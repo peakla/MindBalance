@@ -231,6 +231,11 @@ document.addEventListener('DOMContentLoaded', () => {
       loadFollowerCountsData(viewedUserId);
       loadReputationPointsData(viewedUserId);
       
+      // Initialize analytics visualizations
+      if (typeof ProfileAnalytics !== 'undefined') {
+        ProfileAnalytics.init(viewedUserId);
+      }
+      
       // If viewing someone else's profile and we're logged in, check follow status
       if (!isOwnProfile && currentUser) {
         checkFollowStatus();
@@ -263,6 +268,11 @@ document.addEventListener('DOMContentLoaded', () => {
             loadActivityData(user.id);
             loadFollowerCountsData(user.id);
             loadReputationPointsData(user.id);
+            
+            // Initialize analytics visualizations
+            if (typeof ProfileAnalytics !== 'undefined') {
+              ProfileAnalytics.init(user.id);
+            }
           } else {
             showGuestView();
           }

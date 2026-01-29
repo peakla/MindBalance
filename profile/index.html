@@ -13,12 +13,15 @@
   <link rel="stylesheet" href="../css/style.css" />
   <link rel="stylesheet" href="../css/animations.css" />
   <link rel="stylesheet" href="../css/toast.css" />
+  <link rel="stylesheet" href="../css/analytics.css" />
   <link rel="stylesheet" href="profile.css" />
 
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="../js/auth.js" defer></script>
   <script src="../js/settings.js" defer></script>
   <script src="../js/translations.js" defer></script>
+  <script src="../js/analytics.js" defer></script>
+  <script src="profile-analytics.js" defer></script>
 </head>
 
 <body>
@@ -643,15 +646,34 @@
       
       <!-- Activity Tab -->
       <div class="mb-profile__panel is-active" id="activityPanel">
-        <div class="mb-profile__activity-filters">
-          <button class="mb-profile__filter is-active" data-filter="all">All</button>
-          <button class="mb-profile__filter" data-filter="posts">Posts</button>
-          <button class="mb-profile__filter" data-filter="comments">Comments</button>
-        </div>
-        <div class="mb-profile__activity" id="activityFeed">
-          <div class="mb-profile__loading">
-            <div class="mb-profile__spinner"></div>
-            <p>Loading activity...</p>
+        
+        <!-- Reading Stats Section -->
+        <div class="mb-profile__analytics-section" id="profileReadingStats"></div>
+        
+        <!-- Activity Chart Section -->
+        <div class="mb-profile__analytics-section" id="profileActivityChart"></div>
+        
+        <!-- Calendar Heatmap Section -->
+        <div class="mb-profile__analytics-section" id="profileHeatmap"></div>
+        
+        <!-- Activity Timeline Section -->
+        <div class="mb-profile__analytics-section" id="profileTimeline"></div>
+        
+        <!-- Community Activity Section -->
+        <div class="mb-profile__community-section">
+          <h3 class="mb-profile__section-title">
+            <ion-icon name="chatbubbles-outline"></ion-icon> Community Posts
+          </h3>
+          <div class="mb-profile__activity-filters">
+            <button class="mb-profile__filter is-active" data-filter="all">All</button>
+            <button class="mb-profile__filter" data-filter="posts">Posts</button>
+            <button class="mb-profile__filter" data-filter="comments">Comments</button>
+          </div>
+          <div class="mb-profile__activity" id="activityFeed">
+            <div class="mb-profile__loading">
+              <div class="mb-profile__spinner"></div>
+              <p>Loading activity...</p>
+            </div>
           </div>
         </div>
       </div>
@@ -685,12 +707,7 @@
             <span><ion-icon name="star"></ion-icon> <span id="totalPoints">0</span> points</span>
           </div>
         </div>
-        <div class="mb-profile__achievements-grid animate-stagger" id="achievementsGrid">
-          <div class="mb-profile__loading">
-            <div class="mb-profile__spinner"></div>
-            <p>Loading achievements...</p>
-          </div>
-        </div>
+        <div class="mb-profile__analytics-section" id="profileAchievements"></div>
       </div>
       
       <!-- Wellness Tab -->

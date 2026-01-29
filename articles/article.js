@@ -2425,3 +2425,70 @@
   
   document.addEventListener('DOMContentLoaded', initSaveButton);
 })();
+
+// ===== READING PROGRESS TRACKING =====
+(function() {
+  'use strict';
+  
+  const articleSlug = window.location.pathname.split('/').filter(p => p).pop().replace('.html', '');
+  const articleTitle = document.title.replace(' | MindBalance', '');
+  
+  document.body.dataset.articleId = articleSlug;
+  
+  let readingStartTime = Date.now();
+  let maxScrollDepth = 0;
+  let hasTrackedStart = false;
+  let hasTrackedComplete = false;
+  
+  function trackScrollProgress() {
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    if (docHeight > 0) {
+      const currentScroll = window.scrollY;
+      const newDepth = Math.round((currentScroll / docHeight) * 100);
+      if (newDepth > maxScrollDepth) {
+        maxScrollDepth = newDepth;
+        
+        if (maxScrollDepth >= 90 && !hasTrackedComplete) {
+          hasTrackedComplete = true;
+          if (typeof MBAnalytics !== 'undefined') {
+            MBAnalytics.trackArticleComplete(articleSlug);
+          }
+        }
+      }
+    }
+  }
+  
+  function initReadingTracker() {
+    if (!hasTrackedStart && typeof MBAnalytics !== 'undefined') {
+      hasTrackedStart = true;
+      MBAnalytics.trackArticleRead(articleSlug, articleTitle);
+    }
+    
+    let ticking = false;
+    window.addEventListener('scroll', () => {
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          trackScrollProgress();
+          ticking = false;
+        });
+        ticking = true;
+      }
+    }, { passive: true });
+    
+    document.addEventListener('visibilitychange', () => {
+      if (document.hidden && typeof MBAnalytics !== 'undefined') {
+        MBAnalytics.logActivity('article_progress', {
+          article_id: articleSlug,
+          progress: maxScrollDepth,
+          time_spent: Math.round((Date.now() - readingStartTime) / 1000)
+        });
+      }
+    });
+  }
+  
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initReadingTracker);
+  } else {
+    initReadingTracker();
+  }
+})();

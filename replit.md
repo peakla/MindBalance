@@ -49,6 +49,13 @@ MindBalance is a static website built with HTML, CSS, and JavaScript, employing 
 -   **User Settings**: Persistent panel for customizing accessibility options.
 -   **Navigation**: Dynamic navbar with a crisis button, search bar with typeahead, dropdown menus, notification badges, and a mobile-specific hamburger menu.
 -   **User Profile Page**: Instagram-style profile with cover and avatar uploads, editable display name and bio, social links, unified stats card (posts, comments, likes, followers, following, reputation, streak badges), and multiple tabs (Activity, Liked Posts, Saved Articles, Achievements, Wellness, Settings). Includes a mood tracker, wellness goals CRUD, reading streak calendar, profile theme picker, privacy controls, and account deletion functionality. Supports public profile viewing with privacy considerations and a social follow/unfollow system.
+-   **Enhanced Wellness Tab** (`profile/wellness-enhanced.css`): Comprehensive visual overhaul including:
+    - Glassmorphism card effects with subtle blur backgrounds and gradient top borders
+    - Mood tracker with large animated emoji buttons (64px), glow effects on selection, and wiggle animations
+    - Color-coded mood entry cards with mood-level colored top borders and note previews
+    - Wellness goals with category icons (leaf, fitness, moon, people, book), enhanced empty states, and delete button hover effects
+    - Reading streak with animated flame icon, GitHub-style activity calendar with 4 intensity levels, and milestone badges (7/14/30/100 day)
+    - Full dark mode support and mobile responsive design (768px/480px breakpoints)
 -   **Analytics & Tracking System**: Comprehensive user activity tracking via centralized `analytics.js` module:
     - Tracks page views, article reads/completions, scroll depth, time spent on pages
     - Achievement system with 15 unlockable badges and unlock animations

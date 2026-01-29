@@ -562,218 +562,240 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 
   // ========================================
-  // ENHANCED FAQ FUNCTIONALITY
+  // SPLIT PANEL FAQ FUNCTIONALITY
   // ========================================
 
   const faqSearchInput = document.getElementById('faqSearchInput');
   const faqSearchClear = document.getElementById('faqSearchClear');
-  const faqSearchResults = document.getElementById('faqSearchResults');
-  const faqCategoryPills = document.querySelectorAll('.faq-category-pill');
-  const faqCategoryGroups = document.querySelectorAll('.faq-category-group');
-  const faqCards = document.querySelectorAll('.faq-card');
+  const faqTabs = document.querySelectorAll('.faq-split__tab');
+  const faqQuestions = document.querySelectorAll('.faq-split__question');
   const faqNoResults = document.getElementById('faqNoResults');
+  const faqAnswerPanel = document.getElementById('faqAnswerPanel');
+  const faqPrevBtn = document.getElementById('faqPrevBtn');
+  const faqNextBtn = document.getElementById('faqNextBtn');
 
   let activeCategory = 'all';
+  let currentFaqId = '1';
 
-  // Category filter functionality
-  faqCategoryPills.forEach(pill => {
-    pill.addEventListener('click', function() {
-      const category = this.dataset.category;
-      activeCategory = category;
+  function getQuestionDataFromDOM(faqId) {
+    const questionEl = document.querySelector(`.faq-split__question[data-faq-id="${faqId}"]`);
+    if (!questionEl) return null;
 
-      // Update active pill
-      faqCategoryPills.forEach(p => p.classList.remove('active'));
-      this.classList.add('active');
+    const catEl = questionEl.querySelector('.faq-split__question-cat');
+    const questionTextEl = questionEl.querySelector('.faq-split__question-text');
+    const answerDataEl = questionEl.querySelector('.faq-split__answer-data');
+    const tipDataEl = questionEl.querySelector('.faq-split__tip-data');
 
-      // Clear search when switching categories
-      if (faqSearchInput) {
-        faqSearchInput.value = '';
-        faqSearchClear.style.display = 'none';
-        faqSearchResults.textContent = '';
-      }
+    return {
+      category: catEl ? catEl.textContent.trim() : '',
+      categoryIcon: questionEl.dataset.catIcon || 'help-circle-outline',
+      question: questionTextEl ? questionTextEl.textContent : '',
+      answer: answerDataEl ? answerDataEl.textContent : '',
+      tip: tipDataEl ? tipDataEl.textContent : ''
+    };
+  }
 
-      // Filter by category
-      filterFAQs('', category);
+  function updateAnswerPanel(faqId) {
+    const data = getQuestionDataFromDOM(faqId);
+    if (!data || !faqAnswerPanel) return;
+
+    currentFaqId = faqId;
+
+    const answerCat = document.getElementById('faqAnswerCat');
+    const answerNum = document.getElementById('faqAnswerNum');
+    const answerQuestion = document.getElementById('faqAnswerQuestion');
+    const answerContent = document.getElementById('faqAnswerContent');
+    const answerTip = document.getElementById('faqAnswerTip');
+
+    if (answerCat) {
+      answerCat.innerHTML = `<ion-icon name="${data.categoryIcon}"></ion-icon> ${data.category}`;
+    }
+    if (answerNum) {
+      answerNum.textContent = `Question ${faqId.padStart(2, '0')}`;
+    }
+    if (answerQuestion) {
+      answerQuestion.textContent = data.question;
+    }
+    if (answerContent) {
+      answerContent.innerHTML = `<p>${data.answer}</p>`;
+    }
+    if (answerTip) {
+      answerTip.textContent = data.tip;
+    }
+
+    faqQuestions.forEach(q => {
+      q.classList.toggle('active', q.dataset.faqId === faqId);
+    });
+
+    faqAnswerPanel.style.animation = 'none';
+    faqAnswerPanel.offsetHeight;
+    faqAnswerPanel.style.animation = 'faq-answer-slide-in 0.4s cubic-bezier(0.4, 0, 0.2, 1)';
+
+    document.querySelectorAll('.faq-split__feedback-btn').forEach(btn => {
+      btn.classList.remove('selected');
+    });
+
+    updateNavButtons();
+  }
+
+  function getVisibleQuestions() {
+    return Array.from(faqQuestions).filter(q => !q.classList.contains('hidden'));
+  }
+
+  function updateNavButtons() {
+    const visible = getVisibleQuestions();
+    const currentIndex = visible.findIndex(q => q.dataset.faqId === currentFaqId);
+
+    if (faqPrevBtn) {
+      faqPrevBtn.disabled = currentIndex <= 0;
+    }
+    if (faqNextBtn) {
+      faqNextBtn.disabled = currentIndex >= visible.length - 1;
+    }
+  }
+
+  faqQuestions.forEach(question => {
+    question.addEventListener('click', function() {
+      const faqId = this.dataset.faqId;
+      updateAnswerPanel(faqId);
     });
   });
 
-  // Search functionality
+  faqTabs.forEach(tab => {
+    tab.addEventListener('click', function() {
+      const category = this.dataset.category;
+      activeCategory = category;
+
+      faqTabs.forEach(t => t.classList.remove('active'));
+      this.classList.add('active');
+
+      if (faqSearchInput) {
+        faqSearchInput.value = '';
+        if (faqSearchClear) faqSearchClear.style.display = 'none';
+      }
+
+      filterQuestions('', category);
+    });
+  });
+
   if (faqSearchInput) {
     faqSearchInput.addEventListener('input', function() {
       const query = this.value.trim().toLowerCase();
       
-      // Show/hide clear button
-      faqSearchClear.style.display = query.length > 0 ? 'block' : 'none';
+      if (faqSearchClear) {
+        faqSearchClear.style.display = query.length > 0 ? 'block' : 'none';
+      }
 
-      // Reset category to "all" when searching
       if (query.length > 0) {
-        faqCategoryPills.forEach(p => p.classList.remove('active'));
-        document.querySelector('.faq-category-pill[data-category="all"]')?.classList.add('active');
+        faqTabs.forEach(t => t.classList.remove('active'));
+        document.querySelector('.faq-split__tab[data-category="all"]')?.classList.add('active');
         activeCategory = 'all';
       }
 
-      filterFAQs(query, 'all');
+      filterQuestions(query, 'all');
     });
 
-    // Clear button
-    faqSearchClear?.addEventListener('click', function() {
-      faqSearchInput.value = '';
-      faqSearchClear.style.display = 'none';
-      faqSearchResults.textContent = '';
-      filterFAQs('', activeCategory);
-      faqSearchInput.focus();
-    });
+    if (faqSearchClear) {
+      faqSearchClear.addEventListener('click', function() {
+        faqSearchInput.value = '';
+        faqSearchClear.style.display = 'none';
+        filterQuestions('', activeCategory);
+        faqSearchInput.focus();
+      });
+    }
   }
 
-  function filterFAQs(query, category) {
+  function filterQuestions(query, category) {
     let visibleCount = 0;
-    let totalCount = faqCards.length;
+    let firstVisible = null;
 
-    // Hide/show category groups based on category filter
-    faqCategoryGroups.forEach(group => {
-      const groupCategory = group.dataset.categoryGroup;
-      if (category === 'all' || groupCategory === category) {
-        group.classList.remove('hidden');
-      } else {
-        group.classList.add('hidden');
-      }
-    });
-
-    // Filter individual cards by search query
-    faqCards.forEach(card => {
-      const cardCategory = card.dataset.category;
-      const questionText = card.querySelector('.faq-card__text')?.textContent.toLowerCase() || '';
-      const answerText = card.querySelector('.faq-card__answer-content p')?.textContent.toLowerCase() || '';
-      const searchText = questionText + ' ' + answerText;
-
-      const matchesCategory = category === 'all' || cardCategory === category;
+    faqQuestions.forEach(question => {
+      const qCategory = question.dataset.category;
+      const qId = question.dataset.faqId;
+      
+      const questionTextEl = question.querySelector('.faq-split__question-text');
+      const answerDataEl = question.querySelector('.faq-split__answer-data');
+      const questionText = questionTextEl ? questionTextEl.textContent : '';
+      const answerText = answerDataEl ? answerDataEl.textContent : '';
+      const searchText = (questionText + ' ' + answerText).toLowerCase();
+      const matchesCategory = category === 'all' || qCategory === category;
       const matchesSearch = query === '' || searchText.includes(query);
 
       if (matchesCategory && matchesSearch) {
-        card.classList.remove('hidden');
+        question.classList.remove('hidden');
         visibleCount++;
+        if (!firstVisible) firstVisible = question;
 
-        // Highlight matching text if searching
-        if (query.length > 0) {
-          highlightText(card, query);
-        } else {
-          removeHighlights(card);
+        const textEl = question.querySelector('.faq-split__question-text');
+        if (textEl) {
+          if (query.length > 0) {
+            const originalText = textEl.getAttribute('data-original-text') || textEl.textContent;
+            textEl.setAttribute('data-original-text', originalText);
+            textEl.innerHTML = originalText.replace(
+              new RegExp(`(${escapeRegex(query)})`, 'gi'),
+              '<mark class="faq-split__highlight">$1</mark>'
+            );
+          } else {
+            const originalText = textEl.getAttribute('data-original-text');
+            if (originalText) textEl.textContent = originalText;
+          }
         }
       } else {
-        card.classList.add('hidden');
-        removeHighlights(card);
+        question.classList.add('hidden');
+        const textEl = question.querySelector('.faq-split__question-text');
+        if (textEl) {
+          const originalText = textEl.getAttribute('data-original-text');
+          if (originalText) textEl.textContent = originalText;
+        }
       }
     });
 
-    // Update search results count
-    if (query.length > 0 && faqSearchResults) {
-      if (visibleCount > 0) {
-        faqSearchResults.textContent = `Found ${visibleCount} result${visibleCount !== 1 ? 's' : ''} for "${query}"`;
-      } else {
-        faqSearchResults.textContent = '';
-      }
-    } else if (faqSearchResults) {
-      faqSearchResults.textContent = '';
-    }
-
-    // Show/hide no results message
     if (faqNoResults) {
-      faqNoResults.style.display = visibleCount === 0 ? 'block' : 'none';
+      faqNoResults.style.display = visibleCount === 0 ? 'flex' : 'none';
     }
 
-    // Hide empty category groups
-    faqCategoryGroups.forEach(group => {
-      const visibleCards = group.querySelectorAll('.faq-card:not(.hidden)');
-      if (visibleCards.length === 0 && category === 'all') {
-        group.classList.add('hidden');
+    if (firstVisible && !firstVisible.classList.contains('active')) {
+      updateAnswerPanel(firstVisible.dataset.faqId);
+    }
+
+    updateNavButtons();
+  }
+
+  if (faqPrevBtn) {
+    faqPrevBtn.addEventListener('click', function() {
+      const visible = getVisibleQuestions();
+      const currentIndex = visible.findIndex(q => q.dataset.faqId === currentFaqId);
+      if (currentIndex > 0) {
+        updateAnswerPanel(visible[currentIndex - 1].dataset.faqId);
       }
     });
   }
 
-  function highlightText(card, query) {
-    const questionSpan = card.querySelector('.faq-card__text');
-    const answerP = card.querySelector('.faq-card__answer-content p');
-
-    if (questionSpan) {
-      const originalText = questionSpan.getAttribute('data-original-text') || questionSpan.textContent;
-      questionSpan.setAttribute('data-original-text', originalText);
-      questionSpan.innerHTML = originalText.replace(
-        new RegExp(`(${escapeRegex(query)})`, 'gi'),
-        '<mark class="faq-highlight">$1</mark>'
-      );
-    }
-
-    if (answerP) {
-      const originalText = answerP.getAttribute('data-original-text') || answerP.textContent;
-      answerP.setAttribute('data-original-text', originalText);
-      answerP.innerHTML = originalText.replace(
-        new RegExp(`(${escapeRegex(query)})`, 'gi'),
-        '<mark class="faq-highlight">$1</mark>'
-      );
-    }
-  }
-
-  function removeHighlights(card) {
-    const questionSpan = card.querySelector('.faq-card__text');
-    const answerP = card.querySelector('.faq-card__answer-content p');
-
-    if (questionSpan) {
-      const originalText = questionSpan.getAttribute('data-original-text');
-      if (originalText) {
-        questionSpan.textContent = originalText;
+  if (faqNextBtn) {
+    faqNextBtn.addEventListener('click', function() {
+      const visible = getVisibleQuestions();
+      const currentIndex = visible.findIndex(q => q.dataset.faqId === currentFaqId);
+      if (currentIndex < visible.length - 1) {
+        updateAnswerPanel(visible[currentIndex + 1].dataset.faqId);
       }
-    }
-
-    if (answerP) {
-      const originalText = answerP.getAttribute('data-original-text');
-      if (originalText) {
-        answerP.textContent = originalText;
-      }
-    }
+    });
   }
 
   function escapeRegex(string) {
     return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
   }
 
-  // FAQ accordion - close others when opening one
-  faqCards.forEach(card => {
-    const summary = card.querySelector('summary');
-    summary?.addEventListener('click', function(e) {
-      // Close other cards in the same category group
-      const parentGroup = card.closest('.faq-category-group');
-      if (parentGroup) {
-        parentGroup.querySelectorAll('.faq-card[open]').forEach(openCard => {
-          if (openCard !== card) {
-            openCard.removeAttribute('open');
-          }
-        });
-      }
-    });
-  });
-
-  // Feedback button functionality
-  const feedbackBtns = document.querySelectorAll('.faq-feedback-btn');
+  const feedbackBtns = document.querySelectorAll('.faq-split__feedback-btn');
   feedbackBtns.forEach(btn => {
     btn.addEventListener('click', function() {
       const feedback = this.dataset.feedback;
-      const card = this.closest('.faq-card');
-      const faqId = card?.dataset.faqId;
-      const feedbackContainer = this.closest('.faq-card__feedback');
-
-      // Toggle selection
       const wasSelected = this.classList.contains('selected');
       
-      // Remove selected from all buttons in this card
-      feedbackContainer?.querySelectorAll('.faq-feedback-btn').forEach(b => {
-        b.classList.remove('selected');
-      });
+      feedbackBtns.forEach(b => b.classList.remove('selected'));
 
-      // Select this button if it wasn't already selected
       if (!wasSelected) {
         this.classList.add('selected');
         
-        // Animate the icon
         const icon = this.querySelector('ion-icon');
         if (icon) {
           icon.style.transform = 'scale(1.3)';
@@ -782,9 +804,10 @@ document.addEventListener('DOMContentLoaded', function() {
           }, 200);
         }
 
-        // Log feedback (could be sent to analytics)
-        console.log(`FAQ #${faqId} feedback: ${feedback}`);
+        console.log(`FAQ #${currentFaqId} feedback: ${feedback}`);
       }
     });
   });
+
+  updateNavButtons();
 });

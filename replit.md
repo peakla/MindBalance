@@ -16,6 +16,15 @@ MindBalance is a static website built with HTML, CSS, and JavaScript, employing 
 ### Frontend
 -   **Structure & Styling**: Multiple static HTML pages, custom CSS with a robust custom properties system for theming, and Poppins font family.
 -   **Interactivity**: Vanilla JavaScript for DOM manipulation and managing user preferences.
+-   **Animation System**: Comprehensive shared animation library (`css/animations.css` and `js/animations.js`) providing:
+    - Scroll-triggered animations via IntersectionObserver (fade-in, slide-up, slide-left, slide-right, scale-in, blur-in)
+    - Staggered card reveal animations for grids
+    - Hover effects (lift, scale, glow, 3D tilt, shine)
+    - Continuous animations (float, pulse, shimmer, bounce)
+    - Enhanced quote-block component with floating animation and decorative elements
+    - Back-to-top button with bounce animation
+    - Full dark mode support for all animations
+    - Respects `prefers-reduced-motion` for accessibility
 -   **Accessibility**: Comprehensive settings panel offering 7 options (Dark Mode, Font Size, High Contrast, Colorblind modes, Focus Mode, Dyslexia Font, Reduced Motion) with preferences persisted via localStorage.
 -   **Responsiveness**: Full responsive design with orientation lock messages and safe area support.
 -   **Multilingual Support**: Supports 6 languages (English, Spanish, French, Chinese Simplified, Hindi, Korean) using `data-translate` attributes and JSON-based translation files. Language preference persists in localStorage. A CSV master file (`translations.csv`) is the single source of truth for translations, with Python scripts to generate JSON files and audit for completeness.

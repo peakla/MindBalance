@@ -2390,13 +2390,12 @@
       } else {
         await supabaseClient
           .from('saved_articles')
-          .insert({
+          .upsert({
             user_id: user.id,
             article_slug: slug,
             article_title: title,
-            article_category: category,
-            article_image: image
-          });
+            article_thumbnail: image
+          }, { onConflict: 'user_id,article_slug' });
         
         btn.classList.add('is-saved');
         btn.querySelector('i').className = 'fas fa-bookmark';

@@ -167,8 +167,8 @@ function createSavedArticleCard(article) {
   link.href = `/articles/${slug}.html`;
   link.className = 'saved-card-link';
   
-  if (article.article_image) {
-    const imgUrl = article.article_image;
+  const imgUrl = article.article_image || article.article_thumbnail;
+  if (imgUrl) {
     if (imgUrl.startsWith('http://') || imgUrl.startsWith('https://') || imgUrl.startsWith('/')) {
       const img = document.createElement('img');
       img.src = imgUrl;

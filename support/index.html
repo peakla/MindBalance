@@ -6,6 +6,7 @@
     <title>Support | MindBalance</title>
     <link rel="icon" type="image/png" href="/assets/images/favicon.png">
     <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/animations.css">
     <link rel="stylesheet" href="../css/support.css">
     
     <!-- Supabase Auth -->
@@ -601,11 +602,16 @@
         </div>
       </section>
 
-      <!-- Quote Callout -->
+      <!-- Inspirational Quote -->
       <div class="container">
-        <div class="quote-callout animate-section">
-          <p class="quote-callout__text" data-translate="support_quote_text">There is hope, even when your brain tells you there isn't.</p>
-          <span class="quote-callout__author" data-translate="support_quote_author">John Green</span>
+        <div class="quote-block animate-scale-in">
+          <div class="quote-block__decoration quote-block__decoration--1"></div>
+          <div class="quote-block__decoration quote-block__decoration--2"></div>
+          <div class="quote-block__icon">
+            <ion-icon name="heart-outline"></ion-icon>
+          </div>
+          <p class="quote-block__text" data-translate="support_quote_text">There is hope, even when your brain tells you there isn't.</p>
+          <span class="quote-block__author" data-translate="support_quote_author">John Green</span>
         </div>
       </div>
 
@@ -1289,6 +1295,7 @@
     <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
     <script src="../js/script.js" defer></script>
     <script src="../js/scroll-progress.js" defer></script>
+    <script src="../js/animations.js" defer></script>
     <script src="support.js" defer></script>
     <script src="support-animations.js" defer></script>
 </body>

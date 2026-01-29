@@ -45,7 +45,7 @@ MindBalance is a static website built with HTML, CSS, and JavaScript, employing 
     - Powered by SAMHSA Treatment Locator API
     - Always-visible crisis resources section (988 Lifeline, Crisis Text Line, Trevor Project)
     - National non-profits with local chapter finders (pulled from resources.json)
--   **Support Page**: Provides crisis support, helplines, self-help tools (breathing, grounding, journaling), an appointment scheduler, and an expandable FAQ.
+-   **Support Page**: Provides crisis support, helplines, self-help tools (breathing, grounding, journaling), an appointment scheduler, and a split-panel FAQ with modern design (questions list on left, answer display on right, category tabs, search, prev/next navigation, quick tips section, responsive mobile layout).
 -   **User Settings**: Persistent panel for customizing accessibility options.
 -   **Navigation**: Dynamic navbar with a crisis button, search bar with typeahead, dropdown menus, notification badges, and a mobile-specific hamburger menu.
 -   **User Profile Page**: Instagram-style profile with cover and avatar uploads, editable display name and bio, social links, unified stats card (posts, comments, likes, followers, following, reputation, streak badges), and multiple tabs (Activity, Liked Posts, Saved Articles, Achievements, Wellness, Settings). Includes a mood tracker, wellness goals CRUD, reading streak calendar, profile theme picker, privacy controls, and account deletion functionality. Supports public profile viewing with privacy considerations and a social follow/unfollow system.

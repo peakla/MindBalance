@@ -365,7 +365,9 @@ def newsletter_subscribe():
         
         # Send welcome email via Resend
         api_key, from_email = get_resend_credentials()
-        if api_key and from_email:
+        # Use verified domain email
+        from_email = "MindBalance <noreply@mindbalance.cloud>"
+        if api_key:
             try:
                 import resend as resend_module
                 resend_module.api_key = api_key

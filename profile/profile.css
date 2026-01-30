@@ -62,11 +62,11 @@
   box-shadow: 0 8px 25px rgba(184, 155, 94, 0.4);
 }
 
-/* Profile Wrapper */
+/* Profile Wrapper - Full Width on Desktop */
 .mb-profile__wrap {
-  max-width: 900px;
+  max-width: 1400px;
   margin: 0 auto;
-  padding: 0 20px 60px;
+  padding: 0 40px 60px;
 }
 
 /* Profile Header */

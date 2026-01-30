@@ -1385,27 +1385,50 @@ async function loadMoodHistory() {
   
   moods.reverse().forEach(mood => {
     const date = new Date(mood.created_at);
-    const dayName = date.toLocaleDateString('en-US', { weekday: 'short' });
+    const dayName = date.toLocaleDateString('en-US', { weekday: 'long', month: 'short', day: 'numeric' });
     const timeStr = date.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' });
     const emoji = moodEmojis[mood.mood] || '😐';
     const moodLevel = moodLevels[mood.mood] || 3;
+    const moodLabels = { 1: 'Very Bad', 2: 'Bad', 3: 'Okay', 4: 'Good', 5: 'Great' };
+    const moodLabel = moodLabels[moodLevel];
     
     const card = createSafeElement('div', 'mood-entry-card');
     card.setAttribute('data-mood', moodLevel);
     
+    // Left side - emoji
+    const emojiContainer = createSafeElement('div', 'mood-entry-emoji');
     const emojiSpan = createSafeElement('span', 'mood-emoji-large', emoji);
-    const dateSpan = createSafeElement('span', 'mood-date', dayName);
+    emojiContainer.appendChild(emojiSpan);
+    
+    // Right side - content
+    const contentDiv = createSafeElement('div', 'mood-entry-content');
+    
+    // Header with mood label and time
+    const headerDiv = createSafeElement('div', 'mood-entry-header');
+    const moodLabelSpan = createSafeElement('span', 'mood-label', moodLabel);
     const timeSpan = createSafeElement('span', 'mood-time', timeStr);
+    headerDiv.appendChild(moodLabelSpan);
+    headerDiv.appendChild(timeSpan);
     
-    card.appendChild(emojiSpan);
-    card.appendChild(dateSpan);
-    card.appendChild(timeSpan);
+    // Date
+    const dateSpan = createSafeElement('span', 'mood-date', dayName);
     
+    contentDiv.appendChild(headerDiv);
+    contentDiv.appendChild(dateSpan);
+    
+    // Note if exists
     if (mood.note) {
-      const noteSpan = createSafeElement('span', 'mood-note-preview', mood.note);
-      card.appendChild(noteSpan);
+      const noteDiv = createSafeElement('div', 'mood-note-preview');
+      const noteIcon = createSafeElement('ion-icon');
+      noteIcon.setAttribute('name', 'chatbubble-outline');
+      noteDiv.appendChild(noteIcon);
+      const noteText = createSafeElement('span', '', mood.note);
+      noteDiv.appendChild(noteText);
+      contentDiv.appendChild(noteDiv);
     }
     
+    card.appendChild(emojiContainer);
+    card.appendChild(contentDiv);
     chart.appendChild(card);
   });
   

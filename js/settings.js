@@ -13,14 +13,20 @@
   };
 
   const ACCENT_COLORS = {
+    gold: { hex: '#af916d', hover: '#9d8260', rgb: '175, 145, 109' },
     purple: { hex: '#9b7ed9', hover: '#8a6dc8', rgb: '155, 126, 217' },
     blue: { hex: '#4a90d9', hover: '#3d7fc8', rgb: '74, 144, 217' },
     green: { hex: '#4db896', hover: '#3fa884', rgb: '77, 184, 150' },
     teal: { hex: '#38b2ac', hover: '#2d9d98', rgb: '56, 178, 172' },
     pink: { hex: '#d97eab', hover: '#c86d9a', rgb: '217, 126, 171' },
     orange: { hex: '#e09c5c', hover: '#d08b4b', rgb: '224, 156, 92' },
-    red: { hex: '#e07070', hover: '#d05f5f', rgb: '224, 112, 112' },
-    gold: { hex: '#d6bd9f', hover: '#c4ab8d', rgb: '214, 189, 159' }
+    red: { hex: '#e07070', hover: '#d05f5f', rgb: '224, 112, 112' }
+  };
+
+  // Default accent colors per theme
+  const DEFAULT_ACCENT = {
+    light: 'gold',
+    dark: 'purple'
   };
 
   function getPreference(key, defaultValue) {
@@ -59,6 +65,13 @@
     document.querySelectorAll('[data-theme-toggle]').forEach(toggle => {
       toggle.checked = effectiveTheme === 'dark';
     });
+    
+    // Apply theme-appropriate default accent if user hasn't set one
+    const storedAccent = getPreference(STORAGE_KEYS.accentColor, null);
+    if (!storedAccent) {
+      const themeDefault = effectiveTheme === 'dark' ? DEFAULT_ACCENT.dark : DEFAULT_ACCENT.light;
+      applyAccentColor(themeDefault);
+    }
   }
 
   function applyFontSize(size) {
@@ -138,8 +151,8 @@
   }
 
   function applyAccentColor(colorName) {
-    const color = ACCENT_COLORS[colorName] || ACCENT_COLORS.purple;
-    const effectiveColorName = ACCENT_COLORS[colorName] ? colorName : 'purple';
+    const color = ACCENT_COLORS[colorName] || ACCENT_COLORS.gold;
+    const effectiveColorName = ACCENT_COLORS[colorName] ? colorName : 'gold';
     
     // Apply CSS custom properties to :root
     document.documentElement.style.setProperty('--user-accent', color.hex);
@@ -169,7 +182,12 @@
     const savedColorblind = getPreference(STORAGE_KEYS.colorblind, 'none');
     const savedAdhdMode = getPreference(STORAGE_KEYS.adhdMode, 'false');
     const savedDyslexiaFont = getPreference(STORAGE_KEYS.dyslexiaFont, 'false');
-    const savedAccentColor = getPreference(STORAGE_KEYS.accentColor, 'purple');
+    
+    // Get the effective theme (light or dark)
+    const effectiveTheme = savedTheme === 'system' ? getSystemThemePreference() : savedTheme;
+    // Use theme-appropriate default accent (gold for light, purple for dark)
+    const themeDefault = effectiveTheme === 'dark' ? DEFAULT_ACCENT.dark : DEFAULT_ACCENT.light;
+    const savedAccentColor = getPreference(STORAGE_KEYS.accentColor, themeDefault);
 
     // Clear any stored high contrast preference (feature removed)
     try { localStorage.removeItem(STORAGE_KEYS.highContrast); } catch(e) {}
@@ -367,15 +385,18 @@
       return ACCENT_COLORS;
     },
     getPreferences: function() {
+      const savedTheme = getPreference(STORAGE_KEYS.theme, 'light');
+      const effectiveTheme = savedTheme === 'system' ? getSystemThemePreference() : savedTheme;
+      const themeDefault = effectiveTheme === 'dark' ? DEFAULT_ACCENT.dark : DEFAULT_ACCENT.light;
       return {
-        theme: getPreference(STORAGE_KEYS.theme, 'light'),
+        theme: savedTheme,
         fontSize: getPreference(STORAGE_KEYS.fontSize, 'normal'),
         reduceMotion: getPreference(STORAGE_KEYS.reduceMotion, 'false') === 'true',
         highContrast: getPreference(STORAGE_KEYS.highContrast, 'false') === 'true',
         colorblind: getPreference(STORAGE_KEYS.colorblind, 'none'),
         adhdMode: getPreference(STORAGE_KEYS.adhdMode, 'false') === 'true',
         dyslexiaFont: getPreference(STORAGE_KEYS.dyslexiaFont, 'false') === 'true',
-        accentColor: getPreference(STORAGE_KEYS.accentColor, 'purple')
+        accentColor: getPreference(STORAGE_KEYS.accentColor, themeDefault)
       };
     }
   };

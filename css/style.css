@@ -27,11 +27,11 @@
   --nav-transition: 0.35s cubic-bezier(0.4, 0, 0.2, 1);
   --nav-transition-fast: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
   
-  /* User accent color system - default purple */
-  --user-accent: #9b7ed9;
-  --user-accent-hover: #8a6dc8;
-  --user-accent-rgb: 155, 126, 217;
-  --user-accent-glow: rgba(155, 126, 217, 0.3);
+  /* User accent color system - default gold-crayola for light mode */
+  --user-accent: #af916d;
+  --user-accent-hover: #9d8260;
+  --user-accent-rgb: 175, 145, 109;
+  --user-accent-glow: rgba(175, 145, 109, 0.3);
   
   /* Legacy purple accent colors (for backwards compatibility) */
   --purple-accent: #9b7ed9;
@@ -459,6 +459,11 @@ html {
 }
 
 [data-theme="dark"] {
+  /* Dark mode default accent color - purple (overridden by JS when user selects a color) */
+  --user-accent: #9b7ed9;
+  --user-accent-hover: #8a6dc8;
+  --user-accent-rgb: 155, 126, 217;
+  --user-accent-glow: rgba(155, 126, 217, 0.3);
   scrollbar-color: var(--user-accent) #1a1a2e;
 }
 

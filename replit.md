@@ -39,13 +39,9 @@ MindBalance is a static website built with HTML, CSS, and JavaScript, employing 
 ### Key Features
 -   **Resource Library**: Interactive directory with featured resources spotlight, non-profit organizations (NAMI, Mental Health America, Crisis Text Line, The Trevor Project, 988 Lifeline), community resources with local examples, a suggestion form, real-time search and filtering (including Non-Profit and Community categories), share buttons, and visual polish (card effects, animations, skeleton loading).
 -   **Find Help** (`/find-help/`): Dedicated page for finding local mental health services:
-    - ZIP code search with radius selector (5/10/25/50/100 miles)
-    - Service type filters (Mental Health, Substance Use, Crisis Services)
-    - Rich result cards showing facility name, services, address, phone, distance
-    - Call and Directions action buttons on each result
-    - Powered by SAMHSA Treatment Locator API
     - Always-visible crisis resources section (988 Lifeline, Crisis Text Line, Trevor Project)
     - National non-profits with local chapter finders (pulled from resources.json)
+    - Links to external helplines and support organizations
 -   **Support Page**: Provides crisis support, helplines, self-help tools (breathing, grounding, journaling), an appointment scheduler, and a split-panel FAQ with modern design (questions list on left, answer display on right, category tabs, search, prev/next navigation, quick tips section, responsive mobile layout).
 -   **User Settings**: Persistent panel for customizing accessibility options.
 -   **Navigation**: Dynamic navbar with a crisis button, search bar with typeahead, dropdown menus, notification badges, and a mobile-specific hamburger menu.

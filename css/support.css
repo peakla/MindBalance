@@ -645,9 +645,51 @@
   padding: 80px 20px;
 }
 
+.helplines-expect {
+  display: flex;
+  align-items: flex-start;
+  gap: 20px;
+  background: linear-gradient(135deg, #f0f7ff 0%, #e8f4fd 100%);
+  border: 1px solid #d0e5f7;
+  border-radius: 16px;
+  padding: 24px 28px;
+  margin-bottom: 32px;
+  animation: support-card-enter 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+.helplines-expect__icon {
+  width: 48px;
+  height: 48px;
+  background: linear-gradient(135deg, #4a90d9 0%, #357abd 100%);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.helplines-expect__icon ion-icon {
+  font-size: 24px;
+  color: #fff;
+}
+
+.helplines-expect__content h3 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #2d5a87;
+  margin-bottom: 8px;
+}
+
+.helplines-expect__content p {
+  font-size: 0.95rem;
+  color: #4a7ba7;
+  line-height: 1.6;
+  margin: 0;
+}
+
 .helplines-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
   gap: 24px;
 }
 
@@ -656,6 +698,8 @@
   border: 1px solid #e0e0e0;
   border-radius: 16px;
   padding: 28px;
+  position: relative;
+  overflow: hidden;
   transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), 
               box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1),
               border-color 0.3s ease;
@@ -664,15 +708,154 @@
   animation: support-card-enter 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
 }
 
-.helpline-card:nth-child(1) { animation-delay: 0.1s; }
-.helpline-card:nth-child(2) { animation-delay: 0.2s; }
-.helpline-card:nth-child(3) { animation-delay: 0.3s; }
-.helpline-card:nth-child(4) { animation-delay: 0.4s; }
+.helpline-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, #d6bd9f, #c4a67a);
+  transition: height 0.3s ease;
+}
+
+.helpline-card--crisis::before {
+  background: linear-gradient(90deg, #e53935, #c62828);
+}
+
+.helpline-card--lgbtq::before,
+.helpline-card--trans::before {
+  background: linear-gradient(90deg, #9c27b0, #7b1fa2, #e91e63);
+}
+
+.helpline-card--youth::before {
+  background: linear-gradient(90deg, #ff9800, #f57c00);
+}
+
+.helpline-card--veterans::before {
+  background: linear-gradient(90deg, #1565c0, #0d47a1);
+}
+
+.helpline-card--specialized::before {
+  background: linear-gradient(90deg, #00897b, #00695c);
+}
+
+.helpline-card--general::before {
+  background: linear-gradient(90deg, #2196f3, #1976d2);
+}
+
+.helpline-card:nth-child(1) { animation-delay: 0.05s; }
+.helpline-card:nth-child(2) { animation-delay: 0.1s; }
+.helpline-card:nth-child(3) { animation-delay: 0.15s; }
+.helpline-card:nth-child(4) { animation-delay: 0.2s; }
+.helpline-card:nth-child(5) { animation-delay: 0.25s; }
+.helpline-card:nth-child(6) { animation-delay: 0.3s; }
+.helpline-card:nth-child(7) { animation-delay: 0.35s; }
+.helpline-card:nth-child(8) { animation-delay: 0.4s; }
+.helpline-card:nth-child(9) { animation-delay: 0.45s; }
+.helpline-card:nth-child(10) { animation-delay: 0.5s; }
+.helpline-card:nth-child(11) { animation-delay: 0.55s; }
+.helpline-card:nth-child(12) { animation-delay: 0.6s; }
 
 .helpline-card:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.1);
-  border-color: #d6bd9f;
+  transform: translateY(-8px);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.12);
+  border-color: transparent;
+}
+
+.helpline-card:hover::before {
+  height: 6px;
+}
+
+.helpline-card--crisis:hover {
+  box-shadow: 0 20px 50px rgba(229, 57, 53, 0.15);
+}
+
+.helpline-card--lgbtq:hover,
+.helpline-card--trans:hover {
+  box-shadow: 0 20px 50px rgba(156, 39, 176, 0.15);
+}
+
+.helpline-card--youth:hover {
+  box-shadow: 0 20px 50px rgba(255, 152, 0, 0.15);
+}
+
+.helpline-card--veterans:hover {
+  box-shadow: 0 20px 50px rgba(21, 101, 192, 0.15);
+}
+
+.helpline-card--specialized:hover {
+  box-shadow: 0 20px 50px rgba(0, 137, 123, 0.15);
+}
+
+.helpline-card--general:hover {
+  box-shadow: 0 20px 50px rgba(33, 150, 243, 0.15);
+}
+
+.helpline-card__icon-wrapper {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 16px;
+  background: linear-gradient(135deg, #f8f6f3 0%, #f0ebe4 100%);
+}
+
+.helpline-card--crisis .helpline-card__icon-wrapper {
+  background: linear-gradient(135deg, #ffebee 0%, #ffcdd2 100%);
+}
+
+.helpline-card--crisis .helpline-card__icon-wrapper ion-icon {
+  color: #e53935;
+}
+
+.helpline-card--lgbtq .helpline-card__icon-wrapper,
+.helpline-card--trans .helpline-card__icon-wrapper {
+  background: linear-gradient(135deg, #f3e5f5 0%, #e1bee7 100%);
+}
+
+.helpline-card--lgbtq .helpline-card__icon-wrapper ion-icon,
+.helpline-card--trans .helpline-card__icon-wrapper ion-icon {
+  color: #9c27b0;
+}
+
+.helpline-card--youth .helpline-card__icon-wrapper {
+  background: linear-gradient(135deg, #fff3e0 0%, #ffe0b2 100%);
+}
+
+.helpline-card--youth .helpline-card__icon-wrapper ion-icon {
+  color: #ff9800;
+}
+
+.helpline-card--veterans .helpline-card__icon-wrapper {
+  background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+}
+
+.helpline-card--veterans .helpline-card__icon-wrapper ion-icon {
+  color: #1565c0;
+}
+
+.helpline-card--specialized .helpline-card__icon-wrapper {
+  background: linear-gradient(135deg, #e0f2f1 0%, #b2dfdb 100%);
+}
+
+.helpline-card--specialized .helpline-card__icon-wrapper ion-icon {
+  color: #00897b;
+}
+
+.helpline-card--general .helpline-card__icon-wrapper {
+  background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+}
+
+.helpline-card--general .helpline-card__icon-wrapper ion-icon {
+  color: #2196f3;
+}
+
+.helpline-card__icon-wrapper ion-icon {
+  font-size: 24px;
+  color: #d6bd9f;
 }
 
 .helpline-card__header {
@@ -691,57 +874,151 @@
 }
 
 .helpline-card__badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
   background: #e8f5e9;
   color: #2e7d32;
   font-size: 0.75rem;
   font-weight: 600;
-  padding: 4px 10px;
+  padding: 5px 12px;
   border-radius: 20px;
+}
+
+.helpline-card__badge ion-icon {
+  font-size: 12px;
+}
+
+.helpline-card__badge--24-7 {
+  background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
+  color: #2e7d32;
+}
+
+.helpline-card__badge--hours {
+  background: linear-gradient(135deg, #fff3e0 0%, #ffe0b2 100%);
+  color: #e65100;
 }
 
 .helpline-card__text {
   font-size: 0.95rem;
   color: #666;
   line-height: 1.5;
-  margin-bottom: 20px;
+  margin-bottom: 12px;
+}
+
+.helpline-card__wait {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.85rem;
+  color: #43a047;
+  margin-bottom: 16px;
+}
+
+.helpline-card__wait ion-icon {
+  font-size: 14px;
+  color: #43a047;
 }
 
 .helpline-card__contacts {
   display: flex;
-  gap: 12px;
+  gap: 10px;
   flex-wrap: wrap;
+  margin-bottom: 12px;
+}
+
+.helpline-card__tty {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.8rem;
+  color: #888;
+  padding-top: 12px;
+  border-top: 1px solid #eee;
+}
+
+.helpline-card__tty ion-icon {
+  font-size: 16px;
+  color: #888;
 }
 
 .helpline-contact {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  padding: 12px 20px;
+  padding: 10px 16px;
   background: linear-gradient(135deg, #f8f6f3 0%, #f0ebe4 100%);
   border-radius: 10px;
   color: #2d2d2d;
-  font-size: 0.9rem;
+  font-size: 0.85rem;
   font-weight: 600;
   text-decoration: none;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
 }
 
+.helpline-contact--call {
+  background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
+}
+
+.helpline-contact--call ion-icon {
+  color: #43a047;
+}
+
+.helpline-contact--text {
+  background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+}
+
+.helpline-contact--text ion-icon {
+  color: #1976d2;
+}
+
+.helpline-contact--chat {
+  background: linear-gradient(135deg, #f3e5f5 0%, #e1bee7 100%);
+}
+
+.helpline-contact--chat ion-icon {
+  color: #8e24aa;
+}
+
 .helpline-contact:hover {
-  background: linear-gradient(135deg, #d6bd9f 0%, #c4a67a 100%);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+}
+
+.helpline-contact--call:hover {
+  background: linear-gradient(135deg, #43a047 0%, #2e7d32 100%);
   color: #fff;
-  transform: translateY(-2px);
-  box-shadow: 0 6px 16px rgba(214, 189, 159, 0.4);
+}
+
+.helpline-contact--call:hover ion-icon {
+  color: #fff;
+}
+
+.helpline-contact--text:hover {
+  background: linear-gradient(135deg, #1976d2 0%, #1565c0 100%);
+  color: #fff;
+}
+
+.helpline-contact--text:hover ion-icon {
+  color: #fff;
+}
+
+.helpline-contact--chat:hover {
+  background: linear-gradient(135deg, #8e24aa 0%, #7b1fa2 100%);
+  color: #fff;
+}
+
+.helpline-contact--chat:hover ion-icon {
+  color: #fff;
 }
 
 .helpline-contact ion-icon {
-  font-size: 1.1rem;
-  color: #d6bd9f;
+  font-size: 1rem;
   transition: color 0.3s ease, transform 0.3s ease;
 }
 
 .helpline-contact:hover ion-icon {
-  color: #fff;
   transform: scale(1.15);
 }
 
@@ -2971,18 +3248,122 @@
   box-shadow: 0 16px 40px rgba(0, 0, 0, 0.3);
 }
 
+[data-theme="dark"] .helplines-expect {
+  background: linear-gradient(135deg, #252542 0%, #2a2a4a 100%);
+  border-color: #3a3a5a;
+}
+
+[data-theme="dark"] .helplines-expect__icon {
+  background: linear-gradient(135deg, #4a90d9 0%, #357abd 100%);
+}
+
+[data-theme="dark"] .helplines-expect__content h3 {
+  color: #a0c4e8;
+}
+
+[data-theme="dark"] .helplines-expect__content p {
+  color: #8ab4d6;
+}
+
+[data-theme="dark"] .helpline-card__icon-wrapper {
+  background: linear-gradient(135deg, #3a3a5a 0%, #454570 100%);
+}
+
+[data-theme="dark"] .helpline-card--crisis .helpline-card__icon-wrapper {
+  background: linear-gradient(135deg, #4a2828 0%, #5a3030 100%);
+}
+
+[data-theme="dark"] .helpline-card--lgbtq .helpline-card__icon-wrapper,
+[data-theme="dark"] .helpline-card--trans .helpline-card__icon-wrapper {
+  background: linear-gradient(135deg, #3a2845 0%, #4a3055 100%);
+}
+
+[data-theme="dark"] .helpline-card--youth .helpline-card__icon-wrapper {
+  background: linear-gradient(135deg, #4a3520 0%, #5a4028 100%);
+}
+
+[data-theme="dark"] .helpline-card--veterans .helpline-card__icon-wrapper {
+  background: linear-gradient(135deg, #1a3050 0%, #253a5a 100%);
+}
+
+[data-theme="dark"] .helpline-card--specialized .helpline-card__icon-wrapper {
+  background: linear-gradient(135deg, #1a3a38 0%, #254545 100%);
+}
+
+[data-theme="dark"] .helpline-card--general .helpline-card__icon-wrapper {
+  background: linear-gradient(135deg, #1a3050 0%, #253a5a 100%);
+}
+
+[data-theme="dark"] .helpline-card__badge {
+  background: linear-gradient(135deg, #2a4a30 0%, #355540 100%);
+  color: #8bc48f;
+}
+
+[data-theme="dark"] .helpline-card__badge--hours {
+  background: linear-gradient(135deg, #4a3a20 0%, #5a4525 100%);
+  color: #e8b060;
+}
+
+[data-theme="dark"] .helpline-card__wait {
+  color: #8bc48f;
+}
+
+[data-theme="dark"] .helpline-card__wait ion-icon {
+  color: #8bc48f;
+}
+
+[data-theme="dark"] .helpline-card__tty {
+  border-top-color: #3a3a5a;
+  color: #888;
+}
+
 [data-theme="dark"] .helpline-contact {
   background: linear-gradient(135deg, #2a2a4a 0%, #353558 100%);
   color: #fff;
 }
 
+[data-theme="dark"] .helpline-contact--call {
+  background: linear-gradient(135deg, #2a4a30 0%, #355540 100%);
+}
+
+[data-theme="dark"] .helpline-contact--call ion-icon {
+  color: #8bc48f;
+}
+
+[data-theme="dark"] .helpline-contact--text {
+  background: linear-gradient(135deg, #1a3050 0%, #253a5a 100%);
+}
+
+[data-theme="dark"] .helpline-contact--text ion-icon {
+  color: #64b5f6;
+}
+
+[data-theme="dark"] .helpline-contact--chat {
+  background: linear-gradient(135deg, #3a2845 0%, #4a3055 100%);
+}
+
+[data-theme="dark"] .helpline-contact--chat ion-icon {
+  color: #ce93d8;
+}
+
+[data-theme="dark"] .helpline-contact--call:hover {
+  background: linear-gradient(135deg, #43a047 0%, #2e7d32 100%);
+}
+
+[data-theme="dark"] .helpline-contact--text:hover {
+  background: linear-gradient(135deg, #1976d2 0%, #1565c0 100%);
+}
+
+[data-theme="dark"] .helpline-contact--chat:hover {
+  background: linear-gradient(135deg, #8e24aa 0%, #7b1fa2 100%);
+}
+
 [data-theme="dark"] .helpline-contact:hover {
-  background: linear-gradient(135deg, #d6bd9f 0%, #c4a67a 100%);
-  color: #1a1a2e;
+  color: #fff;
 }
 
 [data-theme="dark"] .helpline-contact:hover ion-icon {
-  color: #1a1a2e;
+  color: #fff;
 }
 
 [data-theme="dark"] .crisis-section,

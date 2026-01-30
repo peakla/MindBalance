@@ -139,18 +139,26 @@
 
   function applyAccentColor(colorName) {
     const color = ACCENT_COLORS[colorName] || ACCENT_COLORS.purple;
+    const effectiveColorName = ACCENT_COLORS[colorName] ? colorName : 'purple';
     
+    // Apply CSS custom properties to :root
     document.documentElement.style.setProperty('--user-accent', color.hex);
     document.documentElement.style.setProperty('--user-accent-hover', color.hover);
     document.documentElement.style.setProperty('--user-accent-rgb', color.rgb);
     document.documentElement.style.setProperty('--user-accent-glow', `rgba(${color.rgb}, 0.3)`);
     
+    // Also set a data attribute for CSS targeting
+    document.documentElement.setAttribute('data-accent', effectiveColorName);
+    
+    // Update button active states
     document.querySelectorAll('[data-accent-color]').forEach(btn => {
-      btn.classList.toggle('active', btn.getAttribute('data-accent-color') === colorName);
+      const isActive = btn.getAttribute('data-accent-color') === effectiveColorName;
+      btn.classList.toggle('active', isActive);
+      btn.setAttribute('aria-pressed', isActive ? 'true' : 'false');
     });
     
     document.querySelectorAll('select[data-accent-select]').forEach(select => {
-      select.value = colorName;
+      select.value = effectiveColorName;
     });
   }
 
@@ -234,7 +242,9 @@
     });
 
     document.querySelectorAll('[data-accent-color]').forEach(btn => {
-      btn.addEventListener('click', function() {
+      btn.addEventListener('click', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
         const colorName = this.getAttribute('data-accent-color');
         setPreference(STORAGE_KEYS.accentColor, colorName);
         applyAccentColor(colorName);

@@ -23,11 +23,8 @@
     red: { hex: '#e07070', hover: '#d05f5f', rgb: '224, 112, 112' }
   };
 
-  // Default accent colors per theme
-  const DEFAULT_ACCENT = {
-    light: 'gold',
-    dark: 'purple'
-  };
+  // Default accent color (same for all themes)
+  const DEFAULT_ACCENT = 'gold';
 
   function getPreference(key, defaultValue) {
     try {
@@ -66,11 +63,11 @@
       toggle.checked = effectiveTheme === 'dark';
     });
     
-    // Apply theme-appropriate default accent if user hasn't set one
+    // Apply accent color (user's stored choice or default)
+    // Note: We don't change accent when theme changes - user's choice persists
     const storedAccent = getPreference(STORAGE_KEYS.accentColor, null);
     if (!storedAccent) {
-      const themeDefault = effectiveTheme === 'dark' ? DEFAULT_ACCENT.dark : DEFAULT_ACCENT.light;
-      applyAccentColor(themeDefault);
+      applyAccentColor(DEFAULT_ACCENT);
     }
   }
 
@@ -183,11 +180,8 @@
     const savedAdhdMode = getPreference(STORAGE_KEYS.adhdMode, 'false');
     const savedDyslexiaFont = getPreference(STORAGE_KEYS.dyslexiaFont, 'false');
     
-    // Get the effective theme (light or dark)
-    const effectiveTheme = savedTheme === 'system' ? getSystemThemePreference() : savedTheme;
-    // Use theme-appropriate default accent (gold for light, purple for dark)
-    const themeDefault = effectiveTheme === 'dark' ? DEFAULT_ACCENT.dark : DEFAULT_ACCENT.light;
-    const savedAccentColor = getPreference(STORAGE_KEYS.accentColor, themeDefault);
+    // Get saved accent color (same default for all themes)
+    const savedAccentColor = getPreference(STORAGE_KEYS.accentColor, DEFAULT_ACCENT);
 
     // Clear any stored high contrast preference (feature removed)
     try { localStorage.removeItem(STORAGE_KEYS.highContrast); } catch(e) {}
@@ -385,18 +379,15 @@
       return ACCENT_COLORS;
     },
     getPreferences: function() {
-      const savedTheme = getPreference(STORAGE_KEYS.theme, 'light');
-      const effectiveTheme = savedTheme === 'system' ? getSystemThemePreference() : savedTheme;
-      const themeDefault = effectiveTheme === 'dark' ? DEFAULT_ACCENT.dark : DEFAULT_ACCENT.light;
       return {
-        theme: savedTheme,
+        theme: getPreference(STORAGE_KEYS.theme, 'light'),
         fontSize: getPreference(STORAGE_KEYS.fontSize, 'normal'),
         reduceMotion: getPreference(STORAGE_KEYS.reduceMotion, 'false') === 'true',
         highContrast: getPreference(STORAGE_KEYS.highContrast, 'false') === 'true',
         colorblind: getPreference(STORAGE_KEYS.colorblind, 'none'),
         adhdMode: getPreference(STORAGE_KEYS.adhdMode, 'false') === 'true',
         dyslexiaFont: getPreference(STORAGE_KEYS.dyslexiaFont, 'false') === 'true',
-        accentColor: getPreference(STORAGE_KEYS.accentColor, themeDefault)
+        accentColor: getPreference(STORAGE_KEYS.accentColor, DEFAULT_ACCENT)
       };
     }
   };

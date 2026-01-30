@@ -1046,68 +1046,189 @@
 
   </main>
   
+  <!-- Back to Top Button -->
+  <button class="back-to-top" id="backToTop" aria-label="Back to top">
+    <ion-icon name="chevron-up-outline"></ion-icon>
+  </button>
+
   <!-- FOOTER -->
   <footer id="footer" class="mb-footer" aria-label="Site footer">
+    <!-- Animated Wave Separator -->
+    <div class="mb-footer__wave">
+      <svg viewBox="0 0 1200 120" preserveAspectRatio="none">
+        <path class="wave-path wave-1" d="M0,60 Q150,20 300,60 T600,60 T900,60 T1200,60 L1200,120 L0,120 Z"></path>
+        <path class="wave-path wave-2" d="M0,80 Q200,40 400,80 T800,80 T1200,80 L1200,120 L0,120 Z"></path>
+        <path class="wave-path wave-3" d="M0,100 Q300,70 600,100 T1200,100 L1200,120 L0,120 Z"></path>
+      </svg>
+    </div>
+
     <div class="mb-footer__top">
+      <!-- Decorative Pattern Overlay -->
+      <div class="mb-footer__pattern"></div>
+      
       <div class="mb-footer__wrap">
+        <!-- Row 1: Main Content -->
+        <div class="mb-footer__main-grid">
 
-        <!-- Brand / About -->
-        <section class="mb-footer__col" aria-label="About MindBalance">
-          <h3 class="mb-footer__brand" data-translate="footer_brand">MindBalance</h3>
-          <p class="mb-footer__text" data-translate="footer_about">
-            MindBalance is a student-built mental health education and support hub.
-            Our goal is to provide clear, reliable information and guide visitors toward safe resources.
-          </p>
-          <a class="mb-footer__link" href="/support/" data-translate="footer_read_more">Read more →</a>
-        </section>
+          <!-- Brand / About -->
+          <section class="mb-footer__col" aria-label="About MindBalance">
+            <h3 class="mb-footer__brand" data-translate="footer_brand">MindBalance</h3>
+            <p class="mb-footer__text" data-translate="footer_about">
+              MindBalance is a student-built mental health education and support hub.
+              Our goal is to provide clear, reliable information and guide visitors toward safe resources.
+            </p>
+            <a class="mb-footer__link" href="/support/" data-translate="footer_read_more">Read more →</a>
+            
+            <!-- Trust Badges -->
+            <div class="mb-footer__trust">
+              <div class="mb-footer__badge">
+                <ion-icon name="shield-checkmark-outline"></ion-icon>
+                <span>Privacy First</span>
+              </div>
+              <div class="mb-footer__badge">
+                <ion-icon name="accessibility-outline"></ion-icon>
+                <span>Accessible</span>
+              </div>
+              <div class="mb-footer__badge">
+                <ion-icon name="people-outline"></ion-icon>
+                <span>Community</span>
+              </div>
+            </div>
+          </section>
 
-        <!-- Pages -->
-        <nav class="mb-footer__col" aria-label="Footer navigation">
-          <h4 class="mb-footer__heading" data-translate="footer_pages">Pages</h4>
-          <ul class="mb-footer__list">
-            <li><a class="mb-footer__link" href="/" data-translate="nav_home">Home</a></li>
-            <li><a class="mb-footer__link" href="/support/">About</a></li>
-            <li><a class="mb-footer__link" href="/resourcelib/">Resource Library</a></li>
-            <li><a class="mb-footer__link" href="/community/">Community Hub</a></li>
-            <li><a class="mb-footer__link" href="/blog/">Blog</a></li>
-            <li><a class="mb-footer__link" href="/docs/" data-translate="nav_docs">Documentation</a></li>
-            <li><a class="mb-footer__link" href="/auth/" data-auth-btn>Sign In</a></li>
-          </ul>
-        </nav>
+          <!-- Pages (Collapsible on Mobile) -->
+          <nav class="mb-footer__col mb-footer__accordion" aria-label="Footer navigation">
+            <button class="mb-footer__accordion-btn" aria-expanded="false">
+              <h4 class="mb-footer__heading" data-translate="footer_pages">Pages</h4>
+              <ion-icon name="chevron-down-outline" class="accordion-icon"></ion-icon>
+            </button>
+            <ul class="mb-footer__list mb-footer__accordion-content">
+              <li><a class="mb-footer__link" href="/" data-translate="nav_home">Home</a></li>
+              <li><a class="mb-footer__link" href="/support/">About</a></li>
+              <li><a class="mb-footer__link" href="/resourcelib/">Resource Library</a></li>
+              <li><a class="mb-footer__link" href="/community/">Community Hub</a></li>
+              <li><a class="mb-footer__link" href="/blog/">Blog</a></li>
+              <li><a class="mb-footer__link" href="/find-help/">Find Help</a></li>
+              <li><a class="mb-footer__link" href="/auth/" data-auth-btn>Sign In</a></li>
+            </ul>
+          </nav>
 
-        <!-- Topics / Tags -->
-        <section class="mb-footer__col" aria-label="Popular topics">
-          <h4 class="mb-footer__heading" data-translate="footer_topics">Popular Topics</h4>
-          <div class="mb-footer__tags">
-            <a class="mb-footer__tag" href="/resourcelib/?topic=anxiety" data-translate="blog_filter_anxiety">Anxiety</a>
-            <a class="mb-footer__tag" href="/resourcelib/?topic=depression" data-translate="blog_filter_depression">Depression</a>
-            <a class="mb-footer__tag" href="/resourcelib/?topic=stress" data-translate="blog_filter_stress">Stress</a>
-            <a class="mb-footer__tag" href="/resourcelib/?topic=sleep" data-translate="blog_filter_sleep">Sleep</a>
-            <a class="mb-footer__tag" href="/resourcelib/?topic=mindfulness" data-translate="blog_filter_mindfulness">Mindfulness</a>
-            <a class="mb-footer__tag" href="/resourcelib/?topic=teens" data-translate="blog_filter_teens">Teens</a>
+          <!-- Topics / Tags -->
+          <section class="mb-footer__col" aria-label="Popular topics">
+            <h4 class="mb-footer__heading" data-translate="footer_topics">Popular Topics</h4>
+            <div class="mb-footer__tags">
+              <a class="mb-footer__tag" href="/resourcelib/?topic=anxiety" data-translate="blog_filter_anxiety">Anxiety</a>
+              <a class="mb-footer__tag" href="/resourcelib/?topic=depression" data-translate="blog_filter_depression">Depression</a>
+              <a class="mb-footer__tag" href="/resourcelib/?topic=stress" data-translate="blog_filter_stress">Stress</a>
+              <a class="mb-footer__tag" href="/resourcelib/?topic=sleep" data-translate="blog_filter_sleep">Sleep</a>
+              <a class="mb-footer__tag" href="/resourcelib/?topic=mindfulness" data-translate="blog_filter_mindfulness">Mindfulness</a>
+              <a class="mb-footer__tag" href="/resourcelib/?topic=teens" data-translate="blog_filter_teens">Teens</a>
+            </div>
+          </section>
+
+          <!-- Take Action + Contact -->
+          <section class="mb-footer__col" aria-label="Take action">
+            <h4 class="mb-footer__heading" data-translate="footer_action">Take Action</h4>
+
+            <p class="mb-footer__text" data-translate="footer_action_desc">
+              Support mental health education and community access to resources.
+            </p>
+
+            <div class="mb-footer__cta animate-scale-in">
+              <a class="mb-footer__btn" href="/support/" data-translate="footer_get_support">Get Support</a>
+              <a class="mb-footer__btn mb-footer__btn--ghost" href="/auth/" data-auth-btn>Sign In</a>
+            </div>
+
+            <h5 class="mb-footer__subheading" data-translate="footer_follow">Follow Us</h5>
+            <div class="mb-footer__social">
+              <a class="mb-footer__icon mb-footer__icon--instagram" href="https://www.instagram.com/mindbalance2026?igsh=MTdid3ZpdDZzdHFtcA==" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+                <ion-icon name="logo-instagram"></ion-icon>
+              </a>
+              <a class="mb-footer__icon mb-footer__icon--youtube" href="https://www.youtube.com/@MindBaIance" target="_blank" rel="noopener noreferrer" aria-label="YouTube">
+                <ion-icon name="logo-youtube"></ion-icon>
+              </a>
+            </div>
+          </section>
+        </div>
+
+        <!-- Row 2: Newsletter + Recent Posts -->
+        <div class="mb-footer__extras">
+          <!-- Newsletter Signup -->
+          <section class="mb-footer__newsletter" aria-label="Newsletter signup">
+            <div class="mb-footer__newsletter-content">
+              <ion-icon name="mail-outline" class="newsletter-icon"></ion-icon>
+              <div class="newsletter-text">
+                <h4 class="mb-footer__heading">Stay Updated</h4>
+                <p class="mb-footer__text">Get mental wellness tips and resources delivered to your inbox.</p>
+              </div>
+            </div>
+            <form class="mb-footer__newsletter-form" id="newsletterForm">
+              <input type="email" class="mb-footer__newsletter-input" placeholder="Enter your email" required aria-label="Email address">
+              <button type="submit" class="mb-footer__newsletter-btn">
+                <span>Subscribe</span>
+                <ion-icon name="arrow-forward-outline"></ion-icon>
+              </button>
+            </form>
+            <p class="mb-footer__newsletter-note">We respect your privacy. Unsubscribe anytime.</p>
+          </section>
+
+          <!-- Recent Blog Posts -->
+          <section class="mb-footer__recent" aria-label="Recent articles">
+            <h4 class="mb-footer__heading">Latest Articles</h4>
+            <div class="mb-footer__posts">
+              <a href="/articles/mental-health-news.html" class="mb-footer__post">
+                <div class="mb-footer__post-icon">
+                  <ion-icon name="flask-outline"></ion-icon>
+                </div>
+                <div class="mb-footer__post-info">
+                  <span class="mb-footer__post-title">Mental Health Research News</span>
+                  <span class="mb-footer__post-meta">Latest findings</span>
+                </div>
+              </a>
+              <a href="/articles/recovery-stories.html" class="mb-footer__post">
+                <div class="mb-footer__post-icon">
+                  <ion-icon name="heart-outline"></ion-icon>
+                </div>
+                <div class="mb-footer__post-info">
+                  <span class="mb-footer__post-title">Recovery Stories</span>
+                  <span class="mb-footer__post-meta">Real journeys</span>
+                </div>
+              </a>
+              <a href="/articles/workplace-wellness.html" class="mb-footer__post">
+                <div class="mb-footer__post-icon">
+                  <ion-icon name="briefcase-outline"></ion-icon>
+                </div>
+                <div class="mb-footer__post-info">
+                  <span class="mb-footer__post-title">Workplace Wellness</span>
+                  <span class="mb-footer__post-meta">Professional tips</span>
+                </div>
+              </a>
+            </div>
+          </section>
+        </div>
+
+        <!-- Footer Controls: Language & Theme -->
+        <div class="mb-footer__controls">
+          <div class="mb-footer__control-group">
+            <ion-icon name="language-outline"></ion-icon>
+            <select class="mb-footer__select" id="footerLangSelect" aria-label="Select language">
+              <option value="en">English</option>
+              <option value="es">Español</option>
+              <option value="fr">Français</option>
+              <option value="zh">中文</option>
+              <option value="hi">हिन्दी</option>
+              <option value="ko">한국어</option>
+            </select>
           </div>
-        </section>
-
-        <!-- Take Action -->
-        <section class="mb-footer__col" aria-label="Take action">
-          <h4 class="mb-footer__heading" data-translate="footer_action">Take Action</h4>
-
-          <p class="mb-footer__text" data-translate="footer_action_desc">
-            Support mental health education and community access to resources.
-          </p>
-
-          <div class="mb-footer__cta animate-scale-in">
-            <a class="mb-footer__btn" href="/support/" data-translate="footer_get_support">Get Support</a>
-            <a class="mb-footer__btn mb-footer__btn--ghost" href="/auth/" data-auth-btn>Sign In</a>
+          <div class="mb-footer__control-group">
+            <ion-icon name="moon-outline" class="theme-icon-dark"></ion-icon>
+            <ion-icon name="sunny-outline" class="theme-icon-light"></ion-icon>
+            <label class="mb-footer__theme-toggle">
+              <input type="checkbox" id="footerThemeToggle">
+              <span class="mb-footer__theme-slider"></span>
+            </label>
           </div>
-
-          <h5 class="mb-footer__subheading" data-translate="footer_follow">Follow Us</h5>
-          <div class="mb-footer__social">
-            <a class="mb-footer__icon" href="https://www.instagram.com/mindbalance2026?igsh=MTdid3ZpdDZzdHFtcA==" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
-              <ion-icon name="logo-instagram"></ion-icon>
-            </a>
-          </div>
-        </section>
+        </div>
 
       </div>
     </div>
@@ -1139,6 +1260,7 @@
   <script src="js/script.js" defer></script>
   <script src="js/scroll-progress.js" defer></script>
   <script src="js/animations.js" defer></script>
+  <script src="js/footer.js" defer></script>
 
 </body>
 </html>

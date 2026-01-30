@@ -68,13 +68,20 @@ MindBalance is a static website built with HTML, CSS, and JavaScript, employing 
     - Progress rings for wellness goals
     - Four Supabase tables: `user_activity_logs`, `reading_progress`, `user_achievements`, `user_engagement`
     - Full dark mode support and skeleton loading states
--   **Enhanced Footer**: Modern footer design with:
-    - Wave separator SVG above footer creating smooth transition
-    - Gradient backgrounds with subtle radial overlay effects
+-   **Enhanced Footer** (`js/footer.js`): Comprehensive modern footer with:
+    - Animated three-layer wave separator with CSS keyframe animations
+    - Decorative dot pattern overlay for visual texture
+    - Gradient backgrounds with radial overlay effects
+    - Trust badges section (Privacy First, Accessible, Community)
+    - Newsletter signup form with email input, subscribe button, and success toast
+    - Recent blog posts preview section with 3 latest articles
+    - Collapsible accordion navigation for mobile (expand/collapse with animation)
+    - Footer controls: language selector dropdown + dark/light mode toggle
+    - Social media icons: Instagram + YouTube (https://www.youtube.com/@MindBaIance)
     - Rounded pill-style buttons with shadows and hover effects
     - Glassmorphism topic tags with backdrop blur
-    - Circular social media icons with Instagram-style gradient on hover
     - Full dark mode support with purple accent colors
+    - Back-to-top button with smooth scroll and bounce animation
 -   **Community Hub Enhancements**: Features popular discussions sidebar, clickable usernames linking to profiles, an @mentions system with autocomplete, and an inbox/notifications modal.
 -   **Article Pages**: Dedicated `/articles/` directory for full-length, TTS-enabled articles with a magazine-style layout, TTS audio player with advanced controls (speed, highlighting, progress), floating reading controls panel (font size, line spacing, dark mode, focus mode, print), text highlighting, bookmarking, and an enhanced sticky Table of Contents sidebar. Includes reading time per section, completion checkmarks, mini-map, scroll position indicator, keyboard navigation, and social share buttons. Also features a "Save Article" button and related articles section.
 -   **News & Stories Section**: Dedicated blog section featuring real stories, research updates, and community spotlights. Includes 6 article pages: Mental Health Research News, Recovery Stories, Workplace Wellness, Teen Mental Health Support, Community Support, and Mental Health Wins. All articles feature "New" badges with pulse animation, TTS audio, and full reading controls.

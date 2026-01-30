@@ -656,6 +656,30 @@
 
       <!-- Helplines Section -->
       <section class="helplines-section" id="helplines" aria-label="Helplines">
+        <!-- Sticky Quick Access Bar -->
+        <div class="helplines-quick-access" id="helplines-quick-access">
+          <div class="quick-access-inner">
+            <span class="quick-access-label" data-translate="quick_access_label">Need Help Now?</span>
+            <div class="quick-access-links">
+              <a href="tel:988" class="quick-access-item quick-access-item--988">
+                <ion-icon name="call"></ion-icon>
+                <span class="quick-access-name">988</span>
+                <span class="quick-access-desc" data-translate="quick_access_988">Suicide & Crisis</span>
+              </a>
+              <a href="sms:741741" class="quick-access-item quick-access-item--crisis">
+                <ion-icon name="chatbubble"></ion-icon>
+                <span class="quick-access-name" data-translate="quick_access_text">Text HOME</span>
+                <span class="quick-access-desc">741741</span>
+              </a>
+              <a href="tel:1-866-488-7386" class="quick-access-item quick-access-item--trevor">
+                <ion-icon name="heart"></ion-icon>
+                <span class="quick-access-name">Trevor</span>
+                <span class="quick-access-desc" data-translate="quick_access_trevor">LGBTQ+ Youth</span>
+              </a>
+            </div>
+          </div>
+        </div>
+
         <!-- Decorative floating shapes -->
         <div class="helplines-decoration helplines-decoration--1"></div>
         <div class="helplines-decoration helplines-decoration--2"></div>
@@ -671,12 +695,13 @@
             <p class="section-subtitle" data-translate="helplines_subtitle">Free, confidential support is available 24/7</p>
           </div>
 
-          <!-- Filter Pills -->
-          <div class="helplines-filters">
-            <button class="helplines-filter-pill active" data-filter="all">
-              <ion-icon name="apps-outline"></ion-icon>
-              <span data-translate="hl_filter_all">All</span>
-            </button>
+          <!-- Filter Pills and View Toggle -->
+          <div class="helplines-controls">
+            <div class="helplines-filters">
+              <button class="helplines-filter-pill active" data-filter="all">
+                <ion-icon name="apps-outline"></ion-icon>
+                <span data-translate="hl_filter_all">All</span>
+              </button>
             <button class="helplines-filter-pill" data-filter="crisis">
               <ion-icon name="alert-circle-outline"></ion-icon>
               <span data-translate="hl_filter_crisis">Crisis</span>
@@ -701,6 +726,17 @@
               <ion-icon name="call-outline"></ion-icon>
               <span data-translate="hl_filter_general">General</span>
             </button>
+            </div>
+            
+            <!-- View Toggle -->
+            <div class="helplines-view-toggle">
+              <button class="view-toggle-btn active" data-view="grid" aria-label="Grid view">
+                <ion-icon name="grid-outline"></ion-icon>
+              </button>
+              <button class="view-toggle-btn" data-view="list" aria-label="List view">
+                <ion-icon name="list-outline"></ion-icon>
+              </button>
+            </div>
           </div>
 
           <div class="helplines-expect">

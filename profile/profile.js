@@ -1169,6 +1169,22 @@ async function checkAndAwardBadges(allAchievements, unlockedIds) {
   const supabaseClient = getSupabaseClient();
   if (!supabaseClient) return;
   
+  if (!allAchievements || !unlockedIds) {
+    const { data: achievements } = await supabaseClient
+      .from('achievements')
+      .select('*');
+    
+    const { data: userAchievements } = await supabaseClient
+      .from('user_achievements')
+      .select('achievement_id')
+      .eq('user_id', currentUser.id);
+    
+    allAchievements = achievements || [];
+    unlockedIds = new Set((userAchievements || []).map(ua => ua.achievement_id));
+  }
+  
+  if (allAchievements.length === 0) return;
+  
   // Get user stats
   const [postsResult, commentsResult, likesResult, moodResult, goalsResult, savedResult] = await Promise.all([
     supabaseClient.from('posts').select('id', { count: 'exact' }).eq('author_id', currentUser.id),
@@ -1318,11 +1334,15 @@ async function logMood() {
     return;
   }
   
+  ToastManager.success('Mood logged successfully!');
+  
   document.getElementById('moodNote').value = '';
   document.querySelectorAll('.mb-profile__mood-btn').forEach(b => b.classList.remove('is-selected'));
   selectedMood = null;
   
   loadMoodHistory();
+  
+  checkAndAwardBadges();
 }
 
 async function loadMoodHistory() {

@@ -197,12 +197,48 @@ function initAuth() {
     const user = session?.user || null;
     broadcastAuthChange(user);
     updateAuthUI(user);
+    if (user) {
+      logDailyVisit(user.id);
+    }
   });
   
   getCurrentUser().then(user => {
     broadcastAuthChange(user);
     updateAuthUI(user);
+    if (user) {
+      logDailyVisit(user.id);
+    }
   });
+}
+
+async function logDailyVisit(userId) {
+  const sb = getSupabase();
+  if (!sb || !userId) return;
+  
+  const today = new Date().toISOString().split('T')[0];
+  const sessionKey = `daily_visit_logged_${today}`;
+  
+  if (sessionStorage.getItem(sessionKey)) {
+    return;
+  }
+  
+  try {
+    await sb
+      .from('user_engagement')
+      .upsert({
+        user_id: userId,
+        visit_date: today,
+        articles_read: 0
+      }, { 
+        onConflict: 'user_id,visit_date',
+        ignoreDuplicates: true
+      });
+    
+    sessionStorage.setItem(sessionKey, 'true');
+    await updateStreakFromActivity(userId);
+  } catch (e) {
+    console.warn('Error logging daily visit:', e);
+  }
 }
 
 // Initialize auth immediately if document is already ready, otherwise wait

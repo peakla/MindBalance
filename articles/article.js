@@ -2400,6 +2400,10 @@
         btn.classList.add('is-saved');
         btn.querySelector('i').className = 'fas fa-bookmark';
         btn.querySelector('span').textContent = getTranslation('article_saved', 'Saved!');
+        
+        if (typeof MBAnalytics !== 'undefined' && MBAnalytics.logActivity) {
+          MBAnalytics.logActivity('article_saved', { article_slug: slug, article_title: title });
+        }
       }
     } catch (error) {
       console.error('Error saving article:', error);

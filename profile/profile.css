@@ -3,6 +3,13 @@
 /* Profile Accent Color Variable (set dynamically by JS) */
 :root {
   --profile-accent: #b89b5e;
+  --profile-gradient: linear-gradient(135deg, #b89b5e 0%, #d6bd9f 100%);
+}
+
+/* Dark mode purple accent override */
+[data-theme="dark"] {
+  --profile-accent: #9b7ed9;
+  --profile-gradient: linear-gradient(135deg, #9b7ed9 0%, #7c5fc4 100%);
 }
 
 .mb-profile {
@@ -423,10 +430,15 @@
   width: 40px;
   height: 40px;
   border: 3px solid #e8e4dc;
-  border-top-color: #b89b5e;
+  border-top-color: var(--profile-accent, #b89b5e);
   border-radius: 50%;
   margin: 0 auto 15px;
   animation: spin 1s linear infinite;
+}
+
+[data-theme="dark"] .mb-profile__spinner {
+  border-color: #3a3a5a;
+  border-top-color: var(--profile-accent);
 }
 
 @keyframes spin {
@@ -867,6 +879,10 @@
 /* Dark Mode */
 [data-theme="dark"] .mb-profile {
   background: #0f0f1a;
+}
+
+[data-theme="dark"] .mb-profile__guest-content ion-icon {
+  color: var(--profile-accent);
 }
 
 [data-theme="dark"] .mb-profile__guest-content h1,
@@ -3180,6 +3196,10 @@
 [data-theme="dark"] .mb-profile__section-title {
   color: #f1f1f1;
   border-color: #3a3a50;
+}
+
+[data-theme="dark"] .mb-profile__section-title ion-icon {
+  color: var(--purple-accent, #9b7ed9);
 }
 
 [data-theme="dark"] .mb-profile__community-section {

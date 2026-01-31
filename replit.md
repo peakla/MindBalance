@@ -26,6 +26,17 @@ MindBalance is a static website built with HTML, CSS, and JavaScript, employing 
     - Full dark mode support for all animations
     - Respects `prefers-reduced-motion` for accessibility
 -   **Accessibility**: Comprehensive settings panel offering 7 options (Dark Mode, Font Size, High Contrast, Colorblind modes, Focus Mode, Dyslexia Font, Reduced Motion) with preferences persisted via localStorage.
+-   **Enhanced Settings Modal** (`css/settings-modal.css` and `js/settings-modal.js`): Full-featured modal experience with:
+    - First-time onboarding wizard for new users
+    - Tabbed navigation (Appearance, Accessibility, Reading, Language)
+    - Theme presets (Calm Ocean, Warm Sunset, Forest Green, Night Mode, High Contrast) with live preview
+    - Before/After comparison toggle for accessibility settings
+    - Accessibility score ring with real-time calculation
+    - Profile sync indicator showing when settings are saved to account
+    - Reset buttons per section and master reset to defaults
+    - Keyboard navigation (Escape to close, Tab cycling)
+    - Full dark mode support with purple accent colors
+    - Integrated across all 21+ pages
 -   **User Accent Color System**: Theme-aware accent color picker with 8 color options (gold, purple, blue, green, teal, pink, orange, red). Applied via CSS custom properties (`--user-accent`, `--user-accent-hover`, `--user-accent-rgb`, `--user-accent-glow`) at `:root` level. Default accent is gold-crayola (#af916d) for light mode and purple (#9b7ed9) for dark mode. User-selected accent persists independently of theme and is applied to all interactive elements (buttons, links, progress bars, TOC pills, TTS controls, scrollbars).
 -   **Responsiveness**: Full responsive design with orientation lock messages and safe area support.
 -   **Multilingual Support**: Supports 6 languages (English, Spanish, French, Chinese Simplified, Hindi, Korean) using `data-translate` attributes and JSON-based translation files. Language preference persists in localStorage. A CSV master file (`translations.csv`) is the single source of truth for translations, with Python scripts to generate JSON files and audit for completeness.

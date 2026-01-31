@@ -279,18 +279,25 @@
       const settingsToggle = wrapper.querySelector('[data-settings-toggle]');
       const settingsDropdown = wrapper.querySelector('[data-settings-dropdown]');
 
-      if (settingsToggle && settingsDropdown) {
+      if (settingsToggle) {
         settingsToggle.addEventListener('click', function(e) {
           e.stopPropagation();
-          document.querySelectorAll('.settings-dropdown.active').forEach(d => {
-            if (d !== settingsDropdown) d.classList.remove('active');
-          });
-          settingsDropdown.classList.toggle('active');
+          e.preventDefault();
+          if (window.SettingsModal && window.SettingsModal.open) {
+            window.SettingsModal.open();
+          } else if (settingsDropdown) {
+            document.querySelectorAll('.settings-dropdown.active').forEach(d => {
+              if (d !== settingsDropdown) d.classList.remove('active');
+            });
+            settingsDropdown.classList.toggle('active');
+          }
         });
 
-        settingsDropdown.addEventListener('click', function(e) {
-          e.stopPropagation();
-        });
+        if (settingsDropdown) {
+          settingsDropdown.addEventListener('click', function(e) {
+            e.stopPropagation();
+          });
+        }
       }
     });
 
@@ -347,34 +354,42 @@
       setPreference(STORAGE_KEYS.theme, theme);
       applyTheme(theme);
     },
+    applyTheme: applyTheme,
     setFontSize: function(size) {
       setPreference(STORAGE_KEYS.fontSize, size);
       applyFontSize(size);
     },
+    applyFontSize: applyFontSize,
     setReduceMotion: function(enabled) {
       setPreference(STORAGE_KEYS.reduceMotion, enabled ? 'true' : 'false');
       applyReduceMotion(enabled);
     },
+    applyReduceMotion: applyReduceMotion,
     setHighContrast: function(enabled) {
       setPreference(STORAGE_KEYS.highContrast, enabled ? 'true' : 'false');
       applyHighContrast(enabled);
     },
+    applyHighContrast: applyHighContrast,
     setColorblind: function(mode) {
       setPreference(STORAGE_KEYS.colorblind, mode);
       applyColorblind(mode);
     },
+    applyColorblind: applyColorblind,
     setAdhdMode: function(enabled) {
       setPreference(STORAGE_KEYS.adhdMode, enabled ? 'true' : 'false');
       applyAdhdMode(enabled);
     },
+    applyAdhdMode: applyAdhdMode,
     setDyslexiaFont: function(enabled) {
       setPreference(STORAGE_KEYS.dyslexiaFont, enabled ? 'true' : 'false');
       applyDyslexiaFont(enabled);
     },
+    applyDyslexiaFont: applyDyslexiaFont,
     setAccentColor: function(colorName) {
       setPreference(STORAGE_KEYS.accentColor, colorName);
       applyAccentColor(colorName);
     },
+    applyAccentColor: applyAccentColor,
     getAccentColors: function() {
       return ACCENT_COLORS;
     },

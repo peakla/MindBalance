@@ -725,6 +725,114 @@ INSERT INTO posts (id, author_id, content, category, like_count, comment_count, 
 );
 
 -- =====================================================
+-- 23. PREPOPULATED STARTER COMMENTS
+-- =====================================================
+INSERT INTO post_comments (id, post_id, author_id, content, created_at) VALUES
+-- Comments for Welcome post (3 comments)
+(
+  'f6a7b8c9-d0e1-2345-fab0-456789012345',
+  'a1b2c3d4-e5f6-7890-abcd-ef1234567890',
+  NULL,
+  'Thank you for creating this space! It means so much to have a community that understands.',
+  NOW() - INTERVAL '6 days'
+),
+(
+  'a7b8c9d0-e1f2-3456-ab01-567890123456',
+  'a1b2c3d4-e5f6-7890-abcd-ef1234567890',
+  NULL,
+  'So grateful to be here. Looking forward to connecting with everyone!',
+  NOW() - INTERVAL '5 days'
+),
+(
+  'b8c9d0e1-f2a3-4567-bc12-678901234567',
+  'a1b2c3d4-e5f6-7890-abcd-ef1234567890',
+  NULL,
+  'This is exactly what I needed. Thank you for making mental health support accessible.',
+  NOW() - INTERVAL '4 days'
+),
+-- Comments for Self-care post (3 comments)
+(
+  'c9d0e1f2-a3b4-5678-cd23-789012345678',
+  'b2c3d4e5-f6a7-8901-bcde-f12345678901',
+  NULL,
+  'I took a 10-minute walk today! Small steps count.',
+  NOW() - INTERVAL '2 days 20 hours'
+),
+(
+  'd0e1f2a3-b4c5-6789-de34-890123456789',
+  'b2c3d4e5-f6a7-8901-bcde-f12345678901',
+  NULL,
+  'Made myself a healthy breakfast instead of skipping it. Progress!',
+  NOW() - INTERVAL '2 days 15 hours'
+),
+(
+  'e1f2a3b4-c5d6-7890-ef45-901234567890',
+  'b2c3d4e5-f6a7-8901-bcde-f12345678901',
+  NULL,
+  'I finally said no to something that would have drained my energy. Self-care is boundaries too!',
+  NOW() - INTERVAL '2 days 10 hours'
+),
+-- Comments for Breathing exercise post (2 comments)
+(
+  'f2a3b4c5-d6e7-8901-fa56-012345678901',
+  'c3d4e5f6-a7b8-9012-cdef-123456789012',
+  NULL,
+  'This technique really works! I use it before stressful meetings.',
+  NOW() - INTERVAL '1 day 20 hours'
+),
+(
+  'a3b4c5d6-e7f8-9012-ab67-123456789012',
+  'c3d4e5f6-a7b8-9012-cdef-123456789012',
+  NULL,
+  'Never heard of 4-7-8 before. Going to try it tonight when I can''t sleep.',
+  NOW() - INTERVAL '1 day 15 hours'
+),
+-- Comments for Mental health wins post (3 comments)
+(
+  'b4c5d6e7-f8a9-0123-bc78-234567890123',
+  'd4e5f6a7-b8c9-0123-defa-234567890123',
+  NULL,
+  'I needed this reminder today. Thank you!',
+  NOW() - INTERVAL '20 hours'
+),
+(
+  'c5d6e7f8-a9b0-1234-cd89-345678901234',
+  'd4e5f6a7-b8c9-0123-defa-234567890123',
+  NULL,
+  'Got out of bed AND made my bed today. Double win!',
+  NOW() - INTERVAL '18 hours'
+),
+(
+  'd6e7f8a9-b0c1-2345-de90-456789012345',
+  'd4e5f6a7-b8c9-0123-defa-234567890123',
+  NULL,
+  'Celebrating that I reached out to a friend today after isolating for weeks.',
+  NOW() - INTERVAL '15 hours'
+),
+-- Comments for Resources post (2 comments)
+(
+  'e7f8a9b0-c1d2-3456-ef01-567890123456',
+  'e5f6a7b8-c9d0-1234-efab-345678901234',
+  NULL,
+  'The Resource Library has been so helpful. Found a therapist through one of the links!',
+  NOW() - INTERVAL '10 hours'
+),
+(
+  'f8a9b0c1-d2e3-4567-fa12-678901234567',
+  'e5f6a7b8-c9d0-1234-efab-345678901234',
+  NULL,
+  'Bookmarked the crisis resources page. You never know when you or someone else might need it.',
+  NOW() - INTERVAL '8 hours'
+);
+
+-- Update comment counts to match actual comments
+UPDATE posts SET comment_count = 3 WHERE id = 'a1b2c3d4-e5f6-7890-abcd-ef1234567890';
+UPDATE posts SET comment_count = 3 WHERE id = 'b2c3d4e5-f6a7-8901-bcde-f12345678901';
+UPDATE posts SET comment_count = 2 WHERE id = 'c3d4e5f6-a7b8-9012-cdef-123456789012';
+UPDATE posts SET comment_count = 3 WHERE id = 'd4e5f6a7-b8c9-0123-defa-234567890123';
+UPDATE posts SET comment_count = 2 WHERE id = 'e5f6a7b8-c9d0-1234-efab-345678901234';
+
+-- =====================================================
 -- COMPLETE! All 18 tables + 2 functions + starter data created.
 -- =====================================================
-SELECT 'SUCCESS: All tables, functions, and starter posts created!' as status;
+SELECT 'SUCCESS: All tables, functions, starter posts, and comments created!' as status;

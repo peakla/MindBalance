@@ -34,10 +34,30 @@ function getAuthPath() {
       path.includes('/resourcelib/') ||
       path.includes('/community/') ||
       path.includes('/support/') ||
-      path.includes('/auth/')) {
+      path.includes('/auth/') ||
+      path.includes('/articles/') ||
+      path.includes('/profile/') ||
+      path.includes('/find-help/')) {
     return '../auth/';
   }
   return './auth/';
+}
+
+function getProfilePath() {
+  const path = window.location.pathname;
+  if (path.includes('/blog/') || 
+      path.includes('/resourcelib/') ||
+      path.includes('/community/') ||
+      path.includes('/support/') ||
+      path.includes('/auth/') ||
+      path.includes('/articles/') ||
+      path.includes('/find-help/')) {
+    return '../profile/';
+  }
+  if (path.includes('/profile/')) {
+    return './';
+  }
+  return './profile/';
 }
 
 function saveRedirectUrl() {
@@ -47,12 +67,23 @@ function saveRedirectUrl() {
   }
 }
 
+function saveRedirectToProfile() {
+  // Set redirect to profile page when user clicks user icon to manage account
+  sessionStorage.setItem('auth_redirect', '/profile/');
+  sessionStorage.setItem('auth_intent', 'manage_profile');
+}
+
 function getRedirectUrl() {
   return sessionStorage.getItem('auth_redirect') || '/';
 }
 
+function getAuthIntent() {
+  return sessionStorage.getItem('auth_intent') || null;
+}
+
 function clearRedirectUrl() {
   sessionStorage.removeItem('auth_redirect');
+  sessionStorage.removeItem('auth_intent');
 }
 
 function broadcastAuthChange(user) {
@@ -145,6 +176,10 @@ async function updateUserButton(user) {
   if (user) {
     userBtn.classList.add('is-signed-in');
     
+    // When logged in, clicking user icon goes directly to profile
+    userBtn.onclick = null; // Clear any previous handler
+    userBtn.href = getProfilePath();
+    
     // Try to get user profile with avatar
     try {
       const sb = getSupabase();
@@ -186,6 +221,13 @@ async function updateUserButton(user) {
     if (icon) icon.style.display = '';
     const avatar = userBtn.querySelector('.user-avatar');
     if (avatar) avatar.remove();
+    
+    // When not logged in, clicking user icon should redirect to profile after login
+    userBtn.onclick = (e) => {
+      e.preventDefault();
+      saveRedirectToProfile();
+      window.location.href = getAuthPath();
+    };
   }
 }
 

@@ -1,10 +1,16 @@
 -- =====================================================
--- FRESH INSTALL - DROP AND RECREATE ALL TABLES
--- WARNING: This deletes all existing data!
+-- MINDBALANCE - COMPLETE FRESH INSTALL
+-- WARNING: This deletes ALL existing data!
 -- Run this in Supabase SQL Editor
 -- =====================================================
 
--- DROP EXISTING TABLES (in correct order due to foreign keys)
+-- =====================================================
+-- DROP ALL EXISTING TABLES (correct order for foreign keys)
+-- =====================================================
+DROP TABLE IF EXISTS post_reports CASCADE;
+DROP TABLE IF EXISTS post_likes CASCADE;
+DROP TABLE IF EXISTS post_comments CASCADE;
+DROP TABLE IF EXISTS notifications CASCADE;
 DROP TABLE IF EXISTS saved_articles CASCADE;
 DROP TABLE IF EXISTS followers CASCADE;
 DROP TABLE IF EXISTS user_achievements CASCADE;
@@ -12,38 +18,209 @@ DROP TABLE IF EXISTS achievements CASCADE;
 DROP TABLE IF EXISTS mood_logs CASCADE;
 DROP TABLE IF EXISTS wellness_goals CASCADE;
 DROP TABLE IF EXISTS user_engagement CASCADE;
+DROP TABLE IF EXISTS user_activity_logs CASCADE;
+DROP TABLE IF EXISTS reading_progress CASCADE;
+DROP TABLE IF EXISTS newsletter_subscribers CASCADE;
+DROP TABLE IF EXISTS resource_suggestions CASCADE;
+DROP TABLE IF EXISTS likes CASCADE;
+DROP TABLE IF EXISTS posts CASCADE;
+DROP TABLE IF EXISTS profiles CASCADE;
+
+-- Drop functions
+DROP FUNCTION IF EXISTS calculate_user_reputation(UUID);
+DROP FUNCTION IF EXISTS update_user_streak(UUID);
 
 -- =====================================================
--- 1. SAVED ARTICLES TABLE
+-- 1. PROFILES TABLE
 -- =====================================================
-CREATE TABLE saved_articles (
-  id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
-  user_id UUID REFERENCES auth.users(id) ON DELETE CASCADE,
-  article_slug TEXT NOT NULL,
-  article_title TEXT NOT NULL,
-  article_category TEXT,
-  article_image TEXT,
-  saved_at TIMESTAMPTZ DEFAULT NOW(),
-  UNIQUE(user_id, article_slug)
+CREATE TABLE profiles (
+  id UUID REFERENCES auth.users(id) ON DELETE CASCADE PRIMARY KEY,
+  email TEXT,
+  display_name TEXT,
+  avatar_url TEXT,
+  bio TEXT,
+  theme_color TEXT DEFAULT '#d4a574',
+  social_links JSONB DEFAULT '{}',
+  is_public BOOLEAN DEFAULT TRUE,
+  show_activity BOOLEAN DEFAULT TRUE,
+  show_saved BOOLEAN DEFAULT FALSE,
+  reputation_points INTEGER DEFAULT 0,
+  current_streak INTEGER DEFAULT 0,
+  longest_streak INTEGER DEFAULT 0,
+  last_visit_date DATE,
+  created_at TIMESTAMPTZ DEFAULT NOW(),
+  updated_at TIMESTAMPTZ DEFAULT NOW()
 );
 
-ALTER TABLE saved_articles ENABLE ROW LEVEL SECURITY;
+ALTER TABLE profiles ENABLE ROW LEVEL SECURITY;
 
-DROP POLICY IF EXISTS "Users can view own saved articles" ON saved_articles;
-DROP POLICY IF EXISTS "Users can save articles" ON saved_articles;
-DROP POLICY IF EXISTS "Users can unsave articles" ON saved_articles;
+CREATE POLICY "Public profiles are viewable by everyone" ON profiles
+  FOR SELECT USING (true);
 
-CREATE POLICY "Users can view own saved articles" ON saved_articles
-  FOR SELECT USING (auth.uid() = user_id);
+CREATE POLICY "Users can insert their own profile" ON profiles
+  FOR INSERT WITH CHECK (auth.uid() = id);
 
-CREATE POLICY "Users can save articles" ON saved_articles
+CREATE POLICY "Users can update own profile" ON profiles
+  FOR UPDATE USING (auth.uid() = id);
+
+CREATE POLICY "Users can delete own profile" ON profiles
+  FOR DELETE USING (auth.uid() = id);
+
+-- =====================================================
+-- 2. POSTS TABLE (Community Hub)
+-- =====================================================
+CREATE TABLE posts (
+  id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
+  author_id UUID REFERENCES auth.users(id) ON DELETE CASCADE,
+  content TEXT NOT NULL,
+  category TEXT DEFAULT 'general',
+  image_url TEXT,
+  like_count INTEGER DEFAULT 0,
+  comment_count INTEGER DEFAULT 0,
+  is_pinned BOOLEAN DEFAULT FALSE,
+  is_hidden BOOLEAN DEFAULT FALSE,
+  created_at TIMESTAMPTZ DEFAULT NOW(),
+  updated_at TIMESTAMPTZ DEFAULT NOW()
+);
+
+ALTER TABLE posts ENABLE ROW LEVEL SECURITY;
+
+CREATE POLICY "Anyone can view visible posts" ON posts
+  FOR SELECT USING (is_hidden = false);
+
+CREATE POLICY "Authenticated users can create posts" ON posts
+  FOR INSERT WITH CHECK (auth.uid() = author_id);
+
+CREATE POLICY "Users can update own posts" ON posts
+  FOR UPDATE USING (auth.uid() = author_id);
+
+CREATE POLICY "Users can delete own posts" ON posts
+  FOR DELETE USING (auth.uid() = author_id);
+
+-- =====================================================
+-- 3. POST LIKES TABLE
+-- =====================================================
+CREATE TABLE post_likes (
+  id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
+  post_id UUID REFERENCES posts(id) ON DELETE CASCADE,
+  user_id UUID REFERENCES auth.users(id) ON DELETE CASCADE,
+  created_at TIMESTAMPTZ DEFAULT NOW(),
+  UNIQUE(post_id, user_id)
+);
+
+ALTER TABLE post_likes ENABLE ROW LEVEL SECURITY;
+
+CREATE POLICY "Anyone can view likes" ON post_likes
+  FOR SELECT USING (true);
+
+CREATE POLICY "Authenticated users can like posts" ON post_likes
   FOR INSERT WITH CHECK (auth.uid() = user_id);
 
-CREATE POLICY "Users can unsave articles" ON saved_articles
+CREATE POLICY "Users can unlike posts" ON post_likes
   FOR DELETE USING (auth.uid() = user_id);
 
 -- =====================================================
--- 2. FOLLOWERS TABLE
+-- 4. POST COMMENTS TABLE
+-- =====================================================
+CREATE TABLE post_comments (
+  id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
+  post_id UUID REFERENCES posts(id) ON DELETE CASCADE,
+  author_id UUID REFERENCES auth.users(id) ON DELETE CASCADE,
+  content TEXT NOT NULL,
+  parent_id UUID REFERENCES post_comments(id) ON DELETE CASCADE,
+  created_at TIMESTAMPTZ DEFAULT NOW(),
+  updated_at TIMESTAMPTZ DEFAULT NOW()
+);
+
+ALTER TABLE post_comments ENABLE ROW LEVEL SECURITY;
+
+CREATE POLICY "Anyone can view comments" ON post_comments
+  FOR SELECT USING (true);
+
+CREATE POLICY "Authenticated users can create comments" ON post_comments
+  FOR INSERT WITH CHECK (auth.uid() = author_id);
+
+CREATE POLICY "Users can update own comments" ON post_comments
+  FOR UPDATE USING (auth.uid() = author_id);
+
+CREATE POLICY "Users can delete own comments" ON post_comments
+  FOR DELETE USING (auth.uid() = author_id);
+
+-- =====================================================
+-- 5. POST REPORTS TABLE (Moderation)
+-- =====================================================
+CREATE TABLE post_reports (
+  id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
+  post_id UUID REFERENCES posts(id) ON DELETE CASCADE,
+  reporter_id UUID REFERENCES auth.users(id) ON DELETE CASCADE,
+  reason TEXT NOT NULL,
+  details TEXT,
+  status TEXT DEFAULT 'pending',
+  created_at TIMESTAMPTZ DEFAULT NOW()
+);
+
+ALTER TABLE post_reports ENABLE ROW LEVEL SECURITY;
+
+CREATE POLICY "Users can submit reports" ON post_reports
+  FOR INSERT WITH CHECK (auth.uid() = reporter_id);
+
+CREATE POLICY "Users can view own reports" ON post_reports
+  FOR SELECT USING (auth.uid() = reporter_id);
+
+-- =====================================================
+-- 6. LIKES TABLE (Generic - for various content)
+-- =====================================================
+CREATE TABLE likes (
+  id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
+  user_id UUID REFERENCES auth.users(id) ON DELETE CASCADE,
+  content_type TEXT NOT NULL,
+  content_id UUID NOT NULL,
+  created_at TIMESTAMPTZ DEFAULT NOW(),
+  UNIQUE(user_id, content_type, content_id)
+);
+
+ALTER TABLE likes ENABLE ROW LEVEL SECURITY;
+
+CREATE POLICY "Anyone can view likes" ON likes
+  FOR SELECT USING (true);
+
+CREATE POLICY "Users can create likes" ON likes
+  FOR INSERT WITH CHECK (auth.uid() = user_id);
+
+CREATE POLICY "Users can delete own likes" ON likes
+  FOR DELETE USING (auth.uid() = user_id);
+
+-- =====================================================
+-- 7. NOTIFICATIONS TABLE
+-- =====================================================
+CREATE TABLE notifications (
+  id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
+  user_id UUID REFERENCES auth.users(id) ON DELETE CASCADE,
+  type TEXT NOT NULL,
+  title TEXT NOT NULL,
+  message TEXT,
+  link TEXT,
+  sender_id UUID REFERENCES auth.users(id) ON DELETE SET NULL,
+  is_read BOOLEAN DEFAULT FALSE,
+  created_at TIMESTAMPTZ DEFAULT NOW()
+);
+
+ALTER TABLE notifications ENABLE ROW LEVEL SECURITY;
+
+CREATE POLICY "Users can view own notifications" ON notifications
+  FOR SELECT USING (auth.uid() = user_id);
+
+CREATE POLICY "Anyone can create notifications" ON notifications
+  FOR INSERT WITH CHECK (true);
+
+CREATE POLICY "Users can update own notifications" ON notifications
+  FOR UPDATE USING (auth.uid() = user_id);
+
+CREATE POLICY "Users can delete own notifications" ON notifications
+  FOR DELETE USING (auth.uid() = user_id);
+
+-- =====================================================
+-- 8. FOLLOWERS TABLE
 -- =====================================================
 CREATE TABLE followers (
   id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
@@ -55,10 +232,6 @@ CREATE TABLE followers (
 
 ALTER TABLE followers ENABLE ROW LEVEL SECURITY;
 
-DROP POLICY IF EXISTS "Anyone can view followers" ON followers;
-DROP POLICY IF EXISTS "Users can follow others" ON followers;
-DROP POLICY IF EXISTS "Users can unfollow" ON followers;
-
 CREATE POLICY "Anyone can view followers" ON followers
   FOR SELECT USING (true);
 
@@ -69,7 +242,7 @@ CREATE POLICY "Users can unfollow" ON followers
   FOR DELETE USING (auth.uid() = follower_id);
 
 -- =====================================================
--- 3. ACHIEVEMENTS TABLE
+-- 9. ACHIEVEMENTS TABLE
 -- =====================================================
 CREATE TABLE achievements (
   id TEXT PRIMARY KEY,
@@ -83,7 +256,6 @@ CREATE TABLE achievements (
 
 ALTER TABLE achievements ENABLE ROW LEVEL SECURITY;
 
-DROP POLICY IF EXISTS "Anyone can view achievements" ON achievements;
 CREATE POLICY "Anyone can view achievements" ON achievements
   FOR SELECT USING (true);
 
@@ -103,7 +275,7 @@ INSERT INTO achievements (id, name, description, icon, category, points, criteri
   ('profile_complete', 'Complete Profile', 'Added avatar, bio, and social links', 'person-outline', 'profile', 20, '{"profile_complete": true}');
 
 -- =====================================================
--- 4. USER ACHIEVEMENTS TABLE
+-- 10. USER ACHIEVEMENTS TABLE
 -- =====================================================
 CREATE TABLE user_achievements (
   id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
@@ -115,9 +287,6 @@ CREATE TABLE user_achievements (
 
 ALTER TABLE user_achievements ENABLE ROW LEVEL SECURITY;
 
-DROP POLICY IF EXISTS "Anyone can view user achievements" ON user_achievements;
-DROP POLICY IF EXISTS "System can grant achievements" ON user_achievements;
-
 CREATE POLICY "Anyone can view user achievements" ON user_achievements
   FOR SELECT USING (true);
 
@@ -125,7 +294,32 @@ CREATE POLICY "System can grant achievements" ON user_achievements
   FOR INSERT WITH CHECK (auth.uid() = user_id);
 
 -- =====================================================
--- 5. MOOD LOGS TABLE
+-- 11. SAVED ARTICLES TABLE
+-- =====================================================
+CREATE TABLE saved_articles (
+  id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
+  user_id UUID REFERENCES auth.users(id) ON DELETE CASCADE,
+  article_slug TEXT NOT NULL,
+  article_title TEXT NOT NULL,
+  article_category TEXT,
+  article_image TEXT,
+  saved_at TIMESTAMPTZ DEFAULT NOW(),
+  UNIQUE(user_id, article_slug)
+);
+
+ALTER TABLE saved_articles ENABLE ROW LEVEL SECURITY;
+
+CREATE POLICY "Users can view own saved articles" ON saved_articles
+  FOR SELECT USING (auth.uid() = user_id);
+
+CREATE POLICY "Users can save articles" ON saved_articles
+  FOR INSERT WITH CHECK (auth.uid() = user_id);
+
+CREATE POLICY "Users can unsave articles" ON saved_articles
+  FOR DELETE USING (auth.uid() = user_id);
+
+-- =====================================================
+-- 12. MOOD LOGS TABLE
 -- =====================================================
 CREATE TABLE mood_logs (
   id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
@@ -138,10 +332,6 @@ CREATE TABLE mood_logs (
 
 ALTER TABLE mood_logs ENABLE ROW LEVEL SECURITY;
 
-DROP POLICY IF EXISTS "Users can view own mood logs" ON mood_logs;
-DROP POLICY IF EXISTS "Users can create mood logs" ON mood_logs;
-DROP POLICY IF EXISTS "Users can delete own mood logs" ON mood_logs;
-
 CREATE POLICY "Users can view own mood logs" ON mood_logs
   FOR SELECT USING (auth.uid() = user_id);
 
@@ -152,7 +342,7 @@ CREATE POLICY "Users can delete own mood logs" ON mood_logs
   FOR DELETE USING (auth.uid() = user_id);
 
 -- =====================================================
--- 6. WELLNESS GOALS TABLE
+-- 13. WELLNESS GOALS TABLE
 -- =====================================================
 CREATE TABLE wellness_goals (
   id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
@@ -171,11 +361,6 @@ CREATE TABLE wellness_goals (
 
 ALTER TABLE wellness_goals ENABLE ROW LEVEL SECURITY;
 
-DROP POLICY IF EXISTS "Users can view own goals" ON wellness_goals;
-DROP POLICY IF EXISTS "Users can create goals" ON wellness_goals;
-DROP POLICY IF EXISTS "Users can update own goals" ON wellness_goals;
-DROP POLICY IF EXISTS "Users can delete own goals" ON wellness_goals;
-
 CREATE POLICY "Users can view own goals" ON wellness_goals
   FOR SELECT USING (auth.uid() = user_id);
 
@@ -189,7 +374,7 @@ CREATE POLICY "Users can delete own goals" ON wellness_goals
   FOR DELETE USING (auth.uid() = user_id);
 
 -- =====================================================
--- 7. USER ENGAGEMENT TABLE (reading streaks)
+-- 14. USER ENGAGEMENT TABLE (Reading Streaks)
 -- =====================================================
 CREATE TABLE user_engagement (
   id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
@@ -203,10 +388,6 @@ CREATE TABLE user_engagement (
 
 ALTER TABLE user_engagement ENABLE ROW LEVEL SECURITY;
 
-DROP POLICY IF EXISTS "Users can view own engagement" ON user_engagement;
-DROP POLICY IF EXISTS "Users can log engagement" ON user_engagement;
-DROP POLICY IF EXISTS "Users can update own engagement" ON user_engagement;
-
 CREATE POLICY "Users can view own engagement" ON user_engagement
   FOR SELECT USING (auth.uid() = user_id);
 
@@ -217,33 +398,178 @@ CREATE POLICY "Users can update own engagement" ON user_engagement
   FOR UPDATE USING (auth.uid() = user_id);
 
 -- =====================================================
--- ENABLE REALTIME (optional)
+-- 15. USER ACTIVITY LOGS TABLE
 -- =====================================================
-DO $$
-BEGIN
-  ALTER PUBLICATION supabase_realtime ADD TABLE saved_articles;
-EXCEPTION WHEN duplicate_object THEN NULL;
-END $$;
+CREATE TABLE user_activity_logs (
+  id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
+  user_id UUID REFERENCES auth.users(id) ON DELETE CASCADE,
+  activity_type TEXT NOT NULL,
+  activity_data JSONB DEFAULT '{}',
+  page_url TEXT,
+  created_at TIMESTAMPTZ DEFAULT NOW()
+);
 
-DO $$
-BEGIN
-  ALTER PUBLICATION supabase_realtime ADD TABLE followers;
-EXCEPTION WHEN duplicate_object THEN NULL;
-END $$;
+ALTER TABLE user_activity_logs ENABLE ROW LEVEL SECURITY;
 
-DO $$
-BEGIN
-  ALTER PUBLICATION supabase_realtime ADD TABLE mood_logs;
-EXCEPTION WHEN duplicate_object THEN NULL;
-END $$;
+CREATE POLICY "Users can view own activity logs" ON user_activity_logs
+  FOR SELECT USING (auth.uid() = user_id);
 
-DO $$
-BEGIN
-  ALTER PUBLICATION supabase_realtime ADD TABLE wellness_goals;
-EXCEPTION WHEN duplicate_object THEN NULL;
-END $$;
+CREATE POLICY "Users can create activity logs" ON user_activity_logs
+  FOR INSERT WITH CHECK (auth.uid() = user_id);
 
 -- =====================================================
--- DONE! All tables created fresh.
+-- 16. READING PROGRESS TABLE
 -- =====================================================
-SELECT 'SUCCESS: All tables created!' as status;
+CREATE TABLE reading_progress (
+  id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
+  user_id UUID REFERENCES auth.users(id) ON DELETE CASCADE,
+  article_slug TEXT NOT NULL,
+  scroll_depth INTEGER DEFAULT 0,
+  time_spent_seconds INTEGER DEFAULT 0,
+  completed BOOLEAN DEFAULT FALSE,
+  last_read_at TIMESTAMPTZ DEFAULT NOW(),
+  created_at TIMESTAMPTZ DEFAULT NOW(),
+  UNIQUE(user_id, article_slug)
+);
+
+ALTER TABLE reading_progress ENABLE ROW LEVEL SECURITY;
+
+CREATE POLICY "Users can view own reading progress" ON reading_progress
+  FOR SELECT USING (auth.uid() = user_id);
+
+CREATE POLICY "Users can create reading progress" ON reading_progress
+  FOR INSERT WITH CHECK (auth.uid() = user_id);
+
+CREATE POLICY "Users can update own reading progress" ON reading_progress
+  FOR UPDATE USING (auth.uid() = user_id);
+
+-- =====================================================
+-- 17. NEWSLETTER SUBSCRIBERS TABLE
+-- =====================================================
+CREATE TABLE newsletter_subscribers (
+  id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
+  email TEXT UNIQUE NOT NULL,
+  subscribed_at TIMESTAMPTZ DEFAULT NOW(),
+  is_active BOOLEAN DEFAULT TRUE
+);
+
+ALTER TABLE newsletter_subscribers ENABLE ROW LEVEL SECURITY;
+
+CREATE POLICY "Anyone can subscribe" ON newsletter_subscribers
+  FOR INSERT WITH CHECK (true);
+
+CREATE POLICY "Users can view own subscription" ON newsletter_subscribers
+  FOR SELECT USING (true);
+
+-- =====================================================
+-- 18. RESOURCE SUGGESTIONS TABLE
+-- =====================================================
+CREATE TABLE resource_suggestions (
+  id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
+  user_id UUID REFERENCES auth.users(id) ON DELETE SET NULL,
+  title TEXT NOT NULL,
+  url TEXT,
+  category TEXT,
+  description TEXT,
+  status TEXT DEFAULT 'pending',
+  created_at TIMESTAMPTZ DEFAULT NOW()
+);
+
+ALTER TABLE resource_suggestions ENABLE ROW LEVEL SECURITY;
+
+CREATE POLICY "Anyone can submit suggestions" ON resource_suggestions
+  FOR INSERT WITH CHECK (true);
+
+CREATE POLICY "Users can view own suggestions" ON resource_suggestions
+  FOR SELECT USING (auth.uid() = user_id OR user_id IS NULL);
+
+-- =====================================================
+-- 19. HELPER FUNCTIONS
+-- =====================================================
+
+-- Function to calculate user reputation
+CREATE OR REPLACE FUNCTION calculate_user_reputation(user_uuid UUID)
+RETURNS INTEGER AS $$
+DECLARE
+  total_reputation INTEGER := 0;
+  post_likes INTEGER;
+  comment_count INTEGER;
+  achievement_points INTEGER;
+BEGIN
+  SELECT COALESCE(SUM(p.like_count), 0) INTO post_likes
+  FROM posts p WHERE p.author_id = user_uuid;
+  
+  SELECT COUNT(*) INTO comment_count
+  FROM post_comments WHERE author_id = user_uuid;
+  
+  SELECT COALESCE(SUM(a.points), 0) INTO achievement_points
+  FROM user_achievements ua
+  JOIN achievements a ON ua.achievement_id = a.id
+  WHERE ua.user_id = user_uuid;
+  
+  total_reputation := (post_likes * 2) + (comment_count * 1) + achievement_points;
+  
+  RETURN total_reputation;
+END;
+$$ LANGUAGE plpgsql SECURITY DEFINER;
+
+-- Function to update user streak
+CREATE OR REPLACE FUNCTION update_user_streak(user_uuid UUID)
+RETURNS VOID AS $$
+DECLARE
+  last_visit DATE;
+  new_streak INTEGER;
+BEGIN
+  SELECT last_visit_date, current_streak INTO last_visit, new_streak
+  FROM profiles WHERE id = user_uuid;
+  
+  IF last_visit IS NULL OR last_visit < CURRENT_DATE - INTERVAL '1 day' THEN
+    new_streak := 1;
+  ELSIF last_visit = CURRENT_DATE - INTERVAL '1 day' THEN
+    new_streak := COALESCE(new_streak, 0) + 1;
+  END IF;
+  
+  UPDATE profiles SET 
+    current_streak = new_streak,
+    longest_streak = GREATEST(COALESCE(longest_streak, 0), new_streak),
+    last_visit_date = CURRENT_DATE
+  WHERE id = user_uuid;
+END;
+$$ LANGUAGE plpgsql SECURITY DEFINER;
+
+-- =====================================================
+-- 20. ENABLE REALTIME
+-- =====================================================
+DO $$ BEGIN ALTER PUBLICATION supabase_realtime ADD TABLE posts; EXCEPTION WHEN duplicate_object THEN NULL; END $$;
+DO $$ BEGIN ALTER PUBLICATION supabase_realtime ADD TABLE post_comments; EXCEPTION WHEN duplicate_object THEN NULL; END $$;
+DO $$ BEGIN ALTER PUBLICATION supabase_realtime ADD TABLE post_likes; EXCEPTION WHEN duplicate_object THEN NULL; END $$;
+DO $$ BEGIN ALTER PUBLICATION supabase_realtime ADD TABLE notifications; EXCEPTION WHEN duplicate_object THEN NULL; END $$;
+DO $$ BEGIN ALTER PUBLICATION supabase_realtime ADD TABLE followers; EXCEPTION WHEN duplicate_object THEN NULL; END $$;
+DO $$ BEGIN ALTER PUBLICATION supabase_realtime ADD TABLE saved_articles; EXCEPTION WHEN duplicate_object THEN NULL; END $$;
+DO $$ BEGIN ALTER PUBLICATION supabase_realtime ADD TABLE mood_logs; EXCEPTION WHEN duplicate_object THEN NULL; END $$;
+DO $$ BEGIN ALTER PUBLICATION supabase_realtime ADD TABLE wellness_goals; EXCEPTION WHEN duplicate_object THEN NULL; END $$;
+
+-- =====================================================
+-- 21. CREATE STORAGE BUCKET FOR AVATARS
+-- =====================================================
+INSERT INTO storage.buckets (id, name, public)
+VALUES ('avatars', 'avatars', true)
+ON CONFLICT (id) DO NOTHING;
+
+-- Storage policies for avatars bucket
+CREATE POLICY "Avatar images are publicly accessible" ON storage.objects
+  FOR SELECT USING (bucket_id = 'avatars');
+
+CREATE POLICY "Anyone can upload an avatar" ON storage.objects
+  FOR INSERT WITH CHECK (bucket_id = 'avatars');
+
+CREATE POLICY "Anyone can update their avatar" ON storage.objects
+  FOR UPDATE USING (bucket_id = 'avatars');
+
+CREATE POLICY "Anyone can delete their avatar" ON storage.objects
+  FOR DELETE USING (bucket_id = 'avatars');
+
+-- =====================================================
+-- COMPLETE! All 18 tables + 2 functions created.
+-- =====================================================
+SELECT 'SUCCESS: All tables and functions created!' as status;

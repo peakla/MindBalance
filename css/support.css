@@ -677,12 +677,14 @@
 .quick-access-label {
   color: #fff;
   font-weight: 700;
-  font-size: 1rem;
+  font-size: 0.85rem;
   text-transform: uppercase;
   letter-spacing: 0.5px;
   display: flex;
   align-items: center;
   gap: 8px;
+  white-space: nowrap;
+  flex-shrink: 0;
 }
 
 .quick-access-label::before {

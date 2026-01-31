@@ -6692,13 +6692,14 @@ body.nav-active .nav-open-btn {
 }
 
 [data-theme="dark"] .navbar-link.active {
-  background: rgba(26, 26, 46, 0.95);
-  border-color: rgba(155, 126, 217, 0.6);
+  background: transparent;
+  border-color: transparent;
   color: #fff;
 }
 
 [data-theme="dark"] .navbar-link.active .span {
-  color: #fff;
+  color: var(--purple-accent, #9b7ed9);
+  font-weight: 600;
 }
 
 [data-theme="dark"] .navbar-link {
@@ -9336,8 +9337,8 @@ body.reading-mode[data-theme="dark"] {
   }
 
   [data-theme="dark"] .navbar-link.active {
-    background: rgba(26, 26, 46, 0.95) !important;
-    border-color: rgba(155, 126, 217, 0.6) !important;
+    background: transparent !important;
+    border-color: transparent !important;
   }
 
   .navbar .close-btn {

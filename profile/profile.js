@@ -157,19 +157,19 @@ function createBadge(achievement, isUnlocked) {
     badge.classList.add('locked');
   }
   
-  // Create icon wrapper - supports both ion-icons and emoji fallback
-  const iconWrap = createSafeElement('div', 'mb-profile__badge-icon');
-  const iconName = achievement.icon || 'trophy-outline';
-  
-  // If icon looks like an ion-icon name (contains hyphen), create ion-icon element
-  if (iconName.includes('-')) {
-    const ionIcon = document.createElement('ion-icon');
-    ionIcon.setAttribute('name', iconName);
-    iconWrap.appendChild(ionIcon);
-  } else {
-    // Treat as emoji
-    iconWrap.textContent = iconName || '🏆';
+  // Add lock icon for locked badges
+  if (!isUnlocked) {
+    const lockIcon = document.createElement('ion-icon');
+    lockIcon.setAttribute('name', 'lock-closed');
+    lockIcon.className = 'badge-lock-icon';
+    badge.appendChild(lockIcon);
   }
+  
+  // Create icon wrapper - all badges use trophy icon for consistent look
+  const iconWrap = createSafeElement('div', 'mb-profile__badge-icon');
+  const trophyIcon = document.createElement('ion-icon');
+  trophyIcon.setAttribute('name', 'trophy');
+  iconWrap.appendChild(trophyIcon);
   
   badge.appendChild(iconWrap);
   badge.appendChild(createSafeElement('h4', null, achievement.name || 'Achievement'));

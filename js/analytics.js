@@ -116,11 +116,9 @@ const MBAnalytics = (function() {
     try {
       await sb.from('user_activity_logs').insert({
         user_id: currentUser.id,
-        session_id: sessionId,
-        action_type: actionType,
+        activity_type: actionType,
         page_url: window.location.pathname,
-        metadata: metadata,
-        created_at: new Date().toISOString()
+        activity_data: metadata
       });
     } catch (err) {
       console.warn('Analytics log failed:', err);
@@ -154,7 +152,7 @@ const MBAnalytics = (function() {
     await checkAchievements('article_complete');
   }
 
-  async function updateReadingProgress(articleId, progress, timeSpent) {
+  async function updateReadingProgress(articleSlug, progress, timeSpent) {
     if (!currentUser) return;
 
     const sb = getSupabase();
@@ -165,13 +163,13 @@ const MBAnalytics = (function() {
         .from('reading_progress')
         .select('*')
         .eq('user_id', currentUser.id)
-        .eq('article_id', articleId)
+        .eq('article_slug', articleSlug)
         .single();
 
       if (existing) {
-        if (progress > existing.progress_percent || timeSpent > existing.time_spent_seconds) {
+        if (progress > existing.scroll_depth || timeSpent > existing.time_spent_seconds) {
           await sb.from('reading_progress').update({
-            progress_percent: Math.max(progress, existing.progress_percent),
+            scroll_depth: Math.max(progress, existing.scroll_depth),
             time_spent_seconds: Math.max(timeSpent, existing.time_spent_seconds),
             last_read_at: new Date().toISOString(),
             completed: progress >= 90
@@ -180,10 +178,9 @@ const MBAnalytics = (function() {
       } else {
         await sb.from('reading_progress').insert({
           user_id: currentUser.id,
-          article_id: articleId,
-          progress_percent: progress,
+          article_slug: articleSlug,
+          scroll_depth: progress,
           time_spent_seconds: timeSpent,
-          last_read_at: new Date().toISOString(),
           completed: progress >= 90
         });
       }
@@ -283,7 +280,7 @@ const MBAnalytics = (function() {
         .from('user_activity_logs')
         .select('*', { count: 'exact', head: true })
         .eq('user_id', currentUser.id)
-        .eq('action_type', actionType);
+        .eq('activity_type', actionType);
 
       for (const achievement of ACHIEVEMENTS) {
         if (earnedIds.includes(achievement.id)) continue;
@@ -353,7 +350,7 @@ const MBAnalytics = (function() {
     try {
       const { data } = await sb
         .from('user_activity_logs')
-        .select('action_type, created_at')
+        .select('activity_type, created_at')
         .eq('user_id', userId)
         .gte('created_at', startDate.toISOString())
         .order('created_at', { ascending: true });
@@ -382,7 +379,7 @@ const MBAnalytics = (function() {
       if (dailyCounts.hasOwnProperty(date)) {
         dailyCounts[date]++;
       }
-      typeCounts[activity.action_type] = (typeCounts[activity.action_type] || 0) + 1;
+      typeCounts[activity.activity_type] = (typeCounts[activity.activity_type] || 0) + 1;
     });
 
     return {
@@ -406,7 +403,7 @@ const MBAnalytics = (function() {
       const completed = articles.filter(a => a.completed).length;
       const totalTime = articles.reduce((sum, a) => sum + (a.time_spent_seconds || 0), 0);
       const avgProgress = articles.length > 0 
-        ? Math.round(articles.reduce((sum, a) => sum + a.progress_percent, 0) / articles.length) 
+        ? Math.round(articles.reduce((sum, a) => sum + (a.scroll_depth || 0), 0) / articles.length) 
         : 0;
 
       return {

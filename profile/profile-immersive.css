@@ -906,6 +906,48 @@
   background: linear-gradient(135deg, rgba(155, 126, 217, 0.2) 0%, rgba(75, 70, 100, 0.3) 100%);
 }
 
+/* ===== LIGHT MODE OVERRIDES ===== */
+/* When in light mode, override night-time dark colors with lighter alternatives */
+body:not([data-theme="dark"]) .time-night {
+  --time-primary: #9b8cc4;
+  --time-secondary: #c4b5dc;
+  --time-bg-start: #d8d0e8;
+  --time-bg-mid: #e8e0f0;
+  --time-bg-end: #f0e8f8;
+  --time-text: #1a1a2e;
+  --time-glow: rgba(155, 126, 217, 0.3);
+}
+
+/* Light mode profile header text remains dark/readable */
+body:not([data-theme="dark"]) .time-night .profile-greeting__message,
+body:not([data-theme="dark"]) .time-night .profile-greeting__subtitle {
+  color: #1a1a2e;
+}
+
+body:not([data-theme="dark"]) .time-night .mb-profile__name,
+body:not([data-theme="dark"]) .time-night .mb-profile__email,
+body:not([data-theme="dark"]) .time-night .mb-profile__bio {
+  color: #333;
+}
+
+/* Light mode profile stats card */
+body:not([data-theme="dark"]) .mb-profile__unified-stats {
+  background: rgba(255, 255, 255, 0.95);
+  color: #1a1a2e;
+}
+
+/* Light mode edit/share buttons */
+body:not([data-theme="dark"]) .time-night .mb-profile__actions-btn {
+  background: rgba(255, 255, 255, 0.9);
+  color: #333;
+  border-color: rgba(0, 0, 0, 0.1);
+}
+
+body:not([data-theme="dark"]) .time-night .mb-profile__actions-btn.primary {
+  background: linear-gradient(135deg, #b89b5e 0%, #d6bd9f 100%);
+  color: #fff;
+}
+
 /* ===== MOBILE RESPONSIVE ===== */
 @media (max-width: 768px) {
   .profile-greeting {

@@ -7271,6 +7271,13 @@ textarea::placeholder {
 .mb-commentUser {
   font-weight: bold;
   color: #111;
+  display: inline;
+  white-space: nowrap;
+}
+
+.mb-comment {
+  display: block;
+  margin-bottom: 8px;
 }
 
 .mb-commentBody {

@@ -398,6 +398,8 @@ async function loadProfileData(userId) {
 
   if (profile) {
     userProfile = profile;
+    // Expose to window for immersive greeting
+    window.userProfile = profile;
     document.getElementById('profileName').textContent = profile.display_name || profile.username || 'User';
     document.getElementById('profileBio').textContent = profile.bio || 'No bio yet...';
     
@@ -949,9 +951,15 @@ function setupEditProfile() {
     document.getElementById('settingsBio').value = bio;
     
     userProfile = { ...userProfile, display_name: name, bio: bio };
+    window.userProfile = userProfile;
     
     // Update profile completion progress
     updateProfileCompletion(userProfile);
+    
+    // Update immersive greeting if available
+    if (window.MindBalanceImmersive?.updateGreeting) {
+      window.MindBalanceImmersive.updateGreeting();
+    }
     
     modal.hidden = true;
   });
@@ -990,9 +998,15 @@ function setupSettings() {
     document.getElementById('profileBio').textContent = bio || 'No bio yet...';
     
     userProfile = { ...userProfile, display_name: name, bio: bio };
+    window.userProfile = userProfile;
     
     // Update profile completion progress
     updateProfileCompletion(userProfile);
+    
+    // Update immersive greeting if available
+    if (window.MindBalanceImmersive?.updateGreeting) {
+      window.MindBalanceImmersive.updateGreeting();
+    }
     
     ToastManager.success('Settings saved!');
   });

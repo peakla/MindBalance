@@ -1175,68 +1175,89 @@
 
 .mb-profile__achievements-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-  gap: 20px;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
 }
 
 .mb-profile__badge {
-  padding: 25px 15px;
-  background: #fff;
-  border-radius: 16px;
+  padding: 20px 12px;
+  background: #f8f9fc;
+  border-radius: 12px;
   text-align: center;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-  transition: transform 0.2s ease;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
   position: relative;
 }
 
 .mb-profile__badge:hover {
-  transform: translateY(-3px);
+  transform: translateY(-2px);
+}
+
+/* Unlocked badge styling - gold highlight */
+.mb-profile__badge.unlocked {
+  background: linear-gradient(135deg, #fffdf5 0%, #fff9e6 100%);
+  border: 1px solid rgba(184, 155, 94, 0.3);
+  box-shadow: 0 4px 12px rgba(184, 155, 94, 0.15);
+}
+
+.mb-profile__badge.unlocked::after {
+  content: '';
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  width: 18px;
+  height: 18px;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23b89b5e'%3E%3Cpath d='M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z'/%3E%3C/svg%3E") center / contain no-repeat;
 }
 
 .mb-profile__badge.locked {
-  opacity: 0.5;
-  filter: grayscale(1);
+  opacity: 0.6;
 }
 
 .mb-profile__badge.locked::after {
   content: '';
   position: absolute;
-  top: 10px;
-  right: 10px;
-  width: 20px;
-  height: 20px;
+  top: 8px;
+  right: 8px;
+  width: 18px;
+  height: 18px;
   background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%239a9ab5'%3E%3Cpath d='M12 17a2 2 0 0 0 2-2 2 2 0 0 0-2-2 2 2 0 0 0-2 2 2 2 0 0 0 2 2m6-9a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V10a2 2 0 0 1 2-2h1V6a5 5 0 0 1 5-5 5 5 0 0 1 5 5v2h1m-6-5a3 3 0 0 0-3 3v2h6V6a3 3 0 0 0-3-3Z'/%3E%3C/svg%3E") center / contain no-repeat;
 }
 
 .mb-profile__badge-icon {
-  width: 60px;
-  height: 60px;
-  margin: 0 auto 12px;
+  width: 50px;
+  height: 50px;
+  margin: 0 auto 10px;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(135deg, rgba(212, 165, 116, 0.2) 0%, rgba(212, 165, 116, 0.05) 100%);
+  background: rgba(184, 155, 94, 0.1);
   border-radius: 50%;
-  font-size: 1.8rem;
+  font-size: 1.5rem;
+  color: #9a9ab5;
+}
+
+.mb-profile__badge.unlocked .mb-profile__badge-icon {
+  background: linear-gradient(135deg, rgba(184, 155, 94, 0.25) 0%, rgba(184, 155, 94, 0.1) 100%);
   color: #b89b5e;
 }
 
 .mb-profile__badge h4 {
-  font-size: 0.95rem;
+  font-size: 0.85rem;
   font-weight: 600;
   color: #1a1a2e;
-  margin-bottom: 5px;
+  margin-bottom: 4px;
 }
 
 .mb-profile__badge p {
-  font-size: 0.8rem;
+  font-size: 0.7rem;
   color: #6b6b8a;
-  line-height: 1.4;
+  line-height: 1.3;
 }
 
 .mb-profile__badge .badge-points {
-  margin-top: 10px;
-  font-size: 0.75rem;
+  margin-top: 8px;
+  font-size: 0.7rem;
   font-weight: 600;
   color: #b89b5e;
 }
@@ -1621,10 +1642,20 @@
 
 /* Dark mode adjustments for wellness & achievements */
 [data-theme="dark"] .mb-profile__wellness-section,
-[data-theme="dark"] .mb-profile__badge,
 [data-theme="dark"] .mb-profile__saved-card {
   background: #2d2b3d;
   box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+}
+
+[data-theme="dark"] .mb-profile__badge {
+  background: #2d2b3d;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+[data-theme="dark"] .mb-profile__badge.unlocked {
+  background: linear-gradient(135deg, #3d3a50 0%, #2d2b3d 100%);
+  border: 1px solid rgba(184, 155, 94, 0.4);
+  box-shadow: 0 4px 16px rgba(184, 155, 94, 0.2);
 }
 
 [data-theme="dark"] .mb-profile__badge h4 {
@@ -1632,11 +1663,17 @@
 }
 
 [data-theme="dark"] .mb-profile__badge p {
-  color: rgba(255, 255, 255, 0.7);
+  color: rgba(255, 255, 255, 0.6);
 }
 
 [data-theme="dark"] .mb-profile__badge-icon {
-  background: linear-gradient(135deg, rgba(212, 165, 116, 0.3) 0%, rgba(212, 165, 116, 0.1) 100%);
+  background: rgba(155, 126, 217, 0.15);
+  color: #7a7a9a;
+}
+
+[data-theme="dark"] .mb-profile__badge.unlocked .mb-profile__badge-icon {
+  background: linear-gradient(135deg, rgba(184, 155, 94, 0.3) 0%, rgba(184, 155, 94, 0.15) 100%);
+  color: #d4a574;
 }
 
 [data-theme="dark"] .mb-profile__filter {
@@ -1683,6 +1720,13 @@
   background: #2d2b3d;
   border-color: #3d3a50;
   color: #e0e0e8;
+}
+
+/* Responsive for badge grid - medium screens */
+@media (max-width: 992px) {
+  .mb-profile__achievements-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
 }
 
 /* Responsive for new elements */

@@ -151,7 +151,11 @@ function createGoalItem(goal) {
 
 function createBadge(achievement, isUnlocked) {
   const badge = createSafeElement('div', 'mb-profile__badge card-animated hover-lift');
-  if (!isUnlocked) badge.classList.add('locked');
+  if (isUnlocked) {
+    badge.classList.add('unlocked');
+  } else {
+    badge.classList.add('locked');
+  }
   
   const iconWrap = createSafeElement('div', 'mb-profile__badge-icon', achievement.icon_emoji || '🏆');
   badge.appendChild(iconWrap);

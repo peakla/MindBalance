@@ -5520,64 +5520,7 @@ body.dark-mode .view-toggle-btn.active {
   }
 }
 
-/* ========================== */
-/* BACK TO TOP BUTTON */
-/* ========================== */
-.back-to-top {
-  position: fixed;
-  bottom: 30px;
-  right: 30px;
-  width: 50px;
-  height: 50px;
-  background: linear-gradient(135deg, #d6bd9f 0%, #c4a67a 100%);
-  border: none;
-  border-radius: 50%;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0 4px 20px rgba(214, 189, 159, 0.4);
-  opacity: 0;
-  visibility: hidden;
-  transform: translateY(20px);
-  transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.3s ease,
-              background 0.3s ease, box-shadow 0.3s ease;
-  z-index: 1000;
-}
-
-.back-to-top.is-visible {
-  opacity: 1;
-  visibility: visible;
-  transform: translateY(0);
-  animation: back-to-top-bounce 2s ease-in-out infinite;
-}
-
-@keyframes back-to-top-bounce {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-6px); }
-}
-
-.back-to-top:hover {
-  background: linear-gradient(135deg, #c4a67a 0%, #b89b5e 100%);
-  box-shadow: 0 6px 25px rgba(214, 189, 159, 0.5);
-  animation: none;
-  transform: translateY(-3px);
-}
-
-.back-to-top ion-icon {
-  font-size: 24px;
-  color: #fff;
-}
-
-[data-theme="dark"] .back-to-top {
-  background: linear-gradient(135deg, #3d3a50 0%, #4d4a60 100%);
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
-}
-
-[data-theme="dark"] .back-to-top:hover {
-  background: linear-gradient(135deg, #4d4a60 0%, #5d5a70 100%);
-  box-shadow: 0 6px 25px rgba(0, 0, 0, 0.5);
-}
+/* Back to Top Button - uses global styles from style.css */
 
 /* ========================== */
 /* QUOTE CALLOUT */

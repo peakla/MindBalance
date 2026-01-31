@@ -52,9 +52,9 @@
     // Show/hide button based on scroll position
     function toggleBackToTop() {
       if (window.scrollY > 400) {
-        backToTopBtn.classList.add('is-visible');
+        backToTopBtn.classList.add('visible');
       } else {
-        backToTopBtn.classList.remove('is-visible');
+        backToTopBtn.classList.remove('visible');
       }
     }
 

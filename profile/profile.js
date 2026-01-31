@@ -1215,6 +1215,9 @@ async function checkAndAwardBadges(allAchievements, unlockedIds) {
     streak: currentStreak
   };
   
+  // Known criteria types that we can evaluate
+  const knownCriteriaTypes = ['posts', 'comments', 'likes_received', 'mood_logs', 'goals', 'goals_completed', 'saves', 'streak', 'profile_complete'];
+  
   // Check each achievement and award if ALL criteria met
   const newBadges = [];
   for (const achievement of allAchievements) {
@@ -1228,6 +1231,11 @@ async function checkAndAwardBadges(allAchievements, unlockedIds) {
     }
     if (!criteria || Object.keys(criteria).length === 0) continue;
     
+    // Skip achievements with unknown criteria types (don't auto-grant them)
+    const criteriaKeys = Object.keys(criteria);
+    const hasUnknownCriteria = criteriaKeys.some(key => !knownCriteriaTypes.includes(key));
+    if (hasUnknownCriteria) continue;
+    
     let earned = true;
     
     if (criteria.posts !== undefined && stats.posts < criteria.posts) earned = false;
@@ -1238,6 +1246,27 @@ async function checkAndAwardBadges(allAchievements, unlockedIds) {
     if (criteria.goals_completed !== undefined && stats.goals_completed < criteria.goals_completed) earned = false;
     if (criteria.saves !== undefined && stats.saves < criteria.saves) earned = false;
     if (criteria.streak !== undefined && stats.streak < criteria.streak) earned = false;
+    
+    // Check profile_complete criteria - user must have avatar, bio, and at least one social link
+    if (criteria.profile_complete !== undefined) {
+      const hasAvatar = userProfile?.avatar_url && userProfile.avatar_url.trim() !== '';
+      const hasBio = userProfile?.bio && userProfile.bio.trim() !== '';
+      
+      // Handle social_links that might be stringified JSON
+      let socialLinks = userProfile?.social_links || {};
+      if (typeof socialLinks === 'string') {
+        try {
+          socialLinks = JSON.parse(socialLinks);
+        } catch (e) {
+          socialLinks = {};
+        }
+      }
+      const hasSocialLinks = Object.values(socialLinks).some(link => link && String(link).trim() !== '');
+      
+      if (!hasAvatar || !hasBio || !hasSocialLinks) {
+        earned = false;
+      }
+    }
     
     if (earned) {
       newBadges.push({

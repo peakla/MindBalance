@@ -5,6 +5,100 @@
 -- =====================================================
 
 -- =====================================================
+-- DROP ALL EXISTING POLICIES FIRST
+-- =====================================================
+-- Profiles policies
+DROP POLICY IF EXISTS "Public profiles are viewable by everyone" ON profiles;
+DROP POLICY IF EXISTS "Users can insert their own profile" ON profiles;
+DROP POLICY IF EXISTS "Users can update own profile" ON profiles;
+DROP POLICY IF EXISTS "Users can delete own profile" ON profiles;
+
+-- Posts policies
+DROP POLICY IF EXISTS "Anyone can view visible posts" ON posts;
+DROP POLICY IF EXISTS "Authenticated users can create posts" ON posts;
+DROP POLICY IF EXISTS "Users can update own posts" ON posts;
+DROP POLICY IF EXISTS "Users can delete own posts" ON posts;
+
+-- Post likes policies
+DROP POLICY IF EXISTS "Anyone can view likes" ON post_likes;
+DROP POLICY IF EXISTS "Authenticated users can like posts" ON post_likes;
+DROP POLICY IF EXISTS "Users can unlike posts" ON post_likes;
+
+-- Post comments policies
+DROP POLICY IF EXISTS "Anyone can view comments" ON post_comments;
+DROP POLICY IF EXISTS "Authenticated users can create comments" ON post_comments;
+DROP POLICY IF EXISTS "Users can update own comments" ON post_comments;
+DROP POLICY IF EXISTS "Users can delete own comments" ON post_comments;
+
+-- Post reports policies
+DROP POLICY IF EXISTS "Users can submit reports" ON post_reports;
+DROP POLICY IF EXISTS "Users can view own reports" ON post_reports;
+
+-- Likes policies
+DROP POLICY IF EXISTS "Anyone can view likes" ON likes;
+DROP POLICY IF EXISTS "Users can create likes" ON likes;
+DROP POLICY IF EXISTS "Users can delete own likes" ON likes;
+
+-- Notifications policies
+DROP POLICY IF EXISTS "Users can view own notifications" ON notifications;
+DROP POLICY IF EXISTS "Anyone can create notifications" ON notifications;
+DROP POLICY IF EXISTS "Users can update own notifications" ON notifications;
+DROP POLICY IF EXISTS "Users can delete own notifications" ON notifications;
+
+-- Followers policies
+DROP POLICY IF EXISTS "Anyone can view followers" ON followers;
+DROP POLICY IF EXISTS "Users can follow others" ON followers;
+DROP POLICY IF EXISTS "Users can unfollow" ON followers;
+
+-- Achievements policies
+DROP POLICY IF EXISTS "Anyone can view achievements" ON achievements;
+DROP POLICY IF EXISTS "Anyone can view user achievements" ON user_achievements;
+DROP POLICY IF EXISTS "System can grant achievements" ON user_achievements;
+
+-- Saved articles policies
+DROP POLICY IF EXISTS "Users can view own saved articles" ON saved_articles;
+DROP POLICY IF EXISTS "Users can save articles" ON saved_articles;
+DROP POLICY IF EXISTS "Users can unsave articles" ON saved_articles;
+
+-- Mood logs policies
+DROP POLICY IF EXISTS "Users can view own mood logs" ON mood_logs;
+DROP POLICY IF EXISTS "Users can create mood logs" ON mood_logs;
+DROP POLICY IF EXISTS "Users can delete own mood logs" ON mood_logs;
+
+-- Wellness goals policies
+DROP POLICY IF EXISTS "Users can view own goals" ON wellness_goals;
+DROP POLICY IF EXISTS "Users can create goals" ON wellness_goals;
+DROP POLICY IF EXISTS "Users can update own goals" ON wellness_goals;
+DROP POLICY IF EXISTS "Users can delete own goals" ON wellness_goals;
+
+-- User engagement policies
+DROP POLICY IF EXISTS "Users can view own engagement" ON user_engagement;
+DROP POLICY IF EXISTS "Users can insert own engagement" ON user_engagement;
+DROP POLICY IF EXISTS "Users can update own engagement" ON user_engagement;
+
+-- User activity logs policies
+DROP POLICY IF EXISTS "Users can view own activity" ON user_activity_logs;
+DROP POLICY IF EXISTS "Users can log own activity" ON user_activity_logs;
+
+-- Reading progress policies
+DROP POLICY IF EXISTS "Users can view own reading progress" ON reading_progress;
+DROP POLICY IF EXISTS "Users can track reading progress" ON reading_progress;
+DROP POLICY IF EXISTS "Users can update reading progress" ON reading_progress;
+
+-- Newsletter policies
+DROP POLICY IF EXISTS "Anyone can subscribe" ON newsletter_subscribers;
+
+-- Resource suggestions policies
+DROP POLICY IF EXISTS "Authenticated users can submit suggestions" ON resource_suggestions;
+DROP POLICY IF EXISTS "Users can view own suggestions" ON resource_suggestions;
+
+-- Storage policies
+DROP POLICY IF EXISTS "Avatar images are publicly accessible" ON storage.objects;
+DROP POLICY IF EXISTS "Anyone can upload an avatar" ON storage.objects;
+DROP POLICY IF EXISTS "Anyone can update their avatar" ON storage.objects;
+DROP POLICY IF EXISTS "Anyone can delete their avatar" ON storage.objects;
+
+-- =====================================================
 -- DROP ALL EXISTING TABLES (correct order for foreign keys)
 -- =====================================================
 DROP TABLE IF EXISTS post_reports CASCADE;

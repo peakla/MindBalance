@@ -30,6 +30,7 @@
   <link rel="stylesheet" href="css/responsive-system.css">
   <link rel="stylesheet" href="css/settings-modal.css">
   <link rel="stylesheet" href="css/animations.css">
+  <link rel="stylesheet" href="css/quote-banner.css">
 
   <!-- Preload  -->
   <link rel="preload" href="css/style.css" as="style">
@@ -56,6 +57,7 @@
   <script src="js/settings.js" defer></script>
   <script src="js/settings-modal.js" defer></script>
   <script src="js/translations.js" defer></script>
+  <script src="js/quote-banner.js" defer></script>
 </head>
 
 <body>
@@ -575,6 +577,35 @@
     </div>
   </section>
 
+  <!-- INSPIRATIONAL QUOTE BANNER -->
+  <section class="quote-banner" aria-label="Inspirational quotes">
+    <div class="quote-banner__container">
+      <div class="quote-banner__content" aria-live="polite" role="region">
+        <p class="quote-banner__text" data-translate="quote_1_text">You don't have to control your thoughts. You just have to stop letting them control you.</p>
+        <p class="quote-banner__author" data-translate="quote_1_author">— Dan Millman</p>
+      </div>
+      <div class="quote-banner__controls" role="tablist" aria-label="Quote navigation"></div>
+    </div>
+  </section>
+
+  <!-- DAILY WELLNESS TIP -->
+  <section class="wellness-tip" aria-label="Daily wellness tip">
+    <div class="wellness-tip__container">
+      <div class="wellness-tip__header">
+        <div class="wellness-tip__icon" aria-hidden="true">🌟</div>
+        <span class="wellness-tip__label" data-translate="tip_day_label">Today's Wellness Tip</span>
+      </div>
+      <div class="wellness-tip__card">
+        <h2 class="wellness-tip__title">Start Fresh</h2>
+        <p class="wellness-tip__text">Begin your week with intention. Take 5 minutes to set a simple wellness goal for the week ahead.</p>
+        <a href="/articles/mindfulness.html" class="wellness-tip__action" data-translate="tip_action">
+          <span>Try It Now</span>
+          <i class="fas fa-arrow-right"></i>
+        </a>
+        <p class="wellness-tip__day"></p>
+      </div>
+    </div>
+  </section>
 
     <!-- MOOD CHECK-IN WIDGET -->
     <section class="mb-moodcheck" aria-label="How are you feeling today?">

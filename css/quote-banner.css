@@ -1,0 +1,312 @@
+/* ===== INSPIRATIONAL QUOTE BANNER ===== */
+.quote-banner {
+  background: linear-gradient(135deg, #f8f5f0 0%, #ebe6df 100%);
+  padding: 60px 20px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.quote-banner::before {
+  content: '"';
+  position: absolute;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 8rem;
+  font-family: Georgia, serif;
+  color: rgba(175, 145, 109, 0.15);
+  line-height: 1;
+  pointer-events: none;
+}
+
+.quote-banner__container {
+  max-width: 800px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+}
+
+.quote-banner__content {
+  min-height: 120px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.quote-banner__text {
+  font-family: 'Poppins', sans-serif;
+  font-size: clamp(1.25rem, 3vw, 1.75rem);
+  font-weight: 500;
+  font-style: italic;
+  color: #2c2c2c;
+  line-height: 1.6;
+  margin-bottom: 16px;
+  opacity: 1;
+  transition: opacity 0.5s ease;
+}
+
+.quote-banner__text.fade-out {
+  opacity: 0;
+}
+
+.quote-banner__author {
+  font-family: 'Poppins', sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--user-accent, #af916d);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  opacity: 1;
+  transition: opacity 0.5s ease;
+}
+
+.quote-banner__author.fade-out {
+  opacity: 0;
+}
+
+.quote-banner__controls {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 24px;
+}
+
+.quote-banner__dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: rgba(44, 44, 44, 0.2);
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  transition: background 0.3s ease, transform 0.3s ease;
+}
+
+.quote-banner__dot:hover {
+  background: rgba(44, 44, 44, 0.4);
+  transform: scale(1.2);
+}
+
+.quote-banner__dot.active {
+  background: var(--user-accent, #af916d);
+  transform: scale(1.2);
+}
+
+.quote-banner__dot:focus-visible {
+  outline: 2px solid var(--user-accent, #af916d);
+  outline-offset: 2px;
+}
+
+/* Dark Mode */
+[data-theme="dark"] .quote-banner {
+  background: linear-gradient(135deg, #1a1a2e 0%, #16162a 100%);
+}
+
+[data-theme="dark"] .quote-banner::before {
+  color: rgba(155, 126, 217, 0.1);
+}
+
+[data-theme="dark"] .quote-banner__text {
+  color: #e8e8e8;
+}
+
+[data-theme="dark"] .quote-banner__author {
+  color: var(--user-accent, #9b7ed9);
+}
+
+[data-theme="dark"] .quote-banner__dot {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+[data-theme="dark"] .quote-banner__dot:hover {
+  background: rgba(255, 255, 255, 0.4);
+}
+
+[data-theme="dark"] .quote-banner__dot.active {
+  background: var(--user-accent, #9b7ed9);
+}
+
+/* Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  .quote-banner__text,
+  .quote-banner__author {
+    transition: none;
+  }
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+  .quote-banner {
+    padding: 40px 16px;
+  }
+  
+  .quote-banner::before {
+    font-size: 5rem;
+    top: 10px;
+  }
+  
+  .quote-banner__content {
+    min-height: 100px;
+  }
+}
+
+
+/* ===== DAILY WELLNESS TIP ===== */
+.wellness-tip {
+  background: #fff;
+  padding: 50px 20px;
+  text-align: center;
+}
+
+.wellness-tip__container {
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.wellness-tip__header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.wellness-tip__icon {
+  width: 48px;
+  height: 48px;
+  background: linear-gradient(135deg, var(--user-accent, #af916d) 0%, #d4b896 100%);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+}
+
+.wellness-tip__label {
+  font-family: 'Poppins', sans-serif;
+  font-size: 0.875rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: var(--user-accent, #af916d);
+}
+
+.wellness-tip__card {
+  background: linear-gradient(135deg, #f8f5f0 0%, #ebe6df 100%);
+  border-radius: 16px;
+  padding: 32px;
+  border: 1px solid rgba(175, 145, 109, 0.2);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+}
+
+.wellness-tip__title {
+  font-family: 'Poppins', sans-serif;
+  font-size: clamp(1.25rem, 2.5vw, 1.5rem);
+  font-weight: 700;
+  color: #2c2c2c;
+  margin-bottom: 12px;
+}
+
+.wellness-tip__text {
+  font-family: 'Poppins', sans-serif;
+  font-size: 1rem;
+  color: #555;
+  line-height: 1.7;
+  margin-bottom: 20px;
+}
+
+.wellness-tip__action {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 24px;
+  background: var(--user-accent, #af916d);
+  color: #fff;
+  font-family: 'Poppins', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-decoration: none;
+  border-radius: 30px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.wellness-tip__action:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(175, 145, 109, 0.3);
+}
+
+.wellness-tip__action:focus-visible {
+  outline: 2px solid var(--user-accent, #af916d);
+  outline-offset: 3px;
+}
+
+.wellness-tip__day {
+  margin-top: 16px;
+  font-size: 0.8rem;
+  color: #888;
+  font-style: italic;
+}
+
+/* Dark Mode */
+[data-theme="dark"] .wellness-tip {
+  background: #0f0f1a;
+}
+
+[data-theme="dark"] .wellness-tip__icon {
+  background: linear-gradient(135deg, var(--user-accent, #9b7ed9) 0%, #7a5dc7 100%);
+}
+
+[data-theme="dark"] .wellness-tip__label {
+  color: var(--user-accent, #9b7ed9);
+}
+
+[data-theme="dark"] .wellness-tip__card {
+  background: linear-gradient(135deg, #1a1a2e 0%, #16162a 100%);
+  border-color: rgba(155, 126, 217, 0.2);
+}
+
+[data-theme="dark"] .wellness-tip__title {
+  color: #e8e8e8;
+}
+
+[data-theme="dark"] .wellness-tip__text {
+  color: #b0b0b0;
+}
+
+[data-theme="dark"] .wellness-tip__action {
+  background: var(--user-accent, #9b7ed9);
+}
+
+[data-theme="dark"] .wellness-tip__action:hover {
+  box-shadow: 0 4px 15px rgba(155, 126, 217, 0.3);
+}
+
+[data-theme="dark"] .wellness-tip__day {
+  color: #777;
+}
+
+/* Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  .wellness-tip__action {
+    transition: none;
+  }
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+  .wellness-tip {
+    padding: 40px 16px;
+  }
+  
+  .wellness-tip__card {
+    padding: 24px 20px;
+  }
+  
+  .wellness-tip__icon {
+    width: 40px;
+    height: 40px;
+    font-size: 1.25rem;
+  }
+}

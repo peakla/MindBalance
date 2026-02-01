@@ -571,8 +571,14 @@
     });
     
     document.getElementById('settingsLanguage')?.addEventListener('change', (e) => {
-      setPreference(STORAGE_KEYS.language, e.target.value);
-      if (window.changeLanguage) window.changeLanguage(e.target.value);
+      const lang = e.target.value;
+      setPreference(STORAGE_KEYS.language, lang);
+      // Use the MindBalance translation system
+      if (window.MindBalanceTranslations?.setLanguage) {
+        window.MindBalanceTranslations.setLanguage(lang);
+      } else if (window.changeLanguage) {
+        window.changeLanguage(lang);
+      }
       updateSyncStatus();
     });
     

@@ -38,8 +38,8 @@ const supportedLanguages = ['en', 'es', 'fr', 'zh', 'hi', 'ko'];
  * Get current language from localStorage
  */
 function getCurrentLanguage() {
-  // Support both old key (mindbalance-language) and new key for migration
-  const stored = localStorage.getItem('mindbalance-language') || localStorage.getItem('mindbalance_language');
+  // Support both underscore and hyphen keys for compatibility
+  const stored = localStorage.getItem('mindbalance_language') || localStorage.getItem('mindbalance-language');
   if (stored && supportedLanguages.includes(stored)) {
     return stored;
   }
@@ -141,6 +141,8 @@ async function setLanguage(lang) {
     lang = 'en';
   }
   
+  // Save to both keys for compatibility
+  localStorage.setItem('mindbalance_language', lang);
   localStorage.setItem('mindbalance-language', lang);
   document.documentElement.lang = lang;
   console.log('[Translations] Set document lang to:', lang);

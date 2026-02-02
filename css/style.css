@@ -4270,7 +4270,7 @@ body.dark-theme .rl-local-search__error {
 
   .navbar-list {
     display: flex;
-    gap: 24px;
+    gap: 6px;
     align-items: center;
   }
 
@@ -6265,10 +6265,324 @@ body.nav-active .nav-open-btn {
 .navbar-actions {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 12px;
   margin-left: auto;
   position: relative;
   z-index: 100;
+  flex-shrink: 0;
+}
+
+/* Consolidated User Menu */
+.user-menu-wrapper {
+  position: relative;
+  z-index: 102;
+}
+
+.user-menu-trigger {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 12px;
+  border: none;
+  background: var(--bg-secondary, rgba(0, 0, 0, 0.04));
+  border-radius: 30px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  color: var(--text-primary, #1a1a2e);
+}
+
+.user-menu-trigger:hover {
+  background: var(--bg-tertiary, rgba(0, 0, 0, 0.08));
+}
+
+.user-menu-trigger .user-avatar-small {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid var(--accent-color, #b89b5e);
+}
+
+.user-menu-trigger .user-icon {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--accent-color, #b89b5e);
+  border-radius: 50%;
+  color: #fff;
+  font-size: 18px;
+}
+
+.user-menu-trigger .menu-chevron {
+  font-size: 14px;
+  transition: transform 0.2s ease;
+  opacity: 0.6;
+}
+
+.user-menu-wrapper.active .user-menu-trigger .menu-chevron {
+  transform: rotate(180deg);
+}
+
+/* User menu dropdown */
+.user-menu-dropdown {
+  position: absolute;
+  top: calc(100% + 10px);
+  right: 0;
+  width: 280px;
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-10px);
+  transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s ease;
+  overflow: hidden;
+}
+
+.user-menu-wrapper.active .user-menu-dropdown {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+[data-theme="dark"] .user-menu-dropdown {
+  background: #252542;
+  border-color: rgba(255, 255, 255, 0.08);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
+}
+
+[data-theme="dark"] .user-menu-trigger {
+  background: rgba(255, 255, 255, 0.08);
+  color: #fff;
+}
+
+[data-theme="dark"] .user-menu-trigger:hover {
+  background: rgba(255, 255, 255, 0.12);
+}
+
+/* User menu header */
+.user-menu-header {
+  padding: 16px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+[data-theme="dark"] .user-menu-header {
+  border-bottom-color: rgba(255, 255, 255, 0.08);
+}
+
+.user-menu-header .user-avatar-large {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid var(--accent-color, #b89b5e);
+}
+
+.user-menu-header .user-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.user-menu-header .user-name {
+  font-family: 'Poppins', sans-serif;
+  font-size: 15px;
+  font-weight: 600;
+  color: #1a1a2e;
+  margin: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+[data-theme="dark"] .user-menu-header .user-name {
+  color: #fff;
+}
+
+.user-menu-header .user-email {
+  font-size: 12px;
+  color: #666;
+  margin: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+[data-theme="dark"] .user-menu-header .user-email {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+/* User menu items */
+.user-menu-items {
+  padding: 8px 0;
+}
+
+.user-menu-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  color: #333;
+  text-decoration: none;
+  font-family: 'Poppins', sans-serif;
+  font-size: 14px;
+  transition: background 0.15s ease;
+  border: none;
+  background: none;
+  width: 100%;
+  cursor: pointer;
+  text-align: left;
+}
+
+.user-menu-item:hover {
+  background: rgba(0, 0, 0, 0.04);
+}
+
+[data-theme="dark"] .user-menu-item {
+  color: #fff;
+}
+
+[data-theme="dark"] .user-menu-item:hover {
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.user-menu-item ion-icon {
+  font-size: 20px;
+  color: #666;
+}
+
+[data-theme="dark"] .user-menu-item ion-icon {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.user-menu-item .menu-item-badge {
+  margin-left: auto;
+  background: #e74c3c;
+  color: #fff;
+  font-size: 11px;
+  font-weight: 600;
+  padding: 2px 8px;
+  border-radius: 10px;
+  min-width: 20px;
+  text-align: center;
+}
+
+.user-menu-divider {
+  height: 1px;
+  background: rgba(0, 0, 0, 0.08);
+  margin: 8px 0;
+}
+
+[data-theme="dark"] .user-menu-divider {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+/* Settings toggle in user menu */
+.user-menu-settings {
+  padding: 0 16px 16px;
+}
+
+.user-menu-settings-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 0;
+}
+
+.user-menu-settings-row .setting-label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 13px;
+  color: #666;
+}
+
+[data-theme="dark"] .user-menu-settings-row .setting-label {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.user-menu-settings-row .setting-label ion-icon {
+  font-size: 18px;
+}
+
+/* Logout button in menu */
+.user-menu-item.logout-item {
+  color: #e74c3c;
+}
+
+.user-menu-item.logout-item ion-icon {
+  color: #e74c3c;
+}
+
+/* Guest state */
+.user-menu-guest {
+  padding: 20px 16px;
+  text-align: center;
+}
+
+.user-menu-guest p {
+  font-size: 13px;
+  color: #666;
+  margin: 0 0 12px 0;
+}
+
+[data-theme="dark"] .user-menu-guest p {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.user-menu-signin-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px 24px;
+  background: var(--accent-color, #b89b5e);
+  color: #fff;
+  border: none;
+  border-radius: 25px;
+  font-family: 'Poppins', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background 0.2s ease;
+  width: 100%;
+}
+
+.user-menu-signin-btn:hover {
+  background: var(--accent-hover, #a08550);
+}
+
+/* User menu badge on trigger */
+.user-menu-trigger {
+  position: relative;
+}
+
+.user-menu-badge {
+  position: absolute;
+  top: -4px;
+  right: -4px;
+  background: #e74c3c;
+  color: #fff;
+  font-size: 10px;
+  font-weight: 600;
+  padding: 2px 6px;
+  border-radius: 10px;
+  min-width: 16px;
+  text-align: center;
+}
+
+/* Hide old navbar action buttons on desktop when user menu is present */
+@media (min-width: 1200px) {
+  .navbar-actions .settings-wrapper[style*="display: none"],
+  .navbar-actions > div[style*="display: none"] {
+    display: none !important;
+  }
 }
 
 .navbar-action-btn {

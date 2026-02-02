@@ -410,146 +410,74 @@
 
       </nav>
 
-      <!-- Navbar Actions (User, Settings, Sign In) -->
+      <!-- Navbar Actions (Search, User Menu, Crisis) -->
       <div class="navbar-actions">
         <!-- Search Bar -->
         <div class="navbar-search" id="navbarSearch">
-          <input type="text" class="navbar-search__input" placeholder="Search..." aria-label="Search site"
-            id="searchInput">
+          <input type="text" class="navbar-search__input" placeholder="Search..." aria-label="Search site" id="searchInput">
           <button class="navbar-search__btn" aria-label="Toggle search" id="searchToggle">
             <ion-icon name="search-outline"></ion-icon>
           </button>
           <div class="navbar-search__results" id="searchResults"></div>
         </div>
-
-        <a href="/profile/" class="navbar-action-btn" id="userBtn" aria-label="User account" data-user-btn>
-          <ion-icon name="person-outline" class="action-icon"></ion-icon>
-          <span class="notif-badge" id="notifBadge" hidden>0</span>
-        </a>
-
-        <div class="settings-wrapper">
-          <button class="navbar-action-btn" id="settingsBtn" aria-label="Settings" data-settings-toggle>
-            <ion-icon name="settings-outline" class="action-icon"></ion-icon>
+        
+        <!-- Consolidated User Menu -->
+        <div class="user-menu-wrapper" id="userMenuWrapper">
+          <button class="user-menu-trigger" id="userMenuTrigger" aria-label="User menu" aria-expanded="false">
+            <span class="user-icon" data-user-icon>
+              <ion-icon name="person-outline"></ion-icon>
+            </span>
+            <ion-icon name="chevron-down-outline" class="menu-chevron"></ion-icon>
+            <span class="notif-badge user-menu-badge" id="userMenuBadge" hidden>0</span>
           </button>
-
-          <!-- Settings Dropdown -->
-          <div class="settings-dropdown" data-settings-dropdown>
-            <div class="settings-header">
-              <span class="settings-title" data-translate="settings_preferences">Preferences</span>
+          
+          <div class="user-menu-dropdown" id="userMenuDropdown">
+            <!-- Signed In State -->
+            <div class="user-menu-signed-in" data-auth-show style="display: none;">
+              <div class="user-menu-header">
+                <img src="/assets/images/default-avatar.png" alt="User avatar" class="user-avatar-large" id="userMenuAvatar">
+                <div class="user-info">
+                  <p class="user-name" id="userMenuName">User</p>
+                  <p class="user-email" id="userMenuEmail">user@example.com</p>
+                </div>
+              </div>
+              <div class="user-menu-items">
+                <a href="/profile/" class="user-menu-item">
+                  <ion-icon name="person-outline"></ion-icon>
+                  <span data-translate="nav_profile">My Profile</span>
+                </a>
+                <button class="user-menu-item" onclick="openGlobalInbox(); toggleUserMenu();">
+                  <ion-icon name="notifications-outline"></ion-icon>
+                  <span data-translate="nav_notifications">Notifications</span>
+                  <span class="menu-item-badge" id="userMenuNotifBadge" hidden>0</span>
+                </button>
+                <div class="user-menu-divider"></div>
+                <a href="#" class="user-menu-item" onclick="openSettingsModal(); toggleUserMenu(); return false;">
+                  <ion-icon name="settings-outline"></ion-icon>
+                  <span data-translate="settings_title">Settings</span>
+                </a>
+                <div class="user-menu-divider"></div>
+                <button class="user-menu-item logout-item" onclick="handleUserMenuLogout()">
+                  <ion-icon name="log-out-outline"></ion-icon>
+                  <span data-translate="nav_logout">Log Out</span>
+                </button>
+              </div>
             </div>
-            <div class="settings-content">
-              <div class="setting-item">
-                <div class="setting-info">
-                  <ion-icon name="moon-outline"></ion-icon>
-                  <span data-translate="settings_dark_mode">Dark Mode</span>
-                </div>
-                <label class="theme-toggle-switch">
-                  <input type="checkbox" data-theme-toggle>
-                  <span class="theme-toggle-slider"></span>
-                </label>
-              </div>
-              <div class="setting-item">
-                <div class="setting-info">
-                  <ion-icon name="text-outline"></ion-icon>
-                  <span data-translate="settings_font_size">Font Size</span>
-                </div>
-                <select class="setting-select" data-font-size-select>
-                  <option value="normal">Normal</option>
-                  <option value="large">Large</option>
-                  <option value="x-large">Extra Large</option>
-                </select>
-              </div>
-              <div class="setting-item">
-                <div class="setting-info">
-                  <ion-icon name="eye-outline"></ion-icon>
-                  <span data-translate="settings_colorblind">Colorblind Mode</span>
-                </div>
-                <select class="setting-select" data-colorblind-select>
-                  <option value="none">None</option>
-                  <option value="protanopia">Protanopia</option>
-                  <option value="deuteranopia">Deuteranopia</option>
-                  <option value="tritanopia">Tritanopia</option>
-                </select>
-              </div>
-              <div class="setting-item">
-                <div class="setting-info">
-                  <ion-icon name="flash-outline"></ion-icon>
-                  <span data-translate="settings_focus_mode">Focus Mode (ADHD)</span>
-                </div>
-                <label class="theme-toggle-switch">
-                  <input type="checkbox" data-adhd-toggle>
-                  <span class="theme-toggle-slider"></span>
-                </label>
-              </div>
-              <div class="setting-item">
-                <div class="setting-info">
-                  <ion-icon name="reader-outline"></ion-icon>
-                  <span data-translate="settings_dyslexia">Dyslexia Font</span>
-                </div>
-                <label class="theme-toggle-switch">
-                  <input type="checkbox" data-dyslexia-toggle>
-                  <span class="theme-toggle-slider"></span>
-                </label>
-              </div>
-              <div class="setting-item">
-                <div class="setting-info">
-                  <ion-icon name="accessibility-outline"></ion-icon>
-                  <span data-translate="settings_reduce_motion">Reduce Motion</span>
-                </div>
-                <label class="theme-toggle-switch">
-                  <input type="checkbox" data-reduce-motion-toggle>
-                  <span class="theme-toggle-slider"></span>
-                </label>
-              </div>
-              <div class="setting-item setting-item--accent">
-                <div class="setting-info">
-                  <ion-icon name="color-palette-outline"></ion-icon>
-                  <span data-translate="settings_accent_color">Accent Color</span>
-                </div>
-                <div class="accent-color-picker">
-                  <button class="accent-color-btn" data-accent-color="purple" title="Purple"
-                    style="--btn-color: #9b7ed9"></button>
-                  <button class="accent-color-btn" data-accent-color="blue" title="Blue"
-                    style="--btn-color: #4a90d9"></button>
-                  <button class="accent-color-btn" data-accent-color="green" title="Green"
-                    style="--btn-color: #4db896"></button>
-                  <button class="accent-color-btn" data-accent-color="teal" title="Teal"
-                    style="--btn-color: #38b2ac"></button>
-                  <button class="accent-color-btn" data-accent-color="pink" title="Pink"
-                    style="--btn-color: #d97eab"></button>
-                  <button class="accent-color-btn" data-accent-color="orange" title="Orange"
-                    style="--btn-color: #e09c5c"></button>
-                  <button class="accent-color-btn" data-accent-color="red" title="Red"
-                    style="--btn-color: #e07070"></button>
-                  <button class="accent-color-btn active" data-accent-color="gold" title="Gold"
-                    style="--btn-color: #af916d"></button>
-                </div>
-              </div>
-              <div class="setting-item">
-                <div class="setting-info">
-                  <ion-icon name="language-outline"></ion-icon>
-                  <span data-translate="settings_language">Language</span>
-                </div>
-                <select class="setting-select" data-language-select>
-                  <option value="en">English</option>
-                  <option value="es">Español</option>
-                  <option value="fr">Français</option>
-                  <option value="zh">中文</option>
-                  <option value="hi">हिन्दी</option>
-                  <option value="ko">한국어</option>
-                </select>
-              </div>
+            
+            <!-- Guest State -->
+            <div class="user-menu-guest" data-auth-hide>
+              <p data-translate="user_menu_guest_text">Sign in to access your profile and notifications</p>
+              <a href="/auth/" class="user-menu-signin-btn">
+                <ion-icon name="log-in-outline"></ion-icon>
+                <span data-translate="nav_signin">Sign In</span>
+              </a>
             </div>
           </div>
         </div>
-
+        
         <a href="/support/#crisis" class="crisis-btn" aria-label="Get help now">
           <ion-icon name="alert-circle" aria-hidden="true"></ion-icon>
           <span data-translate="nav_get_help">Get Help Now</span>
-        </a>
-
-        <a href="/auth/" class="navbar-action-btn auth-btn" data-auth-btn aria-label="Sign in">
-          <span class="auth-text" data-translate="nav_signin">Sign In</span>
         </a>
       </div>
 

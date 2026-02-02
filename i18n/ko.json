@@ -916,6 +916,7 @@
   "nav_signin": "로그인",
   "nav_signout": "로그아웃",
   "nav_profile": "내 프로필",
+  "user_menu_guest_text": "프로필과 알림에 접근하려면 로그인하세요",
   "nav_logout": "로그아웃",
   "nav_notifications": "알림",
   "notes_auto_save": "메모가 자동으로 저장됩니다",

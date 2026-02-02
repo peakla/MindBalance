@@ -31,7 +31,7 @@
   }
   
   function updateAllBadges(count) {
-    document.querySelectorAll('.notif-badge, #notifBadge, #mobileNotifBadge').forEach(badge => {
+    document.querySelectorAll('.notif-badge, #notifBadge, #mobileNotifBadge, #userMenuBadge, #userMenuNotifBadge, .user-menu-badge, .menu-item-badge').forEach(badge => {
       if (count > 0) {
         badge.textContent = count > 99 ? '99+' : count;
         badge.hidden = false;

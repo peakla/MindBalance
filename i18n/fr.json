@@ -916,6 +916,7 @@
   "nav_signin": "Se Connecter",
   "nav_signout": "Se Déconnecter",
   "nav_profile": "Mon Profil",
+  "user_menu_guest_text": "Connectez-vous pour accéder à votre profil et notifications",
   "nav_logout": "Se Déconnecter",
   "nav_notifications": "Notifications",
   "notes_auto_save": "Les notes sont sauvegardées automatiquement",

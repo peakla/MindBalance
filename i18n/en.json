@@ -901,6 +901,7 @@
   "nav_signin": "Sign In",
   "nav_signout": "Sign Out",
   "nav_profile": "My Profile",
+  "user_menu_guest_text": "Sign in to access your profile and notifications",
   "nav_logout": "Log Out",
   "nav_notifications": "Notifications",
   "notes_auto_save": "Notes are saved automatically",

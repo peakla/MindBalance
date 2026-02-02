@@ -916,6 +916,7 @@
   "nav_signin": "Iniciar Sesión",
   "nav_signout": "Cerrar Sesión",
   "nav_profile": "Mi Perfil",
+  "user_menu_guest_text": "Inicia sesión para acceder a tu perfil y notificaciones",
   "nav_logout": "Cerrar Sesión",
   "nav_notifications": "Notificaciones",
   "notes_auto_save": "Las notas se guardan automáticamente",

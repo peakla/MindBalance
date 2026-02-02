@@ -265,10 +265,14 @@ function initAuth() {
   const sb = getSupabase();
   if (!sb) return;
   
+  // Initialize user menu
+  initUserMenu();
+  
   sb.auth.onAuthStateChange((event, session) => {
     const user = session?.user || null;
     broadcastAuthChange(user);
     updateAuthUI(user);
+    updateUserMenuUI(user);
     if (user) {
       logDailyVisit(user.id);
     }
@@ -277,6 +281,7 @@ function initAuth() {
   getCurrentUser().then(user => {
     broadcastAuthChange(user);
     updateAuthUI(user);
+    updateUserMenuUI(user);
     if (user) {
       logDailyVisit(user.id);
     }
@@ -480,6 +485,140 @@ async function getReadingCalendar(userId, days = 30) {
   }
 }
 
+// ===== USER MENU FUNCTIONS =====
+function toggleUserMenu() {
+  const wrapper = document.getElementById('userMenuWrapper');
+  const trigger = document.getElementById('userMenuTrigger');
+  if (!wrapper) return;
+  
+  const isActive = wrapper.classList.toggle('active');
+  if (trigger) {
+    trigger.setAttribute('aria-expanded', isActive);
+  }
+}
+
+function closeUserMenu() {
+  const wrapper = document.getElementById('userMenuWrapper');
+  const trigger = document.getElementById('userMenuTrigger');
+  if (wrapper) {
+    wrapper.classList.remove('active');
+  }
+  if (trigger) {
+    trigger.setAttribute('aria-expanded', 'false');
+  }
+}
+
+async function handleUserMenuLogout() {
+  closeUserMenu();
+  await signOut();
+  window.location.href = '/';
+}
+
+async function updateUserMenuUI(user) {
+  const signedInSection = document.querySelector('.user-menu-signed-in');
+  const guestSection = document.querySelector('.user-menu-guest');
+  const userIcon = document.querySelector('[data-user-icon]');
+  const userMenuAvatar = document.getElementById('userMenuAvatar');
+  const userMenuName = document.getElementById('userMenuName');
+  const userMenuEmail = document.getElementById('userMenuEmail');
+  
+  if (user) {
+    // Signed in state
+    if (signedInSection) signedInSection.style.display = 'block';
+    if (guestSection) guestSection.style.display = 'none';
+    
+    // Set initial user info from auth user
+    let displayName = user.user_metadata?.display_name || user.email?.split('@')[0] || 'User';
+    let avatarUrl = user.user_metadata?.avatar_url || null;
+    
+    if (userMenuEmail) userMenuEmail.textContent = user.email || '';
+    
+    // Try to get profile data for avatar and display name
+    try {
+      const sb = getSupabase();
+      if (sb) {
+        const { data: profile } = await sb
+          .from('profiles')
+          .select('avatar_url, display_name')
+          .eq('id', user.id)
+          .single();
+        
+        if (profile) {
+          if (profile.display_name) displayName = profile.display_name;
+          if (profile.avatar_url) avatarUrl = profile.avatar_url;
+        }
+      }
+    } catch (e) {
+      // Use default values on error
+    }
+    
+    // Update display name
+    if (userMenuName) userMenuName.textContent = displayName;
+    
+    // Update avatar in dropdown
+    if (userMenuAvatar) {
+      userMenuAvatar.src = avatarUrl || '/assets/images/default-avatar.png';
+    }
+    
+    // Update user icon trigger to show avatar if available
+    if (userIcon) {
+      if (avatarUrl) {
+        userIcon.innerHTML = `<img src="${avatarUrl}" alt="${displayName}" class="user-avatar-small">`;
+      } else {
+        userIcon.innerHTML = '<ion-icon name="person-outline"></ion-icon>';
+      }
+    }
+  } else {
+    // Guest state
+    if (signedInSection) signedInSection.style.display = 'none';
+    if (guestSection) guestSection.style.display = 'block';
+    
+    // Reset user icon
+    if (userIcon) {
+      userIcon.innerHTML = '<ion-icon name="person-outline"></ion-icon>';
+    }
+    
+    // Reset avatar
+    if (userMenuAvatar) {
+      userMenuAvatar.src = '/assets/images/default-avatar.png';
+    }
+    if (userMenuName) userMenuName.textContent = 'User';
+    if (userMenuEmail) userMenuEmail.textContent = '';
+  }
+}
+
+// Initialize user menu on DOM ready
+function initUserMenu() {
+  const trigger = document.getElementById('userMenuTrigger');
+  const wrapper = document.getElementById('userMenuWrapper');
+  
+  if (trigger) {
+    trigger.addEventListener('click', (e) => {
+      e.stopPropagation();
+      toggleUserMenu();
+    });
+  }
+  
+  // Close on outside click
+  document.addEventListener('click', (e) => {
+    if (wrapper && !wrapper.contains(e.target)) {
+      closeUserMenu();
+    }
+  });
+  
+  // Close on escape
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      closeUserMenu();
+    }
+  });
+}
+
+// Global functions for onclick handlers
+window.toggleUserMenu = toggleUserMenu;
+window.closeUserMenu = closeUserMenu;
+window.handleUserMenuLogout = handleUserMenuLogout;
+
 window.MindBalanceAuth = {
   getSupabase,
   getCurrentUser,
@@ -493,5 +632,6 @@ window.MindBalanceAuth = {
   getUser: () => currentAuthUser,
   logReadingActivity,
   getReadingCalendar,
-  updateStreakFromActivity
+  updateStreakFromActivity,
+  updateUserMenuUI
 };

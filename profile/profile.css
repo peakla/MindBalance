@@ -3283,7 +3283,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 20px;
+  padding: 12px;
 }
 
 .onboarding-modal[hidden] {
@@ -3297,24 +3297,24 @@
   right: 0;
   bottom: 0;
   background: rgba(0, 0, 0, 0.7);
-  backdrop-filter: blur(4px);
 }
 
 .onboarding-modal__content {
   position: relative;
   background: #fff;
-  border-radius: 20px;
-  max-width: 480px;
+  border-radius: 16px;
+  max-width: 380px;
   width: 100%;
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-  animation: onboardingSlideIn 0.4s ease-out;
-  overflow: hidden;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.25);
+  animation: onboardingSlideIn 0.3s ease-out;
 }
 
 @keyframes onboardingSlideIn {
   from {
     opacity: 0;
-    transform: translateY(30px) scale(0.95);
+    transform: translateY(20px) scale(0.97);
   }
   to {
     opacity: 1;
@@ -3324,48 +3324,48 @@
 
 .onboarding-modal__header {
   text-align: center;
-  padding: 40px 30px 25px;
+  padding: 20px 20px 15px;
   background: linear-gradient(135deg, #d4a574 0%, #c49464 100%);
   color: #fff;
 }
 
 .onboarding-modal__icon {
-  width: 70px;
-  height: 70px;
-  margin: 0 auto 15px;
+  width: 50px;
+  height: 50px;
+  margin: 0 auto 10px;
   background: rgba(255, 255, 255, 0.2);
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 2rem;
+  font-size: 1.5rem;
 }
 
 .onboarding-modal__title {
-  font-size: 1.5rem;
+  font-size: 1.25rem;
   font-weight: 700;
-  margin-bottom: 8px;
+  margin-bottom: 4px;
 }
 
 .onboarding-modal__subtitle {
-  font-size: 0.95rem;
+  font-size: 0.85rem;
   opacity: 0.9;
 }
 
 .onboarding-modal__body {
-  padding: 30px;
+  padding: 20px;
 }
 
 .onboarding-modal__body .form-group {
-  margin-bottom: 20px;
+  margin-bottom: 16px;
 }
 
 .onboarding-modal__body label {
   display: block;
   font-weight: 600;
-  font-size: 0.9rem;
+  font-size: 0.85rem;
   color: #1a1a2e;
-  margin-bottom: 8px;
+  margin-bottom: 6px;
 }
 
 .onboarding-modal__body .required {
@@ -3375,10 +3375,10 @@
 .onboarding-modal__body input,
 .onboarding-modal__body textarea {
   width: 100%;
-  padding: 14px 16px;
+  padding: 10px 12px;
   border: 2px solid #e5e7eb;
-  border-radius: 12px;
-  font-size: 1rem;
+  border-radius: 10px;
+  font-size: 0.9rem;
   font-family: inherit;
   transition: border-color 0.2s ease, box-shadow 0.2s ease;
   background: #f9fafb;
@@ -3388,53 +3388,53 @@
 .onboarding-modal__body textarea:focus {
   outline: none;
   border-color: #d4a574;
-  box-shadow: 0 0 0 4px rgba(212, 165, 116, 0.15);
+  box-shadow: 0 0 0 3px rgba(212, 165, 116, 0.15);
   background: #fff;
 }
 
 .onboarding-modal__body textarea {
   resize: vertical;
-  min-height: 80px;
+  min-height: 60px;
 }
 
 .onboarding-modal__body .form-hint {
   display: block;
-  font-size: 0.8rem;
+  font-size: 0.75rem;
   color: #6b7280;
-  margin-top: 6px;
+  margin-top: 4px;
 }
 
 .onboarding-modal__footer {
-  padding: 20px 30px 30px;
+  padding: 12px 20px 20px;
   text-align: center;
 }
 
 .onboarding-modal__note {
-  font-size: 0.8rem;
+  font-size: 0.75rem;
   color: #6b7280;
-  margin-bottom: 15px;
+  margin-bottom: 10px;
 }
 
 .onboarding-modal__note i {
-  margin-right: 6px;
+  margin-right: 5px;
 }
 
 .onboarding-modal__footer .btn-primary {
   width: 100%;
-  padding: 16px 24px;
+  padding: 12px 20px;
   background: linear-gradient(135deg, #d4a574 0%, #c49464 100%);
   color: #fff;
   border: none;
-  border-radius: 12px;
-  font-size: 1rem;
+  border-radius: 10px;
+  font-size: 0.9rem;
   font-weight: 600;
   cursor: pointer;
   transition: transform 0.2s ease, box-shadow 0.2s ease, opacity 0.2s ease;
 }
 
 .onboarding-modal__footer .btn-primary:hover:not(:disabled) {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(212, 165, 116, 0.4);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 16px rgba(212, 165, 116, 0.35);
 }
 
 .onboarding-modal__footer .btn-primary:disabled {
@@ -3443,7 +3443,45 @@
 }
 
 .onboarding-modal__footer .btn-primary i {
-  margin-right: 8px;
+  margin-right: 6px;
+}
+
+/* Responsive: Extra small screens */
+@media (max-width: 400px) {
+  .onboarding-modal {
+    padding: 8px;
+  }
+  
+  .onboarding-modal__content {
+    max-width: 100%;
+    border-radius: 12px;
+  }
+  
+  .onboarding-modal__header {
+    padding: 16px 16px 12px;
+  }
+  
+  .onboarding-modal__icon {
+    width: 40px;
+    height: 40px;
+    font-size: 1.25rem;
+  }
+  
+  .onboarding-modal__title {
+    font-size: 1.1rem;
+  }
+  
+  .onboarding-modal__subtitle {
+    font-size: 0.8rem;
+  }
+  
+  .onboarding-modal__body {
+    padding: 16px;
+  }
+  
+  .onboarding-modal__footer {
+    padding: 10px 16px 16px;
+  }
 }
 
 /* Dark mode for onboarding modal */

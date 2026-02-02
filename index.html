@@ -31,6 +31,8 @@
   <link rel="stylesheet" href="css/settings-modal.css">
   <link rel="stylesheet" href="css/animations.css">
   <link rel="stylesheet" href="css/quote-banner.css">
+  <link rel="stylesheet" href="css/crisis-support.css">
+  <link rel="stylesheet" href="css/wellness-checkin.css">
 
   <!-- Preload  -->
   <link rel="preload" href="css/style.css" as="style">
@@ -58,6 +60,7 @@
   <script src="js/settings-modal.js" defer></script>
   <script src="js/translations.js" defer></script>
   <script src="js/quote-banner.js" defer></script>
+  <script src="js/wellness-checkin.js" defer></script>
 </head>
 
 <body>
@@ -588,58 +591,185 @@
     </div>
   </section>
 
-  <!-- DAILY WELLNESS TIP -->
-  <section class="wellness-tip" aria-label="Daily wellness tip">
-    <div class="wellness-tip__container">
-      <div class="wellness-tip__header">
-        <div class="wellness-tip__icon" aria-hidden="true">🌟</div>
-        <span class="wellness-tip__label" data-translate="tip_day_label">Today's Wellness Tip</span>
+  <!-- CRISIS SUPPORT SECTION -->
+  <section class="crisis-support" aria-label="Get immediate support">
+    <div class="crisis-support__container">
+      <div class="crisis-support__header">
+        <div class="crisis-support__badge">
+          <span class="crisis-support__badge-dot"></span>
+          <span data-translate="crisis_available_24_7">Available 24/7</span>
+        </div>
+        <h2 class="crisis-support__title" data-translate="crisis_title">Need Immediate Support?</h2>
+        <p class="crisis-support__subtitle" data-translate="crisis_subtitle">You're not alone. These resources are here to help, anytime you need them.</p>
       </div>
-      <div class="wellness-tip__card">
-        <h2 class="wellness-tip__title">Start Fresh</h2>
-        <p class="wellness-tip__text">Begin your week with intention. Take 5 minutes to set a simple wellness goal for the week ahead.</p>
-        <a href="/articles/mindfulness.html" class="wellness-tip__action" data-translate="tip_action">
-          <span>Try It Now</span>
-          <i class="fas fa-arrow-right"></i>
+      
+      <div class="crisis-support__grid">
+        <a href="tel:988" class="crisis-support__card">
+          <div class="crisis-support__card-icon crisis-support__card-icon--988">
+            <span>📞</span>
+          </div>
+          <div class="crisis-support__card-content">
+            <h3 class="crisis-support__card-name" data-translate="crisis_988_name">988 Suicide & Crisis Lifeline</h3>
+            <p class="crisis-support__card-desc" data-translate="crisis_988_desc">Free, confidential support for people in distress. Call or text 988.</p>
+            <span class="crisis-support__card-action">
+              <span data-translate="crisis_call_now">Call Now</span>
+              <span>→</span>
+            </span>
+          </div>
         </a>
-        <p class="wellness-tip__day"></p>
+        
+        <a href="sms:741741?body=HELLO" class="crisis-support__card">
+          <div class="crisis-support__card-icon crisis-support__card-icon--text">
+            <span>💬</span>
+          </div>
+          <div class="crisis-support__card-content">
+            <h3 class="crisis-support__card-name" data-translate="crisis_text_name">Crisis Text Line</h3>
+            <p class="crisis-support__card-desc" data-translate="crisis_text_desc">Text HOME to 741741 to connect with a trained crisis counselor.</p>
+            <span class="crisis-support__card-action">
+              <span data-translate="crisis_text_now">Text Now</span>
+              <span>→</span>
+            </span>
+          </div>
+        </a>
+        
+        <a href="tel:18884887386" class="crisis-support__card">
+          <div class="crisis-support__card-icon crisis-support__card-icon--trevor">
+            <span>🏳️‍🌈</span>
+          </div>
+          <div class="crisis-support__card-content">
+            <h3 class="crisis-support__card-name" data-translate="crisis_trevor_name">The Trevor Project</h3>
+            <p class="crisis-support__card-desc" data-translate="crisis_trevor_desc">Crisis support for LGBTQ+ young people. Call 1-866-488-7386.</p>
+            <span class="crisis-support__card-action">
+              <span data-translate="crisis_get_help">Get Help</span>
+              <span>→</span>
+            </span>
+          </div>
+        </a>
+      </div>
+      
+      <div class="crisis-support__more">
+        <a href="/find-help/" class="crisis-support__more-link">
+          <span data-translate="crisis_view_all">View All Helplines & Resources</span>
+          <span>→</span>
+        </a>
       </div>
     </div>
   </section>
 
-    <!-- MOOD CHECK-IN WIDGET -->
-    <section class="mb-moodcheck" aria-label="How are you feeling today?">
-      <div class="mb-moodcheck__wrap">
-        <h2 class="mb-moodcheck__title" data-translate="home_mood_title">How are you feeling today?</h2>
-        <p class="mb-moodcheck__subtitle" data-translate="home_mood_subtitle">Select your mood and we'll guide you to helpful resources</p>
-        <div class="mb-moodcheck__options">
-          <button class="mb-moodcheck__btn" data-mood="great" aria-label="Feeling great">
-            <span class="mb-moodcheck__emoji">😊</span>
-            <span class="mb-moodcheck__label" data-translate="mood_great">Great</span>
-          </button>
-          <button class="mb-moodcheck__btn" data-mood="okay" aria-label="Feeling okay">
-            <span class="mb-moodcheck__emoji">🙂</span>
-            <span class="mb-moodcheck__label" data-translate="mood_okay">Okay</span>
-          </button>
-          <button class="mb-moodcheck__btn" data-mood="stressed" aria-label="Feeling stressed">
-            <span class="mb-moodcheck__emoji">😰</span>
-            <span class="mb-moodcheck__label" data-translate="mood_stressed">Stressed</span>
-          </button>
-          <button class="mb-moodcheck__btn" data-mood="anxious" aria-label="Feeling anxious">
-            <span class="mb-moodcheck__emoji">😟</span>
-            <span class="mb-moodcheck__label" data-translate="mood_anxious">Anxious</span>
-          </button>
-          <button class="mb-moodcheck__btn" data-mood="sad" aria-label="Feeling sad">
-            <span class="mb-moodcheck__emoji">😢</span>
-            <span class="mb-moodcheck__label" data-translate="mood_sad">Sad</span>
-          </button>
-        </div>
-        <div class="mb-moodcheck__result" id="moodResult" hidden aria-live="polite" role="status">
-          <p class="mb-moodcheck__message" id="moodMessage"></p>
-          <a class="mb-moodcheck__link" id="moodLink" href="#">View Resources →</a>
+  <!-- ENHANCED WELLNESS CHECK-IN (Combined Mood + Tips) -->
+  <section class="wellness-checkin" aria-label="Wellness check-in">
+    <canvas class="wellness-checkin__confetti" aria-hidden="true"></canvas>
+    <div class="wellness-checkin__container">
+      
+      <!-- Greeting -->
+      <div class="wellness-checkin__greeting">
+        <p class="wellness-checkin__time-greeting">
+          <span class="wellness-checkin__time-icon">☀️</span>
+          <span data-translate="greeting_afternoon">Good afternoon</span>
+        </p>
+        <h2 class="wellness-checkin__title" data-translate="wellness_checkin_title">How are you feeling today?</h2>
+        <p class="wellness-checkin__subtitle" data-translate="wellness_checkin_subtitle">Select your mood and we'll guide you to helpful resources</p>
+        
+        <!-- Streak Badge -->
+        <div class="wellness-checkin__streak" style="display: none;">
+          <span class="wellness-checkin__streak-icon">🔥</span>
+          <span><span class="wellness-checkin__streak-count">0</span> day streak</span>
         </div>
       </div>
-    </section>
+
+      <!-- Main Card -->
+      <div class="wellness-checkin__card">
+        
+        <!-- Mood Buttons -->
+        <div class="wellness-checkin__moods" role="radiogroup" aria-label="Select your mood">
+          <button class="wellness-checkin__mood-btn" data-mood="happy" type="button" role="radio" aria-checked="false" aria-label="Feeling happy">
+            <span class="wellness-checkin__mood-emoji">😊</span>
+            <span class="wellness-checkin__mood-label" data-translate="mood_happy">Happy</span>
+          </button>
+          <button class="wellness-checkin__mood-btn" data-mood="calm" type="button" role="radio" aria-checked="false" aria-label="Feeling calm">
+            <span class="wellness-checkin__mood-emoji">😌</span>
+            <span class="wellness-checkin__mood-label" data-translate="mood_calm">Calm</span>
+          </button>
+          <button class="wellness-checkin__mood-btn" data-mood="okay" type="button" role="radio" aria-checked="false" aria-label="Feeling okay">
+            <span class="wellness-checkin__mood-emoji">😐</span>
+            <span class="wellness-checkin__mood-label" data-translate="mood_okay">Okay</span>
+          </button>
+          <button class="wellness-checkin__mood-btn" data-mood="anxious" type="button" role="radio" aria-checked="false" aria-label="Feeling anxious">
+            <span class="wellness-checkin__mood-emoji">😰</span>
+            <span class="wellness-checkin__mood-label" data-translate="mood_anxious">Anxious</span>
+          </button>
+          <button class="wellness-checkin__mood-btn" data-mood="sad" type="button" role="radio" aria-checked="false" aria-label="Feeling sad">
+            <span class="wellness-checkin__mood-emoji">😢</span>
+            <span class="wellness-checkin__mood-label" data-translate="mood_sad">Sad</span>
+          </button>
+          <button class="wellness-checkin__mood-btn" data-mood="stressed" type="button" role="radio" aria-checked="false" aria-label="Feeling stressed">
+            <span class="wellness-checkin__mood-emoji">😤</span>
+            <span class="wellness-checkin__mood-label" data-translate="mood_stressed">Stressed</span>
+          </button>
+        </div>
+
+        <!-- Default Daily Tip (before mood selection) -->
+        <div class="wellness-checkin__default-tip">
+          <div class="wellness-checkin__default-tip-icon">🌟</div>
+          <h3 class="wellness-checkin__default-tip-title">Today's Wellness Tip</h3>
+          <p class="wellness-checkin__default-tip-text">Select your mood above to get personalized tips and resources.</p>
+        </div>
+
+        <!-- Response Section (shown after mood selection) -->
+        <div class="wellness-checkin__response" aria-live="polite">
+          <p class="wellness-checkin__affirmation"></p>
+          <div class="wellness-checkin__tip">
+            <p class="wellness-checkin__tip-title"></p>
+            <p class="wellness-checkin__tip-text"></p>
+          </div>
+          <div class="wellness-checkin__actions"></div>
+        </div>
+
+        <!-- Community Mood Bar -->
+        <div class="wellness-checkin__community">
+          <p class="wellness-checkin__community-title">
+            <span>👥</span>
+            <span data-translate="community_mood_title">How our community is feeling today</span>
+          </p>
+          <div class="wellness-checkin__community-bar">
+            <div class="wellness-checkin__community-segment" data-mood="happy" style="width: 28%;"></div>
+            <div class="wellness-checkin__community-segment" data-mood="calm" style="width: 22%;"></div>
+            <div class="wellness-checkin__community-segment" data-mood="okay" style="width: 20%;"></div>
+            <div class="wellness-checkin__community-segment" data-mood="anxious" style="width: 12%;"></div>
+            <div class="wellness-checkin__community-segment" data-mood="sad" style="width: 8%;"></div>
+            <div class="wellness-checkin__community-segment" data-mood="stressed" style="width: 10%;"></div>
+          </div>
+          <div class="wellness-checkin__community-legend">
+            <span class="wellness-checkin__legend-item" data-mood="happy">
+              <span class="wellness-checkin__legend-dot" style="background: #10b981;"></span>
+              <span data-translate="mood_happy">Happy</span>
+            </span>
+            <span class="wellness-checkin__legend-item" data-mood="calm">
+              <span class="wellness-checkin__legend-dot" style="background: #06b6d4;"></span>
+              <span data-translate="mood_calm">Calm</span>
+            </span>
+            <span class="wellness-checkin__legend-item" data-mood="okay">
+              <span class="wellness-checkin__legend-dot" style="background: #f59e0b;"></span>
+              <span data-translate="mood_okay">Okay</span>
+            </span>
+            <span class="wellness-checkin__legend-item" data-mood="anxious">
+              <span class="wellness-checkin__legend-dot" style="background: #8b5cf6;"></span>
+              <span data-translate="mood_anxious">Anxious</span>
+            </span>
+            <span class="wellness-checkin__legend-item" data-mood="sad">
+              <span class="wellness-checkin__legend-dot" style="background: #3b82f6;"></span>
+              <span data-translate="mood_sad">Sad</span>
+            </span>
+            <span class="wellness-checkin__legend-item" data-mood="stressed">
+              <span class="wellness-checkin__legend-dot" style="background: #ef4444;"></span>
+              <span data-translate="mood_stressed">Stressed</span>
+            </span>
+          </div>
+        </div>
+        
+      </div>
+    </div>
+  </section>
 
   <!-- ACTION BOX -->
   <section class="mb-actionbox" aria-label="Featured mental health resources">

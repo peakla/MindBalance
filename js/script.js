@@ -770,17 +770,40 @@ document.addEventListener("DOMContentLoaded", function () {
       const btn = document.createElement("button");
       btn.type = "button";
       btn.className = "rl-filterBtn";
+      btn.dataset.label = label;
+      btn.dataset.type = type;
       btn.textContent = label;
+      
+      // Set initial active state based on current state
+      if (state[type].has(label)) {
+        btn.classList.add("is-active");
+      }
 
       btn.addEventListener("click", () => {
         const set = state[type];
-        if (set.has(label)) set.delete(label);
-        else set.add(label);
+        if (set.has(label)) {
+          set.delete(label);
+          btn.classList.remove("is-active");
+        } else {
+          set.add(label);
+          btn.classList.add("is-active");
+        }
         renderChips();
         renderResults();
       });
 
       container.appendChild(btn);
+    });
+  }
+  
+  // Update sidebar button active states (for when filters are applied via URL)
+  function updateFilterButtonStates() {
+    document.querySelectorAll('.rl-filterBtn').forEach(btn => {
+      const type = btn.dataset.type;
+      const label = btn.dataset.label;
+      if (type && label && state[type]) {
+        btn.classList.toggle('is-active', state[type].has(label));
+      }
     });
   }
 
@@ -1059,6 +1082,45 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
+  // Parse URL parameters for pre-filtering (from navbar dropdown links)
+  function parseUrlFilters() {
+    const params = new URLSearchParams(window.location.search);
+    const category = params.get('category');
+    const topic = params.get('topic');
+    const search = params.get('q') || params.get('search');
+    
+    return { category, topic, search };
+  }
+  
+  // Apply URL filters to state (case-insensitive matching)
+  function applyUrlFilters(categories) {
+    const { category, topic, search } = parseUrlFilters();
+    
+    // Handle category or topic parameter
+    const filterParam = category || topic;
+    if (filterParam) {
+      // Find matching category (case-insensitive)
+      const matchingCategory = categories.find(
+        cat => cat.toLowerCase() === filterParam.toLowerCase()
+      );
+      if (matchingCategory) {
+        state.categories.add(matchingCategory);
+      } else {
+        // If no exact category match, set it as a search term
+        state.q = filterParam;
+        searchEl.value = filterParam;
+        setClearBtnVisibility();
+      }
+    }
+    
+    // Handle search parameter
+    if (search) {
+      state.q = search;
+      searchEl.value = search;
+      setClearBtnVisibility();
+    }
+  }
+
   // Put the JSON file at: ../data/resources.json (recommended)
   fetch("../data/resources.json", { cache: "no-store" })
     .then((r) => r.json())
@@ -1071,6 +1133,12 @@ document.addEventListener("DOMContentLoaded", function () {
 
       buildFilterButtons(catsEl, categories, "categories");
       buildFilterButtons(provEl, providers, "providers");
+      
+      // Apply URL filters (from navbar dropdown links)
+      applyUrlFilters(categories);
+      
+      // Update sidebar buttons to show active state from URL filters
+      updateFilterButtonStates();
 
       // Render spotlight section with featured resources
       renderSpotlight(all);

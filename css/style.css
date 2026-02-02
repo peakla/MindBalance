@@ -1986,6 +1986,11 @@ html {
   text-decoration: underline;
 }
 
+.rl-filterBtn.is-active {
+  color: var(--user-accent, #af916d);
+  font-weight: 600;
+}
+
 .rl-meta {
   font-size: 12px;
   color: #6b7280;

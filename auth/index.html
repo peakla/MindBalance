@@ -1122,15 +1122,6 @@
             </div>
           </div>
           
-          <div class="form-group" id="displayNameGroup" style="display: none;">
-            <label for="displayName">Display Name <span style="color: var(--error);">*</span></label>
-            <div class="input-wrapper">
-              <input id="displayName" type="text" placeholder="Choose your display name" maxlength="30" />
-              <i class="fas fa-user input-icon"></i>
-            </div>
-            <span class="input-hint" style="font-size: 0.8rem; color: var(--text-muted); margin-top: 4px; display: block;">This name will be shown on your profile and posts</span>
-          </div>
-          
           <button id="signin" class="btn btn-primary">
             <i class="fas fa-sign-in-alt"></i>
             Sign In
@@ -1209,29 +1200,11 @@
   const emailInput = document.getElementById("email");
   const passwordInput = document.getElementById("password");
   const passwordToggle = document.getElementById("passwordToggle");
-  const displayNameInput = document.getElementById("displayName");
-  const displayNameGroup = document.getElementById("displayNameGroup");
   const userInfo = document.getElementById("userInfo");
   const userAvatar = document.getElementById("userAvatar");
   const userEmail = document.getElementById("userEmail");
   const formSection = document.getElementById("formSection");
   const actionBtns = document.getElementById("actionBtns");
-  
-  let isSignupMode = false;
-  
-  // Toggle signup mode to show display name field
-  function toggleSignupMode(enabled) {
-    isSignupMode = enabled;
-    displayNameGroup.style.display = enabled ? 'block' : 'none';
-    if (enabled) {
-      displayNameInput.focus();
-    }
-  }
-  
-  // Show display name field when user focuses on password (likely signing up)
-  document.getElementById("signup").addEventListener("mouseenter", () => {
-    toggleSignupMode(true);
-  });
 
   // Password visibility toggle
   passwordToggle.addEventListener("click", () => {
@@ -1347,37 +1320,11 @@
   });
 
   document.getElementById("signup").addEventListener("click", async () => {
-    // Show display name field if not visible
-    if (!isSignupMode) {
-      toggleSignupMode(true);
-      setMsg("Please choose a display name for your profile.", "info");
-      return;
-    }
-    
     const email = emailInput.value.trim();
     const password = passwordInput.value;
-    const displayName = displayNameInput.value.trim();
     
     if (!email || !password) {
       setMsg("Please enter your email and password.", "error");
-      return;
-    }
-    
-    if (!displayName) {
-      setMsg("Please enter a display name. This will be shown on your profile.", "error");
-      displayNameInput.focus();
-      return;
-    }
-    
-    if (displayName.length < 2) {
-      setMsg("Display name must be at least 2 characters.", "error");
-      displayNameInput.focus();
-      return;
-    }
-    
-    if (displayName.length > 30) {
-      setMsg("Display name must be 30 characters or less.", "error");
-      displayNameInput.focus();
       return;
     }
     
@@ -1395,12 +1342,7 @@
     
     const { data, error } = await sb.auth.signUp({ 
       email, 
-      password,
-      options: {
-        data: {
-          display_name: displayName
-        }
-      }
+      password
     });
     
     if (error) {
@@ -1408,12 +1350,11 @@
       return;
     }
     
-    // Create user profile with display name
+    // Create basic user profile - display name will be set via onboarding modal
     if (data.user) {
       const { error: profileError } = await sb.from('user_profiles').upsert({
         id: data.user.id,
-        email: email,
-        display_name: displayName
+        email: email
       }, { onConflict: 'id' });
       
       if (profileError) {
@@ -1422,8 +1363,6 @@
     }
     
     setMsg("Account created! Check your email to confirm, then sign in.", "success");
-    toggleSignupMode(false);
-    displayNameInput.value = '';
   });
 
   document.getElementById("signout").addEventListener("click", async () => {

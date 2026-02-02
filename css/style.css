@@ -938,10 +938,10 @@ html {
   max-width: 360px;
   width: 100%;
   padding-inline: 24px;
-  padding-block-end: 24px;
+  padding-block-end: 0;
   overflow: hidden;
   visibility: hidden;
-  z-index: 2;
+  z-index: 9999;
   transition: transform var(--nav-transition), visibility 0s 0.35s;
   border-right: 1px solid rgba(0, 0, 0, 0.08);
   box-shadow: 8px 0 40px rgba(0, 0, 0, 0.15);
@@ -1148,7 +1148,7 @@ html {
   opacity: 0;
   pointer-events: none;
   transition: opacity var(--nav-transition);
-  z-index: 1;
+  z-index: 9998;
 }
 
 .overlay.active {
@@ -8056,6 +8056,99 @@ p {
 [data-theme="dark"] .mobile-settings-section {
   background: #3d3a50;
   border-color: rgba(255, 255, 255, 0.1);
+}
+
+/* ==== MOBILE AUTH SECTION ==== */
+.mobile-auth-section {
+  display: none;
+  flex-direction: column;
+  gap: 8px;
+  padding: 16px 20px;
+  margin-top: auto;
+  background: #f5f1eb;
+  border-top: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+[data-theme="dark"] .mobile-auth-section {
+  background: #2d2d4a;
+  border-color: rgba(255, 255, 255, 0.08);
+}
+
+.mobile-auth-btn {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 16px;
+  background: #fff;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 10px;
+  color: #1a1a2e;
+  font-size: 15px;
+  font-weight: 500;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  position: relative;
+}
+
+.mobile-auth-btn ion-icon {
+  font-size: 20px;
+  color: var(--user-accent, #af916d);
+}
+
+.mobile-auth-btn:hover {
+  background: #f9f7f4;
+  transform: translateX(4px);
+}
+
+[data-theme="dark"] .mobile-auth-btn {
+  background: #3d3d5c;
+  border-color: rgba(255, 255, 255, 0.1);
+  color: #fff;
+}
+
+[data-theme="dark"] .mobile-auth-btn:hover {
+  background: #4d4d6c;
+}
+
+.mobile-signin-btn {
+  background: var(--user-accent, #af916d);
+  color: #fff;
+  border-color: var(--user-accent, #af916d);
+}
+
+.mobile-signin-btn ion-icon {
+  color: #fff;
+}
+
+.mobile-signin-btn:hover {
+  background: #9a7e5a;
+  border-color: #9a7e5a;
+}
+
+[data-theme="dark"] .mobile-signin-btn {
+  background: var(--user-accent, #af916d);
+  color: #fff;
+}
+
+.mobile-logout-btn {
+  color: #ef4444;
+}
+
+.mobile-logout-btn ion-icon {
+  color: #ef4444;
+}
+
+.mobile-inbox-btn .mobile-notif-badge {
+  position: static;
+  margin-left: auto;
+}
+
+/* Show mobile auth section only on mobile when navbar is active */
+@media (max-width: 991px) {
+  .mobile-auth-section {
+    display: flex;
+  }
 }
 
 /* ==== KEYBOARD FOCUS STYLES ==== */

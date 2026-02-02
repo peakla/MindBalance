@@ -62,6 +62,9 @@ document.addEventListener("DOMContentLoaded", function () {
     submenuPanels.forEach(panel => panel.classList.remove("active"));
     navbar.classList.remove("submenu-open");
   }
+  
+  // Expose closeNavbar globally for use in onclick handlers
+  window.closeNavbar = closeNavbar;
 
   function toggleNavbar() {
     if (!navbar) return;

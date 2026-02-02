@@ -32,6 +32,7 @@
   <link rel="stylesheet" href="css/animations.css">
   <link rel="stylesheet" href="css/quote-banner.css">
   <link rel="stylesheet" href="css/wellness-checkin.css">
+  <link rel="stylesheet" href="css/notifications.css">
 
   <!-- Preload  -->
   <link rel="preload" href="css/style.css" as="style">
@@ -60,6 +61,7 @@
   <script src="js/translations.js" defer></script>
   <script src="js/quote-banner.js" defer></script>
   <script src="js/wellness-checkin.js" defer></script>
+  <script src="js/notifications.js" defer></script>
 </head>
 
 <body>
@@ -339,6 +341,27 @@
           </div>
         </div>
 
+        <!-- Mobile Auth Section -->
+        <div class="mobile-auth-section">
+          <button class="mobile-auth-btn mobile-inbox-btn" onclick="openGlobalInbox(); closeNavbar();" data-auth-show>
+            <ion-icon name="notifications-outline"></ion-icon>
+            <span data-translate="nav_notifications">Notifications</span>
+            <span class="notif-badge mobile-notif-badge" id="mobileNotifBadge" hidden>0</span>
+          </button>
+          <a href="/profile/" class="mobile-auth-btn mobile-profile-btn" data-auth-show>
+            <ion-icon name="person-outline"></ion-icon>
+            <span data-translate="nav_profile">My Profile</span>
+          </a>
+          <button class="mobile-auth-btn mobile-logout-btn" onclick="handleMobileLogout()" data-auth-show>
+            <ion-icon name="log-out-outline"></ion-icon>
+            <span data-translate="nav_logout">Log Out</span>
+          </button>
+          <a href="/auth/" class="mobile-auth-btn mobile-signin-btn" data-auth-hide>
+            <ion-icon name="log-in-outline"></ion-icon>
+            <span data-translate="nav_signin">Sign In</span>
+          </a>
+        </div>
+
         <!-- Mobile Submenu Panels -->
         <div class="navbar-submenu-panel" data-submenu-panel="resources">
           <div class="submenu-header">
@@ -419,8 +442,12 @@
         
         <a href="/profile/" class="navbar-action-btn" id="userBtn" aria-label="User account" data-user-btn>
           <ion-icon name="person-outline" class="action-icon"></ion-icon>
-          <span class="notif-badge" id="notifBadge" hidden>0</span>
         </a>
+        
+        <button class="navbar-action-btn navbar-inbox-btn" id="inboxBtn" aria-label="Notifications" onclick="openGlobalInbox()" data-auth-show>
+          <ion-icon name="notifications-outline" class="action-icon"></ion-icon>
+          <span class="notif-badge" id="notifBadge" hidden>0</span>
+        </button>
         
         <div class="settings-wrapper">
           <button class="navbar-action-btn" id="settingsBtn" aria-label="Settings" data-settings-toggle>

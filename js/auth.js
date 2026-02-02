@@ -163,9 +163,39 @@ function updateAuthUI(user) {
     }
   });
   
+  // Handle data-auth-show elements (visible when logged in)
+  document.querySelectorAll('[data-auth-show]').forEach(el => {
+    if (user) {
+      el.style.display = '';
+      el.removeAttribute('hidden');
+    } else {
+      el.style.display = 'none';
+      el.setAttribute('hidden', '');
+    }
+  });
+  
+  // Handle data-auth-hide elements (visible when logged out)
+  document.querySelectorAll('[data-auth-hide]').forEach(el => {
+    if (user) {
+      el.style.display = 'none';
+      el.setAttribute('hidden', '');
+    } else {
+      el.style.display = '';
+      el.removeAttribute('hidden');
+    }
+  });
+  
   // Update user button in navbar to show avatar when signed in
   updateUserButton(user);
 }
+
+// Mobile logout handler
+function handleMobileLogout() {
+  signOut();
+}
+
+// Expose globally for onclick handlers
+window.handleMobileLogout = handleMobileLogout;
 
 async function updateUserButton(user) {
   const userBtn = document.querySelector('[data-user-btn]');

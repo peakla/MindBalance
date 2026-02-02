@@ -6560,13 +6560,14 @@ body.nav-active .nav-open-btn {
 
 /* ==== MOBILE SETTINGS SECTION ==== */
 .mobile-settings-section {
-  padding: 16px;
-  border-top: 1px solid rgba(0, 0, 0, 0.1);
-  margin-top: auto;
+  padding: 0;
+  margin: 12px 8px;
   flex-shrink: 0;
-  background: #ebe5db;
-  border-radius: 12px;
-  margin-bottom: 10px;
+  background: #fff;
+  border-radius: 16px;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  overflow: hidden;
 }
 
 /* Collapsible settings toggle */
@@ -6575,16 +6576,24 @@ body.nav-active .nav-open-btn {
   align-items: center;
   justify-content: space-between;
   cursor: pointer;
-  padding: 0;
-  background: none;
+  padding: 14px 16px;
+  background: linear-gradient(135deg, #f8f5f0 0%, #f0ebe3 100%);
   border: none;
   width: 100%;
+  transition: background 0.2s ease;
+}
+
+.mobile-settings-toggle:hover {
+  background: linear-gradient(135deg, #f0ebe3 0%, #e8e3db 100%);
 }
 
 .mobile-settings-toggle ion-icon {
-  font-size: 16px;
-  color: var(--accent-color, #b89b5e);
-  transition: transform 0.2s ease;
+  font-size: 18px;
+  color: var(--user-accent, #af916d);
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  background: rgba(175, 145, 109, 0.1);
+  padding: 6px;
+  border-radius: 8px;
 }
 
 .mobile-settings-section.collapsed .mobile-settings-toggle ion-icon {
@@ -6596,40 +6605,74 @@ body.nav-active .nav-open-btn {
 }
 
 .mobile-settings-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
   font-family: 'Poppins', sans-serif;
-  font-size: 13px;
+  font-size: 14px;
   font-weight: 600;
-  color: var(--accent-color, #b89b5e);
-  text-transform: uppercase;
-  letter-spacing: 1px;
+  color: #1a1a2e;
+  text-transform: none;
+  letter-spacing: 0;
   margin: 0;
 }
 
+.mobile-settings-title::before {
+  content: '\2699';
+  font-size: 18px;
+  color: var(--user-accent, #af916d);
+}
+
 .mobile-settings-list {
-  margin-top: 14px;
+  padding: 12px 16px 16px;
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 10px;
+  background: #fff;
+  animation: slideDown 0.3s ease;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .mobile-setting-item {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  padding: 10px 12px;
+  background: #f9f7f4;
+  border-radius: 12px;
+  transition: background 0.2s ease;
+}
+
+.mobile-setting-item:hover {
+  background: #f3f0ea;
 }
 
 .mobile-setting-label {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 12px;
   font-family: 'Poppins', sans-serif;
   font-size: 14px;
-  color: var(--text-primary, #1a1a2e);
+  font-weight: 500;
+  color: #1a1a2e;
 }
 
 .mobile-setting-label ion-icon {
-  font-size: 18px;
-  color: var(--text-secondary, #4a4a68);
+  font-size: 20px;
+  color: var(--user-accent, #af916d);
+  background: rgba(175, 145, 109, 0.1);
+  padding: 6px;
+  border-radius: 8px;
 }
 
 /* Hide mobile settings on desktop, show on mobile */
@@ -8048,100 +8091,212 @@ p {
   color: var(--text-primary);
 }
 
-.mobile-settings-section {
-  background: #ebe5db;
-  border-color: rgba(0, 0, 0, 0.1);
+[data-theme="dark"] .mobile-settings-section {
+  background: #2d2d4a;
+  border-color: rgba(255, 255, 255, 0.08);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
 }
 
-[data-theme="dark"] .mobile-settings-section {
-  background: #3d3a50;
-  border-color: rgba(255, 255, 255, 0.1);
+[data-theme="dark"] .mobile-settings-toggle {
+  background: linear-gradient(135deg, #3d3d5c 0%, #2d2d4a 100%);
+}
+
+[data-theme="dark"] .mobile-settings-toggle:hover {
+  background: linear-gradient(135deg, #4d4d6c 0%, #3d3d5c 100%);
+}
+
+[data-theme="dark"] .mobile-settings-title {
+  color: #fff;
+}
+
+[data-theme="dark"] .mobile-settings-list {
+  background: #2d2d4a;
+}
+
+[data-theme="dark"] .mobile-setting-item {
+  background: #3d3d5c;
+}
+
+[data-theme="dark"] .mobile-setting-item:hover {
+  background: #4d4d6c;
+}
+
+[data-theme="dark"] .mobile-setting-label {
+  color: #e0e0e0;
 }
 
 /* ==== MOBILE AUTH SECTION ==== */
 .mobile-auth-section {
   display: none;
   flex-direction: column;
-  gap: 8px;
-  padding: 16px 20px;
-  margin-top: auto;
-  background: #f5f1eb;
+  gap: 6px;
+  padding: 12px 16px 16px;
+  margin-top: 12px;
+  background: linear-gradient(to bottom, #f5f1eb 0%, #efe9df 100%);
   border-top: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 16px 16px 0 0;
+}
+
+.mobile-auth-section::before {
+  content: '';
+  display: block;
+  width: 40px;
+  height: 4px;
+  background: rgba(0, 0, 0, 0.12);
+  border-radius: 2px;
+  margin: 0 auto 10px;
 }
 
 [data-theme="dark"] .mobile-auth-section {
-  background: #2d2d4a;
+  background: linear-gradient(to bottom, #2d2d4a 0%, #252542 100%);
   border-color: rgba(255, 255, 255, 0.08);
+}
+
+[data-theme="dark"] .mobile-auth-section::before {
+  background: rgba(255, 255, 255, 0.15);
 }
 
 .mobile-auth-btn {
   display: flex;
   align-items: center;
-  gap: 12px;
-  padding: 14px 16px;
+  gap: 14px;
+  padding: 14px 18px;
   background: #fff;
-  border: 1px solid rgba(0, 0, 0, 0.08);
-  border-radius: 10px;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  border-radius: 14px;
   color: #1a1a2e;
+  font-family: 'Poppins', sans-serif;
   font-size: 15px;
   font-weight: 500;
   text-decoration: none;
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
   position: relative;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
 }
 
 .mobile-auth-btn ion-icon {
-  font-size: 20px;
+  font-size: 22px;
   color: var(--user-accent, #af916d);
+  flex-shrink: 0;
+}
+
+.mobile-auth-btn::after {
+  content: '';
+  position: absolute;
+  right: 18px;
+  width: 6px;
+  height: 6px;
+  border-right: 2px solid rgba(0, 0, 0, 0.2);
+  border-bottom: 2px solid rgba(0, 0, 0, 0.2);
+  transform: rotate(-45deg);
+  transition: transform 0.2s ease;
 }
 
 .mobile-auth-btn:hover {
-  background: #f9f7f4;
+  background: #faf8f5;
   transform: translateX(4px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.mobile-auth-btn:hover::after {
+  transform: rotate(-45deg) translateX(2px);
+}
+
+.mobile-auth-btn:active {
+  transform: translateX(2px) scale(0.98);
 }
 
 [data-theme="dark"] .mobile-auth-btn {
   background: #3d3d5c;
-  border-color: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.08);
   color: #fff;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+[data-theme="dark"] .mobile-auth-btn::after {
+  border-color: rgba(255, 255, 255, 0.3);
 }
 
 [data-theme="dark"] .mobile-auth-btn:hover {
   background: #4d4d6c;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
 }
 
 .mobile-signin-btn {
-  background: var(--user-accent, #af916d);
+  background: linear-gradient(135deg, var(--user-accent, #af916d) 0%, #9a7e5a 100%);
   color: #fff;
-  border-color: var(--user-accent, #af916d);
+  border: none;
+  box-shadow: 0 4px 12px rgba(175, 145, 109, 0.3);
 }
 
 .mobile-signin-btn ion-icon {
   color: #fff;
 }
 
+.mobile-signin-btn::after {
+  border-color: rgba(255, 255, 255, 0.5);
+}
+
 .mobile-signin-btn:hover {
-  background: #9a7e5a;
-  border-color: #9a7e5a;
+  background: linear-gradient(135deg, #9a7e5a 0%, #8a6e4a 100%);
+  box-shadow: 0 6px 16px rgba(175, 145, 109, 0.4);
 }
 
 [data-theme="dark"] .mobile-signin-btn {
-  background: var(--user-accent, #af916d);
+  background: linear-gradient(135deg, var(--user-accent, #af916d) 0%, #9a7e5a 100%);
   color: #fff;
 }
 
 .mobile-logout-btn {
-  color: #ef4444;
+  color: #dc2626;
+  background: #fef2f2;
+  border-color: rgba(220, 38, 38, 0.1);
 }
 
 .mobile-logout-btn ion-icon {
-  color: #ef4444;
+  color: #dc2626;
+}
+
+.mobile-logout-btn::after {
+  border-color: rgba(220, 38, 38, 0.3);
+}
+
+.mobile-logout-btn:hover {
+  background: #fee2e2;
+  border-color: rgba(220, 38, 38, 0.2);
+}
+
+[data-theme="dark"] .mobile-logout-btn {
+  background: rgba(220, 38, 38, 0.1);
+  border-color: rgba(220, 38, 38, 0.2);
+  color: #f87171;
+}
+
+[data-theme="dark"] .mobile-logout-btn ion-icon {
+  color: #f87171;
+}
+
+[data-theme="dark"] .mobile-logout-btn:hover {
+  background: rgba(220, 38, 38, 0.15);
 }
 
 .mobile-inbox-btn .mobile-notif-badge {
   position: static;
   margin-left: auto;
+  background: var(--user-accent, #af916d);
+  color: #fff;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 2px 8px;
+  border-radius: 12px;
+  min-width: 20px;
+  text-align: center;
+}
+
+.mobile-profile-btn::after,
+.mobile-inbox-btn::after {
+  display: none;
 }
 
 /* Show mobile auth section only on mobile when navbar is active */

@@ -14,18 +14,52 @@
     return div.innerHTML;
   }
   
+  let retryCount = 0;
+  const MAX_RETRIES = 5;
+  
   async function loadAIInsights() {
     if (insightsLoaded) return;
     
     const contentEl = document.getElementById('aiInsightsContent');
     const affirmationEl = document.getElementById('aiAffirmation');
     
-    if (!contentEl || !window.supabaseClient) return;
+    if (!contentEl) {
+      console.log('[AI Insights] Content element not found');
+      return;
+    }
+    
+    // Helper to show fallback content
+    function showFallback(message, affirmation, isFinal = true) {
+      contentEl.innerHTML = '';
+      const p = document.createElement('p');
+      p.textContent = message;
+      contentEl.appendChild(p);
+      if (affirmationEl) {
+        affirmationEl.textContent = `"${affirmation}"`;
+        affirmationEl.style.display = 'block';
+      }
+      if (isFinal) {
+        insightsLoaded = true;
+      }
+    }
+    
+    // Check if Supabase is available - retry if not
+    if (!window.supabaseClient) {
+      retryCount++;
+      if (retryCount < MAX_RETRIES) {
+        console.log(`[AI Insights] Waiting for Supabase... (attempt ${retryCount}/${MAX_RETRIES})`);
+        setTimeout(loadAIInsights, 1000);
+        return;
+      }
+      console.log('[AI Insights] Supabase not available after retries');
+      showFallback('Keep tracking your wellness journey - every step counts!', 'You are capable of amazing things.');
+      return;
+    }
     
     try {
       const { data: { user } } = await window.supabaseClient.auth.getUser();
       if (!user) {
-        contentEl.innerHTML = '<p>Sign in to see your personalized wellness insights.</p>';
+        showFallback('Sign in to see your personalized wellness insights.', 'Your journey to wellness starts here.');
         return;
       }
       
@@ -52,55 +86,52 @@
       const goalsData = goalsResult.data || [];
       const profile = profileResult.data || {};
       
-      // Call AI insights API
-      const response = await fetch('/api/wellness/insights', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          mood_data: moodData,
-          goals_data: goalsData,
-          streak_data: {
-            current_streak: profile.current_streak || 0,
-            longest_streak: profile.longest_streak || 0
-          }
-        })
-      });
+      // Call AI insights API with timeout
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 15000);
       
-      const result = await response.json();
-      insightsLoaded = true;
-      
-      if (result.success !== false) {
-        // Use DOM APIs to safely insert text content
-        contentEl.textContent = '';
-        const p = document.createElement('p');
-        p.textContent = result.insight || 'Keep up your wellness journey!';
-        contentEl.appendChild(p);
+      try {
+        const response = await fetch('/api/wellness/insights', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            mood_data: moodData,
+            goals_data: goalsData,
+            streak_data: {
+              current_streak: profile.current_streak || 0,
+              longest_streak: profile.longest_streak || 0
+            }
+          }),
+          signal: controller.signal
+        });
         
-        if (result.affirmation && affirmationEl) {
-          affirmationEl.textContent = `"${result.affirmation}"`;
-          affirmationEl.style.display = 'block';
+        clearTimeout(timeoutId);
+        
+        const result = await response.json();
+        
+        if (result.success !== false && result.insight) {
+          contentEl.innerHTML = '';
+          const p = document.createElement('p');
+          p.textContent = result.insight;
+          contentEl.appendChild(p);
+          
+          if (result.affirmation && affirmationEl) {
+            affirmationEl.textContent = `"${result.affirmation}"`;
+            affirmationEl.style.display = 'block';
+          }
+          insightsLoaded = true;
+        } else {
+          showFallback('Keep tracking your wellness journey - every step counts!', 'You are capable of amazing things.');
         }
-      } else {
-        contentEl.textContent = '';
-        const p = document.createElement('p');
-        p.textContent = 'Keep tracking your wellness journey - every step counts!';
-        contentEl.appendChild(p);
-        if (affirmationEl) {
-          affirmationEl.textContent = '"You are capable of amazing things."';
-          affirmationEl.style.display = 'block';
-        }
+      } catch (fetchErr) {
+        clearTimeout(timeoutId);
+        console.log('[AI Insights] API call failed:', fetchErr.message);
+        showFallback('Keep tracking your wellness journey - every step counts!', 'You are capable of amazing things.');
       }
       
     } catch (err) {
-      console.error('AI insights error:', err);
-      contentEl.textContent = '';
-      const p = document.createElement('p');
-      p.textContent = 'Keep tracking your wellness journey - every step counts!';
-      contentEl.appendChild(p);
-      if (affirmationEl) {
-        affirmationEl.textContent = '"You are capable of amazing things."';
-        affirmationEl.style.display = 'block';
-      }
+      console.error('[AI Insights] Error:', err);
+      showFallback('Keep tracking your wellness journey - every step counts!', 'You are capable of amazing things.');
     }
   }
   

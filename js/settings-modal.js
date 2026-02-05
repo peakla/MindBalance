@@ -834,6 +834,9 @@
     open: openSettingsModal,
     close: closeSettingsModal
   };
+  
+  window.openSettingsModal = openSettingsModal;
+  window.closeSettingsModal = closeSettingsModal;
 
   init();
 })();

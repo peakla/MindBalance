@@ -1,5 +1,6 @@
 import os
 import json
+import random
 from openai import OpenAI
 
 AI_INTEGRATIONS_OPENAI_API_KEY = os.environ.get("AI_INTEGRATIONS_OPENAI_API_KEY")
@@ -9,6 +10,20 @@ openai = OpenAI(
     api_key=AI_INTEGRATIONS_OPENAI_API_KEY,
     base_url=AI_INTEGRATIONS_OPENAI_BASE_URL
 )
+
+FALLBACK_INSIGHTS = [
+    {"insight": "Keep tracking your wellness journey - every step counts!", "affirmation": "You are capable of amazing things."},
+    {"insight": "Your dedication to self-care makes a real difference.", "affirmation": "Every day is a chance to grow stronger."},
+    {"insight": "Small steps lead to big changes in your wellbeing.", "affirmation": "You have the strength to overcome any challenge."},
+    {"insight": "Taking time for yourself is never wasted time.", "affirmation": "Your mental health matters deeply."},
+    {"insight": "Progress, not perfection, is what truly matters.", "affirmation": "Be proud of how far you have come."},
+    {"insight": "Your commitment to wellness inspires positive change.", "affirmation": "You deserve all the happiness in the world."},
+    {"insight": "Checking in with yourself is a powerful habit.", "affirmation": "Today is full of new possibilities."},
+    {"insight": "Awareness is the first step toward positive growth.", "affirmation": "You are worthy of love and care."}
+]
+
+def get_random_fallback():
+    return random.choice(FALLBACK_INSIGHTS)
 
 def generate_wellness_insight(mood_data, goals_data, streak_data):
     """
@@ -72,10 +87,11 @@ Format your response as JSON:
         }
     except Exception as e:
         print(f"AI insight error: {e}")
+        fallback = get_random_fallback()
         return {
             "success": False,
-            "insight": "Keep tracking your wellness journey - every step counts!",
-            "affirmation": "You are capable of amazing things."
+            "insight": fallback["insight"],
+            "affirmation": fallback["affirmation"]
         }
 
 

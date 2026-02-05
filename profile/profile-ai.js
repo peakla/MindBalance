@@ -6,6 +6,23 @@
   
   let insightsLoaded = false;
   
+  // Pool of varied fallback messages to avoid showing the same one
+  const FALLBACK_MESSAGES = [
+    { message: 'Keep tracking your wellness journey - every step counts!', affirmation: 'You are capable of amazing things.' },
+    { message: 'Your dedication to self-care makes a real difference.', affirmation: 'Every day is a chance to grow stronger.' },
+    { message: 'Small steps lead to big changes in your wellbeing.', affirmation: 'You have the strength to overcome any challenge.' },
+    { message: 'Taking time for yourself is never wasted time.', affirmation: 'Your mental health matters deeply.' },
+    { message: 'Progress, not perfection, is what truly matters.', affirmation: 'Be proud of how far you have come.' },
+    { message: 'Your commitment to wellness inspires positive change.', affirmation: 'You deserve all the happiness in the world.' },
+    { message: 'Checking in with yourself is a powerful habit.', affirmation: 'Today is full of new possibilities.' },
+    { message: 'Awareness is the first step toward positive growth.', affirmation: 'You are worthy of love and care.' }
+  ];
+  
+  function getRandomFallback() {
+    const index = Math.floor(Math.random() * FALLBACK_MESSAGES.length);
+    return FALLBACK_MESSAGES[index];
+  }
+  
   // Sanitize text to prevent XSS - escape HTML entities
   function sanitizeText(text) {
     if (!text || typeof text !== 'string') return '';
@@ -52,7 +69,8 @@
         return;
       }
       console.log('[AI Insights] Supabase not available after retries');
-      showFallback('Keep tracking your wellness journey - every step counts!', 'You are capable of amazing things.');
+      const fallback = getRandomFallback();
+      showFallback(fallback.message, fallback.affirmation);
       return;
     }
     
@@ -120,18 +138,23 @@
             affirmationEl.style.display = 'block';
           }
           insightsLoaded = true;
+          console.log('[AI Insights] Successfully loaded personalized insight');
         } else {
-          showFallback('Keep tracking your wellness journey - every step counts!', 'You are capable of amazing things.');
+          console.log('[AI Insights] API returned no insight, using fallback. Response:', result);
+          const fallback = getRandomFallback();
+          showFallback(fallback.message, fallback.affirmation);
         }
       } catch (fetchErr) {
         clearTimeout(timeoutId);
         console.log('[AI Insights] API call failed:', fetchErr.message);
-        showFallback('Keep tracking your wellness journey - every step counts!', 'You are capable of amazing things.');
+        const fallback = getRandomFallback();
+        showFallback(fallback.message, fallback.affirmation);
       }
       
     } catch (err) {
       console.error('[AI Insights] Error:', err);
-      showFallback('Keep tracking your wellness journey - every step counts!', 'You are capable of amazing things.');
+      const fallback = getRandomFallback();
+      showFallback(fallback.message, fallback.affirmation);
     }
   }
   

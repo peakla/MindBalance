@@ -311,6 +311,18 @@ const MBAnalytics = (function() {
         unlocked_at: new Date().toISOString()
       });
 
+      try {
+        await sb.from('notifications').insert({
+          user_id: currentUser.id,
+          type: 'achievement',
+          from_user_name: 'MindBalance',
+          content: `You earned the "${achievement.name}" badge: ${achievement.description}`,
+          read: false
+        });
+      } catch (notifErr) {
+        console.warn('Failed to create achievement notification:', notifErr);
+      }
+
       showAchievementNotification(achievement);
     } catch (err) {
       console.warn('Achievement unlock failed:', err);
@@ -423,17 +435,59 @@ const MBAnalytics = (function() {
     if (!sb) return { earned: [], available: ACHIEVEMENTS };
 
     try {
-      const { data } = await sb
-        .from('user_achievements')
-        .select('*')
-        .eq('user_id', userId)
-        .order('unlocked_at', { ascending: false });
+      const [userAchievementsResult, allAchievementsResult] = await Promise.all([
+        sb.from('user_achievements')
+          .select('*')
+          .eq('user_id', userId)
+          .order('unlocked_at', { ascending: false }),
+        sb.from('achievements')
+          .select('*')
+      ]);
 
-      const earnedIds = (data || []).map(a => a.achievement_id);
-      const available = ACHIEVEMENTS.filter(a => !earnedIds.includes(a.id));
+      const userAchievements = userAchievementsResult.data || [];
+      const dbAchievements = allAchievementsResult.data || [];
+      
+      const dbAchievementMap = {};
+      dbAchievements.forEach(a => {
+        dbAchievementMap[a.id] = a;
+      });
+
+      const earnedIds = userAchievements.map(a => a.achievement_id);
+      
+      const earned = userAchievements.map(userAchievement => {
+        const dbInfo = dbAchievementMap[userAchievement.achievement_id];
+        const jsInfo = ACHIEVEMENTS.find(a => a.id === userAchievement.achievement_id);
+        return {
+          ...userAchievement,
+          name: dbInfo?.name || jsInfo?.name || userAchievement.achievement_name || 'Achievement',
+          description: dbInfo?.description || jsInfo?.description || userAchievement.achievement_description || '',
+          icon: dbInfo?.icon || jsInfo?.icon || userAchievement.achievement_icon || 'trophy-outline'
+        };
+      });
+
+      const allAvailableIds = new Set([
+        ...ACHIEVEMENTS.map(a => a.id),
+        ...dbAchievements.map(a => a.id)
+      ]);
+      
+      const available = [];
+      allAvailableIds.forEach(id => {
+        if (!earnedIds.includes(id)) {
+          const dbInfo = dbAchievementMap[id];
+          const jsInfo = ACHIEVEMENTS.find(a => a.id === id);
+          if (dbInfo || jsInfo) {
+            available.push({
+              id,
+              name: dbInfo?.name || jsInfo?.name || 'Achievement',
+              description: dbInfo?.description || jsInfo?.description || '',
+              icon: dbInfo?.icon || jsInfo?.icon || 'trophy-outline'
+            });
+          }
+        }
+      });
 
       return {
-        earned: data || [],
+        earned,
         available
       };
     } catch (err) {

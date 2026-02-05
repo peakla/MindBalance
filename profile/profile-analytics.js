@@ -307,6 +307,11 @@ const ProfileAnalytics = (function() {
       const { earned, available } = await MBAnalytics.getAchievements(userId);
       const badgesContainer = document.getElementById('achievementsBadges');
       
+      const unlockedBadgesEl = document.getElementById('unlockedBadges');
+      const totalBadgesEl = document.getElementById('totalBadges');
+      if (unlockedBadgesEl) unlockedBadgesEl.textContent = earned.length;
+      if (totalBadgesEl) totalBadgesEl.textContent = earned.length + available.length;
+      
       const allBadges = [
         ...earned.map(a => ({ ...a, unlocked: true })),
         ...available.map(a => ({ ...a, unlocked: false }))
@@ -315,10 +320,10 @@ const ProfileAnalytics = (function() {
       badgesContainer.innerHTML = allBadges.map(badge => `
         <div class="mb-badge ${badge.unlocked ? '' : 'mb-badge--locked'}">
           <div class="mb-badge__icon">
-            <ion-icon name="${badge.achievement_icon || badge.icon}"></ion-icon>
+            <ion-icon name="${badge.icon || 'trophy-outline'}"></ion-icon>
           </div>
-          <div class="mb-badge__name">${badge.achievement_name || badge.name}</div>
-          <div class="mb-badge__desc">${badge.achievement_description || badge.description}</div>
+          <div class="mb-badge__name">${badge.name || 'Achievement'}</div>
+          <div class="mb-badge__desc">${badge.description || ''}</div>
           ${badge.unlocked ? `<div class="mb-badge__date">Unlocked ${formatTimeAgo(badge.unlocked_at)}</div>` : ''}
         </div>
       `).join('');

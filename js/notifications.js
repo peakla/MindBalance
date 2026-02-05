@@ -103,7 +103,8 @@
       'like': 'liked your post',
       'comment': 'commented on your post',
       'follow': 'started following you',
-      'reply': 'replied to your comment'
+      'reply': 'replied to your comment',
+      'achievement': 'Badge earned!'
     };
     return texts[type] || 'sent you a notification';
   }
@@ -183,7 +184,8 @@
       'like': 'heart-outline',
       'comment': 'chatbubble-outline',
       'follow': 'person-add-outline',
-      'reply': 'return-down-forward-outline'
+      'reply': 'return-down-forward-outline',
+      'achievement': 'trophy-outline'
     };
     return icons[type] || 'notifications-outline';
   }

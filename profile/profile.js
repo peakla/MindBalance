@@ -1319,9 +1319,26 @@ async function checkAndAwardBadges(allAchievements, unlockedIds) {
     }
   }
   
-  // Award new badges
+  // Award new badges and send notifications
   if (newBadges.length > 0) {
     await supabaseClient.from('user_achievements').insert(newBadges);
+    
+    const notifications = newBadges.map(badge => {
+      const achievement = allAchievements.find(a => a.id === badge.achievement_id);
+      return {
+        user_id: currentUser.id,
+        type: 'achievement',
+        from_user_name: 'MindBalance',
+        content: `You earned the "${achievement?.name || 'Achievement'}" badge: ${achievement?.description || ''}`,
+        read: false
+      };
+    });
+    
+    try {
+      await supabaseClient.from('notifications').insert(notifications);
+    } catch (notifErr) {
+      console.warn('Failed to create achievement notifications:', notifErr);
+    }
     loadAchievements();
   }
 }

@@ -1032,9 +1032,10 @@ function createPostElement(postData, timeStr) {
     article.dataset.edited = 'true';
   }
   
+  const displayName = postData.author_name || 'MindBalance Team';
   const authorLink = postData.author_id 
-    ? `<a href="/profile/?user=${postData.author_id}" class="mb-postAuthorLink">${escapeHtml(postData.author_name)}</a>`
-    : escapeHtml(postData.author_name);
+    ? `<a href="/profile/?user=${postData.author_id}" class="mb-postAuthorLink">${escapeHtml(displayName)}</a>`
+    : escapeHtml(displayName);
   
   article.innerHTML = `
     <div class="mb-postHead">

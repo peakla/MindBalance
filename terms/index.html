@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+<!-- ===== HEAD ===== -->
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -97,6 +98,7 @@
         <img src="/assets/images/MindBalanceLogo.svg" width="160" height="50" alt="MindBalance - logo" decoding="async">
       </a>
 
+<!-- ===== NAVBAR ===== -->
       <nav class="navbar" data-navbar>
 
         <button class="close-btn" aria-label="close menu" data-nav-toggler>
@@ -256,7 +258,7 @@
           </div>
         </div>
 
-        <!-- Mobile Auth Section -->
+        
         <div class="mobile-auth-section">
           <button class="mobile-auth-btn mobile-inbox-btn" onclick="openGlobalInbox(); closeNavbar();" data-auth-show>
             <ion-icon name="notifications-outline"></ion-icon>
@@ -277,7 +279,7 @@
           </a>
         </div>
 
-        <!-- Mobile Submenu Panels -->
+        
         <div class="navbar-submenu-panel" data-submenu-panel="resources">
           <div class="submenu-header">
             <button class="submenu-back-btn" aria-label="Back to main menu">
@@ -342,12 +344,11 @@
           </div>
         </div>
 
-
       </nav>
 
-      <!-- Navbar Actions (Search, Settings, User Menu, Crisis) -->
+      
       <div class="navbar-actions">
-        <!-- Search Bar -->
+        
         <div class="navbar-search" id="navbarSearch">
           <input type="text" class="navbar-search__input" placeholder="Search..." aria-label="Search site" id="searchInput">
           <button class="navbar-search__btn" aria-label="Toggle search" id="searchToggle">
@@ -356,12 +357,12 @@
           <div class="navbar-search__results" id="searchResults"></div>
         </div>
         
-        <!-- Accessibility Settings Button - Always Visible -->
+        
         <button class="navbar-settings-btn" onclick="openSettingsModal()" aria-label="Accessibility settings" title="Settings">
           <ion-icon name="settings-outline"></ion-icon>
         </button>
         
-        <!-- Consolidated User Menu -->
+        
         <div class="user-menu-wrapper" id="userMenuWrapper">
           <button class="user-menu-trigger" id="userMenuTrigger" aria-label="User menu" aria-expanded="false">
             <span class="user-icon" data-user-icon>
@@ -372,7 +373,7 @@
           </button>
           
           <div class="user-menu-dropdown" id="userMenuDropdown">
-            <!-- Signed In State -->
+            
             <div class="user-menu-signed-in" data-auth-show style="display: none;">
               <div class="user-menu-header">
                 <img src="/assets/images/default-avatar.png" alt="User avatar" class="user-avatar-large" id="userMenuAvatar">
@@ -399,7 +400,7 @@
               </div>
             </div>
             
-            <!-- Guest State -->
+            
             <div class="user-menu-guest" data-auth-hide>
               <p data-translate="user_menu_guest_text">Sign in to access your profile and notifications</p>
               <a href="/auth/" class="user-menu-signin-btn">
@@ -427,6 +428,7 @@
     </div>
   </header>
 
+<!-- ===== MAIN CONTENT ===== -->
   <main class="legal-page">
     <div class="container">
       <div class="legal-header">
@@ -504,9 +506,9 @@
   <ion-icon name="chevron-up-outline"></ion-icon>
 </button>
 
-<!-- FOOTER -->
+<!-- ===== FOOTER ===== -->
 <footer id="footer" class="mb-footer" aria-label="Site footer">
-  <!-- Animated Wave Separator -->
+  
   <div class="mb-footer__wave">
     <svg viewBox="0 0 1200 120" preserveAspectRatio="none">
       <path class="wave-path wave-1" d="M0,60 Q150,20 300,60 T600,60 T900,60 T1200,60 L1200,120 L0,120 Z"></path>
@@ -516,14 +518,14 @@
   </div>
 
   <div class="mb-footer__top">
-    <!-- Decorative Pattern Overlay -->
+    
     <div class="mb-footer__pattern"></div>
     
     <div class="mb-footer__wrap">
-      <!-- Row 1: Main Content -->
+      
       <div class="mb-footer__main-grid">
 
-        <!-- Brand / About -->
+        
         <section class="mb-footer__col" aria-label="About MindBalance">
           <h3 class="mb-footer__brand" data-translate="footer_brand">MindBalance</h3>
           <p class="mb-footer__text" data-translate="footer_about">
@@ -532,7 +534,7 @@
           </p>
           <a class="mb-footer__link" href="/support/" data-translate="footer_read_more">Read more →</a>
           
-          <!-- Trust Badges -->
+          
           <div class="mb-footer__trust">
             <div class="mb-footer__badge">
               <ion-icon name="shield-checkmark-outline"></ion-icon>
@@ -549,7 +551,7 @@
           </div>
         </section>
 
-        <!-- Pages (Collapsible on Mobile) -->
+        
         <nav class="mb-footer__col mb-footer__accordion" aria-label="Footer navigation">
           <button class="mb-footer__accordion-btn" aria-expanded="false">
             <h4 class="mb-footer__heading" data-translate="footer_pages">Pages</h4>
@@ -565,7 +567,7 @@
           </ul>
         </nav>
 
-        <!-- Topics / Tags -->
+        
         <section class="mb-footer__col" aria-label="Popular topics">
           <h4 class="mb-footer__heading" data-translate="footer_topics">Popular Topics</h4>
           <div class="mb-footer__tags">
@@ -578,7 +580,7 @@
           </div>
         </section>
 
-        <!-- Take Action + Contact -->
+        
         <section class="mb-footer__col" aria-label="Take action">
           <h4 class="mb-footer__heading" data-translate="footer_action">Take Action</h4>
 
@@ -603,9 +605,9 @@
         </section>
       </div>
 
-      <!-- Row 2: Newsletter + Recent Posts -->
+      
       <div class="mb-footer__extras">
-        <!-- Newsletter Signup -->
+        
         <section class="mb-footer__newsletter" aria-label="Newsletter signup">
           <div class="mb-footer__newsletter-content">
             <ion-icon name="mail-outline" class="newsletter-icon"></ion-icon>
@@ -624,7 +626,7 @@
           <p class="mb-footer__newsletter-note" data-translate="footer_privacy_note">We respect your privacy. Unsubscribe anytime.</p>
         </section>
 
-        <!-- Recent Blog Posts -->
+        
         <section class="mb-footer__recent" aria-label="Recent articles">
           <h4 class="mb-footer__heading" data-translate="footer_latest_articles">Latest Articles</h4>
           <div class="mb-footer__posts">
@@ -659,7 +661,7 @@
         </section>
       </div>
 
-      <!-- Footer Controls: Language & Theme -->
+      
       <div class="mb-footer__controls">
         <div class="mb-footer__control-group">
           <ion-icon name="language-outline"></ion-icon>
@@ -685,7 +687,7 @@
     </div>
   </div>
 
-  <!-- Bottom bar -->
+  
   <div class="mb-footer__bottom">
     <div class="mb-footer__wrap mb-footer__bottomwrap">
       <p class="mb-footer__copy">
@@ -701,10 +703,10 @@
   </div>
 </footer>
 
+<!-- ===== SCRIPTS ===== -->
   <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
   <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
   <script src="../js/script.js" defer></script>
 <script src="../js/footer.js" defer></script>
-  <script src="/js/security.js"></script>
 </body>
 </html>

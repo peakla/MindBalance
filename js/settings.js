@@ -1,6 +1,9 @@
+// ==================== SETTINGS ====================
+
 (function() {
   'use strict';
 
+  // --- Storage Keys ---
   const STORAGE_KEYS = {
     theme: 'mindbalance_theme',
     fontSize: 'mindbalance_font_size',
@@ -12,6 +15,7 @@
     accentColor: 'mindbalance_accent_color'
   };
 
+  // --- Accent Colors ---
   const ACCENT_COLORS = {
     gold: { hex: '#af916d', hover: '#9d8260', rgb: '175, 145, 109' },
     purple: { hex: '#9b7ed9', hover: '#8a6dc8', rgb: '155, 126, 217' },
@@ -23,9 +27,9 @@
     red: { hex: '#e07070', hover: '#d05f5f', rgb: '224, 112, 112' }
   };
 
-  // Default accent color (same for all themes)
   const DEFAULT_ACCENT = 'gold';
 
+  // --- Preference Helpers ---
   function getPreference(key, defaultValue) {
     try {
       const value = localStorage.getItem(key);
@@ -43,6 +47,7 @@
     }
   }
 
+  // --- Theme ---
   function getSystemThemePreference() {
     if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
       return 'dark';
@@ -63,14 +68,13 @@
       toggle.checked = effectiveTheme === 'dark';
     });
     
-    // Apply accent color (user's stored choice or default)
-    // Note: We don't change accent when theme changes - user's choice persists
     const storedAccent = getPreference(STORAGE_KEYS.accentColor, null);
     if (!storedAccent) {
       applyAccentColor(DEFAULT_ACCENT);
     }
   }
 
+  // --- Font Size ---
   function applyFontSize(size) {
     document.documentElement.setAttribute('data-font-size', size);
     
@@ -79,6 +83,7 @@
     });
   }
 
+  // --- Reduce Motion ---
   function applyReduceMotion(enabled) {
     if (enabled === 'true' || enabled === true) {
       document.documentElement.setAttribute('data-reduce-motion', 'true');
@@ -93,6 +98,7 @@
     });
   }
 
+  // --- High Contrast ---
   function applyHighContrast(enabled) {
     if (enabled === 'true' || enabled === true) {
       document.documentElement.setAttribute('data-high-contrast', 'true');
@@ -107,6 +113,7 @@
     });
   }
 
+  // --- Colorblind Mode ---
   function applyColorblind(mode) {
     if (mode && mode !== 'none') {
       document.documentElement.setAttribute('data-colorblind', mode);
@@ -119,6 +126,7 @@
     });
   }
 
+  // --- ADHD Mode ---
   function applyAdhdMode(enabled) {
     if (enabled === 'true' || enabled === true) {
       document.documentElement.setAttribute('data-adhd-mode', 'true');
@@ -133,6 +141,7 @@
     });
   }
 
+  // --- Dyslexia Font ---
   function applyDyslexiaFont(enabled) {
     if (enabled === 'true' || enabled === true) {
       document.documentElement.setAttribute('data-dyslexia-font', 'true');
@@ -147,20 +156,18 @@
     });
   }
 
+  // --- Accent Color ---
   function applyAccentColor(colorName) {
     const color = ACCENT_COLORS[colorName] || ACCENT_COLORS.gold;
     const effectiveColorName = ACCENT_COLORS[colorName] ? colorName : 'gold';
     
-    // Apply CSS custom properties to :root
     document.documentElement.style.setProperty('--user-accent', color.hex);
     document.documentElement.style.setProperty('--user-accent-hover', color.hover);
     document.documentElement.style.setProperty('--user-accent-rgb', color.rgb);
     document.documentElement.style.setProperty('--user-accent-glow', `rgba(${color.rgb}, 0.3)`);
     
-    // Also set a data attribute for CSS targeting
     document.documentElement.setAttribute('data-accent', effectiveColorName);
     
-    // Update button active states
     document.querySelectorAll('[data-accent-color]').forEach(btn => {
       const isActive = btn.getAttribute('data-accent-color') === effectiveColorName;
       btn.classList.toggle('active', isActive);
@@ -172,6 +179,7 @@
     });
   }
 
+  // --- Settings Initialization ---
   function initSettings() {
     const savedTheme = getPreference(STORAGE_KEYS.theme, 'light');
     const savedFontSize = getPreference(STORAGE_KEYS.fontSize, 'normal');
@@ -180,10 +188,8 @@
     const savedAdhdMode = getPreference(STORAGE_KEYS.adhdMode, 'false');
     const savedDyslexiaFont = getPreference(STORAGE_KEYS.dyslexiaFont, 'false');
     
-    // Get saved accent color (same default for all themes)
     const savedAccentColor = getPreference(STORAGE_KEYS.accentColor, DEFAULT_ACCENT);
 
-    // Clear any stored high contrast preference (feature removed)
     try { localStorage.removeItem(STORAGE_KEYS.highContrast); } catch(e) {}
     document.documentElement.removeAttribute('data-high-contrast');
 
@@ -196,6 +202,7 @@
     applyAccentColor(savedAccentColor);
   }
 
+  // --- Settings Listeners ---
   function initSettingsListeners() {
     document.querySelectorAll('[data-theme-toggle]').forEach(toggle => {
       toggle.addEventListener('change', function() {
@@ -272,6 +279,7 @@
     });
   }
 
+  // --- Settings Dropdown ---
   function initSettingsDropdown() {
     const settingsWrappers = document.querySelectorAll('.settings-wrapper');
     
@@ -308,6 +316,7 @@
     });
   }
 
+  // --- User Button ---
   function initUserButton() {
     const userBtns = document.querySelectorAll('[data-user-btn]');
     
@@ -326,6 +335,7 @@
     }
   }
 
+  // --- Initialize ---
   initSettings();
 
   if (document.readyState === 'loading') {
@@ -340,6 +350,7 @@
     initUserButton();
   }
 
+  // --- System Theme Change Listener ---
   if (window.matchMedia) {
     window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function() {
       const savedTheme = getPreference(STORAGE_KEYS.theme, 'light');
@@ -349,6 +360,7 @@
     });
   }
 
+  // --- Public API ---
   window.MindBalanceSettings = {
     setTheme: function(theme) {
       setPreference(STORAGE_KEYS.theme, theme);

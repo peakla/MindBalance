@@ -1,3 +1,6 @@
+// ==================== AUTHENTICATION ====================
+
+// --- Supabase Configuration ---
 const SUPABASE_URL = "https://cxjqessxarjayqxvhnhs.supabase.co";
 const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImN4anFlc3N4YXJqYXlxeHZobmhzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjgwMjQwOTEsImV4cCI6MjA4MzYwMDA5MX0.SUI4sPOSPxDiGwqwQr19UOKtbK7KmjMqkX6HUT6-yps";
 
@@ -6,6 +9,7 @@ let authReady = false;
 let currentAuthUser = null;
 let authChangeCallbacks = [];
 
+// --- Supabase Client ---
 function getSupabase() {
   if (!supabaseClient && typeof supabase !== 'undefined') {
     supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
@@ -13,6 +17,7 @@ function getSupabase() {
   return supabaseClient;
 }
 
+// --- User Session ---
 async function getCurrentUser() {
   const sb = getSupabase();
   if (!sb) return null;
@@ -28,6 +33,7 @@ async function signOut() {
   await sb.auth.signOut();
 }
 
+// --- Path Helpers ---
 function getAuthPath() {
   const path = window.location.pathname;
   if (path.includes('/blog/') || 
@@ -60,6 +66,7 @@ function getProfilePath() {
   return './profile/';
 }
 
+// --- Redirect Management ---
 function saveRedirectUrl() {
   const currentUrl = window.location.pathname + window.location.search;
   if (!currentUrl.includes('/auth/')) {
@@ -68,7 +75,6 @@ function saveRedirectUrl() {
 }
 
 function saveRedirectToProfile() {
-  // Set redirect to profile page when user clicks user icon to manage account
   sessionStorage.setItem('auth_redirect', '/profile/');
   sessionStorage.setItem('auth_intent', 'manage_profile');
 }
@@ -86,6 +92,7 @@ function clearRedirectUrl() {
   sessionStorage.removeItem('auth_intent');
 }
 
+// --- Auth State Broadcasting ---
 function broadcastAuthChange(user) {
   if (currentAuthUser === user && authReady) return;
   
@@ -129,6 +136,7 @@ function onAuthChange(callback) {
   }
 }
 
+// --- Auth UI Updates ---
 function updateAuthUI(user) {
   const authBtns = document.querySelectorAll('[data-auth-btn]');
   const authPath = getAuthPath();
@@ -141,7 +149,6 @@ function updateAuthUI(user) {
     
     if (user) {
       textTarget.textContent = 'Sign Out';
-      // Update translate attribute so translations don't overwrite our text
       if (textTarget.hasAttribute('data-translate')) {
         textTarget.setAttribute('data-translate', 'nav_signout');
       }
@@ -151,7 +158,6 @@ function updateAuthUI(user) {
       };
     } else {
       textTarget.textContent = 'Sign In';
-      // Reset translate attribute for sign in state
       if (textTarget.hasAttribute('data-translate')) {
         textTarget.setAttribute('data-translate', 'nav_signin');
       }
@@ -163,7 +169,6 @@ function updateAuthUI(user) {
     }
   });
   
-  // Handle data-auth-show elements (visible when logged in)
   document.querySelectorAll('[data-auth-show]').forEach(el => {
     if (user) {
       el.style.display = '';
@@ -174,7 +179,6 @@ function updateAuthUI(user) {
     }
   });
   
-  // Handle data-auth-hide elements (visible when logged out)
   document.querySelectorAll('[data-auth-hide]').forEach(el => {
     if (user) {
       el.style.display = 'none';
@@ -185,18 +189,17 @@ function updateAuthUI(user) {
     }
   });
   
-  // Update user button in navbar to show avatar when signed in
   updateUserButton(user);
 }
 
-// Mobile logout handler
+// --- Mobile Logout ---
 function handleMobileLogout() {
   signOut();
 }
 
-// Expose globally for onclick handlers
 window.handleMobileLogout = handleMobileLogout;
 
+// --- User Button ---
 async function updateUserButton(user) {
   const userBtn = document.querySelector('[data-user-btn]');
   if (!userBtn) return;
@@ -206,11 +209,9 @@ async function updateUserButton(user) {
   if (user) {
     userBtn.classList.add('is-signed-in');
     
-    // When logged in, clicking user icon goes directly to profile
-    userBtn.onclick = null; // Clear any previous handler
+    userBtn.onclick = null;
     userBtn.href = getProfilePath();
     
-    // Try to get user profile with avatar
     try {
       const sb = getSupabase();
       if (sb) {
@@ -221,7 +222,6 @@ async function updateUserButton(user) {
           .single();
         
         if (profile?.avatar_url) {
-          // Replace icon with avatar image
           if (icon) icon.style.display = 'none';
           
           let avatar = userBtn.querySelector('.user-avatar');
@@ -233,7 +233,6 @@ async function updateUserButton(user) {
           }
           avatar.src = profile.avatar_url;
         } else {
-          // No avatar, ensure icon is visible and remove any existing avatar
           if (icon) icon.style.display = '';
           const existingAvatar = userBtn.querySelector('.user-avatar');
           if (existingAvatar) existingAvatar.remove();
@@ -241,18 +240,15 @@ async function updateUserButton(user) {
       }
     } catch (e) {
       console.log('Could not load user avatar');
-      // Ensure icon is visible on error
       if (icon) icon.style.display = '';
     }
   } else {
     userBtn.classList.remove('is-signed-in');
     
-    // Restore icon
     if (icon) icon.style.display = '';
     const avatar = userBtn.querySelector('.user-avatar');
     if (avatar) avatar.remove();
     
-    // When not logged in, clicking user icon should redirect to profile after login
     userBtn.onclick = (e) => {
       e.preventDefault();
       saveRedirectToProfile();
@@ -261,11 +257,11 @@ async function updateUserButton(user) {
   }
 }
 
+// --- Auth Initialization ---
 function initAuth() {
   const sb = getSupabase();
   if (!sb) return;
   
-  // Initialize user menu
   initUserMenu();
   
   sb.auth.onAuthStateChange((event, session) => {
@@ -288,6 +284,7 @@ function initAuth() {
   });
 }
 
+// --- Daily Visit Logging ---
 async function logDailyVisit(userId) {
   const sb = getSupabase();
   if (!sb || !userId) return;
@@ -318,16 +315,13 @@ async function logDailyVisit(userId) {
   }
 }
 
-// Initialize auth immediately if document is already ready, otherwise wait
 if (document.readyState === 'loading') {
   document.addEventListener('DOMContentLoaded', initAuth);
 } else {
   initAuth();
 }
 
-// =====================================================
-// READING ACTIVITY & STREAK TRACKING
-// =====================================================
+// ==================== READING ACTIVITY & STREAK TRACKING ====================
 
 async function logReadingActivity(articleSlug, articleTitle) {
   const sb = getSupabase();
@@ -336,9 +330,8 @@ async function logReadingActivity(articleSlug, articleTitle) {
   const user = await getCurrentUser();
   if (!user) return null;
   
-  const today = new Date().toISOString().split('T')[0]; // YYYY-MM-DD
+  const today = new Date().toISOString().split('T')[0];
   
-  // Check if already logged for this article today (to avoid duplicate counts)
   const sessionKey = `reading_logged_${articleSlug}_${today}`;
   if (sessionStorage.getItem(sessionKey)) {
     console.log('Already logged reading for this article today');
@@ -346,8 +339,6 @@ async function logReadingActivity(articleSlug, articleTitle) {
   }
   
   try {
-    // Use upsert with conflict on (user_id, visit_date) unique constraint
-    // First, get current count
     const { data: existing } = await sb
       .from('user_engagement')
       .select('articles_read')
@@ -357,7 +348,6 @@ async function logReadingActivity(articleSlug, articleTitle) {
     
     const currentCount = existing?.articles_read || 0;
     
-    // Upsert the engagement record
     const { data, error } = await sb
       .from('user_engagement')
       .upsert({
@@ -372,10 +362,8 @@ async function logReadingActivity(articleSlug, articleTitle) {
     
     if (error) throw error;
     
-    // Mark as logged for this session
     sessionStorage.setItem(sessionKey, 'true');
     
-    // Update streak after logging activity
     await updateStreakFromActivity(user.id);
     return data;
   } catch (e) {
@@ -384,12 +372,12 @@ async function logReadingActivity(articleSlug, articleTitle) {
   }
 }
 
+// --- Streak Calculation ---
 async function updateStreakFromActivity(userId) {
   const sb = getSupabase();
   if (!sb) return;
   
   try {
-    // Get user's engagement history ordered by date
     const { data: engagementDays, error } = await sb
       .from('user_engagement')
       .select('visit_date')
@@ -400,12 +388,10 @@ async function updateStreakFromActivity(userId) {
       return;
     }
     
-    // Calculate streak from consecutive days
     let currentStreak = 0;
     const today = new Date();
     today.setHours(0, 0, 0, 0);
     
-    // Check each day going backwards
     for (let i = 0; i < engagementDays.length; i++) {
       const visitDate = new Date(engagementDays[i].visit_date + 'T00:00:00');
       const expectedDate = new Date(today);
@@ -415,25 +401,20 @@ async function updateStreakFromActivity(userId) {
       if (visitDate.getTime() === expectedDate.getTime()) {
         currentStreak++;
       } else if (i === 0) {
-        // If today is not in the list, check if yesterday was
         const yesterday = new Date(today);
         yesterday.setDate(yesterday.getDate() - 1);
         yesterday.setHours(0, 0, 0, 0);
         
         if (visitDate.getTime() === yesterday.getTime()) {
-          // Continue checking from yesterday
           currentStreak++;
         } else {
-          // Streak is broken
           break;
         }
       } else {
-        // Gap in dates - streak is broken
         break;
       }
     }
     
-    // Get current profile to check longest streak
     const { data: profile } = await sb
       .from('profiles')
       .select('longest_streak')
@@ -442,7 +423,6 @@ async function updateStreakFromActivity(userId) {
     
     const longestStreak = Math.max(currentStreak, profile?.longest_streak || 0);
     
-    // Update profile with new streak values
     await sb
       .from('profiles')
       .update({
@@ -452,7 +432,6 @@ async function updateStreakFromActivity(userId) {
       })
       .eq('id', userId);
     
-    // Dispatch event for real-time UI updates
     window.dispatchEvent(new CustomEvent('mindbalance:streakupdated', {
       detail: { currentStreak, longestStreak }
     }));
@@ -462,6 +441,7 @@ async function updateStreakFromActivity(userId) {
   }
 }
 
+// --- Reading Calendar ---
 async function getReadingCalendar(userId, days = 30) {
   const sb = getSupabase();
   if (!sb) return [];
@@ -485,7 +465,8 @@ async function getReadingCalendar(userId, days = 30) {
   }
 }
 
-// ===== USER MENU FUNCTIONS =====
+// ==================== USER MENU ====================
+
 function toggleUserMenu() {
   const wrapper = document.getElementById('userMenuWrapper');
   const trigger = document.getElementById('userMenuTrigger');
@@ -514,6 +495,7 @@ async function handleUserMenuLogout() {
   window.location.href = '/';
 }
 
+// --- User Menu UI ---
 async function updateUserMenuUI(user) {
   const signedInSection = document.querySelector('.user-menu-signed-in');
   const guestSection = document.querySelector('.user-menu-guest');
@@ -523,17 +505,14 @@ async function updateUserMenuUI(user) {
   const userMenuEmail = document.getElementById('userMenuEmail');
   
   if (user) {
-    // Signed in state
     if (signedInSection) signedInSection.style.display = 'block';
     if (guestSection) guestSection.style.display = 'none';
     
-    // Set initial user info from auth user
     let displayName = user.user_metadata?.display_name || user.email?.split('@')[0] || 'User';
     let avatarUrl = user.user_metadata?.avatar_url || null;
     
     if (userMenuEmail) userMenuEmail.textContent = user.email || '';
     
-    // Try to get profile data for avatar and display name
     try {
       const sb = getSupabase();
       if (sb) {
@@ -549,18 +528,14 @@ async function updateUserMenuUI(user) {
         }
       }
     } catch (e) {
-      // Use default values on error
     }
     
-    // Update display name
     if (userMenuName) userMenuName.textContent = displayName;
     
-    // Update avatar in dropdown
     if (userMenuAvatar) {
       userMenuAvatar.src = avatarUrl || '/assets/images/default-avatar.png';
     }
     
-    // Update user icon trigger to show avatar if available
     if (userIcon) {
       if (avatarUrl) {
         userIcon.innerHTML = `<img src="${avatarUrl}" alt="${displayName}" class="user-avatar-small">`;
@@ -569,16 +544,13 @@ async function updateUserMenuUI(user) {
       }
     }
   } else {
-    // Guest state
     if (signedInSection) signedInSection.style.display = 'none';
     if (guestSection) guestSection.style.display = 'block';
     
-    // Reset user icon
     if (userIcon) {
       userIcon.innerHTML = '<ion-icon name="person-outline"></ion-icon>';
     }
     
-    // Reset avatar
     if (userMenuAvatar) {
       userMenuAvatar.src = '/assets/images/default-avatar.png';
     }
@@ -587,7 +559,7 @@ async function updateUserMenuUI(user) {
   }
 }
 
-// Initialize user menu on DOM ready
+// --- User Menu Initialization ---
 function initUserMenu() {
   const trigger = document.getElementById('userMenuTrigger');
   const wrapper = document.getElementById('userMenuWrapper');
@@ -599,14 +571,12 @@ function initUserMenu() {
     });
   }
   
-  // Close on outside click
   document.addEventListener('click', (e) => {
     if (wrapper && !wrapper.contains(e.target)) {
       closeUserMenu();
     }
   });
   
-  // Close on escape
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') {
       closeUserMenu();
@@ -614,7 +584,7 @@ function initUserMenu() {
   });
 }
 
-// Global functions for onclick handlers
+// --- Global Exports ---
 window.toggleUserMenu = toggleUserMenu;
 window.closeUserMenu = closeUserMenu;
 window.handleUserMenuLogout = handleUserMenuLogout;

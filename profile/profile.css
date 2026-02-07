@@ -1,24 +1,22 @@
-/* ===== PROFILE PAGE STYLES ===== */
-
-/* Profile Accent Color Variable (set dynamically by JS) */
+/* === VARIABLES === */
 :root {
   --profile-accent: #b89b5e;
   --profile-gradient: linear-gradient(135deg, #b89b5e 0%, #d6bd9f 100%);
 }
 
-/* Dark mode purple accent override */
 [data-theme="dark"] {
   --profile-accent: #9b7ed9;
   --profile-gradient: linear-gradient(135deg, #9b7ed9 0%, #7c5fc4 100%);
 }
 
+/* === PROFILE BASE === */
 .mb-profile {
   min-height: 80vh;
   background: #f8f6f2;
   padding-top: 120px;
 }
 
-/* Guest View */
+/* === GUEST VIEW === */
 .mb-profile__guest {
   display: flex;
   align-items: center;
@@ -69,14 +67,14 @@
   box-shadow: 0 8px 25px rgba(184, 155, 94, 0.4);
 }
 
-/* Profile Wrapper - Full Width on Desktop */
+/* === PROFILE WRAPPER === */
 .mb-profile__wrap {
   max-width: 1400px;
   margin: 0 auto;
   padding: 0 40px 60px;
 }
 
-/* Profile Header */
+/* === PROFILE HEADER === */
 .mb-profile__header {
   background: #fff;
   border-radius: 20px;
@@ -85,6 +83,7 @@
   margin-bottom: 30px;
 }
 
+/* === COVER IMAGE === */
 .mb-profile__cover {
   height: 260px;
   background: linear-gradient(135deg, #b89b5e 0%, #d6bd9f 50%, #8fa67a 100%);
@@ -133,7 +132,7 @@
   flex-shrink: 0;
 }
 
-/* Hide file inputs */
+/* === FILE INPUTS === */
 #avatarInput,
 #coverInput {
   display: none !important;
@@ -142,7 +141,7 @@
   left: -9999px !important;
 }
 
-/* ===== AVATAR PICKER MODAL ===== */
+/* === AVATAR PICKER === */
 .mb-avatar-picker {
   position: fixed;
   top: 0;
@@ -298,6 +297,7 @@
   border-color: #3d3a50;
 }
 
+/* === AVATAR === */
 .mb-profile__avatar {
   width: 140px;
   height: 140px;
@@ -333,6 +333,7 @@
   color: #fff;
 }
 
+/* === PROFILE DETAILS === */
 .mb-profile__details {
   padding-top: 10px;
   flex: 1;
@@ -361,9 +362,7 @@
   max-width: 400px;
 }
 
-/* Stats are now styled in the interactive features section below */
-
-/* Tabs */
+/* === TABS === */
 .mb-profile__tabs {
   display: flex;
   gap: 10px;
@@ -406,7 +405,7 @@
   color: #fff;
 }
 
-/* Tab Panels */
+/* === TAB PANELS === */
 .mb-profile__panel {
   display: none;
   background: #fff;
@@ -419,7 +418,7 @@
   display: block;
 }
 
-/* Loading State */
+/* === LOADING STATE === */
 .mb-profile__loading {
   text-align: center;
   padding: 60px 20px;
@@ -445,7 +444,7 @@
   to { transform: rotate(360deg); }
 }
 
-/* Empty State */
+/* === EMPTY STATE === */
 .mb-profile__empty {
   text-align: center;
   padding: 60px 20px;
@@ -467,7 +466,7 @@
   font-weight: 600;
 }
 
-/* Activity Feed */
+/* === ACTIVITY FEED === */
 .mb-activity-item {
   display: flex;
   gap: 15px;
@@ -514,7 +513,7 @@
   color: #6b6b8a;
 }
 
-/* ===== LIKED POSTS GRID ===== */
+/* === LIKED POSTS === */
 #likedPosts {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
@@ -632,7 +631,6 @@
   font-size: 0.95rem;
 }
 
-/* Dark mode for liked posts */
 [data-theme="dark"] .mb-liked-post {
   background: #2d2b3d;
   border-color: rgba(255, 255, 255, 0.05);
@@ -662,13 +660,14 @@
   border-color: #3d3a50;
 }
 
+/* === RESPONSIVE === */
 @media (max-width: 768px) {
   #likedPosts {
     grid-template-columns: 1fr;
   }
 }
 
-/* Settings */
+/* === SETTINGS === */
 .mb-profile__settings-section {
   margin-bottom: 35px;
 }
@@ -767,7 +766,7 @@
   color: #fff;
 }
 
-/* Modal */
+/* === MODAL === */
 .mb-modal {
   position: fixed;
   inset: 0;
@@ -876,7 +875,7 @@
   transform: translateY(-2px);
 }
 
-/* Dark Mode */
+/* === DARK MODE === */
 [data-theme="dark"] .mb-profile {
   background: #0f0f1a;
 }
@@ -913,8 +912,6 @@
 [data-theme="dark"] .mb-profile__stat-num {
   color: #fff;
 }
-
-/* Dark mode edit-btn styles moved to quick actions section */
 
 [data-theme="dark"] .mb-profile__tab {
   color: rgba(255, 255, 255, 0.6);
@@ -966,7 +963,6 @@
   color: #fff;
 }
 
-/* Responsive */
 @media (max-width: 768px) {
   .mb-profile__info {
     grid-template-columns: 1fr;
@@ -1007,9 +1003,6 @@
   }
 }
 
-/* ===== NEW PROFILE ENHANCEMENTS ===== */
-
-/* Badges Row - now inside stats card */
 .mb-profile__badges-row {
   display: none;
 }
@@ -1046,7 +1039,6 @@
   background: linear-gradient(135deg, rgba(212, 165, 116, 0.25) 0%, rgba(212, 165, 116, 0.1) 100%);
 }
 
-/* Activity Filters */
 .mb-profile__activity-filters {
   display: flex;
   gap: 10px;
@@ -1078,7 +1070,6 @@
   color: #fff;
 }
 
-/* Liked Posts */
 .mb-profile__liked {
   display: flex;
   flex-direction: column;
@@ -1112,7 +1103,6 @@
   color: #9a9ab5;
 }
 
-/* Saved Grid */
 .mb-profile__saved-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
@@ -1154,7 +1144,6 @@
   color: #9a9ab5;
 }
 
-/* Achievements Grid */
 .mb-profile__achievements-header {
   margin-bottom: 25px;
 }
@@ -1197,7 +1186,6 @@
   transform: translateY(-2px);
 }
 
-/* Lock icon for locked badges */
 .mb-profile__badge .badge-lock-icon {
   position: absolute;
   top: 10px;
@@ -1207,7 +1195,6 @@
   opacity: 0.7;
 }
 
-/* Unlocked badge styling - gold highlight */
 .mb-profile__badge.unlocked {
   background: linear-gradient(135deg, #fffdf5 0%, #fff9e6 100%);
   border: 2px solid rgba(184, 155, 94, 0.5);
@@ -1265,7 +1252,6 @@
   color: #d4a574;
 }
 
-/* Wellness Section */
 .mb-profile__wellness {
   display: flex;
   flex-direction: column;
@@ -1295,7 +1281,6 @@
   color: #b89b5e;
 }
 
-/* Mood Tracker */
 .mb-profile__mood-input {
   text-align: center;
   margin-bottom: 25px;
@@ -1407,7 +1392,6 @@
   color: #9a9ab5;
 }
 
-/* Goals */
 .mb-profile__goals-add {
   display: flex;
   gap: 10px;
@@ -1502,7 +1486,6 @@
   color: #ef4444;
 }
 
-/* Streak Display */
 .mb-profile__streak-display {
   display: flex;
   gap: 30px;
@@ -1576,7 +1559,6 @@
   box-shadow: 0 0 0 2px #2d2b3d, 0 0 0 4px #d6bd9f;
 }
 
-/* Settings Enhancements */
 .mb-profile__settings-section h3 {
   display: flex;
   align-items: center;
@@ -1643,7 +1625,6 @@
   box-shadow: 0 0 0 3px rgba(26, 26, 46, 0.1);
 }
 
-/* Dark mode adjustments for wellness & achievements */
 [data-theme="dark"] .mb-profile__wellness-section,
 [data-theme="dark"] .mb-profile__saved-card {
   background: #2d2b3d;
@@ -1741,14 +1722,12 @@
   color: #e0e0e8;
 }
 
-/* Responsive for badge grid - medium screens */
 @media (max-width: 992px) {
   .mb-profile__achievements-grid {
     grid-template-columns: repeat(3, 1fr);
   }
 }
 
-/* Responsive for new elements */
 @media (max-width: 768px) {
   .mb-profile__badges-row {
     flex-direction: column;
@@ -1777,8 +1756,6 @@
     height: 42px;
   }
 }
-
-/* ===== SAVED ARTICLES TAB ===== */
 
 .mb-profile__saved-grid {
   display: grid;
@@ -1858,8 +1835,6 @@
   }
 }
 
-/* ===== SOCIAL LINKS DISPLAY ===== */
-
 .mb-profile__social-links {
   display: flex;
   gap: 10px;
@@ -1887,7 +1862,6 @@
   box-shadow: 0 6px 20px color-mix(in srgb, var(--profile-accent, #b89b5e) 35%, transparent);
 }
 
-/* Hide social links container when empty */
 .mb-profile__social-links:empty,
 .mb-profile__social-links:not(:has(a:not([hidden]))) {
   display: none;
@@ -2000,7 +1974,6 @@
   line-height: 1.2;
 }
 
-/* Clickable follower/following stats */
 .mb-profile__stat.is-clickable {
   cursor: pointer;
 }
@@ -2026,8 +1999,6 @@
   gap: 10px;
   justify-content: center;
 }
-
-/* ===== QUICK ACTION BUTTONS ===== */
 
 .mb-profile__quick-actions {
   display: flex;
@@ -2090,7 +2061,6 @@
   font-size: 1rem;
 }
 
-/* Follow button styles */
 .mb-profile__follow-container {
   display: inline-flex;
 }
@@ -2164,8 +2134,6 @@
   border-color: #d6bd9f;
   color: #d6bd9f;
 }
-
-/* ===== PROFILE COMPLETION PROGRESS ===== */
 
 .mb-profile__completion {
   display: flex;
@@ -2267,8 +2235,6 @@
   color: #4caf50;
 }
 
-/* ===== HOVER ANIMATIONS ===== */
-
 .mb-profile__stat {
   transition: all 0.3s ease;
   padding: 10px;
@@ -2325,7 +2291,6 @@
   transform: scale(1.05);
 }
 
-/* Focus states for accessibility */
 .mb-profile__tab:focus-visible,
 .mb-profile__action-btn:focus-visible,
 .mb-profile__edit-btn:focus-visible,
@@ -2334,7 +2299,6 @@
   outline-offset: 2px;
 }
 
-/* Animated number counter effect */
 @keyframes countUp {
   from { opacity: 0; transform: translateY(10px); }
   to { opacity: 1; transform: translateY(0); }
@@ -2344,7 +2308,6 @@
   animation: countUp 0.5s ease-out;
 }
 
-/* Pulse effect for completion ring when complete */
 @keyframes completePulse {
   0%, 100% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.4); }
   50% { box-shadow: 0 0 0 10px rgba(16, 185, 129, 0); }
@@ -2382,8 +2345,6 @@
     justify-content: center;
   }
 }
-
-/* ===== PUBLIC PROFILE PREVIEW MODAL ===== */
 
 .mb-profile__preview-modal {
   position: fixed;
@@ -2553,7 +2514,6 @@
   color: #f0f0f5;
 }
 
-/* Responsive profile layout */
 @media (max-width: 900px) {
   .mb-profile__info {
     flex-direction: column;
@@ -2613,7 +2573,6 @@
   }
 }
 
-/* Respect reduced motion preference */
 @media (prefers-reduced-motion: reduce) {
   .mb-profile__stat,
   .mb-profile__tab,
@@ -2641,7 +2600,6 @@
   }
 }
 
-/* ===== FOLLOWER/FOLLOWING LIST MODAL ===== */
 .mb-follow-modal {
   position: fixed;
   inset: 0;
@@ -2782,7 +2740,6 @@
   max-width: 200px;
 }
 
-/* ===== ACCOUNT DELETION STYLES ===== */
 .mb-profile__danger-zone h3 {
   color: #dc3545;
 }
@@ -2818,7 +2775,6 @@
   background: transparent;
 }
 
-/* Delete Confirmation Modal */
 .mb-delete-modal {
   position: fixed;
   inset: 0;
@@ -2936,8 +2892,6 @@
   background: #c82333;
 }
 
-/* ===== MOOD INSIGHTS ===== */
-
 .mb-profile__mood-insights {
   margin-top: 32px;
   padding-top: 24px;
@@ -3043,7 +2997,6 @@
   margin-top: 2px;
 }
 
-/* Mood Line Chart */
 .mood-chart-container {
   margin-bottom: 28px;
 }
@@ -3112,7 +3065,6 @@
   color: #888;
 }
 
-/* Mood Distribution */
 .mood-distribution h5 {
   font-size: 0.95rem;
   font-weight: 600;
@@ -3188,7 +3140,6 @@
   text-align: right;
 }
 
-/* Dark mode for mood insights */
 [data-theme="dark"] .mood-insight-card {
   background: #3d3a50;
 }
@@ -3230,7 +3181,6 @@
   color: #f5f0e8;
 }
 
-/* ===== ANALYTICS SECTIONS ===== */
 .mb-profile__analytics-section {
   margin-bottom: 24px;
 }
@@ -3272,7 +3222,6 @@
   background: #242440;
 }
 
-/* ===== ONBOARDING MODAL ===== */
 .onboarding-modal {
   position: fixed;
   top: 0;
@@ -3446,7 +3395,6 @@
   margin-right: 6px;
 }
 
-/* Responsive: Extra small screens */
 @media (max-width: 400px) {
   .onboarding-modal {
     padding: 8px;
@@ -3484,7 +3432,6 @@
   }
 }
 
-/* Dark mode for onboarding modal */
 [data-theme="dark"] .onboarding-modal__content {
   background: #1a1a2e;
 }

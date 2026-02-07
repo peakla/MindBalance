@@ -1,4 +1,4 @@
-/* ===== INSPIRATIONAL QUOTE BANNER ===== */
+/* === QUOTE BANNER === */
 .quote-banner {
   background: linear-gradient(135deg, #f8f5f0 0%, #ebe6df 100%);
   padding: 60px 20px;
@@ -99,7 +99,7 @@
   outline-offset: 2px;
 }
 
-/* Dark Mode */
+/* === QUOTE BANNER DARK MODE === */
 [data-theme="dark"] .quote-banner {
   background: linear-gradient(135deg, #1a1a2e 0%, #16162a 100%);
 }
@@ -128,7 +128,6 @@
   background: var(--user-accent, #9b7ed9);
 }
 
-/* Reduced Motion */
 @media (prefers-reduced-motion: reduce) {
   .quote-banner__text,
   .quote-banner__author {
@@ -136,7 +135,6 @@
   }
 }
 
-/* Mobile Responsive */
 @media (max-width: 768px) {
   .quote-banner {
     padding: 40px 16px;
@@ -152,8 +150,7 @@
   }
 }
 
-
-/* ===== DAILY WELLNESS TIP ===== */
+/* === WELLNESS TIP === */
 .wellness-tip {
   background: #fff;
   padding: 50px 20px;
@@ -249,7 +246,7 @@
   font-style: italic;
 }
 
-/* Dark Mode */
+/* === WELLNESS TIP DARK MODE === */
 [data-theme="dark"] .wellness-tip {
   background: #0f0f1a;
 }
@@ -287,14 +284,12 @@
   color: #777;
 }
 
-/* Reduced Motion */
 @media (prefers-reduced-motion: reduce) {
   .wellness-tip__action {
     transition: none;
   }
 }
 
-/* Mobile Responsive */
 @media (max-width: 768px) {
   .wellness-tip {
     padding: 40px 16px;

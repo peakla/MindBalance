@@ -1,9 +1,12 @@
-// Article TTS Player with Play/Pause/Stop controls
-// Supports ElevenLabs premium TTS with fallback to browser voices
+// ==================== ARTICLE PAGE ====================
+
+
+
+// --- Preloader ---
 (function() {
   'use strict';
 
-  // Hide preloader after load (same logic as main script.js)
+
   function hidePreloader() {
     const preloader = document.querySelector('[data-preaload]');
     document.body.classList.add('loaded');
@@ -13,15 +16,16 @@
     window.scrollTo(0, 0);
   }
 
-  // Run preloader hide on load
+
   window.addEventListener('load', hidePreloader);
 
-  // Helper to get current language with legacy key fallback
+
+// --- Language & Translation Helpers ---
   function getSavedLanguage() {
     return localStorage.getItem('mindbalance-language') || localStorage.getItem('mindbalance_language') || 'en';
   }
-  
-  // Translation helper
+
+
   function getTranslation(key, fallback) {
     if (window.translations) {
       const lang = getSavedLanguage();
@@ -34,14 +38,15 @@
     return fallback;
   }
 
-  // TTS Engine State
-  let ttsEngine = localStorage.getItem('tts-engine') || 'elevenlabs'; // 'elevenlabs' or 'browser'
+
+// ==================== TTS ENGINE ====================
+  let ttsEngine = localStorage.getItem('tts-engine') || 'elevenlabs';
   let selectedVoice = localStorage.getItem('tts-voice') || 'rachel';
   let elevenLabsAvailable = false;
-  let currentAudio = null; // For ElevenLabs audio playback
-  let audioCache = {}; // Cache generated audio by paragraph index
-  
-  // Browser TTS State
+  let currentAudio = null;
+  let audioCache = {};
+
+
   let speechSynthesis = window.speechSynthesis;
   let currentUtterance = null;
   let isPlaying = false;
@@ -55,7 +60,8 @@
   let ttsTimeRemaining = 0;
   let isGeneratingAudio = false;
 
-  // Check if ElevenLabs API is available
+
+// --- ElevenLabs Availability ---
   async function checkElevenLabsAvailability() {
     try {
       console.log('Checking ElevenLabs availability...');
@@ -65,15 +71,15 @@
           'Accept': 'application/json'
         }
       });
-      
+
       if (response.ok) {
         const data = await response.json();
         console.log('ElevenLabs health check response:', data);
         elevenLabsAvailable = data.available === true;
-        
+
         if (elevenLabsAvailable) {
           console.log('ElevenLabs is available - premium TTS enabled');
-          // Restore user's preferred engine if ElevenLabs is available
+
           const savedEngine = localStorage.getItem('tts-engine');
           if (savedEngine === 'elevenlabs' || !savedEngine) {
             ttsEngine = 'elevenlabs';
@@ -98,7 +104,8 @@
     updateVoiceSelector();
   }
 
-  // Fetch available voices from ElevenLabs
+
+// --- Voice Management ---
   async function fetchElevenLabsVoices() {
     try {
       const response = await fetch('/api/tts/voices');
@@ -112,22 +119,22 @@
     return [];
   }
 
-  // Update voice selector UI
+
   async function updateVoiceSelector() {
     const voiceSelect = document.getElementById('ttsVoiceSelect');
     const engineToggle = document.getElementById('ttsEngineToggle');
-    
+
     if (engineToggle) {
       engineToggle.textContent = ttsEngine === 'elevenlabs' ? '🎙️ Premium' : '🔊 Browser';
-      engineToggle.title = ttsEngine === 'elevenlabs' 
+      engineToggle.title = ttsEngine === 'elevenlabs'
         ? getTranslation('tts_premium_voice', 'Premium AI Voice (ElevenLabs)')
         : getTranslation('tts_browser_voice', 'Browser Voice');
     }
-    
+
     if (!voiceSelect) return;
-    
+
     voiceSelect.innerHTML = '';
-    
+
     if (ttsEngine === 'elevenlabs' && elevenLabsAvailable) {
       const voices = await fetchElevenLabsVoices();
       voices.forEach(voice => {
@@ -139,7 +146,7 @@
       });
       voiceSelect.disabled = false;
     } else {
-      // Show browser voices
+
       const browserVoices = speechSynthesis ? speechSynthesis.getVoices() : [];
       if (browserVoices.length === 0) {
         const option = document.createElement('option');
@@ -156,28 +163,30 @@
     }
   }
 
-  // Get all readable content
+
+// --- Article Content ---
   function getArticleContent() {
     const contentArea = document.querySelector('.article-content');
     if (!contentArea) return [];
-    
+
     const elements = contentArea.querySelectorAll('h2, h3, p, li');
     return Array.from(elements).map(el => el.textContent.trim()).filter(text => text.length > 0);
   }
 
-  // Highlight current paragraph being read and auto-scroll
+
+// --- Paragraph Highlighting ---
   function highlightParagraph(index) {
     const elements = document.querySelectorAll('.article-content h2, .article-content h3, .article-content p, .article-content li');
     elements.forEach((el, i) => {
       el.classList.toggle('tts-reading', i === index);
-      // Restore original content when no longer reading
+
       if (i !== index && el.dataset.originalHtml) {
         el.innerHTML = el.dataset.originalHtml;
         delete el.dataset.originalHtml;
       }
     });
-    
-    // Wrap words in spans for word-level highlighting (browser TTS only)
+
+
     if (ttsEngine === 'browser' && elements[index]) {
       const el = elements[index];
       if (!el.dataset.originalHtml) {
@@ -185,33 +194,33 @@
         wrapWordsInSpans(el);
       }
     }
-    
-    // Auto-scroll to keep current paragraph in view
+
+
     if (autoScrollEnabled && elements[index]) {
       const el = elements[index];
       const rect = el.getBoundingClientRect();
       const viewportHeight = window.innerHeight;
-      
-      // Only scroll if element is not in the middle portion of viewport
+
+
       if (rect.top < 100 || rect.bottom > viewportHeight - 100) {
         el.scrollIntoView({ behavior: 'smooth', block: 'center' });
       }
     }
   }
-  
-  // Wrap each word in a span for word-level TTS tracking
+
+
   function wrapWordsInSpans(element) {
     const walker = document.createTreeWalker(element, NodeFilter.SHOW_TEXT, null, false);
     const textNodes = [];
     while (walker.nextNode()) textNodes.push(walker.currentNode);
-    
+
     textNodes.forEach(node => {
       const text = node.textContent;
       if (!text.trim()) return;
-      
+
       const fragment = document.createDocumentFragment();
       const words = text.split(/(\s+)/);
-      
+
       words.forEach(word => {
         if (word.match(/^\s+$/)) {
           fragment.appendChild(document.createTextNode(word));
@@ -222,27 +231,28 @@
           fragment.appendChild(span);
         }
       });
-      
+
       node.parentNode.replaceChild(fragment, node);
     });
   }
-  
-  // Highlight current word being spoken
+
+
+// --- Word Highlighting ---
   function highlightWord(charIndex) {
     const elements = document.querySelectorAll('.article-content h2, .article-content h3, .article-content p, .article-content li');
     const currentEl = elements[currentParagraphIndex];
     if (!currentEl) return;
-    
-    // Clear previous word highlight
+
+
     document.querySelectorAll('.tts-current-word').forEach(el => {
       el.classList.remove('tts-current-word');
     });
-    
-    // Find the word at the current character index using cumulative text
+
+
     const wordSpans = currentEl.querySelectorAll('.tts-word');
     const fullText = paragraphs[currentParagraphIndex] || '';
     let charCount = 0;
-    
+
     for (const span of wordSpans) {
       const word = span.textContent;
       const wordStart = fullText.indexOf(word, charCount);
@@ -251,7 +261,7 @@
         continue;
       }
       const wordEnd = wordStart + word.length;
-      
+
       if (charIndex >= wordStart && charIndex < wordEnd) {
         span.classList.add('tts-current-word');
         break;
@@ -260,23 +270,25 @@
     }
   }
 
-  // Clear all highlights
+
+// --- Clear Highlights ---
   function clearHighlights() {
     document.querySelectorAll('.tts-reading').forEach(el => {
       el.classList.remove('tts-reading');
-      // Restore original content
+
       if (el.dataset.originalHtml) {
         el.innerHTML = el.dataset.originalHtml;
         delete el.dataset.originalHtml;
       }
     });
-    // Clear any word highlights
+
     document.querySelectorAll('.tts-current-word').forEach(el => {
       el.classList.remove('tts-current-word');
     });
   }
 
-  // Update player UI
+
+// --- Player UI ---
   function updatePlayerUI() {
     const playBtn = document.getElementById('ttsPlayBtn');
     const pauseBtn = document.getElementById('ttsPauseBtn');
@@ -297,7 +309,7 @@
 
     if (statusText) {
       if (isPlaying && !isPaused) {
-        // Show time remaining during playback
+
         const timeRemaining = calculateTimeRemaining();
         statusText.textContent = timeRemaining;
         statusText.removeAttribute('data-translate');
@@ -314,62 +326,62 @@
       const progress = ((currentParagraphIndex) / paragraphs.length) * 100;
       progressBar.style.width = progress + '%';
     }
-    
-    // Update TTS time remaining
+
+
     updateTTSTimeRemaining();
-    
-    // Update volume UI
+
+
     updateVolumeUI();
-    
-    // Update auto-scroll toggle
+
+
     const autoScrollBtn = document.getElementById('ttsAutoScrollBtn');
     if (autoScrollBtn) {
       autoScrollBtn.classList.toggle('active', autoScrollEnabled);
     }
   }
-  
-  // Calculate time remaining as formatted string
+
+
   function calculateTimeRemaining() {
     if (paragraphs.length === 0) return '--:--';
-    
-    // Calculate remaining text length
+
+
     let remainingChars = 0;
     for (let i = currentParagraphIndex; i < paragraphs.length; i++) {
       remainingChars += paragraphs[i].length;
     }
-    
-    // Estimate: ~15 characters per second at 1x speed, adjusted for playback speed
+
+
     const charsPerSecond = 15 * playbackSpeed;
     const remainingSeconds = Math.ceil(remainingChars / charsPerSecond);
     const minutes = Math.floor(remainingSeconds / 60);
     const seconds = remainingSeconds % 60;
-    
+
     return `${minutes}:${seconds.toString().padStart(2, '0')} remaining`;
   }
-  
-  // Calculate and update TTS time remaining
+
+
   function updateTTSTimeRemaining() {
     const ttsTimeDisplay = document.getElementById('ttsTimeRemaining');
     if (!ttsTimeDisplay || paragraphs.length === 0) return;
-    
+
     const timeRemaining = calculateTimeRemaining();
     ttsTimeDisplay.textContent = timeRemaining.replace(' remaining', '');
   }
-  
-  // Update volume UI
+
+
   function updateVolumeUI() {
     const volumeSlider = document.getElementById('ttsVolumeSlider');
     const volumeIcon = document.getElementById('ttsVolumeIcon');
     const volumeValue = document.getElementById('ttsVolumeValue');
-    
+
     if (volumeSlider) {
       volumeSlider.value = isMuted ? 0 : playbackVolume * 100;
     }
-    
+
     if (volumeValue) {
       volumeValue.textContent = isMuted ? '0%' : Math.round(playbackVolume * 100) + '%';
     }
-    
+
     if (volumeIcon) {
       if (isMuted || playbackVolume === 0) {
         volumeIcon.innerHTML = '<path d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.2.05-.41.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51C20.63 14.91 21 13.5 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3L3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06c1.38-.31 2.63-.95 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4L9.91 6.09 12 8.18V4z"/>';
@@ -381,7 +393,8 @@
     }
   }
 
-  // Get user's selected language for TTS
+
+// --- Language Detection ---
   function getUserLanguage() {
     const savedLang = getSavedLanguage();
     const langMap = {
@@ -395,15 +408,16 @@
     return langMap[savedLang] || 'en-US';
   }
 
-  // Voice cache for reliable TTS language selection
+
+// --- Voice Loading ---
   let cachedVoices = [];
-  
-  // Load voices (handles async voice loading in some browsers)
+
+
   function loadVoices() {
     cachedVoices = speechSynthesis.getVoices();
   }
-  
-  // Initialize voice loading
+
+
   if (speechSynthesis) {
     loadVoices();
     if (speechSynthesis.onvoiceschanged !== undefined) {
@@ -411,28 +425,30 @@
     }
   }
 
-  // Find best voice for language
+
+// --- Voice Matching ---
   function findVoiceForLanguage(lang) {
     const voices = cachedVoices.length ? cachedVoices : speechSynthesis.getVoices();
     if (!voices.length) return null;
 
-    // Try exact match first
+
     let voice = voices.find(v => v.lang === lang);
     if (voice) return voice;
 
-    // Try language prefix match (e.g., 'en' matches 'en-GB')
+
     const langPrefix = lang.split('-')[0];
     voice = voices.find(v => v.lang.startsWith(langPrefix));
     if (voice) return voice;
 
-    // Fallback to first available
+
     return voices[0];
   }
 
-  // Generate audio using ElevenLabs API
+
+// --- ElevenLabs Audio Generation ---
   async function generateElevenLabsAudio(text) {
     const userLang = getSavedLanguage();
-    
+
     try {
       const response = await fetch('/api/tts/generate', {
         method: 'POST',
@@ -443,12 +459,12 @@
           language: userLang
         })
       });
-      
+
       if (!response.ok) {
         const error = await response.json().catch(() => ({ error: 'Unknown error' }));
         throw new Error(error.error || 'TTS generation failed');
       }
-      
+
       const audioBlob = await response.blob();
       return URL.createObjectURL(audioBlob);
     } catch (e) {
@@ -457,7 +473,8 @@
     }
   }
 
-  // Speak a single paragraph using ElevenLabs
+
+// --- ElevenLabs Playback ---
   async function speakParagraphElevenLabs(index) {
     if (index >= paragraphs.length) {
       stopSpeech();
@@ -467,25 +484,25 @@
     currentParagraphIndex = index;
     highlightParagraph(index);
     updatePlayerUI();
-    
+
     const text = paragraphs[index];
-    
-    // Check cache first
+
+
     let audioUrl = audioCache[index];
-    
+
     if (!audioUrl) {
-      // Show generating status
+
       const statusText = document.getElementById('ttsStatus');
       if (statusText) {
         statusText.textContent = getTranslation('tts_generating', 'Generating audio...');
       }
       isGeneratingAudio = true;
-      
+
       try {
         audioUrl = await generateElevenLabsAudio(text);
         audioCache[index] = audioUrl;
       } catch (e) {
-        // Fallback to browser TTS on error
+
         console.warn('Falling back to browser TTS:', e.message);
         ttsEngine = 'browser';
         localStorage.setItem('tts-engine', 'browser');
@@ -494,37 +511,37 @@
         speakParagraphBrowser(index);
         return;
       }
-      
+
       isGeneratingAudio = false;
     }
-    
-    // Stop any current audio
+
+
     if (currentAudio) {
       currentAudio.pause();
       currentAudio = null;
     }
-    
-    // Play the audio
+
+
     currentAudio = new Audio(audioUrl);
     currentAudio.volume = isMuted ? 0 : playbackVolume;
     currentAudio.playbackRate = playbackSpeed;
-    
+
     currentAudio.onended = () => {
       if (isPlaying && !isPaused) {
         speakParagraphElevenLabs(index + 1);
       }
     };
-    
+
     currentAudio.onerror = (e) => {
       console.error('Audio playback error:', e);
-      // Try next paragraph or stop
+
       if (isPlaying && !isPaused && index + 1 < paragraphs.length) {
         speakParagraphElevenLabs(index + 1);
       } else {
         stopSpeech();
       }
     };
-    
+
     try {
       await currentAudio.play();
       updatePlayerUI();
@@ -533,7 +550,8 @@
     }
   }
 
-  // Speak a single paragraph using browser TTS
+
+// --- Browser TTS Playback ---
   function speakParagraphBrowser(index) {
     if (index >= paragraphs.length) {
       stopSpeech();
@@ -551,7 +569,7 @@
     currentUtterance.pitch = 1;
     currentUtterance.volume = isMuted ? 0 : playbackVolume;
 
-    // Try to set a voice that matches the user's language
+
     const voice = findVoiceForLanguage(userLang);
     if (voice) {
       currentUtterance.voice = voice;
@@ -568,8 +586,8 @@
         console.error('TTS Error:', e.error);
       }
     };
-    
-    // Word-by-word tracking using boundary events
+
+
     currentUtterance.onboundary = (event) => {
       if (event.name === 'word') {
         highlightWord(event.charIndex);
@@ -579,7 +597,8 @@
     speechSynthesis.speak(currentUtterance);
   }
 
-  // Speak a single paragraph (routes to correct engine)
+
+// --- Playback Router ---
   function speakParagraph(index) {
     if (ttsEngine === 'elevenlabs' && elevenLabsAvailable) {
       speakParagraphElevenLabs(index);
@@ -588,9 +607,10 @@
     }
   }
 
-  // Play/Resume
+
+// --- Play/Pause/Stop ---
   function playSpeech() {
-    // Handle ElevenLabs audio resume
+
     if (ttsEngine === 'elevenlabs' && elevenLabsAvailable) {
       if (isPaused && currentAudio) {
         currentAudio.play();
@@ -599,22 +619,22 @@
         updatePlayerUI();
         return;
       }
-      
+
       paragraphs = getArticleContent();
       if (paragraphs.length === 0) return;
-      
-      // Clear cache when starting fresh
+
+
       audioCache = {};
       isPlaying = true;
       isPaused = false;
       currentParagraphIndex = 0;
-      
+
       speakParagraphElevenLabs(0);
       updatePlayerUI();
       return;
     }
-    
-    // Browser TTS
+
+
     if (!speechSynthesis) {
       alert(getTranslation('tts_not_supported', 'Text-to-speech is not supported in your browser.'));
       return;
@@ -634,12 +654,12 @@
     isPlaying = true;
     isPaused = false;
     currentParagraphIndex = 0;
-    
+
     speakParagraphBrowser(0);
     updatePlayerUI();
   }
 
-  // Pause
+
   function pauseSpeech() {
     if (ttsEngine === 'elevenlabs' && currentAudio) {
       currentAudio.pause();
@@ -647,7 +667,7 @@
       updatePlayerUI();
       return;
     }
-    
+
     if (speechSynthesis && isPlaying) {
       speechSynthesis.pause();
       isPaused = true;
@@ -655,32 +675,33 @@
     }
   }
 
-  // Stop
+
   function stopSpeech() {
-    // Stop ElevenLabs audio
+
     if (currentAudio) {
       currentAudio.pause();
       currentAudio.currentTime = 0;
       currentAudio = null;
     }
-    
-    // Stop browser TTS
+
+
     if (speechSynthesis) {
       speechSynthesis.cancel();
     }
-    
+
     isPlaying = false;
     isPaused = false;
     currentParagraphIndex = 0;
     isGeneratingAudio = false;
     clearHighlights();
     updatePlayerUI();
-    
+
     const progressBar = document.getElementById('ttsProgressFill');
     if (progressBar) progressBar.style.width = '0%';
   }
 
-  // Change speed
+
+// --- Speed & Volume Controls ---
   function changeSpeed(speed) {
     playbackSpeed = speed;
     localStorage.setItem('tts-speed', speed.toString());
@@ -688,95 +709,97 @@
     if (speedDisplay) {
       speedDisplay.textContent = speed + 'x';
     }
-    
-    // Update ElevenLabs audio playback rate
+
+
     if (currentAudio) {
       currentAudio.playbackRate = speed;
     }
-    
-    // If currently playing with browser TTS, restart current paragraph with new speed
+
+
     if (ttsEngine === 'browser' && isPlaying && !isPaused) {
       speechSynthesis.cancel();
       speakParagraph(currentParagraphIndex);
     }
-    
+
     updateTTSTimeRemaining();
   }
-  
-  // Change volume
+
+
   function changeVolume(volume) {
     playbackVolume = Math.max(0, Math.min(1, volume));
     localStorage.setItem('tts-volume', playbackVolume.toString());
     isMuted = false;
-    
-    // Update ElevenLabs audio volume
+
+
     if (currentAudio) {
       currentAudio.volume = playbackVolume;
     }
-    
-    // Update current utterance volume if playing
+
+
     if (currentUtterance) {
       currentUtterance.volume = playbackVolume;
     }
-    
+
     updateVolumeUI();
   }
-  
-  // Toggle mute
+
+
   function toggleMute() {
     isMuted = !isMuted;
-    
-    // Update ElevenLabs audio volume
+
+
     if (currentAudio) {
       currentAudio.volume = isMuted ? 0 : playbackVolume;
     }
-    
-    // If currently playing with browser TTS, restart with new volume
+
+
     if (ttsEngine === 'browser' && isPlaying && !isPaused) {
       speechSynthesis.cancel();
       speakParagraph(currentParagraphIndex);
     }
-    
+
     updateVolumeUI();
   }
-  
-  // Toggle TTS engine
+
+
+// --- Engine Toggle ---
   function toggleEngine() {
     if (!elevenLabsAvailable) {
       alert(getTranslation('tts_premium_unavailable', 'Premium voice is not available. Using browser voice.'));
       return;
     }
-    
-    // Stop current playback
+
+
     stopSpeech();
-    
-    // Toggle engine
+
+
     ttsEngine = ttsEngine === 'elevenlabs' ? 'browser' : 'elevenlabs';
     localStorage.setItem('tts-engine', ttsEngine);
-    
-    // Clear cache when switching engines
+
+
     audioCache = {};
-    
+
     updateVoiceSelector();
   }
-  
-  // Change voice
+
+
   function changeVoice(voiceId) {
     selectedVoice = voiceId;
     localStorage.setItem('tts-voice', voiceId);
-    
-    // Clear cache when changing voice
+
+
     audioCache = {};
   }
-  
-  // Toggle auto-scroll
+
+
   function toggleAutoScroll() {
     autoScrollEnabled = !autoScrollEnabled;
     localStorage.setItem('tts-autoscroll', autoScrollEnabled.toString());
     updatePlayerUI();
   }
 
-  // Skip forward/backward
+
+// --- Skip Controls ---
   function skipForward() {
     if (paragraphs.length === 0) return;
     const newIndex = Math.min(currentParagraphIndex + 1, paragraphs.length - 1);
@@ -803,7 +826,9 @@
     }
   }
 
-  // Initialize player
+
+
+// ==================== TTS PLAYER INITIALIZATION ====================
   function initPlayer() {
     const playBtn = document.getElementById('ttsPlayBtn');
     const pauseBtn = document.getElementById('ttsPauseBtn');
@@ -822,52 +847,52 @@
     if (stopBtn) stopBtn.addEventListener('click', stopSpeech);
     if (skipBackBtn) skipBackBtn.addEventListener('click', skipBackward);
     if (skipForwardBtn) skipForwardBtn.addEventListener('click', skipForward);
-    
+
     if (speedSelect) {
-      // Restore saved speed
+
       speedSelect.value = playbackSpeed.toString();
       speedSelect.addEventListener('change', (e) => {
         changeSpeed(parseFloat(e.target.value));
       });
     }
-    
-    // Volume controls
+
+
     if (volumeSlider) {
       volumeSlider.value = playbackVolume * 100;
       volumeSlider.addEventListener('input', (e) => {
         changeVolume(parseInt(e.target.value) / 100);
       });
     }
-    
+
     if (volumeBtn) {
       volumeBtn.addEventListener('click', toggleMute);
     }
-    
-    // Auto-scroll toggle
+
+
     if (autoScrollBtn) {
       autoScrollBtn.addEventListener('click', toggleAutoScroll);
     }
-    
-    // Voice selector
+
+
     if (voiceSelect) {
       voiceSelect.addEventListener('change', (e) => {
         changeVoice(e.target.value);
       });
     }
-    
-    // Engine toggle (Premium vs Browser)
+
+
     if (engineToggle) {
       engineToggle.addEventListener('click', toggleEngine);
     }
-    
-    // Check ElevenLabs availability on init
+
+
     checkElevenLabsAvailability();
 
-    // Keyboard shortcuts
+
     document.addEventListener('keydown', (e) => {
-      // Only if not in an input/textarea/select
+
       if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA' || e.target.tagName === 'SELECT') return;
-      
+
       if (e.key === ' ' && e.target.tagName !== 'BUTTON') {
         e.preventDefault();
         if (isPlaying && !isPaused) {
@@ -884,35 +909,35 @@
         e.preventDefault();
         skipBackward();
       } else if (e.key === 'ArrowUp' && !e.ctrlKey && !e.shiftKey && !e.altKey) {
-        // Volume up (only when TTS player is in view)
+
         const player = document.querySelector('.article-tts-player');
         if (player && isElementInViewport(player)) {
           e.preventDefault();
           changeVolume(playbackVolume + 0.1);
         }
       } else if (e.key === 'ArrowDown' && !e.ctrlKey && !e.shiftKey && !e.altKey) {
-        // Volume down (only when TTS player is in view)
+
         const player = document.querySelector('.article-tts-player');
         if (player && isElementInViewport(player)) {
           e.preventDefault();
           changeVolume(playbackVolume - 0.1);
         }
       } else if (e.key.toLowerCase() === 'm') {
-        // Mute toggle
+
         toggleMute();
       }
     });
 
-    // Stop speech when leaving page
+
     window.addEventListener('beforeunload', stopSpeech);
-    
-    // Initialize paragraphs for time estimate
+
+
     paragraphs = getArticleContent();
 
     updatePlayerUI();
   }
-  
-  // Helper: check if element is in viewport
+
+
   function isElementInViewport(el) {
     const rect = el.getBoundingClientRect();
     return (
@@ -923,7 +948,9 @@
     );
   }
 
-  // Table of Contents - Enhanced with all features
+
+
+// ==================== TABLE OF CONTENTS ====================
   function initTableOfContents() {
     const toc = document.querySelector('.article-toc');
     const tocToggle = document.querySelector('.article-toc__toggle');
@@ -932,48 +959,48 @@
     const articleContent = document.querySelector('.article-content');
     const tocNav = document.querySelector('.article-toc__nav');
     const tocHeader = document.querySelector('.article-toc__header');
-    
+
     if (!toc || !tocLinks.length) return;
-    
-    // Get article slug for localStorage keys
+
+
     const articleSlug = window.location.pathname.split('/').pop().replace('.html', '');
-    
-    // Section data with word counts and reading times
+
+
     const sections = [];
     let completedSections = new Set();
     let bookmarkedSections = JSON.parse(localStorage.getItem(`toc-bookmarks-${articleSlug}`) || '[]');
     let lastReadSection = localStorage.getItem(`toc-lastread-${articleSlug}`);
-    
-    // Calculate word count for a section
+
+
     function getSectionWordCount(sectionEl) {
       if (!sectionEl) return 0;
-      // Find the enclosing section container
+
       const sectionContainer = sectionEl.closest('section');
       if (sectionContainer) {
-        // Get all text content from the section
+
         const text = sectionContainer.textContent || '';
         return text.split(/\s+/).filter(w => w.length > 0).length;
       }
-      // Fallback: count words in parent element
+
       const parent = sectionEl.parentElement;
       if (parent) {
         const text = parent.textContent || '';
         return Math.max(50, text.split(/\s+/).filter(w => w.length > 0).length / 2);
       }
-      return 100; // Default estimate
+      return 100;
     }
-    
-    // Build section data
+
+
     tocLinks.forEach((link, index) => {
       const targetId = link.getAttribute('href').slice(1);
       const sectionEl = document.getElementById(targetId);
       if (sectionEl) {
         const sectionContainer = sectionEl.closest('section') || sectionEl.parentElement;
         const wordCount = getSectionWordCount(sectionEl);
-        const readingTime = Math.max(1, Math.ceil(wordCount / 200)); // 200 WPM
+        const readingTime = Math.max(1, Math.ceil(wordCount / 200));
         const firstPara = sectionContainer?.querySelector('p');
         const preview = firstPara ? firstPara.textContent.slice(0, 120) + '...' : '';
-        
+
         sections.push({
           id: targetId,
           element: sectionEl,
@@ -985,8 +1012,8 @@
         });
       }
     });
-    
-    // === ADD READING TIME BADGES ===
+
+
     sections.forEach(section => {
       const timeSpan = document.createElement('span');
       timeSpan.className = 'article-toc__time';
@@ -994,16 +1021,16 @@
       timeSpan.title = `${section.readingTime} min read`;
       section.link.appendChild(timeSpan);
     });
-    
-    // === ADD CHECKMARKS FOR COMPLETED SECTIONS ===
+
+
     sections.forEach(section => {
       const checkSpan = document.createElement('span');
       checkSpan.className = 'article-toc__check';
       checkSpan.innerHTML = `<svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>`;
       section.link.appendChild(checkSpan);
     });
-    
-    // === ADD SECTION PREVIEWS ===
+
+
     sections.forEach(section => {
       if (section.preview && window.innerWidth > 900) {
         const previewDiv = document.createElement('div');
@@ -1013,8 +1040,8 @@
         section.link.appendChild(previewDiv);
       }
     });
-    
-    // === ADD BOOKMARK BUTTONS ===
+
+
     sections.forEach(section => {
       const bookmarkBtn = document.createElement('button');
       bookmarkBtn.className = 'article-toc__bookmark';
@@ -1033,7 +1060,7 @@
       });
       section.link.appendChild(bookmarkBtn);
     });
-    
+
     function toggleBookmark(sectionId, btn) {
       const idx = bookmarkedSections.indexOf(sectionId);
       if (idx > -1) {
@@ -1051,12 +1078,12 @@
       }
       localStorage.setItem(`toc-bookmarks-${articleSlug}`, JSON.stringify(bookmarkedSections));
     }
-    
-    // === CREATE ENHANCED CONTENT CONTAINER ===
+
+
     const enhancedContent = document.createElement('div');
     enhancedContent.className = 'article-toc__enhanced';
-    
-    // === ADD MINIMAP ===
+
+
     const minimap = document.createElement('div');
     minimap.className = 'article-toc__minimap';
     sections.forEach((section, idx) => {
@@ -1074,8 +1101,8 @@
       minimap.appendChild(bar);
     });
     enhancedContent.appendChild(minimap);
-    
-    // === ADD RESUME READING PROMPT ===
+
+
     let resumeDiv = null;
     if (lastReadSection && sections.find(s => s.id === lastReadSection)) {
       resumeDiv = document.createElement('div');
@@ -1101,15 +1128,15 @@
       });
       enhancedContent.appendChild(resumeDiv);
     }
-    
-    // Insert enhanced content after header
+
+
     if (tocHeader) {
       tocHeader.after(enhancedContent);
     } else {
       tocNav.insertBefore(enhancedContent, tocNav.firstChild);
     }
-    
-    // === ADD JUMP BUTTONS ===
+
+
     const jumpBtns = document.createElement('div');
     jumpBtns.className = 'article-toc__jump-btns';
     jumpBtns.innerHTML = `
@@ -1123,25 +1150,25 @@
       </button>
     `;
     tocNav.appendChild(jumpBtns);
-    
+
     jumpBtns.querySelector('[data-jump="top"]').addEventListener('click', () => {
       window.scrollTo({ top: 0, behavior: 'smooth' });
     });
     jumpBtns.querySelector('[data-jump="bottom"]').addEventListener('click', () => {
       window.scrollTo({ top: document.documentElement.scrollHeight, behavior: 'smooth' });
     });
-    
-    // === ADD SCROLL POSITION INDICATOR ===
+
+
     const positionIndicator = document.createElement('div');
     positionIndicator.className = 'article-toc__position-indicator';
     tocNav.insertBefore(positionIndicator, tocNav.firstChild);
-    
-    // === ADD SWIPE INDICATOR FOR MOBILE ===
+
+
     const swipeIndicator = document.createElement('div');
     swipeIndicator.className = 'article-toc__swipe-indicator';
     toc.insertBefore(swipeIndicator, toc.firstChild);
-    
-    // Create floating show button for when TOC is hidden
+
+
     let showBtn = document.querySelector('.article-toc-show-btn');
     if (!showBtn) {
       showBtn = document.createElement('button');
@@ -1151,11 +1178,11 @@
       showBtn.setAttribute('title', 'Show Table of Contents');
       document.body.appendChild(showBtn);
     }
-    
-    // Get the article layout container
+
+
     const articleLayout = document.querySelector('.article-layout');
-    
-    // Toggle collapse functionality - hide/show TOC
+
+
     const toggleTOC = (hide) => {
       if (hide) {
         toc.classList.add('collapsed');
@@ -1169,26 +1196,26 @@
         localStorage.setItem('toc-collapsed', 'false');
       }
     };
-    
+
     if (tocToggle) {
       tocToggle.addEventListener('click', (e) => {
         e.preventDefault();
         e.stopPropagation();
-        toggleTOC(true); // Hide TOC
+        toggleTOC(true);
       });
     }
-    
+
     showBtn.addEventListener('click', () => {
-      toggleTOC(false); // Show TOC
+      toggleTOC(false);
     });
-    
-    // Restore saved state
+
+
     const savedCollapsed = localStorage.getItem('toc-collapsed');
     if (savedCollapsed === 'true') {
       toggleTOC(true);
     }
-    
-    // Smooth scroll on link click
+
+
     tocLinks.forEach(link => {
       link.addEventListener('click', (e) => {
         e.preventDefault();
@@ -1202,15 +1229,15 @@
         }
       });
     });
-    
-    // === KEYBOARD NAVIGATION ===
+
+
     toc.addEventListener('keydown', (e) => {
       const focusedLink = document.activeElement;
       if (!focusedLink.classList.contains('article-toc__pill')) return;
-      
+
       const currentIndex = Array.from(tocLinks).indexOf(focusedLink);
       let nextIndex = currentIndex;
-      
+
       if (e.key === 'ArrowDown' || e.key === 'j') {
         e.preventDefault();
         nextIndex = Math.min(currentIndex + 1, tocLinks.length - 1);
@@ -1228,30 +1255,30 @@
         focusedLink.click();
         return;
       }
-      
+
       if (nextIndex !== currentIndex) {
         tocLinks[nextIndex].focus();
       }
     });
-    
-    // Active section tracking and all updates
+
+
     function updateTocState() {
       if (!articleContent) return;
-      
+
       const scrollTop = window.scrollY;
       const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-      
-      // Update TOC progress bar
+
+
       if (tocProgressBar) {
         const progress = Math.min((scrollTop / docHeight) * 100, 100);
         tocProgressBar.style.width = progress + '%';
       }
-      
-      // Find active section
+
+
       let activeSection = null;
       let activeIndex = -1;
       const offset = 150;
-      
+
       for (let i = sections.length - 1; i >= 0; i--) {
         const section = sections[i];
         const rect = section.element.getBoundingClientRect();
@@ -1261,14 +1288,14 @@
           break;
         }
       }
-      
-      // If at very top of page, set first section as active
+
+
       if (activeIndex === -1 && sections.length > 0) {
         activeSection = sections[0];
         activeIndex = 0;
       }
-      
-      // Update section classes
+
+
       sections.forEach((section, idx) => {
         section.link.classList.remove('active', 'completed');
         if (idx === activeIndex) {
@@ -1278,24 +1305,24 @@
           completedSections.add(section.id);
         }
       });
-      
-      // Save last read section (only if not at the very top)
+
+
       if (activeSection && scrollTop > 100) {
         localStorage.setItem(`toc-lastread-${articleSlug}`, activeSection.id);
       }
-      
-      // Update minimap
+
+
       const minimapBars = minimap.querySelectorAll('.article-toc__minimap-section');
       minimapBars.forEach((bar, idx) => {
         bar.classList.remove('active', 'completed');
         const marker = bar.querySelector('.article-toc__minimap-marker');
-        
+
         if (idx === activeIndex) {
           bar.classList.add('active');
           if (marker && sections[idx]) {
             const sectionRect = sections[idx].element.getBoundingClientRect();
             const nextSection = sections[idx + 1];
-            let sectionHeight = 500; // Default
+            let sectionHeight = 500;
             if (nextSection) {
               sectionHeight = Math.max(100, nextSection.element.getBoundingClientRect().top - sectionRect.top);
             }
@@ -1309,8 +1336,8 @@
           if (marker) marker.style.width = '0%';
         }
       });
-      
-      // Update position indicator
+
+
       if (activeSection && positionIndicator && tocNav) {
         const linkRect = activeSection.link.getBoundingClientRect();
         const navRect = tocNav.getBoundingClientRect();
@@ -1320,8 +1347,8 @@
         positionIndicator.style.opacity = '1';
       }
     }
-    
-    // Throttled scroll handler
+
+
     let ticking = false;
     window.addEventListener('scroll', () => {
       if (!ticking) {
@@ -1332,19 +1359,20 @@
         ticking = true;
       }
     }, { passive: true });
-    
-    // Initial state
+
+
     updateTocState();
-    
-    // Mobile TOC functionality
+
+
     initMobileToc(toc, tocLinks);
   }
-  
-  // Mobile TOC - Toggle button, bottom sheet, and swipe gestures
+
+
+// --- Mobile TOC ---
   function initMobileToc(toc, tocLinks) {
     if (!toc) return;
-    
-    // Create mobile toggle button
+
+
     const mobileToggle = document.createElement('button');
     mobileToggle.className = 'mobile-toc-toggle';
     mobileToggle.setAttribute('aria-label', 'Toggle table of contents');
@@ -1356,13 +1384,13 @@
       </svg>
     `;
     document.body.appendChild(mobileToggle);
-    
-    // Create overlay
+
+
     const overlay = document.createElement('div');
     overlay.className = 'mobile-toc-overlay';
     document.body.appendChild(overlay);
-    
-    // Create close button for mobile TOC
+
+
     const closeBtn = document.createElement('button');
     closeBtn.className = 'mobile-toc-close';
     closeBtn.setAttribute('aria-label', 'Close table of contents');
@@ -1373,23 +1401,23 @@
       </svg>
     `;
     toc.insertBefore(closeBtn, toc.firstChild);
-    
+
     let isOpen = false;
-    
+
     function openMobileToc() {
       isOpen = true;
       toc.classList.add('mobile-visible');
       overlay.classList.add('visible');
       mobileToggle.classList.add('active');
       document.body.style.overflow = 'hidden';
-      
-      // Focus first link for accessibility
+
+
       setTimeout(() => {
         const firstLink = toc.querySelector('.article-toc__pill');
         if (firstLink) firstLink.focus();
       }, 300);
     }
-    
+
     function closeMobileToc() {
       isOpen = false;
       toc.classList.remove('mobile-visible');
@@ -1398,8 +1426,8 @@
       document.body.style.overflow = '';
       mobileToggle.focus();
     }
-    
-    // Toggle button click
+
+
     mobileToggle.addEventListener('click', () => {
       if (isOpen) {
         closeMobileToc();
@@ -1407,21 +1435,21 @@
         openMobileToc();
       }
     });
-    
-    // Close button click
+
+
     closeBtn.addEventListener('click', closeMobileToc);
-    
-    // Overlay click
+
+
     overlay.addEventListener('click', closeMobileToc);
-    
-    // Close on escape key
+
+
     document.addEventListener('keydown', (e) => {
       if (e.key === 'Escape' && isOpen) {
         closeMobileToc();
       }
     });
-    
-    // Close when clicking a TOC link on mobile
+
+
     tocLinks.forEach(link => {
       link.addEventListener('click', () => {
         if (window.innerWidth <= 900 && isOpen) {
@@ -1429,19 +1457,19 @@
         }
       });
     });
-    
-    // Handle window resize
+
+
     window.addEventListener('resize', () => {
       if (window.innerWidth > 900 && isOpen) {
         closeMobileToc();
       }
     });
-    
-    // === SWIPE GESTURE SUPPORT ===
+
+
     let touchStartY = 0;
     let touchCurrentY = 0;
     let isDragging = false;
-    
+
     toc.addEventListener('touchstart', (e) => {
       if (window.innerWidth > 900) return;
       const swipeIndicator = toc.querySelector('.article-toc__swipe-indicator');
@@ -1450,34 +1478,34 @@
         isDragging = true;
       }
     }, { passive: true });
-    
+
     toc.addEventListener('touchmove', (e) => {
       if (!isDragging || window.innerWidth > 900) return;
       touchCurrentY = e.touches[0].clientY;
       const diff = touchCurrentY - touchStartY;
-      
-      // Only allow dragging down
+
+
       if (diff > 0) {
         toc.style.transform = `translateY(${diff}px)`;
         toc.style.transition = 'none';
       }
     }, { passive: true });
-    
+
     toc.addEventListener('touchend', () => {
       if (!isDragging || window.innerWidth > 900) return;
       isDragging = false;
-      
+
       const diff = touchCurrentY - touchStartY;
       toc.style.transition = '';
       toc.style.transform = '';
-      
-      // If dragged down more than 100px, close the TOC
+
+
       if (diff > 100) {
         closeMobileToc();
       }
     }, { passive: true });
-    
-    // Also allow swipe down anywhere on the TOC header area
+
+
     const tocHeader = toc.querySelector('.article-toc__header');
     if (tocHeader) {
       tocHeader.addEventListener('touchstart', (e) => {
@@ -1488,7 +1516,9 @@
     }
   }
 
-  // Reading progress for article
+
+
+// ==================== READING PROGRESS ====================
   function initReadingProgress() {
     const progressBar = document.querySelector('.article-reading-progress__fill');
     if (!progressBar) return;
@@ -1501,7 +1531,9 @@
     }, { passive: true });
   }
 
-  // Mini Floating TTS Player
+
+
+// ==================== MINI PLAYER ====================
   function initMiniPlayer() {
     const miniPlayer = document.createElement('div');
     miniPlayer.className = 'tts-mini-player';
@@ -1548,17 +1580,17 @@
     miniPlayer.appendChild(closeBtn);
 
     document.body.appendChild(miniPlayer);
-    
+
     const mainPlayer = document.querySelector('.article-tts-player');
     let miniVisible = false;
-    
-    // Show mini player when main player is out of view and audio is playing
+
+
     function updateMiniPlayerVisibility() {
       if (!mainPlayer) return;
-      
+
       const rect = mainPlayer.getBoundingClientRect();
       const isMainPlayerVisible = rect.bottom > 0 && rect.top < window.innerHeight;
-      
+
       if (isPlaying && !isMainPlayerVisible) {
         if (!miniVisible) {
           miniPlayer.classList.add('visible');
@@ -1571,13 +1603,13 @@
         }
       }
     }
-    
+
     window.addEventListener('scroll', updateMiniPlayerVisibility, { passive: true });
-    
-    // Mini player controls
+
+
     const miniPlayBtn = document.getElementById('miniPlayBtn');
     const miniCloseBtn = document.getElementById('miniCloseBtn');
-    
+
     miniPlayBtn.addEventListener('click', () => {
       if (isPlaying && !isPaused) {
         pauseSpeech();
@@ -1587,21 +1619,21 @@
         miniPlayBtn.innerHTML = '<i class="fas fa-pause"></i>';
       }
     });
-    
+
     miniCloseBtn.addEventListener('click', () => {
       stopSpeech();
       miniPlayer.classList.remove('visible');
       miniVisible = false;
     });
-    
-    // Update mini player UI
+
+
     const originalUpdatePlayerUI = updatePlayerUI;
     updatePlayerUI = function() {
       originalUpdatePlayerUI();
-      
+
       const miniStatus = document.getElementById('miniStatus');
       const miniProgressFill = document.getElementById('miniProgressFill');
-      
+
       if (miniStatus) {
         if (isPlaying && !isPaused) {
           miniStatus.textContent = getTranslation('tts_playing', 'Playing...');
@@ -1614,48 +1646,50 @@
           miniPlayBtn.innerHTML = '<i class="fas fa-play"></i>';
         }
       }
-      
+
       if (miniProgressFill && paragraphs.length > 0) {
         const progress = ((currentParagraphIndex) / paragraphs.length) * 100;
         miniProgressFill.style.width = progress + '%';
       }
-      
+
       updateMiniPlayerVisibility();
     };
   }
-  
-  // Sleep Timer
+
+
   let sleepTimerTimeout = null;
   let sleepTimerMinutes = 0;
-  
+
+
+// ==================== SLEEP TIMER ====================
   function initSleepTimer() {
     const timerContainer = document.querySelector('.sleep-timer-container');
     if (!timerContainer) return;
-    
+
     const timerBtn = timerContainer.querySelector('.sleep-timer-btn');
     const dropdown = timerContainer.querySelector('.sleep-timer-dropdown');
-    
+
     if (!timerBtn || !dropdown) return;
-    
+
     timerBtn.addEventListener('click', () => {
       dropdown.classList.toggle('visible');
     });
-    
-    // Close dropdown when clicking outside
+
+
     document.addEventListener('click', (e) => {
       if (!timerContainer.contains(e.target)) {
         dropdown.classList.remove('visible');
       }
     });
-    
-    // Timer options
+
+
     const options = dropdown.querySelectorAll('.sleep-timer-option');
     options.forEach(option => {
       option.addEventListener('click', () => {
         const minutes = parseInt(option.dataset.minutes, 10);
         setSleepTimer(minutes);
         dropdown.classList.remove('visible');
-        
+
         options.forEach(o => o.classList.remove('active'));
         if (minutes > 0) {
           option.classList.add('active');
@@ -1666,15 +1700,15 @@
       });
     });
   }
-  
+
   function setSleepTimer(minutes) {
     if (sleepTimerTimeout) {
       clearTimeout(sleepTimerTimeout);
       sleepTimerTimeout = null;
     }
-    
+
     sleepTimerMinutes = minutes;
-    
+
     if (minutes > 0) {
       sleepTimerTimeout = setTimeout(() => {
         stopSpeech();
@@ -1684,8 +1718,10 @@
       }, minutes * 60 * 1000);
     }
   }
-  
-  // Keyboard Shortcuts Overlay
+
+
+
+// ==================== KEYBOARD SHORTCUTS ====================
   function initKeyboardShortcuts() {
     const overlay = document.createElement('div');
     overlay.className = 'keyboard-shortcuts-overlay';
@@ -1707,18 +1743,18 @@
       </div>
     `;
     document.body.appendChild(overlay);
-    
+
     overlay.querySelector('.keyboard-shortcuts-close').addEventListener('click', () => {
       overlay.classList.remove('visible');
     });
-    
+
     overlay.addEventListener('click', (e) => {
       if (e.target === overlay) {
         overlay.classList.remove('visible');
       }
     });
-    
-    // Show on ? key
+
+
     document.addEventListener('keydown', (e) => {
       if (e.key === '?' && !e.ctrlKey && !e.altKey && !e.metaKey) {
         const activeEl = document.activeElement;
@@ -1726,8 +1762,8 @@
         overlay.classList.add('visible');
       }
     });
-    
-    // Add help button to player
+
+
     const helpBtn = document.getElementById('ttsHelpBtn');
     if (helpBtn) {
       helpBtn.addEventListener('click', () => {
@@ -1735,17 +1771,19 @@
       });
     }
   }
-  
-  // Notes Panel
+
+
+
+// ==================== NOTES PANEL ====================
   function initNotesPanel() {
     const notesPanel = document.createElement('div');
     notesPanel.className = 'article-notes-panel';
     notesPanel.id = 'articleNotesPanel';
-    
+
     const articleId = window.location.pathname.replace(/[^a-z0-9]/gi, '-');
     const storageKey = 'article-notes-' + articleId;
     const savedNotes = localStorage.getItem(storageKey) || '';
-    
+
     notesPanel.innerHTML = `
       <div class="notes-panel__header">
         <span class="notes-panel__title"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path fill="currentColor" d="M19 3H4.99c-1.11 0-1.98.9-1.98 2L3 19c0 1.1.88 2 1.99 2H19c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 12h-4c0 1.66-1.35 3-3 3s-3-1.34-3-3H4.99V5H19v10z"/></svg> ${getTranslation('my_notes', 'My Notes')}</span>
@@ -1764,22 +1802,22 @@
         </div>
       </div>
     `;
-    
+
     function escapeHtml(str) {
       if (!str) return '';
       return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
     }
     document.body.appendChild(notesPanel);
-    
+
     const closeBtn = document.getElementById('notesPanelClose');
     const textarea = document.getElementById('articleNotesTextarea');
     const saveStatus = document.getElementById('notesSaveStatus');
-    
+
     closeBtn.addEventListener('click', () => {
       notesPanel.classList.remove('visible');
     });
-    
-    // Auto-save notes
+
+
     let saveTimeout;
     textarea.addEventListener('input', () => {
       saveStatus.textContent = getTranslation('notes_saving', 'Saving...');
@@ -1792,16 +1830,16 @@
         }, 2000);
       }, 500);
     });
-    
-    // Toggle notes panel
+
+
     const notesBtn = document.getElementById('notesBtn');
     if (notesBtn) {
       notesBtn.addEventListener('click', () => {
         notesPanel.classList.toggle('visible');
       });
     }
-    
-    // Clear notes
+
+
     const clearBtn = document.getElementById('notesClearBtn');
     if (clearBtn) {
       clearBtn.addEventListener('click', () => {
@@ -1815,8 +1853,8 @@
         }
       });
     }
-    
-    // Export notes
+
+
     const exportBtn = document.getElementById('notesExportBtn');
     if (exportBtn) {
       exportBtn.addEventListener('click', () => {
@@ -1825,7 +1863,7 @@
           alert('No notes to export');
           return;
         }
-        
+
         const articleTitle = document.querySelector('.article-title')?.textContent || 'Article Notes';
         const blob = new Blob([`# ${articleTitle}\n\n${notes}`], { type: 'text/markdown' });
         const url = URL.createObjectURL(blob);
@@ -1837,25 +1875,27 @@
       });
     }
   }
-  
-  // Download Audio
+
+
+
+// ==================== DOWNLOAD AUDIO ====================
   async function initDownloadAudio() {
     const downloadBtn = document.getElementById('ttsDownloadBtn');
     if (!downloadBtn) return;
-    
+
     downloadBtn.addEventListener('click', async () => {
       if (!elevenLabsAvailable || ttsEngine !== 'elevenlabs') {
         alert(getTranslation('download_premium_only', 'Audio download is only available with premium voice.'));
         return;
       }
-      
+
       downloadBtn.classList.add('downloading');
       downloadBtn.disabled = true;
-      
+
       try {
         const content = getArticleContent();
-        const fullText = content.slice(0, 20).join(' '); // First 20 paragraphs for demo
-        
+        const fullText = content.slice(0, 20).join(' ');
+
         const response = await fetch('/api/tts/generate', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
@@ -1865,11 +1905,11 @@
             language: getUserLanguage()
           })
         });
-        
+
         if (!response.ok) {
           throw new Error('Download failed');
         }
-        
+
         const blob = await response.blob();
         const url = URL.createObjectURL(blob);
         const a = document.createElement('a');
@@ -1877,17 +1917,19 @@
         a.download = 'article-audio.mp3';
         a.click();
         URL.revokeObjectURL(url);
-        
+
       } catch (e) {
         alert(getTranslation('download_failed', 'Failed to download audio. Please try again.'));
       }
-      
+
       downloadBtn.classList.remove('downloading');
       downloadBtn.disabled = false;
     });
   }
 
-  // Init
+
+
+// ==================== ARTICLE INITIALIZATION ====================
   function init() {
     initPlayer();
     initTableOfContents();
@@ -1904,20 +1946,21 @@
     initDownloadAudio();
     trackArticleRead();
   }
-  
-  // Track article read for streak calculation
+
+
+// --- Reading Tracker ---
   function trackArticleRead() {
-    // Wait for auth to be ready
+
     if (window.MindBalanceAuth && window.MindBalanceAuth.onAuthReady) {
       window.MindBalanceAuth.onAuthReady(async (user) => {
         if (!user) return;
-        
-        // Get article info from page
+
+
         const slug = window.location.pathname.split('/').filter(Boolean).pop()?.replace('.html', '') || 'unknown';
         const titleEl = document.querySelector('.article-title, h1');
         const title = titleEl ? titleEl.textContent : 'Article';
-        
-        // Log reading activity
+
+
         try {
           await window.MindBalanceAuth.logReadingActivity(slug, title);
           console.log('Reading activity logged for:', slug);
@@ -1928,33 +1971,34 @@
     }
   }
 
-  // Listen for language changes and refresh TTS content
+
+// --- Language Change Listener ---
   function initLanguageChangeListener() {
-    // Listen for translations-ready event (fired when translations are loaded)
+
     window.addEventListener('translations-ready', (e) => {
-      // Refresh article content and UI with new translations
+
       paragraphs = getArticleContent();
       if (isPlaying) {
         stopSpeech();
       }
       updatePlayerUI();
-      // Re-render dynamic UI elements that need translations
+
       updateDynamicUITranslations();
     });
 
-    // Listen for language select changes
+
     const languageSelects = document.querySelectorAll('[data-language-select]');
     languageSelects.forEach(select => {
       select.addEventListener('change', () => {
-        // The translations-ready event will handle the UI update
-        // Just stop any current playback
+
+
         if (isPlaying) {
           stopSpeech();
         }
       });
     });
 
-    // Also listen for storage changes (in case language is changed from another tab)
+
     window.addEventListener('storage', (e) => {
       if (e.key === 'mindbalance-language') {
         setTimeout(() => {
@@ -1967,40 +2011,42 @@
       }
     });
   }
-  
-  // Update dynamic UI elements with current translations
+
+
   function updateDynamicUITranslations() {
-    // Update mini player
+
     const miniTitle = document.querySelector('.tts-mini-player__title');
     if (miniTitle) {
       miniTitle.textContent = getTranslation('tts_listening', 'Listening to article');
     }
-    
-    // Update notes panel title
+
+
     const notesTitle = document.querySelector('.notes-panel__title');
     if (notesTitle) {
       notesTitle.innerHTML = `<svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path fill="currentColor" d="M19 3H4.99c-1.11 0-1.98.9-1.98 2L3 19c0 1.1.88 2 1.99 2H19c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 12h-4c0 1.66-1.35 3-3 3s-3-1.34-3-3H4.99V5H19v10z"/></svg> ${getTranslation('my_notes', 'My Notes')}`;
     }
-    
-    // Update notes placeholder
+
+
     const notesTextarea = document.getElementById('articleNotesTextarea');
     if (notesTextarea) {
       notesTextarea.placeholder = getTranslation('notes_placeholder', 'Write your notes here...');
     }
-    
-    // Update notes save status
+
+
     const saveStatus = document.getElementById('notesSaveStatus');
     if (saveStatus) {
       saveStatus.textContent = getTranslation('notes_auto_save', 'Notes are saved automatically');
     }
   }
 
-  // Reading Controls Panel
+
+
+// ==================== READING CONTROLS ====================
   function initReadingControls() {
     const panel = document.querySelector('.reading-controls');
     if (!panel) return;
 
-    // Toggle panel visibility
+
     const toggleBtn = panel.querySelector('.reading-controls__toggle');
     if (toggleBtn) {
       toggleBtn.addEventListener('click', () => {
@@ -2008,13 +2054,13 @@
         localStorage.setItem('article-controls-collapsed', panel.classList.contains('collapsed'));
       });
 
-      // Restore collapsed state
+
       if (localStorage.getItem('article-controls-collapsed') === 'true') {
         panel.classList.add('collapsed');
       }
     }
 
-    // Font size controls
+
     const fontSmaller = document.getElementById('fontSmaller');
     const fontLarger = document.getElementById('fontLarger');
     const fontSizes = ['small', 'normal', 'large', 'x-large'];
@@ -2042,7 +2088,7 @@
       });
     }
 
-    // Line spacing control
+
     const spacingBtn = document.getElementById('lineSpacingBtn');
     const spacings = ['compact', 'normal', 'relaxed'];
     let currentSpacingIndex = spacings.indexOf(localStorage.getItem('article-line-spacing') || 'normal');
@@ -2054,8 +2100,8 @@
         currentSpacingIndex = (currentSpacingIndex + 1) % spacings.length;
         document.body.setAttribute('data-article-spacing', spacings[currentSpacingIndex]);
         localStorage.setItem('article-line-spacing', spacings[currentSpacingIndex]);
-        
-        // Update tooltip
+
+
         const tooltip = spacingBtn.querySelector('.reading-control-btn__tooltip');
         if (tooltip) {
           const labels = { compact: 'Compact', normal: 'Normal', relaxed: 'Relaxed' };
@@ -2064,7 +2110,7 @@
       });
     }
 
-    // Reading mode toggle
+
     const readingModeBtn = document.getElementById('readingModeBtn');
     if (readingModeBtn) {
       readingModeBtn.addEventListener('click', () => {
@@ -2073,7 +2119,7 @@
       });
     }
 
-    // Print button
+
     const printBtn = document.getElementById('printBtn');
     if (printBtn) {
       printBtn.addEventListener('click', () => {
@@ -2082,12 +2128,13 @@
     }
   }
 
-  // Time Remaining Indicator
+
+// --- Time Remaining ---
   function initTimeRemaining() {
     const timeValue = document.getElementById('timeRemainingValue');
     if (!timeValue) return;
 
-    // Estimate reading time (avg 200 words per minute)
+
     const content = document.querySelector('.article-content');
     if (!content) return;
 
@@ -2101,7 +2148,7 @@
       const scrollPercent = docHeight > 0 ? scrollTop / docHeight : 0;
       const remainingPercent = 1 - scrollPercent;
       const remainingMinutes = Math.max(1, Math.ceil(totalMinutes * remainingPercent));
-      
+
       if (remainingMinutes <= 1) {
         timeValue.textContent = '< 1';
       } else {
@@ -2113,7 +2160,9 @@
     window.addEventListener('scroll', updateTimeRemaining, { passive: true });
   }
 
-  // Text Highlight Feature
+
+
+// ==================== TEXT HIGHLIGHT ====================
   function initTextHighlight() {
     const content = document.querySelector('.article-content');
     if (!content) return;
@@ -2121,11 +2170,11 @@
     const articleId = window.location.pathname;
     const storageKey = 'article-highlights-' + articleId.replace(/[^a-z0-9]/gi, '-');
 
-    // Load saved highlights
+
     function loadHighlights() {
       const saved = localStorage.getItem(storageKey);
       if (!saved) return;
-      
+
       try {
         const highlights = JSON.parse(saved);
         highlights.forEach(h => {
@@ -2139,7 +2188,7 @@
       }
     }
 
-    // Find text in content
+
     function findTextInContent(searchText) {
       const walker = document.createTreeWalker(content, NodeFilter.SHOW_TEXT, null, false);
       let node;
@@ -2155,22 +2204,22 @@
       return null;
     }
 
-    // Wrap range with highlight span
+
     function wrapRangeWithHighlight(range, id) {
       const span = document.createElement('span');
       span.className = 'user-highlight';
       span.dataset.highlightId = id || Date.now().toString();
-      
+
       try {
-        // Try the simple approach first
+
         range.surroundContents(span);
       } catch (e) {
-        // If selection spans multiple elements, extract and wrap the contents
+
         const fragment = range.extractContents();
         span.appendChild(fragment);
         range.insertNode(span);
       }
-      
+
       span.addEventListener('click', () => {
         const confirmMsg = getTranslation('highlight_remove_confirm', 'Remove this highlight?');
         if (confirm(confirmMsg)) {
@@ -2179,7 +2228,7 @@
       });
     }
 
-    // Save highlights
+
     function saveHighlights() {
       const highlights = [];
       content.querySelectorAll('.user-highlight').forEach(span => {
@@ -2191,7 +2240,7 @@
       localStorage.setItem(storageKey, JSON.stringify(highlights));
     }
 
-    // Remove highlight
+
     function removeHighlight(id) {
       const span = content.querySelector(`[data-highlight-id="${id}"]`);
       if (span) {
@@ -2204,7 +2253,7 @@
       }
     }
 
-    // Handle text selection for highlighting
+
     const highlightBtn = document.getElementById('highlightBtn');
     if (highlightBtn) {
       highlightBtn.addEventListener('click', () => {
@@ -2233,12 +2282,14 @@
     loadHighlights();
   }
 
-  // Bookmark Reading Position (works for all users via localStorage)
+
+
+// ==================== BOOKMARKS ====================
   function initBookmark() {
     const articleId = window.location.pathname;
     const storageKey = 'article-bookmark-' + articleId.replace(/[^a-z0-9]/gi, '-');
 
-    // Load bookmark on page load
+
     function loadBookmark() {
       const saved = localStorage.getItem(storageKey);
       if (saved) {
@@ -2249,7 +2300,7 @@
       }
     }
 
-    // Save bookmark periodically
+
     function saveBookmark() {
       const scrollTop = window.scrollY;
       if (scrollTop > 100) {
@@ -2257,15 +2308,15 @@
       }
     }
 
-    // Show resume reading prompt
+
     function showResumePrompt(scrollPos) {
       const prompt = document.createElement('div');
       prompt.className = 'bookmark-prompt';
-      
+
       const resumeText = getTranslation('bookmark_resume', 'Resume where you left off?');
       const yesText = getTranslation('bookmark_yes', 'Yes');
       const noText = getTranslation('bookmark_no', 'No');
-      
+
       prompt.innerHTML = `
         <span>${resumeText}</span>
         <button class="bookmark-prompt__yes">${yesText}</button>
@@ -2283,20 +2334,20 @@
         prompt.remove();
       });
 
-      // Auto-hide after 10 seconds
+
       setTimeout(() => {
         if (prompt.parentNode) prompt.remove();
       }, 10000);
     }
 
-    // Debounced save on scroll
+
     let saveTimeout;
     window.addEventListener('scroll', () => {
       clearTimeout(saveTimeout);
       saveTimeout = setTimeout(saveBookmark, 1000);
     }, { passive: true });
 
-    // Load on init
+
     setTimeout(loadBookmark, 500);
   }
 
@@ -2306,7 +2357,7 @@
     init();
   }
 
-  // Expose for external use
+
   window.ArticleTTS = {
     play: playSpeech,
     pause: pauseSpeech,
@@ -2314,35 +2365,38 @@
     changeSpeed
   };
 
-  // ============================================
-  // SAVE ARTICLE FUNCTIONALITY
-  // ============================================
-  
+
+
+
+
+// --- Supabase Client ---
   function getSupabaseClient() {
     if (typeof getSupabase === 'function') {
       return getSupabase();
     }
     return null;
   }
-  
+
   function getArticleInfo() {
     const path = window.location.pathname;
     const slug = path.split('/').pop().replace('.html', '');
     const title = document.querySelector('title')?.textContent?.split('|')[0]?.trim() || slug;
-    const category = document.querySelector('.article-category')?.textContent || 
+    const category = document.querySelector('.article-category')?.textContent ||
                     document.querySelector('.article-tag')?.textContent || 'Article';
-    const image = document.querySelector('.article-hero img')?.src || 
+    const image = document.querySelector('.article-hero img')?.src ||
                  document.querySelector('meta[property="og:image"]')?.content || '';
     return { slug, title, category, image };
   }
-  
+
+
+// ==================== SAVE ARTICLE ====================
   async function checkIfSaved() {
     const supabaseClient = getSupabaseClient();
     if (!supabaseClient) return false;
-    
+
     const { data: { user } } = await supabaseClient.auth.getUser();
     if (!user) return false;
-    
+
     const { slug } = getArticleInfo();
     const { data } = await supabaseClient
       .from('saved_articles')
@@ -2350,32 +2404,32 @@
       .eq('user_id', user.id)
       .eq('article_slug', slug)
       .single();
-    
+
     return !!data;
   }
-  
+
   async function toggleSaveArticle() {
     const btn = document.getElementById('saveArticleBtn');
     if (!btn) return;
-    
+
     const supabaseClient = getSupabaseClient();
     if (!supabaseClient) {
       alert('Please sign in to save articles');
       window.location.href = '/auth/';
       return;
     }
-    
+
     const { data: { user } } = await supabaseClient.auth.getUser();
     if (!user) {
       alert('Please sign in to save articles');
       window.location.href = '/auth/';
       return;
     }
-    
+
     btn.disabled = true;
     const { slug, title, category, image } = getArticleInfo();
     const isSaved = btn.classList.contains('is-saved');
-    
+
     try {
       if (isSaved) {
         await supabaseClient
@@ -2383,7 +2437,7 @@
           .delete()
           .eq('user_id', user.id)
           .eq('article_slug', slug);
-        
+
         btn.classList.remove('is-saved');
         btn.querySelector('i').className = 'far fa-bookmark';
         btn.querySelector('span').textContent = getTranslation('save_article', 'Save Article');
@@ -2396,11 +2450,11 @@
             article_title: title,
             article_image: image
           }, { onConflict: 'user_id,article_slug' });
-        
+
         btn.classList.add('is-saved');
         btn.querySelector('i').className = 'fas fa-bookmark';
         btn.querySelector('span').textContent = getTranslation('article_saved', 'Saved!');
-        
+
         if (typeof MBAnalytics !== 'undefined' && MBAnalytics.logActivity) {
           MBAnalytics.logActivity('article_saved', { article_slug: slug, article_title: title });
         }
@@ -2412,13 +2466,13 @@
       btn.disabled = false;
     }
   }
-  
+
   async function initSaveButton() {
     const btn = document.getElementById('saveArticleBtn');
     if (!btn) return;
-    
+
     btn.addEventListener('click', toggleSaveArticle);
-    
+
     const isSaved = await checkIfSaved();
     if (isSaved) {
       btn.classList.add('is-saved');
@@ -2426,24 +2480,26 @@
       btn.querySelector('span').textContent = getTranslation('article_saved', 'Saved!');
     }
   }
-  
+
   document.addEventListener('DOMContentLoaded', initSaveButton);
 })();
 
-// ===== READING PROGRESS TRACKING =====
+
 (function() {
   'use strict';
-  
+
+
+// ==================== READING ANALYTICS ====================
   const articleSlug = window.location.pathname.split('/').filter(p => p).pop().replace('.html', '');
   const articleTitle = document.title.replace(' | MindBalance', '');
-  
+
   document.body.dataset.articleId = articleSlug;
-  
+
   let readingStartTime = Date.now();
   let maxScrollDepth = 0;
   let hasTrackedStart = false;
   let hasTrackedComplete = false;
-  
+
   function trackScrollProgress() {
     const docHeight = document.documentElement.scrollHeight - window.innerHeight;
     if (docHeight > 0) {
@@ -2451,7 +2507,7 @@
       const newDepth = Math.round((currentScroll / docHeight) * 100);
       if (newDepth > maxScrollDepth) {
         maxScrollDepth = newDepth;
-        
+
         if (maxScrollDepth >= 90 && !hasTrackedComplete) {
           hasTrackedComplete = true;
           if (typeof MBAnalytics !== 'undefined') {
@@ -2461,13 +2517,13 @@
       }
     }
   }
-  
+
   function initReadingTracker() {
     if (!hasTrackedStart && typeof MBAnalytics !== 'undefined') {
       hasTrackedStart = true;
       MBAnalytics.trackArticleRead(articleSlug, articleTitle);
     }
-    
+
     let ticking = false;
     window.addEventListener('scroll', () => {
       if (!ticking) {
@@ -2478,7 +2534,7 @@
         ticking = true;
       }
     }, { passive: true });
-    
+
     document.addEventListener('visibilitychange', () => {
       if (document.hidden && typeof MBAnalytics !== 'undefined') {
         MBAnalytics.logActivity('article_progress', {
@@ -2489,7 +2545,7 @@
       }
     });
   }
-  
+
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', initReadingTracker);
   } else {

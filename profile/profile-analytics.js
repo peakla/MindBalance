@@ -1,8 +1,11 @@
+// ==================== PROFILE ANALYTICS ====================
+
 const ProfileAnalytics = (function() {
   'use strict';
 
   let currentUserId = null;
 
+  // --- Formatting Helpers ---
   function formatTimeAgo(dateStr) {
     const date = new Date(dateStr);
     const now = new Date();
@@ -23,6 +26,7 @@ const ProfileAnalytics = (function() {
     return `${hours}h ${mins}m`;
   }
 
+  // --- Activity Icons & Descriptions ---
   function getActionIcon(actionType) {
     const icons = {
       'page_view': 'eye-outline',
@@ -65,6 +69,7 @@ const ProfileAnalytics = (function() {
     return descriptions[type] || `Performed ${type.replace(/_/g, ' ')}`;
   }
 
+  // ==================== CALENDAR HEATMAP ====================
   async function renderCalendarHeatmap(container, userId) {
     if (!container) return;
     
@@ -129,6 +134,7 @@ const ProfileAnalytics = (function() {
     }
   }
 
+  // ==================== ACTIVITY TIMELINE ====================
   async function renderActivityTimeline(container, userId) {
     if (!container) return;
     
@@ -189,6 +195,7 @@ const ProfileAnalytics = (function() {
     }
   }
 
+  // ==================== READING STATS ====================
   async function renderReadingStats(container, userId) {
     if (!container) return;
     
@@ -236,6 +243,7 @@ const ProfileAnalytics = (function() {
     }
   }
 
+  // ==================== ACTIVITY CHART ====================
   async function renderActivityChart(container, userId) {
     if (!container) return;
     
@@ -301,6 +309,7 @@ const ProfileAnalytics = (function() {
     }
   }
 
+  // ==================== ACHIEVEMENTS ====================
   async function renderAchievements(container, userId) {
     if (!container) return;
     
@@ -342,6 +351,7 @@ const ProfileAnalytics = (function() {
     }
   }
 
+  // --- Progress Ring ---
   function createProgressRing(percent, size = 80, strokeWidth = 8) {
     const radius = (size - strokeWidth) / 2;
     const circumference = radius * 2 * Math.PI;
@@ -359,6 +369,7 @@ const ProfileAnalytics = (function() {
     `;
   }
 
+  // --- Initialization ---
   async function init(userId) {
     if (!userId) return;
     currentUserId = userId;
@@ -378,6 +389,7 @@ const ProfileAnalytics = (function() {
     ]);
   }
 
+  // --- Public API ---
   return {
     init,
     renderCalendarHeatmap,

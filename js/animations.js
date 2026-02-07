@@ -1,11 +1,9 @@
-/**
- * MindBalance - Shared Animation System
- * Consistent scroll-triggered animations across all pages
- */
+// ==================== ANIMATION SYSTEM ====================
 
 (function() {
   'use strict';
 
+  // --- Configuration ---
   const ANIMATION_CONFIG = {
     threshold: 0.15,
     rootMargin: '0px 0px -50px 0px'
@@ -24,10 +22,12 @@
 
   let observer = null;
 
+  // --- Motion Preferences ---
   function shouldReduceMotion() {
     return window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   }
 
+  // --- Reveal Helpers ---
   function revealElement(element) {
     element.classList.add('is-visible');
   }
@@ -37,6 +37,7 @@
     elements.forEach(el => revealElement(el));
   }
 
+  // --- Intersection Observer ---
   function handleIntersection(entries, observer) {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
@@ -46,6 +47,7 @@
     });
   }
 
+  // --- Scroll Animations ---
   function initScrollAnimations() {
     if (shouldReduceMotion()) {
       revealAllImmediately();
@@ -70,6 +72,7 @@
     });
   }
 
+  // --- Back To Top ---
   function initBackToTop() {
     const backToTopBtn = document.querySelector('.back-to-top');
     if (!backToTopBtn) return;
@@ -105,6 +108,7 @@
     toggleVisibility();
   }
 
+  // --- Ripple Effect ---
   function initRippleEffect() {
     const rippleElements = document.querySelectorAll('.btn-ripple');
     
@@ -127,6 +131,7 @@
     });
   }
 
+  // --- Hover Effects ---
   function initHoverEffects() {
     if (shouldReduceMotion()) return;
     
@@ -153,6 +158,7 @@
     });
   }
 
+  // --- Parallax ---
   function initParallax() {
     if (shouldReduceMotion()) return;
     
@@ -173,6 +179,7 @@
     window.addEventListener('scroll', updateParallax, { passive: true });
   }
 
+  // --- Count Up ---
   function initCountUp() {
     const countElements = document.querySelectorAll('.count-up');
     
@@ -214,6 +221,7 @@
     countElements.forEach(el => countObserver.observe(el));
   }
 
+  // --- Initialization ---
   function init() {
     if (document.readyState === 'loading') {
       document.addEventListener('DOMContentLoaded', function() {
@@ -234,6 +242,7 @@
     }
   }
 
+  // --- Public API ---
   window.MindBalanceAnimations = {
     init: init,
     refresh: initScrollAnimations,

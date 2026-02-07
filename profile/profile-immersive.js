@@ -1,15 +1,14 @@
-/* ===== IMMERSIVE PROFILE EXPERIENCE ===== */
-/* Day/night cycle, personalized greetings, scroll animations, haptic feedback */
+// ==================== IMMERSIVE PROFILE EXPERIENCE ====================
 
 (function() {
   'use strict';
   
-  // ===== DAY/NIGHT CYCLE =====
+  // ==================== DAY/NIGHT CYCLE ====================
   const TimeOfDay = {
-    MORNING: 'morning',    // 6am - 12pm
-    AFTERNOON: 'afternoon', // 12pm - 5pm
-    EVENING: 'evening',    // 5pm - 8pm
-    NIGHT: 'night'         // 8pm - 6am
+    MORNING: 'morning',
+    AFTERNOON: 'afternoon',
+    EVENING: 'evening',
+    NIGHT: 'night'
   };
   
   function getTimeOfDay() {
@@ -42,7 +41,7 @@
     }
   }
   
-  // Affirmations based on time of day
+  // --- Affirmations ---
   const affirmations = {
     morning: [
       "Today is full of possibilities.",
@@ -80,29 +79,24 @@
     return timeAffirmations[Math.floor(Math.random() * timeAffirmations.length)];
   }
   
+  // --- Time Theme Application ---
   function applyTimeOfDay() {
     const time = getTimeOfDay();
     const body = document.body;
     const profile = document.querySelector('.mb-profile');
     
-    // Remove all time classes
     body.classList.remove('time-morning', 'time-afternoon', 'time-evening', 'time-night');
-    
-    // Add current time class
     body.classList.add(`time-${time}`);
     
-    // Add immersive class to profile
     if (profile) {
       profile.classList.add('immersive');
     }
     
-    // Create immersive background if it doesn't exist
     createImmersiveBackground();
-    
-    // Update greeting
     updateGreeting();
   }
   
+  // --- Immersive Background ---
   function createImmersiveBackground() {
     if (document.querySelector('.immersive-bg')) return;
     
@@ -122,8 +116,6 @@
     `;
     
     document.body.insertBefore(bg, document.body.firstChild);
-    
-    // Generate stars for night mode
     generateStars();
   }
   
@@ -131,10 +123,8 @@
     const container = document.getElementById('starsContainer');
     if (!container) return;
     
-    // Clear existing stars
     container.innerHTML = '';
     
-    // Generate 50 random stars
     for (let i = 0; i < 50; i++) {
       const star = document.createElement('div');
       star.className = 'star';
@@ -147,11 +137,11 @@
     }
   }
   
+  // --- Greeting ---
   function updateGreeting() {
     const greetingEl = document.querySelector('.profile-greeting');
     if (!greetingEl) return;
     
-    // Only show greeting on own profile (treat undefined as not own profile to avoid flicker)
     if (window.isOwnProfile !== true) {
       greetingEl.style.display = 'none';
       return;
@@ -162,7 +152,6 @@
     const messageEl = greetingEl.querySelector('.profile-greeting__message');
     const affirmationEl = greetingEl.querySelector('.profile-greeting__affirmation');
     
-    // Get user name from profile
     const userName = window.userProfile?.display_name || 
                      document.querySelector('.mb-profile__name')?.textContent ||
                      'there';
@@ -174,7 +163,6 @@
     }
     
     if (messageEl) {
-      // Use DOM APIs to prevent XSS
       messageEl.textContent = '';
       const greetingText = document.createTextNode(`${getGreeting()}, `);
       const nameSpan = document.createElement('span');
@@ -191,7 +179,7 @@
     }
   }
   
-  // ===== SCROLL-TRIGGERED ANIMATIONS =====
+  // ==================== SCROLL ANIMATIONS ====================
   function initScrollAnimations() {
     const observerOptions = {
       root: null,
@@ -204,23 +192,21 @@
         if (entry.isIntersecting) {
           entry.target.classList.add('revealed');
           
-          // Trigger counter animations if present
           const counters = entry.target.querySelectorAll('.stat-counter[data-target]');
           counters.forEach(counter => animateCounter(counter));
           
-          // Trigger progress rings if present
           const rings = entry.target.querySelectorAll('.progress-ring__circle-progress');
           rings.forEach(ring => animateProgressRing(ring));
         }
       });
     }, observerOptions);
     
-    // Observe all scroll-reveal elements
     document.querySelectorAll('.scroll-reveal, .scroll-reveal-left, .scroll-reveal-right, .scroll-reveal-scale, .stagger-reveal').forEach(el => {
       observer.observe(el);
     });
   }
   
+  // --- Counter Animation ---
   function animateCounter(counter) {
     if (counter.classList.contains('counted')) return;
     counter.classList.add('counted');
@@ -233,7 +219,6 @@
       const elapsed = currentTime - start;
       const progress = Math.min(elapsed / duration, 1);
       
-      // Easing function
       const easeOutQuart = 1 - Math.pow(1 - progress, 4);
       const current = Math.round(easeOutQuart * target);
       
@@ -250,12 +235,13 @@
     requestAnimationFrame(update);
   }
   
+  // --- Progress Ring Animation ---
   function animateProgressRing(ring) {
     if (ring.classList.contains('animated')) return;
     ring.classList.add('animated');
     
     const percent = parseFloat(ring.dataset.percent) || 0;
-    const circumference = 226; // 2 * PI * 36 (radius)
+    const circumference = 226;
     const offset = circumference - (percent / 100) * circumference;
     
     setTimeout(() => {
@@ -263,7 +249,7 @@
     }, 100);
   }
   
-  // ===== HAPTIC FEEDBACK =====
+  // ==================== HAPTIC FEEDBACK ====================
   const HapticIntensity = {
     LIGHT: 'light',
     MEDIUM: 'medium',
@@ -273,7 +259,6 @@
   function triggerHaptic(intensity = HapticIntensity.LIGHT) {
     if (!window.navigator?.vibrate) return;
     
-    // Check if user prefers reduced motion
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
     
     switch (intensity) {
@@ -290,22 +275,18 @@
   }
   
   function initHapticFeedback() {
-    // Light haptics for buttons
     document.querySelectorAll('.haptic-light, .quick-action-btn, .mb-profile__tab').forEach(el => {
       el.addEventListener('touchstart', () => triggerHaptic(HapticIntensity.LIGHT), { passive: true });
     });
     
-    // Medium haptics for important actions
     document.querySelectorAll('.haptic-medium, .follow-btn, .save-btn').forEach(el => {
       el.addEventListener('touchstart', () => triggerHaptic(HapticIntensity.MEDIUM), { passive: true });
     });
     
-    // Heavy haptics for achievements
     document.querySelectorAll('.haptic-heavy, .achievement-unlock').forEach(el => {
       el.addEventListener('touchstart', () => triggerHaptic(HapticIntensity.HEAVY), { passive: true });
     });
     
-    // Visual feedback for haptic interactions
     document.querySelectorAll('.haptic-feedback').forEach(el => {
       el.addEventListener('touchstart', function() {
         this.classList.add('touched');
@@ -314,7 +295,7 @@
     });
   }
   
-  // ===== PARALLAX EFFECT =====
+  // ==================== PARALLAX ====================
   function initParallax() {
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
     
@@ -330,7 +311,7 @@
     }, { passive: true });
   }
   
-  // ===== ONLINE STATUS =====
+  // ==================== ONLINE STATUS ====================
   function updateOnlineStatus(isOnline = true) {
     const statusEl = document.querySelector('.online-status');
     if (!statusEl) return;
@@ -346,7 +327,7 @@
     }
   }
   
-  // ===== PEOPLE SUGGESTIONS =====
+  // ==================== PEOPLE SUGGESTIONS ====================
   async function loadPeopleSuggestions() {
     const container = document.getElementById('peopleSuggestions');
     const list = document.getElementById('peopleSuggestionsList');
@@ -356,16 +337,14 @@
       const { data: { user } } = await window.supabaseClient.auth.getUser();
       if (!user) return;
       
-      // Get users the current user is already following
       const { data: following } = await window.supabaseClient
         .from('followers')
         .select('following_id')
         .eq('follower_id', user.id);
       
       const followingIds = following?.map(f => f.following_id) || [];
-      followingIds.push(user.id); // Exclude self
+      followingIds.push(user.id);
       
-      // Get active users (with posts or comments) that user doesn't follow
       const { data: suggestions } = await window.supabaseClient
         .from('profiles')
         .select('id, display_name, avatar_url')
@@ -382,7 +361,6 @@
       list.innerHTML = '';
       
       for (const person of suggestions) {
-        // Count mutual connections (users you both follow)
         const { count: mutualCount } = await window.supabaseClient
           .from('followers')
           .select('*', { count: 'exact', head: true })
@@ -400,7 +378,6 @@
           <button class="people-suggestion__follow-btn haptic-light" data-user-id="${person.id}">Follow</button>
         `;
         
-        // Add follow button functionality
         const followBtn = item.querySelector('.people-suggestion__follow-btn');
         followBtn.addEventListener('click', async (e) => {
           e.preventDefault();
@@ -415,7 +392,6 @@
             followBtn.disabled = true;
             followBtn.style.opacity = '0.6';
             
-            // Haptic feedback
             triggerHaptic(HapticIntensity.MEDIUM);
           } catch (err) {
             console.error('Failed to follow:', err);
@@ -430,30 +406,19 @@
     }
   }
   
-  // ===== INITIALIZE =====
+  // ==================== INITIALIZATION ====================
   function init() {
-    // Apply time-based theme
     applyTimeOfDay();
-    
-    // Update time every minute
     setInterval(applyTimeOfDay, 60000);
-    
-    // Initialize scroll animations
     initScrollAnimations();
-    
-    // Initialize haptic feedback
     initHapticFeedback();
-    
-    // Initialize parallax
     initParallax();
     
-    // Update greeting when user data loads
     window.addEventListener('profileLoaded', () => {
       updateGreeting();
       loadPeopleSuggestions();
     });
     
-    // Also try to load suggestions after a delay if profile is already loaded
     setTimeout(() => {
       if (window.userProfile) {
         updateGreeting();
@@ -461,7 +426,6 @@
       }
     }, 2000);
     
-    // Listen for theme changes to adjust colors
     const observer = new MutationObserver(() => {
       applyTimeOfDay();
     });
@@ -472,7 +436,7 @@
     });
   }
   
-  // Expose functions globally for other scripts
+  // --- Public API ---
   window.ImmersiveProfile = {
     triggerHaptic,
     loadPeopleSuggestions,
@@ -484,7 +448,6 @@
     getRandomAffirmation
   };
   
-  // Initialize when DOM is ready
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', init);
   } else {

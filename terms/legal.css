@@ -1,5 +1,4 @@
-/* Legal Pages Styling */
-
+/* === LEGAL PAGE === */
 .legal-page {
   padding: 140px 0 60px;
   min-height: 100vh;
@@ -16,6 +15,7 @@
   padding: 0 20px;
 }
 
+/* === HEADER === */
 .legal-header {
   text-align: center;
   margin-bottom: 40px;
@@ -47,6 +47,7 @@
   color: #aaa;
 }
 
+/* === CONTENT === */
 .legal-content {
   background: #fff;
   border-radius: 16px;
@@ -59,6 +60,7 @@
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
 }
 
+/* === SECTIONS === */
 .legal-section {
   margin-bottom: 32px;
   padding-bottom: 32px;
@@ -153,7 +155,7 @@
   color: #f0d090;
 }
 
-/* Highlight Box */
+/* === HIGHLIGHT BOX === */
 .legal-highlight {
   background: linear-gradient(135deg, #fef3c7, #fde68a);
   border-radius: 12px;
@@ -190,7 +192,7 @@
   color: #ccc;
 }
 
-/* Warning Box */
+/* === WARNING BOX === */
 .legal-warning {
   background: linear-gradient(135deg, #fee2e2, #fecaca);
   border-radius: 12px;
@@ -220,7 +222,7 @@
   color: #fca5a5;
 }
 
-/* Competition Badge Section */
+/* === HIGHLIGHT SECTION === */
 .legal-highlight-section {
   background: linear-gradient(135deg, #dbeafe, #bfdbfe);
   border-radius: 12px;
@@ -266,7 +268,7 @@
   color: #bfdbfe;
 }
 
-/* Navigation between legal pages */
+/* === NAVIGATION === */
 .legal-nav {
   display: flex;
   justify-content: center;
@@ -316,7 +318,7 @@
   color: #1a1a2e;
 }
 
-/* Responsive */
+/* === RESPONSIVE === */
 @media (max-width: 768px) {
   .legal-page {
     padding: 120px 0 40px;

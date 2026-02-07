@@ -1,7 +1,4 @@
-/* ===== IMMERSIVE PROFILE EXPERIENCE ===== */
-/* Full-page, cinematic profile with day/night cycle, parallax, and animations */
-
-/* ===== CSS VARIABLES FOR DAY/NIGHT CYCLE ===== */
+/* === VARIABLES === */
 :root {
   --time-primary: #87CEEB;
   --time-secondary: #FFB347;
@@ -13,7 +10,7 @@
   --parallax-speed: 0.5;
 }
 
-/* Morning (6am - 12pm) */
+/* === TIME THEMES === */
 .time-morning {
   --time-primary: #FFB347;
   --time-secondary: #87CEEB;
@@ -23,7 +20,6 @@
   --time-glow: rgba(255, 183, 77, 0.4);
 }
 
-/* Afternoon (12pm - 5pm) */
 .time-afternoon {
   --time-primary: #87CEEB;
   --time-secondary: #98D8C8;
@@ -33,7 +29,6 @@
   --time-glow: rgba(135, 206, 235, 0.3);
 }
 
-/* Evening (5pm - 8pm) */
 .time-evening {
   --time-primary: #FF7F50;
   --time-secondary: #DDA0DD;
@@ -43,7 +38,6 @@
   --time-glow: rgba(255, 127, 80, 0.4);
 }
 
-/* Night (8pm - 6am) */
 .time-night {
   --time-primary: #6B5B95;
   --time-secondary: #1a1a2e;
@@ -54,8 +48,7 @@
   --time-glow: rgba(155, 126, 217, 0.4);
 }
 
-/* ===== MAKE PROFILE BACKGROUND TRANSPARENT FOR IMMERSIVE MODE ===== */
-/* When any time class is active, make .mb-profile transparent so immersive bg shows */
+/* === TRANSPARENT BACKGROUNDS === */
 .time-morning .mb-profile,
 .time-afternoon .mb-profile,
 .time-evening .mb-profile,
@@ -63,7 +56,6 @@
   background: transparent !important;
 }
 
-/* Also make body background transparent */
 .time-morning,
 .time-afternoon,
 .time-evening,
@@ -71,7 +63,7 @@
   background: transparent !important;
 }
 
-/* ===== IMMERSIVE BACKGROUND LAYERS ===== */
+/* === IMMERSIVE BACKGROUND === */
 .immersive-bg {
   position: fixed;
   top: 0;
@@ -95,13 +87,13 @@
   transition: background 2s ease;
 }
 
-/* Parallax floating shapes */
 .immersive-bg__shapes {
   position: absolute;
   inset: 0;
   pointer-events: none;
 }
 
+/* === FLOATING SHAPES === */
 .floating-shape {
   position: absolute;
   border-radius: 50%;
@@ -160,7 +152,7 @@
   }
 }
 
-/* Stars for night mode */
+/* === STARS === */
 .immersive-bg__stars {
   position: absolute;
   inset: 0;
@@ -191,7 +183,7 @@
   50% { opacity: 1; transform: scale(1.2); }
 }
 
-/* Sun rays for daytime */
+/* === SUN === */
 .immersive-bg__sun {
   position: absolute;
   top: -50px;
@@ -220,7 +212,7 @@
   50% { transform: scale(1.1); }
 }
 
-/* Moon for night */
+/* === MOON === */
 .immersive-bg__moon {
   position: absolute;
   top: 80px;
@@ -238,7 +230,7 @@
   opacity: 1;
 }
 
-/* ===== PERSONALIZED GREETING ===== */
+/* === GREETING === */
 .profile-greeting {
   text-align: center;
   padding: 30px 20px 10px;
@@ -295,7 +287,6 @@
   font-style: italic;
 }
 
-/* Dark mode greeting adjustments */
 [data-theme="dark"] .profile-greeting__message,
 .time-night .profile-greeting__message {
   color: #ffffff;
@@ -306,7 +297,7 @@
   color: rgba(255, 255, 255, 0.7);
 }
 
-/* ===== SCROLL-TRIGGERED ANIMATIONS ===== */
+/* === SCROLL ANIMATIONS === */
 .scroll-reveal {
   opacity: 0;
   transform: translateY(40px);
@@ -351,7 +342,6 @@
   transform: scale(1);
 }
 
-/* Staggered animations for lists */
 .stagger-reveal > * {
   opacity: 0;
   transform: translateY(30px);
@@ -370,7 +360,7 @@
   transform: translateY(0);
 }
 
-/* ===== IMMERSIVE PROFILE HEADER ===== */
+/* === IMMERSIVE HEADER === */
 .mb-profile.immersive {
   background: transparent;
   padding-top: 80px;
@@ -390,26 +380,23 @@
   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
 }
 
-/* Dark mode profile header */
 [data-theme="dark"] .mb-profile.immersive .mb-profile__header {
   background: rgba(45, 43, 61, 0.85);
   border: 1px solid rgba(155, 126, 217, 0.2);
 }
 
-/* Night time dark mode profile header */
 [data-theme="dark"].time-night .mb-profile.immersive .mb-profile__header,
 [data-theme="dark"] .time-night .mb-profile.immersive .mb-profile__header {
   background: rgba(45, 43, 61, 0.85);
   border: 1px solid rgba(155, 126, 217, 0.2);
 }
 
-/* Light mode profile header during night - keep it light */
 body:not([data-theme="dark"]) .time-night .mb-profile.immersive .mb-profile__header {
   background: rgba(255, 255, 255, 0.9);
   border: 1px solid rgba(200, 180, 220, 0.3);
 }
 
-/* ===== GLASSMORPHISM CARDS ===== */
+/* === GLASSMORPHISM CARDS === */
 .glass-card {
   background: rgba(255, 255, 255, 0.7);
   backdrop-filter: blur(20px);
@@ -425,26 +412,23 @@ body:not([data-theme="dark"]) .time-night .mb-profile.immersive .mb-profile__hea
   box-shadow: 0 20px 50px rgba(0, 0, 0, 0.12);
 }
 
-/* Dark mode glass card - only apply dark styles when user is in dark mode */
 [data-theme="dark"] .glass-card {
   background: rgba(45, 43, 61, 0.7);
   border: 1px solid rgba(155, 126, 217, 0.2);
 }
 
-/* Night time dark mode glass card */
 [data-theme="dark"].time-night .glass-card,
 [data-theme="dark"] .time-night .glass-card {
   background: rgba(45, 43, 61, 0.7);
   border: 1px solid rgba(155, 126, 217, 0.2);
 }
 
-/* Light mode glass card during night - keep it light */
 body:not([data-theme="dark"]) .time-night .glass-card {
   background: rgba(255, 255, 255, 0.85);
   border: 1px solid rgba(200, 180, 220, 0.4);
 }
 
-/* ===== ANIMATED STAT COUNTERS ===== */
+/* === STAT COUNTERS === */
 .stat-counter {
   font-family: 'Poppins', sans-serif;
   font-weight: 700;
@@ -464,7 +448,7 @@ body:not([data-theme="dark"]) .time-night .glass-card {
   50% { transform: scale(1.1); }
 }
 
-/* ===== RADIAL PROGRESS RINGS ===== */
+/* === PROGRESS RINGS === */
 .progress-ring {
   position: relative;
   width: 80px;
@@ -502,7 +486,7 @@ body:not([data-theme="dark"]) .time-night .glass-card {
   font-size: 1.25rem;
 }
 
-/* ===== COMMUNITY CONNECTION FEATURES ===== */
+/* === COMMUNITY FEATURES === */
 .online-status {
   display: inline-flex;
   align-items: center;
@@ -555,7 +539,7 @@ body:not([data-theme="dark"]) .time-night .glass-card {
   font-size: 0.9rem;
 }
 
-/* Quick action buttons */
+/* === QUICK ACTIONS === */
 .quick-actions {
   display: flex;
   gap: 10px;
@@ -602,7 +586,7 @@ body:not([data-theme="dark"]) .time-night .glass-card {
   border-color: rgba(255, 255, 255, 0.2);
 }
 
-/* ===== HAPTIC FEEDBACK SUPPORT ===== */
+/* === HAPTIC FEEDBACK === */
 .haptic-light {
   -webkit-tap-highlight-color: transparent;
 }
@@ -615,7 +599,6 @@ body:not([data-theme="dark"]) .time-night .glass-card {
   -webkit-tap-highlight-color: transparent;
 }
 
-/* Visual feedback for haptic interactions */
 .haptic-feedback {
   position: relative;
   overflow: hidden;
@@ -641,7 +624,7 @@ body:not([data-theme="dark"]) .time-night .glass-card {
   opacity: 0;
 }
 
-/* ===== AI INSIGHTS SECTION ===== */
+/* === AI INSIGHTS === */
 .ai-insights {
   padding: 25px;
   border-radius: 20px;
@@ -741,7 +724,7 @@ body:not([data-theme="dark"]) .time-night .glass-card {
   40% { transform: scale(1); opacity: 1; }
 }
 
-/* ===== PEOPLE YOU MAY KNOW ===== */
+/* === PEOPLE SUGGESTIONS === */
 .people-suggestions {
   padding: 20px;
 }
@@ -824,7 +807,7 @@ body:not([data-theme="dark"]) .time-night .glass-card {
   box-shadow: 0 4px 12px var(--time-glow);
 }
 
-/* ===== REDUCED MOTION SUPPORT ===== */
+/* === REDUCED MOTION === */
 @media (prefers-reduced-motion: reduce) {
   .floating-shape,
   .star,
@@ -851,7 +834,7 @@ body:not([data-theme="dark"]) .time-night .glass-card {
   }
 }
 
-/* ===== AI MOOD SUGGESTION ===== */
+/* === AI MOOD SUGGESTION === */
 .ai-mood-suggestion {
   display: flex;
   align-items: flex-start;
@@ -876,7 +859,7 @@ body:not([data-theme="dark"]) .time-night .glass-card {
   line-height: 1.5;
 }
 
-/* ===== AI GOAL SUGGESTION ===== */
+/* === AI GOAL SUGGESTION === */
 .ai-goal-suggestion {
   padding: 18px;
   margin: 15px 0;
@@ -946,8 +929,6 @@ body:not([data-theme="dark"]) .time-night .glass-card {
   background: linear-gradient(135deg, rgba(155, 126, 217, 0.2) 0%, rgba(75, 70, 100, 0.3) 100%);
 }
 
-/* ===== LIGHT MODE OVERRIDES ===== */
-/* When in light mode, override night-time dark colors with lighter alternatives */
 body:not([data-theme="dark"]) .time-night {
   --time-primary: #9b8cc4;
   --time-secondary: #c4b5dc;
@@ -958,13 +939,11 @@ body:not([data-theme="dark"]) .time-night {
   --time-glow: rgba(155, 126, 217, 0.3);
 }
 
-/* Light mode profile header text remains dark/readable */
 body:not([data-theme="dark"]) .time-night .profile-greeting__message,
 body:not([data-theme="dark"]) .time-night .profile-greeting__subtitle {
   color: #1a1a2e;
 }
 
-/* Light mode date pill styling */
 body:not([data-theme="dark"]) .time-night .profile-greeting__time {
   background: rgba(155, 126, 217, 0.2);
   color: #5a4a8a;
@@ -978,13 +957,11 @@ body:not([data-theme="dark"]) .time-night .mb-profile__bio {
   color: #333;
 }
 
-/* Light mode profile stats card */
 body:not([data-theme="dark"]) .mb-profile__unified-stats {
   background: rgba(255, 255, 255, 0.95);
   color: #1a1a2e;
 }
 
-/* Light mode edit/share buttons */
 body:not([data-theme="dark"]) .time-night .mb-profile__actions-btn {
   background: rgba(255, 255, 255, 0.9);
   color: #333;
@@ -996,7 +973,6 @@ body:not([data-theme="dark"]) .time-night .mb-profile__actions-btn.primary {
   color: #fff;
 }
 
-/* ===== MOBILE RESPONSIVE ===== */
 @media (max-width: 768px) {
   .profile-greeting {
     padding: 20px 15px 5px;

@@ -1,9 +1,12 @@
+// ==================== NOTIFICATIONS ====================
+
 (function() {
   'use strict';
   
   let notificationsLoaded = false;
   let currentUser = null;
   
+  // --- Supabase Client ---
   function getSupabaseClient() {
     if (window.supabaseClient) return window.supabaseClient;
     if (typeof window.getSupabase === 'function') {
@@ -13,6 +16,7 @@
   }
   
   async function loadNotificationCount() {
+  // --- Notification Count ---
     const client = getSupabaseClient();
     if (!client || !currentUser) return;
     
@@ -31,6 +35,7 @@
   }
   
   function updateAllBadges(count) {
+  // --- Badge Updates ---
     document.querySelectorAll('.notif-badge, #notifBadge, #mobileNotifBadge, #userMenuBadge, #userMenuNotifBadge, .user-menu-badge, .menu-item-badge').forEach(badge => {
       if (count > 0) {
         badge.textContent = count > 99 ? '99+' : count;
@@ -44,6 +49,7 @@
   }
   
   async function loadNotifications() {
+  // --- Load Notifications ---
     const client = getSupabaseClient();
     if (!client || !currentUser) return [];
     
@@ -64,6 +70,7 @@
   }
   
   async function markNotificationRead(notifId) {
+  // --- Mark Read ---
     const client = getSupabaseClient();
     if (!client) return;
     
@@ -97,6 +104,7 @@
     }
   }
   
+  // --- Notification Helpers ---
   function getNotificationText(type) {
     const texts = {
       'mention': 'mentioned you in a post',
@@ -125,6 +133,7 @@
   }
   
   async function renderNotificationsList() {
+  // --- Notification Rendering ---
     const container = document.getElementById('globalNotificationsList');
     if (!container) return;
     
@@ -190,6 +199,7 @@
     return icons[type] || 'notifications-outline';
   }
   
+  // --- HTML Escaping ---
   function escapeHtml(text) {
     if (!text) return '';
     const div = document.createElement('div');
@@ -198,6 +208,7 @@
   }
   
   function createInboxModal() {
+  // --- Inbox Modal ---
     if (document.getElementById('globalInboxModal')) return;
     
     const modal = document.createElement('div');
@@ -271,6 +282,7 @@
   }
   
   async function init() {
+  // --- Initialization ---
     const client = getSupabaseClient();
     if (!client) {
       setTimeout(init, 500);

@@ -1,7 +1,4 @@
-/* ===== ENHANCED WELLNESS TAB STYLES ===== */
-/* Using !important to override profile.css base styles */
-
-/* Glassmorphism Base */
+/* === GLASSMORPHISM BASE === */
 .mb-profile__tab-content .mb-profile__wellness-section,
 .mb-profile__wellness-section {
   background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0.85) 100%) !important;
@@ -58,7 +55,7 @@
   filter: drop-shadow(0 2px 4px rgba(184, 155, 94, 0.3));
 }
 
-/* ===== ENHANCED MOOD TRACKER ===== */
+/* === MOOD TRACKER === */
 .mb-profile__mood-input {
   text-align: center;
   margin-bottom: 32px;
@@ -159,7 +156,7 @@
   75% { transform: scale(1.1) rotate(5deg); }
 }
 
-/* Mood Note Input */
+/* === MOOD NOTE INPUT === */
 .mb-profile__mood-note {
   width: 100%;
   max-width: 450px;
@@ -184,7 +181,7 @@
   color: #9a9ab0;
 }
 
-/* Log Mood Button */
+/* === LOG MOOD BUTTON === */
 .mb-profile__mood-log-btn {
   padding: 14px 36px;
   background: linear-gradient(135deg, #b89b5e 0%, #c9a968 50%, #d6bd9f 100%);
@@ -226,7 +223,7 @@
   transform: translateY(-1px);
 }
 
-/* ===== MOOD HISTORY - ENHANCED ===== */
+/* === MOOD HISTORY === */
 .mb-profile__mood-history {
   margin-top: 32px;
   padding-top: 28px;
@@ -243,14 +240,12 @@
   gap: 8px;
 }
 
-/* Recent Moods - Color Coded Cards */
 .mb-profile__mood-entries {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
   gap: 16px;
 }
 
-/* Mood Entries Grid - Similar to Liked Posts */
 .mb-profile__mood-entries {
   display: grid !important;
   grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)) !important;
@@ -258,6 +253,8 @@
 }
 
 .mb-profile__mood-history .mood-entry-card,
+
+/* === MOOD ENTRY CARDS === */
 .mood-entry-card {
   background: #fff !important;
   border-radius: 16px !important;
@@ -295,7 +292,6 @@
   box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1) !important;
 }
 
-/* Emoji Container */
 .mood-entry-emoji {
   width: 56px;
   height: 56px;
@@ -315,7 +311,6 @@
   filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1)) !important;
 }
 
-/* Content Area */
 .mood-entry-content {
   flex: 1;
   min-width: 0;
@@ -381,7 +376,7 @@
   overflow: hidden;
 }
 
-/* Mood Trend Chart */
+/* === MOOD TREND CHART === */
 .mb-profile__mood-trend {
   margin-top: 24px;
   background: linear-gradient(145deg, rgba(248, 246, 242, 0.8) 0%, rgba(255, 255, 255, 0.6) 100%);
@@ -455,7 +450,7 @@
   text-transform: uppercase;
 }
 
-/* ===== ENHANCED WELLNESS GOALS ===== */
+/* === WELLNESS GOALS === */
 .mb-profile__goals-add {
   display: flex;
   gap: 12px;
@@ -524,7 +519,7 @@
   font-size: 1.2rem;
 }
 
-/* Goals List */
+/* === GOALS LIST === */
 .mb-profile__goals-list {
   display: flex;
   flex-direction: column;
@@ -612,7 +607,6 @@
   font-size: 1rem;
 }
 
-/* Goal Progress Ring */
 .goal-progress-ring {
   width: 48px;
   height: 48px;
@@ -702,7 +696,7 @@
   transform: scale(1.1);
 }
 
-/* Goals Empty State */
+/* === GOALS EMPTY STATE === */
 .mb-profile__goals-empty {
   text-align: center;
   padding: 50px 30px;
@@ -735,7 +729,7 @@
   font-size: 0.95rem;
 }
 
-/* ===== ENHANCED READING STREAK ===== */
+/* === READING STREAK === */
 .mb-profile__streak-display {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -804,7 +798,7 @@
   letter-spacing: 0.5px;
 }
 
-/* Streak Calendar Heatmap */
+/* === STREAK CALENDAR === */
 .mb-profile__streak-calendar {
   background: linear-gradient(145deg, rgba(248, 246, 242, 0.8) 0%, rgba(255, 255, 255, 0.6) 100%);
   border-radius: 16px;
@@ -901,7 +895,6 @@
   transform: translateX(-50%) translateY(0);
 }
 
-/* Streak Milestones */
 .mb-profile__streak-milestones {
   margin-top: 24px;
   display: flex;
@@ -946,7 +939,6 @@
   opacity: 0.5;
 }
 
-/* ===== DARK MODE OVERRIDES ===== */
 [data-theme="dark"] .mb-profile__wellness-section {
   background: linear-gradient(135deg, rgba(45, 43, 61, 0.95) 0%, rgba(45, 43, 61, 0.85) 100%);
   border-color: rgba(255, 255, 255, 0.08);
@@ -1077,7 +1069,6 @@
   color: #a0a0b8;
 }
 
-/* ===== ADDITIONAL DARK MODE FIXES ===== */
 [data-theme="dark"] .mb-profile__wellness-section,
 [data-theme="dark"] .mb-profile__tab-content .mb-profile__wellness-section {
   background: linear-gradient(135deg, rgba(45, 43, 61, 0.98) 0%, rgba(45, 43, 61, 0.92) 100%) !important;
@@ -1157,7 +1148,6 @@
   color: #8a8a9a !important;
 }
 
-/* ===== RESPONSIVE ADJUSTMENTS ===== */
 @media (max-width: 768px) {
   .mb-profile__wellness-section {
     padding: 20px !important;

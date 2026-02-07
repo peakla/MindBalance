@@ -1,9 +1,4 @@
-/* ============================================
-   ARTICLE PAGE STYLES
-   Magazine-style layout with TTS player
-   ============================================ */
-
-/* Reading Progress */
+/* === READING PROGRESS === */
 .article-reading-progress {
   position: fixed;
   top: 0;
@@ -25,7 +20,7 @@
   background: rgba(255, 255, 255, 0.1);
 }
 
-/* Header - Use tan/gold to match site footer */
+/* === HEADER === */
 .article-header {
   background: #d6bd9f;
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
@@ -40,6 +35,7 @@
   border-bottom-color: rgba(255, 255, 255, 0.1);
 }
 
+/* === NAVIGATION === */
 .article-nav {
   display: flex;
   justify-content: space-between;
@@ -98,25 +94,25 @@
   color: var(--user-accent, #9b7ed9);
 }
 
-/* Main */
+/* === MAIN === */
 .article-main {
   padding-bottom: 60px;
-  overflow-x: visible; /* Override main style.css to enable sticky TOC */
+  overflow-x: visible; 
 }
 
 .article-container {
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 20px;
-  overflow-x: visible; /* Override main style.css to enable sticky TOC */
+  overflow-x: visible; 
 }
 
-/* Ensure article layout allows sticky positioning */
+/* === LAYOUT === */
 .article-layout {
   overflow: visible;
 }
 
-/* Hero */
+/* === HERO === */
 .article-hero {
   position: relative;
   width: 100%;
@@ -187,7 +183,7 @@
   text-shadow: 0 1px 6px rgba(0,0,0,0.4);
 }
 
-/* TTS Player - Use warm site colors instead of blue */
+/* === TTS PLAYER === */
 .article-tts-player {
   background: linear-gradient(135deg, #3d3a50 0%, #2d2b3d 100%);
   border-radius: 16px;
@@ -372,7 +368,6 @@
   opacity: 0.6;
 }
 
-/* Article Layout - TOC on left, Article on right with proper spacing */
 .article-layout {
   display: grid;
   grid-template-columns: 280px 1fr;
@@ -382,7 +377,7 @@
   margin: 0 auto;
 }
 
-/* TOC sticks to viewport while scrolling */
+/* === TABLE OF CONTENTS === */
 .article-toc {
   width: 100%;
   position: sticky;
@@ -392,7 +387,6 @@
   align-self: start;
 }
 
-/* When TOC is hidden, article takes full width and centers */
 .article-layout.toc-hidden {
   grid-template-columns: 1fr;
   max-width: 800px;
@@ -402,7 +396,7 @@
   display: none;
 }
 
-/* Article content container with subtle background for readability */
+/* === ARTICLE CONTENT === */
 .article-content {
   max-width: 720px;
   background: #fff;
@@ -426,7 +420,7 @@
     padding: 16px;
   }
   
-  /* Hide desktop TOC on mobile, show mobile toggle */
+  
   .article-toc {
     display: none;
     position: fixed;
@@ -477,7 +471,7 @@
   }
 }
 
-/* Mobile TOC Toggle Button */
+/* === MOBILE TOC === */
 .mobile-toc-toggle {
   display: none;
   position: fixed;
@@ -531,7 +525,7 @@
   color: #fff;
 }
 
-/* Mobile TOC Overlay */
+/* === MOBILE TOC OVERLAY === */
 .mobile-toc-overlay {
   display: none;
   position: fixed;
@@ -554,7 +548,6 @@
   background: rgba(0, 0, 0, 0.7);
 }
 
-/* Mobile TOC Close Button */
 .mobile-toc-close {
   position: absolute;
   top: 12px;
@@ -597,7 +590,6 @@
   }
 }
 
-/* Reduced motion for mobile */
 @media (prefers-reduced-motion: reduce) {
   .article-toc,
   .mobile-toc-toggle,
@@ -606,8 +598,6 @@
   }
 }
 
-/* Table of Contents - Pill Navigation Design */
-/* Note: sticky positioning is set in Article Layout section above */
 .article-toc {
   background: #ffffff;
   border-radius: 16px;
@@ -619,7 +609,6 @@
   transition: all 0.3s ease;
 }
 
-/* Collapsed state - hide completely */
 .article-toc.collapsed {
   display: none;
 }
@@ -630,7 +619,6 @@
   box-shadow: 0 2px 12px rgba(0, 0, 0, 0.3);
 }
 
-/* TOC Header with Progress and Toggle */
 .article-toc__header {
   display: flex;
   align-items: center;
@@ -645,7 +633,6 @@
   border-bottom-color: rgba(255, 255, 255, 0.08);
 }
 
-/* Progress Bar */
 .article-toc__progress {
   flex: 1;
   height: 4px;
@@ -670,7 +657,6 @@
   background: var(--user-accent, #9b7ed9);
 }
 
-/* Toggle Button */
 .article-toc__toggle {
   display: flex;
   align-items: center;
@@ -705,7 +691,6 @@
   color: #fff;
 }
 
-/* Floating TOC toggle button (appears when TOC is hidden) */
 .article-toc-show-btn {
   position: fixed;
   bottom: 30px;
@@ -754,7 +739,6 @@
   box-shadow: 0 4px 20px rgba(var(--user-accent-rgb, 155, 126, 217), 0.4);
 }
 
-/* List Styles */
 .article-toc__list {
   list-style: none;
   padding: 0;
@@ -768,7 +752,6 @@
   margin: 0;
 }
 
-/* Pill Navigation Links */
 .article-toc__pill {
   display: flex;
   align-items: center;
@@ -801,7 +784,6 @@
   background: var(--user-accent-hover, #8a6dc8);
 }
 
-/* Number Badge */
 .article-toc__num {
   display: flex;
   align-items: center;
@@ -827,7 +809,6 @@
   color: #fff;
 }
 
-/* Text Label */
 .article-toc__text {
   white-space: nowrap;
   overflow: hidden;
@@ -835,7 +816,6 @@
   transition: opacity 0.2s ease;
 }
 
-/* Dark Mode Pill Styles */
 [data-theme="dark"] .article-toc__pill {
   background: #3d3a50;
   color: #ccc;
@@ -871,7 +851,6 @@
   color: #fff;
 }
 
-/* Reduced Motion */
 @media (prefers-reduced-motion: reduce) {
   .article-toc,
   .article-toc__pill,
@@ -888,14 +867,10 @@
   }
 }
 
-/* ===== ENHANCED TOC FEATURES ===== */
-
-/* Enhanced Content Container */
 .article-toc__enhanced {
   margin-bottom: 12px;
 }
 
-/* Reading Time Badge per Section */
 .article-toc__time {
   font-size: 0.65rem;
   color: #888;
@@ -922,7 +897,6 @@
   color: rgba(0, 0, 0, 0.7);
 }
 
-/* Section Completion Checkmark */
 .article-toc__check {
   display: none;
   width: 16px;
@@ -949,7 +923,6 @@
   opacity: 1;
 }
 
-/* Scroll Position Indicator */
 .article-toc__position-indicator {
   position: absolute;
   left: 0;
@@ -1003,7 +976,6 @@
   background: rgba(255, 255, 255, 0.3);
 }
 
-/* Jump Navigation Buttons */
 .article-toc__jump-btns {
   display: flex;
   gap: 8px;
@@ -1053,7 +1025,6 @@
   color: #fff;
 }
 
-/* Section Preview Tooltip */
 .article-toc__preview {
   position: absolute;
   left: calc(100% + 12px);
@@ -1101,7 +1072,6 @@
   border-right-color: #3d3a50;
 }
 
-/* Bookmarkable Sections */
 .article-toc__bookmark {
   width: 18px;
   height: 18px;
@@ -1134,7 +1104,6 @@
   height: 14px;
 }
 
-/* Resume Reading Prompt */
 .article-toc__resume {
   display: none;
   align-items: center;
@@ -1201,7 +1170,6 @@
   color: #d6bd9f;
 }
 
-/* Mini-map Visual */
 .article-toc__minimap {
   display: flex;
   flex-direction: row;
@@ -1253,7 +1221,6 @@
   background: #d6bd9f;
 }
 
-/* Minimap Reading Position Marker */
 .article-toc__minimap-marker {
   position: absolute;
   left: 0;
@@ -1268,7 +1235,6 @@
   background: rgba(214, 189, 159, 0.3);
 }
 
-/* Keyboard Focus Styles */
 .article-toc__pill:focus {
   outline: 2px solid var(--user-accent, #9b7ed9);
   outline-offset: 2px;
@@ -1282,7 +1248,6 @@
   outline-color: var(--user-accent, #9b7ed9);
 }
 
-/* Collapsed State - Hide Extra Elements */
 .article-toc.collapsed .article-toc__time,
 .article-toc.collapsed .article-toc__check,
 .article-toc.collapsed .article-toc__bookmark,
@@ -1294,7 +1259,6 @@
   display: none;
 }
 
-/* Mobile Swipe Indicator */
 .article-toc__swipe-indicator {
   display: none;
   width: 40px;
@@ -1326,7 +1290,6 @@
   }
 }
 
-/* Reduced Motion for New Features */
 @media (prefers-reduced-motion: reduce) {
   .article-toc__check,
   .article-toc__preview,
@@ -1337,7 +1300,6 @@
     transition: none;
   }
 }
-
 
 .article-content section {
   margin-bottom: 48px;
@@ -1412,7 +1374,6 @@
   color: #fff;
 }
 
-/* TTS Reading Highlight - Smooth transitions */
 .article-content h2,
 .article-content h3,
 .article-content p,
@@ -1437,14 +1398,12 @@
   box-shadow: inset 0 0 0 2px rgba(214, 189, 159, 0.25);
 }
 
-
 @media (prefers-reduced-motion: reduce) {
   .tts-reading {
     animation: none;
   }
 }
 
-/* Word-level TTS highlighting */
 .tts-word {
   display: inline;
   transition: background-color 0.15s ease, color 0.15s ease;
@@ -1465,7 +1424,6 @@
   color: #1a1a2e;
 }
 
-/* TTS Engine Toggle Button */
 .tts-engine-toggle {
   display: inline-flex;
   align-items: center;
@@ -1487,7 +1445,6 @@
   box-shadow: 0 2px 8px rgba(214, 189, 159, 0.4);
 }
 
-/* TTS Voice Selector */
 .tts-player__voice {
   display: flex;
   align-items: center;
@@ -1515,7 +1472,6 @@
   color: #fff;
 }
 
-/* TTS Player Enhanced Controls */
 .tts-player__row {
   display: flex;
   align-items: center;
@@ -1655,7 +1611,6 @@
   opacity: 0.7;
 }
 
-/* Responsive TTS player */
 @media (max-width: 600px) {
   .tts-player__row {
     flex-direction: column;
@@ -1671,7 +1626,6 @@
   }
 }
 
-/* Article Footer */
 .article-footer {
   margin-top: 48px;
   padding-top: 32px;
@@ -1786,7 +1740,6 @@
   fill: currentColor;
 }
 
-/* Related Articles */
 .article-related {
   margin-top: 48px;
   padding-top: 32px;
@@ -1882,7 +1835,6 @@
   color: #aaa;
 }
 
-/* Page Footer */
 .article-page-footer {
   background: #f8f9fa;
   padding: 32px 20px;
@@ -1912,7 +1864,6 @@
   margin: 0 auto;
 }
 
-/* High Contrast Mode */
 [data-high-contrast="true"] .article-tts-player {
   border: 3px solid #000;
 }
@@ -1939,7 +1890,6 @@
   border: 2px solid #000;
 }
 
-/* Reduced Motion */
 @media (prefers-reduced-motion: reduce) {
   .article-reading-progress__fill,
   .tts-progress-bar__fill,
@@ -1948,7 +1898,6 @@
   }
 }
 
-/* Mobile Responsive */
 @media (max-width: 768px) {
   .article-hero {
     height: 300px;
@@ -1992,11 +1941,6 @@
     font-size: 1rem;
   }
 }
-
-/* ============================================
-   READING CONTROLS PANEL
-   Floating toolbar for reading customization
-   ============================================ */
 
 .reading-controls {
   position: fixed;
@@ -2121,7 +2065,6 @@
   color: #1a1a2e;
 }
 
-/* Font Size Controls */
 .reading-controls__font-size {
   display: flex;
   flex-direction: column;
@@ -2171,7 +2114,6 @@
   color: #1a1a2e;
 }
 
-/* Time Remaining Indicator */
 .reading-controls__time {
   text-align: center;
   padding: 8px 0;
@@ -2193,7 +2135,6 @@
   color: #e0e0e0;
 }
 
-/* Reading Mode Styles */
 body.article-reading-mode .header,
 body.article-reading-mode .article-toc,
 body.article-reading-mode .article-share,
@@ -2215,7 +2156,6 @@ body.article-reading-mode .article-main {
   padding-top: 40px;
 }
 
-/* Font Size Modifiers - Target ALL text elements */
 body[data-article-font="small"] .article-content {
   font-size: 0.9rem;
 }
@@ -2272,7 +2212,6 @@ body[data-article-font="x-large"] .article-content li {
   font-size: 1.4rem;
 }
 
-/* Line Spacing Modifiers */
 body[data-article-spacing="compact"] .article-content p,
 body[data-article-spacing="compact"] .article-content li {
   line-height: 1.5;
@@ -2288,7 +2227,6 @@ body[data-article-spacing="relaxed"] .article-content li {
   line-height: 2;
 }
 
-/* Mobile Reading Controls */
 @media (max-width: 768px) {
   .reading-controls {
     right: 10px;
@@ -2312,9 +2250,6 @@ body[data-article-spacing="relaxed"] .article-content li {
   }
 }
 
-/* ============================================
-   TEXT SELECTION STYLING (prevents layout shift)
-   ============================================ */
 .article-content ::selection {
   background: rgba(255, 235, 59, 0.4);
   color: inherit;
@@ -2335,22 +2270,18 @@ body[data-article-spacing="relaxed"] .article-content li {
   color: inherit;
 }
 
-/* ============================================
-   TEXT HIGHLIGHT FEATURE
-   ============================================ */
-
 .user-highlight {
   background: linear-gradient(120deg, #fff176 0%, #ffeb3b 100%);
   border-radius: 3px;
   cursor: pointer;
-  /* No padding/margin to prevent layout shift during highlighting */
+  
   box-decoration-break: clone;
   -webkit-box-decoration-break: clone;
 }
 
 .user-highlight:hover {
   background: linear-gradient(120deg, #ffca28 0%, #ffc107 100%);
-  /* No box-shadow to prevent layout shift */
+  
 }
 
 [data-theme="dark"] .user-highlight {
@@ -2361,10 +2292,6 @@ body[data-article-spacing="relaxed"] .article-content li {
 [data-theme="dark"] .user-highlight:hover {
   background: linear-gradient(120deg, #7e57c2 0%, #9575cd 100%);
 }
-
-/* ============================================
-   BOOKMARK PROMPT
-   ============================================ */
 
 .bookmark-prompt {
   position: fixed;
@@ -2445,7 +2372,6 @@ body[data-article-spacing="relaxed"] .article-content li {
   color: #e0e0e0;
 }
 
-/* Mini Floating TTS Player */
 .tts-mini-player {
   position: fixed;
   bottom: 24px;
@@ -2552,7 +2478,6 @@ body[data-article-spacing="relaxed"] .article-content li {
   background: linear-gradient(135deg, #252542 0%, #1a1a2e 100%);
 }
 
-/* Sleep Timer Dropdown */
 .sleep-timer-container {
   position: relative;
 }
@@ -2621,7 +2546,6 @@ body[data-article-spacing="relaxed"] .article-content li {
   color: #1a1a2e;
 }
 
-/* Keyboard Shortcuts Overlay */
 .keyboard-shortcuts-overlay {
   position: fixed;
   inset: 0;
@@ -2712,7 +2636,6 @@ body[data-article-spacing="relaxed"] .article-content li {
   background: #3d5d8a;
 }
 
-/* Download Audio Button */
 .tts-download-btn {
   display: flex;
   align-items: center;
@@ -2754,7 +2677,6 @@ body[data-article-spacing="relaxed"] .article-content li {
   to { transform: rotate(360deg); }
 }
 
-/* Notes Panel */
 .article-notes-panel {
   position: fixed;
   right: -400px;
@@ -2901,7 +2823,6 @@ body[data-article-spacing="relaxed"] .article-content li {
   color: #999;
 }
 
-/* Key Takeaways Section */
 .article-takeaways {
   background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
   border-radius: 16px;
@@ -2971,7 +2892,6 @@ body[data-article-spacing="relaxed"] .article-content li {
   }
 }
 
-/* Print Styles */
 @media print {
   .reading-controls,
   .header,
@@ -2997,10 +2917,6 @@ body[data-article-spacing="relaxed"] .article-content li {
     print-color-adjust: exact;
   }
 }
-
-/* ============================================
-   SAVE ARTICLE BUTTON
-   ============================================ */
 
 .article-actions {
   margin: 30px 0;
@@ -3067,10 +2983,6 @@ body[data-article-spacing="relaxed"] .article-content li {
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
 }
 
-/* =====================================================
-   Back-to-Top Button Position on Article Pages
-   Moved up to avoid overlap with TTS mini player
-   ===================================================== */
 .back-to-top {
   bottom: 100px;
   right: 30px;

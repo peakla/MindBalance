@@ -1,9 +1,4 @@
-/* ============================================
-   ENHANCED SETTINGS MODAL
-   A comprehensive, full-featured settings experience
-   ============================================ */
-
-/* Modal Overlay */
+/* === MODAL OVERLAY === */
 .settings-modal-overlay {
   position: fixed;
   top: 0;
@@ -23,7 +18,7 @@
   visibility: visible;
 }
 
-/* Modal Container */
+/* === MODAL CONTAINER === */
 .settings-modal {
   position: fixed;
   top: 50%;
@@ -55,7 +50,7 @@
   box-shadow: 0 25px 80px rgba(0, 0, 0, 0.5);
 }
 
-/* Left Sidebar - Categories */
+/* === SIDEBAR === */
 .settings-sidebar {
   width: 240px;
   background: linear-gradient(180deg, #f8f6f3 0%, #f0ece5 100%);
@@ -99,7 +94,7 @@
   color: var(--user-accent, #af916d);
 }
 
-/* Category Tabs */
+/* === CATEGORY TABS === */
 .settings-categories {
   flex: 1;
   padding: 16px 12px;
@@ -156,7 +151,7 @@
   flex-shrink: 0;
 }
 
-/* Accessibility Score in Sidebar */
+/* === ACCESSIBILITY SCORE === */
 .settings-accessibility-score {
   padding: 20px;
   border-top: 1px solid rgba(0, 0, 0, 0.08);
@@ -224,7 +219,7 @@
   color: rgba(255, 255, 255, 0.6);
 }
 
-/* Main Content Area */
+/* === MAIN CONTENT === */
 .settings-main {
   flex: 1;
   display: flex;
@@ -232,7 +227,7 @@
   overflow: hidden;
 }
 
-/* Header with Close & Sync */
+/* === MAIN HEADER === */
 .settings-main-header {
   display: flex;
   align-items: center;
@@ -263,7 +258,7 @@
   gap: 12px;
 }
 
-/* Sync Indicator */
+/* === SYNC INDICATOR === */
 .settings-sync-indicator {
   display: flex;
   align-items: center;
@@ -290,7 +285,7 @@
   font-size: 14px;
 }
 
-/* Before/After Toggle */
+/* === COMPARE TOGGLE === */
 .settings-compare-toggle {
   display: flex;
   align-items: center;
@@ -324,7 +319,7 @@
   background: rgba(255, 255, 255, 0.15);
 }
 
-/* Close Button */
+/* === CLOSE BUTTON === */
 .settings-close-btn {
   width: 36px;
   height: 36px;
@@ -360,7 +355,7 @@
   color: rgba(255, 255, 255, 0.7);
 }
 
-/* Content Panels */
+/* === CONTENT PANELS === */
 .settings-content {
   flex: 1;
   overflow-y: auto;
@@ -381,7 +376,7 @@
   to { opacity: 1; transform: translateY(0); }
 }
 
-/* Theme Presets Section */
+/* === SECTIONS === */
 .settings-section {
   margin-bottom: 32px;
 }
@@ -400,7 +395,7 @@
   color: rgba(255, 255, 255, 0.9);
 }
 
-/* Theme Preset Cards */
+/* === THEME PRESETS === */
 .theme-presets-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
@@ -451,7 +446,6 @@
   font-size: 12px;
 }
 
-/* Preset: Default */
 .theme-preset-default {
   background: linear-gradient(135deg, #f8f6f3 0%, #fff 100%);
 }
@@ -459,7 +453,6 @@
   background: linear-gradient(90deg, #af916d 0%, #d4a574 100%);
 }
 
-/* Preset: Calm Ocean */
 .theme-preset-ocean {
   background: linear-gradient(135deg, #e8f4f8 0%, #fff 100%);
 }
@@ -467,7 +460,6 @@
   background: linear-gradient(90deg, #4a90d9 0%, #38b2ac 100%);
 }
 
-/* Preset: Warm Sunset */
 .theme-preset-sunset {
   background: linear-gradient(135deg, #fef3e8 0%, #fff 100%);
 }
@@ -475,7 +467,6 @@
   background: linear-gradient(90deg, #e09c5c 0%, #e07070 100%);
 }
 
-/* Preset: Forest Green */
 .theme-preset-forest {
   background: linear-gradient(135deg, #e8f5f0 0%, #fff 100%);
 }
@@ -483,7 +474,6 @@
   background: linear-gradient(90deg, #4db896 0%, #38b2ac 100%);
 }
 
-/* Preset: Night Mode */
 .theme-preset-night {
   background: linear-gradient(135deg, #2d2d4a 0%, #1a1a2e 100%);
   color: #fff;
@@ -492,7 +482,6 @@
   background: linear-gradient(90deg, #9b7ed9 0%, #6366f1 100%);
 }
 
-/* Preset: High Contrast */
 .theme-preset-contrast {
   background: #000;
   color: #fff;
@@ -513,7 +502,6 @@
   opacity: 0.7;
 }
 
-/* Dark Mode: Force dark text on light-background preset cards */
 [data-theme="dark"] .theme-preset-default,
 [data-theme="dark"] .theme-preset-ocean,
 [data-theme="dark"] .theme-preset-sunset,
@@ -532,7 +520,7 @@
   color: #1a1a2e;
 }
 
-/* Settings Item Rows */
+/* === SETTINGS ITEMS === */
 .settings-item {
   display: flex;
   align-items: center;
@@ -596,7 +584,7 @@
   color: rgba(255, 255, 255, 0.6);
 }
 
-/* Toggle Switch - Enhanced */
+/* === TOGGLE SWITCH === */
 .settings-toggle {
   position: relative;
   width: 52px;
@@ -643,7 +631,7 @@
   transform: translateX(24px);
 }
 
-/* Select Dropdown - Enhanced */
+/* === SELECT DROPDOWN === */
 .settings-select {
   padding: 10px 36px 10px 14px;
   border: 1px solid rgba(0, 0, 0, 0.12);
@@ -675,7 +663,7 @@
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23fff' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
 }
 
-/* Accent Color Picker - Enhanced */
+/* === ACCENT COLOR PICKER === */
 .accent-color-grid {
   display: flex;
   flex-wrap: wrap;
@@ -717,7 +705,7 @@
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
 }
 
-/* Live Preview Section */
+/* === LIVE PREVIEW === */
 .settings-preview {
   background: rgba(0, 0, 0, 0.03);
   border-radius: 16px;
@@ -776,7 +764,7 @@
   font-weight: 600;
 }
 
-/* Reset Button */
+/* === RESET BUTTON === */
 .settings-reset-btn {
   display: flex;
   align-items: center;
@@ -811,7 +799,7 @@
   color: #e07070;
 }
 
-/* Onboarding Overlay */
+/* === ONBOARDING === */
 .settings-onboarding {
   position: absolute;
   top: 0;
@@ -919,7 +907,7 @@
   color: #666;
 }
 
-/* Mobile Responsive */
+/* === MOBILE RESPONSIVE === */
 @media (max-width: 768px) {
   .settings-modal {
     width: 100%;

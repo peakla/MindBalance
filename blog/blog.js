@@ -1,10 +1,9 @@
-// Blog Accessibility Features
-// Text-to-Speech, Reading Mode, Reading Progress
+// ==================== BLOG ====================
 
 (function() {
   'use strict';
 
-  // Translation helper
+  // --- Translation Helper ---
   function getTranslation(key, fallback) {
     if (window.translations) {
       const lang = localStorage.getItem('mindbalance-language') || 'en';
@@ -17,9 +16,7 @@
     return fallback;
   }
 
-  // =====================
-  // TEXT-TO-SPEECH
-  // =====================
+  // ==================== TEXT-TO-SPEECH ====================
   let speechSynthesis = window.speechSynthesis;
   let currentUtterance = null;
   let isPlaying = false;
@@ -128,9 +125,7 @@
     });
   }
 
-  // =====================
-  // READING MODE
-  // =====================
+  // ==================== READING MODE ====================
   let readingModeEnabled = localStorage.getItem('mindbalance-reading-mode') === 'true';
 
   function toggleReadingMode() {
@@ -178,9 +173,7 @@
     applyReadingMode();
   }
 
-  // =====================
-  // READING PROGRESS BAR
-  // =====================
+  // ==================== READING PROGRESS ====================
   function updateReadingProgress() {
     const progressFill = document.querySelector('.mb-readingProgress__fill');
     const progressBar = document.querySelector('.mb-readingProgress');
@@ -213,9 +206,7 @@
     updateReadingProgress();
   }
 
-  // =====================
-  // KEYBOARD NAVIGATION
-  // =====================
+  // ==================== KEYBOARD NAVIGATION ====================
   function enhanceKeyboardNav() {
     const articles = document.querySelectorAll('.mb-featureCard, .mb-postCard, .mb-listPost, .mb-miniCard');
     
@@ -234,9 +225,7 @@
     });
   }
 
-  // =====================
-  // HOVER EFFECTS ENHANCEMENT
-  // =====================
+  // ==================== HOVER EFFECTS ====================
   function addHoverEffects() {
     const cards = document.querySelectorAll('.mb-postCard, .mb-listPost, .mb-miniCard');
     
@@ -259,9 +248,7 @@
     });
   }
 
-  // =====================
-  // INIT
-  // =====================
+  // ==================== INITIALIZATION ====================
   function init() {
     addTTSButtons();
     createReadingModeToggle();
@@ -278,6 +265,7 @@
     init();
   }
 
+  // --- Public API ---
   window.MindBalanceBlog = {
     stopSpeech,
     toggleReadingMode

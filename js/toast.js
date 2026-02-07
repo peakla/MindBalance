@@ -1,3 +1,5 @@
+// ==================== TOAST NOTIFICATIONS ====================
+
 const ToastManager = (function() {
   let container = null;
   

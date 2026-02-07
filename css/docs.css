@@ -1,20 +1,14 @@
-/* ===========================================
-   MindBalance Documentation Page Styles
-   Elegant, professional design matching site theme
-   =========================================== */
-
-/* Documentation page main content - light mode by default */
+/* === PAGE BACKGROUND === */
 .docs-page #main-content {
   background: linear-gradient(180deg, #f8f9fa 0%, #e9ecef 100%);
   min-height: 100vh;
 }
 
-/* Dark mode support for docs page */
 [data-theme="dark"] .docs-page #main-content {
   background: linear-gradient(180deg, #1a1a2e 0%, #16213e 100%);
 }
 
-/* Documentation Container - positioned below navbar */
+/* === CONTAINER === */
 .docs-container {
   max-width: 1100px;
   margin: 0 auto;
@@ -22,7 +16,7 @@
   min-height: 60vh;
 }
 
-/* Documentation Header */
+/* === HEADER === */
 .docs-header {
   text-align: center;
   padding: 2.5rem 0 3rem;
@@ -77,14 +71,14 @@
   color: var(--quick-silver, #a3a3a3);
 }
 
-/* Main Content Area */
+/* === MAIN CONTENT === */
 .docs-main {
   display: flex;
   flex-direction: column;
   gap: 2.5rem;
 }
 
-/* Section Base Styling - Light mode by default */
+/* === SECTIONS === */
 .docs-section {
   background: #ffffff;
   border: 1px solid #e0e0e0;
@@ -105,7 +99,7 @@
   box-shadow: 0 12px 40px rgba(0, 0, 0, 0.35);
 }
 
-/* PDF Section - Special Gradient Styling */
+/* === PDF SECTION === */
 .docs-section--pdfs {
   background: linear-gradient(135deg, #1b4332 0%, #2d6a4f 50%, #40916c 100%);
   border: none;
@@ -133,7 +127,7 @@
   color: rgba(255, 255, 255, 0.9);
 }
 
-/* Section Titles - Light mode by default */
+/* === SECTION TITLES === */
 .docs-section__title {
   display: flex;
   align-items: center;
@@ -170,7 +164,7 @@
   color: var(--quick-silver, #a3a3a3);
 }
 
-/* PDF Cards Grid */
+/* === PDF CARDS === */
 .docs-pdf-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -238,7 +232,7 @@
   opacity: 1;
 }
 
-/* Content Text - Light mode by default */
+/* === CONTENT TEXT === */
 .docs-content {
   color: #444444;
   line-height: 1.8;
@@ -265,7 +259,7 @@
   color: var(--white, #ffffff);
 }
 
-/* Features List - Light mode by default */
+/* === FEATURES LIST === */
 .docs-features {
   display: flex;
   flex-direction: column;
@@ -335,7 +329,7 @@
   color: var(--quick-silver, #a3a3a3);
 }
 
-/* Tech Stack Grid - Light mode by default */
+/* === TECH STACK === */
 .docs-tech-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
@@ -400,7 +394,7 @@
   border-radius: 50%;
 }
 
-/* CTA Section */
+/* === CTA SECTION === */
 .docs-section--cta {
   background: transparent;
   border: none;
@@ -438,10 +432,7 @@
   font-size: 1.3rem;
 }
 
-/* =========================================
-   Responsive Design
-   ========================================= */
-
+/* === RESPONSIVE === */
 @media (max-width: 992px) {
   .docs-container {
     padding: 2rem 1.5rem 3rem;
@@ -529,4 +520,3 @@
     font-size: 1rem;
   }
 }
-

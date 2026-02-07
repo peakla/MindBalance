@@ -1,12 +1,12 @@
-/* ===== AI WELLNESS INSIGHTS =====*/
-/* Fetch and display AI-powered wellness insights in the profile */
+// ==================== AI WELLNESS INSIGHTS ====================
 
 (function() {
   'use strict';
   
+  // --- State ---
   let insightsLoaded = false;
   
-  // Pool of varied fallback messages to avoid showing the same one
+  // --- Fallback Messages ---
   const FALLBACK_MESSAGES = [
     { message: 'Keep tracking your wellness journey - every step counts!', affirmation: 'You are capable of amazing things.' },
     { message: 'Your dedication to self-care makes a real difference.', affirmation: 'Every day is a chance to grow stronger.' },
@@ -23,7 +23,7 @@
     return FALLBACK_MESSAGES[index];
   }
   
-  // Sanitize text to prevent XSS - escape HTML entities
+  // --- Sanitization ---
   function sanitizeText(text) {
     if (!text || typeof text !== 'string') return '';
     const div = document.createElement('div');
@@ -31,6 +31,7 @@
     return div.innerHTML;
   }
   
+  // --- Load AI Insights ---
   let retryCount = 0;
   const MAX_RETRIES = 5;
   
@@ -45,7 +46,6 @@
       return;
     }
     
-    // Helper to show fallback content
     function showFallback(message, affirmation, isFinal = true) {
       contentEl.innerHTML = '';
       const p = document.createElement('p');
@@ -60,7 +60,6 @@
       }
     }
     
-    // Check if Supabase is available - retry if not
     if (!window.supabaseClient) {
       retryCount++;
       if (retryCount < MAX_RETRIES) {
@@ -81,7 +80,6 @@
         return;
       }
       
-      // Fetch user wellness data in parallel
       const [moodResult, goalsResult, profileResult] = await Promise.all([
         window.supabaseClient
           .from('mood_logs')
@@ -104,7 +102,6 @@
       const goalsData = goalsResult.data || [];
       const profile = profileResult.data || {};
       
-      // Call AI insights API with timeout
       const controller = new AbortController();
       const timeoutId = setTimeout(() => controller.abort(), 15000);
       
@@ -158,6 +155,7 @@
     }
   }
   
+  // --- Mood Analysis ---
   async function loadMoodAnalysis() {
     try {
       const { data: { user } } = await window.supabaseClient.auth.getUser();
@@ -183,6 +181,7 @@
     }
   }
   
+  // --- Goal Suggestions ---
   async function getGoalSuggestion() {
     try {
       const { data: { user } } = await window.supabaseClient.auth.getUser();
@@ -212,20 +211,18 @@
     }
   }
   
-  // Display mood analysis in the mood insights section
+  // --- Display Mood Analysis ---
   async function displayMoodAnalysis() {
     const moodTrendEl = document.getElementById('moodTrendValue');
     if (!moodTrendEl) return;
     
     const result = await loadMoodAnalysis();
     if (result && result.success !== false) {
-      // Update the mood trend with AI-powered analysis
       if (result.analysis) {
         moodTrendEl.textContent = result.analysis.split(' ')[0] || 'Stable';
         moodTrendEl.title = result.analysis;
       }
       
-      // Show suggestion as a toast or update UI
       if (result.suggestion) {
         const suggestionEl = document.createElement('div');
         suggestionEl.className = 'ai-mood-suggestion';
@@ -247,21 +244,18 @@
     }
   }
   
-  // Display goal suggestion in the goals section
+  // --- Display Goal Suggestion ---
   async function displayGoalSuggestion() {
     const goalsSection = document.querySelector('.mb-profile__wellness-section:has(.mb-profile__goals-list), .mb-profile__goals-section');
     if (!goalsSection) return;
     
-    // Check if suggestion already exists
     if (goalsSection.querySelector('.ai-goal-suggestion')) return;
     
     const result = await getGoalSuggestion();
     if (result && result.success !== false && result.goal) {
-      // Build elements safely to prevent XSS
       const suggestionEl = document.createElement('div');
       suggestionEl.className = 'ai-goal-suggestion glass-card';
       
-      // Header
       const header = document.createElement('div');
       header.className = 'ai-goal-suggestion__header';
       const headerIcon = document.createElement('ion-icon');
@@ -271,17 +265,14 @@
       header.appendChild(headerIcon);
       header.appendChild(headerText);
       
-      // Goal text
       const goalText = document.createElement('p');
       goalText.className = 'ai-goal-suggestion__text';
       goalText.textContent = result.goal;
       
-      // Reason
       const reasonText = document.createElement('p');
       reasonText.className = 'ai-goal-suggestion__reason';
       reasonText.textContent = result.why || '';
       
-      // Add button with event listener (not inline onclick)
       const addBtn = document.createElement('button');
       addBtn.className = 'ai-goal-suggestion__add';
       const btnIcon = document.createElement('ion-icon');
@@ -289,7 +280,6 @@
       addBtn.appendChild(btnIcon);
       addBtn.appendChild(document.createTextNode(' Add This Goal'));
       
-      // Store goal data safely
       const goalData = {
         title: result.goal,
         category: result.category || 'mindfulness'
@@ -299,13 +289,11 @@
         window.addSuggestedGoal(goalData.title, goalData.category);
       });
       
-      // Assemble
       suggestionEl.appendChild(header);
       suggestionEl.appendChild(goalText);
       suggestionEl.appendChild(reasonText);
       suggestionEl.appendChild(addBtn);
       
-      // Insert after the goals header
       const sectionHeader = goalsSection.querySelector('h3');
       if (sectionHeader && sectionHeader.nextSibling) {
         sectionHeader.parentNode.insertBefore(suggestionEl, sectionHeader.nextSibling);
@@ -315,9 +303,8 @@
     }
   }
   
-  // Load insights when wellness tab is shown
+  // --- Initialization ---
   function initAIInsights() {
-    // Observe wellness tab visibility
     const wellnessTab = document.querySelector('[data-tab="wellness"]');
     if (wellnessTab) {
       wellnessTab.addEventListener('click', () => {
@@ -329,7 +316,6 @@
       });
     }
     
-    // Also load if wellness panel is already visible
     const wellnessPanel = document.getElementById('wellnessPanel');
     if (wellnessPanel && wellnessPanel.classList.contains('is-active')) {
       setTimeout(() => {
@@ -339,7 +325,6 @@
       }, 500);
     }
     
-    // Load when profile data is ready
     window.addEventListener('profileLoaded', () => {
       const wellnessPanel = document.getElementById('wellnessPanel');
       if (wellnessPanel && wellnessPanel.classList.contains('is-active')) {
@@ -350,7 +335,7 @@
     });
   }
   
-  // Global function to add a suggested goal
+  // --- Add Suggested Goal ---
   window.addSuggestedGoal = async function(title, category) {
     if (!window.supabaseClient) return;
     
@@ -367,18 +352,15 @@
           completed: false
         });
       
-      // Remove the suggestion element
       const suggestionEl = document.querySelector('.ai-goal-suggestion');
       if (suggestionEl) {
         suggestionEl.remove();
       }
       
-      // Reload goals if function exists
       if (typeof window.loadWellnessGoals === 'function') {
         window.loadWellnessGoals();
       }
       
-      // Show success feedback
       if (window.ImmersiveProfile?.triggerHaptic) {
         window.ImmersiveProfile.triggerHaptic('medium');
       }
@@ -387,15 +369,13 @@
     }
   };
 
-  
-  // Expose functions globally
+  // --- Public API ---
   window.AIWellness = {
     loadInsights: loadAIInsights,
     getMoodAnalysis: loadMoodAnalysis,
     getGoalSuggestion: getGoalSuggestion
   };
   
-  // Initialize when DOM is ready
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', initAIInsights);
   } else {

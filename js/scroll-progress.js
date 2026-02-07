@@ -1,3 +1,5 @@
+// ==================== SCROLL PROGRESS ====================
+
 (function() {
   'use strict';
   

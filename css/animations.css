@@ -1,13 +1,4 @@
-/* ================================================== */
-/* MINDBALANCE - SHARED ANIMATIONS LIBRARY            */
-/* Consistent page animations across all pages        */
-/* ================================================== */
-
-/* ========================== */
-/* BASE ANIMATION STATES      */
-/* ========================== */
-
-/* Elements start hidden and animate in */
+/* === BASE ANIMATION STATES === */
 .animate-fade-in,
 .animate-slide-up,
 .animate-slide-left,
@@ -43,7 +34,7 @@
   transform: translateY(20px);
 }
 
-/* Visible state - applied by JavaScript */
+/* === VISIBLE STATES === */
 .animate-fade-in.is-visible,
 .animate-slide-up.is-visible,
 .animate-slide-left.is-visible,
@@ -55,10 +46,7 @@
   filter: blur(0);
 }
 
-/* ========================== */
-/* STAGGERED ANIMATIONS       */
-/* ========================== */
-
+/* === STAGGERED ANIMATIONS === */
 .animate-stagger > * {
   opacity: 0;
   transform: translateY(30px);
@@ -83,10 +71,7 @@
   transform: translateY(0);
 }
 
-/* ========================== */
-/* KEYFRAME ANIMATIONS        */
-/* ========================== */
-
+/* === KEYFRAME ANIMATIONS === */
 @keyframes fadeInUp {
   from {
     opacity: 0;
@@ -237,10 +222,7 @@
   }
 }
 
-/* ========================== */
-/* HOVER ANIMATIONS           */
-/* ========================== */
-
+/* === HOVER ANIMATIONS === */
 .hover-lift {
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
@@ -297,10 +279,7 @@
   left: 100%;
 }
 
-/* ========================== */
-/* CONTINUOUS ANIMATIONS      */
-/* ========================== */
-
+/* === CONTINUOUS ANIMATIONS === */
 .animate-float {
   animation: float 3s ease-in-out infinite;
 }
@@ -331,10 +310,7 @@
   animation: rotate 10s linear infinite;
 }
 
-/* ========================== */
-/* PAGE LOAD ANIMATIONS       */
-/* ========================== */
-
+/* === PAGE LOAD ANIMATIONS === */
 .page-enter {
   animation: fadeInUp 0.6s ease forwards;
 }
@@ -359,10 +335,7 @@
   opacity: 0;
 }
 
-/* ========================== */
-/* CARD ANIMATIONS            */
-/* ========================== */
-
+/* === CARD ANIMATIONS === */
 .card-animated {
   transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275),
               box-shadow 0.4s ease,
@@ -378,10 +351,7 @@
   box-shadow: 0 25px 50px rgba(0, 0, 0, 0.4);
 }
 
-/* ========================== */
-/* BUTTON ANIMATIONS          */
-/* ========================== */
-
+/* === BUTTON ANIMATIONS === */
 .btn-animated {
   position: relative;
   overflow: hidden;
@@ -412,10 +382,7 @@
   pointer-events: none;
 }
 
-/* ========================== */
-/* SECTION DECORATIONS        */
-/* ========================== */
-
+/* === SECTION DECORATIONS === */
 .section-decorated {
   position: relative;
 }
@@ -436,10 +403,7 @@
   background: linear-gradient(135deg, #d6bd9f 0%, #8b7355 100%);
 }
 
-/* ========================== */
-/* GRADIENT TEXT              */
-/* ========================== */
-
+/* === GRADIENT TEXT === */
 .gradient-text {
   background: linear-gradient(135deg, #8b7355 0%, #d6bd9f 50%, #8b7355 100%);
   -webkit-background-clip: text;
@@ -466,10 +430,7 @@
   background-size: 200% auto;
 }
 
-/* ========================== */
-/* QUOTE CALLOUT - ENHANCED   */
-/* ========================== */
-
+/* === QUOTE BLOCK === */
 .quote-block {
   position: relative;
   padding: 50px 60px;
@@ -584,7 +545,6 @@
   animation: float 4s ease-in-out infinite 1s;
 }
 
-/* Dark mode for enhanced quote */
 [data-theme="dark"] .quote-block {
   background: linear-gradient(145deg, #2a2a4a 0%, #252542 50%, #1f1f3a 100%);
   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4), 
@@ -614,7 +574,7 @@
   background: radial-gradient(circle, rgba(214, 189, 159, 0.08) 0%, transparent 70%);
 }
 
-/* Responsive quote block */
+/* === RESPONSIVE === */
 @media (max-width: 768px) {
   .quote-block {
     padding: 35px 25px;
@@ -661,10 +621,7 @@
   }
 }
 
-/* ========================== */
-/* WAVE DIVIDERS              */
-/* ========================== */
-
+/* === WAVE DIVIDERS === */
 .wave-divider {
   position: relative;
   height: 80px;
@@ -682,10 +639,7 @@
   transform: rotate(180deg);
 }
 
-/* ========================== */
-/* SKELETON LOADING           */
-/* ========================== */
-
+/* === SKELETON LOADING === */
 .skeleton {
   background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
   background-size: 200% 100%;
@@ -698,10 +652,7 @@
   background-size: 200% 100%;
 }
 
-/* ========================== */
-/* REDUCED MOTION             */
-/* ========================== */
-
+/* === REDUCED MOTION === */
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,

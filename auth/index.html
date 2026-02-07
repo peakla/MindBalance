@@ -1,5 +1,6 @@
 <!doctype html>
 <html lang="en">
+<!-- ===== HEAD ===== -->
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -15,7 +16,7 @@
   
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   
-  <!-- Apply saved theme immediately to prevent flash -->
+  
   <script>
     (function() {
       var theme = localStorage.getItem('mindbalance_theme') || 'light';
@@ -63,18 +64,18 @@
       margin-top: 0 !important;
     }
     
-    /* Hide global header on auth page */
+    
     header, .navbar, nav, .top-bar, .top-header, #header {
       display: none !important;
     }
     
-    /* Split screen layout */
+    
     .auth-wrapper {
       display: flex;
       min-height: 100vh;
     }
     
-    /* Left decorative panel */
+    
     .auth-panel {
       flex: 1;
       background: var(--panel-bg);
@@ -234,7 +235,7 @@
       font-weight: 600;
     }
     
-    /* Right form section */
+    
     .auth-form-section {
       flex: 1;
       display: flex;
@@ -290,7 +291,7 @@
       line-height: 1.6;
     }
     
-    /* Enhanced form inputs */
+    
     .form-group {
       margin-bottom: 1.25rem;
       position: relative;
@@ -352,7 +353,7 @@
       margin-bottom: 0.5rem;
     }
     
-    /* Password toggle */
+    
     .password-toggle {
       position: absolute;
       right: 16px;
@@ -376,7 +377,7 @@
       display: flex;
     }
     
-    /* Buttons */
+    
     .btn {
       width: 100% !important;
       display: flex !important;
@@ -461,7 +462,7 @@
       box-shadow: 0 4px 12px rgba(59, 130, 246, 0.2);
     }
     
-    /* Force all buttons in form to be full width */
+    
     .form-section .btn,
     #formSection .btn,
     .card .btn {
@@ -502,7 +503,7 @@
       font-size: 1rem;
     }
     
-    /* Messages */
+    
     .message {
       margin-top: 1.5rem;
       padding: 16px 18px;
@@ -547,7 +548,7 @@
       border: 1px solid var(--border);
     }
     
-    /* Divider */
+    
     .divider {
       display: flex;
       align-items: center;
@@ -566,7 +567,7 @@
       background: var(--border);
     }
     
-    /* Help text */
+    
     .help-text {
       margin-top: 1.5rem;
       padding: 14px 16px;
@@ -585,7 +586,7 @@
       margin-top: 2px;
     }
     
-    /* Back link */
+    
     .back-link {
       display: flex;
       align-items: center;
@@ -602,7 +603,7 @@
       color: var(--primary);
     }
     
-    /* User info (signed in state) */
+    
     .user-info {
       display: none;
       text-align: center;
@@ -660,7 +661,7 @@
       display: none;
     }
     
-    /* Animations */
+    
     @keyframes fadeSlideUp {
       from {
         opacity: 0;
@@ -677,7 +678,7 @@
       to { opacity: 1; }
     }
     
-    /* Responsive */
+    
     @media (max-width: 992px) {
       .auth-panel {
         display: none;
@@ -711,7 +712,7 @@
       }
     }
     
-    /* Dark mode support */
+    
     [data-theme="dark"],
     body.dark-mode {
       --bg: #1a1a2e;
@@ -977,7 +978,7 @@
       color: #9b7ed9;
     }
     
-    /* Preloader styles */
+    
     .preload {
       position: fixed;
       top: 0;
@@ -1019,12 +1020,10 @@
 </head>
 <body>
 
-<!-- Preloader -->
 <div class="preload" data-preaload>
   <img src="/assets/images/preload.gif" alt="Loading..." class="loader-gif" decoding="async">
 </div>
 
-<!-- SVG Filters for Colorblind Accessibility -->
 <svg style="position: absolute; width: 0; height: 0; overflow: hidden;" aria-hidden="true">
   <defs>
     <filter id="protanopia-filter">
@@ -1052,7 +1051,7 @@
 </svg>
 
 <div class="auth-wrapper">
-  <!-- Left decorative panel -->
+  
   <div class="auth-panel">
     <div class="panel-content">
       <img src="/assets/images/MindBalanceLogo.svg" alt="MindBalance" class="panel-logo">
@@ -1100,7 +1099,7 @@
     </div>
   </div>
   
-  <!-- Right form section -->
+  
   <div class="auth-form-section">
     <div class="auth-container">
       <div class="mobile-logo">
@@ -1196,14 +1195,12 @@
 </div>
 
 <script>
-  // Preloader handler
   const preloader = document.querySelector("[data-preaload]");
   window.addEventListener("load", function () {
     document.body.classList.add("loaded");
     if (preloader) preloader.classList.add("loaded");
   });
 
-  // Load theme from localStorage
   const savedTheme = localStorage.getItem('theme');
   if (savedTheme === 'dark') {
     document.documentElement.setAttribute('data-theme', 'dark');
@@ -1225,7 +1222,6 @@
   const formSection = document.getElementById("formSection");
   const actionBtns = document.getElementById("actionBtns");
 
-  // Password visibility toggle with SVG icons
   const eyeOpenPath = '<path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/>';
   const eyeClosedPath = '<path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"/><line x1="1" y1="1" x2="23" y2="23"/>';
   
@@ -1375,7 +1371,6 @@
       return;
     }
     
-    // Create basic user profile - display name will be set via onboarding modal
     if (data.user) {
       const { error: profileError } = await sb.from('user_profiles').upsert({
         id: data.user.id,
@@ -1443,9 +1438,9 @@
   <ion-icon name="chevron-up-outline"></ion-icon>
 </button>
 
-<!-- FOOTER -->
+<!-- ===== FOOTER ===== -->
 <footer id="footer" class="mb-footer" aria-label="Site footer">
-  <!-- Animated Wave Separator -->
+  
   <div class="mb-footer__wave">
     <svg viewBox="0 0 1200 120" preserveAspectRatio="none">
       <path class="wave-path wave-1" d="M0,60 Q150,20 300,60 T600,60 T900,60 T1200,60 L1200,120 L0,120 Z"></path>
@@ -1455,14 +1450,14 @@
   </div>
 
   <div class="mb-footer__top">
-    <!-- Decorative Pattern Overlay -->
+    
     <div class="mb-footer__pattern"></div>
     
     <div class="mb-footer__wrap">
-      <!-- Row 1: Main Content -->
+      
       <div class="mb-footer__main-grid">
 
-        <!-- Brand / About -->
+        
         <section class="mb-footer__col" aria-label="About MindBalance">
           <h3 class="mb-footer__brand" data-translate="footer_brand">MindBalance</h3>
           <p class="mb-footer__text" data-translate="footer_about">
@@ -1471,7 +1466,7 @@
           </p>
           <a class="mb-footer__link" href="/support/" data-translate="footer_read_more">Read more →</a>
           
-          <!-- Trust Badges -->
+          
           <div class="mb-footer__trust">
             <div class="mb-footer__badge">
               <ion-icon name="shield-checkmark-outline"></ion-icon>
@@ -1488,7 +1483,8 @@
           </div>
         </section>
 
-        <!-- Pages (Collapsible on Mobile) -->
+        
+<!-- ===== NAVBAR ===== -->
         <nav class="mb-footer__col mb-footer__accordion" aria-label="Footer navigation">
           <button class="mb-footer__accordion-btn" aria-expanded="false">
             <h4 class="mb-footer__heading" data-translate="footer_pages">Pages</h4>
@@ -1504,7 +1500,7 @@
           </ul>
         </nav>
 
-        <!-- Topics / Tags -->
+        
         <section class="mb-footer__col" aria-label="Popular topics">
           <h4 class="mb-footer__heading" data-translate="footer_topics">Popular Topics</h4>
           <div class="mb-footer__tags">
@@ -1517,7 +1513,7 @@
           </div>
         </section>
 
-        <!-- Take Action + Contact -->
+        
         <section class="mb-footer__col" aria-label="Take action">
           <h4 class="mb-footer__heading" data-translate="footer_action">Take Action</h4>
 
@@ -1542,9 +1538,9 @@
         </section>
       </div>
 
-      <!-- Row 2: Newsletter + Recent Posts -->
+      
       <div class="mb-footer__extras">
-        <!-- Newsletter Signup -->
+        
         <section class="mb-footer__newsletter" aria-label="Newsletter signup">
           <div class="mb-footer__newsletter-content">
             <ion-icon name="mail-outline" class="newsletter-icon"></ion-icon>
@@ -1563,7 +1559,7 @@
           <p class="mb-footer__newsletter-note" data-translate="footer_privacy_note">We respect your privacy. Unsubscribe anytime.</p>
         </section>
 
-        <!-- Recent Blog Posts -->
+        
         <section class="mb-footer__recent" aria-label="Recent articles">
           <h4 class="mb-footer__heading" data-translate="footer_latest_articles">Latest Articles</h4>
           <div class="mb-footer__posts">
@@ -1598,7 +1594,7 @@
         </section>
       </div>
 
-      <!-- Footer Controls: Language & Theme -->
+      
       <div class="mb-footer__controls">
         <div class="mb-footer__control-group">
           <ion-icon name="language-outline"></ion-icon>
@@ -1624,7 +1620,7 @@
     </div>
   </div>
 
-  <!-- Bottom bar -->
+  
   <div class="mb-footer__bottom">
     <div class="mb-footer__wrap mb-footer__bottomwrap">
       <p class="mb-footer__copy">
@@ -1640,10 +1636,10 @@
   </div>
 </footer>
 
+<!-- ===== SCRIPTS ===== -->
 <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js" defer></script>
 <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js" defer></script>
 <script src="../js/settings.js" defer></script>
 <script src="../js/footer.js" defer></script>
-  <script src="/js/security.js"></script>
 </body>
 </html>

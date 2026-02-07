@@ -1,12 +1,9 @@
-/**
- * Quote Banner & Daily Wellness Tip
- * Rotating inspirational quotes and daily wellness tips with translations
- */
+// ==================== QUOTE BANNER & WELLNESS TIP ====================
 
 (function() {
   'use strict';
 
-  // Quotes data with translation keys
+  // --- Quotes Data ---
   const quotes = [
     { text: 'quote_1_text', author: 'quote_1_author' },
     { text: 'quote_2_text', author: 'quote_2_author' },
@@ -17,7 +14,6 @@
     { text: 'quote_7_text', author: 'quote_7_author' }
   ];
 
-  // Fallback quotes (English)
   const fallbackQuotes = {
     quote_1_text: "You don't have to control your thoughts. You just have to stop letting them control you.",
     quote_1_author: "Dan Millman",
@@ -35,7 +31,7 @@
     quote_7_author: "Stephen Covey"
   };
 
-  // Daily wellness tips with translation keys
+  // --- Wellness Tips Data ---
   const wellnessTips = [
     { title: 'tip_sunday_title', text: 'tip_sunday_text', icon: '🌅', link: '/articles/mindfulness.html' },
     { title: 'tip_monday_title', text: 'tip_monday_text', icon: '🎯', link: '/support/' },
@@ -46,7 +42,6 @@
     { title: 'tip_saturday_title', text: 'tip_saturday_text', icon: '💤', link: '/articles/sleep.html' }
   ];
 
-  // Fallback tips (English)
   const fallbackTips = {
     tip_sunday_title: "Start Fresh",
     tip_sunday_text: "Begin your week with intention. Take 5 minutes to set a simple wellness goal for the week ahead.",
@@ -65,20 +60,17 @@
     tip_day_label: "Today's Wellness Tip"
   };
 
+  // --- State ---
   let currentQuoteIndex = 0;
   let autoRotateInterval = null;
   let translations = {};
 
-  /**
-   * Get translation with fallback
-   */
+  // --- Translation Helper ---
   function t(key) {
     return translations[key] || fallbackQuotes[key] || fallbackTips[key] || key;
   }
 
-  /**
-   * Initialize the quote banner
-   */
+  // --- Quote Banner ---
   function initQuoteBanner() {
     const banner = document.querySelector('.quote-banner');
     if (!banner) return;
@@ -89,7 +81,6 @@
 
     if (!textEl || !authorEl || !dotsContainer) return;
 
-    // Create dots
     dotsContainer.innerHTML = '';
     quotes.forEach((_, index) => {
       const dot = document.createElement('button');
@@ -100,24 +91,19 @@
       dotsContainer.appendChild(dot);
     });
 
-    // Display first quote
     displayQuote(0);
 
-    // Check reduced motion preference
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     
-    // Auto-rotate every 12 seconds (skip if reduced motion)
     if (!prefersReducedMotion) {
       startAutoRotate();
     }
 
-    // Pause on hover
     banner.addEventListener('mouseenter', stopAutoRotate);
     banner.addEventListener('mouseleave', () => {
       if (!prefersReducedMotion) startAutoRotate();
     });
 
-    // Pause on focus within
     banner.addEventListener('focusin', stopAutoRotate);
     banner.addEventListener('focusout', (e) => {
       if (!banner.contains(e.relatedTarget) && !prefersReducedMotion) {
@@ -126,9 +112,7 @@
     });
   }
 
-  /**
-   * Display a specific quote
-   */
+  // --- Display Quote ---
   function displayQuote(index) {
     const banner = document.querySelector('.quote-banner');
     if (!banner) return;
@@ -140,11 +124,9 @@
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
     if (prefersReducedMotion) {
-      // No animation
       textEl.textContent = t(quotes[index].text);
       authorEl.textContent = '— ' + t(quotes[index].author);
     } else {
-      // Fade out
       textEl.classList.add('fade-out');
       authorEl.classList.add('fade-out');
 
@@ -156,7 +138,6 @@
       }, 500);
     }
 
-    // Update dots
     dots.forEach((dot, i) => {
       dot.classList.toggle('active', i === index);
     });
@@ -164,9 +145,7 @@
     currentQuoteIndex = index;
   }
 
-  /**
-   * Go to a specific quote
-   */
+  // --- Quote Navigation ---
   function goToQuote(index) {
     stopAutoRotate();
     displayQuote(index);
@@ -177,25 +156,17 @@
     }
   }
 
-  /**
-   * Move to next quote
-   */
   function nextQuote() {
     const nextIndex = (currentQuoteIndex + 1) % quotes.length;
     displayQuote(nextIndex);
   }
 
-  /**
-   * Start auto-rotation
-   */
+  // --- Auto-Rotation ---
   function startAutoRotate() {
     stopAutoRotate();
     autoRotateInterval = setInterval(nextQuote, 12000);
   }
 
-  /**
-   * Stop auto-rotation
-   */
   function stopAutoRotate() {
     if (autoRotateInterval) {
       clearInterval(autoRotateInterval);
@@ -203,9 +174,7 @@
     }
   }
 
-  /**
-   * Initialize the daily wellness tip
-   */
+  // --- Wellness Tip ---
   function initWellnessTip() {
     const tipSection = document.querySelector('.wellness-tip');
     if (!tipSection) return;
@@ -218,11 +187,9 @@
 
     if (!titleEl || !textEl) return;
 
-    // Get today's day (0 = Sunday, 6 = Saturday)
     const today = new Date().getDay();
     const tip = wellnessTips[today];
 
-    // Update content using DOM APIs (XSS safe)
     titleEl.textContent = t(tip.title);
     textEl.textContent = t(tip.text);
     
@@ -240,11 +207,8 @@
     }
   }
 
-  /**
-   * Load translations and initialize
-   */
+  // --- Initialization ---
   async function init() {
-    // Try to get translations from the global cache
     const lang = localStorage.getItem('mindbalance-language') || 'en';
     
     try {
@@ -260,14 +224,13 @@
     initWellnessTip();
   }
 
-  // Initialize when DOM is ready
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', init);
   } else {
     init();
   }
 
-  // Re-initialize on language change
+  // --- Language Change Handler ---
   window.addEventListener('languageChanged', async (e) => {
     const lang = e.detail?.language || 'en';
     try {
@@ -279,7 +242,6 @@
       console.warn('Could not reload translations');
     }
     
-    // Re-display current quote with new translation
     displayQuote(currentQuoteIndex);
     initWellnessTip();
   });

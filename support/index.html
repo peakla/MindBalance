@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+<!-- ===== HEAD ===== -->
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,7 +12,7 @@
     <link rel="stylesheet" href="../css/animations.css">
     <link rel="stylesheet" href="../css/support.css">
     
-    <!-- Supabase Auth -->
+    
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="../js/auth.js" defer></script>
   <script src="../js/analytics.js" defer></script>
@@ -21,10 +22,9 @@
 </head>
 <body>
 
-<!-- SVG Filters for Colorblind Accessibility -->
 <svg style="position: absolute; width: 0; height: 0; overflow: hidden;" aria-hidden="true">
   <defs>
-    <!-- Protanopia (red-blind) filter -->
+    
     <filter id="protanopia-filter">
       <feColorMatrix type="matrix" values="
         0.567, 0.433, 0,     0, 0
@@ -32,7 +32,7 @@
         0,     0.242, 0.758, 0, 0
         0,     0,     0,     1, 0"/>
     </filter>
-    <!-- Deuteranopia (green-blind) filter -->
+    
     <filter id="deuteranopia-filter">
       <feColorMatrix type="matrix" values="
         0.625, 0.375, 0,   0, 0
@@ -40,7 +40,7 @@
         0,     0.3,   0.7, 0, 0
         0,     0,     0,   1, 0"/>
     </filter>
-    <!-- Tritanopia (blue-blind) filter -->
+    
     <filter id="tritanopia-filter">
       <feColorMatrix type="matrix" values="
         0.95, 0.05,  0,     0, 0
@@ -51,7 +51,7 @@
   </defs>
 </svg>
 
-  <!-- Preloader -->
+  
   <div class="orientation-lock"></div>
   <div class="preload" data-preaload>
     <img src="/assets/images/preload.gif" alt="Loading..." class="loader-gif" decoding="async">
@@ -60,7 +60,8 @@
     </div>
   </div>
 
-  <!-- Scroll Progress Indicator -->
+  
+<!-- ===== NAVBAR ===== -->
   <nav class="scroll-progress" aria-label="Page sections">
     <div class="scroll-progress__bar" aria-hidden="true"></div>
     <div class="scroll-progress__sections">
@@ -85,9 +86,9 @@
     </div>
   </nav>
 
-  <!-- TOP BAR -->
-  <!-- HEADER -->
-  <!-- TOP BAR -->
+  
+  
+  
   <div class="topbar">
     <div class="container">
 
@@ -126,7 +127,7 @@
     </div>
   </div>
 
-  <!-- HEADER -->
+  
   <header class="header" data-header>
     <div class="container">
 
@@ -220,8 +221,8 @@
         </ul>
         </div>
 
-        <!-- Mobile Settings Section -->
-        <!-- Mobile Settings Section (Collapsible) -->
+        
+        
         <div class="mobile-settings-section collapsed">
           <button class="mobile-settings-toggle" aria-expanded="false" aria-controls="mobileSettingsList">
             <span class="mobile-settings-title" data-translate="settings_title">Settings</span>
@@ -300,7 +301,7 @@
           </div>
         </div>
 
-        <!-- Mobile Auth Section -->
+        
         <div class="mobile-auth-section">
           <button class="mobile-auth-btn mobile-inbox-btn" onclick="openGlobalInbox(); closeNavbar();" data-auth-show>
             <ion-icon name="notifications-outline"></ion-icon>
@@ -321,7 +322,7 @@
           </a>
         </div>
 
-        <!-- Mobile Submenu Panels -->
+        
         <div class="navbar-submenu-panel" data-submenu-panel="resources">
           <div class="submenu-header">
             <button class="submenu-back-btn" aria-label="Back to main menu">
@@ -386,12 +387,11 @@
           </div>
         </div>
 
-
       </nav>
 
-      <!-- Navbar Actions (Search, Settings, User Menu, Crisis) -->
+      
       <div class="navbar-actions">
-        <!-- Search Bar -->
+        
         <div class="navbar-search" id="navbarSearch">
           <input type="text" class="navbar-search__input" placeholder="Search..." aria-label="Search site" id="searchInput">
           <button class="navbar-search__btn" aria-label="Toggle search" id="searchToggle">
@@ -400,12 +400,12 @@
           <div class="navbar-search__results" id="searchResults"></div>
         </div>
         
-        <!-- Accessibility Settings Button - Always Visible -->
+        
         <button class="navbar-settings-btn" onclick="openSettingsModal()" aria-label="Accessibility settings" title="Settings">
           <ion-icon name="settings-outline"></ion-icon>
         </button>
         
-        <!-- Consolidated User Menu -->
+        
         <div class="user-menu-wrapper" id="userMenuWrapper">
           <button class="user-menu-trigger" id="userMenuTrigger" aria-label="User menu" aria-expanded="false">
             <span class="user-icon" data-user-icon>
@@ -416,7 +416,7 @@
           </button>
           
           <div class="user-menu-dropdown" id="userMenuDropdown">
-            <!-- Signed In State -->
+            
             <div class="user-menu-signed-in" data-auth-show style="display: none;">
               <div class="user-menu-header">
                 <img src="/assets/images/default-avatar.png" alt="User avatar" class="user-avatar-large" id="userMenuAvatar">
@@ -443,7 +443,7 @@
               </div>
             </div>
             
-            <!-- Guest State -->
+            
             <div class="user-menu-guest" data-auth-hide>
               <p data-translate="user_menu_guest_text">Sign in to access your profile and notifications</p>
               <a href="/auth/" class="user-menu-signin-btn">
@@ -471,8 +471,10 @@
     </div>
   </header>
 
+<!-- ===== MAIN CONTENT ===== -->
     <main class="support-main">
-      <!-- Hero Section -->
+      
+<!-- ===== HERO ===== -->
       <section class="support-hero">
         <div class="support-hero__decorative support-hero__decorative--1" aria-hidden="true"></div>
         <div class="support-hero__decorative support-hero__decorative--2" aria-hidden="true"></div>
@@ -488,7 +490,7 @@
         </div>
       </section>
 
-      <!-- Crisis Support Section -->
+      
       <section class="crisis-section" id="crisis" aria-label="Crisis Support">
         <div class="container">
           <div class="crisis-banner">
@@ -540,7 +542,7 @@
         </div>
       </section>
 
-      <!-- Quick Links Section -->
+      
       <section class="quicklinks-section" aria-label="Quick Links">
         <div class="container">
           <div class="section-header">
@@ -595,7 +597,7 @@
         </div>
       </section>
 
-      <!-- Inspirational Quote -->
+      
       <div class="container">
         <div class="quote-block animate-scale-in">
           <div class="quote-block__decoration quote-block__decoration--1"></div>
@@ -608,7 +610,7 @@
         </div>
       </div>
 
-      <!-- Wave Separator -->
+      
       <div class="helplines-wave-separator">
         <svg viewBox="0 0 1200 120" preserveAspectRatio="none">
           <path class="wave-1" d="M0,60 C150,90 350,30 600,60 C850,90 1050,30 1200,60 L1200,120 L0,120 Z"></path>
@@ -617,9 +619,9 @@
         </svg>
       </div>
 
-      <!-- Helplines Section -->
+      
       <section class="helplines-section" id="helplines" aria-label="Helplines">
-        <!-- Decorative floating shapes -->
+        
         <div class="helplines-decoration helplines-decoration--1"></div>
         <div class="helplines-decoration helplines-decoration--2"></div>
         <div class="helplines-decoration helplines-decoration--3"></div>
@@ -634,7 +636,7 @@
             <p class="section-subtitle" data-translate="helplines_subtitle">Free, confidential support is available 24/7</p>
           </div>
 
-          <!-- Filter Pills and View Toggle -->
+          
           <div class="helplines-controls">
             <div class="helplines-filters">
               <button class="helplines-filter-pill active" data-filter="all">
@@ -667,7 +669,7 @@
             </button>
             </div>
             
-            <!-- View Toggle -->
+            
             <div class="helplines-view-toggle">
               <button class="view-toggle-btn active" data-view="grid" aria-label="Grid view">
                 <ion-icon name="grid-outline"></ion-icon>
@@ -1008,7 +1010,7 @@
         </div>
       </section>
 
-      <!-- Resources Section -->
+      
       <section class="resources-section" id="resources" aria-label="Support Resources">
         <div class="container">
           <div class="section-header">
@@ -1056,7 +1058,7 @@
         </div>
       </section>
 
-      <!-- Self-Help Tools Section -->
+      
       <section class="selfhelp-section" id="self-help" aria-label="Self-Help Tools">
         <div class="container">
           <div class="section-header">
@@ -1106,7 +1108,7 @@
         </div>
       </section>
 
-      <!-- Breathing Exercise Modal -->
+      
       <div class="wellness-modal" id="breathingModal" role="dialog" aria-modal="true" aria-labelledby="breathingModalTitle">
         <div class="wellness-modal__backdrop"></div>
         <div class="wellness-modal__content">
@@ -1161,7 +1163,7 @@
         </div>
       </div>
 
-      <!-- Grounding Exercise Modal -->
+      
       <div class="wellness-modal" id="groundingModal" role="dialog" aria-modal="true" aria-labelledby="groundingModalTitle">
         <div class="wellness-modal__backdrop"></div>
         <div class="wellness-modal__content wellness-modal__content--grounding">
@@ -1264,7 +1266,7 @@
         </div>
       </div>
 
-      <!-- Appointment Scheduling Section -->
+      
       <section class="appointment-section" id="appointment" aria-label="Schedule Appointment">
         <div class="container">
           <div class="appointment-content">
@@ -1349,10 +1351,10 @@
         </div>
       </section>
 
-      <!-- FAQ Section - Split Panel Layout -->
+      
       <section class="faq-split" id="faq" aria-label="Frequently Asked Questions">
         <div class="container">
-          <!-- FAQ Header -->
+          
           <div class="faq-split__header animate-on-scroll">
             <div class="faq-split__header-icon">
               <ion-icon name="help-circle-outline"></ion-icon>
@@ -1361,7 +1363,7 @@
             <p class="faq-split__subtitle" data-translate="faq_intro_text">At MindBalance, we believe in being open and supportive. Find answers to your questions about mental health, therapy, and getting help.</p>
           </div>
 
-          <!-- Search Bar -->
+          
           <div class="faq-split__search animate-on-scroll">
             <ion-icon name="search-outline" class="faq-split__search-icon"></ion-icon>
             <input type="text" class="faq-split__search-input" id="faqSearchInput" aria-label="Search frequently asked questions" data-translate-placeholder="faq_search_placeholder" placeholder="Search for a question...">
@@ -1370,11 +1372,11 @@
             </button>
           </div>
 
-          <!-- Split Panel Container -->
+          
           <div class="faq-split__container animate-on-scroll">
-            <!-- Left Panel - Questions List -->
+            
             <div class="faq-split__left">
-              <!-- Category Tabs -->
+              
               <div class="faq-split__tabs">
                 <button class="faq-split__tab active" data-category="all">
                   <ion-icon name="grid-outline"></ion-icon>
@@ -1398,9 +1400,9 @@
                 </button>
               </div>
 
-              <!-- Questions List -->
+              
               <div class="faq-split__questions" id="faqQuestionsList">
-                <!-- Crisis Questions -->
+                
                 <div class="faq-split__question active" data-faq-id="1" data-category="crisis" data-cat-icon="alert-circle-outline">
                   <div class="faq-split__question-num">01</div>
                   <div class="faq-split__question-content">
@@ -1429,7 +1431,7 @@
                   <span class="faq-split__tip-data" hidden data-translate="faq_tip2">Crisis lines are for anyone in distress, not just those in immediate danger. Don't hesitate to reach out if you're struggling.</span>
                 </div>
 
-                <!-- Therapy Questions -->
+                
                 <div class="faq-split__question" data-faq-id="3" data-category="therapy" data-cat-icon="medical-outline">
                   <div class="faq-split__question-num">03</div>
                   <div class="faq-split__question-content">
@@ -1542,7 +1544,7 @@
                   <span class="faq-split__tip-data" hidden data-translate="faq_tip10">Panic attacks usually peak within 10 minutes and subside within 20-30 minutes. Knowing this can help reduce fear during an attack.</span>
                 </div>
 
-                <!-- No Results -->
+                
                 <div class="faq-split__no-results" id="faqNoResults" style="display: none;">
                   <ion-icon name="search-outline"></ion-icon>
                   <p data-translate="faq_no_results">No questions match your search.</p>
@@ -1550,10 +1552,10 @@
               </div>
             </div>
 
-            <!-- Right Panel - Answer Display -->
+            
             <div class="faq-split__right">
               <div class="faq-split__answer-panel" id="faqAnswerPanel">
-                <!-- Answer Header -->
+                
                 <div class="faq-split__answer-header">
                   <span class="faq-split__answer-cat" id="faqAnswerCat">
                     <ion-icon name="alert-circle-outline"></ion-icon>
@@ -1562,15 +1564,15 @@
                   <span class="faq-split__answer-num" id="faqAnswerNum">Question 01</span>
                 </div>
 
-                <!-- Answer Question -->
+                
                 <h3 class="faq-split__answer-question" id="faqAnswerQuestion" data-translate="faq_q1">Is the 988 Lifeline really free?</h3>
 
-                <!-- Answer Content -->
+                
                 <div class="faq-split__answer-content" id="faqAnswerContent">
                   <p data-translate="faq_a1">Yes, the 988 Suicide & Crisis Lifeline is completely free and available 24/7. You can call or text 988 from anywhere in the United States. The service is confidential and staffed by trained crisis counselors.</p>
                 </div>
 
-                <!-- Related Tips -->
+                
                 <div class="faq-split__answer-tips">
                   <h4>
                     <ion-icon name="bulb-outline"></ion-icon>
@@ -1579,7 +1581,7 @@
                   <p id="faqAnswerTip">You can also text 988 if you prefer not to call. Both options connect you to the same trained counselors.</p>
                 </div>
 
-                <!-- Feedback -->
+                
                 <div class="faq-split__answer-feedback">
                   <span class="faq-split__feedback-label" data-translate="faq_helpful">Was this helpful?</span>
                   <div class="faq-split__feedback-btns">
@@ -1594,7 +1596,7 @@
                   </div>
                 </div>
 
-                <!-- Navigation -->
+                
                 <div class="faq-split__answer-nav">
                   <button class="faq-split__nav-btn faq-split__nav-prev" id="faqPrevBtn" disabled>
                     <ion-icon name="chevron-back-outline"></ion-icon>
@@ -1607,7 +1609,7 @@
                 </div>
               </div>
 
-              <!-- Empty State (shown when no question selected on mobile) -->
+              
               <div class="faq-split__empty" id="faqEmptyState" style="display: none;">
                 <ion-icon name="hand-left-outline"></ion-icon>
                 <p>Select a question from the list to view the answer</p>
@@ -1615,7 +1617,7 @@
             </div>
           </div>
 
-          <!-- Still Need Help CTA -->
+          
           <div class="faq-split__cta animate-on-scroll">
             <div class="faq-split__cta-content">
               <ion-icon name="chatbubbles-outline" class="faq-split__cta-icon"></ion-icon>
@@ -1637,9 +1639,9 @@
   <ion-icon name="chevron-up-outline"></ion-icon>
 </button>
 
-<!-- FOOTER -->
+<!-- ===== FOOTER ===== -->
 <footer id="footer" class="mb-footer" aria-label="Site footer">
-  <!-- Animated Wave Separator -->
+  
   <div class="mb-footer__wave">
     <svg viewBox="0 0 1200 120" preserveAspectRatio="none">
       <path class="wave-path wave-1" d="M0,60 Q150,20 300,60 T600,60 T900,60 T1200,60 L1200,120 L0,120 Z"></path>
@@ -1649,14 +1651,14 @@
   </div>
 
   <div class="mb-footer__top">
-    <!-- Decorative Pattern Overlay -->
+    
     <div class="mb-footer__pattern"></div>
     
     <div class="mb-footer__wrap">
-      <!-- Row 1: Main Content -->
+      
       <div class="mb-footer__main-grid">
 
-        <!-- Brand / About -->
+        
         <section class="mb-footer__col" aria-label="About MindBalance">
           <h3 class="mb-footer__brand" data-translate="footer_brand">MindBalance</h3>
           <p class="mb-footer__text" data-translate="footer_about">
@@ -1665,7 +1667,7 @@
           </p>
           <a class="mb-footer__link" href="/support/" data-translate="footer_read_more">Read more →</a>
           
-          <!-- Trust Badges -->
+          
           <div class="mb-footer__trust">
             <div class="mb-footer__badge">
               <ion-icon name="shield-checkmark-outline"></ion-icon>
@@ -1682,7 +1684,7 @@
           </div>
         </section>
 
-        <!-- Pages (Collapsible on Mobile) -->
+        
         <nav class="mb-footer__col mb-footer__accordion" aria-label="Footer navigation">
           <button class="mb-footer__accordion-btn" aria-expanded="false">
             <h4 class="mb-footer__heading" data-translate="footer_pages">Pages</h4>
@@ -1698,7 +1700,7 @@
           </ul>
         </nav>
 
-        <!-- Topics / Tags -->
+        
         <section class="mb-footer__col" aria-label="Popular topics">
           <h4 class="mb-footer__heading" data-translate="footer_topics">Popular Topics</h4>
           <div class="mb-footer__tags">
@@ -1711,7 +1713,7 @@
           </div>
         </section>
 
-        <!-- Take Action + Contact -->
+        
         <section class="mb-footer__col" aria-label="Take action">
           <h4 class="mb-footer__heading" data-translate="footer_action">Take Action</h4>
 
@@ -1736,9 +1738,9 @@
         </section>
       </div>
 
-      <!-- Row 2: Newsletter + Recent Posts -->
+      
       <div class="mb-footer__extras">
-        <!-- Newsletter Signup -->
+        
         <section class="mb-footer__newsletter" aria-label="Newsletter signup">
           <div class="mb-footer__newsletter-content">
             <ion-icon name="mail-outline" class="newsletter-icon"></ion-icon>
@@ -1757,7 +1759,7 @@
           <p class="mb-footer__newsletter-note" data-translate="footer_privacy_note">We respect your privacy. Unsubscribe anytime.</p>
         </section>
 
-        <!-- Recent Blog Posts -->
+        
         <section class="mb-footer__recent" aria-label="Recent articles">
           <h4 class="mb-footer__heading" data-translate="footer_latest_articles">Latest Articles</h4>
           <div class="mb-footer__posts">
@@ -1792,7 +1794,7 @@
         </section>
       </div>
 
-      <!-- Footer Controls: Language & Theme -->
+      
       <div class="mb-footer__controls">
         <div class="mb-footer__control-group">
           <ion-icon name="language-outline"></ion-icon>
@@ -1818,7 +1820,7 @@
     </div>
   </div>
 
-  <!-- Bottom bar -->
+  
   <div class="mb-footer__bottom">
     <div class="mb-footer__wrap mb-footer__bottomwrap">
       <p class="mb-footer__copy">
@@ -1834,7 +1836,8 @@
   </div>
 </footer>
 
-    <!-- Ionicons -->
+    
+<!-- ===== SCRIPTS ===== -->
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
     <script src="../js/script.js" defer></script>
@@ -1844,6 +1847,5 @@
     <script src="support-animations.js" defer></script>
     <script src="../js/helplines.js" defer></script>
 <script src="../js/footer.js" defer></script>
-  <script src="/js/security.js"></script>
 </body>
 </html>

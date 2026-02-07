@@ -1,6 +1,4 @@
-/* ===== ANALYTICS & ACHIEVEMENT STYLES ===== */
-
-/* Achievement Notification */
+/* === ACHIEVEMENT NOTIFICATION === */
 .mb-achievement-notification {
   position: fixed;
   bottom: 30px;
@@ -66,12 +64,13 @@
   color: rgba(255, 255, 255, 0.7);
 }
 
+/* === ACHIEVEMENT ANIMATION === */
 @keyframes achievementPulse {
   0%, 100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(212, 165, 116, 0.4); }
   50% { transform: scale(1.05); box-shadow: 0 0 20px 5px rgba(212, 165, 116, 0.2); }
 }
 
-/* Calendar Heatmap */
+/* === CALENDAR HEATMAP === */
 .mb-heatmap {
   background: #fff;
   border-radius: 16px;
@@ -151,7 +150,7 @@
   border-radius: 2px;
 }
 
-/* Activity Timeline */
+/* === ACTIVITY TIMELINE === */
 .mb-timeline {
   background: #fff;
   border-radius: 16px;
@@ -211,6 +210,7 @@
 .mb-timeline__item:nth-child(4) { animation-delay: 0.25s; }
 .mb-timeline__item:nth-child(5) { animation-delay: 0.3s; }
 
+/* === TIMELINE ANIMATION === */
 @keyframes fadeSlideIn {
   from { opacity: 0; transform: translateX(-10px); }
   to { opacity: 1; transform: translateX(0); }
@@ -254,7 +254,7 @@
   color: #6b6b8a;
 }
 
-/* Stats Charts */
+/* === STATS CHARTS === */
 .mb-stats-chart {
   background: #fff;
   border-radius: 16px;
@@ -349,7 +349,7 @@
   color: #6b6b8a;
 }
 
-/* Progress Rings */
+/* === PROGRESS RINGS === */
 .mb-progress-ring {
   position: relative;
   display: inline-flex;
@@ -380,7 +380,7 @@
   color: #1a1a2e;
 }
 
-/* Achievement Badges Grid */
+/* === ACHIEVEMENT BADGES === */
 .mb-badges {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
@@ -460,7 +460,7 @@
   margin-top: 8px;
 }
 
-/* Skeleton Loading States */
+/* === SKELETON LOADING === */
 .mb-skeleton {
   background: linear-gradient(90deg, #f0f0f5 25%, #e8e8ed 50%, #f0f0f5 75%);
   background-size: 200% 100%;
@@ -478,7 +478,7 @@
 .mb-skeleton--title { height: 24px; width: 60%; margin-bottom: 12px; }
 .mb-skeleton--stat { height: 40px; }
 
-/* Empty States */
+/* === EMPTY STATES === */
 .mb-empty-state {
   text-align: center;
   padding: 40px 20px;
@@ -520,7 +520,7 @@
   transform: translateY(-2px);
 }
 
-/* Reading Stats Card */
+/* === READING STATS === */
 .mb-reading-stats {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -571,7 +571,7 @@
   letter-spacing: 0.5px;
 }
 
-/* Responsive */
+/* === RESPONSIVE === */
 @media (max-width: 768px) {
   .mb-achievement-notification {
     left: 16px;
@@ -593,7 +593,7 @@
   }
 }
 
-/* Dark Mode */
+/* === DARK MODE === */
 [data-theme="dark"] .mb-achievement-notification {
   background: linear-gradient(135deg, #2a2a4a 0%, #1a1a2e 100%);
 }

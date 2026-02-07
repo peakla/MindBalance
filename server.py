@@ -1,3 +1,4 @@
+# ==================== IMPORTS ====================
 import os
 import time
 import uuid
@@ -11,12 +12,12 @@ from functools import wraps
 from resend import Emails
 from api.wellness_insights import generate_wellness_insight, generate_mood_analysis, generate_goal_suggestion
 
+# ==================== APP CONFIGURATION ====================
 app = Flask(__name__, static_folder='.', static_url_path='')
 
 REPLIT_DEV_DOMAIN = os.environ.get('REPLIT_DEV_DOMAIN', '')
 REPLIT_DOMAINS = os.environ.get('REPLIT_DOMAINS', '')
 
-# Build allowed origins from all possible domains
 ALLOWED_ORIGINS = [
     'http://localhost:5000',
     'http://127.0.0.1:5000',
@@ -29,9 +30,10 @@ if REPLIT_DOMAINS:
         if domain:
             ALLOWED_ORIGINS.append(f'https://{domain}')
 
+# ==================== CORS CONFIGURATION ====================
 CORS(app, resources={
     r"/api/tts/*": {
-        "origins": "*",  # Allow all origins for TTS endpoints
+        "origins": "*",
         "methods": ["GET", "POST", "OPTIONS"],
         "allow_headers": ["Content-Type"]
     }
@@ -75,6 +77,7 @@ def get_db_connection():
         return None
     return psycopg2.connect(DATABASE_URL)
 
+# ==================== RATE LIMITING ====================
 request_counts = defaultdict(list)
 RATE_LIMIT_REQUESTS = 10
 RATE_LIMIT_WINDOW = 60
@@ -105,17 +108,14 @@ def check_referer(f):
         referer = request.headers.get('Referer', '')
         origin = request.headers.get('Origin', '')
         
-        # Check against known local domains
         valid = any([
             'localhost' in referer or 'localhost' in origin,
             '127.0.0.1' in referer or '127.0.0.1' in origin,
         ])
         
-        # Check dev domain
         if REPLIT_DEV_DOMAIN:
             valid = valid or REPLIT_DEV_DOMAIN in referer or REPLIT_DEV_DOMAIN in origin
         
-        # Check all production domains
         if REPLIT_DOMAINS:
             for domain in REPLIT_DOMAINS.split(','):
                 domain = domain.strip()
@@ -123,11 +123,9 @@ def check_referer(f):
                     valid = True
                     break
         
-        # Also allow if no referer/origin (direct API testing)
         if not referer and not origin:
             valid = True
         
-        # Allow any replit.app or replit.dev domains
         if 'replit.app' in referer or 'replit.app' in origin:
             valid = True
         if 'replit.dev' in referer or 'replit.dev' in origin:
@@ -139,6 +137,7 @@ def check_referer(f):
         return f(*args, **kwargs)
     return decorated_function
 
+# ==================== VOICE CONFIGURATION ====================
 VOICE_MAP = {
     'rachel': 'EXAVITQu4vr4xnSDxMaL',
     'adam': '21m00Tcm4TlvDq8ikWAM',
@@ -159,6 +158,7 @@ LANGUAGE_VOICE_MAP = {
     'hi': 'adam',
 }
 
+# ==================== ROUTES ====================
 @app.route('/')
 def serve_index():
     return send_from_directory('.', 'index.html')
@@ -219,20 +219,16 @@ def serve_contact():
 
 @app.route('/<path:path>')
 def serve_static(path):
-    # Strip trailing slash for directory check
     clean_path = path.rstrip('/')
     
-    # Check if path is a directory and serve its index.html
     if os.path.isdir(clean_path):
         index_path = os.path.join(clean_path, 'index.html')
         if os.path.exists(index_path):
             return send_from_directory('.', index_path)
     
-    # Serve the file directly if it exists
     if os.path.exists(path):
         return send_from_directory('.', path)
     
-    # Fallback to main index.html for SPA-style routing
     return send_from_directory('.', 'index.html')
 
 @app.route('/api/tts/voices', methods=['GET'])
@@ -327,7 +323,6 @@ def newsletter_subscribe():
     if not email:
         return jsonify({'error': 'Email address is required'}), 400
     
-    # Basic email validation
     import re
     email_pattern = r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$'
     if not re.match(email_pattern, email):
@@ -341,21 +336,17 @@ def newsletter_subscribe():
         
         cursor = conn.cursor()
         
-        # Check if email already exists
         cursor.execute("SELECT id, confirmed FROM newsletter_subscribers WHERE email = %s", (email,))
         existing = cursor.fetchone()
         
         if existing:
-            if existing[1]:  # Already confirmed
+            if existing[1]:
                 return jsonify({'message': 'You are already subscribed to our newsletter!', 'already_subscribed': True}), 200
             else:
-                # Resend confirmation email
-                pass  # Will send email below
+                pass
         else:
-            # Generate confirmation token
             confirmation_token = str(uuid.uuid4())
             
-            # Insert new subscriber
             cursor.execute(
                 """INSERT INTO newsletter_subscribers (email, confirmation_token, confirmed) 
                    VALUES (%s, %s, TRUE) 
@@ -364,9 +355,7 @@ def newsletter_subscribe():
             )
             conn.commit()
         
-        # Send welcome email via Resend
         api_key, from_email = get_resend_credentials()
-        # Use verified domain email
         from_email = "MindBalance <noreply@mindbalance.cloud>"
         if api_key:
             try:
@@ -426,7 +415,6 @@ def newsletter_subscribe():
                 })
             except Exception as e:
                 print(f"Error sending welcome email: {e}")
-                # Don't fail the subscription if email fails
         
         cursor.close()
         return jsonify({
@@ -514,5 +502,6 @@ def goal_suggestion_endpoint():
         })
 
 
+# ==================== SERVER STARTUP ====================
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000, debug=False)

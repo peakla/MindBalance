@@ -1,12 +1,9 @@
+/* === SUPPORT MAIN === */
 .support-main {
   padding-top: 100px;
 }
 
-/* ========================== */
-/* SCROLL-TRIGGERED ANIMATIONS */
-/* ========================== */
-
-/* Base styles for animated sections */
+/* === SCROLL ANIMATIONS === */
 .animate-section {
   opacity: 0;
   transform: translateY(40px);
@@ -19,7 +16,6 @@
   transform: translateY(0);
 }
 
-/* Staggered card animations */
 .animate-stagger > * {
   opacity: 0;
   transform: translateY(30px);
@@ -43,7 +39,6 @@
   transform: translateY(0);
 }
 
-/* Slide from left animation */
 .animate-slide-left {
   opacity: 0;
   transform: translateX(-50px);
@@ -56,7 +51,6 @@
   transform: translateX(0);
 }
 
-/* Slide from right animation */
 .animate-slide-right {
   opacity: 0;
   transform: translateX(50px);
@@ -69,7 +63,6 @@
   transform: translateX(0);
 }
 
-/* Scale up animation */
 .animate-scale {
   opacity: 0;
   transform: scale(0.9);
@@ -82,7 +75,7 @@
   transform: scale(1);
 }
 
-/* Hero Section */
+/* === HERO SECTION === */
 .support-hero {
   background: linear-gradient(135deg, #f8f6f3 0%, #efe9e1 50%, #e8e4df 100%);
   padding: 100px 20px 80px;
@@ -278,7 +271,7 @@
   color: #bbb;
 }
 
-/* Crisis Section */
+/* === CRISIS SECTION === */
 .crisis-section {
   background: #fff;
   padding: 60px 20px;
@@ -500,7 +493,7 @@
   transform: translateX(4px);
 }
 
-/* Section Header */
+/* === SECTION HEADER === */
 .section-header {
   text-align: center;
   margin-bottom: 48px;
@@ -526,7 +519,7 @@
   line-height: 1.6;
 }
 
-/* Section divider wave */
+/* === SECTION DIVIDER === */
 .section-divider {
   position: relative;
   height: 80px;
@@ -557,7 +550,7 @@
   background-size: cover;
 }
 
-/* Quick Links Section */
+/* === QUICK LINKS === */
 .quicklinks-section {
   background: #f8f6f3;
   padding: 80px 20px;
@@ -639,16 +632,13 @@
   line-height: 1.5;
 }
 
-/* Helplines Section */
+/* === HELPLINES === */
 .helplines-section {
   background: #fff;
   padding: 80px 20px;
 }
 
-/* ========================== */
-/* ========================== */
-/* CONTROLS ROW (FILTERS + VIEW TOGGLE) */
-/* ========================== */
+/* === HELPLINES CONTROLS === */
 .helplines-controls {
   display: flex;
   align-items: center;
@@ -695,9 +685,7 @@
   font-size: 1.25rem;
 }
 
-/* ========================== */
-/* LIST VIEW LAYOUT */
-/* ========================== */
+/* === LIST VIEW === */
 .helplines-grid.list-view {
   display: flex;
   flex-direction: column;
@@ -788,7 +776,7 @@ body.dark-mode .view-toggle-btn.active {
     align-self: flex-end;
   }
   
-  /* Mobile Collapsible Category Sections */
+  
   .helplines-grid.mobile-grouped {
     display: flex;
     flex-direction: column;
@@ -889,7 +877,7 @@ body.dark-mode .view-toggle-btn.active {
     margin-bottom: 0;
   }
   
-  /* Dark mode mobile categories */
+  
   body.dark-mode .mobile-category-group {
     background: #1a1a1a;
     border-color: #333;
@@ -918,7 +906,6 @@ body.dark-mode .view-toggle-btn.active {
   }
 }
 
-/* Reduced motion */
 @media (prefers-reduced-motion: reduce) {
   .helplines-grid {
     transition: none;
@@ -1310,11 +1297,6 @@ body.dark-mode .view-toggle-btn.active {
   color: #fff;
 }
 
-/* ========================== */
-/* HELPLINES ENHANCED VISUALS */
-/* ========================== */
-
-/* Pulse animation for 24/7 badges */
 @keyframes badge-pulse {
   0%, 100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(46, 125, 50, 0.4); }
   50% { transform: scale(1.05); box-shadow: 0 0 0 8px rgba(46, 125, 50, 0); }
@@ -1324,7 +1306,6 @@ body.dark-mode .view-toggle-btn.active {
   animation: badge-pulse 2.5s ease-in-out infinite;
 }
 
-/* Floating animation for card icons */
 @keyframes icon-float {
   0%, 100% { transform: translateY(0); }
   50% { transform: translateY(-6px); }
@@ -1339,7 +1320,6 @@ body.dark-mode .view-toggle-btn.active {
   transform: scale(1.1) rotate(5deg);
 }
 
-/* Ripple effect on buttons */
 .helpline-contact {
   position: relative;
   overflow: hidden;
@@ -1363,7 +1343,6 @@ body.dark-mode .view-toggle-btn.active {
   height: 200px;
 }
 
-/* Shine sweep effect on hover */
 .helpline-card::after {
   content: '';
   position: absolute;
@@ -1385,7 +1364,6 @@ body.dark-mode .view-toggle-btn.active {
   left: 100%;
 }
 
-/* Animated gradient glow border */
 @keyframes gradient-glow {
   0% { background-position: 0% 50%; }
   50% { background-position: 100% 50%; }
@@ -1429,7 +1407,6 @@ body.dark-mode .view-toggle-btn.active {
   animation: gradient-glow 2s ease infinite;
 }
 
-/* SVG Wave Separator */
 .helplines-wave-separator {
   position: relative;
   height: 80px;
@@ -1464,7 +1441,6 @@ body.dark-mode .view-toggle-btn.active {
   50% { transform: translateX(-20px); }
 }
 
-/* Dot pattern background */
 .helplines-section {
   position: relative;
   background: 
@@ -1485,7 +1461,6 @@ body.dark-mode .view-toggle-btn.active {
   pointer-events: none;
 }
 
-/* Floating decorative shapes */
 .helplines-decoration {
   position: absolute;
   pointer-events: none;
@@ -1538,7 +1513,6 @@ body.dark-mode .view-toggle-btn.active {
   50% { transform: translateY(-15px) rotate(5deg); opacity: 1; }
 }
 
-/* Category Filter Pills */
 .helplines-filters {
   display: flex;
   flex-wrap: wrap;
@@ -1639,7 +1613,6 @@ body.dark-mode .view-toggle-btn.active {
   font-size: 16px;
 }
 
-/* Filter animation for cards */
 .helpline-card.filter-hidden {
   opacity: 0;
   transform: scale(0.8);
@@ -1653,7 +1626,6 @@ body.dark-mode .view-toggle-btn.active {
   transform: translateY(0) scale(1);
 }
 
-/* Quick Copy Button */
 .helpline-copy-btn {
   display: inline-flex;
   align-items: center;
@@ -1687,7 +1659,6 @@ body.dark-mode .view-toggle-btn.active {
   color: #fff;
 }
 
-/* Availability badges */
 .helpline-card__availability {
   display: flex;
   gap: 8px;
@@ -1733,7 +1704,6 @@ body.dark-mode .view-toggle-btn.active {
   font-size: 12px;
 }
 
-/* Reduced motion support */
 @media (prefers-reduced-motion: reduce) {
   .helpline-card__badge--24-7,
   .helpline-card__icon-wrapper,
@@ -1781,7 +1751,6 @@ body.dark-mode .view-toggle-btn.active {
   transform: scale(1.15);
 }
 
-/* Resources Section */
 .resources-section {
   background: #f8f6f3;
   padding: 80px 20px;
@@ -1843,7 +1812,6 @@ body.dark-mode .view-toggle-btn.active {
   font-size: 0.9rem;
 }
 
-/* Self-Help Section */
 .selfhelp-section {
   background: #fff;
   padding: 80px 20px;
@@ -1900,7 +1868,6 @@ body.dark-mode .view-toggle-btn.active {
   margin-bottom: 6px;
 }
 
-/* Appointment Section */
 .appointment-section {
   background: linear-gradient(135deg, #f8f6f3 0%, #e8e4df 100%);
   padding: 80px 20px;
@@ -2032,7 +1999,6 @@ body.dark-mode .view-toggle-btn.active {
   margin-top: 16px;
 }
 
-/* FAQ Section */
 .faq-section {
   background: transparent;
   padding: 0;
@@ -2082,7 +2048,6 @@ body.dark-mode .view-toggle-btn.active {
   display: block;
 }
 
-/* Custom scrollbar for FAQ list */
 .faq-list::-webkit-scrollbar {
   width: 8px;
 }
@@ -2101,7 +2066,6 @@ body.dark-mode .view-toggle-btn.active {
   background: rgba(0, 0, 0, 0.3);
 }
 
-/* Hide default summary marker */
 .faq-question::-webkit-details-marker {
   display: none;
 }
@@ -2186,7 +2150,6 @@ body.dark-mode .view-toggle-btn.active {
   color: #d6bd9f;
 }
 
-/* Enhanced accordion animation */
 .faq-answer {
   display: block;
   max-height: 0;
@@ -2224,16 +2187,11 @@ body.dark-mode .view-toggle-btn.active {
   opacity: 0;
 }
 
-/* Container */
 .container {
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 20px;
 }
-
-/* ========================== */
-/* NEW FAQ SECTION - ENHANCED */
-/* ========================== */
 
 .faq-section-new {
   background: linear-gradient(180deg, #f8f6f3 0%, #fff 50%, #f8f6f3 100%);
@@ -2252,7 +2210,6 @@ body.dark-mode .view-toggle-btn.active {
   background: linear-gradient(90deg, #d6bd9f, #f2c200, #d6bd9f);
 }
 
-/* FAQ Header */
 .faq-header {
   text-align: center;
   margin-bottom: 40px;
@@ -2300,7 +2257,6 @@ body.dark-mode .view-toggle-btn.active {
   line-height: 1.7;
 }
 
-/* FAQ Search */
 .faq-search-wrapper {
   max-width: 600px;
   margin: 0 auto 32px;
@@ -2375,7 +2331,6 @@ body.dark-mode .view-toggle-btn.active {
   min-height: 20px;
 }
 
-/* Category Filter Pills */
 .faq-categories {
   display: flex;
   flex-wrap: wrap;
@@ -2423,13 +2378,11 @@ body.dark-mode .view-toggle-btn.active {
   box-shadow: 0 6px 20px rgba(214, 189, 159, 0.4);
 }
 
-/* FAQ Container */
 .faq-container {
   max-width: 900px;
   margin: 0 auto;
 }
 
-/* Category Group */
 .faq-category-group {
   margin-bottom: 40px;
 }
@@ -2480,14 +2433,12 @@ body.dark-mode .view-toggle-btn.active {
   border-radius: 50px;
 }
 
-/* FAQ Items Wrapper */
 .faq-items-wrapper {
   display: flex;
   flex-direction: column;
   gap: 16px;
 }
 
-/* FAQ Card - Individual Question */
 .faq-card {
   background: #fff;
   border-radius: 16px;
@@ -2512,7 +2463,6 @@ body.dark-mode .view-toggle-btn.active {
   display: none;
 }
 
-/* FAQ Question Summary */
 .faq-card__question {
   display: flex;
   align-items: center;
@@ -2541,7 +2491,6 @@ body.dark-mode .view-toggle-btn.active {
   border-bottom: 1px solid rgba(214, 189, 159, 0.2);
 }
 
-/* Question Number Badge */
 .faq-card__number {
   display: flex;
   align-items: center;
@@ -2562,7 +2511,6 @@ body.dark-mode .view-toggle-btn.active {
   box-shadow: 0 4px 12px rgba(214, 189, 159, 0.4);
 }
 
-/* Question Icon Wrapper */
 .faq-card__icon-wrapper {
   display: flex;
   align-items: center;
@@ -2589,7 +2537,6 @@ body.dark-mode .view-toggle-btn.active {
   transform: rotate(15deg);
 }
 
-/* Question Text */
 .faq-card__text {
   flex: 1;
   font-size: 1rem;
@@ -2598,7 +2545,6 @@ body.dark-mode .view-toggle-btn.active {
   line-height: 1.5;
 }
 
-/* Chevron Icon */
 .faq-card__chevron {
   font-size: 1.3rem;
   color: #888;
@@ -2615,7 +2561,6 @@ body.dark-mode .view-toggle-btn.active {
   color: #c4a67a;
 }
 
-/* Answer Section */
 .faq-card__answer {
   max-height: 0;
   overflow: hidden;
@@ -2643,7 +2588,6 @@ body.dark-mode .view-toggle-btn.active {
   margin: 0;
 }
 
-/* Feedback Section */
 .faq-card__feedback {
   display: flex;
   align-items: center;
@@ -2715,7 +2659,6 @@ body.dark-mode .view-toggle-btn.active {
   color: #fff;
 }
 
-/* No Results */
 .faq-no-results {
   text-align: center;
   padding: 60px 20px;
@@ -2732,7 +2675,6 @@ body.dark-mode .view-toggle-btn.active {
   font-size: 1.1rem;
 }
 
-/* Search Highlight */
 .faq-highlight {
   background: linear-gradient(135deg, rgba(242, 194, 0, 0.4) 0%, rgba(214, 189, 159, 0.4) 100%);
   color: inherit;
@@ -2744,7 +2686,6 @@ body.dark-mode .view-toggle-btn.active {
   background: linear-gradient(135deg, rgba(242, 194, 0, 0.3) 0%, rgba(214, 189, 159, 0.3) 100%);
 }
 
-/* FAQ CTA Section */
 .faq-cta {
   display: flex;
   align-items: center;
@@ -2809,7 +2750,6 @@ body.dark-mode .view-toggle-btn.active {
   font-size: 1.2rem;
 }
 
-/* Stagger animation for FAQ cards */
 .faq-items-wrapper .faq-card {
   opacity: 0;
   transform: translateY(20px);
@@ -2830,10 +2770,6 @@ body.dark-mode .view-toggle-btn.active {
   }
 }
 
-/* ========================== */
-/* SPLIT PANEL FAQ LAYOUT */
-/* ========================== */
-
 .faq-split {
   background: linear-gradient(180deg, #f8f6f3 0%, #fff 50%, #f8f6f3 100%);
   padding: 80px 20px 100px;
@@ -2851,7 +2787,6 @@ body.dark-mode .view-toggle-btn.active {
   background: linear-gradient(90deg, #d6bd9f, #f2c200, #d6bd9f);
 }
 
-/* Header */
 .faq-split__header {
   text-align: center;
   margin-bottom: 40px;
@@ -2894,7 +2829,6 @@ body.dark-mode .view-toggle-btn.active {
   line-height: 1.7;
 }
 
-/* Search Bar */
 .faq-split__search {
   position: relative;
   max-width: 600px;
@@ -2949,7 +2883,6 @@ body.dark-mode .view-toggle-btn.active {
   transform: scale(1.1);
 }
 
-/* Split Container */
 .faq-split__container {
   display: grid;
   grid-template-columns: 400px 1fr;
@@ -2959,7 +2892,6 @@ body.dark-mode .view-toggle-btn.active {
   min-height: 600px;
 }
 
-/* Left Panel - Questions */
 .faq-split__left {
   background: #fff;
   border-radius: 20px;
@@ -2970,7 +2902,6 @@ body.dark-mode .view-toggle-btn.active {
   flex-direction: column;
 }
 
-/* Category Tabs */
 .faq-split__tabs {
   display: flex;
   flex-wrap: wrap;
@@ -3011,7 +2942,6 @@ body.dark-mode .view-toggle-btn.active {
   box-shadow: 0 4px 12px rgba(214, 189, 159, 0.35);
 }
 
-/* Questions List */
 .faq-split__questions {
   flex: 1;
   overflow-y: auto;
@@ -3033,7 +2963,6 @@ body.dark-mode .view-toggle-btn.active {
   border-radius: 3px;
 }
 
-/* Question Item */
 .faq-split__question {
   display: flex;
   align-items: center;
@@ -3123,7 +3052,6 @@ body.dark-mode .view-toggle-btn.active {
   transform: translateX(3px);
 }
 
-/* No Results in Questions */
 .faq-split__no-results {
   text-align: center;
   padding: 40px 20px;
@@ -3141,7 +3069,6 @@ body.dark-mode .view-toggle-btn.active {
   margin: 0;
 }
 
-/* Right Panel - Answer */
 .faq-split__right {
   position: sticky;
   top: 120px;
@@ -3218,7 +3145,6 @@ body.dark-mode .view-toggle-btn.active {
   margin: 0;
 }
 
-/* Tips Section */
 .faq-split__answer-tips {
   background: linear-gradient(135deg, rgba(242, 194, 0, 0.08) 0%, rgba(214, 189, 159, 0.08) 100%);
   border-radius: 16px;
@@ -3249,7 +3175,6 @@ body.dark-mode .view-toggle-btn.active {
   margin: 0;
 }
 
-/* Feedback Section */
 .faq-split__answer-feedback {
   display: flex;
   align-items: center;
@@ -3312,7 +3237,6 @@ body.dark-mode .view-toggle-btn.active {
   color: #fff;
 }
 
-/* Navigation Buttons */
 .faq-split__answer-nav {
   display: flex;
   justify-content: space-between;
@@ -3351,7 +3275,6 @@ body.dark-mode .view-toggle-btn.active {
   font-size: 1.1rem;
 }
 
-/* Empty State */
 .faq-split__empty {
   display: flex;
   flex-direction: column;
@@ -3376,7 +3299,6 @@ body.dark-mode .view-toggle-btn.active {
   margin: 0;
 }
 
-/* CTA Section */
 .faq-split__cta {
   display: flex;
   align-items: center;
@@ -3437,17 +3359,12 @@ body.dark-mode .view-toggle-btn.active {
   background: #fffef8;
 }
 
-/* Highlight for search */
 .faq-split__highlight {
   background: linear-gradient(135deg, rgba(242, 194, 0, 0.4) 0%, rgba(214, 189, 159, 0.4) 100%);
   color: inherit;
   padding: 2px 4px;
   border-radius: 4px;
 }
-
-/* ========================== */
-/* SPLIT PANEL DARK MODE */
-/* ========================== */
 
 [data-theme="dark"] .faq-split {
   background: linear-gradient(180deg, #1a1a2e 0%, #16213e 50%, #1a1a2e 100%);
@@ -3514,7 +3431,6 @@ body.dark-mode .view-toggle-btn.active {
   color: #e0e0e0;
 }
 
-/* Hide the data elements used for i18n - these store answer/tip text for JS to read */
 .faq-split__answer-data,
 .faq-split__tip-data {
   display: none !important;
@@ -3570,10 +3486,6 @@ body.dark-mode .view-toggle-btn.active {
 [data-theme="dark"] .faq-split__highlight {
   background: linear-gradient(135deg, rgba(242, 194, 0, 0.3) 0%, rgba(214, 189, 159, 0.3) 100%);
 }
-
-/* ========================== */
-/* SPLIT PANEL RESPONSIVE */
-/* ========================== */
 
 @media (max-width: 968px) {
   .faq-split__container {
@@ -3667,10 +3579,6 @@ body.dark-mode .view-toggle-btn.active {
     font-size: 0.85rem;
   }
 }
-
-/* ========================== */
-/* NEW FAQ DARK MODE */
-/* ========================== */
 
 [data-theme="dark"] .faq-section-new {
   background: linear-gradient(180deg, #1a1a2e 0%, #16213e 50%, #1a1a2e 100%);
@@ -3807,10 +3715,6 @@ body.dark-mode .view-toggle-btn.active {
   box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
 }
 
-/* ========================== */
-/* NEW FAQ RESPONSIVE */
-/* ========================== */
-
 @media (max-width: 768px) {
   .faq-section-new {
     padding: 60px 16px 80px;
@@ -3927,7 +3831,6 @@ body.dark-mode .view-toggle-btn.active {
   }
 }
 
-/* Dark Mode */
 [data-theme="dark"] .support-hero {
   background: linear-gradient(135deg, #1a1a2e 0%, #252542 100%);
 }
@@ -4125,7 +4028,6 @@ body.dark-mode .view-toggle-btn.active {
   color: #fff;
 }
 
-/* Dark mode for new visual enhancements */
 [data-theme="dark"] .helplines-section {
   background: 
     radial-gradient(circle at 20% 30%, rgba(155, 126, 217, 0.08) 0%, transparent 50%),
@@ -4395,7 +4297,6 @@ body.dark-mode .view-toggle-btn.active {
   background: rgba(255, 255, 255, 0.3);
 }
 
-/* High Contrast Mode */
 [data-high-contrast="true"] .support-hero,
 [data-high-contrast="true"] .crisis-section,
 [data-high-contrast="true"] .quicklinks-section,
@@ -4502,7 +4403,6 @@ body.dark-mode .view-toggle-btn.active {
   color: #fff;
 }
 
-/* Responsive */
 @media (max-width: 768px) {
   .support-hero {
     padding: 60px 20px;
@@ -4579,7 +4479,6 @@ body.dark-mode .view-toggle-btn.active {
   }
 }
 
-/* Large screens - scale up for better readability */
 @media (min-width: 1200px) {
   .support-hero {
     padding: 100px 40px;
@@ -4732,7 +4631,6 @@ body.dark-mode .view-toggle-btn.active {
   }
 }
 
-/* Extra large screens - even bigger scaling */
 @media (min-width: 1600px) {
   .support-hero__title {
     font-size: 4rem;
@@ -4778,11 +4676,6 @@ body.dark-mode .view-toggle-btn.active {
   }
 }
 
-/* ========================================
-   INTERACTIVE WELLNESS TOOLS
-   ======================================== */
-
-/* Interactive Self-Help Cards */
 .selfhelp-card--interactive {
   cursor: pointer;
   border: none;
@@ -4817,7 +4710,6 @@ body.dark-mode .view-toggle-btn.active {
   transform: scale(1.2);
 }
 
-/* Wellness Modal */
 .wellness-modal {
   position: fixed;
   top: 0;
@@ -4903,7 +4795,6 @@ body.dark-mode .view-toggle-btn.active {
   color: #2d2d2d;
 }
 
-/* Breathing Patterns Selector */
 .breathing-patterns {
   display: flex;
   gap: 8px;
@@ -4934,7 +4825,6 @@ body.dark-mode .view-toggle-btn.active {
   color: #fff;
 }
 
-/* Breathing Circle Animation */
 .breathing-circle-container {
   position: relative;
   display: flex;
@@ -4990,7 +4880,6 @@ body.dark-mode .view-toggle-btn.active {
   margin-top: 4px;
 }
 
-/* Breathing Rings */
 .breathing-circle__rings {
   position: absolute;
   top: 50%;
@@ -5049,7 +4938,6 @@ body.dark-mode .view-toggle-btn.active {
   }
 }
 
-/* Breathing Controls */
 .breathing-controls {
   display: flex;
   justify-content: center;
@@ -5087,7 +4975,6 @@ body.dark-mode .view-toggle-btn.active {
   background: #c0392b;
 }
 
-/* Breathing Stats */
 .breathing-stats {
   display: flex;
   justify-content: center;
@@ -5116,7 +5003,6 @@ body.dark-mode .view-toggle-btn.active {
   letter-spacing: 0.5px;
 }
 
-/* Audio Toggle */
 .breathing-audio-toggle {
   display: flex;
   justify-content: center;
@@ -5136,10 +5022,6 @@ body.dark-mode .view-toggle-btn.active {
   height: 18px;
   accent-color: var(--gold-crayola, #d4a853);
 }
-
-/* ========================================
-   GROUNDING EXERCISE
-   ======================================== */
 
 .grounding-intro {
   text-align: center;
@@ -5264,7 +5146,6 @@ body.dark-mode .view-toggle-btn.active {
   background: rgba(76, 175, 80, 0.05);
 }
 
-/* Grounding Navigation */
 .grounding-nav {
   display: flex;
   justify-content: space-between;
@@ -5317,7 +5198,6 @@ body.dark-mode .view-toggle-btn.active {
   box-shadow: 0 4px 15px rgba(76, 175, 80, 0.4);
 }
 
-/* Dark Mode for Wellness Modals */
 [data-theme="dark"] .wellness-modal__content {
   background: linear-gradient(145deg, #2d2b3d 0%, #3d3a50 100%);
 }
@@ -5381,7 +5261,6 @@ body.dark-mode .view-toggle-btn.active {
   color: #ccc;
 }
 
-/* Reduced Motion */
 @media (prefers-reduced-motion: reduce) {
   .support-hero::before {
     animation: none;
@@ -5440,7 +5319,6 @@ body.dark-mode .view-toggle-btn.active {
   }
 }
 
-/* Mobile Responsive */
 @media (max-width: 600px) {
   .wellness-modal__content {
     padding: 24px 20px;
@@ -5520,11 +5398,6 @@ body.dark-mode .view-toggle-btn.active {
   }
 }
 
-/* Back to Top Button - uses global styles from style.css */
-
-/* ========================== */
-/* QUOTE CALLOUT */
-/* ========================== */
 .quote-callout {
   background: linear-gradient(135deg, #f8f6f3 0%, #f0ebe4 100%);
   border-left: 4px solid #d6bd9f;
@@ -5586,9 +5459,6 @@ body.dark-mode .view-toggle-btn.active {
   color: #d6bd9f;
 }
 
-/* ========================== */
-/* SECTION ICON STYLES */
-/* ========================== */
 .section-icon {
   display: inline-flex;
   align-items: center;
@@ -5611,7 +5481,6 @@ body.dark-mode .view-toggle-btn.active {
   box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
 }
 
-/* Dark mode section divider */
 [data-theme="dark"] .section-divider::before {
   background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 100'%3E%3Cpath fill='%231a1a2e' d='M0,50 C360,100 720,0 1080,50 C1260,75 1350,75 1440,50 L1440,100 L0,100 Z'/%3E%3C/svg%3E") no-repeat bottom;
   background-size: cover;
@@ -5622,7 +5491,6 @@ body.dark-mode .view-toggle-btn.active {
   background-size: cover;
 }
 
-/* Dark mode section title */
 [data-theme="dark"] .section-title {
   background: linear-gradient(135deg, #fff 0%, #ccc 100%);
   -webkit-background-clip: text;
@@ -5630,7 +5498,6 @@ body.dark-mode .view-toggle-btn.active {
   -webkit-text-fill-color: transparent;
 }
 
-/* Ripple effect for buttons */
 .crisis-btn,
 .helpline-contact {
   position: relative;

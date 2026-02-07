@@ -1,21 +1,8 @@
-/**
- * MindBalance Translation System
- * 
- * This is a lightweight loader that fetches translations from JSON files.
- * Translations are stored in /i18n/{lang}.json files.
- * 
- * To add/edit translations:
- * 1. Edit translations.csv (the master file)
- * 2. Run: python scripts/csv_to_json.py
- * 3. The JSON files in /i18n/ will be updated
- * 
- * Supported languages: en, es, fr, zh, hi, ko
- */
+// ==================== TRANSLATION SYSTEM ====================
 
-// Cache for loaded translations
+// --- Cache & Fallbacks ---
 const translationCache = {};
 
-// Fallback translations (minimal English for critical UI before JSON loads)
 const fallbackTranslations = {
   nav_home: "Home",
   nav_contact: "Contact",
@@ -31,14 +18,10 @@ const fallbackTranslations = {
   settings_language: "Language"
 };
 
-// Supported languages
 const supportedLanguages = ['en', 'es', 'fr', 'zh', 'hi', 'ko'];
 
-/**
- * Get current language from localStorage
- */
+// --- Language Detection ---
 function getCurrentLanguage() {
-  // Support both underscore and hyphen keys for compatibility
   const stored = localStorage.getItem('mindbalance_language') || localStorage.getItem('mindbalance-language');
   if (stored && supportedLanguages.includes(stored)) {
     return stored;
@@ -46,12 +29,9 @@ function getCurrentLanguage() {
   return 'en';
 }
 
-/**
- * Load translations for a specific language
- */
+// --- Load Translations ---
 async function loadTranslations(lang) {
   console.log('[Translations] Loading translations for:', lang);
-  // Return from cache if available
   if (translationCache[lang]) {
     console.log('[Translations] Returning cached translations for:', lang);
     return translationCache[lang];
@@ -69,7 +49,6 @@ async function loadTranslations(lang) {
     return data;
   } catch (error) {
     console.warn(`[Translations] Could not load translations for '${lang}':`, error);
-    // Fallback to English
     if (lang !== 'en') {
       return loadTranslations('en');
     }
@@ -77,26 +56,19 @@ async function loadTranslations(lang) {
   }
 }
 
-/**
- * Apply translations to the page or a specific container
- * @param {Object} translations - The translations object
- * @param {HTMLElement} container - Optional container to apply translations within
- */
+// --- Apply Translations (Sync) ---
 function applyTranslationsSync(translations, container = document) {
   console.log('[Translations] Applying translations to', container === document ? 'page' : 'container');
-  // Helper to check if text contains HTML tags
   function containsHTML(text) {
     return /<[a-z][\s\S]*>/i.test(text);
   }
   
-  // Apply to data-translate elements
   const translateEls = container.querySelectorAll('[data-translate]');
   console.log('[Translations] Found', translateEls.length, 'elements with data-translate');
   let appliedCount = 0;
   translateEls.forEach(el => {
     const key = el.getAttribute('data-translate');
     if (translations[key]) {
-      // Use innerHTML for content with HTML tags, textContent otherwise
       if (containsHTML(translations[key])) {
         el.innerHTML = translations[key];
       } else {
@@ -107,7 +79,6 @@ function applyTranslationsSync(translations, container = document) {
   });
   console.log('[Translations] Applied', appliedCount, 'translations');
   
-  // Apply to data-translate-placeholder elements
   container.querySelectorAll('[data-translate-placeholder]').forEach(el => {
     const key = el.getAttribute('data-translate-placeholder');
     if (translations[key]) {
@@ -115,7 +86,6 @@ function applyTranslationsSync(translations, container = document) {
     }
   });
   
-  // Apply to data-translate-html elements (for content with HTML)
   container.querySelectorAll('[data-translate-html]').forEach(el => {
     const key = el.getAttribute('data-translate-html');
     if (translations[key]) {
@@ -124,13 +94,8 @@ function applyTranslationsSync(translations, container = document) {
   });
 }
 
-/**
- * Apply translations (async version)
- * @param {string|HTMLElement} langOrContainer - Language code or container element
- * @returns {Promise<Object>} The translations object
- */
+// --- Apply Translations (Async) ---
 async function applyTranslations(langOrContainer) {
-  // If passed a DOM element, apply translations to that container
   if (langOrContainer instanceof HTMLElement) {
     const currentLang = getCurrentLanguage();
     const translations = await loadTranslations(currentLang);
@@ -138,16 +103,13 @@ async function applyTranslations(langOrContainer) {
     return translations;
   }
   
-  // Otherwise treat as language code
   const lang = langOrContainer || getCurrentLanguage();
   const translations = await loadTranslations(lang);
   applyTranslationsSync(translations);
   return translations;
 }
 
-/**
- * Set and apply a new language
- */
+// --- Set Language ---
 async function setLanguage(lang) {
   console.log('[Translations] setLanguage called with:', lang);
   if (!supportedLanguages.includes(lang)) {
@@ -155,13 +117,11 @@ async function setLanguage(lang) {
     lang = 'en';
   }
   
-  // Save to both keys for compatibility
   localStorage.setItem('mindbalance_language', lang);
   localStorage.setItem('mindbalance-language', lang);
   document.documentElement.lang = lang;
   console.log('[Translations] Set document lang to:', lang);
   
-  // Sync ALL language selectors on the page
   document.querySelectorAll('[data-language-select]').forEach(select => {
     select.value = lang;
   });
@@ -173,33 +133,25 @@ async function setLanguage(lang) {
     console.error('[Translations] Error applying translations:', error);
   }
   
-  // Dispatch event when language changes
   window.dispatchEvent(new CustomEvent('translations-ready', { 
     detail: { lang: lang, translations: translationCache[lang] } 
   }));
 }
 
-/**
- * Get a single translation (async)
- */
+// --- Translation Getters ---
 async function getTranslation(key, lang = null) {
   const language = lang || getCurrentLanguage();
   const translations = await loadTranslations(language);
   return translations[key] || fallbackTranslations[key] || key;
 }
 
-/**
- * Get a translation synchronously from cache
- * Returns the key if translation not found
- */
 function getTranslationSync(key, lang = null) {
   const language = lang || getCurrentLanguage();
   const translations = translationCache[language] || translationCache['en'] || fallbackTranslations;
   return translations[key] || key;
 }
 
-// Use event delegation for ALL language selectors (including dynamically added ones)
-// This prevents duplicate handlers when both direct and delegated listeners are used
+// --- Event Delegation ---
 document.addEventListener('change', function(e) {
   if (e.target && e.target.matches('[data-language-select]')) {
     console.log('[Translations] Language changed to:', e.target.value);
@@ -207,31 +159,28 @@ document.addEventListener('change', function(e) {
   }
 });
 
-// Initialize on page load
+// --- Initialization ---
 document.addEventListener('DOMContentLoaded', async function() {
   console.log('[Translations] Initializing translation system...');
   const currentLang = getCurrentLanguage();
   console.log('[Translations] Current language:', currentLang);
   
-  // Set initial value on all language selectors (no event listeners - handled by delegation above)
   const langSelects = document.querySelectorAll('[data-language-select]');
   console.log('[Translations] Found', langSelects.length, 'language selectors');
   langSelects.forEach(langSelect => {
     langSelect.value = currentLang;
   });
   
-  // Load and apply translations
   document.documentElement.lang = currentLang;
   await applyTranslations(currentLang);
   console.log('[Translations] Initial translations applied');
   
-  // Dispatch event when translations are ready
   window.dispatchEvent(new CustomEvent('translations-ready', { 
     detail: { lang: currentLang, translations: translationCache[currentLang] } 
   }));
 });
 
-// Expose global API
+// --- Public API ---
 window.MindBalanceTranslations = {
   setLanguage,
   getCurrentLanguage,
@@ -242,9 +191,7 @@ window.MindBalanceTranslations = {
   supportedLanguages
 };
 
-// Legacy compatibility: expose translations object (populated on demand)
-// This allows existing code that uses translations[lang][key] to still work
-// after the translations are loaded
+// --- Legacy Compatibility ---
 window.translations = new Proxy({}, {
   get: function(target, lang) {
     return translationCache[lang] || {};

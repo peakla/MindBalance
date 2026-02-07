@@ -1,3 +1,4 @@
+/* === TOAST CONTAINER === */
 #toast-container {
   position: fixed;
   top: 20px;
@@ -11,6 +12,7 @@
   width: calc(100% - 40px);
 }
 
+/* === TOAST BASE === */
 .toast {
   display: flex;
   align-items: center;
@@ -68,6 +70,7 @@
   color: #333;
 }
 
+/* === TOAST VARIANTS === */
 .toast-success {
   border-color: #10b981;
 }
@@ -100,6 +103,7 @@
   color: #3b82f6;
 }
 
+/* === DARK MODE === */
 [data-theme="dark"] .toast {
   background: #2d2b3d;
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4), 0 2px 8px rgba(0, 0, 0, 0.3);
@@ -117,6 +121,7 @@
   color: #fff;
 }
 
+/* === REDUCED MOTION === */
 @media (prefers-reduced-motion: reduce) {
   .toast {
     transition: opacity 0.15s ease;
@@ -128,6 +133,7 @@
   }
 }
 
+/* === MOBILE RESPONSIVE === */
 @media (max-width: 480px) {
   #toast-container {
     top: auto;

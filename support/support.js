@@ -1,4 +1,6 @@
+// ==================== SUPPORT PAGE ====================
 document.addEventListener('DOMContentLoaded', function() {
+  // --- Email Validation ---
   const DISPOSABLE_DOMAINS = [
     'tempmail.com', 'throwaway.email', 'guerrillamail.com', 'mailinator.com',
     'temp-mail.org', '10minutemail.com', 'fakeinbox.com', 'trashmail.com',
@@ -8,53 +10,55 @@ document.addEventListener('DOMContentLoaded', function() {
     'temp.email', 'tempinbox.com', 'fakemailgenerator.com', 'emailondeck.com',
     'mintemail.com', 'discard.email', 'spamgourmet.com', 'mytemp.email'
   ];
-  
+
   function isValidEmail(email) {
     const emailRegex = /^[a-zA-Z0-9](?:[a-zA-Z0-9._-]*[a-zA-Z0-9])?@[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?(?:\.[a-zA-Z]{2,})+$/;
     if (!emailRegex.test(email)) return false;
-    
+
     const domain = email.split('@')[1].toLowerCase();
     if (DISPOSABLE_DOMAINS.some(d => domain.includes(d))) return false;
-    
+
     if (domain.length < 4) return false;
-    
+
     return true;
   }
-  
+
   const appointmentForm = document.getElementById('appointmentForm');
+
+  // ==================== APPOINTMENT FORM ====================
   const appointmentDate = document.getElementById('appointmentDate');
-  
+
   if (appointmentDate) {
     const today = new Date();
     const minDate = new Date(today);
     minDate.setDate(today.getDate() + 1);
-    
+
     const maxDate = new Date(today);
     maxDate.setMonth(today.getMonth() + 3);
-    
+
     appointmentDate.min = minDate.toISOString().split('T')[0];
     appointmentDate.max = maxDate.toISOString().split('T')[0];
   }
-  
+
   if (appointmentForm) {
     appointmentForm.addEventListener('submit', async function(e) {
       e.preventDefault();
-      
+
       const emailInput = document.getElementById('appointmentEmail');
       const email = emailInput ? emailInput.value.trim() : '';
-      
+
       if (!isValidEmail(email)) {
         alert('Please enter a valid email address. Temporary or disposable emails are not allowed.');
         if (emailInput) emailInput.focus();
         return;
       }
-      
+
       const submitBtn = appointmentForm.querySelector('.form-submit');
       const originalText = submitBtn.innerHTML;
-      
+
       submitBtn.innerHTML = '<ion-icon name="hourglass-outline"></ion-icon><span>Sending...</span>';
       submitBtn.disabled = true;
-      
+
       try {
         const formData = new FormData(appointmentForm);
         const response = await fetch(appointmentForm.action, {
@@ -64,11 +68,11 @@ document.addEventListener('DOMContentLoaded', function() {
             'Accept': 'application/json'
           }
         });
-        
+
         if (response.ok) {
           submitBtn.innerHTML = '<ion-icon name="checkmark-circle-outline"></ion-icon><span>Request Submitted!</span>';
           submitBtn.style.background = '#4caf50';
-          
+
           setTimeout(function() {
             appointmentForm.reset();
             submitBtn.innerHTML = originalText;
@@ -83,7 +87,7 @@ document.addEventListener('DOMContentLoaded', function() {
         console.error('Form submission error:', error);
         submitBtn.innerHTML = '<ion-icon name="alert-circle-outline"></ion-icon><span>Error - Try Again</span>';
         submitBtn.style.background = '#e74c3c';
-        
+
         setTimeout(function() {
           submitBtn.innerHTML = originalText;
           submitBtn.disabled = false;
@@ -92,8 +96,10 @@ document.addEventListener('DOMContentLoaded', function() {
       }
     });
   }
-  
+
   const searchInput = document.getElementById('supportSearch');
+
+  // ==================== SEARCH ====================
   if (searchInput) {
     searchInput.addEventListener('keypress', function(e) {
       if (e.key === 'Enter') {
@@ -123,7 +129,7 @@ document.addEventListener('DOMContentLoaded', function() {
             'faq': '#faq',
             'question': '#faq'
           };
-          
+
           let targetSection = null;
           for (const [keyword, section] of Object.entries(sections)) {
             if (query.includes(keyword)) {
@@ -131,7 +137,7 @@ document.addEventListener('DOMContentLoaded', function() {
               break;
             }
           }
-          
+
           if (targetSection) {
             const element = document.querySelector(targetSection);
             if (element) {
@@ -144,10 +150,12 @@ document.addEventListener('DOMContentLoaded', function() {
       }
     });
   }
-  
-  // Legacy FAQ item handling (backwards compatibility)
+
+
   const faqItems = document.querySelectorAll('.faq-item');
   if (faqItems.length > 0) {
+
+  // ==================== FAQ ACCORDION ====================
     faqItems.forEach(item => {
       const summary = item.querySelector('summary');
       if (summary) {
@@ -161,11 +169,13 @@ document.addEventListener('DOMContentLoaded', function() {
       }
     });
   }
-  
+
   const scrollProgress = document.querySelector('.scroll-progress');
   const progressBar = document.querySelector('.scroll-progress__bar');
+
+  // ==================== SCROLL PROGRESS ====================
   const dots = document.querySelectorAll('.scroll-progress__dot');
-  
+
   if (scrollProgress && dots.length > 0) {
     const sections = [
       { id: 'crisis', element: document.getElementById('crisis') },
@@ -175,7 +185,7 @@ document.addEventListener('DOMContentLoaded', function() {
       { id: 'appointment', element: document.getElementById('appointment') },
       { id: 'faq', element: document.getElementById('faq') }
     ].filter(s => s.element);
-    
+
     dots.forEach(dot => {
       dot.addEventListener('click', function() {
         const sectionId = this.getAttribute('data-section');
@@ -185,25 +195,25 @@ document.addEventListener('DOMContentLoaded', function() {
         }
       });
     });
-    
+
     function updateScrollProgress() {
       const scrollTop = window.scrollY;
       const docHeight = document.documentElement.scrollHeight - window.innerHeight;
       const scrollPercent = (scrollTop / docHeight) * 100;
-      
+
       if (progressBar) {
         progressBar.style.setProperty('--progress', scrollPercent + '%');
       }
-      
+
       if (scrollTop > 300) {
         scrollProgress.classList.add('visible');
       } else {
         scrollProgress.classList.remove('visible');
       }
-      
+
       let currentSection = null;
       const viewportMiddle = scrollTop + window.innerHeight / 3;
-      
+
       for (let i = sections.length - 1; i >= 0; i--) {
         const section = sections[i];
         if (section.element.offsetTop <= viewportMiddle) {
@@ -211,7 +221,7 @@ document.addEventListener('DOMContentLoaded', function() {
           break;
         }
       }
-      
+
       dots.forEach(dot => {
         const sectionId = dot.getAttribute('data-section');
         if (sectionId === currentSection) {
@@ -221,17 +231,19 @@ document.addEventListener('DOMContentLoaded', function() {
         }
       });
     }
-    
+
     window.addEventListener('scroll', updateScrollProgress, { passive: true });
     updateScrollProgress();
   }
-  
-  // ========================================
-  // BREATHING EXERCISE
-  // ========================================
-  
+
+
+
+
+
   const breathingModal = document.getElementById('breathingModal');
   const openBreathingBtn = document.getElementById('openBreathingTool');
+
+  // ==================== BREATHING TOOL ====================
   const breathingCircle = document.getElementById('breathingCircle');
   const breathingText = document.getElementById('breathingText');
   const breathingTimer = document.getElementById('breathingTimer');
@@ -241,23 +253,23 @@ document.addEventListener('DOMContentLoaded', function() {
   const breathingDurationEl = document.getElementById('breathingDuration');
   const breathingAudioToggle = document.getElementById('breathingAudio');
   const breathingContainer = document.querySelector('.breathing-circle-container');
-  
+
   const breathingPatterns = {
     '478': { inhale: 4, hold: 7, exhale: 8, name: '4-7-8 Relaxing' },
     'box': { inhale: 4, hold: 4, exhale: 4, holdOut: 4, name: 'Box Breathing' },
     'calm': { inhale: 4, hold: 0, exhale: 6, name: 'Calm Breathing' }
   };
-  
+
   let currentPattern = '478';
   let breathingInterval = null;
   let breathingTimeout = null;
   let breathingCycles = 0;
   let breathingStartTime = null;
   let durationInterval = null;
-  
-  // Audio context for breathing cues
+
+
   let audioContext = null;
-  
+
   function playTone(frequency, duration) {
     if (!breathingAudioToggle?.checked) return;
     try {
@@ -278,37 +290,37 @@ document.addEventListener('DOMContentLoaded', function() {
       console.log('Audio not supported');
     }
   }
-  
+
   function openBreathingModal() {
     breathingModal?.classList.add('is-active');
     document.body.style.overflow = 'hidden';
   }
-  
+
   function closeBreathingModal() {
     breathingModal?.classList.remove('is-active');
     document.body.style.overflow = '';
     stopBreathing();
   }
-  
+
   function formatDuration(ms) {
     const totalSeconds = Math.floor(ms / 1000);
     const minutes = Math.floor(totalSeconds / 60);
     const seconds = totalSeconds % 60;
     return `${minutes}:${seconds.toString().padStart(2, '0')}`;
   }
-  
+
   function updateDuration() {
     if (breathingStartTime) {
       const elapsed = Date.now() - breathingStartTime;
       if (breathingDurationEl) breathingDurationEl.textContent = formatDuration(elapsed);
     }
   }
-  
+
   function runBreathingCycle() {
     const pattern = breathingPatterns[currentPattern];
     let phase = 'inhale';
     let countdown = pattern.inhale;
-    
+
     function updatePhase() {
       if (breathingText) {
         const phaseTexts = {
@@ -320,8 +332,8 @@ document.addEventListener('DOMContentLoaded', function() {
         breathingText.textContent = phaseTexts[phase];
       }
       if (breathingTimer) breathingTimer.textContent = countdown;
-      
-      // Update circle class
+
+
       breathingCircle?.classList.remove('is-inhaling', 'is-holding', 'is-exhaling');
       if (phase === 'inhale') {
         breathingCircle?.classList.add('is-inhaling');
@@ -333,15 +345,15 @@ document.addEventListener('DOMContentLoaded', function() {
         breathingCircle.style.transition = `transform ${pattern.exhale}s ease-in-out`;
       }
     }
-    
+
     updatePhase();
-    playTone(440, 0.2); // Start tone
-    
+    playTone(440, 0.2);
+
     breathingInterval = setInterval(() => {
       countdown--;
-      
+
       if (countdown <= 0) {
-        // Move to next phase
+
         if (phase === 'inhale') {
           if (pattern.hold > 0) {
             phase = 'hold';
@@ -362,7 +374,7 @@ document.addEventListener('DOMContentLoaded', function() {
             countdown = pattern.holdOut;
             playTone(349, 0.15);
           } else {
-            // Cycle complete
+
             breathingCycles++;
             if (breathingCyclesEl) breathingCyclesEl.textContent = breathingCycles;
             phase = 'inhale';
@@ -370,7 +382,7 @@ document.addEventListener('DOMContentLoaded', function() {
             playTone(440, 0.2);
           }
         } else if (phase === 'holdOut') {
-          // Cycle complete
+
           breathingCycles++;
           if (breathingCyclesEl) breathingCyclesEl.textContent = breathingCycles;
           phase = 'inhale';
@@ -383,20 +395,20 @@ document.addEventListener('DOMContentLoaded', function() {
       }
     }, 1000);
   }
-  
+
   function startBreathing() {
     breathingCycles = 0;
     if (breathingCyclesEl) breathingCyclesEl.textContent = '0';
     breathingStartTime = Date.now();
     durationInterval = setInterval(updateDuration, 1000);
-    
+
     startBreathingBtn.style.display = 'none';
     stopBreathingBtn.style.display = 'block';
     breathingContainer?.classList.add('is-active');
-    
+
     runBreathingCycle();
   }
-  
+
   function stopBreathing() {
     if (breathingInterval) {
       clearInterval(breathingInterval);
@@ -406,26 +418,26 @@ document.addEventListener('DOMContentLoaded', function() {
       clearInterval(durationInterval);
       durationInterval = null;
     }
-    
+
     startBreathingBtn.style.display = 'block';
     stopBreathingBtn.style.display = 'none';
     breathingContainer?.classList.remove('is-active');
-    
+
     breathingCircle?.classList.remove('is-inhaling', 'is-holding', 'is-exhaling');
     if (breathingText) breathingText.textContent = 'Ready';
     if (breathingTimer) breathingTimer.textContent = '';
   }
-  
-  // Event listeners for breathing
+
+
   openBreathingBtn?.addEventListener('click', openBreathingModal);
-  
+
   breathingModal?.querySelector('.wellness-modal__backdrop')?.addEventListener('click', closeBreathingModal);
   breathingModal?.querySelector('.wellness-modal__close')?.addEventListener('click', closeBreathingModal);
-  
+
   startBreathingBtn?.addEventListener('click', startBreathing);
   stopBreathingBtn?.addEventListener('click', stopBreathing);
-  
-  // Pattern selection
+
+
   document.querySelectorAll('.breathing-pattern').forEach(btn => {
     btn.addEventListener('click', () => {
       document.querySelectorAll('.breathing-pattern').forEach(b => b.classList.remove('is-active'));
@@ -434,19 +446,19 @@ document.addEventListener('DOMContentLoaded', function() {
       stopBreathing();
     });
   });
-  
-  // Escape key to close
+
+
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') {
       if (breathingModal?.classList.contains('is-active')) closeBreathingModal();
       if (groundingModal?.classList.contains('is-active')) closeGroundingModal();
     }
   });
-  
-  // ========================================
-  // GROUNDING EXERCISE
-  // ========================================
-  
+
+
+
+
+
   const groundingModal = document.getElementById('groundingModal');
   const openGroundingBtn = document.getElementById('openGroundingTool');
   const groundingSteps = document.querySelectorAll('.grounding-step');
@@ -454,53 +466,53 @@ document.addEventListener('DOMContentLoaded', function() {
   const groundingPrevBtn = document.getElementById('groundingPrev');
   const groundingNextBtn = document.getElementById('groundingNext');
   const groundingRestartBtn = document.getElementById('groundingRestart');
-  
+
   const stepOrder = ['5', '4', '3', '2', '1', 'complete'];
   let currentGroundingStep = 0;
-  
+
   function openGroundingModal() {
     groundingModal?.classList.add('is-active');
     document.body.style.overflow = 'hidden';
     resetGrounding();
   }
-  
+
   function closeGroundingModal() {
     groundingModal?.classList.remove('is-active');
     document.body.style.overflow = '';
   }
-  
+
   function resetGrounding() {
     currentGroundingStep = 0;
     updateGroundingStep();
-    
-    // Clear all inputs
+
+
     document.querySelectorAll('.grounding-input').forEach(input => {
       input.value = '';
     });
-    
+
     groundingPrevBtn.style.display = 'block';
     groundingNextBtn.style.display = 'block';
     groundingRestartBtn.style.display = 'none';
   }
-  
+
   function updateGroundingStep() {
     const stepId = stepOrder[currentGroundingStep];
-    
-    // Update active step
+
+
     groundingSteps.forEach(step => {
       step.classList.remove('is-active');
       if (step.dataset.step === stepId) {
         step.classList.add('is-active');
       }
     });
-    
-    // Update progress bar
+
+
     const progress = (currentGroundingStep / (stepOrder.length - 1)) * 100;
     if (groundingProgressBar) groundingProgressBar.style.width = `${progress}%`;
-    
-    // Update buttons
+
+
     groundingPrevBtn.disabled = currentGroundingStep === 0;
-    
+
     if (stepId === 'complete') {
       groundingPrevBtn.style.display = 'none';
       groundingNextBtn.style.display = 'none';
@@ -510,40 +522,40 @@ document.addEventListener('DOMContentLoaded', function() {
       groundingNextBtn.style.display = 'block';
       groundingRestartBtn.style.display = 'none';
     }
-    
-    // Focus first input of current step
+
+
     const currentStepEl = document.querySelector(`.grounding-step[data-step="${stepId}"]`);
     const firstInput = currentStepEl?.querySelector('.grounding-input');
     if (firstInput) {
       setTimeout(() => firstInput.focus(), 100);
     }
   }
-  
+
   function goToNextStep() {
     if (currentGroundingStep < stepOrder.length - 1) {
       currentGroundingStep++;
       updateGroundingStep();
     }
   }
-  
+
   function goToPrevStep() {
     if (currentGroundingStep > 0) {
       currentGroundingStep--;
       updateGroundingStep();
     }
   }
-  
-  // Event listeners for grounding
+
+
   openGroundingBtn?.addEventListener('click', openGroundingModal);
-  
+
   groundingModal?.querySelector('.wellness-modal__backdrop')?.addEventListener('click', closeGroundingModal);
   groundingModal?.querySelector('.wellness-modal__close')?.addEventListener('click', closeGroundingModal);
-  
+
   groundingNextBtn?.addEventListener('click', goToNextStep);
   groundingPrevBtn?.addEventListener('click', goToPrevStep);
   groundingRestartBtn?.addEventListener('click', resetGrounding);
-  
-  // Allow Enter key to go to next in grounding inputs
+
+
   document.querySelectorAll('.grounding-input').forEach((input, index, inputs) => {
     input.addEventListener('keydown', (e) => {
       if (e.key === 'Enter') {
@@ -551,7 +563,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const currentStep = input.closest('.grounding-step');
         const stepInputs = currentStep.querySelectorAll('.grounding-input');
         const inputIndex = Array.from(stepInputs).indexOf(input);
-        
+
         if (inputIndex < stepInputs.length - 1) {
           stepInputs[inputIndex + 1].focus();
         } else {
@@ -561,9 +573,9 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   });
 
-  // ========================================
-  // SPLIT PANEL FAQ FUNCTIONALITY
-  // ========================================
+
+
+
 
   const faqSearchInput = document.getElementById('faqSearchInput');
   const faqSearchClear = document.getElementById('faqSearchClear');
@@ -681,7 +693,7 @@ document.addEventListener('DOMContentLoaded', function() {
   if (faqSearchInput) {
     faqSearchInput.addEventListener('input', function() {
       const query = this.value.trim().toLowerCase();
-      
+
       if (faqSearchClear) {
         faqSearchClear.style.display = query.length > 0 ? 'block' : 'none';
       }
@@ -712,7 +724,7 @@ document.addEventListener('DOMContentLoaded', function() {
     faqQuestions.forEach(question => {
       const qCategory = question.dataset.category;
       const qId = question.dataset.faqId;
-      
+
       const questionTextEl = question.querySelector('.faq-split__question-text');
       const answerDataEl = question.querySelector('.faq-split__answer-data');
       const questionText = questionTextEl ? questionTextEl.textContent : '';
@@ -790,12 +802,12 @@ document.addEventListener('DOMContentLoaded', function() {
     btn.addEventListener('click', function() {
       const feedback = this.dataset.feedback;
       const wasSelected = this.classList.contains('selected');
-      
+
       feedbackBtns.forEach(b => b.classList.remove('selected'));
 
       if (!wasSelected) {
         this.classList.add('selected');
-        
+
         const icon = this.querySelector('ion-icon');
         if (icon) {
           icon.style.transform = 'scale(1.3)';

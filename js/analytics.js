@@ -1,6 +1,9 @@
+// ==================== ANALYTICS ====================
+
 const MBAnalytics = (function() {
   'use strict';
 
+  // --- State ---
   let supabaseClient = null;
   let currentUser = null;
   let sessionId = null;
@@ -9,6 +12,7 @@ const MBAnalytics = (function() {
   let readingStartTime = null;
   let isTracking = false;
 
+  // --- Supabase Client ---
   function getSupabase() {
     if (!supabaseClient && typeof supabase !== 'undefined') {
       const SUPABASE_URL = "https://cxjqessxarjayqxvhnhs.supabase.co";
@@ -18,6 +22,7 @@ const MBAnalytics = (function() {
     return supabaseClient;
   }
 
+  // --- Session Management ---
   function generateSessionId() {
     return 'sess_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
   }
@@ -31,6 +36,7 @@ const MBAnalytics = (function() {
     return sid;
   }
 
+  // --- Initialization ---
   async function init() {
     sessionId = getOrCreateSessionId();
     const sb = getSupabase();
@@ -50,6 +56,7 @@ const MBAnalytics = (function() {
     trackPageView();
   }
 
+  // --- Scroll Tracking ---
   function setupScrollTracking() {
     let ticking = false;
     window.addEventListener('scroll', () => {
@@ -70,6 +77,7 @@ const MBAnalytics = (function() {
     }, { passive: true });
   }
 
+  // --- Visibility Tracking ---
   function setupVisibilityTracking() {
     document.addEventListener('visibilitychange', () => {
       if (document.hidden) {
@@ -85,6 +93,7 @@ const MBAnalytics = (function() {
     });
   }
 
+  // --- Page Tracking ---
   async function trackPageView() {
     const pageData = {
       page_url: window.location.pathname,
@@ -107,6 +116,7 @@ const MBAnalytics = (function() {
     });
   }
 
+  // --- Activity Logging ---
   async function logActivity(actionType, metadata = {}) {
     if (!currentUser) return;
 
@@ -125,6 +135,7 @@ const MBAnalytics = (function() {
     }
   }
 
+  // --- Article Tracking ---
   async function trackArticleRead(articleId, articleTitle) {
     if (!currentUser) return;
 
@@ -152,6 +163,7 @@ const MBAnalytics = (function() {
     await checkAchievements('article_complete');
   }
 
+  // --- Reading Progress ---
   async function updateReadingProgress(articleSlug, progress, timeSpent) {
     if (!currentUser) return;
 
@@ -197,6 +209,7 @@ const MBAnalytics = (function() {
     await updateReadingProgress(articleId, scrollDepth, timeSpent);
   }
 
+  // --- Content Tracking ---
   async function trackResourceView(resourceId, resourceTitle) {
     await logActivity('resource_view', {
       resource_id: resourceId,
@@ -219,6 +232,7 @@ const MBAnalytics = (function() {
     });
   }
 
+  // --- Wellness Tracking ---
   async function trackMoodEntry(mood, notes) {
     await logActivity('mood_entry', {
       mood: mood,
@@ -237,12 +251,15 @@ const MBAnalytics = (function() {
     }
   }
 
+  // --- Community Tracking ---
   async function trackCommunityAction(actionType, postId) {
     await logActivity('community_' + actionType, {
       post_id: postId
     });
     await checkAchievements('community_' + actionType);
   }
+
+  // ==================== ACHIEVEMENTS ====================
 
   const ACHIEVEMENTS = [
     { id: 'first_article', name: 'First Steps', description: 'Read your first article', icon: 'book-outline', condition: { action: 'article_read', count: 1 } },
@@ -262,6 +279,7 @@ const MBAnalytics = (function() {
     { id: 'completionist', name: 'Completionist', description: 'Complete 10 articles 100%', icon: 'checkmark-done-outline', condition: { action: 'article_complete', count: 10 } }
   ];
 
+  // --- Achievement Checks ---
   async function checkAchievements(actionType) {
     if (!currentUser) return;
 
@@ -295,6 +313,7 @@ const MBAnalytics = (function() {
     }
   }
 
+  // --- Achievement Unlock ---
   async function unlockAchievement(achievement) {
     if (!currentUser) return;
 
@@ -329,6 +348,7 @@ const MBAnalytics = (function() {
     }
   }
 
+  // --- Achievement Notification ---
   function showAchievementNotification(achievement) {
     const notification = document.createElement('div');
     notification.className = 'mb-achievement-notification';
@@ -351,6 +371,8 @@ const MBAnalytics = (function() {
       setTimeout(() => notification.remove(), 500);
     }, 4000);
   }
+
+  // ==================== STATS & DATA RETRIEVAL ====================
 
   async function getActivityStats(userId, days = 30) {
     const sb = getSupabase();
@@ -401,6 +423,7 @@ const MBAnalytics = (function() {
     };
   }
 
+  // --- Reading Stats ---
   async function getReadingStats(userId) {
     const sb = getSupabase();
     if (!sb) return null;
@@ -430,6 +453,7 @@ const MBAnalytics = (function() {
     }
   }
 
+  // --- Achievements Data ---
   async function getAchievements(userId) {
     const sb = getSupabase();
     if (!sb) return { earned: [], available: ACHIEVEMENTS };
@@ -496,6 +520,7 @@ const MBAnalytics = (function() {
     }
   }
 
+  // --- Streak Data ---
   async function getStreakData(userId, days = 365) {
     const sb = getSupabase();
     if (!sb) return null;
@@ -554,6 +579,7 @@ const MBAnalytics = (function() {
     }
   }
 
+  // --- Recent Activity ---
   async function getRecentActivity(userId, limit = 20) {
     const sb = getSupabase();
     if (!sb) return [];
@@ -573,6 +599,7 @@ const MBAnalytics = (function() {
     }
   }
 
+  // --- Public API ---
   return {
     init,
     trackArticleRead,
@@ -593,6 +620,7 @@ const MBAnalytics = (function() {
   };
 })();
 
+// --- Auto-Initialize ---
 document.addEventListener('DOMContentLoaded', () => {
   MBAnalytics.init();
 });

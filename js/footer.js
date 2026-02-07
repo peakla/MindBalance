@@ -1,3 +1,6 @@
+// ==================== FOOTER ====================
+
+// --- Initialization ---
 document.addEventListener('DOMContentLoaded', () => {
   initBackToTop();
   initNewsletterForm();
@@ -5,6 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initFooterControls();
 });
 
+// --- Back To Top ---
 function initBackToTop() {
   const backToTopBtn = document.getElementById('backToTop');
   if (!backToTopBtn) return;
@@ -27,6 +31,7 @@ function initBackToTop() {
   });
 }
 
+// --- Newsletter Form ---
 function initNewsletterForm() {
   const form = document.getElementById('newsletterForm');
   if (!form) return;
@@ -40,7 +45,6 @@ function initNewsletterForm() {
     
     if (!email) return;
 
-    // Basic email validation
     const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
     if (!emailPattern.test(email)) {
       showToast('Please enter a valid email address.');
@@ -92,6 +96,7 @@ function initNewsletterForm() {
   });
 }
 
+// --- Footer Accordion ---
 function initFooterAccordion() {
   const accordionBtns = document.querySelectorAll('.mb-footer__accordion-btn');
   
@@ -103,12 +108,12 @@ function initFooterAccordion() {
   });
 }
 
+// --- Footer Controls ---
 function initFooterControls() {
   const langSelect = document.getElementById('footerLangSelect');
   const themeToggle = document.getElementById('footerThemeToggle');
 
   if (langSelect) {
-    // Use the translation system's current language
     const savedLang = window.MindBalanceTranslations?.getCurrentLanguage?.() || 
                       localStorage.getItem('mindbalance-language') || 'en';
     langSelect.value = savedLang;
@@ -116,11 +121,9 @@ function initFooterControls() {
     langSelect.addEventListener('change', (e) => {
       const lang = e.target.value;
       
-      // Use the translation system's setLanguage which handles everything
       if (window.MindBalanceTranslations?.setLanguage) {
         window.MindBalanceTranslations.setLanguage(lang);
       } else {
-        // Fallback if translation system not loaded yet
         localStorage.setItem('mindbalance-language', lang);
         document.querySelectorAll('[data-language-select]').forEach(select => {
           if (select !== langSelect) {
@@ -159,6 +162,7 @@ function initFooterControls() {
   listenForHeaderChanges();
 }
 
+// --- Header Change Sync ---
 function listenForHeaderChanges() {
   document.querySelectorAll('[data-theme-toggle]').forEach(toggle => {
     if (toggle.id !== 'footerThemeToggle') {
@@ -183,6 +187,7 @@ function listenForHeaderChanges() {
   });
 }
 
+// --- Toast ---
 function showToast(message) {
   let toast = document.querySelector('.footer-toast');
   

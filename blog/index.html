@@ -1,39 +1,40 @@
 <!DOCTYPE html>
 <html lang="en">
 
+<!-- ===== HEAD ===== -->
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Blog | MindBalance</title>
 
-  <!-- Metadata -->
+  
   <link rel="icon" type="image/png" href="/assets/images/favicon.png" />
   <meta name="title" content="MindBalance - Mental Health Blog & Resource Hub" />
   <meta name="description"
     content="MindBalance is a curated mental health blog featuring credible resources, clear explanations, and practical takeaways on anxiety, stress, depression, sleep, mindfulness, and teen mental health." />
 
-  <!-- Performance: CDN loads -->
+  
   <link rel="preconnect" href="https://unpkg.com" />
   <link rel="preconnect" href="https://cdn.jsdelivr.net" />
   <link rel="preconnect" href="https://cdnjs.cloudflare.com" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 
-  <!-- Stylesheets -->
+  
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
 
-  <!-- CSS -->
+  
   <link rel="stylesheet" href="../css/style.css" />
   <link rel="stylesheet" href="../css/responsive-system.css" />
   <link rel="stylesheet" href="../css/settings-modal.css" />
   <link rel="stylesheet" href="../css/analytics.css" />
   <link rel="stylesheet" href="../css/animations.css" />
 
-  <!-- Preload -->
+  
   <link rel="preload" href="../css/style.css" as="style" />
 
-  <!-- Webflow-like JS -->
+  
   <script>
     !function (o, c) {
       var n = c.documentElement, t = " w-mod-";
@@ -43,7 +44,7 @@
     }(window, document);
   </script>
 
-  <!-- Supabase SDK -->
+  
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="../js/auth.js" defer></script>
   <script src="../js/analytics.js" defer></script>
@@ -55,10 +56,10 @@
 
 <body>
 
-  <!-- SVG Filters for Colorblind Accessibility -->
+  
   <svg style="position: absolute; width: 0; height: 0; overflow: hidden;" aria-hidden="true">
     <defs>
-      <!-- Protanopia (red-blind) filter -->
+      
       <filter id="protanopia-filter">
         <feColorMatrix type="matrix" values="
         0.567, 0.433, 0,     0, 0
@@ -66,7 +67,7 @@
         0,     0.242, 0.758, 0, 0
         0,     0,     0,     1, 0" />
       </filter>
-      <!-- Deuteranopia (green-blind) filter -->
+      
       <filter id="deuteranopia-filter">
         <feColorMatrix type="matrix" values="
         0.625, 0.375, 0,   0, 0
@@ -74,7 +75,7 @@
         0,     0.3,   0.7, 0, 0
         0,     0,     0,   1, 0" />
       </filter>
-      <!-- Tritanopia (blue-blind) filter -->
+      
       <filter id="tritanopia-filter">
         <feColorMatrix type="matrix" values="
         0.95, 0.05,  0,     0, 0
@@ -85,7 +86,7 @@
     </defs>
   </svg>
 
-  <!-- Preloader -->
+  
   <div class="orientation-lock"></div>
   <div class="preload" data-preaload>
     <img src="/assets/images/preload.gif" alt="Loading..." class="loader-gif" decoding="async">
@@ -94,7 +95,8 @@
     </div>
   </div>
 
-  <!-- Scroll Progress Indicator -->
+  
+<!-- ===== NAVBAR ===== -->
   <nav class="scroll-progress" aria-label="Page sections">
     <div class="scroll-progress__bar" aria-hidden="true"></div>
     <div class="scroll-progress__sections">
@@ -113,7 +115,7 @@
     </div>
   </nav>
 
-  <!-- TOP BAR -->
+  
   <div class="topbar">
     <div class="container">
       <address class="topbar-item">
@@ -150,8 +152,8 @@
     </div>
   </div>
 
-  <!-- HEADER -->
-  <!-- HEADER -->
+  
+  
   <header class="header" data-header>
     <div class="container">
 
@@ -246,8 +248,8 @@
           </ul>
         </div>
 
-        <!-- Mobile Settings Section -->
-        <!-- Mobile Settings Section (Collapsible) -->
+        
+        
         <div class="mobile-settings-section collapsed">
           <button class="mobile-settings-toggle" aria-expanded="false" aria-controls="mobileSettingsList">
             <span class="mobile-settings-title" data-translate="settings_title">Settings</span>
@@ -333,7 +335,7 @@
           </div>
         </div>
 
-        <!-- Mobile Auth Section -->
+        
         <div class="mobile-auth-section">
           <button class="mobile-auth-btn mobile-inbox-btn" onclick="openGlobalInbox(); closeNavbar();" data-auth-show>
             <ion-icon name="notifications-outline"></ion-icon>
@@ -354,7 +356,7 @@
           </a>
         </div>
 
-        <!-- Mobile Submenu Panels -->
+        
         <div class="navbar-submenu-panel" data-submenu-panel="resources">
           <div class="submenu-header">
             <button class="submenu-back-btn" aria-label="Back to main menu">
@@ -419,12 +421,11 @@
           </div>
         </div>
 
-
       </nav>
 
-      <!-- Navbar Actions (Search, Settings, User Menu, Crisis) -->
+      
       <div class="navbar-actions">
-        <!-- Search Bar -->
+        
         <div class="navbar-search" id="navbarSearch">
           <input type="text" class="navbar-search__input" placeholder="Search..." aria-label="Search site" id="searchInput">
           <button class="navbar-search__btn" aria-label="Toggle search" id="searchToggle">
@@ -433,12 +434,12 @@
           <div class="navbar-search__results" id="searchResults"></div>
         </div>
         
-        <!-- Accessibility Settings Button - Always Visible -->
+        
         <button class="navbar-settings-btn" onclick="openSettingsModal()" aria-label="Accessibility settings" title="Settings">
           <ion-icon name="settings-outline"></ion-icon>
         </button>
         
-        <!-- Consolidated User Menu -->
+        
         <div class="user-menu-wrapper" id="userMenuWrapper">
           <button class="user-menu-trigger" id="userMenuTrigger" aria-label="User menu" aria-expanded="false">
             <span class="user-icon" data-user-icon>
@@ -449,7 +450,7 @@
           </button>
           
           <div class="user-menu-dropdown" id="userMenuDropdown">
-            <!-- Signed In State -->
+            
             <div class="user-menu-signed-in" data-auth-show style="display: none;">
               <div class="user-menu-header">
                 <img src="/assets/images/default-avatar.png" alt="User avatar" class="user-avatar-large" id="userMenuAvatar">
@@ -476,7 +477,7 @@
               </div>
             </div>
             
-            <!-- Guest State -->
+            
             <div class="user-menu-guest" data-auth-hide>
               <p data-translate="user_menu_guest_text">Sign in to access your profile and notifications</p>
               <a href="/auth/" class="user-menu-signin-btn">
@@ -504,7 +505,7 @@
     </div>
   </header>
 
-  <!-- ===== Blog Hero ===== -->
+  
   <section class="mb-blogHero animate-fade-in">
     <div class="mb-blogHero__inner container">
       <div class="mb-blogHero__left">
@@ -543,7 +544,7 @@
       </div>
 
       <div class="mb-blogHero__right">
-        <!-- Top ticker strip -->
+        
         <div class="mb-ticker" aria-label="Top highlights">
           <div class="mb-ticker__item">
             <span class="mb-ticker__num">1</span>
@@ -559,7 +560,7 @@
           </div>
         </div>
 
-        <!-- Big featured card -->
+        
         <article class="mb-featureCard animate-scale-in" id="featured">
           <a class="mb-featureCard__imgWrap" href="../articles/anxiety.html">
             <img class="mb-featureCard__img"
@@ -609,14 +610,15 @@
     </div>
   </section>
 
-  <!-- ===== Main Layout ===== -->
+  
+<!-- ===== MAIN CONTENT ===== -->
   <main class="mb-blog container" id="sections">
     <div class="mb-blogGrid">
 
-      <!-- LEFT: posts -->
+      
       <section class="mb-posts" aria-label="Blog posts">
 
-        <!-- Results / status bar -->
+        
         <div class="mb-resultsBar" aria-live="polite">
           <div class="mb-resultsBar__left">
             <div class="mb-resultsBar__count" id="resultsCount">Showing: 0 posts</div>
@@ -627,7 +629,7 @@
           </button>
         </div>
 
-        <!-- No results message -->
+        
         <div class="mb-emptyState" id="noResults">
           <strong>No results found.</strong>
           <div style="margin-top:6px;">
@@ -635,7 +637,7 @@
           </div>
         </div>
 
-        <!-- News & Stories Section -->
+        
         <div class="mb-sectionHead" id="news-stories">
           <h3 class="mb-sectionHead__title" data-translate="blog_news_stories">News & Stories</h3>
           <span class="mb-sectionHead__subtitle" style="font-size: 14px; color: #666;">Real stories, research updates & community spotlights</span>
@@ -771,13 +773,13 @@
           </article>
         </div>
 
-        <!-- Section heading -->
+        
         <div class="mb-sectionHead" style="margin-top: 2rem;">
           <h3 class="mb-sectionHead__title">Featured Articles</h3>
           <a class="mb-sectionHead__more" href="#latest">View More →</a>
         </div>
 
-        <!-- 2-up top cards -->
+        
         <div class="mb-2up animate-stagger">
           <article class="mb-postCard card-animated hover-lift" data-category="Stress">
             <a class="mb-postCard__imgWrap" href="../articles/stress.html">
@@ -835,7 +837,7 @@
           </article>
         </div>
 
-        <!-- 2 small cards row -->
+        
         <div class="mb-2up mb-2up--mini animate-stagger">
           <article class="mb-miniCard card-animated hover-lift" data-category="Depression">
             <img src="/assets/images/depressioncover.png"
@@ -872,7 +874,7 @@
           </article>
         </div>
 
-        <!-- More mini cards -->
+        
         <div class="mb-2up mb-2up--mini animate-stagger">
           <article class="mb-miniCard card-animated hover-lift" data-category="Sleep">
             <img src="/assets/images/SleepCover.png" alt="Peaceful bedroom for restful sleep" class="mb-miniCard__img"
@@ -909,13 +911,13 @@
           </article>
         </div>
 
-        <!-- Second section heading -->
+        
         <div class="mb-sectionHead" id="latest">
           <h3 class="mb-sectionHead__title">In-Depth Guides</h3>
           <a class="mb-sectionHead__more" href="#more">View More →</a>
         </div>
 
-        <!-- Large list items -->
+        
         <div class="mb-listStack animate-stagger">
           <article class="mb-listPost card-animated hover-lift" data-category="Sleep">
             <a class="mb-listPost__imgWrap" href="../articles/sleep.html">
@@ -1079,13 +1081,13 @@
           </article>
         </div>
 
-        <!-- More sections -->
+        
         <div class="mb-sectionHead" id="more">
           <h3 class="mb-sectionHead__title">More Topics</h3>
           <a class="mb-sectionHead__more" href="#allPosts">View More →</a>
         </div>
 
-        <!-- 3-column compact grid -->
+        
         <div class="mb-3grid" id="allPosts">
           <article class="mb-compactCard" data-category="Depression">
             <a class="mb-compactCard__imgWrap" href="../articles/depression.html">
@@ -1188,13 +1190,13 @@
           </article>
         </div>
 
-        <!-- Pagination / load more -->
+        
         <div class="mb-loadMore">
           <button class="mb-loadMore__btn" type="button" id="loadMoreBtn">Load more…</button>
         </div>
       </section>
 
-      <!-- RIGHT: sidebar -->
+      
       <aside class="mb-sidebar" aria-label="Sidebar">
         <div class="mb-widget">
           <div class="mb-widget__title">Search</div>
@@ -1312,16 +1314,16 @@
     </div>
   </main>
 
-  <!-- Toast -->
+  
   <div class="mb-toast" id="toast" role="status" aria-live="polite" aria-atomic="true"></div>
 
-  <!-- Scripts -->
+  
   <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js" defer></script>
   <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js" defer></script>
   <script src="https://unpkg.com/swiper@8/swiper-bundle.min.js" defer></script>
   <script src="../js/script.js" defer></script>
 
-  <!-- Blog JavaScript -->
+  
   <script>
     (function () {
       const SUPABASE_URL = "https://cxjqessxarjayqxvhnhs.supabase.co";
@@ -1623,9 +1625,9 @@
   <ion-icon name="chevron-up-outline"></ion-icon>
 </button>
 
-<!-- FOOTER -->
+<!-- ===== FOOTER ===== -->
 <footer id="footer" class="mb-footer" aria-label="Site footer">
-  <!-- Animated Wave Separator -->
+  
   <div class="mb-footer__wave">
     <svg viewBox="0 0 1200 120" preserveAspectRatio="none">
       <path class="wave-path wave-1" d="M0,60 Q150,20 300,60 T600,60 T900,60 T1200,60 L1200,120 L0,120 Z"></path>
@@ -1635,14 +1637,14 @@
   </div>
 
   <div class="mb-footer__top">
-    <!-- Decorative Pattern Overlay -->
+    
     <div class="mb-footer__pattern"></div>
     
     <div class="mb-footer__wrap">
-      <!-- Row 1: Main Content -->
+      
       <div class="mb-footer__main-grid">
 
-        <!-- Brand / About -->
+        
         <section class="mb-footer__col" aria-label="About MindBalance">
           <h3 class="mb-footer__brand" data-translate="footer_brand">MindBalance</h3>
           <p class="mb-footer__text" data-translate="footer_about">
@@ -1651,7 +1653,7 @@
           </p>
           <a class="mb-footer__link" href="/support/" data-translate="footer_read_more">Read more →</a>
           
-          <!-- Trust Badges -->
+          
           <div class="mb-footer__trust">
             <div class="mb-footer__badge">
               <ion-icon name="shield-checkmark-outline"></ion-icon>
@@ -1668,7 +1670,7 @@
           </div>
         </section>
 
-        <!-- Pages (Collapsible on Mobile) -->
+        
         <nav class="mb-footer__col mb-footer__accordion" aria-label="Footer navigation">
           <button class="mb-footer__accordion-btn" aria-expanded="false">
             <h4 class="mb-footer__heading" data-translate="footer_pages">Pages</h4>
@@ -1684,7 +1686,7 @@
           </ul>
         </nav>
 
-        <!-- Topics / Tags -->
+        
         <section class="mb-footer__col" aria-label="Popular topics">
           <h4 class="mb-footer__heading" data-translate="footer_topics">Popular Topics</h4>
           <div class="mb-footer__tags">
@@ -1697,7 +1699,7 @@
           </div>
         </section>
 
-        <!-- Take Action + Contact -->
+        
         <section class="mb-footer__col" aria-label="Take action">
           <h4 class="mb-footer__heading" data-translate="footer_action">Take Action</h4>
 
@@ -1722,9 +1724,9 @@
         </section>
       </div>
 
-      <!-- Row 2: Newsletter + Recent Posts -->
+      
       <div class="mb-footer__extras">
-        <!-- Newsletter Signup -->
+        
         <section class="mb-footer__newsletter" aria-label="Newsletter signup">
           <div class="mb-footer__newsletter-content">
             <ion-icon name="mail-outline" class="newsletter-icon"></ion-icon>
@@ -1743,7 +1745,7 @@
           <p class="mb-footer__newsletter-note" data-translate="footer_privacy_note">We respect your privacy. Unsubscribe anytime.</p>
         </section>
 
-        <!-- Recent Blog Posts -->
+        
         <section class="mb-footer__recent" aria-label="Recent articles">
           <h4 class="mb-footer__heading" data-translate="footer_latest_articles">Latest Articles</h4>
           <div class="mb-footer__posts">
@@ -1778,7 +1780,7 @@
         </section>
       </div>
 
-      <!-- Footer Controls: Language & Theme -->
+      
       <div class="mb-footer__controls">
         <div class="mb-footer__control-group">
           <ion-icon name="language-outline"></ion-icon>
@@ -1804,7 +1806,7 @@
     </div>
   </div>
 
-  <!-- Bottom bar -->
+  
   <div class="mb-footer__bottom">
     <div class="mb-footer__wrap mb-footer__bottomwrap">
       <p class="mb-footer__copy">
@@ -1820,12 +1822,12 @@
   </div>
 </footer>
 
+<!-- ===== SCRIPTS ===== -->
   <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
   <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
   <script src="../js/scroll-progress.js" defer></script>
   <script src="../js/animations.js" defer></script>
 <script src="../js/footer.js" defer></script>
-  <script src="/js/security.js"></script>
 </body>
 
 </html>

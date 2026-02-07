@@ -1,12 +1,9 @@
-/* ============================================
-   ENHANCED WELLNESS CHECK-IN
-   Interactive mood selector with personalized tips
-   ============================================ */
+// ==================== WELLNESS CHECK-IN ====================
 
 (function() {
   'use strict';
 
-  // Mood data with tips, affirmations, and actions
+  // --- Mood Data ---
   const moodData = {
     happy: {
       emoji: '😊',
@@ -82,7 +79,7 @@
     }
   };
 
-  // Daily tips for default state (before mood selection)
+  // --- Daily Tips ---
   const dailyTips = {
     0: { icon: "🌅", title: "Restful Sunday", text: "Sundays are for recharging. Take time today to do something that truly relaxes you, whether it's reading, nature walks, or simply doing nothing at all." },
     1: { icon: "🧘", title: "Mindful Monday", text: "Start your week with intention. Try a 2-minute breathing exercise before your first task: inhale for 4 counts, hold for 4, exhale for 6." },
@@ -93,7 +90,7 @@
     6: { icon: "✨", title: "Self-Care Saturday", text: "Weekends are for recovery. Do one thing today purely for your own enjoyment — no productivity guilt allowed!" }
   };
 
-  // Time-based greetings
+  // --- Time Greeting ---
   function getTimeGreeting() {
     const hour = new Date().getHours();
     if (hour >= 5 && hour < 12) {
@@ -107,7 +104,7 @@
     }
   }
 
-  // Get streak from localStorage
+  // --- Streak Management ---
   function getStreak() {
     const streakData = localStorage.getItem('wellnessStreak');
     if (!streakData) return { count: 0, lastDate: null };
@@ -130,7 +127,6 @@
     }
   }
 
-  // Update streak
   function updateStreak() {
     const streak = getStreak();
     const today = new Date().toDateString();
@@ -152,7 +148,7 @@
     return newCount;
   }
 
-  // Simulated community mood data (in production, this would come from backend)
+  // --- Community Moods ---
   function getCommunityMoods() {
     const stored = sessionStorage.getItem('communityMoods');
     if (stored) {
@@ -172,14 +168,14 @@
     return moods;
   }
 
-  // Check for reduced motion preference
+  // --- Motion Preferences ---
   function prefersReducedMotion() {
     return window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   }
 
-  // Create confetti effect
+  // --- Visual Effects ---
   function createConfetti(container) {
-    if (prefersReducedMotion()) return; // Skip confetti for reduced motion
+    if (prefersReducedMotion()) return;
     
     const colors = ['#10b981', '#06b6d4', '#f59e0b', '#ec4899', '#8b5cf6'];
     const confettiCount = 50;
@@ -202,7 +198,6 @@
       setTimeout(() => confetti.remove(), 3000);
     }
     
-    // Add confetti animation if not exists
     if (!document.getElementById('confetti-styles')) {
       const style = document.createElement('style');
       style.id = 'confetti-styles';
@@ -216,7 +211,6 @@
     }
   }
 
-  // Create calming ripple effect
   function createRipple(container, x, y) {
     const ripple = document.createElement('div');
     ripple.className = 'wellness-checkin__ripple';
@@ -231,7 +225,7 @@
     setTimeout(() => ripple.remove(), 1000);
   }
 
-  // Haptic feedback for mobile
+  // --- Haptic Feedback ---
   function hapticFeedback(type = 'light') {
     if ('vibrate' in navigator) {
       const patterns = {
@@ -243,7 +237,7 @@
     }
   }
 
-  // Initialize the wellness check-in
+  // --- Initialization ---
   function init() {
     const section = document.querySelector('.wellness-checkin');
     if (!section) return;
@@ -257,7 +251,7 @@
     const communityBar = section.querySelector('.wellness-checkin__community-bar');
     const confettiCanvas = section.querySelector('.wellness-checkin__confetti');
 
-    // Set time greeting
+    // --- Greeting Setup ---
     if (greetingEl) {
       const greeting = getTimeGreeting();
       const iconSpan = greetingEl.querySelector('.wellness-checkin__time-icon');
@@ -266,7 +260,7 @@
       if (textSpan) textSpan.textContent = greeting.text;
     }
 
-    // Set streak
+    // --- Streak Setup ---
     const streak = getStreak();
     if (streakEl) {
       if (streak.count > 0) {
@@ -277,7 +271,7 @@
       }
     }
 
-    // Set default daily tip
+    // --- Daily Tip Setup ---
     if (defaultTipEl) {
       const today = new Date().getDay();
       const tip = dailyTips[today];
@@ -290,7 +284,7 @@
       if (textEl) textEl.textContent = tip.text;
     }
 
-    // Set community mood bar
+    // --- Community Mood Bar ---
     if (communityBar) {
       const moods = getCommunityMoods();
       const total = Object.values(moods).reduce((a, b) => a + b, 0);
@@ -302,7 +296,6 @@
         }
       });
 
-      // Update legend percentages
       const legend = section.querySelector('.wellness-checkin__community-legend');
       if (legend) {
         Object.entries(moods).forEach(([mood, count]) => {
@@ -314,7 +307,7 @@
       }
     }
 
-    // Mood button click handlers
+    // --- Mood Button Handlers ---
     moodButtons.forEach(btn => {
       btn.addEventListener('click', () => {
         const mood = btn.dataset.mood;
@@ -323,23 +316,19 @@
 
         hapticFeedback('medium');
 
-        // Update selected state
         moodButtons.forEach(b => b.classList.remove('is-selected'));
         btn.classList.add('is-selected');
 
-        // Update streak
         const newStreak = updateStreak();
         if (streakEl) {
           streakEl.querySelector('.wellness-checkin__streak-count').textContent = newStreak;
           streakEl.style.display = 'inline-flex';
         }
 
-        // Show confetti for positive moods
         if (confettiCanvas && (mood === 'happy' || mood === 'calm')) {
           createConfetti(confettiCanvas);
         }
 
-        // Create ripple for anxious/stressed
         if (mood === 'anxious' || mood === 'stressed') {
           const rect = container.getBoundingClientRect();
           const x = btn.getBoundingClientRect().left - rect.left + btn.offsetWidth / 2;
@@ -347,11 +336,9 @@
           createRipple(container, x, y);
         }
 
-        // Hide default tip, show response
         if (defaultTipEl) defaultTipEl.style.display = 'none';
         
         if (responseEl) {
-          // Update content
           const affirmationEl = responseEl.querySelector('.wellness-checkin__affirmation');
           const tipTitleEl = responseEl.querySelector('.wellness-checkin__tip-title');
           const tipTextEl = responseEl.querySelector('.wellness-checkin__tip-text');
@@ -365,7 +352,6 @@
           if (tipTextEl) tipTextEl.textContent = data.tip;
           if (tipCard) tipCard.style.borderLeftColor = data.color;
 
-          // Update actions
           if (actionsEl) {
             actionsEl.innerHTML = data.actions.map(action => `
               <a href="${action.href}" class="wellness-checkin__action-btn wellness-checkin__action-btn--${action.primary ? 'primary' : 'secondary'}">
@@ -375,15 +361,12 @@
             `).join('');
           }
 
-          // Update CSS variables for accent colors
           responseEl.style.setProperty('--mood-accent', data.color);
           responseEl.style.setProperty('--mood-accent-dark', data.colorDark);
 
-          // Show response
           responseEl.classList.add('is-visible');
         }
 
-        // Update section background subtly
         section.style.setProperty('--selected-mood-color', data.color);
       });
     });
@@ -391,7 +374,6 @@
     console.log('[Wellness Check-In] Initialized');
   }
 
-  // Initialize when DOM is ready
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', init);
   } else {

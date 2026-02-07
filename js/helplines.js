@@ -1,3 +1,6 @@
+// ==================== HELPLINES ====================
+
+// --- Initialization ---
 document.addEventListener('DOMContentLoaded', function() {
   initHelplinesFilters();
   initCopyButtons();
@@ -5,6 +8,7 @@ document.addEventListener('DOMContentLoaded', function() {
   initMobileCategories();
 });
 
+// --- Filter Pills ---
 function initHelplinesFilters() {
   const filterPills = document.querySelectorAll('.helplines-filter-pill');
   const helplineCards = document.querySelectorAll('.helpline-card');
@@ -48,6 +52,7 @@ function initHelplinesFilters() {
   });
 }
 
+// --- Copy Buttons ---
 function initCopyButtons() {
   document.querySelectorAll('.helpline-copy-btn').forEach(btn => {
     btn.addEventListener('click', function(e) {
@@ -100,13 +105,13 @@ function initCopyButtons() {
   });
 }
 
+// --- View Toggle ---
 function initViewToggle() {
   const viewToggleBtns = document.querySelectorAll('.view-toggle-btn');
   const helplinesGrid = document.querySelector('.helplines-grid');
   
   if (!viewToggleBtns.length || !helplinesGrid) return;
   
-  // Load saved preference
   const savedView = localStorage.getItem('helplines-view') || 'grid';
   if (savedView === 'list') {
     helplinesGrid.classList.add('list-view');
@@ -128,10 +133,8 @@ function initViewToggle() {
         helplinesGrid.classList.remove('list-view');
       }
       
-      // Save preference
       localStorage.setItem('helplines-view', view);
       
-      // Trigger re-layout animation
       helplinesGrid.style.opacity = '0';
       setTimeout(() => {
         helplinesGrid.style.opacity = '1';
@@ -140,20 +143,18 @@ function initViewToggle() {
   });
 }
 
+// --- Mobile Categories ---
 function initMobileCategories() {
   const helplinesGrid = document.querySelector('.helplines-grid');
   const helplineCards = document.querySelectorAll('.helpline-card');
   
   if (!helplinesGrid || !helplineCards.length) return;
   
-  // Check if we're on mobile
   const isMobile = () => window.innerWidth <= 768;
   
-  // Store original cards for restoration
   let originalCards = Array.from(helplineCards).map(card => card.cloneNode(true));
   let mobileGroupsCreated = false;
   
-  // Category configuration with translation keys
   const categories = {
     crisis: { nameKey: 'mobile_cat_crisis', fallback: 'Crisis Lines', icon: 'alert-circle' },
     lgbtq: { nameKey: 'mobile_cat_lgbtq', fallback: 'LGBTQ+ Support', icon: 'heart-half' },
@@ -163,7 +164,6 @@ function initMobileCategories() {
     general: { nameKey: 'mobile_cat_general', fallback: 'General Support', icon: 'call' }
   };
   
-  // Get translated text
   function getTranslation(key, fallback) {
     if (window.translations && window.translations[key]) {
       return window.translations[key];
@@ -174,7 +174,6 @@ function initMobileCategories() {
   function createMobileGroups() {
     if (mobileGroupsCreated) return;
     
-    // Group cards by category
     const grouped = {};
     helplineCards.forEach(card => {
       const category = card.dataset.category || 'general';
@@ -182,11 +181,9 @@ function initMobileCategories() {
       grouped[category].push(card.cloneNode(true));
     });
     
-    // Clear the grid
     helplinesGrid.innerHTML = '';
     helplinesGrid.classList.add('mobile-grouped');
     
-    // Create category groups
     Object.keys(categories).forEach(cat => {
       const cards = grouped[cat];
       if (!cards || cards.length === 0) return;
@@ -215,7 +212,6 @@ function initMobileCategories() {
       const content = group.querySelector('.mobile-category-content');
       cards.forEach(card => content.appendChild(card));
       
-      // Add click handler
       const header = group.querySelector('.mobile-category-header');
       header.addEventListener('click', () => {
         const isExpanded = group.classList.contains('expanded');
@@ -223,7 +219,6 @@ function initMobileCategories() {
         header.setAttribute('aria-expanded', !isExpanded);
       });
       
-      // Expand crisis section by default
       if (cat === 'crisis') {
         group.classList.add('expanded');
         header.setAttribute('aria-expanded', 'true');
@@ -232,7 +227,6 @@ function initMobileCategories() {
       helplinesGrid.appendChild(group);
     });
     
-    // Reinitialize copy buttons for cloned cards
     initCopyButtons();
     
     mobileGroupsCreated = true;
@@ -244,7 +238,6 @@ function initMobileCategories() {
     helplinesGrid.innerHTML = '';
     helplinesGrid.classList.remove('mobile-grouped');
     
-    // Restore saved view preference
     const savedView = localStorage.getItem('helplines-view') || 'grid';
     if (savedView === 'list') {
       helplinesGrid.classList.add('list-view');
@@ -254,7 +247,6 @@ function initMobileCategories() {
       helplinesGrid.appendChild(card.cloneNode(true));
     });
     
-    // Reinitialize copy buttons for new cards
     initCopyButtons();
     
     mobileGroupsCreated = false;
@@ -268,13 +260,11 @@ function initMobileCategories() {
     }
   }
   
-  // Debounce resize handler
   let resizeTimeout;
   window.addEventListener('resize', () => {
     clearTimeout(resizeTimeout);
     resizeTimeout = setTimeout(handleResize, 150);
   });
   
-  // Initial check
   handleResize();
 }

@@ -1,31 +1,28 @@
+// ==================== MAIN APPLICATION ====================
 "use strict";
 
-/* =========================================================
-   MAIN INIT
-========================================================= */
+
+
+// --- Preloader ---
 document.addEventListener("DOMContentLoaded", function () {
 
-  /* =========================================================
-     PRELOADER (single source of truth)
-     - Ensures the overlay actually goes away
-  ========================================================= */
+
   const preloader = document.querySelector("[data-preaload]");
   window.addEventListener("load", function () {
     document.body.classList.add("loaded");
     if (preloader) preloader.classList.add("loaded");
 
-    // Legacy fallback if you still had an element with id="preloader"
+
     const legacyLoader = document.getElementById("preloader");
     if (legacyLoader) legacyLoader.style.display = "none";
 
-    // Optional: ensures page starts at top
+
     window.scrollTo(0, 0);
   });
 
 
-  /* =========================================================
-     HELPER: Add event listeners to multiple elements safely
-  ========================================================= */
+
+// --- Utility Functions ---
   function addEventOnElements(elements, eventType, callback) {
     if (!elements || !elements.length) return;
     for (let i = 0; i < elements.length; i++) {
@@ -34,9 +31,8 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
 
-  /* =========================================================
-     NAVBAR (guarded) with improved animations
-  ========================================================= */
+
+// --- Navbar ---
   const navbar = document.querySelector("[data-navbar]");
   const navTogglers = document.querySelectorAll("[data-nav-toggler]");
   const overlay = document.querySelector("[data-overlay]");
@@ -56,14 +52,14 @@ document.addEventListener("DOMContentLoaded", function () {
     overlay.classList.remove("active");
     document.body.classList.remove("nav-active");
     if (navOpenBtn) navOpenBtn.classList.remove("is-active");
-    
-    // Clean up any open submenu panels when closing navbar
+
+
     const submenuPanels = navbar.querySelectorAll(".navbar-submenu-panel");
     submenuPanels.forEach(panel => panel.classList.remove("active"));
     navbar.classList.remove("submenu-open");
   }
-  
-  // Expose closeNavbar globally for use in onclick handlers
+
+
   window.closeNavbar = closeNavbar;
 
   function toggleNavbar() {
@@ -77,7 +73,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
   addEventOnElements(navTogglers, "click", toggleNavbar);
 
-  // Swipe-to-close gesture for mobile nav
+
+// --- Mobile Swipe Gestures ---
   let touchStartX = 0;
   let touchCurrentX = 0;
   let isSwiping = false;
@@ -92,11 +89,11 @@ document.addEventListener("DOMContentLoaded", function () {
       if (!isSwiping) return;
       touchCurrentX = e.touches[0].clientX;
       const diff = touchStartX - touchCurrentX;
-      
-      // Get actual drawer width dynamically
+
+
       const drawerWidth = navbar.offsetWidth || 360;
-      
-      // Only allow swiping left (to close)
+
+
       if (diff > 0 && diff < drawerWidth) {
         navbar.style.transform = `translateX(${drawerWidth - diff}px)`;
         navbar.style.transition = "none";
@@ -107,11 +104,11 @@ document.addEventListener("DOMContentLoaded", function () {
       if (!isSwiping) return;
       isSwiping = false;
       const diff = touchStartX - touchCurrentX;
-      
+
       navbar.style.transition = "";
       navbar.style.transform = "";
-      
-      // Close if swiped more than 80px
+
+
       if (diff > 80) {
         closeNavbar();
       }
@@ -124,35 +121,31 @@ document.addEventListener("DOMContentLoaded", function () {
     }, { passive: true });
   }
 
-  // Touch ripple effect for nav links
+
   function createRipple(e) {
     const link = e.currentTarget;
     const circle = document.createElement("span");
     const diameter = Math.max(link.clientWidth, link.clientHeight);
     const radius = diameter / 2;
-    
+
     circle.style.width = circle.style.height = `${diameter}px`;
     circle.style.left = `${e.clientX - link.getBoundingClientRect().left - radius}px`;
     circle.style.top = `${e.clientY - link.getBoundingClientRect().top - radius}px`;
     circle.classList.add("ripple");
-    
+
     const existingRipple = link.querySelector(".ripple");
     if (existingRipple) existingRipple.remove();
-    
+
     link.appendChild(circle);
   }
 
+// --- Sticky Header ---
   document.querySelectorAll(".navbar-link").forEach(link => {
     link.addEventListener("click", createRipple);
   });
 
 
-  /* =========================================================
-     MOBILE SUBMENU PANEL HANDLING
-     - Click handlers for navbar items with dropdowns (mobile only)
-     - Slide in secondary panel with submenu items
-     - Back button to return to main menu
-  ========================================================= */
+
   function initMobileSubmenu() {
     const isMobile = () => window.innerWidth <= 1024;
     const navbar = document.querySelector("[data-navbar]");
@@ -162,7 +155,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     if (!navbar || !submenuItems.length) return;
 
-    // Handle click on submenu items (mobile only)
+
     submenuItems.forEach(item => {
       const link = item.querySelector(".navbar-link");
       const submenuId = item.getAttribute("data-submenu");
@@ -171,30 +164,31 @@ document.addEventListener("DOMContentLoaded", function () {
       if (!link || !panel) return;
 
       link.addEventListener("click", function(e) {
-        if (!isMobile()) return; // Let desktop hover behavior work
+        if (!isMobile()) return;
 
         e.preventDefault();
         e.stopPropagation();
 
-        // Show the submenu panel
+// --- Submenu Navigation ---
+
         panel.classList.add("active");
         navbar.classList.add("submenu-open");
       });
     });
 
-    // Handle back button clicks
+
     backButtons.forEach(btn => {
       btn.addEventListener("click", function(e) {
         e.preventDefault();
         e.stopPropagation();
 
-        // Hide all submenu panels
+
         submenuPanels.forEach(panel => panel.classList.remove("active"));
         navbar.classList.remove("submenu-open");
       });
     });
 
-    // Close submenu when navbar is closed
+
     const originalCloseNavbar = window.closeNavbar || closeNavbar;
     window.closeNavbarWithSubmenu = function() {
       submenuPanels.forEach(panel => panel.classList.remove("active"));
@@ -204,7 +198,7 @@ document.addEventListener("DOMContentLoaded", function () {
       }
     };
 
-    // Update close function for nav togglers
+
     const closeBtn = navbar.querySelector(".close-btn");
     if (closeBtn) {
       closeBtn.addEventListener("click", function() {
@@ -213,7 +207,7 @@ document.addEventListener("DOMContentLoaded", function () {
       });
     }
 
-    // Close submenu panels when clicking overlay
+
     const overlay = document.querySelector("[data-overlay]");
     if (overlay) {
       overlay.addEventListener("click", function() {
@@ -222,7 +216,7 @@ document.addEventListener("DOMContentLoaded", function () {
       });
     }
 
-    // Reset submenu state on window resize (when switching to desktop)
+
     let resizeTimer;
     window.addEventListener("resize", function() {
       clearTimeout(resizeTimer);
@@ -235,26 +229,24 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
-  // Initialize mobile submenu
+
   initMobileSubmenu();
 
 
-  /* =========================================================
-     ACTIVE NAV STATE - Highlight current page in navigation
-  ========================================================= */
+
   function setActiveNavState() {
     const currentPath = window.location.pathname.replace(/\/$/, "") || "/";
     const navLinks = document.querySelectorAll(".navbar-link");
     let foundActive = false;
-    
+
     navLinks.forEach(link => {
       link.classList.remove("active");
       if (foundActive) return;
-      
+
       const href = link.getAttribute("href");
       if (!href || href.startsWith("#")) return;
-      
-      // Resolve relative paths to absolute using URL API
+
+
       let linkPath;
       try {
         const resolvedUrl = new URL(href, window.location.href);
@@ -262,15 +254,15 @@ document.addEventListener("DOMContentLoaded", function () {
       } catch (e) {
         linkPath = href.replace(/\/$/, "") || "/";
       }
-      
-      // Check for exact match or if current path starts with link path (for nested pages)
+
+
       const isHome = linkPath === "/" || linkPath === "";
       const isCurrentHome = currentPath === "/" || currentPath === "";
-      
-      // Special case: articles are part of blog
+
+
       const isBlogLink = linkPath === "/blog";
       const isOnArticlePage = currentPath.startsWith("/articles");
-      
+
       if (isHome && isCurrentHome) {
         link.classList.add("active");
         foundActive = true;
@@ -286,82 +278,79 @@ document.addEventListener("DOMContentLoaded", function () {
       }
     });
   }
-  
+
   setActiveNavState();
 
 
-  /* =========================================================
-     HEADER hide/show + back-to-top (guarded)
-  ========================================================= */
+
   const header = document.querySelector("[data-header]");
   const backTopBtn = document.querySelector("[data-back-top-btn]");
   let lastScrollPos = 0;
 
-  /* =========================================================
-     DYNAMIC HEADER HEIGHT for content clearance
-  ========================================================= */
-  const MIN_HEADER_HEIGHT = 60; // Minimum safe height fallback
-  let lastKnownHeaderHeight = 100; // Fallback default
-  let initialHeaderHeight = null; // Captured on first load before any hiding
+
+  const MIN_HEADER_HEIGHT = 60;
+  let lastKnownHeaderHeight = 100;
+  let initialHeaderHeight = null;
 
   function measureHeaderHeight(el) {
     if (!el) return 0;
-    // Use scrollHeight for hidden elements, offsetHeight for visible
+
     const height = el.offsetHeight > 0 ? el.offsetHeight : el.scrollHeight;
     return height > 0 ? height : 0;
   }
+// --- User Menu ---
 
   function updateHeaderHeight() {
     let targetHeader = header || document.querySelector('header, .header');
-    
+
     if (targetHeader) {
-      // Always try to measure, regardless of hide state
+
       const height = measureHeaderHeight(targetHeader);
-      
-      // Capture initial height before any hiding occurs
+
+
       if (initialHeaderHeight === null && height > 0) {
         initialHeaderHeight = height;
       }
-      
-      // Update lastKnownHeaderHeight with valid measurements
+
+
       if (height > 0) {
         lastKnownHeaderHeight = height;
       } else if (initialHeaderHeight) {
-        // Fallback to initial height if current measurement fails
+
         lastKnownHeaderHeight = initialHeaderHeight;
       }
     }
-    
-    // Ensure minimum safe height
+
+
     const finalHeight = Math.max(lastKnownHeaderHeight, MIN_HEADER_HEIGHT);
     const safeHeight = finalHeight + 20;
-    
+
     document.documentElement.style.setProperty('--header-height', finalHeight + 'px');
     document.documentElement.style.setProperty('--header-height-safe', safeHeight + 'px');
   }
 
-  // Update header height on load, resize, and orientation change
+
   requestAnimationFrame(updateHeaderHeight);
   window.addEventListener('resize', () => requestAnimationFrame(updateHeaderHeight));
   window.addEventListener('orientationchange', () => requestAnimationFrame(updateHeaderHeight));
-  
-  // Use ResizeObserver for reliable header size tracking
+
+
   if (header && typeof ResizeObserver !== 'undefined') {
     const headerObserver = new ResizeObserver(() => {
-      // Always update, even when hidden - we'll use cached values
+
       requestAnimationFrame(updateHeaderHeight);
     });
     headerObserver.observe(header);
   }
-  
-  // Listen for header transition end to get accurate height after CSS transitions
+
+
   if (header) {
     header.addEventListener('transitionend', () => {
       requestAnimationFrame(updateHeaderHeight);
     });
   }
-  
-  // Capture initial height before any scroll-hiding can occur
+
+
   if (header) {
     initialHeaderHeight = measureHeaderHeight(header);
   }
@@ -387,14 +376,12 @@ document.addEventListener("DOMContentLoaded", function () {
       header.classList.remove("active");
       if (backTopBtn) backTopBtn.classList.remove("active");
     }
-    // Always update header height CSS variable (uses cached values when hidden)
+
     requestAnimationFrame(updateHeaderHeight);
   });
 
 
-  /* =========================================================
-     HAMBURGER (your original, guarded)
-  ========================================================= */
+
   const hamburger = document.querySelector(".hamburger");
   if (hamburger) {
     hamburger.addEventListener("click", function () {
@@ -404,9 +391,7 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
 
-  /* =========================================================
-     GALLERY SCROLL (your original, guarded)
-  ========================================================= */
+
   const scrollContainer = document.querySelector(".gallery");
   const backBtn = document.getElementById("backBtn");
   const nextBtn = document.getElementById("nextBtn");
@@ -431,12 +416,11 @@ document.addEventListener("DOMContentLoaded", function () {
         scrollContainer.scrollLeft -= 900;
       });
     }
+// --- Theme Toggle ---
   }
 
 
-  /* =========================================================
-     HIGHLIGHT ANIMATIONS (guarded)
-  ========================================================= */
+
   function observeHighlightAnimations() {
     const highlights = document.querySelectorAll('[data-highlight="true"]');
     if (!highlights.length) return;
@@ -456,9 +440,7 @@ document.addEventListener("DOMContentLoaded", function () {
   observeHighlightAnimations();
 
 
-  /* =========================================================
-     SWIPER (guarded) - mySwiper
-  ========================================================= */
+
   if (typeof Swiper !== "undefined" && document.querySelector(".mySwiper")) {
     new Swiper(".mySwiper", {
       effect: "coverflow",
@@ -476,9 +458,7 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
-  /* =========================================================
-     SWIPER (guarded) - tranding-slider
-  ========================================================= */
+
   if (typeof Swiper !== "undefined" && document.querySelector(".tranding-slider")) {
     new Swiper(".tranding-slider", {
       effect: "coverflow",
@@ -493,6 +473,7 @@ document.addEventListener("DOMContentLoaded", function () {
         modifier: 2.5,
       },
       pagination: { el: ".swiper-pagination", clickable: true },
+// --- Back to Top ---
       navigation: {
         nextEl: ".swiper-button-next",
         prevEl: ".swiper-button-prev",
@@ -500,11 +481,7 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
-  /* ----------------------------------
-     MINDBALANCE ACTION BOX (carousel)
-     - matches the 4 content sections
-     - smooth fade transitions
-  ---------------------------------- */
+
   (function () {
     const slides = [
       {
@@ -524,6 +501,7 @@ document.addEventListener("DOMContentLoaded", function () {
         kickerKey: "slide2_kicker",
         titleKey: "slide2_title",
         descKey: "slide2_desc",
+// --- Cursor ---
         ctaKey: "slide2_cta",
         kicker: "Helplines & resources",
         title: "Get immediate support",
@@ -552,6 +530,7 @@ document.addEventListener("DOMContentLoaded", function () {
         descKey: "slide4_desc",
         ctaKey: "slide4_cta",
         kicker: "Community & stories",
+// --- Accessibility ---
         title: "Support groups & testimonials",
         desc: "Read real stories from our community. Find encouragement and learn how others have found strength and healing on their mental health journey.",
         cta: "Join community",
@@ -560,7 +539,7 @@ document.addEventListener("DOMContentLoaded", function () {
         imgAlt: "Support community and testimonials"
       }
     ];
-    
+
     function getSlideTranslation(key, fallback) {
       const lang = localStorage.getItem('mindbalance_language') || 'en';
       if (window.translations && window.translations[lang] && window.translations[lang][key]) {
@@ -582,7 +561,7 @@ document.addEventListener("DOMContentLoaded", function () {
     let index = 0;
     let timer = null;
     const INTERVAL_MS = 5000;
-    const FADE_MS = 220; // must match your CSS timing
+    const FADE_MS = 220;
 
     function setActiveCard(i) {
       cards.forEach((btn, n) => {
@@ -604,9 +583,10 @@ document.addEventListener("DOMContentLoaded", function () {
         ctaEl.textContent = getSlideTranslation(s.ctaKey, s.cta);
         ctaEl.setAttribute("href", s.ctaHref);
 
-        // Smooth image swap (helps avoid flash)
+
         imgEl.style.opacity = "0";
         imgEl.src = s.imgSrc;
+// --- Contact Form ---
         imgEl.alt = s.imgAlt;
         imgEl.onload = function () {
           imgEl.style.opacity = "1";
@@ -633,7 +613,7 @@ document.addEventListener("DOMContentLoaded", function () {
       timer = null;
     }
 
-    // Click-to-jump
+
     cards.forEach((btn) => {
       btn.addEventListener("click", (e) => {
         e.preventDefault();
@@ -645,24 +625,20 @@ document.addEventListener("DOMContentLoaded", function () {
       });
     });
 
-    // Pause on hover
+
     const section = document.querySelector(".mb-actionbox");
     if (section) {
       section.addEventListener("mouseenter", stop);
       section.addEventListener("mouseleave", start);
     }
 
-    // Init (make sure first card is active & first content is correct)
+
     smoothSwap(0);
     start();
   })();
 
 
 
-
-  /* =========================================================
-     CARD TOGGLE (guarded)
-  ========================================================= */
   const cardBtns = document.querySelectorAll(".card__btn");
   if (cardBtns.length) {
     cardBtns.forEach(button => {
@@ -674,9 +650,7 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
 
-  /* =========================================================
-     IMG-BOX EXPAND (guarded)
-  ========================================================= */
+
   const imgBoxes = document.querySelectorAll(".img-box");
   if (imgBoxes.length) {
     imgBoxes.forEach(image => {
@@ -687,9 +661,7 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
 
-  /* =========================================================
-     CONTENT BLOCK SCROLL EFFECT (guarded)
-  ========================================================= */
+
   window.addEventListener("scroll", function () {
     const blocks = document.querySelectorAll(".content-block");
     if (!blocks.length) return;
@@ -711,10 +683,12 @@ document.addEventListener("DOMContentLoaded", function () {
 
 });
 
-
+// --- Newsletter ---
 
 document.addEventListener("DOMContentLoaded", function () {
-  // Run only on Resource Library page
+
+// ==================== RESOURCE LIBRARY ====================
+
   if (!document.querySelector(".rl")) return;
 
   const searchEl = document.getElementById("rlSearch");
@@ -728,7 +702,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   if (!searchEl || !clearSearchBtn || !cardsEl || !metaEl || !catsEl || !provEl || !chipsEl || !clearAllEl) return;
 
-  // Active filters (multi-select)
+
   const state = {
     q: "",
     categories: new Set(),
@@ -776,8 +750,8 @@ document.addEventListener("DOMContentLoaded", function () {
       btn.dataset.label = label;
       btn.dataset.type = type;
       btn.textContent = label;
-      
-      // Set initial active state based on current state
+
+
       if (state[type].has(label)) {
         btn.classList.add("is-active");
       }
@@ -798,8 +772,8 @@ document.addEventListener("DOMContentLoaded", function () {
       container.appendChild(btn);
     });
   }
-  
-  // Update sidebar button active states (for when filters are applied via URL)
+
+
   function updateFilterButtonStates() {
     document.querySelectorAll('.rl-filterBtn').forEach(btn => {
       const type = btn.dataset.type;
@@ -851,7 +825,7 @@ document.addEventListener("DOMContentLoaded", function () {
     if (set.size === 0) return true;
     if (!itemValue) return false;
 
-    // itemValue can be string or array
+
     if (Array.isArray(itemValue)) {
       return itemValue.some(v => set.has(v));
     }
@@ -889,7 +863,7 @@ document.addEventListener("DOMContentLoaded", function () {
       const card = document.createElement("article");
       card.className = "rl-card card-animated hover-lift";
 
-      // Helper to get translated label (use sync version to avoid [object Promise])
+
       const getLabel = (key, fallback) => {
         return window.MindBalanceTranslations?.getTranslationSync?.(key) || fallback;
       };
@@ -918,7 +892,7 @@ document.addEventListener("DOMContentLoaded", function () {
         tag.textContent = getLabel(tagKey, t);
         tag.setAttribute("data-translate", tagKey);
 
-        // clicking a tag adds/removes tag filter
+
         tag.style.cursor = "pointer";
         tag.addEventListener("click", () => {
           if (state.tags.has(t)) state.tags.delete(t);
@@ -942,11 +916,11 @@ document.addEventListener("DOMContentLoaded", function () {
       visit.rel = "noopener";
       visit.setAttribute("aria-label", `Visit ${item.title || "resource"}`);
 
-      // Share buttons
+
       const shareBtns = document.createElement("div");
       shareBtns.className = "rl-share-btns";
-      
-      // Copy link button
+
+
       const copyBtn = document.createElement("button");
       copyBtn.className = "rl-share-btn rl-share-btn--copy";
       copyBtn.innerHTML = '<ion-icon name="link-outline"></ion-icon>';
@@ -961,8 +935,8 @@ document.addEventListener("DOMContentLoaded", function () {
           }, 2000);
         });
       });
-      
-      // Twitter share
+
+
       const twitterBtn = document.createElement("a");
       twitterBtn.className = "rl-share-btn rl-share-btn--twitter";
       twitterBtn.innerHTML = '<ion-icon name="logo-twitter"></ion-icon>';
@@ -970,8 +944,8 @@ document.addEventListener("DOMContentLoaded", function () {
       twitterBtn.target = "_blank";
       twitterBtn.rel = "noopener";
       twitterBtn.title = "Share on Twitter";
-      
-      // Facebook share
+
+
       const fbBtn = document.createElement("a");
       fbBtn.className = "rl-share-btn rl-share-btn--facebook";
       fbBtn.innerHTML = '<ion-icon name="logo-facebook"></ion-icon>';
@@ -979,7 +953,7 @@ document.addEventListener("DOMContentLoaded", function () {
       fbBtn.target = "_blank";
       fbBtn.rel = "noopener";
       fbBtn.title = "Share on Facebook";
-      
+
       shareBtns.appendChild(copyBtn);
       shareBtns.appendChild(twitterBtn);
       shareBtns.appendChild(fbBtn);
@@ -1008,7 +982,7 @@ document.addEventListener("DOMContentLoaded", function () {
     renderResults();
   }
 
-  // Events
+
   searchEl.addEventListener("input", () => {
     state.q = searchEl.value;
     setClearBtnVisibility();
@@ -1026,97 +1000,97 @@ document.addEventListener("DOMContentLoaded", function () {
   clearAllEl.addEventListener("click", clearAll);
 
   setClearBtnVisibility();
-  
-  // Show skeleton loading while fetching
+
+
   showSkeletonCards(4);
 
-  // Load "database" JSON (Replit-friendly)
-  // Featured resources for spotlight (curated selection)
-  const featuredIndices = [0, 5, 10]; // First anxiety, first depression, first bipolar resource
-  
+
+
+  const featuredIndices = [0, 5, 10];
+
   function renderSpotlight(resources) {
     const spotlightEl = document.getElementById('rlSpotlight');
     if (!spotlightEl) return;
-    
+
     spotlightEl.innerHTML = '';
-    
+
     featuredIndices.forEach((index) => {
       const item = resources[index];
       if (!item) return;
-      
+
       const card = document.createElement('article');
       card.className = 'rl-spotlight-card';
-      
-      // Use DOM APIs instead of innerHTML for XSS safety
+
+
       const badge = document.createElement('span');
       badge.className = 'rl-spotlight-card__badge';
       badge.textContent = 'Featured';
-      
+
       const provider = document.createElement('p');
       provider.className = 'rl-spotlight-card__provider';
       provider.textContent = item.provider || 'MindBalance';
-      
+
       const title = document.createElement('h4');
       title.className = 'rl-spotlight-card__title';
       title.textContent = item.title || 'Untitled';
-      
+
       const desc = document.createElement('p');
       desc.className = 'rl-spotlight-card__desc';
       desc.textContent = item.description || '';
-      
+
       const actions = document.createElement('div');
       actions.className = 'rl-spotlight-card__actions';
-      
+
       const link = document.createElement('a');
       link.className = 'rl-spotlight-card__btn rl-spotlight-card__btn--primary';
       link.href = item.url || '#';
       link.target = '_blank';
       link.rel = 'noopener';
       link.textContent = 'Learn More →';
-      
+
       actions.appendChild(link);
       card.appendChild(badge);
       card.appendChild(provider);
       card.appendChild(title);
       card.appendChild(desc);
       card.appendChild(actions);
-      
+
       spotlightEl.appendChild(card);
     });
   }
 
-  // Parse URL parameters for pre-filtering (from navbar dropdown links)
+
   function parseUrlFilters() {
     const params = new URLSearchParams(window.location.search);
     const category = params.get('category');
     const topic = params.get('topic');
     const search = params.get('q') || params.get('search');
-    
+
     return { category, topic, search };
   }
-  
-  // Apply URL filters to state (case-insensitive matching)
+
+
   function applyUrlFilters(categories) {
     const { category, topic, search } = parseUrlFilters();
-    
-    // Handle category or topic parameter
+
+
     const filterParam = category || topic;
     if (filterParam) {
-      // Find matching category (case-insensitive)
+
       const matchingCategory = categories.find(
         cat => cat.toLowerCase() === filterParam.toLowerCase()
       );
       if (matchingCategory) {
         state.categories.add(matchingCategory);
       } else {
-        // If no exact category match, set it as a search term
+
         state.q = filterParam;
         searchEl.value = filterParam;
         setClearBtnVisibility();
       }
     }
-    
-    // Handle search parameter
+
+
     if (search) {
       state.q = search;
       searchEl.value = search;
@@ -1124,26 +1098,26 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   }
 
-  // Put the JSON file at: ../data/resources.json (recommended)
+
   fetch("../data/resources.json", { cache: "no-store" })
     .then((r) => r.json())
     .then((data) => {
       all = Array.isArray(data) ? data : [];
 
-      // Build sidebar filters from dataset
+
       const categories = uniqSorted(all.map(x => x.category));
       const providers = uniqSorted(all.map(x => x.provider));
 
       buildFilterButtons(catsEl, categories, "categories");
       buildFilterButtons(provEl, providers, "providers");
-      
-      // Apply URL filters (from navbar dropdown links)
+
+
       applyUrlFilters(categories);
-      
-      // Update sidebar buttons to show active state from URL filters
+
+
       updateFilterButtonStates();
 
-      // Render spotlight section with featured resources
+
       renderSpotlight(all);
 
       renderChips();
@@ -1161,23 +1135,24 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 
-
 document.addEventListener("DOMContentLoaded", function () {
+
+// ==================== TESTIMONIALS ====================
   const resourceSection = document.querySelector(".mb-resources");
   if (!resourceSection) return;
 
-  // Mark section as ready (nice entrance fade)
+
   requestAnimationFrame(() => {
     resourceSection.classList.add("is-ready");
   });
 
-  // Grab cards
+
   const cards = Array.from(document.querySelectorAll(".mb-resource-card"));
 
-  // If no cards, stop
+
   if (!cards.length) return;
 
-  // Stagger in with IntersectionObserver (loads smoothly as you scroll)
+
   const io = new IntersectionObserver(
     (entries) => {
       entries.forEach((entry) => {
@@ -1191,18 +1166,16 @@ document.addEventListener("DOMContentLoaded", function () {
   );
 
   cards.forEach((card, i) => {
-    // small stagger so it feels premium
+
     card.style.setProperty("--delay", `${Math.min(i * 35, 280)}ms`);
     io.observe(card);
   });
 });
 
 
-
-/* ----------------------------------
-   TESTIMONIALS: 3-column auto scroll (middle down, sides up)
----------------------------------- */
 (function initTestimonialsScroller() {
+
+// ==================== INLINE NOTIFICATIONS ====================
   const cols = document.querySelectorAll(".mb-testimonials__col");
   if (!cols.length) return;
 
@@ -1211,7 +1184,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const track = col.querySelector(".mb-testimonials__track");
     if (!viewport || !track) return;
 
-    // Duplicate once for seamless loop (only if not already duplicated)
+
     if (!track.dataset.duplicated) {
       const originalChildren = Array.from(track.children);
       originalChildren.forEach((child) => {
@@ -1222,51 +1195,51 @@ document.addEventListener("DOMContentLoaded", function () {
       track.dataset.duplicated = "true";
     }
 
-    // After images load, calculate exact scroll distance (half the track)
+
     const recalc = () => {
-      // total height includes both original + clones; we want half for perfect loop
+
       const total = track.scrollHeight;
       const half = Math.floor(total / 2);
 
-      // Set CSS var distance for keyframes
+
       track.style.setProperty("--mb-tm-distance", half + "px");
 
-      // Set duration based on distance for consistent speed:
-      // speed = pixels per second (adjust for faster/slower)
-      const speed = 28; // px/sec (try 24-34)
+
+
+      const speed = 28;
       const duration = Math.max(10, Math.round(half / speed));
       track.style.setProperty("--mb-tm-duration", duration + "s");
     };
 
-    // Wait a beat so layout is accurate
+
     requestAnimationFrame(() => requestAnimationFrame(recalc));
 
-    // Recalc on resize
+
     window.addEventListener("resize", () => {
       requestAnimationFrame(recalc);
     });
   });
 })();
 
-/* ----------------------------------
-   NOTIFICATION BADGE SYSTEM
----------------------------------- */
+
 (function initNotifications() {
+
+// ==================== NAVBAR SEARCH ====================
   const notifBadge = document.getElementById('notifBadge');
   if (!notifBadge) return;
 
-  // Check for notifications from localStorage or Supabase
+
   async function checkNotifications() {
-    // Wait for auth to be ready
+
     if (typeof getCurrentUser === 'undefined') return;
-    
+
     const user = await getCurrentUser();
     if (!user) {
       notifBadge.hidden = true;
       return;
     }
 
-    // Check for unread notifications in Supabase
+
     if (typeof getSupabase !== 'undefined') {
       const sb = getSupabase();
       if (sb) {
@@ -1276,7 +1249,7 @@ document.addEventListener("DOMContentLoaded", function () {
             .select('*', { count: 'exact', head: true })
             .eq('user_id', user.id)
             .eq('read', false);
-          
+
           if (count && count > 0) {
             notifBadge.textContent = count > 99 ? '99+' : count;
             notifBadge.hidden = false;
@@ -1284,17 +1257,17 @@ document.addEventListener("DOMContentLoaded", function () {
             notifBadge.hidden = true;
           }
         } catch (e) {
-          // Notifications table might not exist yet
+
           notifBadge.hidden = true;
         }
       }
     }
   }
 
-  // Check on page load (after a short delay for auth)
+
   setTimeout(checkNotifications, 1500);
 
-  // Listen for auth changes
+
   window.addEventListener('mindbalance:authchange', (e) => {
     if (e.detail.isSignedIn) {
       setTimeout(checkNotifications, 500);
@@ -1304,10 +1277,10 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 })();
 
-/* ----------------------------------
-   NAVBAR SEARCH WITH TYPEAHEAD
----------------------------------- */
+
 (function initNavbarSearch() {
+
+// ==================== MOOD CHECK-IN ====================
   const searchContainer = document.getElementById('navbarSearch');
   const searchInput = document.getElementById('searchInput');
   const searchToggle = document.getElementById('searchToggle');
@@ -1315,7 +1288,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   if (!searchContainer || !searchInput || !searchToggle) return;
 
-  // Search data - articles, resources, and pages
+
   const searchData = [
     { title: 'Understanding Anxiety', type: 'Article', url: './articles/anxiety.html', icon: 'document-text-outline' },
     { title: 'Depression Guide', type: 'Article', url: './articles/depression.html', icon: 'document-text-outline' },
@@ -1335,7 +1308,7 @@ document.addEventListener("DOMContentLoaded", function () {
     { title: 'Breathing Exercises', type: 'Tool', url: './support/#breathing', icon: 'fitness-outline' }
   ];
 
-  // Toggle search open/close
+
   searchToggle.addEventListener('click', () => {
     searchContainer.classList.toggle('is-open');
     if (searchContainer.classList.contains('is-open')) {
@@ -1346,17 +1319,17 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
 
-  // Search as user types
+
   searchInput.addEventListener('input', (e) => {
     const query = e.target.value.toLowerCase().trim();
-    
+
     if (query.length < 2) {
       searchResults.classList.remove('is-visible');
       return;
     }
 
-    const matches = searchData.filter(item => 
-      item.title.toLowerCase().includes(query) || 
+    const matches = searchData.filter(item =>
+      item.title.toLowerCase().includes(query) ||
       item.type.toLowerCase().includes(query)
     ).slice(0, 6);
 
@@ -1375,11 +1348,11 @@ document.addEventListener("DOMContentLoaded", function () {
         </a>
       `).join('');
     }
-    
+
     searchResults.classList.add('is-visible');
   });
 
-  // Close when clicking outside
+
   document.addEventListener('click', (e) => {
     if (!searchContainer.contains(e.target)) {
       searchContainer.classList.remove('is-open');
@@ -1387,7 +1360,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
 
-  // Keyboard shortcut: Ctrl/Cmd + K to open search
+
   document.addEventListener('keydown', (e) => {
     if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
       e.preventDefault();
@@ -1401,10 +1374,10 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 })();
 
-/* ----------------------------------
-   MOOD CHECK-IN WIDGET
----------------------------------- */
+
 (function initMoodCheckIn() {
+
+// ==================== MOBILE SETTINGS ====================
   const moodButtons = document.querySelectorAll('.mb-moodcheck__btn');
   const resultContainer = document.getElementById('moodResult');
   const messageEl = document.getElementById('moodMessage');
@@ -1447,12 +1420,12 @@ document.addEventListener("DOMContentLoaded", function () {
 
       if (!data) return;
 
-      // Remove selected from all buttons
+
       moodButtons.forEach(b => b.classList.remove('is-selected'));
-      // Add selected to clicked button
+
       btn.classList.add('is-selected');
 
-      // Show result
+
       if (messageEl) messageEl.textContent = data.message;
       if (linkEl) {
         linkEl.href = data.link;
@@ -1463,13 +1436,13 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 })();
 
-/* ----------------------------------
-   MOBILE SETTINGS TOGGLE
----------------------------------- */
+
 document.addEventListener('DOMContentLoaded', function() {
+
+// ==================== SUGGEST RESOURCE MODAL ====================
   const settingsToggle = document.querySelector('.mobile-settings-toggle');
   const settingsSection = document.querySelector('.mobile-settings-section');
-  
+
   if (settingsToggle && settingsSection) {
     settingsToggle.addEventListener('click', function() {
       const isExpanded = settingsToggle.getAttribute('aria-expanded') === 'true';
@@ -1479,9 +1452,7 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 });
 
-/* ----------------------------------
-   SUGGEST RESOURCE MODAL
----------------------------------- */
+
 document.addEventListener('DOMContentLoaded', function() {
   const suggestModal = document.getElementById('suggestModal');
   const openSuggestBtn = document.getElementById('openSuggestModal');
@@ -1490,51 +1461,51 @@ document.addEventListener('DOMContentLoaded', function() {
   const suggestSuccess = document.getElementById('suggestSuccess');
   const closeSuggestSuccessBtn = document.getElementById('closeSuggestSuccess');
   const modalContent = suggestModal?.querySelector('.suggest-modal__content');
-  
+
   if (!suggestModal || !openSuggestBtn) return;
-  
+
   let previouslyFocusedElement = null;
-  
+
   function openSuggestModal() {
-    // Store the element that had focus before opening
+
     previouslyFocusedElement = document.activeElement;
-    
+
     suggestModal.classList.add('is-active');
     document.body.style.overflow = 'hidden';
-    
-    // Reset to form view
+
+
     if (suggestForm) suggestForm.style.display = 'block';
     if (suggestSuccess) suggestSuccess.style.display = 'none';
-    
-    // Focus the first input for accessibility
+
+
     const firstInput = suggestForm?.querySelector('input, textarea, select');
     if (firstInput) {
       setTimeout(() => firstInput.focus(), 100);
     }
   }
-  
+
   function closeSuggestModal() {
     suggestModal.classList.remove('is-active');
     document.body.style.overflow = '';
-    
-    // Restore focus to the element that opened the modal
+
+
     if (previouslyFocusedElement) {
       previouslyFocusedElement.focus();
       previouslyFocusedElement = null;
     }
   }
-  
-  // Focus trap within modal
+
+
   function handleTabKey(e) {
     if (!suggestModal.classList.contains('is-active')) return;
     if (e.key !== 'Tab') return;
-    
+
     const focusableElements = modalContent.querySelectorAll(
       'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
     );
     const firstElement = focusableElements[0];
     const lastElement = focusableElements[focusableElements.length - 1];
-    
+
     if (e.shiftKey && document.activeElement === firstElement) {
       e.preventDefault();
       lastElement.focus();
@@ -1543,28 +1514,28 @@ document.addEventListener('DOMContentLoaded', function() {
       firstElement.focus();
     }
   }
-  
+
   openSuggestBtn.addEventListener('click', openSuggestModal);
-  
-  // Close on backdrop click
+
+
   suggestModal.querySelector('.suggest-modal__backdrop')?.addEventListener('click', closeSuggestModal);
   suggestModal.querySelector('.suggest-modal__close')?.addEventListener('click', closeSuggestModal);
-  
+
   cancelSuggestBtn?.addEventListener('click', closeSuggestModal);
   closeSuggestSuccessBtn?.addEventListener('click', closeSuggestModal);
-  
-  // Escape key to close and Tab key for focus trap
+
+
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape' && suggestModal.classList.contains('is-active')) {
       closeSuggestModal();
     }
     handleTabKey(e);
   });
-  
-  // Form submission
+
+
   suggestForm?.addEventListener('submit', async (e) => {
     e.preventDefault();
-    
+
     const formData = new FormData(suggestForm);
     const data = {
       name: formData.get('name'),
@@ -1578,28 +1549,28 @@ document.addEventListener('DOMContentLoaded', function() {
       status: 'pending',
       created_at: new Date().toISOString()
     };
-    
+
     try {
-      // Check if Supabase is available
+
       if (window.supabase) {
         const { error } = await window.supabase
           .from('resource_suggestions')
           .insert([data]);
-        
+
         if (error) {
           console.error('Error submitting suggestion:', error);
-          // Still show success since we tried
+
         }
       }
-      
-      // Show success message
+
+
       suggestForm.style.display = 'none';
       suggestSuccess.style.display = 'block';
       suggestForm.reset();
-      
+
     } catch (err) {
       console.error('Error:', err);
-      // Show success anyway for better UX (data saved locally concept)
+
       suggestForm.style.display = 'none';
       suggestSuccess.style.display = 'block';
       suggestForm.reset();

@@ -1,23 +1,13 @@
-/* =====================================================
-   MINDBALANCE RESPONSIVE DESIGN SYSTEM
-   Unified typography, spacing, and layout consistency
-   ===================================================== */
-
-/* =====================================================
-   1. FLUID TYPOGRAPHY SCALE
-   Using clamp() for smooth scaling across all viewports
-   Min: 320px | Preferred: based on viewport | Max: 1400px
-   ===================================================== */
-
+/* === VARIABLES === */
 :root {
-  /* Base font size - 16px standard for accessibility */
+  
   --font-base: 16px;
   
-  /* Fluid Typography Scale */
-  /* Display - Large hero headings */
+  
+  
   --fs-display: clamp(2.5rem, 5vw + 1rem, 4.5rem);
   
-  /* Headings */
+  
   --fs-h1: clamp(2rem, 4vw + 0.5rem, 3.5rem);
   --fs-h2: clamp(1.75rem, 3vw + 0.5rem, 2.75rem);
   --fs-h3: clamp(1.5rem, 2.5vw + 0.5rem, 2rem);
@@ -25,39 +15,31 @@
   --fs-h5: clamp(1.125rem, 1.5vw + 0.25rem, 1.25rem);
   --fs-h6: clamp(1rem, 1vw + 0.25rem, 1.125rem);
   
-  /* Body text */
+  
   --fs-body-lg: clamp(1.125rem, 1vw + 0.5rem, 1.25rem);
   --fs-body: clamp(1rem, 0.5vw + 0.75rem, 1.125rem);
   --fs-body-sm: clamp(0.875rem, 0.5vw + 0.5rem, 1rem);
   
-  /* Small/Label text */
+  
   --fs-label: clamp(0.8125rem, 0.25vw + 0.5rem, 0.9375rem);
   --fs-caption: clamp(0.75rem, 0.25vw + 0.5rem, 0.875rem);
   --fs-tiny: clamp(0.6875rem, 0.25vw + 0.375rem, 0.75rem);
   
-  /* =====================================================
-     2. LINE HEIGHT SCALE
-     Consistent vertical rhythm
-     ===================================================== */
+  
   --lh-tight: 1.2;
   --lh-snug: 1.35;
   --lh-normal: 1.5;
   --lh-relaxed: 1.65;
   --lh-loose: 1.8;
   
-  /* =====================================================
-     3. LETTER SPACING
-     ===================================================== */
+  
   --ls-tight: -0.025em;
   --ls-normal: 0;
   --ls-wide: 0.025em;
   --ls-wider: 0.05em;
   --ls-widest: 0.1em;
   
-  /* =====================================================
-     4. SPACING SCALE
-     Consistent margins and padding
-     ===================================================== */
+  
   --space-3xs: clamp(0.25rem, 0.5vw, 0.375rem);
   --space-2xs: clamp(0.375rem, 0.75vw, 0.5rem);
   --space-xs: clamp(0.5rem, 1vw, 0.75rem);
@@ -69,9 +51,7 @@
   --space-3xl: clamp(4rem, 8vw, 6rem);
   --space-4xl: clamp(6rem, 10vw, 8rem);
   
-  /* =====================================================
-     5. CONTAINER WIDTHS
-     ===================================================== */
+  
   --container-sm: 640px;
   --container-md: 768px;
   --container-lg: 1024px;
@@ -79,12 +59,10 @@
   --container-2xl: 1400px;
   --container-full: 100%;
   
-  /* Container padding */
+  
   --container-padding: clamp(1rem, 4vw, 2rem);
   
-  /* =====================================================
-     6. RESPONSIVE BREAKPOINTS
-     ===================================================== */
+  
   --bp-xs: 375px;
   --bp-sm: 480px;
   --bp-md: 768px;
@@ -93,12 +71,7 @@
   --bp-2xl: 1400px;
 }
 
-/* =====================================================
-   7. OPT-IN TYPOGRAPHY CLASSES
-   Use these classes to apply fluid typography where needed
-   ===================================================== */
-
-/* Headings - use .fs-* classes to apply */
+/* === TYPOGRAPHY CLASSES === */
 .fs-display { font-size: var(--fs-display); line-height: var(--lh-tight); }
 .fs-h1 { font-size: var(--fs-h1); line-height: var(--lh-tight); }
 .fs-h2 { font-size: var(--fs-h2); line-height: var(--lh-tight); }
@@ -107,7 +80,6 @@
 .fs-h5 { font-size: var(--fs-h5); line-height: var(--lh-normal); }
 .fs-h6 { font-size: var(--fs-h6); line-height: var(--lh-normal); }
 
-/* Body text classes */
 .fs-body-lg { font-size: var(--fs-body-lg); line-height: var(--lh-relaxed); }
 .fs-body { font-size: var(--fs-body); line-height: var(--lh-relaxed); }
 .fs-body-sm { font-size: var(--fs-body-sm); line-height: var(--lh-relaxed); }
@@ -115,11 +87,7 @@
 .fs-caption { font-size: var(--fs-caption); line-height: var(--lh-normal); }
 .fs-tiny { font-size: var(--fs-tiny); line-height: var(--lh-normal); }
 
-/* =====================================================
-   8. TEXT WRAPPING & OVERFLOW
-   ===================================================== */
-
-/* Prevent text overflow */
+/* === TEXT WRAPPING === */
 h1, h2, h3, h4, h5, h6,
 p, li, td, th, label, span {
   overflow-wrap: break-word;
@@ -127,34 +95,29 @@ p, li, td, th, label, span {
   hyphens: auto;
 }
 
-/* Better text wrapping for headings */
 h1, h2, h3, h4, h5, h6 {
   text-wrap: balance;
 }
 
-/* Better text wrapping for paragraphs */
 p {
   text-wrap: pretty;
 }
 
-/* Long words handling */
+/* === TEXT UTILITIES === */
 .text-break {
   word-break: break-word;
 }
 
-/* No wrap utility */
 .text-nowrap {
   white-space: nowrap;
 }
 
-/* Truncate text with ellipsis */
 .text-truncate {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
 
-/* Multi-line truncation */
 .text-clamp-2 {
   display: -webkit-box;
   -webkit-line-clamp: 2;
@@ -169,11 +132,7 @@ p {
   overflow: hidden;
 }
 
-/* =====================================================
-   9. RESPONSIVE CONTAINER UTILITIES
-   Use .resp-container-* classes - avoids conflict with existing .container
-   ===================================================== */
-
+/* === CONTAINER UTILITIES === */
 .resp-container {
   width: 100%;
   max-width: var(--container-xl);
@@ -188,10 +147,7 @@ p {
 .resp-container-2xl { max-width: var(--container-2xl); }
 .resp-container-full { max-width: 100%; }
 
-/* =====================================================
-   10. RESPONSIVE GRID
-   ===================================================== */
-
+/* === RESPONSIVE GRID === */
 .grid {
   display: grid;
   gap: var(--space-md);
@@ -202,7 +158,6 @@ p {
 .grid-cols-3 { grid-template-columns: repeat(3, 1fr); }
 .grid-cols-4 { grid-template-columns: repeat(4, 1fr); }
 
-/* Auto-fit responsive grids */
 .grid-auto-sm {
   grid-template-columns: repeat(auto-fit, minmax(min(200px, 100%), 1fr));
 }
@@ -215,16 +170,11 @@ p {
   grid-template-columns: repeat(auto-fit, minmax(min(350px, 100%), 1fr));
 }
 
-/* =====================================================
-   11. RESPONSIVE UTILITIES
-   ===================================================== */
-
-/* Text alignment */
+/* === UTILITY CLASSES === */
 .text-left { text-align: left; }
 .text-center { text-align: center; }
 .text-right { text-align: right; }
 
-/* Font sizes */
 .fs-display { font-size: var(--fs-display); }
 .fs-h1 { font-size: var(--fs-h1); }
 .fs-h2 { font-size: var(--fs-h2); }
@@ -239,14 +189,12 @@ p {
 .fs-caption { font-size: var(--fs-caption); }
 .fs-tiny { font-size: var(--fs-tiny); }
 
-/* Line heights */
 .lh-tight { line-height: var(--lh-tight); }
 .lh-snug { line-height: var(--lh-snug); }
 .lh-normal { line-height: var(--lh-normal); }
 .lh-relaxed { line-height: var(--lh-relaxed); }
 .lh-loose { line-height: var(--lh-loose); }
 
-/* Spacing utilities */
 .mt-0 { margin-top: 0; }
 .mb-0 { margin-bottom: 0; }
 .my-0 { margin-block: 0; }
@@ -288,11 +236,7 @@ p {
 .gap-lg { gap: var(--space-lg); }
 .gap-xl { gap: var(--space-xl); }
 
-/* =====================================================
-   12. RESPONSIVE BREAKPOINT OVERRIDES
-   ===================================================== */
-
-/* Mobile - up to 480px */
+/* === MOBILE BREAKPOINT === */
 @media (max-width: 480px) {
   :root {
     --container-padding: 1rem;
@@ -304,50 +248,44 @@ p {
     grid-template-columns: 1fr;
   }
   
-  /* Hide on mobile */
+  
   .hide-mobile { display: none !important; }
   
-  /* Mobile text alignment */
+  
   .text-center-mobile { text-align: center; }
   .text-left-mobile { text-align: left; }
 }
 
-/* Small tablets - 481px to 768px */
+/* === TABLET BREAKPOINT === */
 @media (min-width: 481px) and (max-width: 768px) {
   .grid-cols-3,
   .grid-cols-4 {
     grid-template-columns: repeat(2, 1fr);
   }
   
-  /* Hide on tablet */
+  
   .hide-tablet { display: none !important; }
 }
 
-/* Large tablets and small desktops - 769px to 1024px */
+/* === DESKTOP BREAKPOINT === */
 @media (min-width: 769px) and (max-width: 1024px) {
   .grid-cols-4 {
     grid-template-columns: repeat(3, 1fr);
   }
 }
 
-/* Desktop - 1025px and up */
+/* === WIDE BREAKPOINT === */
 @media (min-width: 1025px) {
   .hide-desktop { display: none !important; }
 }
 
-/* =====================================================
-   13. ASPECT RATIO UTILITIES
-   ===================================================== */
-
+/* === ASPECT RATIOS === */
 .aspect-square { aspect-ratio: 1; }
 .aspect-video { aspect-ratio: 16 / 9; }
 .aspect-portrait { aspect-ratio: 3 / 4; }
 .aspect-wide { aspect-ratio: 21 / 9; }
 
-/* =====================================================
-   14. FLEXBOX UTILITIES
-   ===================================================== */
-
+/* === FLEXBOX UTILITIES === */
 .flex { display: flex; }
 .flex-col { flex-direction: column; }
 .flex-row { flex-direction: row; }
@@ -369,28 +307,19 @@ p {
 .justify-around { justify-content: space-around; }
 .justify-evenly { justify-content: space-evenly; }
 
-/* Center both axes */
 .flex-center {
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-/* =====================================================
-   15. TOUCH-FRIENDLY TAP TARGETS (utility class)
-   ===================================================== */
-
-/* Apply .touch-target class to elements needing larger touch areas */
+/* === TOUCH TARGETS === */
 .touch-target {
   min-height: 44px;
   min-width: 44px;
 }
 
-/* =====================================================
-   16. CARD & CONTENT BLOCK SPACING (opt-in classes)
-   Use .resp-card and .resp-section to avoid conflicts
-   ===================================================== */
-
+/* === CARD SPACING === */
 .resp-card {
   padding: var(--space-md);
   border-radius: clamp(0.5rem, 1vw, 1rem);
@@ -406,10 +335,7 @@ p {
 .resp-section-sm { padding-block: var(--space-xl); }
 .resp-section-lg { padding-block: var(--space-3xl); }
 
-/* =====================================================
-   17. IMAGE UTILITIES (opt-in classes only)
-   ===================================================== */
-
+/* === IMAGE UTILITIES === */
 .img-cover {
   object-fit: cover;
   width: 100%;
@@ -428,10 +354,7 @@ p {
   display: block;
 }
 
-/* =====================================================
-   18. LIST UTILITIES (opt-in classes)
-   ===================================================== */
-
+/* === LIST UTILITIES === */
 .list-spaced li {
   margin-bottom: var(--space-xs);
   line-height: var(--lh-relaxed);
@@ -441,17 +364,13 @@ p {
   margin-bottom: 0;
 }
 
-/* =====================================================
-   19. TABLE RESPONSIVE (utility class)
-   ===================================================== */
-
+/* === TABLE UTILITIES === */
 .table-responsive {
   width: 100%;
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
 }
 
-/* Apply .resp-table class for styled tables */
 .resp-table {
   width: 100%;
   border-collapse: collapse;
@@ -464,11 +383,7 @@ p {
   vertical-align: top;
 }
 
-/* =====================================================
-   20. FORM ELEMENT UTILITIES (opt-in classes)
-   ===================================================== */
-
-/* Apply .resp-input class for fluid form styling */
+/* === FORM UTILITIES === */
 .resp-input {
   font-size: var(--fs-body);
   padding: var(--space-sm) var(--space-md);
@@ -481,10 +396,7 @@ p {
   display: block;
 }
 
-/* =====================================================
-   21. PRINT STYLES
-   ===================================================== */
-
+/* === PRINT STYLES === */
 @media print {
   :root {
     --font-base: 12pt;
@@ -506,10 +418,7 @@ p {
   .hide-print { display: none !important; }
 }
 
-/* =====================================================
-   22. REDUCED MOTION
-   ===================================================== */
-
+/* === REDUCED MOTION === */
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,

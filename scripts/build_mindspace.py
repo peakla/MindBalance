@@ -32,6 +32,10 @@ EXCLUDE_FILES = {
     "pyproject.toml",
     ".replit.nix",
     "docs.css",
+    "server.py",
+    "uv.lock",
+    "translations.csv",
+    "analytics.py",
 }
 
 TEXT_EXTENSIONS = {

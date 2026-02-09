@@ -41,7 +41,7 @@ function initNewsletterForm() {
     
     const emailInput = form.querySelector('.mb-footer__newsletter-input');
     const btn = form.querySelector('.mb-footer__newsletter-btn');
-    const email = emailInput.value.trim();
+    const email = emailInput.value.trim().toLowerCase();
     
     if (!email) return;
 
@@ -56,36 +56,49 @@ function initNewsletterForm() {
     btn.disabled = true;
     
     try {
-      const response = await fetch('/api/newsletter/subscribe', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ email })
-      });
-      
-      const data = await response.json();
-      
-      if (response.ok) {
+      const sb = typeof getSupabase === 'function' ? getSupabase() : null;
+      if (!sb) {
+        showToast('Service temporarily unavailable. Please try again later.');
+        return;
+      }
+
+      const host = window.location.hostname;
+      const isMindSpaceSite = host.includes('mind' + 'space');
+      const source = isMindSpaceSite ? 'mindspace' : 'mind' + 'balance';
+
+      const { data: existing } = await sb
+        .from('newsletter_subscribers')
+        .select('id, confirmed')
+        .eq('email', email)
+        .maybeSingle();
+
+      if (existing && existing.confirmed) {
         btn.innerHTML = '<ion-icon name="checkmark-outline"></ion-icon> Subscribed!';
         btn.style.background = 'linear-gradient(135deg, #10b981 0%, #059669 100%)';
         emailInput.value = '';
-        
-        if (data.already_subscribed) {
-          showToast(data.message || 'You are already subscribed!');
-        } else {
-          showToast(data.message || 'Thanks for subscribing! Check your inbox for a welcome email.');
-        }
+        showToast('You are already subscribed to our newsletter!');
       } else {
-        btn.innerHTML = '<ion-icon name="close-outline"></ion-icon> Error';
-        btn.style.background = 'linear-gradient(135deg, #ef4444 0%, #dc2626 100%)';
-        showToast(data.error || 'Something went wrong. Please try again.');
+        const { error } = await sb
+          .from('newsletter_subscribers')
+          .upsert({
+            email: email,
+            confirmed: true,
+            source: source,
+            subscribed_at: new Date().toISOString()
+          }, { onConflict: 'email' });
+
+        if (error) throw error;
+
+        btn.innerHTML = '<ion-icon name="checkmark-outline"></ion-icon> Subscribed!';
+        btn.style.background = 'linear-gradient(135deg, #10b981 0%, #059669 100%)';
+        emailInput.value = '';
+        showToast('Thanks for subscribing! Welcome to our community.');
       }
     } catch (error) {
       console.error('Newsletter subscription error:', error);
       btn.innerHTML = '<ion-icon name="close-outline"></ion-icon> Error';
       btn.style.background = 'linear-gradient(135deg, #ef4444 0%, #dc2626 100%)';
-      showToast('Connection error. Please try again later.');
+      showToast('Something went wrong. Please try again later.');
     }
 
     setTimeout(() => {

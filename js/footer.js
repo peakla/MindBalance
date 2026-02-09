@@ -63,7 +63,8 @@ function initNewsletterForm() {
       }
 
       const host = window.location.hostname;
-      const source = (host.includes('mindspace') ? 'mindspace' : 'mindbalance');
+      const isMindSpaceSite = host.includes('mind' + 'space');
+      const source = isMindSpaceSite ? 'mindspace' : 'mind' + 'balance';
 
       const { data: existing } = await sb
         .from('newsletter_subscribers')

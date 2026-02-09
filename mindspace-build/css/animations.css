@@ -395,17 +395,17 @@
   transform: translateX(-50%);
   width: 80px;
   height: 4px;
-  background: linear-gradient(135deg, #5BA4E6 0%, #4893D4 100%);
+  background: linear-gradient(135deg, #2068A8 0%, #1B5A94 100%);
   border-radius: 2px;
 }
 
 [data-theme="dark"] .section-decorated::before {
-  background: linear-gradient(135deg, #5BA4E6 0%, #3B7CC4 100%);
+  background: linear-gradient(135deg, #2068A8 0%, #143E6B 100%);
 }
 
 /* === GRADIENT TEXT === */
 .gradient-text {
-  background: linear-gradient(135deg, #3B7CC4 0%, #5BA4E6 50%, #3B7CC4 100%);
+  background: linear-gradient(135deg, #143E6B 0%, #2068A8 50%, #143E6B 100%);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -413,7 +413,7 @@
 }
 
 .gradient-text-animated {
-  background: linear-gradient(135deg, #3B7CC4 0%, #5BA4E6 50%, #3B7CC4 100%);
+  background: linear-gradient(135deg, #143E6B 0%, #2068A8 50%, #143E6B 100%);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -423,7 +423,7 @@
 
 [data-theme="dark"] .gradient-text,
 [data-theme="dark"] .gradient-text-animated {
-  background: linear-gradient(135deg, #fff 0%, #5BA4E6 50%, #fff 100%);
+  background: linear-gradient(135deg, #fff 0%, #2068A8 50%, #fff 100%);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -475,7 +475,7 @@
   width: 70px;
   height: 70px;
   margin-bottom: 25px;
-  background: linear-gradient(135deg, #5BA4E6 0%, #4893D4 100%);
+  background: linear-gradient(135deg, #2068A8 0%, #1B5A94 100%);
   border-radius: 50%;
   box-shadow: 0 10px 30px rgba(214, 189, 159, 0.35);
   animation: pulse 3s ease-in-out infinite;
@@ -503,7 +503,7 @@
   gap: 12px;
   font-size: 1.1rem;
   font-weight: 600;
-  color: #3B7CC4;
+  color: #143E6B;
   position: relative;
   z-index: 1;
 }
@@ -512,7 +512,7 @@
   content: '';
   width: 40px;
   height: 2px;
-  background: linear-gradient(90deg, transparent, #5BA4E6);
+  background: linear-gradient(90deg, transparent, #2068A8);
   border-radius: 1px;
 }
 
@@ -520,7 +520,7 @@
   content: '';
   width: 40px;
   height: 2px;
-  background: linear-gradient(90deg, #5BA4E6, transparent);
+  background: linear-gradient(90deg, #2068A8, transparent);
   border-radius: 1px;
 }
 
@@ -567,7 +567,7 @@
 }
 
 [data-theme="dark"] .quote-block__author {
-  color: #5BA4E6;
+  color: #2068A8;
 }
 
 [data-theme="dark"] .quote-block__decoration {

@@ -85,8 +85,8 @@ COLOR_REPLACEMENTS = [
     ("#af916d", "#5BA4E6"),
     ("#9d8260", "#4893D4"),
     ("#d4a574", "#7BBDF7"),
-    ("#b89b5e", "#5BA4E6"),
-    ("#a08550", "#4893D4"),
+    ("#b89b5e", "#1A4F85"),
+    ("#a08550", "#163F6E"),
     ("#c9a227", "#3B8DD4"),
     ("#d4aa00", "#3B8DD4"),
     ("#c49464", "#4893D4"),
@@ -95,11 +95,11 @@ COLOR_REPLACEMENTS = [
     ("#e4c094", "#A8D4FF"),
     ("#e8dfd4", "#D6EBFF"),
 
-    ("#d6bd9f", "#5BA4E6"),
-    ("#c4a985", "#4893D4"),
-    ("#c4a67a", "#4893D4"),
-    ("#8b7355", "#3B7CC4"),
-    ("#d4a853", "#5BA4E6"),
+    ("#d6bd9f", "#2068A8"),
+    ("#c4a985", "#1B5A94"),
+    ("#c4a67a", "#1B5A94"),
+    ("#8b7355", "#143E6B"),
+    ("#d4a853", "#2068A8"),
 
     ("#f2a33b", "#4A93D4"),
     ("#e8943a", "#3B8DD4"),
@@ -189,6 +189,20 @@ def transform_content(content, filepath):
     if ext.lower() == ".css":
         content = content.replace("--gold-crayola", "--blue-crayola")
         content = content.replace("#f8a29e", "#38b6ff")
+
+        if basename == "style.css":
+            footer_btn_override = """
+/* MindSpace: white-on-blue footer buttons */
+.mb-footer__btn {
+  background: linear-gradient(135deg, #2068A8 0%, #1B5A94 100%) !important;
+  color: #fff !important;
+  box-shadow: 0 4px 15px rgba(32, 104, 168, 0.3) !important;
+}
+.mb-footer__btn:hover {
+  box-shadow: 0 6px 20px rgba(32, 104, 168, 0.4) !important;
+}
+"""
+            content += footer_btn_override
 
     return content
 

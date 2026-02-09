@@ -247,6 +247,12 @@ def build():
             os.rename(old_path, os.path.join(images_dir, new_name))
             print(f"  Renamed: {old_name} -> {new_name}")
 
+    ms_favicon_src = os.path.join(SOURCE_DIR, "assets", "images", "mindspace-favicon.png")
+    ms_favicon_dst = os.path.join(images_dir, "favicon.png")
+    if os.path.exists(ms_favicon_src):
+        shutil.copy2(ms_favicon_src, ms_favicon_dst)
+        print("  Replaced: favicon.png with MindSpace logo")
+
     print(f"MindSpace build complete!")
     print(f"  Output: {OUTPUT_DIR}")
     print(f"  Files copied: {file_count}")

@@ -62,6 +62,9 @@ function initNewsletterForm() {
         return;
       }
 
+      const host = window.location.hostname;
+      const source = (host.includes('mindspace') ? 'mindspace' : 'mindbalance');
+
       const { data: existing } = await sb
         .from('newsletter_subscribers')
         .select('id, confirmed')
@@ -79,6 +82,7 @@ function initNewsletterForm() {
           .upsert({
             email: email,
             confirmed: true,
+            source: source,
             subscribed_at: new Date().toISOString()
           }, { onConflict: 'email' });
 

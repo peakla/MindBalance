@@ -125,9 +125,20 @@ def transform_content(content, filepath):
 
 
 def build():
+    git_dir = os.path.join(OUTPUT_DIR, ".git")
+    git_backup = None
+    if os.path.exists(git_dir):
+        git_backup = os.path.join(SOURCE_DIR, ".mindspace-git-backup")
+        if os.path.exists(git_backup):
+            shutil.rmtree(git_backup)
+        shutil.move(git_dir, git_backup)
+
     if os.path.exists(OUTPUT_DIR):
         shutil.rmtree(OUTPUT_DIR)
     os.makedirs(OUTPUT_DIR)
+
+    if git_backup and os.path.exists(git_backup):
+        shutil.move(git_backup, git_dir)
 
     file_count = 0
     skipped = 0

@@ -36,6 +36,10 @@ EXCLUDE_FILES = {
     "uv.lock",
     "translations.csv",
     "analytics.py",
+    ".replit.backup",
+    ".gititnore",
+    "mindspace-favicon.png",
+    "mindspace-preload.gif",
 }
 
 TEXT_EXTENSIONS = {

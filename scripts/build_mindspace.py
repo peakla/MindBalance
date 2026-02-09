@@ -87,6 +87,26 @@ COLOR_REPLACEMENTS = [
     ("#e4c094", "#A8D4FF"),
     ("#e8dfd4", "#D6EBFF"),
 
+    ("#d6bd9f", "#5BA4E6"),
+    ("#c4a985", "#4893D4"),
+    ("#c4a67a", "#4893D4"),
+    ("#8b7355", "#3B7CC4"),
+    ("#d4a853", "#5BA4E6"),
+
+    ("#f2a33b", "#4A93D4"),
+    ("#e8943a", "#3B8DD4"),
+    ("#f2c200", "#5BA4E6"),
+    ("#e6b800", "#4893D4"),
+    ("#e5a800", "#4893D4"),
+    ("#d49600", "#3B8DD4"),
+
+    ("#f5f0e8", "#EBF3FC"),
+    ("#f8f6f2", "#EFF5FC"),
+    ("#fbf4e8", "#EBF3FC"),
+    ("#e8e4dc", "#D6E8F8"),
+    ("#e8e4df", "#D6E8F8"),
+    ("#f8f6f3", "#EFF5FC"),
+
     ("#9b7ed9", "#6DB3F2"),
     ("#7c5fc4", "#4A93D4"),
     ("#8a6dc8", "#5CA3E6"),
@@ -120,6 +140,47 @@ def transform_content(content, filepath):
     if ext.lower() in {".css", ".html", ".js"}:
         for old_color, new_color in COLOR_REPLACEMENTS:
             content = content.replace(old_color, new_color)
+
+    if ext.lower() == ".js":
+        content = re.sub(
+            r"blue: \{ hex: '#4a90d9', hover: '#3d7fc8', rgb: '74, 144, 217' \}",
+            "sky: { hex: '#4a90d9', hover: '#3d7fc8', rgb: '74, 144, 217' }",
+            content
+        )
+        content = re.sub(
+            r"blue: \{ hex: '#4a90d9', hover: '#3d7fc8', rgb: '74, 144, 217', name: 'Blue' \}",
+            "sky: { hex: '#4a90d9', hover: '#3d7fc8', rgb: '74, 144, 217', name: 'Sky' }",
+            content
+        )
+        content = content.replace("data-accent-color=\"blue\"", "data-accent-color=\"sky\"")
+
+        content = content.replace(
+            "gold: { hex: '#5BA4E6', hover: '#4893D4', rgb: '91, 164, 230' }",
+            "blue: { hex: '#5BA4E6', hover: '#4893D4', rgb: '91, 164, 230' }"
+        )
+        content = content.replace(
+            "gold: { hex: '#5BA4E6', hover: '#4893D4', rgb: '91, 164, 230', name: 'Gold' }",
+            "blue: { hex: '#5BA4E6', hover: '#4893D4', rgb: '91, 164, 230', name: 'Blue' }"
+        )
+        content = content.replace("DEFAULT_ACCENT = 'gold'", "DEFAULT_ACCENT = 'blue'")
+        content = content.replace("ACCENT_COLORS.gold", "ACCENT_COLORS.blue")
+        content = content.replace("accentColor, 'gold'", "accentColor, 'blue'")
+        content = content.replace("applyAccentColor?.('gold')", "applyAccentColor?.('blue')")
+        content = content.replace("accent: 'gold'", "accent: 'blue'")
+
+    if ext.lower() == ".html":
+        content = re.sub(
+            r'data-accent-color="blue"(.*?)style="--btn-color: #4a90d9"',
+            r'data-accent-color="sky"\1style="--btn-color: #4a90d9"',
+            content
+        )
+        content = content.replace('data-accent-color="gold"', 'data-accent-color="blue"')
+        content = content.replace("title=\"Gold\"", "title=\"Blue\"")
+        content = content.replace("--gold-crayola", "--blue-crayola")
+
+    if ext.lower() == ".css":
+        content = content.replace("--gold-crayola", "--blue-crayola")
+        content = content.replace("#f8a29e", "#9EC8F8")
 
     return content
 

@@ -22,7 +22,7 @@
 
 /* === HEADER === */
 .article-header {
-  background: #d6bd9f;
+  background: #5BA4E6;
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
   padding: 16px 0;
   position: sticky;
@@ -153,7 +153,7 @@
 }
 
 .article-category {
-  background: #d6bd9f;
+  background: #5BA4E6;
   color: #1a1a2e;
   padding: 4px 12px;
   border-radius: 12px;
@@ -1158,7 +1158,7 @@
 
 [data-theme="dark"] .article-toc__resume {
   background: linear-gradient(135deg, #3d3a50, #4d4a60);
-  color: #d6bd9f;
+  color: #5BA4E6;
   border-color: rgba(214, 189, 159, 0.2);
 }
 
@@ -1167,7 +1167,7 @@
 }
 
 [data-theme="dark"] .article-toc__resume-dismiss {
-  color: #d6bd9f;
+  color: #5BA4E6;
 }
 
 .article-toc__minimap {
@@ -1218,7 +1218,7 @@
 }
 
 [data-theme="dark"] .article-toc__minimap-section.active {
-  background: #d6bd9f;
+  background: #5BA4E6;
 }
 
 .article-toc__minimap-marker {
@@ -1420,7 +1420,7 @@
 }
 
 [data-theme="dark"] .tts-word.tts-current-word {
-  background: linear-gradient(135deg, #d6bd9f, #c4ab8d);
+  background: linear-gradient(135deg, #5BA4E6, #c4ab8d);
   color: #1a1a2e;
 }
 
@@ -1429,7 +1429,7 @@
   align-items: center;
   gap: 6px;
   padding: 6px 12px;
-  background: linear-gradient(135deg, #d6bd9f 0%, #5BA4E6 100%);
+  background: linear-gradient(135deg, #5BA4E6 0%, #5BA4E6 100%);
   color: #1a1a2e;
   border: none;
   border-radius: 20px;
@@ -1530,7 +1530,7 @@
   width: 16px;
   height: 16px;
   border-radius: 50%;
-  background: #d6bd9f;
+  background: #5BA4E6;
   cursor: pointer;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
   transition: transform 0.15s ease;
@@ -1545,7 +1545,7 @@
   height: 16px;
   border: none;
   border-radius: 50%;
-  background: #d6bd9f;
+  background: #5BA4E6;
   cursor: pointer;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
 }
@@ -1583,9 +1583,9 @@
 }
 
 .tts-option-btn.active {
-  background: #d6bd9f;
+  background: #5BA4E6;
   color: #1a1a2e;
-  border-color: #d6bd9f;
+  border-color: #5BA4E6;
 }
 
 .tts-option-btn svg,
@@ -1729,8 +1729,8 @@
 }
 
 [data-theme="dark"] .share-btn:hover {
-  background: #d6bd9f;
-  border-color: #d6bd9f;
+  background: #5BA4E6;
+  border-color: #5BA4E6;
   color: #1a1a2e;
 }
 
@@ -1854,7 +1854,7 @@
 }
 
 [data-theme="dark"] .footer-back-link {
-  color: #d6bd9f;
+  color: #5BA4E6;
 }
 
 .footer-disclaimer {
@@ -1973,7 +1973,7 @@
   width: 36px;
   height: 36px;
   border-radius: 50%;
-  background: #d6bd9f;
+  background: #5BA4E6;
   color: #1a1a2e;
   border: none;
   cursor: pointer;
@@ -2110,7 +2110,7 @@
 }
 
 [data-theme="dark"] .reading-controls__font-btns button:hover {
-  background: #d6bd9f;
+  background: #5BA4E6;
   color: #1a1a2e;
 }
 
@@ -2363,7 +2363,7 @@ body[data-article-spacing="relaxed"] .article-content li {
 }
 
 [data-theme="dark"] .bookmark-prompt__yes {
-  background: #d6bd9f;
+  background: #5BA4E6;
   color: #1a1a2e;
 }
 
@@ -2411,7 +2411,7 @@ body[data-article-spacing="relaxed"] .article-content li {
 }
 
 .tts-mini-player__btn:hover {
-  background: #d6bd9f;
+  background: #5BA4E6;
   transform: scale(1.1);
 }
 
@@ -2451,7 +2451,7 @@ body[data-article-spacing="relaxed"] .article-content li {
 
 .tts-mini-player__progress-fill {
   height: 100%;
-  background: #d6bd9f;
+  background: #5BA4E6;
   transition: width 0.3s ease;
 }
 
@@ -2501,9 +2501,9 @@ body[data-article-spacing="relaxed"] .article-content li {
 }
 
 .sleep-timer-btn.active {
-  background: #d6bd9f;
+  background: #5BA4E6;
   color: #1a1a2e;
-  border-color: #d6bd9f;
+  border-color: #5BA4E6;
 }
 
 .sleep-timer-dropdown {
@@ -2542,7 +2542,7 @@ body[data-article-spacing="relaxed"] .article-content li {
 }
 
 .sleep-timer-option.active {
-  background: #d6bd9f;
+  background: #5BA4E6;
   color: #1a1a2e;
 }
 
@@ -2833,7 +2833,7 @@ body[data-article-spacing="relaxed"] .article-content li {
 
 [data-theme="dark"] .article-takeaways {
   background: linear-gradient(135deg, #252542 0%, #1a1a2e 100%);
-  border-left-color: #d6bd9f;
+  border-left-color: #5BA4E6;
 }
 
 .article-takeaways__title {
@@ -2867,7 +2867,7 @@ body[data-article-spacing="relaxed"] .article-content li {
 }
 
 [data-theme="dark"] .article-takeaways__list li::before {
-  color: #d6bd9f;
+  color: #5BA4E6;
 }
 
 @media (max-width: 768px) {
@@ -2929,7 +2929,7 @@ body[data-article-spacing="relaxed"] .article-content li {
   align-items: center;
   gap: 10px;
   padding: 14px 28px;
-  background: linear-gradient(135deg, #5BA4E6 0%, #d6bd9f 100%);
+  background: linear-gradient(135deg, #5BA4E6 0%, #5BA4E6 100%);
   color: #fff;
   border: none;
   border-radius: 30px;

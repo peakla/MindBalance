@@ -22,7 +22,7 @@
   left: 0;
   right: 0;
   height: 4px;
-  background: linear-gradient(90deg, #5BA4E6, #d6bd9f, #8fa67a, #5BA4E6);
+  background: linear-gradient(90deg, #5BA4E6, #5BA4E6, #8fa67a, #5BA4E6);
   background-size: 200% 100%;
   animation: gradientShift 3s ease infinite;
 }
@@ -81,7 +81,7 @@
   height: 64px !important;
   border: 3px solid transparent !important;
   border-radius: 50% !important;
-  background: linear-gradient(145deg, #f8f6f2 0%, #fff 100%) !important;
+  background: linear-gradient(145deg, #EFF5FC 0%, #fff 100%) !important;
   cursor: pointer !important;
   display: flex !important;
   align-items: center !important;
@@ -99,7 +99,7 @@
   position: absolute;
   inset: -4px;
   border-radius: 50%;
-  background: linear-gradient(135deg, #5BA4E6, #d6bd9f, #8fa67a);
+  background: linear-gradient(135deg, #5BA4E6, #5BA4E6, #8fa67a);
   opacity: 0;
   z-index: -1;
   transition: opacity 0.3s ease;
@@ -184,7 +184,7 @@
 /* === LOG MOOD BUTTON === */
 .mb-profile__mood-log-btn {
   padding: 14px 36px;
-  background: linear-gradient(135deg, #5BA4E6 0%, #c9a968 50%, #d6bd9f 100%);
+  background: linear-gradient(135deg, #5BA4E6 0%, #c9a968 50%, #5BA4E6 100%);
   background-size: 200% 100%;
   color: #fff;
   border: none;
@@ -296,7 +296,7 @@
   width: 56px;
   height: 56px;
   border-radius: 50%;
-  background: linear-gradient(135deg, #f8f6f2 0%, #fff 100%);
+  background: linear-gradient(135deg, #EFF5FC 0%, #fff 100%);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -355,7 +355,7 @@
   gap: 8px;
   margin-top: 10px;
   padding: 10px 12px;
-  background: #f8f6f2;
+  background: #EFF5FC;
   border-radius: 10px;
   font-size: 0.875rem;
   color: #4a4a6a;
@@ -498,7 +498,7 @@
   justify-content: center;
   gap: 8px;
   padding: 14px 28px;
-  background: linear-gradient(135deg, #5BA4E6 0%, #d6bd9f 100%);
+  background: linear-gradient(135deg, #5BA4E6 0%, #5BA4E6 100%);
   color: #fff;
   border: none;
   border-radius: 14px;
@@ -548,7 +548,7 @@
   top: 0;
   bottom: 0;
   width: 4px;
-  background: linear-gradient(180deg, #5BA4E6, #d6bd9f);
+  background: linear-gradient(180deg, #5BA4E6, #5BA4E6);
   opacity: 0;
   transition: opacity 0.3s ease;
 }
@@ -946,7 +946,7 @@
 }
 
 [data-theme="dark"] .mb-profile__wellness-section h3 {
-  color: #f5f0e8;
+  color: #EBF3FC;
 }
 
 [data-theme="dark"] .mb-profile__mood-input p {
@@ -961,7 +961,7 @@
 [data-theme="dark"] .mb-profile__mood-note {
   background: rgba(45, 43, 61, 0.8);
   border-color: rgba(184, 155, 94, 0.3);
-  color: #f5f0e8;
+  color: #EBF3FC;
 }
 
 [data-theme="dark"] .mb-profile__mood-history h4 {
@@ -987,7 +987,7 @@
 }
 
 [data-theme="dark"] .mood-label {
-  color: #f5f0e8;
+  color: #EBF3FC;
 }
 
 [data-theme="dark"] .mood-note-preview {
@@ -996,7 +996,7 @@
 }
 
 [data-theme="dark"] .mood-note-preview ion-icon {
-  color: #d6bd9f;
+  color: #5BA4E6;
 }
 
 [data-theme="dark"] .mb-profile__mood-trend {
@@ -1012,7 +1012,7 @@
 [data-theme="dark"] .mb-profile__goal-select {
   background: rgba(45, 43, 61, 0.9);
   border-color: rgba(184, 155, 94, 0.3);
-  color: #f5f0e8;
+  color: #EBF3FC;
 }
 
 [data-theme="dark"] .mb-profile__goal-item {
@@ -1021,7 +1021,7 @@
 }
 
 [data-theme="dark"] .mb-profile__goal-item .goal-title {
-  color: #f5f0e8;
+  color: #EBF3FC;
 }
 
 [data-theme="dark"] .mb-profile__goals-empty {
@@ -1080,7 +1080,7 @@
 [data-theme="dark"] .mb-profile__goal-select {
   background: rgba(45, 43, 61, 0.95) !important;
   border-color: rgba(184, 155, 94, 0.3) !important;
-  color: #f5f0e8 !important;
+  color: #EBF3FC !important;
 }
 
 [data-theme="dark"] .mb-profile__goal-input::placeholder {
@@ -1095,11 +1095,11 @@
 }
 
 [data-theme="dark"] .mb-profile__goal-item .goal-title {
-  color: #f5f0e8 !important;
+  color: #EBF3FC !important;
 }
 
 [data-theme="dark"] .mb-profile__goal-item .goal-check {
-  border-color: #d6bd9f !important;
+  border-color: #5BA4E6 !important;
 }
 
 [data-theme="dark"] .mb-profile__streak-display .mb-profile__streak-stat,

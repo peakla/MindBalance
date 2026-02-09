@@ -17,9 +17,9 @@
 
   // --- Accent Colors ---
   const ACCENT_COLORS = {
-    gold: { hex: '#5BA4E6', hover: '#4893D4', rgb: '91, 164, 230' },
+    blue: { hex: '#5BA4E6', hover: '#4893D4', rgb: '91, 164, 230' },
     purple: { hex: '#6DB3F2', hover: '#5CA3E6', rgb: '109, 179, 242' },
-    blue: { hex: '#4a90d9', hover: '#3d7fc8', rgb: '74, 144, 217' },
+    sky: { hex: '#4a90d9', hover: '#3d7fc8', rgb: '74, 144, 217' },
     green: { hex: '#4db896', hover: '#3fa884', rgb: '77, 184, 150' },
     teal: { hex: '#38b2ac', hover: '#2d9d98', rgb: '56, 178, 172' },
     pink: { hex: '#d97eab', hover: '#c86d9a', rgb: '217, 126, 171' },
@@ -27,7 +27,7 @@
     red: { hex: '#e07070', hover: '#d05f5f', rgb: '224, 112, 112' }
   };
 
-  const DEFAULT_ACCENT = 'gold';
+  const DEFAULT_ACCENT = 'blue';
 
   // --- Preference Helpers ---
   function getPreference(key, defaultValue) {
@@ -158,7 +158,7 @@
 
   // --- Accent Color ---
   function applyAccentColor(colorName) {
-    const color = ACCENT_COLORS[colorName] || ACCENT_COLORS.gold;
+    const color = ACCENT_COLORS[colorName] || ACCENT_COLORS.blue;
     const effectiveColorName = ACCENT_COLORS[colorName] ? colorName : 'gold';
     
     document.documentElement.style.setProperty('--user-accent', color.hex);

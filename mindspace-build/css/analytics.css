@@ -544,7 +544,7 @@
 .mb-reading-stat__icon {
   width: 48px;
   height: 48px;
-  background: linear-gradient(135deg, #f8f6f2 0%, #f0ebe4 100%);
+  background: linear-gradient(135deg, #EFF5FC 0%, #f0ebe4 100%);
   border-radius: 12px;
   display: flex;
   align-items: center;

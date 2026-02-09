@@ -48,7 +48,7 @@
 
 .wellness-checkin__time-greeting {
   font-size: 1rem;
-  color: var(--gold-crayola, #7BBDF7);
+  color: var(--blue-crayola, #7BBDF7);
   font-weight: 500;
   margin-bottom: 0.5rem;
   display: flex;
@@ -90,7 +90,7 @@
 .wellness-checkin__card-title {
   font-size: 1rem;
   font-weight: 600;
-  color: var(--gold-crayola, #7BBDF7);
+  color: var(--blue-crayola, #7BBDF7);
   margin-bottom: 1rem;
   text-align: center;
   text-transform: uppercase;
@@ -258,7 +258,7 @@
 .wellness-checkin__tip-title {
   font-size: 0.85rem;
   font-weight: 600;
-  color: var(--gold-crayola, #7BBDF7);
+  color: var(--blue-crayola, #7BBDF7);
   margin-bottom: 0.5rem;
   text-transform: uppercase;
   letter-spacing: 0.5px;
@@ -415,7 +415,7 @@
 .wellness-checkin__default-tip-title {
   font-size: 1.1rem;
   font-weight: 600;
-  color: var(--gold-crayola, #7BBDF7);
+  color: var(--blue-crayola, #7BBDF7);
   margin-bottom: 0.5rem;
 }
 

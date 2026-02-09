@@ -530,7 +530,7 @@ body:not([data-theme="dark"]) .time-night .glass-card {
   font-size: 0.75rem;
   padding: 3px 8px;
   border-radius: 12px;
-  background: linear-gradient(135deg, var(--user-accent, #5BA4E6) 0%, #d6bd9f 100%);
+  background: linear-gradient(135deg, var(--user-accent, #5BA4E6) 0%, #5BA4E6 100%);
   color: #fff;
   font-weight: 600;
 }
@@ -561,7 +561,7 @@ body:not([data-theme="dark"]) .time-night .glass-card {
 }
 
 .quick-action-btn--primary {
-  background: linear-gradient(135deg, var(--user-accent, #5BA4E6) 0%, #d6bd9f 100%);
+  background: linear-gradient(135deg, var(--user-accent, #5BA4E6) 0%, #5BA4E6 100%);
   color: #fff;
 }
 
@@ -969,7 +969,7 @@ body:not([data-theme="dark"]) .time-night .mb-profile__actions-btn {
 }
 
 body:not([data-theme="dark"]) .time-night .mb-profile__actions-btn.primary {
-  background: linear-gradient(135deg, #5BA4E6 0%, #d6bd9f 100%);
+  background: linear-gradient(135deg, #5BA4E6 0%, #5BA4E6 100%);
   color: #fff;
 }
 

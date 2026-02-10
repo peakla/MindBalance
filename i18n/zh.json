@@ -1125,7 +1125,7 @@
   "settings_high_contrast": "高对比度",
   "settings_language": "语言",
   "settings_preferences": "偏好设置",
-  "settings_reduce_motion": "减少动效",
+  "settings_reduce_motion": "减少动画",
   "settings_title": "设置",
   "share_article": "分享本文：",
   "sidebar_activity": "动态",
@@ -1301,16 +1301,12 @@
   "tip_friday_text": "承认你本周取得的成就，无论多小。每一步都很重要。",
   "tip_saturday_title": "休息充电",
   "tip_saturday_text": "今天允许自己休息。优质睡眠对心理健康至关重要。",
-  
-  "settings_title": "设置",
   "settings_appearance": "外观",
   "settings_accessibility": "无障碍",
   "settings_reading": "阅读",
-  "settings_language": "语言",
   "settings_accessibility_score": "无障碍评分",
   "settings_synced": "已同步",
   "settings_compare": "比较",
-  
   "settings_theme_presets": "主题预设",
   "settings_preset_default": "默认",
   "settings_preset_default_desc": "经典MindBalance",
@@ -1324,18 +1320,14 @@
   "settings_preset_night_desc": "护眼舒适",
   "settings_preset_contrast": "高对比度",
   "settings_preset_contrast_desc": "最大可读性",
-  
   "settings_theme": "主题",
-  "settings_dark_mode": "深色模式",
   "settings_dark_mode_desc": "在低光环境下减少眼睛疲劳",
   "settings_accent_color": "强调色",
   "settings_live_preview": "实时预览",
   "settings_preview_welcome": "欢迎来到MindBalance",
   "settings_preview_journey": "您的心理健康之旅从这里开始。",
   "settings_preview_btn": "开始",
-  
   "settings_visual_accessibility": "视觉无障碍",
-  "settings_high_contrast": "高对比度",
   "settings_high_contrast_desc": "增加对比度以提高可读性",
   "settings_colorblind_mode": "色盲模式",
   "settings_colorblind_desc": "调整颜色以适应色觉缺陷",
@@ -1343,19 +1335,13 @@
   "settings_colorblind_protanopia": "红色盲",
   "settings_colorblind_deuteranopia": "绿色盲",
   "settings_colorblind_tritanopia": "蓝色盲",
-  
   "settings_cognitive_accessibility": "认知无障碍",
-  "settings_focus_mode": "专注模式 (ADHD)",
   "settings_focus_mode_desc": "减少干扰以提高专注力",
   "settings_dyslexia_font": "阅读障碍友好字体",
   "settings_dyslexia_font_desc": "使用OpenDyslexic字体便于阅读",
-  
   "settings_motion_animation": "动画效果",
-  "settings_reduce_motion": "减少动画",
   "settings_reduce_motion_desc": "最小化动画和过渡效果",
-  
   "settings_text_size": "文字大小",
-  "settings_font_size": "字体大小",
   "settings_font_size_desc": "调整文字大小以便舒适阅读",
   "settings_font_small": "小",
   "settings_font_normal": "正常",
@@ -1363,21 +1349,24 @@
   "settings_font_xlarge": "特大",
   "settings_text_preview": "文字预览",
   "settings_reading_preview_text": "心理健康与身体健康同样重要。每天花时间自我检查、练习正念、在需要时寻求支持，都是维持健康的关键步骤。",
-  
   "settings_display_language": "显示语言",
   "settings_display_language_desc": "选择您偏好的语言",
   "settings_reset_defaults": "恢复默认设置",
-  
   "settings_onboarding_title": "欢迎来到设置！",
   "settings_onboarding_text": "使用主题预设、无障碍选项等自定义您的MindBalance体验。您的偏好设置会在所有页面同步。",
   "settings_onboarding_start": "开始",
   "settings_onboarding_skip": "暂时跳过",
-  
   "wellness_mood_title": "心情签到",
   "wellness_daily_tip": "今日健康小贴士",
   "wellness_select_mood_prompt": "选择您的心情，获取个性化建议和资源。",
   "greeting_morning": "早上好",
   "greeting_afternoon": "下午好",
   "greeting_evening": "晚上好",
-  "greeting_night": "晚安"
+  "greeting_night": "晚安",
+  "nav_greeting": "欢迎",
+  "nav_greeting_morning": "早上好",
+  "nav_greeting_afternoon": "下午好",
+  "nav_greeting_evening": "晚上好",
+  "nav_greeting_night": "晚安",
+  "nav_crisis": "获取帮助"
 }

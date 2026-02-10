@@ -1301,16 +1301,12 @@
   "tip_friday_text": "Reconoce lo que lograste esta semana, sin importar cuán pequeño sea. Cada paso cuenta.",
   "tip_saturday_title": "Descansa y Recarga",
   "tip_saturday_text": "Date permiso para descansar hoy. El sueño de calidad es esencial para el bienestar mental.",
-  
-  "settings_title": "Configuración",
   "settings_appearance": "Apariencia",
   "settings_accessibility": "Accesibilidad",
   "settings_reading": "Lectura",
-  "settings_language": "Idioma",
   "settings_accessibility_score": "Puntuación de Accesibilidad",
   "settings_synced": "Sincronizado",
   "settings_compare": "Comparar",
-  
   "settings_theme_presets": "Temas Predefinidos",
   "settings_preset_default": "Predeterminado",
   "settings_preset_default_desc": "MindBalance clásico",
@@ -1324,18 +1320,14 @@
   "settings_preset_night_desc": "Fácil para los ojos",
   "settings_preset_contrast": "Alto Contraste",
   "settings_preset_contrast_desc": "Máxima legibilidad",
-  
   "settings_theme": "Tema",
-  "settings_dark_mode": "Modo Oscuro",
   "settings_dark_mode_desc": "Reduce la fatiga visual en poca luz",
   "settings_accent_color": "Color de Acento",
   "settings_live_preview": "Vista Previa",
   "settings_preview_welcome": "Bienvenido a MindBalance",
   "settings_preview_journey": "Tu viaje hacia el bienestar mental comienza aquí.",
   "settings_preview_btn": "Comenzar",
-  
   "settings_visual_accessibility": "Accesibilidad Visual",
-  "settings_high_contrast": "Alto Contraste",
   "settings_high_contrast_desc": "Aumenta el contraste para mejor legibilidad",
   "settings_colorblind_mode": "Modo Daltónico",
   "settings_colorblind_desc": "Ajusta colores para deficiencia visual",
@@ -1343,19 +1335,13 @@
   "settings_colorblind_protanopia": "Protanopía (Ceguera al rojo)",
   "settings_colorblind_deuteranopia": "Deuteranopía (Ceguera al verde)",
   "settings_colorblind_tritanopia": "Tritanopía (Ceguera al azul)",
-  
   "settings_cognitive_accessibility": "Accesibilidad Cognitiva",
-  "settings_focus_mode": "Modo Enfoque (TDAH)",
   "settings_focus_mode_desc": "Reduce distracciones para mejor concentración",
   "settings_dyslexia_font": "Fuente para Dislexia",
   "settings_dyslexia_font_desc": "Usa fuente OpenDyslexic para lectura más fácil",
-  
   "settings_motion_animation": "Movimiento y Animación",
-  "settings_reduce_motion": "Reducir Movimiento",
   "settings_reduce_motion_desc": "Minimiza animaciones y transiciones",
-  
   "settings_text_size": "Tamaño del Texto",
-  "settings_font_size": "Tamaño de Fuente",
   "settings_font_size_desc": "Ajusta el tamaño del texto para lectura cómoda",
   "settings_font_small": "Pequeño",
   "settings_font_normal": "Normal",
@@ -1363,21 +1349,24 @@
   "settings_font_xlarge": "Extra Grande",
   "settings_text_preview": "Vista Previa del Texto",
   "settings_reading_preview_text": "La salud mental es tan importante como la salud física. Tomarse tiempo cada día para reflexionar, practicar la atención plena y buscar apoyo cuando sea necesario son pasos cruciales para mantener tu bienestar.",
-  
   "settings_display_language": "Idioma de Visualización",
   "settings_display_language_desc": "Elige tu idioma preferido",
   "settings_reset_defaults": "Restablecer Valores",
-  
   "settings_onboarding_title": "¡Bienvenido a Configuración!",
   "settings_onboarding_text": "Personaliza tu experiencia MindBalance con temas, opciones de accesibilidad y más. Tus preferencias se sincronizan en todas las páginas.",
   "settings_onboarding_start": "Comenzar",
   "settings_onboarding_skip": "Omitir por ahora",
-  
   "wellness_mood_title": "Estado de Ánimo",
   "wellness_daily_tip": "Consejo de Bienestar del Día",
   "wellness_select_mood_prompt": "Selecciona tu estado de ánimo para obtener consejos y recursos personalizados.",
   "greeting_morning": "Buenos días",
   "greeting_afternoon": "Buenas tardes",
   "greeting_evening": "Buenas tardes",
-  "greeting_night": "Buenas noches"
+  "greeting_night": "Buenas noches",
+  "nav_greeting": "Bienvenido",
+  "nav_greeting_morning": "Buenos Días",
+  "nav_greeting_afternoon": "Buenas Tardes",
+  "nav_greeting_evening": "Buenas Tardes",
+  "nav_greeting_night": "Buenas Noches",
+  "nav_crisis": "Obtener Ayuda Ahora"
 }

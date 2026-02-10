@@ -73,6 +73,24 @@ document.addEventListener("DOMContentLoaded", function () {
 
   addEventOnElements(navTogglers, "click", toggleNavbar);
 
+  (function initMobileNavGreeting() {
+    const greetingEl = document.getElementById('mobileNavGreeting');
+    if (!greetingEl) return;
+    const hour = new Date().getHours();
+    let key = 'nav_greeting';
+    if (hour >= 5 && hour < 12) key = 'nav_greeting_morning';
+    else if (hour >= 12 && hour < 17) key = 'nav_greeting_afternoon';
+    else if (hour >= 17 && hour < 21) key = 'nav_greeting_evening';
+    else key = 'nav_greeting_night';
+    greetingEl.setAttribute('data-translate', key);
+    const fallbacks = {
+      nav_greeting_morning: 'Good Morning',
+      nav_greeting_afternoon: 'Good Afternoon',
+      nav_greeting_evening: 'Good Evening',
+      nav_greeting_night: 'Good Night'
+    };
+    greetingEl.textContent = fallbacks[key] || 'Welcome';
+  })();
 
 // --- Mobile Swipe Gestures ---
   let touchStartX = 0;

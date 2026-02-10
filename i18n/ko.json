@@ -1122,7 +1122,7 @@
   "settings_dyslexia": "난독증 글꼴",
   "settings_focus_mode": "집중 모드 (ADHD)",
   "settings_font_size": "글꼴 크기",
-  "settings_high_contrast": "고대비 모드",
+  "settings_high_contrast": "고대비",
   "settings_language": "언어",
   "settings_preferences": "환경설정",
   "settings_reduce_motion": "모션 줄이기",
@@ -1301,16 +1301,12 @@
   "tip_friday_text": "이번 주에 이룬 것을 인정하세요, 아무리 작아도. 모든 발걸음이 중요합니다.",
   "tip_saturday_title": "휴식과 충전",
   "tip_saturday_text": "오늘은 쉬어도 괜찮습니다. 양질의 수면은 정신 건강에 필수입니다.",
-  
-  "settings_title": "설정",
   "settings_appearance": "외관",
   "settings_accessibility": "접근성",
   "settings_reading": "읽기",
-  "settings_language": "언어",
   "settings_accessibility_score": "접근성 점수",
   "settings_synced": "동기화됨",
   "settings_compare": "비교",
-  
   "settings_theme_presets": "테마 프리셋",
   "settings_preset_default": "기본",
   "settings_preset_default_desc": "클래식 MindBalance",
@@ -1324,18 +1320,14 @@
   "settings_preset_night_desc": "눈이 편안함",
   "settings_preset_contrast": "고대비",
   "settings_preset_contrast_desc": "최대 가독성",
-  
   "settings_theme": "테마",
-  "settings_dark_mode": "다크 모드",
   "settings_dark_mode_desc": "저조도에서 눈의 피로 감소",
   "settings_accent_color": "강조 색상",
   "settings_live_preview": "실시간 미리보기",
   "settings_preview_welcome": "MindBalance에 오신 것을 환영합니다",
   "settings_preview_journey": "정신 건강 여정이 여기서 시작됩니다.",
   "settings_preview_btn": "시작하기",
-  
   "settings_visual_accessibility": "시각 접근성",
-  "settings_high_contrast": "고대비",
   "settings_high_contrast_desc": "가독성 향상을 위해 대비 증가",
   "settings_colorblind_mode": "색맹 모드",
   "settings_colorblind_desc": "색각 이상에 맞게 색상 조정",
@@ -1343,19 +1335,13 @@
   "settings_colorblind_protanopia": "적색맹",
   "settings_colorblind_deuteranopia": "녹색맹",
   "settings_colorblind_tritanopia": "청색맹",
-  
   "settings_cognitive_accessibility": "인지 접근성",
-  "settings_focus_mode": "집중 모드 (ADHD)",
   "settings_focus_mode_desc": "더 나은 집중을 위해 방해 요소 감소",
   "settings_dyslexia_font": "난독증 친화적 글꼴",
   "settings_dyslexia_font_desc": "읽기 쉬운 OpenDyslexic 글꼴 사용",
-  
   "settings_motion_animation": "모션 및 애니메이션",
-  "settings_reduce_motion": "모션 줄이기",
   "settings_reduce_motion_desc": "애니메이션과 전환 효과 최소화",
-  
   "settings_text_size": "텍스트 크기",
-  "settings_font_size": "글꼴 크기",
   "settings_font_size_desc": "편안한 읽기를 위해 텍스트 크기 조정",
   "settings_font_small": "작게",
   "settings_font_normal": "보통",
@@ -1363,21 +1349,24 @@
   "settings_font_xlarge": "매우 크게",
   "settings_text_preview": "텍스트 미리보기",
   "settings_reading_preview_text": "정신 건강은 신체 건강만큼 중요합니다. 매일 자신을 돌아보고, 마음챙김을 연습하고, 필요할 때 지원을 구하는 시간을 갖는 것이 웰빙을 유지하는 중요한 단계입니다.",
-  
   "settings_display_language": "표시 언어",
   "settings_display_language_desc": "선호하는 언어를 선택하세요",
   "settings_reset_defaults": "기본값으로 재설정",
-  
   "settings_onboarding_title": "설정에 오신 것을 환영합니다!",
   "settings_onboarding_text": "테마 프리셋, 접근성 옵션 등으로 MindBalance 경험을 맞춤 설정하세요. 설정은 모든 페이지에서 동기화됩니다.",
   "settings_onboarding_start": "시작하기",
   "settings_onboarding_skip": "나중에",
-  
   "wellness_mood_title": "기분 체크인",
   "wellness_daily_tip": "오늘의 웰니스 팁",
   "wellness_select_mood_prompt": "맞춤형 팁과 리소스를 받으려면 기분을 선택하세요.",
   "greeting_morning": "좋은 아침",
   "greeting_afternoon": "좋은 오후",
   "greeting_evening": "좋은 저녁",
-  "greeting_night": "안녕히 주무세요"
+  "greeting_night": "안녕히 주무세요",
+  "nav_greeting": "환영합니다",
+  "nav_greeting_morning": "좋은 아침입니다",
+  "nav_greeting_afternoon": "좋은 오후입니다",
+  "nav_greeting_evening": "좋은 저녁입니다",
+  "nav_greeting_night": "좋은 밤 되세요",
+  "nav_crisis": "도움 받기"
 }

@@ -1301,16 +1301,12 @@
   "tip_friday_text": "इस सप्ताह आपने जो हासिल किया उसे स्वीकार करें, चाहे वह कितना भी छोटा हो।",
   "tip_saturday_title": "आराम और रिचार्ज",
   "tip_saturday_text": "आज खुद को आराम करने की अनुमति दें। गुणवत्ता वाली नींद मानसिक कल्याण के लिए आवश्यक है।",
-  
-  "settings_title": "सेटिंग्स",
   "settings_appearance": "दिखावट",
   "settings_accessibility": "सुगमता",
   "settings_reading": "पठन",
-  "settings_language": "भाषा",
   "settings_accessibility_score": "सुगमता स्कोर",
   "settings_synced": "सिंक किया गया",
   "settings_compare": "तुलना करें",
-  
   "settings_theme_presets": "थीम प्रीसेट",
   "settings_preset_default": "डिफ़ॉल्ट",
   "settings_preset_default_desc": "क्लासिक MindBalance",
@@ -1324,18 +1320,14 @@
   "settings_preset_night_desc": "आंखों के लिए आरामदायक",
   "settings_preset_contrast": "उच्च कंट्रास्ट",
   "settings_preset_contrast_desc": "अधिकतम पठनीयता",
-  
   "settings_theme": "थीम",
-  "settings_dark_mode": "डार्क मोड",
   "settings_dark_mode_desc": "कम रोशनी में आंखों की थकान कम करें",
   "settings_accent_color": "एक्सेंट रंग",
   "settings_live_preview": "लाइव पूर्वावलोकन",
   "settings_preview_welcome": "MindBalance में आपका स्वागत है",
   "settings_preview_journey": "आपकी मानसिक कल्याण यात्रा यहां से शुरू होती है।",
   "settings_preview_btn": "शुरू करें",
-  
   "settings_visual_accessibility": "दृश्य सुगमता",
-  "settings_high_contrast": "उच्च कंट्रास्ट",
   "settings_high_contrast_desc": "बेहतर पठनीयता के लिए कंट्रास्ट बढ़ाएं",
   "settings_colorblind_mode": "रंग अंधता मोड",
   "settings_colorblind_desc": "रंग दृष्टि दोष के लिए रंग समायोजित करें",
@@ -1343,19 +1335,13 @@
   "settings_colorblind_protanopia": "प्रोटानोपिया (लाल-अंधा)",
   "settings_colorblind_deuteranopia": "डयूटेरानोपिया (हरा-अंधा)",
   "settings_colorblind_tritanopia": "ट्राइटानोपिया (नीला-अंधा)",
-  
   "settings_cognitive_accessibility": "संज्ञानात्मक सुगमता",
-  "settings_focus_mode": "फोकस मोड (ADHD)",
   "settings_focus_mode_desc": "बेहतर ध्यान के लिए विकर्षण कम करें",
   "settings_dyslexia_font": "डिस्लेक्सिया-अनुकूल फ़ॉन्ट",
   "settings_dyslexia_font_desc": "आसान पढ़ने के लिए OpenDyslexic फ़ॉन्ट का उपयोग करें",
-  
   "settings_motion_animation": "गति और एनिमेशन",
-  "settings_reduce_motion": "गति कम करें",
   "settings_reduce_motion_desc": "एनिमेशन और ट्रांजिशन को न्यूनतम करें",
-  
   "settings_text_size": "टेक्स्ट आकार",
-  "settings_font_size": "फ़ॉन्ट आकार",
   "settings_font_size_desc": "आरामदायक पढ़ने के लिए टेक्स्ट आकार समायोजित करें",
   "settings_font_small": "छोटा",
   "settings_font_normal": "सामान्य",
@@ -1363,21 +1349,24 @@
   "settings_font_xlarge": "अतिरिक्त बड़ा",
   "settings_text_preview": "टेक्स्ट पूर्वावलोकन",
   "settings_reading_preview_text": "मानसिक स्वास्थ्य शारीरिक स्वास्थ्य जितना ही महत्वपूर्ण है। प्रतिदिन अपने आप से जुड़ने, माइंडफुलनेस का अभ्यास करने और जरूरत पड़ने पर सहायता लेने के लिए समय निकालना आपकी भलाई के लिए महत्वपूर्ण कदम हैं।",
-  
   "settings_display_language": "प्रदर्शन भाषा",
   "settings_display_language_desc": "अपनी पसंदीदा भाषा चुनें",
   "settings_reset_defaults": "डिफ़ॉल्ट पर रीसेट करें",
-  
   "settings_onboarding_title": "सेटिंग्स में आपका स्वागत है!",
   "settings_onboarding_text": "थीम प्रीसेट, सुगमता विकल्प और बहुत कुछ के साथ अपने MindBalance अनुभव को अनुकूलित करें। आपकी प्राथमिकताएं सभी पृष्ठों पर सिंक होती हैं।",
   "settings_onboarding_start": "शुरू करें",
   "settings_onboarding_skip": "अभी के लिए छोड़ें",
-  
   "wellness_mood_title": "मूड चेक-इन",
   "wellness_daily_tip": "आज का वेलनेस टिप",
   "wellness_select_mood_prompt": "व्यक्तिगत सुझाव और संसाधन प्राप्त करने के लिए अपना मूड चुनें।",
   "greeting_morning": "सुप्रभात",
   "greeting_afternoon": "नमस्कार",
   "greeting_evening": "शुभ संध्या",
-  "greeting_night": "शुभ रात्रि"
+  "greeting_night": "शुभ रात्रि",
+  "nav_greeting": "स्वागत है",
+  "nav_greeting_morning": "सुप्रभात",
+  "nav_greeting_afternoon": "शुभ दोपहर",
+  "nav_greeting_evening": "शुभ संध्या",
+  "nav_greeting_night": "शुभ रात्रि",
+  "nav_crisis": "अभी मदद लें"
 }

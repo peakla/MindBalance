@@ -1125,7 +1125,7 @@
   "settings_high_contrast": "Contraste Élevé",
   "settings_language": "Langue",
   "settings_preferences": "Préférences",
-  "settings_reduce_motion": "Réduire les Mouvements",
+  "settings_reduce_motion": "Réduire le Mouvement",
   "settings_title": "Paramètres",
   "share_article": "Partager cet article:",
   "sidebar_activity": "Fil d'Activité",
@@ -1301,16 +1301,12 @@
   "tip_friday_text": "Reconnaissez ce que vous avez accompli cette semaine, même les petites choses. Chaque pas compte.",
   "tip_saturday_title": "Repos et Recharge",
   "tip_saturday_text": "Accordez-vous la permission de vous reposer aujourd'hui. Un sommeil de qualité est essentiel.",
-  
-  "settings_title": "Paramètres",
   "settings_appearance": "Apparence",
   "settings_accessibility": "Accessibilité",
   "settings_reading": "Lecture",
-  "settings_language": "Langue",
   "settings_accessibility_score": "Score d'Accessibilité",
   "settings_synced": "Synchronisé",
   "settings_compare": "Comparer",
-  
   "settings_theme_presets": "Thèmes Prédéfinis",
   "settings_preset_default": "Par défaut",
   "settings_preset_default_desc": "MindBalance classique",
@@ -1324,18 +1320,14 @@
   "settings_preset_night_desc": "Facile pour les yeux",
   "settings_preset_contrast": "Contraste Élevé",
   "settings_preset_contrast_desc": "Lisibilité maximale",
-  
   "settings_theme": "Thème",
-  "settings_dark_mode": "Mode Sombre",
   "settings_dark_mode_desc": "Réduire la fatigue oculaire en basse lumière",
   "settings_accent_color": "Couleur d'Accent",
   "settings_live_preview": "Aperçu en Direct",
   "settings_preview_welcome": "Bienvenue sur MindBalance",
   "settings_preview_journey": "Votre voyage vers le bien-être mental commence ici.",
   "settings_preview_btn": "Commencer",
-  
   "settings_visual_accessibility": "Accessibilité Visuelle",
-  "settings_high_contrast": "Contraste Élevé",
   "settings_high_contrast_desc": "Augmenter le contraste pour une meilleure lisibilité",
   "settings_colorblind_mode": "Mode Daltonien",
   "settings_colorblind_desc": "Ajuster les couleurs pour la déficience visuelle",
@@ -1343,19 +1335,13 @@
   "settings_colorblind_protanopia": "Protanopie (Cécité au rouge)",
   "settings_colorblind_deuteranopia": "Deutéranopie (Cécité au vert)",
   "settings_colorblind_tritanopia": "Tritanopie (Cécité au bleu)",
-  
   "settings_cognitive_accessibility": "Accessibilité Cognitive",
-  "settings_focus_mode": "Mode Concentration (TDAH)",
   "settings_focus_mode_desc": "Réduire les distractions pour une meilleure concentration",
   "settings_dyslexia_font": "Police pour Dyslexie",
   "settings_dyslexia_font_desc": "Utiliser la police OpenDyslexic pour une lecture plus facile",
-  
   "settings_motion_animation": "Mouvement et Animation",
-  "settings_reduce_motion": "Réduire le Mouvement",
   "settings_reduce_motion_desc": "Minimiser les animations et transitions",
-  
   "settings_text_size": "Taille du Texte",
-  "settings_font_size": "Taille de Police",
   "settings_font_size_desc": "Ajuster la taille du texte pour une lecture confortable",
   "settings_font_small": "Petit",
   "settings_font_normal": "Normal",
@@ -1363,21 +1349,24 @@
   "settings_font_xlarge": "Très Grand",
   "settings_text_preview": "Aperçu du Texte",
   "settings_reading_preview_text": "La santé mentale est aussi importante que la santé physique. Prendre du temps chaque jour pour vous écouter, pratiquer la pleine conscience et chercher du soutien quand nécessaire sont des étapes cruciales pour maintenir votre bien-être.",
-  
   "settings_display_language": "Langue d'Affichage",
   "settings_display_language_desc": "Choisissez votre langue préférée",
   "settings_reset_defaults": "Réinitialiser",
-  
   "settings_onboarding_title": "Bienvenue dans les Paramètres !",
   "settings_onboarding_text": "Personnalisez votre expérience MindBalance avec des thèmes, des options d'accessibilité et plus encore. Vos préférences se synchronisent sur toutes les pages.",
   "settings_onboarding_start": "Commencer",
   "settings_onboarding_skip": "Passer pour l'instant",
-  
   "wellness_mood_title": "État d'Esprit",
   "wellness_daily_tip": "Conseil Bien-Être du Jour",
   "wellness_select_mood_prompt": "Sélectionnez votre humeur pour obtenir des conseils et ressources personnalisés.",
   "greeting_morning": "Bonjour",
   "greeting_afternoon": "Bon après-midi",
   "greeting_evening": "Bonsoir",
-  "greeting_night": "Bonne nuit"
+  "greeting_night": "Bonne nuit",
+  "nav_greeting": "Bienvenue",
+  "nav_greeting_morning": "Bonjour",
+  "nav_greeting_afternoon": "Bon Après-midi",
+  "nav_greeting_evening": "Bonsoir",
+  "nav_greeting_night": "Bonne Nuit",
+  "nav_crisis": "Obtenir de l'Aide"
 }

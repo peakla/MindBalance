@@ -1195,6 +1195,25 @@
 </div>
 
 <script>
+  (function() {
+    var hash = window.location.hash || '';
+    var search = window.location.search || '';
+    var isOAuthCallback = hash.includes('access_token') || hash.includes('refresh_token') || search.includes('code=');
+    var hasOAuthOrigin = localStorage.getItem('oauth_origin');
+    var currentHost = window.location.hostname;
+    var isMindSpaceDomain = currentHost === 'mind' + 'space.site' || currentHost === 'www.mind' + 'space.site';
+    
+    if (isOAuthCallback && !hasOAuthOrigin && !isMindSpaceDomain) {
+      var targetUrl = 'https://mind' + 'space.site/auth/' + search + hash;
+      window.location.replace(targetUrl);
+      return;
+    }
+    
+    if (isOAuthCallback && hasOAuthOrigin) {
+      localStorage.removeItem('oauth_origin');
+    }
+  })();
+
   const preloader = document.querySelector("[data-preaload]");
   window.addEventListener("load", function () {
     document.body.classList.add("loaded");
@@ -1405,6 +1424,8 @@
 
   document.getElementById("googleSignIn").addEventListener("click", async () => {
     setMsg("Connecting to Google...", "loading");
+    
+    localStorage.setItem('oauth_origin', window.location.origin);
     
     const { error } = await sb.auth.signInWithOAuth({
       provider: 'google',

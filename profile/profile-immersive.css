@@ -773,6 +773,17 @@ body:not([data-theme="dark"]) .time-night .glass-card {
   height: 45px;
   border-radius: 50%;
   object-fit: cover;
+  flex-shrink: 0;
+}
+
+.people-suggestion__avatar--initials {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-weight: 700;
+  font-size: 0.95rem;
+  letter-spacing: 0.5px;
 }
 
 .people-suggestion__info {

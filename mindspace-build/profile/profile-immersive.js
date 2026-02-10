@@ -369,8 +369,15 @@
         
         const item = document.createElement('div');
         item.className = 'people-suggestion';
+        const avatarColors = ['#AF916D','#E57373','#64B5F6','#81C784','#FFD54F','#BA68C8','#4DB6AC','#FF8A65','#90A4AE','#A1887F'];
+        const pName = person.display_name || 'U';
+        const pInitials = pName.split(' ').map(w => w[0]).join('').toUpperCase().slice(0, 2) || pName.substring(0, 2).toUpperCase();
+        const pColorIdx = pName.charCodeAt(0) % avatarColors.length;
+        const avatarHtml = person.avatar_url
+          ? `<img src="${person.avatar_url}" alt="${person.display_name}" class="people-suggestion__avatar" onerror="this.outerHTML='<div class=\\'people-suggestion__avatar people-suggestion__avatar--initials\\' style=\\'background:${avatarColors[pColorIdx]}\\'>${pInitials}</div>'">`
+          : `<div class="people-suggestion__avatar people-suggestion__avatar--initials" style="background:${avatarColors[pColorIdx]}">${pInitials}</div>`;
         item.innerHTML = `
-          <img src="${person.avatar_url || '/assets/images/user.png'}" alt="${person.display_name}" class="people-suggestion__avatar">
+          ${avatarHtml}
           <div class="people-suggestion__info">
             <a href="/profile/?user=${person.id}" class="people-suggestion__name">${person.display_name}</a>
             <span class="people-suggestion__mutual">${mutualCount || 0} mutual connection${mutualCount !== 1 ? 's' : ''}</span>

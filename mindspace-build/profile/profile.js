@@ -468,8 +468,7 @@ async function loadProfileData(userId) {
       if (!initialsEl) {
         initialsEl = document.createElement('div');
         initialsEl.id = 'avatarInitials';
-        initialsEl.style.cssText = 'width:100%;height:100%;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:2.5rem;font-weight:700;color:#fff;position:absolute;top:0;left:0;';
-        avatarImg.parentElement.style.position = 'relative';
+        initialsEl.className = 'mb-profile__avatar-initials';
         avatarImg.parentElement.appendChild(initialsEl);
       }
       initialsEl.textContent = initials;
@@ -2747,6 +2746,35 @@ function escapeHtml(text) {
 document.addEventListener('DOMContentLoaded', setupQuickActions);
 
 
+function createFollowAvatar(profile) {
+  const colors = ['#AF916D','#E57373','#64B5F6','#81C784','#FFD54F','#BA68C8','#4DB6AC','#FF8A65','#90A4AE','#A1887F'];
+  if (profile.avatar_url) {
+    const avatar = document.createElement('img');
+    avatar.className = 'mb-follow-item__avatar';
+    avatar.src = profile.avatar_url;
+    avatar.alt = profile.display_name || 'User';
+    avatar.onerror = () => {
+      const parent = avatar.parentElement;
+      const initialsEl = createInitialsCircle(profile, colors, 'mb-follow-item__avatar');
+      parent.replaceChild(initialsEl, avatar);
+    };
+    return avatar;
+  }
+  return createInitialsCircle(profile, colors, 'mb-follow-item__avatar');
+}
+
+function createInitialsCircle(profile, colors, className) {
+  const name = profile.display_name || profile.username || profile.email || 'U';
+  const initials = name.split(' ').map(w => w[0]).join('').toUpperCase().slice(0, 2) || name.substring(0, 2).toUpperCase();
+  const colorIndex = name.charCodeAt(0) % colors.length;
+  const el = document.createElement('div');
+  el.className = className + ' mb-follow-item__avatar--initials';
+  el.textContent = initials;
+  el.style.background = colors[colorIndex];
+  el.setAttribute('aria-label', name);
+  return el;
+}
+
 async function openFollowersModal() {
   const modal = document.getElementById('followersModal');
   const list = document.getElementById('followersList');
@@ -2801,11 +2829,7 @@ async function openFollowersModal() {
     const item = document.createElement('div');
     item.className = 'mb-follow-item';
 
-    const avatar = document.createElement('img');
-    avatar.className = 'mb-follow-item__avatar';
-    avatar.src = profile.avatar_url || '/assets/images/default-avatar.png';
-    avatar.alt = profile.display_name || 'User';
-    avatar.onerror = () => { avatar.src = '/assets/images/default-avatar.png'; };
+    const avatarEl = createFollowAvatar(profile);
 
     const info = document.createElement('div');
     info.className = 'mb-follow-item__info';
@@ -2822,7 +2846,7 @@ async function openFollowersModal() {
     info.appendChild(nameLink);
     if (profile.bio) info.appendChild(bio);
 
-    item.appendChild(avatar);
+    item.appendChild(avatarEl);
     item.appendChild(info);
     list.appendChild(item);
   });
@@ -2887,11 +2911,7 @@ async function openFollowingModal() {
     const item = document.createElement('div');
     item.className = 'mb-follow-item';
 
-    const avatar = document.createElement('img');
-    avatar.className = 'mb-follow-item__avatar';
-    avatar.src = profile.avatar_url || '/assets/images/default-avatar.png';
-    avatar.alt = profile.display_name || 'User';
-    avatar.onerror = () => { avatar.src = '/assets/images/default-avatar.png'; };
+    const avatarEl = createFollowAvatar(profile);
 
     const info = document.createElement('div');
     info.className = 'mb-follow-item__info';
@@ -2908,7 +2928,7 @@ async function openFollowingModal() {
     info.appendChild(nameLink);
     if (profile.bio) info.appendChild(bio);
 
-    item.appendChild(avatar);
+    item.appendChild(avatarEl);
     item.appendChild(info);
     list.appendChild(item);
   });

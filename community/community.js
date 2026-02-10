@@ -1383,8 +1383,6 @@ async function loadPosts(forceReload = false) {
   }
 
 
-  const existingPosts = feedList.querySelectorAll('.mb-post');
-  existingPosts.forEach(post => post.remove());
   renderedPostIds.clear();
 
   const { data, error } = await client
@@ -1411,6 +1409,8 @@ async function loadPosts(forceReload = false) {
     }
     return;
   }
+
+  feedList.innerHTML = '';
 
   if (data && data.length > 0) {
     if (currentUser) {

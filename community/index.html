@@ -163,10 +163,9 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 12px 14px;
-      border-bottom: 2px solid transparent;
-      border-image: linear-gradient(to right, #AF916D, transparent) 1;
-      gap: 10px;
+      padding: 10px 16px;
+      border-bottom: 1px solid rgba(0,0,0,.08);
+      gap: 12px;
     }
 
     .mb-feedTitle {
@@ -186,18 +185,21 @@
     }
 
     .mb-search {
-      width: 260px;
-      max-width: 45vw;
-      padding: 10px 12px;
-      border-radius: 12px;
-      border: 1px solid rgba(0, 0, 0, .14);
+      width: 220px;
+      max-width: 40vw;
+      padding: 8px 14px;
+      border-radius: 20px;
+      border: 1px solid rgba(0, 0, 0, .1);
       outline: none;
-      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+      font-size: 13px;
+      background: rgba(0,0,0,.02);
+      transition: border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s;
     }
 
     .mb-search:focus {
       border-color: #AF916D;
-      box-shadow: 0 0 0 3px rgba(175, 145, 109, 0.15);
+      box-shadow: 0 0 0 3px rgba(175, 145, 109, 0.1);
+      background: #fff;
     }
 
     .mb-composer {
@@ -210,9 +212,9 @@
 
     .mb-composerTop {
       display: flex;
-      gap: 10px;
+      gap: 12px;
       align-items: center;
-      padding: 12px;
+      padding: 14px 16px;
       background: rgba(175, 145, 109, .03);
       border-bottom: 1px solid rgba(0, 0, 0, .07);
     }
@@ -244,9 +246,10 @@
 
     .mb-composerActions {
       display: flex;
-      justify-content: space-between;
+      align-items: center;
       gap: 10px;
-      padding: 12px;
+      padding: 10px 16px;
+      flex-wrap: wrap;
     }
 
     .mb-btn {
@@ -295,11 +298,12 @@
     .mb-feedList {
       padding: 0 14px 14px;
       display: grid;
-      gap: 12px;
+      gap: 14px;
+      max-height: calc(100vh - 200px);
       overflow-y: auto;
       overflow-x: hidden;
       scrollbar-width: thin;
-      scrollbar-color: rgba(0,0,0,0.2) transparent;
+      scrollbar-color: rgba(0,0,0,0.15) transparent;
     }
 
     .mb-feedList::-webkit-scrollbar {
@@ -446,10 +450,27 @@
     }
 
     .mb-postFooter {
-      padding: 10px 12px;
+      padding: 8px 14px;
       border-top: 1px solid rgba(0, 0, 0, .07);
       display: flex;
-      gap: 8px;
+      align-items: center;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+    .mb-postFooter .mb-btn {
+      font-size: 13px;
+      padding: 6px 12px;
+      border-radius: 18px;
+      border: none;
+      background: transparent;
+      color: #666;
+    }
+    .mb-postFooter .mb-btn:hover {
+      background: rgba(175, 145, 109, 0.08);
+      color: #AF916D;
+    }
+    .mb-postFooter .mb-likeBtn {
+      font-weight: 600;
     }
 
     .mb-progressWrap {
@@ -988,8 +1009,12 @@
       .mb-right { display: block; order: 3; }
       .mb-search { width: 100%; max-width: none; }
       .mb-feedTabs { overflow-x: auto; }
+      .mb-feedList { max-height: none; }
       .mb-fab { bottom: 16px; right: 16px; width: 48px; height: 48px; font-size: 20px; }
       .mb-userCard { display: none; }
+      .mb-composerActions { flex-wrap: wrap; gap: 8px; }
+      .mb-postFooter { gap: 4px; }
+      .mb-postFooter .mb-btn { padding: 5px 10px; font-size: 12px; }
     }
 
     [data-theme="dark"] body {
@@ -1141,6 +1166,16 @@
 
     [data-theme="dark"] .mb-postFooter {
       border-top-color: rgba(255, 255, 255, .08);
+    }
+    [data-theme="dark"] .mb-postFooter .mb-btn {
+      color: #aaa;
+    }
+    [data-theme="dark"] .mb-postFooter .mb-btn:hover {
+      background: rgba(214, 189, 159, 0.1);
+      color: #d6bd9f;
+    }
+    [data-theme="dark"] .mb-feedHeader {
+      border-bottom-color: rgba(255,255,255,.08);
     }
 
     [data-theme="dark"] .mb-progressBar {

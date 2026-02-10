@@ -40,6 +40,9 @@ EXCLUDE_FILES = {
     ".gititnore",
     "mindspace-favicon.png",
     "mindspace-preload.gif",
+    "mindspace-logo.png",
+    "wellness_insights.py",
+    "__init__.py",
 }
 
 TEXT_EXTENSIONS = {
@@ -195,6 +198,7 @@ def transform_content(content, filepath):
         content = content.replace('data-accent-color="gold"', 'data-accent-color="blue"')
         content = content.replace("title=\"Gold\"", "title=\"Blue\"")
         content = content.replace("--gold-crayola", "--blue-crayola")
+        content = content.replace("#f8a29e", "#38b6ff")
         content = content.replace("MindSpaceLogo.svg", "MindSpaceLogo.png")
         content = content.replace("MindBalanceLogo.svg", "MindSpaceLogo.png")
 

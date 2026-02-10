@@ -1,5 +1,12 @@
 {
+  "functions": {
+    "api/newsletter.js": {
+      "memory": 128,
+      "maxDuration": 10
+    }
+  },
   "rewrites": [
+    { "source": "/api/newsletter", "destination": "/api/newsletter.js" },
     { "source": "/resourcelib/", "destination": "/resourcelib/index.html" },
     { "source": "/support/", "destination": "/support/index.html" },
     { "source": "/blog/", "destination": "/blog/index.html" },

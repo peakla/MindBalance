@@ -56,44 +56,26 @@ function initNewsletterForm() {
     btn.disabled = true;
     
     try {
-      const sb = typeof getSupabase === 'function' ? getSupabase() : null;
-      if (!sb) {
-        showToast('Service temporarily unavailable. Please try again later.');
-        return;
-      }
-
       const host = window.location.hostname;
       const isMindSpaceSite = host.includes('mind' + 'space');
       const source = isMindSpaceSite ? 'mindspace' : 'mind' + 'balance';
 
-      const { data: existing } = await sb
-        .from('newsletter_subscribers')
-        .select('id, confirmed')
-        .eq('email', email)
-        .maybeSingle();
+      const response = await fetch('/api/newsletter', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, source })
+      });
 
-      if (existing && existing.confirmed) {
-        btn.innerHTML = '<ion-icon name="checkmark-outline"></ion-icon> Subscribed!';
-        btn.style.background = 'linear-gradient(135deg, #10b981 0%, #059669 100%)';
-        emailInput.value = '';
-        showToast('You are already subscribed to our newsletter!');
-      } else {
-        const { error } = await sb
-          .from('newsletter_subscribers')
-          .upsert({
-            email: email,
-            confirmed: true,
-            source: source,
-            subscribed_at: new Date().toISOString()
-          }, { onConflict: 'email' });
+      const result = await response.json();
 
-        if (error) throw error;
-
-        btn.innerHTML = '<ion-icon name="checkmark-outline"></ion-icon> Subscribed!';
-        btn.style.background = 'linear-gradient(135deg, #10b981 0%, #059669 100%)';
-        emailInput.value = '';
-        showToast('Thanks for subscribing! Welcome to our community.');
+      if (!response.ok) {
+        throw new Error(result.error || 'Subscription failed');
       }
+
+      btn.innerHTML = '<ion-icon name="checkmark-outline"></ion-icon> Subscribed!';
+      btn.style.background = 'linear-gradient(135deg, #10b981 0%, #059669 100%)';
+      emailInput.value = '';
+      showToast(result.message || 'Thanks for subscribing! Welcome to our community.');
     } catch (error) {
       console.error('Newsletter subscription error:', error);
       btn.innerHTML = '<ion-icon name="close-outline"></ion-icon> Error';

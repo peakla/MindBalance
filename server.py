@@ -314,6 +314,7 @@ def tts_health():
         'service': 'elevenlabs'
     })
 
+@app.route('/api/newsletter', methods=['POST'])
 @app.route('/api/newsletter/subscribe', methods=['POST'])
 @check_referer
 @rate_limit

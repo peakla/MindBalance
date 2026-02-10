@@ -686,19 +686,19 @@
         <p class="intro-description" data-translate="home_welcome_desc">At MindBalance, we connect residents with local community resources. Our goal is to provide easy access to organizations, support services, programs, and events in one central place. We want to make community support easier to find and more accessible for everyone.</p>
         <div class="intro-stats">
           <div class="intro-stat">
-            <span class="intro-stat-number">50+</span>
+            <span class="intro-stat-number" data-translate="home_stat_num_resources">50+</span>
             <span class="intro-stat-label" data-translate="home_stat_resources">Resources</span>
           </div>
           <div class="intro-stat">
-            <span class="intro-stat-number">24/7</span>
+            <span class="intro-stat-number" data-translate="home_stat_num_support">24/7</span>
             <span class="intro-stat-label" data-translate="home_stat_support">Crisis Support</span>
           </div>
           <div class="intro-stat">
-            <span class="intro-stat-number">6</span>
+            <span class="intro-stat-number" data-translate="home_stat_num_languages">6</span>
             <span class="intro-stat-label" data-translate="home_stat_languages">Languages</span>
           </div>
           <div class="intro-stat">
-            <span class="intro-stat-number">100%</span>
+            <span class="intro-stat-number" data-translate="home_stat_num_free">100%</span>
             <span class="intro-stat-label" data-translate="home_stat_free">Free Access</span>
           </div>
         </div>
@@ -1517,32 +1517,45 @@
 
   <script>
     (function() {
-      var phrases = [
-        "One World", "Believe in Love", "Life", "You Matter", "Breathe",
-        "You Are Enough", "Keep Going", "Hope", "Be Kind", "Together",
-        "Heal", "Rise", "Courage", "Peace", "You're Not Alone",
-        "Strength", "Let Go", "Dream", "Love Yourself", "Be Present",
-        "It Gets Better", "Stand Tall", "Belong", "Trust the Journey",
-        "Believe", "Grow", "Embrace Change", "Stay", "Shine",
-        "You Are Loved", "Never Give Up", "Begin Again", "Choose Joy"
-      ];
-      for (var j = phrases.length - 1; j > 0; j--) {
-        var k = Math.floor(Math.random() * (j + 1));
-        var temp = phrases[j]; phrases[j] = phrases[k]; phrases[k] = temp;
+      var phraseKeys = [];
+      for (var n = 1; n <= 33; n++) {
+        phraseKeys.push("hero_phrase_" + n);
       }
+
+      function shuffle(arr) {
+        for (var j = arr.length - 1; j > 0; j--) {
+          var k = Math.floor(Math.random() * (j + 1));
+          var temp = arr[j]; arr[j] = arr[k]; arr[k] = temp;
+        }
+      }
+
+      function getPhrase(key) {
+        if (window.MindBalanceTranslations && window.MindBalanceTranslations.getTranslationSync) {
+          return window.MindBalanceTranslations.getTranslationSync(key);
+        }
+        return key;
+      }
+
+      var shuffledKeys = phraseKeys.slice();
+      shuffle(shuffledKeys);
       var el = document.getElementById("hero-cycle-text");
       if (!el) return;
+      el.textContent = getPhrase(shuffledKeys[0]);
       var i = 0;
-      setInterval(function() {
+      var intervalId = setInterval(function() {
         el.classList.add("hero-fade-out");
         el.classList.remove("hero-fade-in");
         setTimeout(function() {
-          i = (i + 1) % phrases.length;
-          el.textContent = phrases[i];
+          i = (i + 1) % shuffledKeys.length;
+          el.textContent = getPhrase(shuffledKeys[i]);
           el.classList.remove("hero-fade-out");
           el.classList.add("hero-fade-in");
         }, 1000);
       }, 4000);
+
+      window.addEventListener("translations-ready", function() {
+        el.textContent = getPhrase(shuffledKeys[i]);
+      });
     })();
   </script>
 

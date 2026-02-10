@@ -1278,14 +1278,13 @@
         </div>
 
         <div class="mb-widget" id="mbSavedWidget">
-          <div class="mb-widget__title">Saved Articles</div>
+          <div class="mb-widget__title" data-translate="blog_saved_articles">Saved Articles</div>
           <div id="mbSavedEmpty" class="mb-savedEmpty">Loading…</div>
           <div id="mbSavedList" class="mb-savedList"></div>
 
           <div class="mb-authLinks">
-            <a class="mb-authBtn" href="../auth/" id="mbLoginLink">Sign in / Register</a>
-            <button class="mb-authBtn mb-authBtn--ghost" type="button" id="mbLogoutBtn" style="display:none;">Log
-              out</button>
+            <a class="mb-authBtn" href="../auth/" id="mbLoginLink" data-translate="blog_sign_in_register">Sign in / Register</a>
+            <button class="mb-authBtn mb-authBtn--ghost" type="button" id="mbLogoutBtn" style="display:none;" data-translate="blog_log_out">Log out</button>
           </div>
         </div>
 
@@ -1376,7 +1375,7 @@
             .from("saved_articles")
             .select("*")
             .eq("user_id", session.user.id)
-            .order("created_at", {ascending: false});
+            .order("saved_at", {ascending: false});
 
           if (error) {
             console.error(error);

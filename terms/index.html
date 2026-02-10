@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="../css/responsive-system.css">
     <link rel="stylesheet" href="../css/settings-modal.css">
+    <link rel="stylesheet" href="../css/notifications.css">
     <link rel="stylesheet" href="../terms/legal.css">
     
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
@@ -18,6 +19,8 @@
     <script src="../js/translations.js" defer></script>
 </head>
 <body>
+
+<a href="#main-content" class="skip-to-content" data-translate="skip_to_content">Skip to main content</a>
 
 <svg style="position: absolute; width: 0; height: 0; overflow: hidden;" aria-hidden="true">
   <defs>
@@ -110,24 +113,35 @@
           </button>
         </div>
 
+        <div class="mobile-nav-crisis" data-nav-toggler>
+          <a href="/support/#crisis" class="mobile-crisis-btn">
+            <ion-icon name="heart-outline"></ion-icon>
+            <span data-translate="nav_crisis">Get Help Now</span>
+            <ion-icon name="arrow-forward-outline" class="mobile-crisis-arrow"></ion-icon>
+          </a>
+        </div>
+
         <div class="navbar-scroll-content">
 
           <ul class="navbar-list">
           <li class="navbar-item">
-            <a href="/" class="navbar-link hover-underline active">
-              <div class="separator"></div><span class="span" data-translate="nav_home">Home</span>
+            <a href="/" class="navbar-link hover-underline">
+              <ion-icon name="home-outline" class="nav-link-icon" aria-hidden="true"></ion-icon>
+              <span class="span" data-translate="nav_home">Home</span>
             </a>
           </li>
 
           <li class="navbar-item">
             <a href="/support/" class="navbar-link hover-underline">
-              <div class="separator"></div><span class="span" data-translate="nav_contact">Contact</span>
+              <ion-icon name="chatbubbles-outline" class="nav-link-icon" aria-hidden="true"></ion-icon>
+              <span class="span" data-translate="nav_contact">Contact</span>
             </a>
           </li>
 
           <li class="navbar-item has-submenu" data-submenu="resources">
             <a href="/resourcelib/" class="navbar-link hover-underline">
-              <div class="separator"></div><span class="span" data-translate="nav_resources">Resource Library</span>
+              <ion-icon name="library-outline" class="nav-link-icon" aria-hidden="true"></ion-icon>
+              <span class="span" data-translate="nav_resources">Resource Library</span>
               <ion-icon name="chevron-forward-outline" class="submenu-chevron" aria-hidden="true"></ion-icon>
             </a>
             <div class="navbar-dropdown">
@@ -152,12 +166,14 @@
 
           <li class="navbar-item">
             <a href="/community/" class="navbar-link hover-underline">
-              <div class="separator"></div><span class="span" data-translate="nav_community">Community Hub</span>
+              <ion-icon name="people-outline" class="nav-link-icon" aria-hidden="true"></ion-icon>
+              <span class="span" data-translate="nav_community">Community Hub</span>
             </a>
           </li>
           <li class="navbar-item has-submenu" data-submenu="blog">
             <a href="/blog/" class="navbar-link hover-underline">
-              <div class="separator"></div><span class="span" data-translate="nav_blog">Blog</span>
+              <ion-icon name="newspaper-outline" class="nav-link-icon" aria-hidden="true"></ion-icon>
+              <span class="span" data-translate="nav_blog">Blog</span>
               <ion-icon name="chevron-forward-outline" class="submenu-chevron" aria-hidden="true"></ion-icon>
             </a>
             <div class="navbar-dropdown">
@@ -179,8 +195,15 @@
               </a>
             </div>
           </li>
+          <li class="navbar-item">
+            <a href="/docs/" class="navbar-link hover-underline">
+              <ion-icon name="document-outline" class="nav-link-icon" aria-hidden="true"></ion-icon>
+              <span class="span" data-translate="nav_docs">References</span>
+            </a>
+          </li>
         </ul>
-        </div>
+
+        <div class="mobile-nav-divider"></div>
 
         <div class="mobile-settings-section collapsed">
           <button class="mobile-settings-toggle" aria-expanded="false" aria-controls="mobileSettingsList">
@@ -233,7 +256,7 @@
                 <span class="theme-toggle-slider"></span>
               </label>
             </div>
-                        <div class="mobile-setting-item mobile-setting-item--accent">
+            <div class="mobile-setting-item mobile-setting-item--accent">
               <span class="mobile-setting-label"><ion-icon name="color-palette-outline"></ion-icon> <span data-translate="settings_accent_color">Accent Color</span></span>
               <div class="mobile-accent-picker">
                 <button class="accent-color-btn" data-accent-color="purple" title="Purple" style="--btn-color: #9b7ed9"></button>
@@ -246,7 +269,7 @@
                 <button class="accent-color-btn active" data-accent-color="gold" title="Gold" style="--btn-color: #af916d"></button>
               </div>
             </div>
-<div class="mobile-setting-item">
+            <div class="mobile-setting-item">
               <span class="mobile-setting-label"><ion-icon name="language-outline"></ion-icon> <span data-translate="settings_language">Language</span></span>
               <select class="setting-select" data-language-select>
                 <option value="en">English</option>
@@ -260,25 +283,40 @@
           </div>
         </div>
 
-        
+        </div>
+
         <div class="mobile-auth-section">
-          <button class="mobile-auth-btn mobile-inbox-btn" onclick="openGlobalInbox(); closeNavbar();" data-auth-show>
-            <ion-icon name="notifications-outline"></ion-icon>
-            <span data-translate="nav_notifications">Notifications</span>
-            <span class="notif-badge mobile-notif-badge" id="mobileNotifBadge" hidden>0</span>
-          </button>
-          <a href="/profile/" class="mobile-auth-btn mobile-profile-btn" data-auth-show>
-            <ion-icon name="person-outline"></ion-icon>
-            <span data-translate="nav_profile">My Profile</span>
-          </a>
-          <button class="mobile-auth-btn mobile-logout-btn" onclick="handleMobileLogout()" data-auth-show>
-            <ion-icon name="log-out-outline"></ion-icon>
-            <span data-translate="nav_logout">Log Out</span>
-          </button>
-          <a href="/auth/" class="mobile-auth-btn mobile-signin-btn" data-auth-hide>
-            <ion-icon name="log-in-outline"></ion-icon>
-            <span data-translate="nav_signin">Sign In</span>
-          </a>
+          <div class="mobile-auth-signed-in" data-auth-show>
+            <a href="/profile/" class="mobile-auth-btn mobile-profile-btn">
+              <div class="mobile-auth-btn__icon">
+                <ion-icon name="person-outline"></ion-icon>
+              </div>
+              <span data-translate="nav_profile">My Profile</span>
+              <ion-icon name="chevron-forward-outline" class="mobile-auth-btn__arrow"></ion-icon>
+            </a>
+            <div class="mobile-auth-row">
+              <button class="mobile-auth-btn mobile-inbox-btn" onclick="openGlobalInbox(); closeNavbar();">
+                <div class="mobile-auth-btn__icon">
+                  <ion-icon name="notifications-outline"></ion-icon>
+                </div>
+                <span data-translate="nav_notifications">Notifications</span>
+                <span class="notif-badge mobile-notif-badge" id="mobileNotifBadge" hidden>0</span>
+              </button>
+              <button class="mobile-auth-btn mobile-logout-btn" onclick="handleMobileLogout()">
+                <div class="mobile-auth-btn__icon mobile-auth-btn__icon--danger">
+                  <ion-icon name="log-out-outline"></ion-icon>
+                </div>
+                <span data-translate="nav_logout">Log Out</span>
+              </button>
+            </div>
+          </div>
+          <div class="mobile-auth-signed-out" data-auth-hide>
+            <a href="/auth/" class="mobile-auth-btn mobile-signin-btn">
+              <ion-icon name="log-in-outline"></ion-icon>
+              <span data-translate="nav_signin">Sign In</span>
+              <ion-icon name="arrow-forward-outline" class="mobile-auth-btn__arrow"></ion-icon>
+            </a>
+          </div>
         </div>
 
         
@@ -431,26 +469,26 @@
   </header>
 
 <!-- ===== MAIN CONTENT ===== -->
-  <main class="legal-page">
+  <main class="legal-page" id="main-content">
     <div class="container">
       <div class="legal-header">
-        <h1>Terms of Service</h1>
-        <p class="legal-updated">Last updated: January 2026</p>
+        <h1 data-translate="legal_terms_title">Terms of Service</h1>
+        <p class="legal-updated" data-translate="legal_terms_updated">Last updated: January 2026</p>
       </div>
 
       <div class="legal-content">
         <section class="legal-section">
-          <h2>1. Acceptance of Terms</h2>
+          <h2 data-translate="legal_terms_s1_title">1. Acceptance of Terms</h2>
           <p>By accessing and using MindBalance, you accept and agree to be bound by the terms and provisions of this agreement. If you do not agree to these terms, please do not use our website.</p>
         </section>
 
         <section class="legal-section">
-          <h2>2. Educational Purpose</h2>
+          <h2 data-translate="legal_terms_s2_title">2. Educational Purpose</h2>
           <p>MindBalance is designed as an educational platform to provide mental health information and resources. The content on this website is intended for informational and educational purposes only. It is not a substitute for professional medical advice, diagnosis, or treatment.</p>
         </section>
 
         <section class="legal-section">
-          <h2>3. User Accounts</h2>
+          <h2 data-translate="legal_terms_s3_title">3. User Accounts</h2>
           <p>When you create an account with us, you must provide accurate and complete information. You are responsible for maintaining the confidentiality of your account credentials and for all activities that occur under your account.</p>
           <ul>
             <li>You must be at least 13 years old to create an account</li>
@@ -460,7 +498,7 @@
         </section>
 
         <section class="legal-section">
-          <h2>4. Community Guidelines</h2>
+          <h2 data-translate="legal_terms_s4_title">4. Community Guidelines</h2>
           <p>Our Community Hub is a safe space for discussing mental health topics. By participating, you agree to:</p>
           <ul>
             <li>Treat all community members with respect and kindness</li>
@@ -472,34 +510,34 @@
         </section>
 
         <section class="legal-section">
-          <h2>5. Intellectual Property</h2>
+          <h2 data-translate="legal_terms_s5_title">5. Intellectual Property</h2>
           <p>The content on MindBalance, including text, graphics, logos, and images, is the property of MindBalance or its content providers. All articles reference their original sources from credible organizations such as the National Institute of Mental Health (NIMH) and Mayo Clinic.</p>
         </section>
 
         <section class="legal-section">
-          <h2>6. External Links</h2>
+          <h2 data-translate="legal_terms_s6_title">6. External Links</h2>
           <p>Our website contains links to external resources and crisis helplines. While we strive to link only to reputable sources, we are not responsible for the content or practices of external websites.</p>
         </section>
 
         <section class="legal-section">
-          <h2>7. Limitation of Liability</h2>
+          <h2 data-translate="legal_terms_s7_title">7. Limitation of Liability</h2>
           <p>MindBalance is provided "as is" without warranties of any kind. We shall not be liable for any damages arising from the use of this website. In case of a mental health emergency, please contact emergency services or a crisis helpline immediately.</p>
         </section>
 
         <section class="legal-section">
-          <h2>8. Changes to Terms</h2>
+          <h2 data-translate="legal_terms_s8_title">8. Changes to Terms</h2>
           <p>We reserve the right to modify these terms at any time. Continued use of the website after changes constitutes acceptance of the new terms.</p>
         </section>
 
         <section class="legal-section">
-          <h2>9. Contact Us</h2>
+          <h2 data-translate="legal_terms_s9_title">9. Contact Us</h2>
           <p>If you have any questions about these Terms of Service, please contact us at <a href="mailto:mindbalancehelp@gmail.com">mindbalancehelp@gmail.com</a>.</p>
         </section>
       </div>
 
       <div class="legal-nav">
-        <a href="../privacy/" class="legal-nav-link">Privacy Policy →</a>
-        <a href="../disclaimer/" class="legal-nav-link">Disclaimer →</a>
+        <a href="../privacy/" class="legal-nav-link" data-translate="legal_nav_privacy">Privacy Policy →</a>
+        <a href="../disclaimer/" class="legal-nav-link" data-translate="legal_nav_disclaimer">Disclaimer →</a>
       </div>
     </div>
   </main>
@@ -708,6 +746,7 @@
 <!-- ===== SCRIPTS ===== -->
   <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
   <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+  <script src="../js/notifications.js" defer></script>
   <script src="../js/script.js" defer></script>
 <script src="../js/footer.js" defer></script>
 </body>

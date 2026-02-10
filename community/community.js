@@ -1155,10 +1155,10 @@ function createPostElement(postData, timeStr) {
       </div>
       <button class="mb-btn mb-commentBtn" type="button">Comment ${commentCount > 0 ? '(' + commentCount + ')' : ''}</button>
       <button class="mb-btn mb-shareBtn" type="button">Share</button>
+      <button class="mb-btn mb-bookmarkBtn" type="button" title="Bookmark">🔖</button>
       ${editButton}
       ${pinButton}
       ${deleteButton}
-      <button class="mb-btn mb-bookmarkBtn" type="button" title="Bookmark">🔖</button>
       <button class="mb-btn mb-reportBtn" type="button" title="Report post">⚑</button>
     </div>
   `;

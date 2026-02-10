@@ -1226,18 +1226,17 @@
     var hash = window.location.hash || '';
     var search = window.location.search || '';
     var isOAuthCallback = hash.includes('access_token') || hash.includes('refresh_token') || search.includes('code=');
-    var hasOAuthOrigin = localStorage.getItem('oauth_origin');
-    var currentHost = window.location.hostname;
-    var isMindSpaceDomain = currentHost === 'mind' + 'space.site' || currentHost === 'www.mind' + 'space.site';
     
-    if (isOAuthCallback && !hasOAuthOrigin && !isMindSpaceDomain) {
-      var targetUrl = 'https://mind' + 'space.site/auth/' + search + hash;
-      window.location.replace(targetUrl);
-      return;
-    }
-    
-    if (isOAuthCallback && hasOAuthOrigin) {
-      localStorage.removeItem('oauth_origin');
+    if (isOAuthCallback) {
+      var params = new URLSearchParams(search);
+      var origin = params.get('origin');
+      if (origin === 'mindspace') {
+        params.delete('origin');
+        var cleanSearch = params.toString() ? '?' + params.toString() : '';
+        var targetUrl = 'https://www.mindspace.site/auth/' + cleanSearch + hash;
+        window.location.replace(targetUrl);
+        return;
+      }
     }
   })();
 
@@ -1469,20 +1468,15 @@
   document.getElementById("googleSignIn").addEventListener("click", async () => {
     setMsg("Connecting to Google...", "loading");
     
-    localStorage.setItem('oauth_origin', window.location.origin);
-    
     const { data, error } = await sb.auth.signInWithOAuth({
       provider: 'google',
       options: {
-        redirectTo: window.location.origin + '/auth/',
-        skipBrowserRedirect: true
+        redirectTo: window.location.origin + '/auth/'
       }
     });
     
     if (error) {
       setMsg(error.message, "error");
-    } else if (data?.url) {
-      window.location.href = data.url;
     }
   });
 

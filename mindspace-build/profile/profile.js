@@ -36,9 +36,23 @@ function createActivityItem(activity) {
 
   const contentWrap = createSafeElement('div', 'mb-activity-item__content');
   const text = createSafeElement('p', 'mb-activity-item__text');
-  const strong = createSafeElement('strong', null, `You ${activity.type === 'post' ? 'posted' : 'commented'}: `);
+  const typeLabels = {
+    'post': 'You posted',
+    'comment': 'You commented',
+    'article_read': 'Read article',
+    'article_complete': 'Finished reading',
+    'page_view': 'Visited',
+    'mood_checkin': 'Mood check-in',
+    'achievement_unlocked': 'Achievement unlocked',
+    'profile_update': 'Updated profile',
+    'bookmark': 'Bookmarked',
+    'like': 'Liked a post'
+  };
+  const label = typeLabels[activity.type] || activity.type;
+  const showColon = ['post', 'comment'].includes(activity.type) || activity.content !== label;
+  const strong = createSafeElement('strong', null, showColon ? label + ': ' : label);
   text.appendChild(strong);
-  text.appendChild(document.createTextNode(truncate(activity.content, 100)));
+  if (showColon) text.appendChild(document.createTextNode(truncate(activity.content, 100)));
 
   const time = createSafeElement('span', 'mb-activity-item__time', formatTimeAgo(activity.time));
   contentWrap.appendChild(text);
@@ -690,12 +704,18 @@ async function loadActivityData(userId) {
     activityLogs.forEach(log => {
       const config = activityConfig[log.activity_type] || { icon: 'ellipse-outline', label: log.activity_type };
       let desc = config.label;
-      if (log.activity_data) {
-        const data = typeof log.activity_data === 'string' ? JSON.parse(log.activity_data) : log.activity_data;
-        if (data.article_title) desc += ': ' + data.article_title;
-        else if (data.mood) desc += ': ' + data.mood;
-        else if (data.badge_name) desc += ': ' + data.badge_name;
-        else if (log.page_url && log.activity_type === 'page_view') desc += ' ' + log.page_url;
+      try {
+        if (log.activity_data) {
+          const data = typeof log.activity_data === 'string' ? JSON.parse(log.activity_data) : log.activity_data;
+          if (data.article_title) desc += ': ' + data.article_title;
+          else if (data.mood) desc += ': ' + data.mood;
+          else if (data.badge_name) desc += ': ' + data.badge_name;
+          else if (log.page_url && log.activity_type === 'page_view') desc += ' ' + log.page_url;
+        } else if (log.page_url && log.activity_type === 'page_view') {
+          desc += ' ' + log.page_url;
+        }
+      } catch (e) {
+        if (log.page_url) desc += ' ' + log.page_url;
       }
       activities.push({
         type: log.activity_type,

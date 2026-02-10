@@ -988,30 +988,23 @@ html {
 .mobile-nav-header {
   display: none;
   align-items: center;
-  justify-content: space-between;
-  padding: 16px 20px;
+  justify-content: center;
+  padding: 18px 20px;
   background: linear-gradient(135deg, #f8f5f0 0%, #f0ebe3 100%);
   border-bottom: 1px solid rgba(0,0,0,0.06);
   flex-shrink: 0;
+  position: relative;
 }
 
-.mobile-nav-header__brand {
+.mobile-nav-header__logo {
   display: flex;
-  flex-direction: column;
-  gap: 2px;
+  align-items: center;
+  justify-content: center;
 }
 
-.mobile-nav-header__brand .logo img {
-  height: 32px;
+.mobile-nav-header__logo img {
+  height: 40px;
   width: auto;
-}
-
-.mobile-nav-greeting {
-  font-family: 'Poppins', sans-serif;
-  font-size: 12px;
-  font-weight: 500;
-  color: #8a8a9a;
-  letter-spacing: 0.02em;
 }
 
 .mobile-nav-close {
@@ -1028,6 +1021,10 @@ html {
   transition: all 0.2s ease;
   padding: 0;
   box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+  position: absolute;
+  right: 16px;
+  top: 50%;
+  transform: translateY(-50%);
 }
 
 .mobile-nav-close ion-icon {
@@ -1038,20 +1035,16 @@ html {
 .mobile-nav-close:hover {
   background: #f0ebe3;
   color: #1a1a2e;
-  transform: scale(1.05);
+  transform: translateY(-50%) scale(1.05);
 }
 
 .mobile-nav-close:active {
-  transform: scale(0.95);
+  transform: translateY(-50%) scale(0.95);
 }
 
 [data-theme="dark"] .mobile-nav-header {
   background: linear-gradient(135deg, #2d2b3d 0%, #252342 100%);
   border-bottom-color: rgba(255,255,255,0.06);
-}
-
-[data-theme="dark"] .mobile-nav-greeting {
-  color: #9a9ab0;
 }
 
 [data-theme="dark"] .mobile-nav-close {

@@ -6,16 +6,32 @@
 (function() {
   'use strict';
 
+  var progressFill = document.querySelector('.progress-bar-fill');
+  var progress = 0;
+  var progressInterval;
 
-  function hidePreloader() {
-    const preloader = document.querySelector('[data-preaload]');
-    document.body.classList.add('loaded');
-    if (preloader) {
-      preloader.classList.add('loaded');
-    }
-    window.scrollTo(0, 0);
+  if (progressFill) {
+    progressInterval = setInterval(function () {
+      progress += Math.random() * 8 + 2;
+      if (progress > 90) progress = 90;
+      progressFill.style.width = progress + '%';
+    }, 150);
   }
 
+  function hidePreloader() {
+    if (progressInterval) clearInterval(progressInterval);
+    if (progressFill) {
+      progressFill.style.width = '100%';
+    }
+    setTimeout(function () {
+      var preloader = document.querySelector('[data-preaload]');
+      document.body.classList.add('loaded');
+      if (preloader) {
+        preloader.classList.add('loaded');
+      }
+      window.scrollTo(0, 0);
+    }, 400);
+  }
 
   window.addEventListener('load', hidePreloader);
 

@@ -792,7 +792,7 @@ html {
   font-family: 'Poppins', sans-serif;
   font-size: 1rem;
   font-weight: 500;
-  color: #2068A8;
+  color: #ffffff;
   letter-spacing: 0.15em;
   text-transform: uppercase;
   margin-top: 4px;
@@ -839,7 +839,7 @@ html {
 
 [data-theme="dark"] .preload-text,
 .dark-mode .preload-text {
-  color: #5a9fd4;
+  color: #ffffff;
 }
 
 [data-theme="dark"] .progress-bar,

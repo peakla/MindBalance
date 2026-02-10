@@ -6,18 +6,34 @@
 // --- Preloader ---
 document.addEventListener("DOMContentLoaded", function () {
 
-
   const preloader = document.querySelector("[data-preaload]");
+  const progressFill = document.querySelector(".progress-bar-fill");
+  let progress = 0;
+
+  function animateProgress() {
+    if (!progressFill) return;
+    const interval = setInterval(function () {
+      progress += Math.random() * 8 + 2;
+      if (progress > 90) progress = 90;
+      progressFill.style.width = progress + "%";
+    }, 150);
+    return interval;
+  }
+
+  const progressInterval = animateProgress();
+
   window.addEventListener("load", function () {
-    document.body.classList.add("loaded");
-    if (preloader) preloader.classList.add("loaded");
-
-
-    const legacyLoader = document.getElementById("preloader");
-    if (legacyLoader) legacyLoader.style.display = "none";
-
-
-    window.scrollTo(0, 0);
+    if (progressInterval) clearInterval(progressInterval);
+    if (progressFill) {
+      progressFill.style.width = "100%";
+    }
+    setTimeout(function () {
+      document.body.classList.add("loaded");
+      if (preloader) preloader.classList.add("loaded");
+      const legacyLoader = document.getElementById("preloader");
+      if (legacyLoader) legacyLoader.style.display = "none";
+      window.scrollTo(0, 0);
+    }, 400);
   });
 
 

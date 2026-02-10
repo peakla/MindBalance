@@ -1242,9 +1242,23 @@
   })();
 
   const preloader = document.querySelector("[data-preaload]");
+  const progressFill = document.querySelector(".progress-bar-fill");
+  let authProgress = 0;
+  let authProgressInterval;
+  if (progressFill) {
+    authProgressInterval = setInterval(function () {
+      authProgress += Math.random() * 8 + 2;
+      if (authProgress > 90) authProgress = 90;
+      progressFill.style.width = authProgress + "%";
+    }, 150);
+  }
   window.addEventListener("load", function () {
-    document.body.classList.add("loaded");
-    if (preloader) preloader.classList.add("loaded");
+    if (authProgressInterval) clearInterval(authProgressInterval);
+    if (progressFill) progressFill.style.width = "100%";
+    setTimeout(function () {
+      document.body.classList.add("loaded");
+      if (preloader) preloader.classList.add("loaded");
+    }, 400);
   });
 
   const savedTheme = localStorage.getItem('theme');

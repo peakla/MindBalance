@@ -1517,32 +1517,45 @@
 
   <script>
     (function() {
-      var phrases = [
-        "One World", "Believe in Love", "Life", "You Matter", "Breathe",
-        "You Are Enough", "Keep Going", "Hope", "Be Kind", "Together",
-        "Heal", "Rise", "Courage", "Peace", "You're Not Alone",
-        "Strength", "Let Go", "Dream", "Love Yourself", "Be Present",
-        "It Gets Better", "Stand Tall", "Belong", "Trust the Journey",
-        "Believe", "Grow", "Embrace Change", "Stay", "Shine",
-        "You Are Loved", "Never Give Up", "Begin Again", "Choose Joy"
-      ];
-      for (var j = phrases.length - 1; j > 0; j--) {
-        var k = Math.floor(Math.random() * (j + 1));
-        var temp = phrases[j]; phrases[j] = phrases[k]; phrases[k] = temp;
+      var phraseKeys = [];
+      for (var n = 1; n <= 46; n++) {
+        phraseKeys.push("hero_phrase_" + n);
       }
+
+      function shuffle(arr) {
+        for (var j = arr.length - 1; j > 0; j--) {
+          var k = Math.floor(Math.random() * (j + 1));
+          var temp = arr[j]; arr[j] = arr[k]; arr[k] = temp;
+        }
+      }
+
+      function getPhrase(key) {
+        if (window.MindBalanceTranslations && window.MindBalanceTranslations.getTranslationSync) {
+          return window.MindBalanceTranslations.getTranslationSync(key);
+        }
+        return key;
+      }
+
+      var shuffledKeys = phraseKeys.slice();
+      shuffle(shuffledKeys);
       var el = document.getElementById("hero-cycle-text");
       if (!el) return;
+      el.textContent = getPhrase(shuffledKeys[0]);
       var i = 0;
-      setInterval(function() {
+      var intervalId = setInterval(function() {
         el.classList.add("hero-fade-out");
         el.classList.remove("hero-fade-in");
         setTimeout(function() {
-          i = (i + 1) % phrases.length;
-          el.textContent = phrases[i];
+          i = (i + 1) % shuffledKeys.length;
+          el.textContent = getPhrase(shuffledKeys[i]);
           el.classList.remove("hero-fade-out");
           el.classList.add("hero-fade-in");
         }, 1000);
       }, 4000);
+
+      window.addEventListener("translations-ready", function() {
+        el.textContent = getPhrase(shuffledKeys[i]);
+      });
     })();
   </script>
 

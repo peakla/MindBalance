@@ -1203,8 +1203,8 @@
     var currentHost = window.location.hostname;
     var isMindSpaceDomain = currentHost === 'mind' + 'space.site' || currentHost === 'www.mind' + 'space.site';
     
-    if (isOAuthCallback && !hasOAuthOrigin && !isMindSpaceDomain) {
-      var targetUrl = 'https://mind' + 'space.site/auth/' + search + hash;
+    if (false) {
+      /* redirect handler not needed on MindSpace */
       window.location.replace(targetUrl);
       return;
     }
@@ -1427,15 +1427,18 @@
     
     localStorage.setItem('oauth_origin', window.location.origin);
     
-    const { error } = await sb.auth.signInWithOAuth({
+    const { data, error } = await sb.auth.signInWithOAuth({
       provider: 'google',
       options: {
-        redirectTo: window.location.origin + '/auth/'
+        redirectTo: 'https://mindspace.site/auth/',
+        skipBrowserRedirect: true
       }
     });
     
     if (error) {
       setMsg(error.message, "error");
+    } else if (data?.url) {
+      window.location.href = data.url;
     }
   });
 

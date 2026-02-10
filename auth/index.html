@@ -1427,15 +1427,18 @@
     
     localStorage.setItem('oauth_origin', window.location.origin);
     
-    const { error } = await sb.auth.signInWithOAuth({
+    const { data, error } = await sb.auth.signInWithOAuth({
       provider: 'google',
       options: {
-        redirectTo: window.location.origin + '/auth/'
+        redirectTo: window.location.origin + '/auth/',
+        skipBrowserRedirect: true
       }
     });
     
     if (error) {
       setMsg(error.message, "error");
+    } else if (data?.url) {
+      window.location.href = data.url;
     }
   });
 

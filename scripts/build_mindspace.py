@@ -202,6 +202,20 @@ def transform_content(content, filepath):
         content = content.replace("MindSpaceLogo.svg", "MindSpaceLogo.png")
         content = content.replace("MindBalanceLogo.svg", "MindSpaceLogo.png")
 
+        if basename == "index.html" and "auth" in os.path.dirname(filepath).replace("\\", "/"):
+            content = content.replace(
+                "redirectTo: window.location.origin + '/auth/'",
+                "redirectTo: 'https://mindspace.site/auth/'"
+            )
+            content = content.replace(
+                "var targetUrl = 'https://mind' + 'space.site/auth/' + search + hash;",
+                "/* redirect handler not needed on MindSpace */"
+            )
+            content = content.replace(
+                "if (isOAuthCallback && !hasOAuthOrigin && !isMindSpaceDomain) {",
+                "if (false) {"
+            )
+
     if ext.lower() == ".css":
         content = content.replace("--gold-crayola", "--blue-crayola")
         content = content.replace("#f8a29e", "#38b6ff")

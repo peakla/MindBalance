@@ -1,6 +1,11 @@
 {
   "trailingSlash": true,
   "cleanUrls": true,
+  "functions": {
+    "api/tts/*.py": {
+      "maxDuration": 30
+    }
+  },
   "rewrites": [
     { "source": "/resourcelib/", "destination": "/resourcelib/index.html" },
     { "source": "/support/", "destination": "/support/index.html" },

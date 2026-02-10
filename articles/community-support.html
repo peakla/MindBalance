@@ -13,18 +13,18 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
-  <link rel="stylesheet" href="../css/style.css" />
-  <link rel="stylesheet" href="../css/responsive-system.css" />
-  <link rel="stylesheet" href="../css/settings-modal.css" />
+  <link rel="stylesheet" href="/css/style.css" />
+  <link rel="stylesheet" href="/css/responsive-system.css" />
+  <link rel="stylesheet" href="/css/settings-modal.css" />
   
   <link rel="stylesheet" href="article.css?v=12" />
 
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  <script src="../js/auth.js" defer></script>
-  <script src="../js/analytics.js" defer></script>
-  <script src="../js/settings.js" defer></script>
-  <script src="../js/settings-modal.js" defer></script>
-  <script src="../js/translations.js" defer></script>
+  <script src="/js/auth.js" defer></script>
+  <script src="/js/analytics.js" defer></script>
+  <script src="/js/settings.js" defer></script>
+  <script src="/js/settings-modal.js" defer></script>
+  <script src="/js/translations.js" defer></script>
   <script src="article.js?v=12" defer></script>
   <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js" defer></script>
   <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js" defer></script>
@@ -140,7 +140,7 @@
 
 <header class="header" data-header>
   <div class="container">
-    <a href="../" class="logo">
+    <a href="/" class="logo">
       <img src="/assets/images/MindBalanceLogo.svg" width="160" height="50" alt="MindBalance - logo" decoding="async">
     </a>
 
@@ -151,68 +151,68 @@
       </button>
 
       <div class="navbar-scroll-content">
-      <a href="../" class="logo">
+      <a href="/" class="logo">
         <img src="/assets/images/MindBalanceLogo.svg" width="160" height="50" alt="MindBalance - logo" decoding="async">
       </a>
 
       <ul class="navbar-list">
         <li class="navbar-item">
-          <a href="../" class="navbar-link hover-underline">
+          <a href="/" class="navbar-link hover-underline">
             <div class="separator"></div><span class="span" data-translate="nav_home">Home</span>
           </a>
         </li>
         <li class="navbar-item">
-          <a href="../support/" class="navbar-link hover-underline">
+          <a href="/support/" class="navbar-link hover-underline">
             <div class="separator"></div><span class="span" data-translate="nav_contact">Contact</span>
           </a>
         </li>
         <li class="navbar-item">
-          <a href="../resourcelib/" class="navbar-link hover-underline">
+          <a href="/resourcelib/" class="navbar-link hover-underline">
             <div class="separator"></div><span class="span" data-translate="nav_resources">Resource Library</span>
           </a>
           <div class="navbar-dropdown">
-            <a href="../resourcelib/?category=anxiety" class="navbar-dropdown__item">
+            <a href="/resourcelib/?category=anxiety" class="navbar-dropdown__item">
               <ion-icon name="pulse-outline"></ion-icon> Anxiety Resources
             </a>
-            <a href="../resourcelib/?category=depression" class="navbar-dropdown__item">
+            <a href="/resourcelib/?category=depression" class="navbar-dropdown__item">
               <ion-icon name="cloudy-outline"></ion-icon> Depression Support
             </a>
-            <a href="../resourcelib/?category=stress" class="navbar-dropdown__item">
+            <a href="/resourcelib/?category=stress" class="navbar-dropdown__item">
               <ion-icon name="flash-outline"></ion-icon> Stress Management
             </a>
-            <a href="../resourcelib/?category=mindfulness" class="navbar-dropdown__item">
+            <a href="/resourcelib/?category=mindfulness" class="navbar-dropdown__item">
               <ion-icon name="leaf-outline"></ion-icon> Mindfulness
             </a>
             <div class="navbar-dropdown__divider"></div>
-            <a href="../resourcelib/" class="navbar-dropdown__item">
+            <a href="/resourcelib/" class="navbar-dropdown__item">
               <ion-icon name="grid-outline"></ion-icon> View All Resources
             </a>
           </div>
         </li>
         <li class="navbar-item">
-          <a href="../community/" class="navbar-link hover-underline">
+          <a href="/community/" class="navbar-link hover-underline">
             <div class="separator"></div><span class="span" data-translate="nav_community">Community Hub</span>
           </a>
         </li>
         <li class="navbar-item">
-          <a href="../blog/" class="navbar-link hover-underline active">
+          <a href="/blog/" class="navbar-link hover-underline active">
             <div class="separator"></div><span class="span" data-translate="nav_blog">Blog</span>
           </a>
           <div class="navbar-dropdown">
-            <a href="../articles/anxiety.html" class="navbar-dropdown__item">
+            <a href="/articles/anxiety.html" class="navbar-dropdown__item">
               <ion-icon name="document-text-outline"></ion-icon> Understanding Anxiety
             </a>
-            <a href="../articles/depression.html" class="navbar-dropdown__item">
+            <a href="/articles/depression.html" class="navbar-dropdown__item">
               <ion-icon name="document-text-outline"></ion-icon> Depression Guide
             </a>
-            <a href="../articles/stress.html" class="navbar-dropdown__item">
+            <a href="/articles/stress.html" class="navbar-dropdown__item">
               <ion-icon name="document-text-outline"></ion-icon> Stress Management
             </a>
-            <a href="../articles/mindfulness.html" class="navbar-dropdown__item">
+            <a href="/articles/mindfulness.html" class="navbar-dropdown__item">
               <ion-icon name="document-text-outline"></ion-icon> Mindfulness Basics
             </a>
             <div class="navbar-dropdown__divider"></div>
-            <a href="../blog/" class="navbar-dropdown__item">
+            <a href="/blog/" class="navbar-dropdown__item">
               <ion-icon name="albums-outline"></ion-icon> All Articles
             </a>
           </div>
@@ -376,7 +376,7 @@
         <div class="navbar-search__results" id="searchResults"></div>
       </div>
       
-      <a href="../profile/" class="navbar-action-btn" id="userBtn" aria-label="User account" data-user-btn>
+      <a href="/profile/" class="navbar-action-btn" id="userBtn" aria-label="User account" data-user-btn>
         <ion-icon name="person-outline" class="action-icon"></ion-icon>
         <span class="notif-badge" id="notifBadge" hidden>0</span>
       </a>
@@ -488,12 +488,12 @@
         </div>
       </div>
       
-      <a href="../support/#crisis" class="crisis-btn" aria-label="Get help now">
+      <a href="/support/#crisis" class="crisis-btn" aria-label="Get help now">
         <ion-icon name="alert-circle" aria-hidden="true"></ion-icon>
         <span data-translate="nav_get_help">Get Help Now</span>
       </a>
       
-      <a href="../auth/" class="navbar-action-btn auth-btn" data-auth-btn aria-label="Sign in">
+      <a href="/auth/" class="navbar-action-btn auth-btn" data-auth-btn aria-label="Sign in">
         <span class="auth-text" data-translate="nav_signin">Sign In</span>
       </a>
     </div>
@@ -1002,9 +1002,9 @@
 </footer>
 
 <!-- ===== SCRIPTS ===== -->
-<script src="../js/script.js" defer></script>
-<script src="../js/animations.js" defer></script>
+<script src="/js/script.js" defer></script>
+<script src="/js/animations.js" defer></script>
 
-<script src="../js/footer.js" defer></script>
+<script src="/js/footer.js" defer></script>
 </body>
 </html>

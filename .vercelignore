@@ -1,0 +1,7 @@
+mindspace-build/
+assets/images/Cover.mp4
+assets/images/MindBalanceHub.mp4
+server.py
+__pycache__/
+*.pyc
+.git/

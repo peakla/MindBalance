@@ -1850,18 +1850,18 @@
       <main class="mb-panel">
         <div class="mb-feedHeader">
           <div class="mb-feedTabs">
-            <button class="mb-feedTab is-active" data-tab="latest">🕐 Latest</button>
-            <button class="mb-feedTab" data-tab="popular">🔥 Popular</button>
-            <button class="mb-feedTab" data-tab="following">👥 Following</button>
+            <button class="mb-feedTab is-active" data-tab="latest" data-translate="community_tab_latest">🕐 Latest</button>
+            <button class="mb-feedTab" data-tab="popular" data-translate="community_tab_popular">🔥 Popular</button>
+            <button class="mb-feedTab" data-tab="following" data-translate="community_tab_following">👥 Following</button>
           </div>
-          <input class="mb-search" id="feedSearch" type="search" placeholder="Search posts..." />
+          <input class="mb-search" id="feedSearch" type="search" placeholder="Search posts..." data-translate-placeholder="community_search_placeholder" />
         </div>
 
         
         <section class="mb-composer animate-slide-up" aria-label="Create a post">
           <div class="mb-composerTop">
             <div class="mb-avatar" id="avatarCircle">MB</div>
-            <input class="mb-input" id="postText" type="text" placeholder="Sign in to share an update…" disabled />
+            <input class="mb-input" id="postText" type="text" placeholder="Sign in to share an update…" data-translate-placeholder="community_signin_placeholder" disabled />
           </div>
           <div class="mb-mediaPreview" id="mediaPreview" style="display: none;">
             <img id="mediaPreviewImg" src="" alt="Media preview" />
@@ -1871,12 +1871,12 @@
             <input type="file" id="mediaInput" accept="image/*" style="display: none;" />
             <button class="mb-btn" type="button" id="mediaBtn" title="Add image to your post" data-translate="community_media_btn">📎 Media</button>
             <select class="mb-categorySelect" id="postCategory">
-              <option value="">Add tag...</option>
-              <option value="motivation">💪 Motivation</option>
-              <option value="question">❓ Question</option>
-              <option value="story">📖 Story</option>
-              <option value="resource">📚 Resource</option>
-              <option value="tip">💡 Tip</option>
+              <option value="" data-translate="community_add_tag">Add tag...</option>
+              <option value="motivation" data-translate="community_tag_motivation">💪 Motivation</option>
+              <option value="question" data-translate="community_tag_question">❓ Question</option>
+              <option value="story" data-translate="community_tag_story">📖 Story</option>
+              <option value="resource" data-translate="community_tag_resource">📚 Resource</option>
+              <option value="tip" data-translate="community_tag_tip">💡 Tip</option>
             </select>
             <div class="mb-charCount" id="charCountRing">
               <svg viewBox="0 0 36 36" class="mb-charCount__svg">
@@ -1894,7 +1894,7 @@
         <section class="mb-feedList animate-stagger" id="feedList" aria-label="Posts">
         </section>
         <div class="mb-loadMore" id="loadMoreWrap" style="display:none;">
-          <button class="mb-btn mb-btnPrimary mb-loadMoreBtn" id="loadMoreBtn" type="button">Load More Posts</button>
+          <button class="mb-btn mb-btnPrimary mb-loadMoreBtn" id="loadMoreBtn" type="button" data-translate="community_load_more">Load More Posts</button>
           <div class="mb-loadMoreCount" id="loadMoreCount"></div>
         </div>
       </main>
@@ -1903,40 +1903,40 @@
       <aside class="mb-panel mb-right animate-slide-right">
         <div class="mb-welcomeCard" id="welcomeCard">
           <div class="mb-welcomeCard__icon">👋</div>
-          <h4>Welcome to the Community!</h4>
-          <p>Join our community to share, connect, and find support on your wellness journey.</p>
-          <a href="../auth/" class="mb-btn mb-btnPrimary" style="display:block; text-decoration:none; text-align:center; border-radius: 20px;">Join Now</a>
+          <h4 data-translate="community_welcome_title">Welcome to the Community!</h4>
+          <p data-translate="community_welcome_text">Join our community to share, connect, and find support on your wellness journey.</p>
+          <a href="../auth/" class="mb-btn mb-btnPrimary" style="display:block; text-decoration:none; text-align:center; border-radius: 20px;" data-translate="community_join_now">Join Now</a>
         </div>
 
         <div class="mb-guidelines">
-          <div class="mb-panelHeader" style="font-size: 15px;">📋 Community Guidelines</div>
+          <div class="mb-panelHeader" style="font-size: 15px;" data-translate="community_guidelines_title">📋 Community Guidelines</div>
           <div class="mb-panelBody">
             <div class="mb-guidelinesList">
-              <div class="mb-guideline">✅ Be kind and supportive</div>
-              <div class="mb-guideline">✅ Share genuine experiences</div>
-              <div class="mb-guideline">✅ Respect everyone's journey</div>
-              <div class="mb-guideline">⚠️ This is not a crisis service</div>
+              <div class="mb-guideline" data-translate="community_guideline_kind">✅ Be kind and supportive</div>
+              <div class="mb-guideline" data-translate="community_guideline_genuine">✅ Share genuine experiences</div>
+              <div class="mb-guideline" data-translate="community_guideline_respect">✅ Respect everyone's journey</div>
+              <div class="mb-guideline" data-translate="community_guideline_crisis">⚠️ This is not a crisis service</div>
             </div>
           </div>
         </div>
 
         <div class="mb-onlineNow">
           <div class="mb-panelHeader" style="font-size: 15px;">
-            <span class="mb-onlineDot"></span> Online Now
+            <span class="mb-onlineDot"></span> <span data-translate="community_online_now">Online Now</span>
             <span class="mb-onlineCount" id="onlineCount">--</span>
           </div>
         </div>
 
-        <div class="mb-panelHeader" style="font-size: 15px;">🔥 Popular Discussions</div>
+        <div class="mb-panelHeader" style="font-size: 15px;" data-translate="community_popular_discussions">🔥 Popular Discussions</div>
         <div class="mb-panelBody">
           <div class="mb-miniList animate-fade-in" id="popularDiscussions">
             <div class="mb-miniItem">
-              <div class="mb-miniSub">Loading popular posts...</div>
+              <div class="mb-miniSub" data-translate="community_loading_popular">Loading popular posts...</div>
             </div>
           </div>
         </div>
 
-        <div class="mb-panelHeader" style="font-size: 15px;">⭐ Top Contributors</div>
+        <div class="mb-panelHeader" style="font-size: 15px;" data-translate="community_top_contributors">⭐ Top Contributors</div>
         <div class="mb-panelBody">
           <div class="mb-topContributors" id="topContributors">
             <div class="mb-contributor">
@@ -1949,7 +1949,7 @@
           </div>
         </div>
 
-        <div class="mb-panelHeader" style="font-size: 15px;">📊 Trending Topics</div>
+        <div class="mb-panelHeader" style="font-size: 15px;" data-translate="community_trending_topics">📊 Trending Topics</div>
         <div class="mb-panelBody">
           <div class="mb-trendingPills" id="trendingTopics">
             <a href="/resourcelib/?category=anxiety" class="mb-trendingPill">😰 Anxiety</a>
@@ -1963,12 +1963,12 @@
 
         <div class="mb-wellnessTip" id="wellnessTip">
           <div class="mb-wellnessTip__icon">💡</div>
-          <div class="mb-wellnessTip__title">Daily Wellness Tip</div>
+          <div class="mb-wellnessTip__title" data-translate="community_wellness_tip_title">Daily Wellness Tip</div>
           <div class="mb-wellnessTip__text" id="tipText">Take 5 deep breaths right now. Inhale for 4 counts, hold for 4, exhale for 6.</div>
         </div>
 
         <div class="mb-moodRing">
-          <div class="mb-panelHeader" style="font-size: 15px;">🌈 Community Mood</div>
+          <div class="mb-panelHeader" style="font-size: 15px;" data-translate="community_mood_title">🌈 Community Mood</div>
           <div class="mb-panelBody">
             <div class="mb-moodBar">
               <div class="mb-moodSegment" style="width: 35%; background: #4caf50;" title="Happy 35%"></div>
@@ -1978,11 +1978,11 @@
               <div class="mb-moodSegment" style="width: 8%; background: #f44336;" title="Struggling 8%"></div>
             </div>
             <div class="mb-moodLabels">
-              <span>😊 Happy</span>
-              <span>😌 Calm</span>
-              <span>🌟 Hopeful</span>
-              <span>🤔 Reflective</span>
-              <span>💙 Support</span>
+              <span data-translate="community_mood_happy">😊 Happy</span>
+              <span data-translate="community_mood_calm">😌 Calm</span>
+              <span data-translate="community_mood_hopeful">🌟 Hopeful</span>
+              <span data-translate="community_mood_reflective">🤔 Reflective</span>
+              <span data-translate="community_mood_support">💙 Support</span>
             </div>
           </div>
         </div>
@@ -2019,21 +2019,54 @@
     });
 
     // Tabs
+    window.currentFeedTab = 'latest';
     document.querySelectorAll('.mb-feedTab').forEach(tab => {
       tab.addEventListener('click', () => {
         document.querySelectorAll('.mb-feedTab').forEach(t => t.classList.remove('is-active'));
         tab.classList.add('is-active');
         const tabType = tab.dataset.tab;
+        window.currentFeedTab = tabType;
         const feedList = document.getElementById('feedList');
         if (!feedList) return;
+
+        const existingSignIn = feedList.querySelector('.mb-followingSignIn');
+        if (existingSignIn) existingSignIn.remove();
+        const existingEmpty = feedList.querySelector('.mb-followingEmpty');
+        if (existingEmpty) existingEmpty.remove();
+
         const posts = Array.from(feedList.querySelectorAll('.mb-post'));
-        if (tabType === 'popular') {
+
+        if (tabType === 'following') {
+          if (typeof currentUser === 'undefined' || !currentUser) {
+            posts.forEach(p => p.style.display = 'none');
+            const signInPrompt = document.createElement('div');
+            signInPrompt.className = 'mb-followingSignIn';
+            const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+            signInPrompt.innerHTML = `
+              <div style="text-align:center; padding:60px 20px;">
+                <div style="font-size:48px; margin-bottom:16px;">👥</div>
+                <h3 style="margin-bottom:8px; color:${isDark ? '#e0e0e0' : '#333'}; font-size:18px;" data-translate="community_following_signin_title">Sign in to see posts from people you follow</h3>
+                <p style="color:${isDark ? '#aaa' : '#666'}; margin-bottom:20px; max-width:360px; margin-left:auto; margin-right:auto; line-height:1.5;" data-translate="community_following_signin_text">Follow community members to build your personalized feed and stay connected with people who inspire you.</p>
+                <a href="../auth/" class="mb-btn mb-btnPrimary" style="display:inline-block; text-decoration:none; padding:10px 28px; border-radius:20px;" data-translate="community_following_signin_btn">Sign In to Get Started</a>
+              </div>
+            `;
+            feedList.appendChild(signInPrompt);
+            if (typeof applyTranslations === 'function') applyTranslations();
+          } else {
+            if (typeof loadFollowingPosts === 'function') {
+              loadFollowingPosts();
+            }
+          }
+        } else if (tabType === 'popular') {
+          posts.forEach(p => p.style.display = '');
           posts.sort((a, b) => {
             const aLikes = parseInt(a.querySelector('.like-count')?.textContent) || 0;
             const bLikes = parseInt(b.querySelector('.like-count')?.textContent) || 0;
             return bLikes - aLikes;
           });
           posts.forEach(post => feedList.appendChild(post));
+        } else {
+          posts.forEach(p => p.style.display = '');
         }
       });
     });
@@ -2093,19 +2126,19 @@
   <div id="inboxModal" class="mb-inbox-modal" hidden role="dialog" aria-modal="true" aria-labelledby="inboxTitle">
     <div class="mb-inbox-content">
       <div class="mb-inbox-header">
-        <h3 class="mb-inbox-title" id="inboxTitle">Notifications</h3>
+        <h3 class="mb-inbox-title" id="inboxTitle" data-translate="community_notifications">Notifications</h3>
         <div class="mb-inbox-actions">
-          <button class="mb-inbox-mark-read" onclick="markAllNotificationsRead()">Mark all read</button>
+          <button class="mb-inbox-mark-read" onclick="markAllNotificationsRead()" data-translate="community_mark_all_read">Mark all read</button>
           <button class="mb-inbox-close" onclick="closeInbox()" aria-label="Close notifications">&times;</button>
         </div>
       </div>
       <div class="mb-inbox-body" id="notificationsList">
-        <div class="mb-inbox-empty">No notifications yet</div>
+        <div class="mb-inbox-empty" data-translate="community_no_notifications">No notifications yet</div>
       </div>
     </div>
   </div>
 
-  <button class="mb-fab" id="composeFab" title="Create a post">✏️</button>
+  <button class="mb-fab" id="composeFab" title="Create a post" data-translate-title="community_create_post">✏️</button>
 
   <button class="back-to-top" id="backToTop" aria-label="Back to top">
   <ion-icon name="chevron-up-outline"></ion-icon>

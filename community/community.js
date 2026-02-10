@@ -41,7 +41,7 @@ function showConfetti() {
 function getTranslation(key, fallback) {
   if (window.translations && window.MindBalanceSettings) {
     const lang = localStorage.getItem('mindbalance-language') || 'en';
-    const langMap = { en: 'en', es: 'es', fr: 'fr', zh: 'zh', hi: 'hi' };
+    const langMap = { en: 'en', es: 'es', fr: 'fr', zh: 'zh', hi: 'hi', ko: 'ko' };
     const langKey = langMap[lang] || 'en';
     if (window.translations[langKey] && window.translations[langKey][key]) {
       return window.translations[langKey][key];
@@ -228,7 +228,7 @@ function updateCommunityUI(user) {
 
     if (postText) {
       postText.disabled = false;
-      postText.placeholder = "What's on your mind? Share with the community...";
+      postText.placeholder = getTranslation('community_share_placeholder', "What's on your mind? Share with the community...");
     }
 
     if (postBtn) {
@@ -264,7 +264,7 @@ function updateCommunityUI(user) {
 
     if (postText) {
       postText.disabled = true;
-      postText.placeholder = 'Sign in to share an update...';
+      postText.placeholder = getTranslation('community_signin_placeholder', 'Sign in to share an update...');
     }
 
     if (postBtn) {
@@ -627,32 +627,32 @@ function showReportModal(postId) {
   modal.className = 'mb-reportModal';
   modal.innerHTML = `
     <div class="mb-reportModalContent">
-      <div class="mb-reportModalTitle">Report this post</div>
+      <div class="mb-reportModalTitle">${getTranslation('community_report_title', 'Report this post')}</div>
       <div class="mb-reportOptions">
         <label class="mb-reportOption">
           <input type="radio" name="reportReason" value="spam">
-          <span>Spam or misleading</span>
+          <span>${getTranslation('community_report_spam', 'Spam or misleading')}</span>
         </label>
         <label class="mb-reportOption">
           <input type="radio" name="reportReason" value="harassment">
-          <span>Harassment or bullying</span>
+          <span>${getTranslation('community_report_harassment', 'Harassment or bullying')}</span>
         </label>
         <label class="mb-reportOption">
           <input type="radio" name="reportReason" value="inappropriate">
-          <span>Inappropriate content</span>
+          <span>${getTranslation('community_report_inappropriate', 'Inappropriate content')}</span>
         </label>
         <label class="mb-reportOption">
           <input type="radio" name="reportReason" value="self-harm">
-          <span>Self-harm or dangerous content</span>
+          <span>${getTranslation('community_report_self_harm', 'Self-harm or dangerous content')}</span>
         </label>
         <label class="mb-reportOption">
           <input type="radio" name="reportReason" value="other">
-          <span>Other</span>
+          <span>${getTranslation('community_report_other', 'Other')}</span>
         </label>
       </div>
       <div class="mb-reportModalActions">
-        <button class="mb-btn mb-cancelReportBtn" type="button">Cancel</button>
-        <button class="mb-btn mb-submitReportBtn" type="button" disabled>Submit Report</button>
+        <button class="mb-btn mb-cancelReportBtn" type="button">${getTranslation('community_cancel', 'Cancel')}</button>
+        <button class="mb-btn mb-submitReportBtn" type="button" disabled>${getTranslation('community_submit_report', 'Submit Report')}</button>
       </div>
     </div>
   `;
@@ -1062,10 +1062,10 @@ async function handlePost() {
 function getUserLevel(authorName) {
   const hash = (authorName || '').split('').reduce((a, c) => a + c.charCodeAt(0), 0);
   const level = hash % 4;
-  if (level === 3) return { label: '🏆 Champion', cls: 'mb-levelBadge--champion' };
-  if (level === 2) return { label: '💪 Supporter', cls: 'mb-levelBadge--supporter' };
-  if (level === 1) return { label: '👤 Regular', cls: 'mb-levelBadge--regular' };
-  return { label: '🌱 Newcomer', cls: 'mb-levelBadge--newcomer' };
+  if (level === 3) return { label: '🏆 ' + getTranslation('community_level_champion', 'Champion'), cls: 'mb-levelBadge--champion' };
+  if (level === 2) return { label: '💪 ' + getTranslation('community_level_supporter', 'Supporter'), cls: 'mb-levelBadge--supporter' };
+  if (level === 1) return { label: '👤 ' + getTranslation('community_level_regular', 'Regular'), cls: 'mb-levelBadge--regular' };
+  return { label: '🌱 ' + getTranslation('community_level_newcomer', 'Newcomer'), cls: 'mb-levelBadge--newcomer' };
 }
 
 function createPostElement(postData, timeStr) {
@@ -1074,16 +1074,17 @@ function createPostElement(postData, timeStr) {
   article.setAttribute('data-text', postData.content);
   article.setAttribute('data-id', postData.id);
   article.setAttribute('data-email', postData.author_email);
+  article.setAttribute('data-author-id', postData.author_id || '');
   article.setAttribute('data-pinned', postData.is_pinned ? 'true' : 'false');
 
   const isOwnPost = currentUser && currentUser.email === postData.author_email;
   const isAdmin = currentUser && currentUser.email === ADMIN_EMAIL;
   const showDeleteButton = canDeletePost(postData.author_email);
   const deleteButton = showDeleteButton
-    ? `<button class="mb-btn mb-deleteBtn" type="button" style="color: #dc2626;">Delete</button>`
+    ? `<button class="mb-btn mb-deleteBtn" type="button" style="color: #dc2626;">${getTranslation('community_delete', 'Delete')}</button>`
     : '';
   const editButton = isOwnPost
-    ? `<button class="mb-btn mb-editBtn" type="button">Edit</button>`
+    ? `<button class="mb-btn mb-editBtn" type="button">${getTranslation('community_edit', 'Edit')}</button>`
     : '';
   const pinButton = isAdmin
     ? `<button class="mb-btn mb-pinBtn" type="button" title="${postData.is_pinned ? 'Unpin post' : 'Pin post'}" data-translate="${postData.is_pinned ? 'community_unpin' : 'community_pin'}">${postData.is_pinned ? '📌 Unpin' : '📌 Pin'}</button>`
@@ -1145,21 +1146,21 @@ function createPostElement(postData, timeStr) {
     ${mediaHtml}
     <div class="mb-postFooter">
       <div class="mb-reactions">
-        <button class="mb-btn mb-likeBtn mb-reactionBtn--like" type="button"><span class="heart-icon">♡</span> Like <span class="like-count">${likeCount > 0 ? likeCount : ''}</span></button>
+        <button class="mb-btn mb-likeBtn mb-reactionBtn--like" type="button"><span class="heart-icon">♡</span> ${getTranslation('community_like', 'Like')} <span class="like-count">${likeCount > 0 ? likeCount : ''}</span></button>
         <div class="mb-reactionPicker" style="display:none;">
-          <button class="mb-reactionOption" data-reaction="support" title="Support">❤️</button>
-          <button class="mb-reactionOption" data-reaction="insightful" title="Insightful">💡</button>
-          <button class="mb-reactionOption" data-reaction="hug" title="Hug">🤗</button>
-          <button class="mb-reactionOption" data-reaction="applause" title="Applause">👏</button>
+          <button class="mb-reactionOption" data-reaction="support" title="${getTranslation('community_reaction_support', 'Support')}">❤️</button>
+          <button class="mb-reactionOption" data-reaction="insightful" title="${getTranslation('community_reaction_insightful', 'Insightful')}">💡</button>
+          <button class="mb-reactionOption" data-reaction="hug" title="${getTranslation('community_reaction_hug', 'Hug')}">🤗</button>
+          <button class="mb-reactionOption" data-reaction="applause" title="${getTranslation('community_reaction_applause', 'Applause')}">👏</button>
         </div>
       </div>
-      <button class="mb-btn mb-commentBtn" type="button">Comment ${commentCount > 0 ? '(' + commentCount + ')' : ''}</button>
-      <button class="mb-btn mb-shareBtn" type="button">Share</button>
-      <button class="mb-btn mb-bookmarkBtn" type="button" title="Bookmark">🔖</button>
+      <button class="mb-btn mb-commentBtn" type="button">${getTranslation('community_comment', 'Comment')} ${commentCount > 0 ? '(' + commentCount + ')' : ''}</button>
+      <button class="mb-btn mb-shareBtn" type="button">${getTranslation('community_share', 'Share')}</button>
+      <button class="mb-btn mb-bookmarkBtn" type="button" title="${getTranslation('community_bookmark', 'Bookmark')}">🔖</button>
       ${editButton}
       ${pinButton}
       ${deleteButton}
-      <button class="mb-btn mb-reportBtn" type="button" title="Report post">⚑</button>
+      <button class="mb-btn mb-reportBtn" type="button" title="${getTranslation('community_report', 'Report post')}">⚑</button>
     </div>
   `;
 
@@ -1744,6 +1745,85 @@ async function init() {
 document.addEventListener('DOMContentLoaded', init);
 
 
+
+// ==================== FOLLOWING FEED ====================
+async function loadFollowingPosts() {
+  if (!currentUser) return;
+
+  const feedList = document.getElementById('feedList');
+  if (!feedList) return;
+
+  const existingSignIn = feedList.querySelector('.mb-followingSignIn');
+  if (existingSignIn) existingSignIn.remove();
+  const existingEmpty = feedList.querySelector('.mb-followingEmpty');
+  if (existingEmpty) existingEmpty.remove();
+
+  const posts = Array.from(feedList.querySelectorAll('.mb-post'));
+  posts.forEach(p => p.style.display = 'none');
+
+  const client = initSupabase();
+  if (!client) return;
+
+  try {
+    const { data: follows, error: followError } = await client
+      .from('follows')
+      .select('following_id')
+      .eq('follower_id', currentUser.id);
+
+    if (followError) {
+      console.warn('Follows table may not exist yet:', followError.message);
+      showFollowingEmpty(feedList, true);
+      return;
+    }
+
+    const followedIds = (follows || []).map(f => f.following_id);
+
+    if (followedIds.length === 0) {
+      showFollowingEmpty(feedList, false);
+      return;
+    }
+
+    let visibleCount = 0;
+    posts.forEach(post => {
+      const postAuthorId = post.getAttribute('data-author-id');
+      if (postAuthorId && followedIds.includes(postAuthorId)) {
+        post.style.display = '';
+        visibleCount++;
+      }
+    });
+
+    if (visibleCount === 0) {
+      showFollowingEmpty(feedList, false);
+    }
+  } catch (err) {
+    console.error('Error loading following posts:', err);
+    showFollowingEmpty(feedList, true);
+  }
+}
+
+function showFollowingEmpty(feedList, isError) {
+  const el = document.createElement('div');
+  el.className = 'mb-followingEmpty';
+  if (isError) {
+    el.innerHTML = `
+      <div style="text-align:center; padding:60px 20px;">
+        <div style="font-size:48px; margin-bottom:16px;">👥</div>
+        <h3 style="margin-bottom:8px; color:#333; font-size:18px;" data-translate="community_following_empty_title">No followed posts yet</h3>
+        <p style="color:#666; max-width:360px; margin:0 auto; line-height:1.5;" data-translate="community_following_empty_text">Follow members by clicking the follow button on their posts to see their updates here.</p>
+      </div>
+    `;
+  } else {
+    el.innerHTML = `
+      <div style="text-align:center; padding:60px 20px;">
+        <div style="font-size:48px; margin-bottom:16px;">👥</div>
+        <h3 style="margin-bottom:8px; color:#333; font-size:18px;" data-translate="community_following_empty_title">No followed posts yet</h3>
+        <p style="color:#666; max-width:360px; margin:0 auto; line-height:1.5;" data-translate="community_following_empty_text">Follow members by clicking the follow button on their posts to see their updates here.</p>
+      </div>
+    `;
+  }
+  feedList.appendChild(el);
+  if (typeof applyTranslations === 'function') applyTranslations();
+}
 
 // ==================== POPULAR DISCUSSIONS ====================
 async function loadPopularDiscussions() {

@@ -1517,10 +1517,10 @@
 
   <script>
     (function() {
-      var phraseKeys = [];
-      for (var n = 1; n <= 46; n++) {
-        phraseKeys.push("hero_phrase_" + n);
-      }
+      var phrases = {
+        "hero_phrase_1":"One World","hero_phrase_2":"Believe in Love","hero_phrase_3":"Life","hero_phrase_4":"You Matter","hero_phrase_5":"Breathe","hero_phrase_6":"You Are Enough","hero_phrase_7":"Keep Going","hero_phrase_8":"Hope","hero_phrase_9":"Be Kind","hero_phrase_10":"Together","hero_phrase_11":"Heal","hero_phrase_12":"Rise","hero_phrase_13":"Courage","hero_phrase_14":"Peace","hero_phrase_15":"You're Not Alone","hero_phrase_16":"Strength","hero_phrase_17":"Let Go","hero_phrase_18":"Dream","hero_phrase_19":"Love Yourself","hero_phrase_20":"Be Present","hero_phrase_21":"It Gets Better","hero_phrase_22":"Stand Tall","hero_phrase_23":"Belong","hero_phrase_24":"Trust the Journey","hero_phrase_25":"Believe","hero_phrase_26":"Grow","hero_phrase_27":"Embrace Change","hero_phrase_28":"Stay","hero_phrase_29":"Shine","hero_phrase_30":"You Are Loved","hero_phrase_31":"Never Give Up","hero_phrase_32":"Begin Again","hero_phrase_33":"Choose Joy","hero_phrase_34":"Stand Tall","hero_phrase_35":"Find Peace","hero_phrase_36":"Rise Above","hero_phrase_37":"Keep Growing","hero_phrase_38":"Feel Deeply","hero_phrase_39":"Stay Present","hero_phrase_40":"Own Your Story","hero_phrase_41":"Heal Gently","hero_phrase_42":"Dream Big","hero_phrase_43":"Trust Yourself","hero_phrase_44":"Breathe Easy","hero_phrase_45":"Be Brave","hero_phrase_46":"Shine Bright"
+      };
+      var phraseKeys = Object.keys(phrases);
 
       function shuffle(arr) {
         for (var j = arr.length - 1; j > 0; j--) {
@@ -1531,9 +1531,10 @@
 
       function getPhrase(key) {
         if (window.MindBalanceTranslations && window.MindBalanceTranslations.getTranslationSync) {
-          return window.MindBalanceTranslations.getTranslationSync(key);
+          var t = window.MindBalanceTranslations.getTranslationSync(key);
+          if (t && t !== key) return t;
         }
-        return key;
+        return phrases[key] || key;
       }
 
       var shuffledKeys = phraseKeys.slice();

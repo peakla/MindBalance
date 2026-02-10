@@ -305,7 +305,6 @@ def build():
 
     rename_map = {
         "MindBalanceLogo.svg": "MindSpaceLogo.svg",
-        "MindBalanceVideo.mp4": "MindSpaceVideo.mp4",
         "MindBalanceHub.mp4": "MindSpaceHub.mp4",
     }
     images_dir = os.path.join(OUTPUT_DIR, "assets", "images")

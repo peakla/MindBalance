@@ -345,7 +345,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
       }
     } else {
-      window.addEventListener('mindbalance:authready', (e) => {
+      window.addEventListener('mindspace:authready', (e) => {
         handleAuth(e.detail.user);
       });
     }
@@ -462,7 +462,7 @@ async function loadProfileData(userId) {
     } else {
       const name = profile.display_name || profile.username || profile.email || 'U';
       const initials = name.split(' ').map(w => w[0]).join('').toUpperCase().slice(0, 2) || name.substring(0, 2).toUpperCase();
-      const colors = ['#AF916D','#E57373','#64B5F6','#81C784','#FFD54F','#BA68C8','#4DB6AC','#FF8A65','#90A4AE','#A1887F'];
+      const colors = ['#2068A8','#E57373','#64B5F6','#81C784','#FFD54F','#BA68C8','#4DB6AC','#FF8A65','#90A4AE','#A1887F'];
       const colorIndex = name.charCodeAt(0) % colors.length;
       let initialsEl = document.getElementById('avatarInitials');
       if (!initialsEl) {
@@ -1099,8 +1099,8 @@ function setupEditProfile() {
     updateProfileCompletion(userProfile);
 
 
-    if (window.MindBalanceImmersive?.updateGreeting) {
-      window.MindBalanceImmersive.updateGreeting();
+    if (window.MindSpaceImmersive?.updateGreeting) {
+      window.MindSpaceImmersive.updateGreeting();
     }
 
     modal.hidden = true;
@@ -1147,8 +1147,8 @@ function setupSettings() {
     updateProfileCompletion(userProfile);
 
 
-    if (window.MindBalanceImmersive?.updateGreeting) {
-      window.MindBalanceImmersive.updateGreeting();
+    if (window.MindSpaceImmersive?.updateGreeting) {
+      window.MindSpaceImmersive.updateGreeting();
     }
 
     ToastManager.success('Settings saved!');
@@ -1450,7 +1450,7 @@ async function checkAndAwardBadges(allAchievements, unlockedIds) {
       return {
         user_id: currentUser.id,
         type: 'achievement',
-        from_user_name: 'MindBalance',
+        from_user_name: 'MindSpace',
         content: `You earned the "${achievement?.name || 'Achievement'}" badge: ${achievement?.description || ''}`,
         read: false
       };
@@ -2024,8 +2024,8 @@ async function loadStreakCalendar() {
   let engagementDays = [];
 
 
-  if (window.MindBalanceAuth && window.MindBalanceAuth.getReadingCalendar) {
-    engagementDays = await window.MindBalanceAuth.getReadingCalendar(targetUserId, 28);
+  if (window.MindSpaceAuth && window.MindSpaceAuth.getReadingCalendar) {
+    engagementDays = await window.MindSpaceAuth.getReadingCalendar(targetUserId, 28);
   } else {
 
     const supabaseClient = getSupabaseClient();
@@ -2111,7 +2111,7 @@ function updateStreakMilestones(currentStreak) {
 }
 
 
-window.addEventListener('mindbalance:streakupdated', (e) => {
+window.addEventListener('mindspace:streakupdated', (e) => {
   const { currentStreak, longestStreak } = e.detail;
 
   const streakEl = document.getElementById('streakNumber');
@@ -2755,7 +2755,7 @@ document.addEventListener('DOMContentLoaded', setupQuickActions);
 
 
 function createFollowAvatar(profile) {
-  const colors = ['#AF916D','#E57373','#64B5F6','#81C784','#FFD54F','#BA68C8','#4DB6AC','#FF8A65','#90A4AE','#A1887F'];
+  const colors = ['#2068A8','#E57373','#64B5F6','#81C784','#FFD54F','#BA68C8','#4DB6AC','#FF8A65','#90A4AE','#A1887F'];
   if (profile.avatar_url) {
     const avatar = document.createElement('img');
     avatar.className = 'mb-follow-item__avatar';
@@ -3108,14 +3108,14 @@ function showOnboardingModal() {
       updateProfileCompletion(userProfile);
 
 
-      if (window.MindBalanceImmersive?.updateGreeting) {
-        window.MindBalanceImmersive.updateGreeting();
+      if (window.MindSpaceImmersive?.updateGreeting) {
+        window.MindSpaceImmersive.updateGreeting();
       }
 
 
       hideOnboardingModal();
 
-      ToastManager.success('Profile setup complete! Welcome to MindBalance!');
+      ToastManager.success('Profile setup complete! Welcome to MindSpace!');
     } catch (error) {
       console.error('Onboarding error:', error);
       ToastManager.error('Failed to save profile. Please try again.');

@@ -31,10 +31,10 @@
 
   <style>
     :root {
-      --primary: #7BBDF7;
-      --primary-hover: #4893D4;
-      --primary-light: #e4b584;
-      --accent: #7BBDF7;
+      --primary: #2068A8;
+      --primary-hover: #1a5a8f;
+      --primary-light: #38b6ff;
+      --accent: #2068A8;
       --success: #10b981;
       --success-bg: #dcfce7;
       --error: #ef4444;
@@ -46,7 +46,7 @@
       --border: #e5e7eb;
       --bg: #f9fafb;
       --card: #ffffff;
-      --panel-bg: #7BBDF7;
+      --panel-bg: #2068A8;
       --panel-text: #1f2937;
     }
     
@@ -332,7 +332,7 @@
     .form-group input:focus {
       border-color: var(--primary);
       background: var(--card);
-      box-shadow: 0 0 0 4px rgba(212, 165, 116, 0.15);
+      box-shadow: 0 0 0 4px rgba(32, 104, 168, 0.15);
     }
     
     .form-group input:focus + .input-icon,
@@ -423,9 +423,9 @@
     }
     
     .btn-primary:hover {
-      background: linear-gradient(135deg, var(--primary-hover) 0%, #b5844f 100%);
+      background: linear-gradient(135deg, var(--primary-hover) 0%, #165a85 100%);
       transform: translateY(-3px);
-      box-shadow: 0 12px 28px rgba(212, 165, 116, 0.45);
+      box-shadow: 0 12px 28px rgba(32, 104, 168, 0.45);
     }
     
     .btn-primary:active {
@@ -630,7 +630,7 @@
       font-size: 1.5rem;
       font-weight: 600;
       margin: 0 auto 14px;
-      box-shadow: 0 4px 12px rgba(212, 165, 116, 0.4);
+      box-shadow: 0 4px 12px rgba(32, 104, 168, 0.4);
     }
     
     .user-info .email {
@@ -736,12 +736,12 @@
     
     [data-theme="dark"] .auth-panel::before,
     body.dark-mode .auth-panel::before {
-      background: rgba(109, 179, 242, 0.15);
+      background: rgba(155, 126, 217, 0.15);
     }
     
     [data-theme="dark"] .auth-panel::after,
     body.dark-mode .auth-panel::after {
-      background: rgba(109, 179, 242, 0.1);
+      background: rgba(155, 126, 217, 0.1);
     }
     
     [data-theme="dark"] .panel-title,
@@ -761,13 +761,13 @@
     
     [data-theme="dark"] .panel-feature-icon,
     body.dark-mode .panel-feature-icon {
-      background: rgba(109, 179, 242, 0.25);
-      border-color: rgba(109, 179, 242, 0.3);
+      background: rgba(155, 126, 217, 0.25);
+      border-color: rgba(155, 126, 217, 0.3);
     }
     
     [data-theme="dark"] .panel-stats,
     body.dark-mode .panel-stats {
-      border-top-color: rgba(109, 179, 242, 0.3);
+      border-top-color: rgba(155, 126, 217, 0.3);
     }
     
     [data-theme="dark"] .panel-stat-number,
@@ -782,8 +782,8 @@
     
     [data-theme="dark"] .panel-testimonial,
     body.dark-mode .panel-testimonial {
-      background: rgba(109, 179, 242, 0.15);
-      border-color: rgba(109, 179, 242, 0.2);
+      background: rgba(155, 126, 217, 0.15);
+      border-color: rgba(155, 126, 217, 0.2);
     }
     
     [data-theme="dark"] .panel-testimonial-text,
@@ -832,7 +832,7 @@
     [data-theme="dark"] .form-group input:focus,
     body.dark-mode .form-group input:focus {
       background: #2f2f50;
-      border-color: #6DB3F2;
+      border-color: #9b7ed9;
     }
     
     [data-theme="dark"] .form-group input::placeholder,
@@ -883,7 +883,7 @@
     
     [data-theme="dark"] .toggle-link a,
     body.dark-mode .toggle-link a {
-      color: #6DB3F2;
+      color: #9b7ed9;
     }
     
     [data-theme="dark"] .help-text,
@@ -891,17 +891,6 @@
       background: #3a3520;
       border-color: #5a4a20;
       color: #fcd34d;
-    }
-
-    [data-theme="dark"] .btn i,
-    body.dark-mode .btn i,
-    [data-theme="dark"] .fas,
-    body.dark-mode .fas,
-    [data-theme="dark"] .help-text i,
-    body.dark-mode .help-text i,
-    [data-theme="dark"] .back-link i,
-    body.dark-mode .back-link i {
-      color: inherit;
     }
     
     [data-theme="dark"] .mobile-logo img,
@@ -911,19 +900,19 @@
     
     [data-theme="dark"] .btn-primary,
     body.dark-mode .btn-primary {
-      background: linear-gradient(135deg, #6DB3F2 0%, #4A93D4 100%);
-      box-shadow: 0 4px 15px rgba(109, 179, 242, 0.3);
+      background: linear-gradient(135deg, #9b7ed9 0%, #7c5cbf 100%);
+      box-shadow: 0 4px 15px rgba(155, 126, 217, 0.3);
     }
     
     [data-theme="dark"] .btn-primary:hover,
     body.dark-mode .btn-primary:hover {
       background: linear-gradient(135deg, #a88de3 0%, #8a6acd 100%);
-      box-shadow: 0 6px 20px rgba(109, 179, 242, 0.4);
+      box-shadow: 0 6px 20px rgba(155, 126, 217, 0.4);
     }
     
     [data-theme="dark"] .btn-guest,
     body.dark-mode .btn-guest {
-      background: linear-gradient(135deg, #3B8DD4 0%, #4f46e5 100%);
+      background: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%);
       box-shadow: 0 4px 15px rgba(99, 102, 241, 0.3);
     }
     
@@ -976,7 +965,7 @@
     
     [data-theme="dark"] .back-link:hover,
     body.dark-mode .back-link:hover {
-      color: #6DB3F2;
+      color: #9b7ed9;
     }
     
     [data-theme="dark"] .input-icon,
@@ -991,7 +980,24 @@
     
     [data-theme="dark"] .password-toggle:hover,
     body.dark-mode .password-toggle:hover {
-      color: #6DB3F2;
+      color: #9b7ed9;
+    }
+    
+    [data-theme="dark"] .btn i,
+    [data-theme="dark"] .btn .fas,
+    body.dark-mode .btn i,
+    body.dark-mode .btn .fas {
+      color: inherit;
+    }
+    
+    [data-theme="dark"] .help-text i,
+    body.dark-mode .help-text i {
+      color: var(--primary);
+    }
+    
+    [data-theme="dark"] .back-link i,
+    body.dark-mode .back-link i {
+      color: inherit;
     }
     
     
@@ -1224,8 +1230,8 @@
     var currentHost = window.location.hostname;
     var isMindSpaceDomain = currentHost === 'mind' + 'space.site' || currentHost === 'www.mind' + 'space.site';
     
-    if (false) {
-      /* redirect handler not needed on MindSpace */
+    if (isOAuthCallback && !hasOAuthOrigin && !isMindSpaceDomain) {
+      var targetUrl = 'https://mind' + 'space.site/auth/' + search + hash;
       window.location.replace(targetUrl);
       return;
     }
@@ -1468,7 +1474,7 @@
     const { data, error } = await sb.auth.signInWithOAuth({
       provider: 'google',
       options: {
-        redirectTo: 'https://mindspace.site/auth/',
+        redirectTo: window.location.origin + '/auth/',
         skipBrowserRedirect: true
       }
     });

@@ -103,7 +103,7 @@ const ProfileAnalytics = (function() {
           <div class="mb-heatmap__legend-item" style="background: #e8dfd4;"></div>
           <div class="mb-heatmap__legend-item" style="background: #d4c4b0;"></div>
           <div class="mb-heatmap__legend-item" style="background: #c9ad8c;"></div>
-          <div class="mb-heatmap__legend-item" style="background: #d4a574;"></div>
+          <div class="mb-heatmap__legend-item" style="background: #2068A8;"></div>
           <span>More</span>
         </div>
       </div>

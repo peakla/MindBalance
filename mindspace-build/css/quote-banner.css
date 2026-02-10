@@ -15,7 +15,7 @@
   transform: translateX(-50%);
   font-size: 8rem;
   font-family: Georgia, serif;
-  color: rgba(91, 164, 230, 0.15);
+  color: rgba(32, 104, 168, 0.15);
   line-height: 1;
   pointer-events: none;
 }
@@ -55,7 +55,7 @@
   font-family: 'Poppins', sans-serif;
   font-size: 1rem;
   font-weight: 600;
-  color: var(--user-accent, #5BA4E6);
+  color: var(--user-accent, #2068A8);
   text-transform: uppercase;
   letter-spacing: 1px;
   opacity: 1;
@@ -90,12 +90,12 @@
 }
 
 .quote-banner__dot.active {
-  background: var(--user-accent, #5BA4E6);
+  background: var(--user-accent, #2068A8);
   transform: scale(1.2);
 }
 
 .quote-banner__dot:focus-visible {
-  outline: 2px solid var(--user-accent, #5BA4E6);
+  outline: 2px solid var(--user-accent, #2068A8);
   outline-offset: 2px;
 }
 
@@ -105,7 +105,7 @@
 }
 
 [data-theme="dark"] .quote-banner::before {
-  color: rgba(109, 179, 242, 0.1);
+  color: rgba(155, 126, 217, 0.1);
 }
 
 [data-theme="dark"] .quote-banner__text {
@@ -113,7 +113,7 @@
 }
 
 [data-theme="dark"] .quote-banner__author {
-  color: var(--user-accent, #6DB3F2);
+  color: var(--user-accent, #9b7ed9);
 }
 
 [data-theme="dark"] .quote-banner__dot {
@@ -125,7 +125,7 @@
 }
 
 [data-theme="dark"] .quote-banner__dot.active {
-  background: var(--user-accent, #6DB3F2);
+  background: var(--user-accent, #9b7ed9);
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -173,7 +173,7 @@
 .wellness-tip__icon {
   width: 48px;
   height: 48px;
-  background: linear-gradient(135deg, var(--user-accent, #5BA4E6) 0%, #A8D4FF 100%);
+  background: linear-gradient(135deg, var(--user-accent, #2068A8) 0%, #38b6ff 100%);
   border-radius: 12px;
   display: flex;
   align-items: center;
@@ -187,14 +187,14 @@
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 2px;
-  color: var(--user-accent, #5BA4E6);
+  color: var(--user-accent, #2068A8);
 }
 
 .wellness-tip__card {
   background: linear-gradient(135deg, #f8f5f0 0%, #ebe6df 100%);
   border-radius: 16px;
   padding: 32px;
-  border: 1px solid rgba(91, 164, 230, 0.2);
+  border: 1px solid rgba(32, 104, 168, 0.2);
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
 }
 
@@ -219,7 +219,7 @@
   align-items: center;
   gap: 8px;
   padding: 12px 24px;
-  background: var(--user-accent, #5BA4E6);
+  background: var(--user-accent, #2068A8);
   color: #fff;
   font-family: 'Poppins', sans-serif;
   font-size: 0.9rem;
@@ -231,11 +231,11 @@
 
 .wellness-tip__action:hover {
   transform: translateY(-2px);
-  box-shadow: 0 4px 15px rgba(91, 164, 230, 0.3);
+  box-shadow: 0 4px 15px rgba(32, 104, 168, 0.3);
 }
 
 .wellness-tip__action:focus-visible {
-  outline: 2px solid var(--user-accent, #5BA4E6);
+  outline: 2px solid var(--user-accent, #2068A8);
   outline-offset: 3px;
 }
 
@@ -252,16 +252,16 @@
 }
 
 [data-theme="dark"] .wellness-tip__icon {
-  background: linear-gradient(135deg, var(--user-accent, #6DB3F2) 0%, #4A93D4 100%);
+  background: linear-gradient(135deg, var(--user-accent, #9b7ed9) 0%, #7a5dc7 100%);
 }
 
 [data-theme="dark"] .wellness-tip__label {
-  color: var(--user-accent, #6DB3F2);
+  color: var(--user-accent, #9b7ed9);
 }
 
 [data-theme="dark"] .wellness-tip__card {
   background: linear-gradient(135deg, #1a1a2e 0%, #16162a 100%);
-  border-color: rgba(109, 179, 242, 0.2);
+  border-color: rgba(155, 126, 217, 0.2);
 }
 
 [data-theme="dark"] .wellness-tip__title {
@@ -273,11 +273,11 @@
 }
 
 [data-theme="dark"] .wellness-tip__action {
-  background: var(--user-accent, #6DB3F2);
+  background: var(--user-accent, #9b7ed9);
 }
 
 [data-theme="dark"] .wellness-tip__action:hover {
-  box-shadow: 0 4px 15px rgba(109, 179, 242, 0.3);
+  box-shadow: 0 4px 15px rgba(155, 126, 217, 0.3);
 }
 
 [data-theme="dark"] .wellness-tip__day {

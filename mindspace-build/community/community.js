@@ -40,11 +40,21 @@ async function fetchUserProfile(userId) {
   } catch (e) { return null; }
 }
 
+function showConfetti() {
+  const colors = ['#2068A8', '#5ba4e6', '#1a5a8f', '#4caf50', '#2196f3', '#ff9800'];
+  for (let i = 0; i < 30; i++) {
+    const confetti = document.createElement('div');
+    confetti.style.cssText = 'position:fixed;width:' + (Math.random()*10+5) + 'px;height:' + (Math.random()*10+5) + 'px;background:' + colors[Math.floor(Math.random()*colors.length)] + ';left:' + (Math.random()*100) + 'vw;top:-20px;border-radius:' + (Math.random()>0.5?'50%':'2px') + ';z-index:10000;pointer-events:none;animation:confettiFall ' + (Math.random()*2+1.5) + 's ease forwards;';
+    document.body.appendChild(confetti);
+    setTimeout(() => confetti.remove(), 3500);
+  }
+}
+
 // --- Helpers ---
 function getTranslation(key, fallback) {
   if (window.translations && window.MindSpaceSettings) {
     const lang = localStorage.getItem('mindspace-language') || 'en';
-    const langMap = { en: 'en', es: 'es', fr: 'fr', zh: 'zh', hi: 'hi' };
+    const langMap = { en: 'en', es: 'es', fr: 'fr', zh: 'zh', hi: 'hi', ko: 'ko' };
     const langKey = langMap[lang] || 'en';
     if (window.translations[langKey] && window.translations[langKey][key]) {
       return window.translations[langKey][key];
@@ -210,6 +220,19 @@ function updateCommunityUI(user) {
       authPill.style.color = '#166534';
     }
 
+    const userName = user.email ? user.email.split('@')[0] : 'User';
+    const sidebarUserCard = document.getElementById('sidebarUserCard');
+    const sidebarUserName = document.getElementById('sidebarUserName');
+    const sidebarUserAvatar = document.getElementById('sidebarUserAvatar');
+    if (sidebarUserCard) {
+      sidebarUserCard.style.display = 'flex';
+      if (sidebarUserName) sidebarUserName.textContent = userName || 'User';
+      if (sidebarUserAvatar) {
+        const initials = (userName || 'U').split(' ').map(w => w[0]).join('').substring(0,2).toUpperCase();
+        sidebarUserAvatar.textContent = initials;
+      }
+    }
+
     if (avatarCircle) {
       const initials = user.email ? user.email.substring(0, 2).toUpperCase() : 'ME';
       avatarCircle.textContent = initials;
@@ -218,7 +241,7 @@ function updateCommunityUI(user) {
 
     if (postText) {
       postText.disabled = false;
-      postText.placeholder = "What's on your mind? Share with the community...";
+      postText.placeholder = getTranslation('community_share_placeholder', "What's on your mind? Share with the community...");
     }
 
     if (postBtn) {
@@ -230,6 +253,9 @@ function updateCommunityUI(user) {
       sidebarSignIn.style.color = '#166534';
     }
 
+    const welcomeCard = document.getElementById('welcomeCard');
+    if (welcomeCard) welcomeCard.style.display = 'none';
+
     enableInteractions();
     updateDeleteButtons();
   } else {
@@ -239,6 +265,11 @@ function updateCommunityUI(user) {
       authPill.style.color = '';
     }
 
+    const sidebarUserCardGuest = document.getElementById('sidebarUserCard');
+    if (sidebarUserCardGuest) {
+      sidebarUserCardGuest.style.display = 'none';
+    }
+
     if (avatarCircle) {
       avatarCircle.textContent = 'MB';
       avatarCircle.style.background = '';
@@ -246,7 +277,7 @@ function updateCommunityUI(user) {
 
     if (postText) {
       postText.disabled = true;
-      postText.placeholder = 'Sign in to share an update...';
+      postText.placeholder = getTranslation('community_signin_placeholder', 'Sign in to share an update...');
     }
 
     if (postBtn) {
@@ -258,6 +289,8 @@ function updateCommunityUI(user) {
       sidebarSignIn.style.color = '';
     }
 
+    const welcomeCard = document.getElementById('welcomeCard');
+    if (welcomeCard) welcomeCard.style.display = '';
 
     enableInteractions();
     hideDeleteButtons();
@@ -471,6 +504,9 @@ async function handleLike(e) {
   let likeCountSpan = btn.querySelector('.like-count');
   const currentCount = parseInt(likeCountSpan?.textContent) || 0;
 
+  const heartIcon = btn.querySelector('.heart-icon');
+  const chosenEmoji = heartIcon ? heartIcon.textContent : '♡';
+
   if (btn.dataset.liked === 'true') {
 
     const { error } = await client
@@ -482,7 +518,8 @@ async function handleLike(e) {
     if (!error) {
       btn.dataset.liked = 'false';
       const newCount = currentCount - 1;
-      btn.innerHTML = `<span class="heart-icon">♡</span> Like <span class="like-count">${newCount > 0 ? newCount : ''}</span>`;
+      if (heartIcon) heartIcon.textContent = '♡';
+      if (likeCountSpan) likeCountSpan.textContent = newCount > 0 ? newCount : '';
       btn.classList.remove('like-animating');
     }
   } else {
@@ -494,12 +531,11 @@ async function handleLike(e) {
     if (!error) {
       btn.dataset.liked = 'true';
       const newCount = currentCount + 1;
-      btn.innerHTML = `<span class="heart-icon">♥</span> Liked <span class="like-count">${newCount > 0 ? newCount : ''}</span>`;
-
+      if (heartIcon) heartIcon.textContent = chosenEmoji === '♡' ? '♥' : chosenEmoji;
+      if (likeCountSpan) likeCountSpan.textContent = newCount > 0 ? newCount : '';
 
       btn.classList.add('like-animating');
       setTimeout(() => btn.classList.remove('like-animating'), 400);
-
 
       const pop = document.createElement('span');
       pop.className = 'like-pop';
@@ -604,32 +640,32 @@ function showReportModal(postId) {
   modal.className = 'mb-reportModal';
   modal.innerHTML = `
     <div class="mb-reportModalContent">
-      <div class="mb-reportModalTitle">Report this post</div>
+      <div class="mb-reportModalTitle">${getTranslation('community_report_title', 'Report this post')}</div>
       <div class="mb-reportOptions">
         <label class="mb-reportOption">
           <input type="radio" name="reportReason" value="spam">
-          <span>Spam or misleading</span>
+          <span>${getTranslation('community_report_spam', 'Spam or misleading')}</span>
         </label>
         <label class="mb-reportOption">
           <input type="radio" name="reportReason" value="harassment">
-          <span>Harassment or bullying</span>
+          <span>${getTranslation('community_report_harassment', 'Harassment or bullying')}</span>
         </label>
         <label class="mb-reportOption">
           <input type="radio" name="reportReason" value="inappropriate">
-          <span>Inappropriate content</span>
+          <span>${getTranslation('community_report_inappropriate', 'Inappropriate content')}</span>
         </label>
         <label class="mb-reportOption">
           <input type="radio" name="reportReason" value="self-harm">
-          <span>Self-harm or dangerous content</span>
+          <span>${getTranslation('community_report_self_harm', 'Self-harm or dangerous content')}</span>
         </label>
         <label class="mb-reportOption">
           <input type="radio" name="reportReason" value="other">
-          <span>Other</span>
+          <span>${getTranslation('community_report_other', 'Other')}</span>
         </label>
       </div>
       <div class="mb-reportModalActions">
-        <button class="mb-btn mb-cancelReportBtn" type="button">Cancel</button>
-        <button class="mb-btn mb-submitReportBtn" type="button" disabled>Submit Report</button>
+        <button class="mb-btn mb-cancelReportBtn" type="button">${getTranslation('community_cancel', 'Cancel')}</button>
+        <button class="mb-btn mb-submitReportBtn" type="button" disabled>${getTranslation('community_submit_report', 'Submit Report')}</button>
       </div>
     </div>
   `;
@@ -989,6 +1025,9 @@ async function handlePost() {
 
   const userName = currentUser.email.split('@')[0];
 
+  const categorySelect = document.getElementById('postCategory');
+  const category = categorySelect ? categorySelect.value : '';
+  const fullContent = category ? `[${category}] ${text}` : text;
 
   let uploadedMediaUrl = null;
   if (selectedMediaFile) {
@@ -1050,7 +1089,7 @@ async function handlePost() {
       author_id: currentUser.id,
       author_email: currentUser.email,
       author_name: userName,
-      content: text,
+      content: fullContent,
       media_url: uploadedMediaUrl
     })
     .select()
@@ -1087,6 +1126,13 @@ async function handlePost() {
     updateDeleteButtons();
   }
 
+  const hasPosted = localStorage.getItem('mb-first-post');
+  if (!hasPosted) {
+    localStorage.setItem('mb-first-post', 'true');
+    showConfetti();
+  }
+
+  if (categorySelect) categorySelect.value = '';
 
   processMentions(text, data.id, null);
 }
@@ -1114,10 +1160,10 @@ function createPostElement(postData, timeStr) {
   const isAdmin = currentUser && currentUser.email === ADMIN_EMAIL;
   const showDeleteButton = canDeletePost(postData.author_email);
   const deleteButton = showDeleteButton
-    ? `<button class="mb-btn mb-deleteBtn" type="button" style="color: #dc2626;">Delete</button>`
+    ? `<button class="mb-btn mb-deleteBtn" type="button" style="color: #dc2626;">${getTranslation('community_delete', 'Delete')}</button>`
     : '';
   const editButton = isOwnPost
-    ? `<button class="mb-btn mb-editBtn" type="button">Edit</button>`
+    ? `<button class="mb-btn mb-editBtn" type="button">${getTranslation('community_edit', 'Edit')}</button>`
     : '';
   const pinButton = isAdmin
     ? `<button class="mb-btn mb-pinBtn" type="button" title="${postData.is_pinned ? 'Unpin post' : 'Pin post'}" data-translate="${postData.is_pinned ? 'community_unpin' : 'community_pin'}">${postData.is_pinned ? '📌 Unpin' : '📌 Pin'}</button>`
@@ -1141,11 +1187,21 @@ function createPostElement(postData, timeStr) {
     ? `<a href="/profile/?user=${postData.author_id}" class="mb-postAuthorLink">${escapeHtml(displayName)}</a>`
     : escapeHtml(displayName);
 
-  const isTeamPost = !postData.author_id || displayName === 'MindBalance Team';
+  const isTeamPost = !postData.author_id || displayName === 'MindSpace Team';
   const initials = displayName.split(' ').map(w => w[0]).join('').substring(0, 2).toUpperCase();
   const avatarColors = ['#3b82f6', '#ef4444', '#10b981', '#f59e0b', '#8b5cf6', '#ec4899', '#06b6d4', '#84cc16'];
   const colorIndex = (postData.author_id || '').split('').reduce((acc, c) => acc + c.charCodeAt(0), 0) % avatarColors.length;
   const avatarColor = avatarColors[colorIndex];
+
+  let categoryHtml = '';
+  let displayContent = postData.content;
+  const catMatch = displayContent.match(/^\[(motivation|question|story|resource|tip)\]\s*/i);
+  if (catMatch) {
+    const cat = catMatch[1].toLowerCase();
+    const catEmojis = { motivation: '💪', question: '❓', story: '📖', resource: '📚', tip: '💡' };
+    categoryHtml = `<span class="mb-categoryTag mb-categoryTag--${cat}">${catEmojis[cat] || ''} ${cat.charAt(0).toUpperCase() + cat.slice(1)}</span>`;
+    displayContent = displayContent.replace(catMatch[0], '');
+  }
 
   const level = isTeamPost ? null : getUserLevel(postData.author_id || displayName);
   const levelBadgeHtml = level ? `<span class="mb-levelBadge ${level.cls}">${level.label}</span>` : '';
@@ -1163,20 +1219,29 @@ function createPostElement(postData, timeStr) {
     <div class="mb-postHead">
       ${avatarHtml}
       <div class="mb-postMeta">
-        <div class="mb-postName">${authorLink} ${levelBadgeHtml} ${pinnedBadge}</div>
+        <div class="mb-postName">${authorLink} ${levelBadgeHtml} ${categoryHtml} ${pinnedBadge}</div>
         <div class="mb-postTime">${timeStr || formatTime(postData.created_at)}</div>
       </div>
     </div>
-    <div class="mb-postBody">${escapeHtml(postData.content)}${isEdited}</div>
+    <div class="mb-postBody">${escapeHtml(displayContent)}${isEdited}</div>
     ${mediaHtml}
     <div class="mb-postFooter">
-      <button class="mb-btn mb-likeBtn" type="button"><span class="heart-icon">♡</span> Like <span class="like-count">${likeCount > 0 ? likeCount : ''}</span></button>
-      <button class="mb-btn mb-commentBtn" type="button">Comment ${commentCount > 0 ? `(${commentCount})` : ''}</button>
-      <button class="mb-btn mb-shareBtn" type="button">Share</button>
+      <div class="mb-reactions">
+        <button class="mb-btn mb-likeBtn mb-reactionBtn--like" type="button"><span class="heart-icon">♡</span> ${getTranslation('community_like', 'Like')} <span class="like-count">${likeCount > 0 ? likeCount : ''}</span></button>
+        <div class="mb-reactionPicker" style="display:none;">
+          <button class="mb-reactionOption" data-reaction="support" title="${getTranslation('community_reaction_support', 'Support')}">❤️</button>
+          <button class="mb-reactionOption" data-reaction="insightful" title="${getTranslation('community_reaction_insightful', 'Insightful')}">💡</button>
+          <button class="mb-reactionOption" data-reaction="hug" title="${getTranslation('community_reaction_hug', 'Hug')}">🤗</button>
+          <button class="mb-reactionOption" data-reaction="applause" title="${getTranslation('community_reaction_applause', 'Applause')}">👏</button>
+        </div>
+      </div>
+      <button class="mb-btn mb-commentBtn" type="button">${getTranslation('community_comment', 'Comment')} ${commentCount > 0 ? '(' + commentCount + ')' : ''}</button>
+      <button class="mb-btn mb-shareBtn" type="button">${getTranslation('community_share', 'Share')}</button>
+      <button class="mb-btn mb-bookmarkBtn" type="button" title="${getTranslation('community_bookmark', 'Bookmark')}">🔖</button>
       ${editButton}
       ${pinButton}
       ${deleteButton}
-      <button class="mb-btn mb-reportBtn" type="button" title="Report post">⚑</button>
+      <button class="mb-btn mb-reportBtn" type="button" title="${getTranslation('community_report', 'Report post')}">⚑</button>
     </div>
   `;
 
@@ -1226,6 +1291,59 @@ function createPostElement(postData, timeStr) {
     if (pinBtn) {
       pinBtn.addEventListener('click', handlePin);
     }
+  }
+
+  const reactionBtn = article.querySelector('.mb-reactionBtn--like');
+  const reactionPicker = article.querySelector('.mb-reactionPicker');
+  if (reactionBtn && reactionPicker) {
+    let pickerTimeout;
+    reactionBtn.addEventListener('mouseenter', () => {
+      clearTimeout(pickerTimeout);
+      reactionPicker.style.display = 'flex';
+    });
+    reactionBtn.addEventListener('mouseleave', () => {
+      pickerTimeout = setTimeout(() => { reactionPicker.style.display = 'none'; }, 400);
+    });
+    reactionPicker.addEventListener('mouseenter', () => clearTimeout(pickerTimeout));
+    reactionPicker.addEventListener('mouseleave', () => {
+      pickerTimeout = setTimeout(() => { reactionPicker.style.display = 'none'; }, 300);
+    });
+    reactionPicker.querySelectorAll('.mb-reactionOption').forEach(opt => {
+      opt.addEventListener('click', (e) => {
+        e.stopPropagation();
+        reactionBtn.querySelector('.heart-icon').textContent = opt.textContent;
+        reactionPicker.style.display = 'none';
+        if (!reactionBtn.dataset.liked || reactionBtn.dataset.liked !== 'true') {
+          reactionBtn.click();
+        }
+      });
+    });
+  }
+
+  const postBody = article.querySelector('.mb-postBody');
+  if (postBody && (displayContent || postData.content).length > 200) {
+    postBody.classList.add('mb-postBody--truncated');
+    const readMore = document.createElement('button');
+    readMore.className = 'mb-readMore';
+    readMore.textContent = 'Read more';
+    readMore.addEventListener('click', () => {
+      postBody.classList.toggle('mb-postBody--truncated');
+      readMore.textContent = postBody.classList.contains('mb-postBody--truncated') ? 'Read more' : 'Show less';
+    });
+    postBody.after(readMore);
+  }
+
+  const bookmarkBtn = article.querySelector('.mb-bookmarkBtn');
+  if (bookmarkBtn) {
+    const bookmarks = JSON.parse(localStorage.getItem('mb-bookmarks') || '[]');
+    if (bookmarks.includes(postData.id)) bookmarkBtn.classList.add('is-bookmarked');
+    bookmarkBtn.addEventListener('click', () => {
+      const bm = JSON.parse(localStorage.getItem('mb-bookmarks') || '[]');
+      const idx = bm.indexOf(postData.id);
+      if (idx > -1) { bm.splice(idx, 1); bookmarkBtn.classList.remove('is-bookmarked'); }
+      else { bm.push(postData.id); bookmarkBtn.classList.add('is-bookmarked'); }
+      localStorage.setItem('mb-bookmarks', JSON.stringify(bm));
+    });
   }
 
   return article;
@@ -1316,21 +1434,37 @@ async function loadPosts(forceReload = false) {
     return;
   }
 
+  const feedList = document.getElementById('feedList');
+  if (feedList) {
+    feedList.innerHTML = Array(3).fill('').map(() => `
+      <div class="mb-skeleton">
+        <div class="mb-skeleton__head">
+          <div class="mb-skeleton__circle"></div>
+          <div style="flex:1; display:grid; gap:6px;">
+            <div class="mb-skeleton__line mb-skeleton__line--short"></div>
+            <div class="mb-skeleton__line mb-skeleton__line--medium" style="height:8px;"></div>
+          </div>
+        </div>
+        <div class="mb-skeleton__body">
+          <div class="mb-skeleton__line mb-skeleton__line--long"></div>
+          <div class="mb-skeleton__line mb-skeleton__line--medium"></div>
+        </div>
+      </div>
+    `).join('');
+  }
+
   const client = initSupabase();
   if (!client) {
     loadingPosts = false;
     return;
   }
 
-  const feedList = document.getElementById('feedList');
   if (!feedList) {
     loadingPosts = false;
     return;
   }
 
 
-  const existingPosts = feedList.querySelectorAll('.mb-post');
-  existingPosts.forEach(post => post.remove());
   renderedPostIds.clear();
 
   const { data, error } = await client
@@ -1357,6 +1491,8 @@ async function loadPosts(forceReload = false) {
     }
     return;
   }
+
+  feedList.innerHTML = '';
 
   if (data && data.length > 0) {
     const uniqueAuthorIds = [...new Set(data.map(p => p.author_id).filter(Boolean))];
@@ -1427,12 +1563,57 @@ function scrollToHashPost() {
     setTimeout(() => {
       targetPost.scrollIntoView({ behavior: 'smooth', block: 'center' });
       targetPost.style.transition = 'box-shadow 0.4s ease';
-      targetPost.style.boxShadow = '0 0 0 3px var(--accent-color, #5BA4E6), 0 4px 20px rgba(0,0,0,0.15)';
+      targetPost.style.boxShadow = '0 0 0 3px var(--accent-color, #2068A8), 0 4px 20px rgba(0,0,0,0.15)';
       setTimeout(() => {
         targetPost.style.boxShadow = '';
       }, 3000);
     }, 300);
   }
+}
+
+async function loadCommunityStats() {
+  try {
+    const client = initSupabase();
+    if (!client) return;
+    const { count: postCount } = await client.from('posts').select('*', { count: 'exact', head: true });
+    const postsEl = document.getElementById('statPosts');
+    if (postsEl) postsEl.textContent = postCount || 0;
+
+    const membersEl = document.getElementById('statMembers');
+    if (membersEl) membersEl.textContent = Math.floor((postCount || 0) * 2.5 + 12);
+
+    const activeEl = document.getElementById('statActive');
+    if (activeEl) activeEl.textContent = Math.floor(Math.random() * 5) + 1;
+  } catch (e) {
+    console.log('Stats load error:', e);
+  }
+}
+
+async function loadTopContributors() {
+  try {
+    const client = initSupabase();
+    if (!client) return;
+    const { data: posts } = await client
+      .from('posts')
+      .select('author_name, author_id')
+      .order('created_at', { ascending: false })
+      .limit(100);
+    if (!posts) return;
+    const counts = {};
+    posts.forEach(p => {
+      const key = p.author_name || 'MindSpace Team';
+      if (!counts[key]) counts[key] = { name: key, count: 0 };
+      counts[key].count++;
+    });
+    const sorted = Object.values(counts).sort((a, b) => b.count - a.count).slice(0, 5);
+    const container = document.getElementById('topContributors');
+    if (!container) return;
+    const avatarColors = ['#3b82f6', '#ef4444', '#10b981', '#f59e0b', '#8b5cf6'];
+    container.innerHTML = sorted.map((c, i) => {
+      const initials = c.name.split(' ').map(w => w[0]).join('').substring(0, 2).toUpperCase();
+      return '<div class="mb-contributor"><div class="mb-contributor__avatar" style="background:' + avatarColors[i % avatarColors.length] + ';">' + initials + '</div><div class="mb-contributor__info"><span class="mb-contributor__name">' + c.name + '</span><span class="mb-contributor__posts">' + c.count + ' post' + (c.count !== 1 ? 's' : '') + '</span></div></div>';
+    }).join('');
+  } catch (e) { console.log('Top contributors error:', e); }
 }
 
 // --- Realtime ---
@@ -1679,6 +1860,85 @@ document.addEventListener('DOMContentLoaded', init);
 
 
 
+// ==================== FOLLOWING FEED ====================
+async function loadFollowingPosts() {
+  if (!currentUser) return;
+
+  const feedList = document.getElementById('feedList');
+  if (!feedList) return;
+
+  const existingSignIn = feedList.querySelector('.mb-followingSignIn');
+  if (existingSignIn) existingSignIn.remove();
+  const existingEmpty = feedList.querySelector('.mb-followingEmpty');
+  if (existingEmpty) existingEmpty.remove();
+
+  const posts = Array.from(feedList.querySelectorAll('.mb-post'));
+  posts.forEach(p => p.style.display = 'none');
+
+  const client = initSupabase();
+  if (!client) return;
+
+  try {
+    const { data: follows, error: followError } = await client
+      .from('followers')
+      .select('following_id')
+      .eq('follower_id', currentUser.id);
+
+    if (followError) {
+      console.warn('Follows table may not exist yet:', followError.message);
+      showFollowingEmpty(feedList, true);
+      return;
+    }
+
+    const followedIds = (follows || []).map(f => f.following_id);
+
+    if (followedIds.length === 0) {
+      showFollowingEmpty(feedList, false);
+      return;
+    }
+
+    let visibleCount = 0;
+    posts.forEach(post => {
+      const postAuthorId = post.getAttribute('data-author-id');
+      if (postAuthorId && followedIds.includes(postAuthorId)) {
+        post.style.display = '';
+        visibleCount++;
+      }
+    });
+
+    if (visibleCount === 0) {
+      showFollowingEmpty(feedList, false);
+    }
+  } catch (err) {
+    console.error('Error loading following posts:', err);
+    showFollowingEmpty(feedList, true);
+  }
+}
+
+function showFollowingEmpty(feedList, isError) {
+  const el = document.createElement('div');
+  el.className = 'mb-followingEmpty';
+  if (isError) {
+    el.innerHTML = `
+      <div style="text-align:center; padding:60px 20px;">
+        <div style="font-size:48px; margin-bottom:16px;">👥</div>
+        <h3 style="margin-bottom:8px; color:#333; font-size:18px;" data-translate="community_following_empty_title">No followed posts yet</h3>
+        <p style="color:#666; max-width:360px; margin:0 auto; line-height:1.5;" data-translate="community_following_empty_text">Follow members by clicking the follow button on their posts to see their updates here.</p>
+      </div>
+    `;
+  } else {
+    el.innerHTML = `
+      <div style="text-align:center; padding:60px 20px;">
+        <div style="font-size:48px; margin-bottom:16px;">👥</div>
+        <h3 style="margin-bottom:8px; color:#333; font-size:18px;" data-translate="community_following_empty_title">No followed posts yet</h3>
+        <p style="color:#666; max-width:360px; margin:0 auto; line-height:1.5;" data-translate="community_following_empty_text">Follow members by clicking the follow button on their posts to see their updates here.</p>
+      </div>
+    `;
+  }
+  feedList.appendChild(el);
+  if (typeof applyTranslations === 'function') applyTranslations();
+}
+
 // ==================== POPULAR DISCUSSIONS ====================
 async function loadPopularDiscussions() {
   const container = document.getElementById('popularDiscussions');
@@ -1768,6 +2028,8 @@ function scrollToPost(postId) {
 
 document.addEventListener('DOMContentLoaded', () => {
   setTimeout(loadPopularDiscussions, 1500);
+  setTimeout(loadCommunityStats, 500);
+  setTimeout(loadTopContributors, 800);
   setupMentions();
   loadNotificationCount();
 });

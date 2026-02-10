@@ -369,7 +369,7 @@
         
         const item = document.createElement('div');
         item.className = 'people-suggestion';
-        const avatarColors = ['#AF916D','#E57373','#64B5F6','#81C784','#FFD54F','#BA68C8','#4DB6AC','#FF8A65','#90A4AE','#A1887F'];
+        const avatarColors = ['#2068A8','#E57373','#64B5F6','#81C784','#FFD54F','#BA68C8','#4DB6AC','#FF8A65','#90A4AE','#A1887F'];
         const pName = person.display_name || 'U';
         const pInitials = pName.split(' ').map(w => w[0]).join('').toUpperCase().slice(0, 2) || pName.substring(0, 2).toUpperCase();
         const pColorIdx = pName.charCodeAt(0) % avatarColors.length;

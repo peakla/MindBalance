@@ -395,17 +395,17 @@
   transform: translateX(-50%);
   width: 80px;
   height: 4px;
-  background: linear-gradient(135deg, #2068A8 0%, #1B5A94 100%);
+  background: linear-gradient(135deg, #5ba4e6 0%, #38b6ff 100%);
   border-radius: 2px;
 }
 
 [data-theme="dark"] .section-decorated::before {
-  background: linear-gradient(135deg, #2068A8 0%, #143E6B 100%);
+  background: linear-gradient(135deg, #5ba4e6 0%, #1a5a8f 100%);
 }
 
 /* === GRADIENT TEXT === */
 .gradient-text {
-  background: linear-gradient(135deg, #143E6B 0%, #2068A8 50%, #143E6B 100%);
+  background: linear-gradient(135deg, #1a5a8f 0%, #5ba4e6 50%, #1a5a8f 100%);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -413,7 +413,7 @@
 }
 
 .gradient-text-animated {
-  background: linear-gradient(135deg, #143E6B 0%, #2068A8 50%, #143E6B 100%);
+  background: linear-gradient(135deg, #1a5a8f 0%, #5ba4e6 50%, #1a5a8f 100%);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -423,7 +423,7 @@
 
 [data-theme="dark"] .gradient-text,
 [data-theme="dark"] .gradient-text-animated {
-  background: linear-gradient(135deg, #fff 0%, #2068A8 50%, #fff 100%);
+  background: linear-gradient(135deg, #fff 0%, #5ba4e6 50%, #fff 100%);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -437,7 +437,7 @@
   margin: 60px auto;
   max-width: 800px;
   text-align: center;
-  background: linear-gradient(145deg, #d4ecff 0%, #f0ebe4 50%, #e8e0d5 100%);
+  background: linear-gradient(145deg, #f0f7ff 0%, #e0eeff 50%, #d0e0f5 100%);
   border-radius: 24px;
   box-shadow: 0 20px 60px rgba(139, 115, 85, 0.12), 
               0 8px 25px rgba(0, 0, 0, 0.06),
@@ -475,7 +475,7 @@
   width: 70px;
   height: 70px;
   margin-bottom: 25px;
-  background: linear-gradient(135deg, #2068A8 0%, #1B5A94 100%);
+  background: linear-gradient(135deg, #5ba4e6 0%, #38b6ff 100%);
   border-radius: 50%;
   box-shadow: 0 10px 30px rgba(214, 189, 159, 0.35);
   animation: pulse 3s ease-in-out infinite;
@@ -503,7 +503,7 @@
   gap: 12px;
   font-size: 1.1rem;
   font-weight: 600;
-  color: #143E6B;
+  color: #1a5a8f;
   position: relative;
   z-index: 1;
 }
@@ -512,7 +512,7 @@
   content: '';
   width: 40px;
   height: 2px;
-  background: linear-gradient(90deg, transparent, #2068A8);
+  background: linear-gradient(90deg, transparent, #5ba4e6);
   border-radius: 1px;
 }
 
@@ -520,7 +520,7 @@
   content: '';
   width: 40px;
   height: 2px;
-  background: linear-gradient(90deg, #2068A8, transparent);
+  background: linear-gradient(90deg, #5ba4e6, transparent);
   border-radius: 1px;
 }
 
@@ -567,7 +567,7 @@
 }
 
 [data-theme="dark"] .quote-block__author {
-  color: #2068A8;
+  color: #5ba4e6;
 }
 
 [data-theme="dark"] .quote-block__decoration {

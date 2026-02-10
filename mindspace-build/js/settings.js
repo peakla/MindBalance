@@ -17,9 +17,9 @@
 
   // --- Accent Colors ---
   const ACCENT_COLORS = {
-    blue: { hex: '#5BA4E6', hover: '#4893D4', rgb: '91, 164, 230' },
-    purple: { hex: '#6DB3F2', hover: '#5CA3E6', rgb: '109, 179, 242' },
-    sky: { hex: '#4a90d9', hover: '#3d7fc8', rgb: '74, 144, 217' },
+    blue: { hex: '#2068A8', hover: '#1a5a8f', rgb: '32, 104, 168' },
+    purple: { hex: '#9b7ed9', hover: '#8a6dc8', rgb: '155, 126, 217' },
+    skyblue: { hex: '#4a90d9', hover: '#3d7fc8', rgb: '74, 144, 217' },
     green: { hex: '#4db896', hover: '#3fa884', rgb: '77, 184, 150' },
     teal: { hex: '#38b2ac', hover: '#2d9d98', rgb: '56, 178, 172' },
     pink: { hex: '#d97eab', hover: '#c86d9a', rgb: '217, 126, 171' },

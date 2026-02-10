@@ -18,9 +18,9 @@
   };
 
   const ACCENT_COLORS = {
-    blue: { hex: '#5BA4E6', hover: '#4893D4', rgb: '91, 164, 230', name: 'Blue' },
-    purple: { hex: '#6DB3F2', hover: '#5CA3E6', rgb: '109, 179, 242', name: 'Purple' },
-    sky: { hex: '#4a90d9', hover: '#3d7fc8', rgb: '74, 144, 217', name: 'Sky' },
+    gold: { hex: '#2068A8', hover: '#1a5a8f', rgb: '32, 104, 168', name: 'Gold' },
+    purple: { hex: '#9b7ed9', hover: '#8a6dc8', rgb: '155, 126, 217', name: 'Purple' },
+    blue: { hex: '#4a90d9', hover: '#3d7fc8', rgb: '74, 144, 217', name: 'Blue' },
     green: { hex: '#4db896', hover: '#3fa884', rgb: '77, 184, 150', name: 'Green' },
     teal: { hex: '#38b2ac', hover: '#2d9d98', rgb: '56, 178, 172', name: 'Teal' },
     pink: { hex: '#d97eab', hover: '#c86d9a', rgb: '217, 126, 171', name: 'Pink' },
@@ -33,7 +33,7 @@
       name: 'Default',
       description: 'Classic MindSpace',
       theme: 'light',
-      accent: 'blue',
+      accent: 'gold',
       fontSize: 'normal',
       highContrast: false
     },
@@ -73,7 +73,7 @@
       name: 'High Contrast',
       description: 'Maximum readability',
       theme: 'light',
-      accent: 'blue',
+      accent: 'gold',
       fontSize: 'large',
       highContrast: true
     }
@@ -616,7 +616,7 @@
     if (fontSize) fontSize.value = getPreference(STORAGE_KEYS.fontSize, 'normal');
     if (language) language.value = getPreference(STORAGE_KEYS.language, 'en');
 
-    const activeAccent = getPreference(STORAGE_KEYS.accentColor, 'blue');
+    const activeAccent = getPreference(STORAGE_KEYS.accentColor, 'gold');
     document.querySelectorAll('.accent-color-option').forEach(option => {
       option.classList.toggle('active', option.dataset.color === activeAccent);
     });
@@ -720,7 +720,7 @@
     if (compareMode) {
       savedSettings = {
         theme: getPreference(STORAGE_KEYS.theme, 'light'),
-        accent: getPreference(STORAGE_KEYS.accentColor, 'blue'),
+        accent: getPreference(STORAGE_KEYS.accentColor, 'gold'),
         fontSize: getPreference(STORAGE_KEYS.fontSize, 'normal'),
         highContrast: getPreference(STORAGE_KEYS.highContrast, 'false'),
         colorblind: getPreference(STORAGE_KEYS.colorblind, 'none'),
@@ -730,7 +730,7 @@
       };
 
       window.MindSpaceSettings?.applyTheme?.('light');
-      window.MindSpaceSettings?.applyAccentColor?.('blue');
+      window.MindSpaceSettings?.applyAccentColor?.('gold');
       window.MindSpaceSettings?.applyFontSize?.('normal');
       window.MindSpaceSettings?.applyHighContrast?.(false);
       window.MindSpaceSettings?.applyColorblind?.('none');
@@ -760,7 +760,7 @@
     });
 
     window.MindSpaceSettings?.applyTheme?.('light');
-    window.MindSpaceSettings?.applyAccentColor?.('blue');
+    window.MindSpaceSettings?.applyAccentColor?.('gold');
     window.MindSpaceSettings?.applyFontSize?.('normal');
     window.MindSpaceSettings?.applyHighContrast?.(false);
     window.MindSpaceSettings?.applyColorblind?.('none');

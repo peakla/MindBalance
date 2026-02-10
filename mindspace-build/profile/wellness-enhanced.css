@@ -22,7 +22,7 @@
   left: 0;
   right: 0;
   height: 4px;
-  background: linear-gradient(90deg, #1A4F85, #2068A8, #8fa67a, #1A4F85);
+  background: linear-gradient(90deg, #2068A8, #5ba4e6, #38b6ff, #2068A8);
   background-size: 200% 100%;
   animation: gradientShift 3s ease infinite;
 }
@@ -51,7 +51,7 @@
 
 .mb-profile__wellness-section h3 ion-icon {
   font-size: 1.4rem;
-  color: #1A4F85;
+  color: #2068A8;
   filter: drop-shadow(0 2px 4px rgba(184, 155, 94, 0.3));
 }
 
@@ -81,7 +81,7 @@
   height: 64px !important;
   border: 3px solid transparent !important;
   border-radius: 50% !important;
-  background: linear-gradient(145deg, #d4ecff 0%, #fff 100%) !important;
+  background: linear-gradient(145deg, #f8f6f2 0%, #fff 100%) !important;
   cursor: pointer !important;
   display: flex !important;
   align-items: center !important;
@@ -99,7 +99,7 @@
   position: absolute;
   inset: -4px;
   border-radius: 50%;
-  background: linear-gradient(135deg, #1A4F85, #2068A8, #8fa67a);
+  background: linear-gradient(135deg, #2068A8, #5ba4e6, #38b6ff);
   opacity: 0;
   z-index: -1;
   transition: opacity 0.3s ease;
@@ -119,7 +119,7 @@
 
 .mb-profile__mood-selector .mb-profile__mood-btn.is-selected,
 .mb-profile__mood-btn.is-selected {
-  border-color: #1A4F85 !important;
+  border-color: #2068A8 !important;
   background: linear-gradient(145deg, rgba(184, 155, 94, 0.15) 0%, rgba(184, 155, 94, 0.05) 100%) !important;
   transform: scale(1.2) !important;
   box-shadow: 
@@ -172,7 +172,7 @@
 
 .mb-profile__mood-note:focus {
   outline: none;
-  border-color: #1A4F85;
+  border-color: #2068A8;
   box-shadow: 0 0 0 4px rgba(184, 155, 94, 0.15);
   background: #fff;
 }
@@ -184,7 +184,7 @@
 /* === LOG MOOD BUTTON === */
 .mb-profile__mood-log-btn {
   padding: 14px 36px;
-  background: linear-gradient(135deg, #1A4F85 0%, #c9a968 50%, #2068A8 100%);
+  background: linear-gradient(135deg, #2068A8 0%, #38b6ff 50%, #5ba4e6 100%);
   background-size: 200% 100%;
   color: #fff;
   border: none;
@@ -296,7 +296,7 @@
   width: 56px;
   height: 56px;
   border-radius: 50%;
-  background: linear-gradient(135deg, #d4ecff 0%, #fff 100%);
+  background: linear-gradient(135deg, #f8f6f2 0%, #fff 100%);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -355,7 +355,7 @@
   gap: 8px;
   margin-top: 10px;
   padding: 10px 12px;
-  background: #d4ecff;
+  background: #f8f6f2;
   border-radius: 10px;
   font-size: 0.875rem;
   color: #4a4a6a;
@@ -365,7 +365,7 @@
 .mood-note-preview ion-icon {
   flex-shrink: 0;
   font-size: 1rem;
-  color: #1A4F85;
+  color: #2068A8;
   margin-top: 2px;
 }
 
@@ -471,7 +471,7 @@
 
 .mb-profile__goal-input:focus {
   outline: none;
-  border-color: #1A4F85;
+  border-color: #2068A8;
   box-shadow: 0 0 0 4px rgba(184, 155, 94, 0.12);
 }
 
@@ -489,7 +489,7 @@
 
 .mb-profile__goal-select:focus {
   outline: none;
-  border-color: #1A4F85;
+  border-color: #2068A8;
 }
 
 .mb-profile__goal-add-btn {
@@ -498,7 +498,7 @@
   justify-content: center;
   gap: 8px;
   padding: 14px 28px;
-  background: linear-gradient(135deg, #1A4F85 0%, #2068A8 100%);
+  background: linear-gradient(135deg, #2068A8 0%, #5ba4e6 100%);
   color: #fff;
   border: none;
   border-radius: 14px;
@@ -548,7 +548,7 @@
   top: 0;
   bottom: 0;
   width: 4px;
-  background: linear-gradient(180deg, #1A4F85, #2068A8);
+  background: linear-gradient(180deg, #2068A8, #5ba4e6);
   opacity: 0;
   transition: opacity 0.3s ease;
 }
@@ -565,7 +565,7 @@
 .mb-profile__goal-item .goal-check {
   width: 28px;
   height: 28px;
-  border: 3px solid #1A4F85;
+  border: 3px solid #2068A8;
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -641,7 +641,7 @@
   transform: translate(-50%, -50%);
   font-size: 0.7rem;
   font-weight: 700;
-  color: #1A4F85;
+  color: #2068A8;
 }
 
 .mb-profile__goal-item .goal-info {
@@ -662,7 +662,7 @@
   gap: 6px;
   font-size: 0.8rem;
   color: #fff;
-  background: linear-gradient(135deg, #1A4F85 0%, #c9a968 100%);
+  background: linear-gradient(135deg, #2068A8 0%, #38b6ff 100%);
   padding: 4px 12px;
   border-radius: 20px;
 }
@@ -781,7 +781,7 @@
 .mb-profile__streak-stat .streak-number {
   font-size: 3rem;
   font-weight: 800;
-  background: linear-gradient(135deg, #1A4F85 0%, #8fa67a 100%);
+  background: linear-gradient(135deg, #2068A8 0%, #38b6ff 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -844,7 +844,7 @@
 .streak-calendar-legend .legend-box.l1 { background: rgba(184, 155, 94, 0.3); }
 .streak-calendar-legend .legend-box.l2 { background: rgba(184, 155, 94, 0.5); }
 .streak-calendar-legend .legend-box.l3 { background: rgba(184, 155, 94, 0.7); }
-.streak-calendar-legend .legend-box.l4 { background: #1A4F85; }
+.streak-calendar-legend .legend-box.l4 { background: #2068A8; }
 
 .streak-calendar-grid {
   display: grid;
@@ -870,7 +870,7 @@
 .streak-day.active-1 { background: rgba(184, 155, 94, 0.25) !important; }
 .streak-day.active-2 { background: rgba(184, 155, 94, 0.45) !important; }
 .streak-day.active-3 { background: rgba(184, 155, 94, 0.65) !important; }
-.streak-day.active-4 { background: #1A4F85 !important; box-shadow: 0 2px 8px rgba(184, 155, 94, 0.4) !important; }
+.streak-day.active-4 { background: #2068A8 !important; box-shadow: 0 2px 8px rgba(184, 155, 94, 0.4) !important; }
 
 .streak-day .streak-tooltip {
   position: absolute;
@@ -946,7 +946,7 @@
 }
 
 [data-theme="dark"] .mb-profile__wellness-section h3 {
-  color: #bde0fe;
+  color: #f5f0e8;
 }
 
 [data-theme="dark"] .mb-profile__mood-input p {
@@ -961,7 +961,7 @@
 [data-theme="dark"] .mb-profile__mood-note {
   background: rgba(45, 43, 61, 0.8);
   border-color: rgba(184, 155, 94, 0.3);
-  color: #bde0fe;
+  color: #f5f0e8;
 }
 
 [data-theme="dark"] .mb-profile__mood-history h4 {
@@ -987,7 +987,7 @@
 }
 
 [data-theme="dark"] .mood-label {
-  color: #bde0fe;
+  color: #f5f0e8;
 }
 
 [data-theme="dark"] .mood-note-preview {
@@ -996,7 +996,7 @@
 }
 
 [data-theme="dark"] .mood-note-preview ion-icon {
-  color: #2068A8;
+  color: #5ba4e6;
 }
 
 [data-theme="dark"] .mb-profile__mood-trend {
@@ -1012,7 +1012,7 @@
 [data-theme="dark"] .mb-profile__goal-select {
   background: rgba(45, 43, 61, 0.9);
   border-color: rgba(184, 155, 94, 0.3);
-  color: #bde0fe;
+  color: #f5f0e8;
 }
 
 [data-theme="dark"] .mb-profile__goal-item {
@@ -1021,7 +1021,7 @@
 }
 
 [data-theme="dark"] .mb-profile__goal-item .goal-title {
-  color: #bde0fe;
+  color: #f5f0e8;
 }
 
 [data-theme="dark"] .mb-profile__goals-empty {
@@ -1080,7 +1080,7 @@
 [data-theme="dark"] .mb-profile__goal-select {
   background: rgba(45, 43, 61, 0.95) !important;
   border-color: rgba(184, 155, 94, 0.3) !important;
-  color: #bde0fe !important;
+  color: #f5f0e8 !important;
 }
 
 [data-theme="dark"] .mb-profile__goal-input::placeholder {
@@ -1095,11 +1095,11 @@
 }
 
 [data-theme="dark"] .mb-profile__goal-item .goal-title {
-  color: #bde0fe !important;
+  color: #f5f0e8 !important;
 }
 
 [data-theme="dark"] .mb-profile__goal-item .goal-check {
-  border-color: #2068A8 !important;
+  border-color: #5ba4e6 !important;
 }
 
 [data-theme="dark"] .mb-profile__streak-display .mb-profile__streak-stat,

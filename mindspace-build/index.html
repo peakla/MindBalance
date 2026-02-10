@@ -273,6 +273,7 @@
               </a>
             </div>
           </li>
+          <li class="navbar-item">
         </ul>
 
         <div class="mobile-nav-divider"></div>
@@ -331,14 +332,14 @@
             <div class="mobile-setting-item mobile-setting-item--accent">
               <span class="mobile-setting-label"><ion-icon name="color-palette-outline"></ion-icon> <span data-translate="settings_accent_color">Accent Color</span></span>
               <div class="mobile-accent-picker">
-                <button class="accent-color-btn" data-accent-color="purple" title="Purple" style="--btn-color: #6DB3F2"></button>
-                <button class="accent-color-btn" data-accent-color="sky" title="Blue" style="--btn-color: #4a90d9"></button>
+                <button class="accent-color-btn" data-accent-color="purple" title="Purple" style="--btn-color: #9b7ed9"></button>
+                <button class="accent-color-btn" data-accent-color="blue" title="Blue" style="--btn-color: #4a90d9"></button>
                 <button class="accent-color-btn" data-accent-color="green" title="Green" style="--btn-color: #4db896"></button>
                 <button class="accent-color-btn" data-accent-color="teal" title="Teal" style="--btn-color: #38b2ac"></button>
                 <button class="accent-color-btn" data-accent-color="pink" title="Pink" style="--btn-color: #d97eab"></button>
                 <button class="accent-color-btn" data-accent-color="orange" title="Orange" style="--btn-color: #e09c5c"></button>
                 <button class="accent-color-btn" data-accent-color="red" title="Red" style="--btn-color: #e07070"></button>
-                <button class="accent-color-btn active" data-accent-color="blue" title="Blue" style="--btn-color: #5BA4E6"></button>
+                <button class="accent-color-btn active" data-accent-color="blue" title="Blue" style="--btn-color: #2068A8"></button>
               </div>
             </div>
             <div class="mobile-setting-item">
@@ -614,14 +615,14 @@
                   <span data-translate="settings_accent_color">Accent Color</span>
                 </div>
                 <div class="accent-color-picker">
-                  <button class="accent-color-btn" data-accent-color="purple" title="Purple" style="--btn-color: #6DB3F2"></button>
-                  <button class="accent-color-btn" data-accent-color="sky" title="Blue" style="--btn-color: #4a90d9"></button>
+                  <button class="accent-color-btn" data-accent-color="purple" title="Purple" style="--btn-color: #9b7ed9"></button>
+                  <button class="accent-color-btn" data-accent-color="blue" title="Blue" style="--btn-color: #4a90d9"></button>
                   <button class="accent-color-btn" data-accent-color="green" title="Green" style="--btn-color: #4db896"></button>
                   <button class="accent-color-btn" data-accent-color="teal" title="Teal" style="--btn-color: #38b2ac"></button>
                   <button class="accent-color-btn" data-accent-color="pink" title="Pink" style="--btn-color: #d97eab"></button>
                   <button class="accent-color-btn" data-accent-color="orange" title="Orange" style="--btn-color: #e09c5c"></button>
                   <button class="accent-color-btn" data-accent-color="red" title="Red" style="--btn-color: #e07070"></button>
-                  <button class="accent-color-btn active" data-accent-color="blue" title="Blue" style="--btn-color: #5BA4E6"></button>
+                  <button class="accent-color-btn active" data-accent-color="blue" title="Blue" style="--btn-color: #2068A8"></button>
                 </div>
               </div>
               <div class="setting-item">
@@ -685,19 +686,19 @@
         <p class="intro-description" data-translate="home_welcome_desc">At MindSpace, we connect residents with local community resources. Our goal is to provide easy access to organizations, support services, programs, and events in one central place. We want to make community support easier to find and more accessible for everyone.</p>
         <div class="intro-stats">
           <div class="intro-stat">
-            <span class="intro-stat-number">50+</span>
+            <span class="intro-stat-number" data-translate="home_stat_num_resources">50+</span>
             <span class="intro-stat-label" data-translate="home_stat_resources">Resources</span>
           </div>
           <div class="intro-stat">
-            <span class="intro-stat-number">24/7</span>
+            <span class="intro-stat-number" data-translate="home_stat_num_support">24/7</span>
             <span class="intro-stat-label" data-translate="home_stat_support">Crisis Support</span>
           </div>
           <div class="intro-stat">
-            <span class="intro-stat-number">6</span>
+            <span class="intro-stat-number" data-translate="home_stat_num_languages">6</span>
             <span class="intro-stat-label" data-translate="home_stat_languages">Languages</span>
           </div>
           <div class="intro-stat">
-            <span class="intro-stat-number">100%</span>
+            <span class="intro-stat-number" data-translate="home_stat_num_free">100%</span>
             <span class="intro-stat-label" data-translate="home_stat_free">Free Access</span>
           </div>
         </div>
@@ -1529,8 +1530,8 @@
       }
 
       function getPhrase(key) {
-        if (window.MindBalanceTranslations && window.MindBalanceTranslations.getTranslationSync) {
-          var t = window.MindBalanceTranslations.getTranslationSync(key);
+        if (window.MindSpaceTranslations && window.MindSpaceTranslations.getTranslationSync) {
+          var t = window.MindSpaceTranslations.getTranslationSync(key);
           if (t && t !== key) return t;
         }
         return phrases[key] || key;

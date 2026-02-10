@@ -871,9 +871,66 @@ async function loadComments(postId, container) {
     .order('created_at', { ascending: true });
 
   if (!error && data) {
+    const authorIds = [...new Set(data.filter(c => c.author_id).map(c => c.author_id))];
+    if (authorIds.length > 0) {
+      try {
+        const { data: profiles } = await client
+          .from('profiles')
+          .select('id, avatar_url, display_name')
+          .in('id', authorIds);
+        if (profiles) {
+          profiles.forEach(p => {
+            profileCache[p.id] = p;
+          });
+          data.forEach(comment => {
+            if (comment.author_id && profileCache[comment.author_id]) {
+              comment.avatar_url = profileCache[comment.author_id].avatar_url;
+              if (!comment.author_name && profileCache[comment.author_id].display_name) {
+                comment.author_name = profileCache[comment.author_id].display_name;
+              }
+            }
+          });
+        }
+      } catch (e) {
+        console.warn('Could not fetch comment author profiles:', e);
+      }
+    }
     data.forEach(comment => {
       container.appendChild(createCommentElement(comment));
     });
+  }
+}
+
+async function deleteComment(commentId, commentEl) {
+  if (!currentUser) return;
+  if (!confirm('Delete this comment?')) return;
+
+  const client = initSupabase();
+  if (!client) return;
+
+  const { error } = await client
+    .from('post_comments')
+    .delete()
+    .eq('id', commentId)
+    .eq('author_id', currentUser.id);
+
+  if (!error) {
+    commentEl.style.transition = 'opacity 0.3s, transform 0.3s';
+    commentEl.style.opacity = '0';
+    commentEl.style.transform = 'translateX(10px)';
+    setTimeout(() => {
+      commentEl.remove();
+      const post = commentEl.closest('.mb-post');
+      if (post) {
+        const commentBtn = post.querySelector('.mb-postFooter .mb-btn:nth-child(2)');
+        if (commentBtn) {
+          const currentCount = parseInt(commentBtn.textContent.match(/\d+/)?.[0] || '1');
+          commentBtn.textContent = `Comment (${Math.max(0, currentCount - 1)})`;
+        }
+      }
+    }, 300);
+  } else {
+    console.error('Error deleting comment:', error);
   }
 }
 
@@ -882,51 +939,60 @@ function createCommentElement(commentData) {
   comment.className = 'mb-comment';
   comment.setAttribute('data-comment-id', commentData.id);
 
+  const isTeamComment = !commentData.author_id;
+  const displayName = commentData.author_name || (isTeamComment ? 'MindBalance Team' : 'Anonymous');
 
-  const fakeUsernames = [
-    'earthygreens0', 'mindfuljourney', 'calmwaters22', 'peacefulpath',
-    'hopefulheart', 'serenesky', 'gentlebreeze', 'quietmind99',
-    'warmthoughts', 'kindspirit', 'healingvibes', 'brightdays',
-    'softglow', 'tranquilsoul', 'innerpeace21'
-  ];
+  const avatarColors = ['#3b82f6', '#ef4444', '#10b981', '#f59e0b', '#8b5cf6', '#ec4899', '#06b6d4', '#84cc16'];
+  const colorIndex = (commentData.author_id || '').split('').reduce((acc, c) => acc + c.charCodeAt(0), 0) % avatarColors.length;
+  const initials = displayName.split(' ').map(w => w[0]).join('').substring(0, 2).toUpperCase();
 
-  let authorName;
-  if (commentData.author_name) {
-    authorName = commentData.author_name;
-  } else if (commentData.author_id) {
-    authorName = 'Anonymous';
+  let avatarHtml;
+  if (isTeamComment) {
+    avatarHtml = '<div class="mb-commentAvatar mb-commentAvatar--team">MB</div>';
+  } else if (commentData.avatar_url) {
+    avatarHtml = `<div class="mb-commentAvatar"><img src="${escapeHtml(commentData.avatar_url)}" alt="${escapeHtml(displayName)}" /></div>`;
   } else {
-
-    const hash = commentData.id.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0);
-    authorName = fakeUsernames[hash % fakeUsernames.length];
+    avatarHtml = `<div class="mb-commentAvatar" style="background: ${avatarColors[colorIndex]}; color: #fff;">${initials}</div>`;
   }
 
-  const userSpan = document.createElement('span');
-  userSpan.className = 'mb-commentUser';
+  const level = isTeamComment ? null : getUserLevel(commentData.author_id || displayName);
+  const levelBadgeHtml = level ? `<span class="mb-levelBadge mb-levelBadge--sm ${level.cls}">${level.label}</span>` : '';
+  const teamBadgeHtml = isTeamComment ? '<span class="mb-teamBadge">Team</span>' : '';
 
-  const authorSpan = document.createElement('span');
-  authorSpan.className = commentData.author_id ? 'mb-commentAuthorLink' : 'mb-communityMember';
-  authorSpan.textContent = authorName;
-
+  let authorHtml;
   if (commentData.author_id) {
-    const authorLink = document.createElement('a');
-    authorLink.href = '/profile/?user=' + commentData.author_id;
-    authorLink.className = 'mb-commentAuthorLink';
-    authorLink.textContent = authorName;
-    userSpan.appendChild(authorLink);
+    authorHtml = `<a href="/profile/?user=${commentData.author_id}" class="mb-commentAuthorLink">${escapeHtml(displayName)}</a>`;
   } else {
-    userSpan.appendChild(authorSpan);
+    authorHtml = `<span class="mb-commentAuthorName--team">${escapeHtml(displayName)}</span>`;
   }
 
-  const colonText = document.createTextNode(': ');
-  userSpan.appendChild(colonText);
+  const timeStr = commentData.created_at ? formatTime(commentData.created_at) : '';
 
-  const bodySpan = document.createElement('span');
-  bodySpan.className = 'mb-commentBody';
-  bodySpan.textContent = commentData.content;
+  const isOwnComment = currentUser && commentData.author_id === currentUser.id;
+  const deleteHtml = isOwnComment ? `<button class="mb-commentDeleteBtn" title="Delete comment"><ion-icon name="trash-outline"></ion-icon></button>` : '';
 
-  comment.appendChild(userSpan);
-  comment.appendChild(bodySpan);
+  comment.innerHTML = `
+    <div class="mb-commentLeft">
+      ${avatarHtml}
+    </div>
+    <div class="mb-commentRight">
+      <div class="mb-commentHeader">
+        <div class="mb-commentMeta">
+          ${authorHtml} ${teamBadgeHtml} ${levelBadgeHtml}
+          <span class="mb-commentTime">${timeStr}</span>
+        </div>
+        ${deleteHtml}
+      </div>
+      <div class="mb-commentBody">${escapeHtml(commentData.content)}</div>
+    </div>
+  `;
+
+  if (isOwnComment) {
+    const deleteBtn = comment.querySelector('.mb-commentDeleteBtn');
+    if (deleteBtn) {
+      deleteBtn.addEventListener('click', () => deleteComment(commentData.id, comment));
+    }
+  }
 
   return comment;
 }
@@ -1484,6 +1550,25 @@ async function loadPosts(forceReload = false) {
 
   postsLoaded = true;
   loadingPosts = false;
+
+  scrollToHashPost();
+}
+
+function scrollToHashPost() {
+  const hash = window.location.hash;
+  if (!hash || !hash.startsWith('#post-')) return;
+  const postId = hash.replace('#post-', '');
+  const targetPost = document.querySelector(`.mb-post[data-id="${postId}"]`);
+  if (targetPost) {
+    setTimeout(() => {
+      targetPost.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      targetPost.style.transition = 'box-shadow 0.4s ease';
+      targetPost.style.boxShadow = '0 0 0 3px var(--accent-color, #af916d), 0 4px 20px rgba(0,0,0,0.15)';
+      setTimeout(() => {
+        targetPost.style.boxShadow = '';
+      }, 3000);
+    }, 300);
+  }
 }
 
 async function loadCommunityStats() {

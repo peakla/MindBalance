@@ -1,0 +1,1645 @@
+<!DOCTYPE html>
+<html lang="en">
+<!-- ===== HEAD ===== -->
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TSA Work Log - MindBalance</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: 'Poppins', Arial, sans-serif;
+      font-size: 11pt;
+      line-height: 1.4;
+      color: #1a1a1a;
+      background: #f5f5f5;
+    }
+    
+    .print-controls {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      z-index: 1000;
+      display: flex;
+      gap: 10px;
+    }
+    
+    .print-btn {
+      background: linear-gradient(135deg, #2d5a27 0%, #4a7c43 100%);
+      color: white;
+      border: none;
+      padding: 12px 24px;
+      border-radius: 8px;
+      font-family: 'Poppins', sans-serif;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      box-shadow: 0 4px 15px rgba(45, 90, 39, 0.3);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    
+    .print-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(45, 90, 39, 0.4);
+    }
+    
+    .back-btn {
+      background: #6b7280;
+      color: white;
+      border: none;
+      padding: 12px 24px;
+      border-radius: 8px;
+      font-family: 'Poppins', sans-serif;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: none;
+      box-shadow: 0 4px 15px rgba(107, 114, 128, 0.3);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    
+    .back-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(107, 114, 128, 0.4);
+    }
+    
+    .document {
+      max-width: 8.5in;
+      margin: 0 auto;
+      background: white;
+      box-shadow: 0 0 20px rgba(0,0,0,0.1);
+    }
+    
+    .page {
+      width: 8.5in;
+      min-height: 11in;
+      padding: 0.5in 0.6in;
+      page-break-after: always;
+      position: relative;
+    }
+    
+    .page:last-child {
+      page-break-after: auto;
+    }
+    
+    .header {
+      text-align: center;
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #2d5a27;
+    }
+    
+    .header h1 {
+      font-size: 16pt;
+      font-weight: 700;
+      color: #2d5a27;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      margin-bottom: 5px;
+    }
+    
+    .header .subtitle {
+      font-size: 11pt;
+      color: #666;
+    }
+    
+    .log-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 9.5pt;
+    }
+    
+    .log-table th {
+      background: #2d5a27;
+      color: white;
+      padding: 10px 8px;
+      text-align: left;
+      font-weight: 600;
+      font-size: 9pt;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    
+    .log-table td {
+      padding: 10px 8px;
+      border-bottom: 1px solid #e0e0e0;
+      vertical-align: top;
+    }
+    
+    .log-table tr:nth-child(even) {
+      background: #f9fafb;
+    }
+    
+    .log-table .date-col {
+      width: 10%;
+      font-weight: 600;
+      color: #2d5a27;
+    }
+    
+    .log-table .task-col {
+      width: 18%;
+    }
+    
+    .log-table .time-col {
+      width: 14%;
+      font-size: 8.5pt;
+    }
+    
+    .log-table .team-col {
+      width: 14%;
+      font-size: 8.5pt;
+    }
+    
+    .log-table .comments-col {
+      width: 44%;
+    }
+    
+    .page-number {
+      position: absolute;
+      bottom: 0.4in;
+      right: 0.6in;
+      font-size: 9pt;
+      color: #666;
+    }
+    
+    .team-badge {
+      display: inline-block;
+      background: #e8f5e9;
+      color: #2d5a27;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-size: 8pt;
+      margin: 1px 0;
+    }
+    
+    @media print {
+      body {
+        background: white;
+      }
+      
+      .print-controls {
+        display: none;
+      }
+      
+      .document {
+        box-shadow: none;
+      }
+      
+      .page {
+        margin: 0;
+        padding: 0.5in 0.6in;
+      }
+    }
+    
+    @page {
+      size: letter;
+      margin: 0;
+    }
+  </style>
+</head>
+<body>
+  <div class="print-controls">
+    <a href="/docs/" class="back-btn">Back to Reference Page</a>
+    <button class="print-btn" onclick="window.print()">Download as PDF</button>
+  </div>
+  
+  <div class="document">
+    
+    <div class="page">
+      <div class="header">
+        <h1>Technology Student Association Work Log</h1>
+        <div class="subtitle">MindBalance - Mental Health Resource Platform</div>
+      </div>
+      
+      <table class="log-table">
+        <thead>
+          <tr>
+            <th class="date-col">Date</th>
+            <th class="task-col">Task</th>
+            <th class="time-col">Time Involved</th>
+            <th class="team-col">Team Members</th>
+            <th class="comments-col">Comments</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="date-col">09/15/24</td>
+            <td class="task-col">Project initialization and team formation</td>
+            <td class="time-col">10:00 AM - 12:30 PM<br><br>2 Hours 30 Minutes</td>
+            <td class="team-col"><span class="team-badge">Marlon</span><br><span class="team-badge">Alan</span><br><span class="team-badge">Mario</span><br><span class="team-badge">Mandip</span></td>
+            <td class="comments-col">Today marked the official start of our TSA Webmaster project. Our team gathered to discuss the competition theme focused on mental health awareness. We brainstormed potential website concepts and ultimately decided on creating MindBalance, a comprehensive mental health resource platform. The team established roles: Marlon would lead frontend development, Alan would handle backend integration, Mario would focus on design and accessibility, and Mandip would manage content and translations. We created our initial project repository on Replit and set up collaborative tools for communication.</td>
+          </tr>
+          <tr>
+            <td class="date-col">09/16/24</td>
+            <td class="task-col">Research and content planning</td>
+            <td class="time-col">11:00 AM - 2:15 PM<br><br>3 Hours 15 Minutes</td>
+            <td class="team-col"><span class="team-badge">Marlon</span><br><span class="team-badge">Alan</span><br><span class="team-badge">Mario</span><br><span class="team-badge">Mandip</span></td>
+            <td class="comments-col">We conducted extensive research on mental health resources and best practices for presenting sensitive health information online. The team reviewed authoritative sources including the National Institute of Mental Health and Mayo Clinic. We outlined the core pages needed: Homepage, Resource Library, Blog, Community Hub, Support page, and Contact page. Mandip began compiling a list of credible resources to feature. We also researched accessibility standards and decided to prioritize WCAG compliance throughout development.</td>
+          </tr>
+          <tr>
+            <td class="date-col">09/18/24</td>
+            <td class="task-col">Wireframing and design concepts</td>
+            <td class="time-col">9:30 AM - 1:00 PM<br><br>3 Hours 30 Minutes</td>
+            <td class="team-col"><span class="team-badge">Mario</span><br><span class="team-badge">Marlon</span></td>
+            <td class="comments-col">Mario led the wireframing session using design tools to create mockups for each page. We established a calming color palette with greens and earth tones to convey wellness and tranquility. The team decided on Poppins as our primary font family for its readability and modern appearance. We sketched navigation layouts, ensuring the crisis support button would be prominently displayed. Mario created initial logo concepts featuring balanced elements to represent mental equilibrium.</td>
+          </tr>
+          <tr>
+            <td class="date-col">09/20/24</td>
+            <td class="task-col">Technology stack decisions</td>
+            <td class="time-col">12:00 PM - 3:30 PM<br><br>3 Hours 30 Minutes</td>
+            <td class="team-col"><span class="team-badge">Alan</span><br><span class="team-badge">Marlon</span><br><span class="team-badge">Mandip</span></td>
+            <td class="comments-col">The team finalized our technology decisions. We chose to build a static website using HTML, CSS, and JavaScript for optimal performance and accessibility. Alan researched Supabase for backend needs including user authentication and data storage. We decided to integrate Swiper.js for carousel functionality and Font Awesome for icons. The team also discussed using Supabase Realtime for the community forum feature. All team members agreed to use Replit as our primary development environment for its collaborative features.</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="page-number">Page 1 of 25</div>
+    </div>
+    
+    
+    <div class="page">
+      <div class="header">
+        <h1>Technology Student Association Work Log</h1>
+        <div class="subtitle">MindBalance - Mental Health Resource Platform</div>
+      </div>
+      
+      <table class="log-table">
+        <thead>
+          <tr>
+            <th class="date-col">Date</th>
+            <th class="task-col">Task</th>
+            <th class="time-col">Time Involved</th>
+            <th class="team-col">Team Members</th>
+            <th class="comments-col">Comments</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="date-col">09/22/24</td>
+            <td class="task-col">Project structure setup</td>
+            <td class="time-col">10:00 AM - 2:00 PM<br><br>4 Hours</td>
+            <td class="team-col"><span class="team-badge">Marlon</span><br><span class="team-badge">Alan</span></td>
+            <td class="comments-col">Marlon and Alan set up the initial project file structure. We created organized directories for CSS, JavaScript, images, and individual page folders. The team established naming conventions and coding standards to maintain consistency. We initialized the main index.html file and created placeholder files for each planned page. Alan configured the Python server for local development testing. We also set up version control practices and established a workflow for collaborative development.</td>
+          </tr>
+          <tr>
+            <td class="date-col">09/24/24</td>
+            <td class="task-col">CSS architecture and custom properties</td>
+            <td class="time-col">11:30 AM - 4:00 PM<br><br>4 Hours 30 Minutes</td>
+            <td class="team-col"><span class="team-badge">Mario</span><br><span class="team-badge">Marlon</span></td>
+            <td class="comments-col">We began building the CSS architecture with a focus on maintainability and theming. Mario created an extensive custom properties system for colors, spacing, typography, and shadows. We established primary, secondary, and accent color variables that would support both light and dark modes. The team implemented a consistent spacing scale and typography system using Poppins font weights. We also created utility classes for common patterns like flex layouts and text alignment to speed up development.</td>
+          </tr>
+          <tr>
+            <td class="date-col">09/26/24</td>
+            <td class="task-col">Navigation bar development</td>
+            <td class="time-col">9:00 AM - 1:30 PM<br><br>4 Hours 30 Minutes</td>
+            <td class="team-col"><span class="team-badge">Marlon</span><br><span class="team-badge">Mario</span></td>
+            <td class="comments-col">Today we focused on creating the main navigation bar. Marlon built a responsive navbar with the MindBalance logo, navigation links, search functionality, and user menu. We implemented a sticky header that follows users as they scroll. The team added a prominent crisis support button styled in red to stand out. Mario ensured the navigation had proper contrast ratios for accessibility. We included hover effects using CSS transitions and prepared the structure for mobile responsiveness.</td>
+          </tr>
+          <tr>
+            <td class="date-col">09/28/24</td>
+            <td class="task-col">Mobile navigation and hamburger menu</td>
+            <td class="time-col">10:30 AM - 3:00 PM<br><br>4 Hours 30 Minutes</td>
+            <td class="team-col"><span class="team-badge">Marlon</span><br><span class="team-badge">Alan</span></td>
+            <td class="comments-col">We implemented the mobile navigation system. Marlon created a hamburger menu icon that transforms into an X when active using CSS animations. Alan wrote JavaScript to toggle the mobile menu open and closed with smooth sliding animations. We ensured the mobile menu was full screen on small devices and included all navigation links, the crisis button, and quick access to settings. The team tested on multiple simulated device sizes to confirm proper behavior across breakpoints.</td>
+          </tr>
+          <tr>
+            <td class="date-col">09/30/24</td>
+            <td class="task-col">Homepage hero section</td>
+            <td class="time-col">12:00 PM - 5:30 PM<br><br>5 Hours 30 Minutes</td>
+            <td class="team-col"><span class="team-badge">Mario</span><br><span class="team-badge">Mandip</span></td>
+            <td class="comments-col">Mario designed and implemented the homepage hero section featuring a welcoming message about mental wellness. We created a gradient background with calming green tones. Mandip wrote compelling copy that emphasizes accessibility to mental health resources for everyone. The hero includes a call to action button directing users to the resource library. We added subtle CSS animations for visual interest while keeping them respectful of the serious subject matter.</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="page-number">Page 2 of 25</div>
+    </div>
+    
+    
+    <div class="page">
+      <div class="header">
+        <h1>Technology Student Association Work Log</h1>
+        <div class="subtitle">MindBalance - Mental Health Resource Platform</div>
+      </div>
+      
+      <table class="log-table">
+        <thead>
+          <tr>
+            <th class="date-col">Date</th>
+            <th class="task-col">Task</th>
+            <th class="time-col">Time Involved</th>
+            <th class="team-col">Team Members</th>
+            <th class="comments-col">Comments</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="date-col">10/02/24</td>
+            <td class="task-col">Crisis support section implementation</td>
+            <td class="time-col">9:00 AM - 12:30 PM<br><br>3 Hours 30 Minutes</td>
+            <td class="team-col"><span class="team-badge">Mandip</span><br><span class="team-badge">Mario</span></td>
+            <td class="comments-col">We created a dedicated crisis support section on the homepage with immediate access to emergency resources. The section prominently displays the 988 Suicide and Crisis Lifeline number with a click to call link. We added the Crisis Text Line information and included links to international crisis resources. Mario designed the section with a distinct visual style using accent colors to draw attention. Mandip researched and verified all crisis hotline numbers for accuracy.</td>
+          </tr>
+          <tr>
+            <td class="date-col">10/04/24</td>
+            <td class="task-col">Wellness check-in feature design</td>
+            <td class="time-col">10:00 AM - 3:00 PM<br><br>5 Hours</td>
+            <td class="team-col"><span class="team-badge">Marlon</span><br><span class="team-badge">Alan</span><br><span class="team-badge">Mario</span></td>
+            <td class="comments-col">The team designed an interactive wellness check-in feature for the homepage. We created a mood selector with emoji representations for different emotional states. The feature includes a side by side layout with mood selection on the left and personalized daily tips on the right. Alan planned the data structure for storing mood history using localStorage. We incorporated gamification elements including streak tracking to encourage daily engagement with the tool.</td>
+          </tr>
+          <tr>
+            <td class="date-col">10/06/24</td>
+            <td class="task-col">Wellness check-in development</td>
+            <td class="time-col">11:00 AM - 5:00 PM<br><br>6 Hours</td>
+            <td class="team-col"><span class="team-badge">Marlon</span><br><span class="team-badge">Alan</span></td>
+            <td class="comments-col">Marlon and Alan built the wellness check-in functionality. We implemented the mood selector with five options ranging from great to struggling. Each mood selection triggers a corresponding daily tip that offers supportive advice. Alan wrote JavaScript to handle mood selection, localStorage persistence, and streak calculation. We added visual feedback when users select their mood including check marks and color changes. The feature displays the current streak count to motivate continued engagement.</td>
+          </tr>
+          <tr>
+            <td class="date-col">10/08/24</td>
+            <td class="task-col">Inspirational quote banner</td>
+            <td class="time-col">12:30 PM - 3:30 PM<br><br>3 Hours</td>
+            <td class="team-col"><span class="team-badge">Mandip</span><br><span class="team-badge">Mario</span></td>
+            <td class="comments-col">We added an inspirational quote banner to the homepage. Mandip curated a collection of mental health related quotes from notable figures and wellness experts. Mario designed a rotating banner with smooth fade transitions between quotes. The banner automatically cycles through quotes every few seconds. We implemented pause on hover functionality so users can read longer quotes. The design uses elegant typography and subtle gradients for visual appeal.</td>
+          </tr>
+          <tr>
+            <td class="date-col">10/10/24</td>
+            <td class="task-col">Footer component creation</td>
+            <td class="time-col">9:30 AM - 2:00 PM<br><br>4 Hours 30 Minutes</td>
+            <td class="team-col"><span class="team-badge">Mario</span><br><span class="team-badge">Marlon</span></td>
+            <td class="comments-col">The team built a comprehensive footer component. We included multiple columns with navigation links organized by category. Mario added an animated wave separator at the top of the footer for visual interest. The footer features trust badges, a newsletter signup form, and recent blog posts preview. We included social media links and legal page links for terms, privacy, and disclaimer. The team ensured the footer collapses appropriately on mobile devices.</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="page-number">Page 3 of 25</div>
+    </div>
+    
+    
+    <div class="page">
+      <div class="header">
+        <h1>Technology Student Association Work Log</h1>
+        <div class="subtitle">MindBalance - Mental Health Resource Platform</div>
+      </div>
+      
+      <table class="log-table">
+        <thead>
+          <tr>
+            <th class="date-col">Date</th>
+            <th class="task-col">Task</th>
+            <th class="time-col">Time Involved</th>
+            <th class="team-col">Team Members</th>
+            <th class="comments-col">Comments</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="date-col">10/12/24</td>
+            <td class="task-col">Dark mode implementation</td>
+            <td class="time-col">10:00 AM - 4:30 PM<br><br>6 Hours 30 Minutes</td>
+            <td class="team-col"><span class="team-badge">Mario</span><br><span class="team-badge">Alan</span></td>
+            <td class="comments-col">We implemented a complete dark mode theme for the website. Mario created an alternate color palette using dark backgrounds with light text while maintaining proper contrast ratios. Alan wrote JavaScript to toggle between light and dark modes and persist the preference in localStorage. We ensured all components including cards, buttons, inputs, and navigation adapted appropriately. The system also respects the user's system preference using the prefers-color-scheme media query.</td>
+          </tr>
+          <tr>
+            <td class="date-col">10/14/24</td>
+            <td class="task-col">Accessibility settings panel</td>
+            <td class="time-col">11:00 AM - 5:00 PM<br><br>6 Hours</td>
+            <td class="team-col"><span class="team-badge">Mario</span><br><span class="team-badge">Alan</span><br><span class="team-badge">Mandip</span></td>
+            <td class="comments-col">The team built a comprehensive accessibility settings panel with seven customization options. We included dark mode toggle, adjustable font size with three levels, high contrast mode for visually impaired users, and three colorblind modes for protanopia, deuteranopia, and tritanopia. We added focus mode to reduce distractions, dyslexia friendly font option using OpenDyslexic, and reduced motion setting for users sensitive to animations. All preferences persist in localStorage.</td>
+          </tr>
+          <tr>
+            <td class="date-col">10/16/24</td>
+            <td class="task-col">Settings modal enhancement</td>
+            <td class="time-col">12:00 PM - 4:00 PM<br><br>4 Hours</td>
+            <td class="team-col"><span class="team-badge">Mario</span><br><span class="team-badge">Marlon</span></td>
+            <td class="comments-col">We enhanced the settings modal with a more polished interface. Mario added tabbed navigation to organize accessibility, display, and language options. We implemented theme presets for quick setup including default, high contrast, and night reading modes. The modal now includes before and after comparison previews so users can see changes before applying them. We also added an accessibility score feature that evaluates the current settings and suggests improvements.</td>
+          </tr>
+          <tr>
+            <td class="date-col">10/18/24</td>
+            <td class="task-col">User accent color system</td>
+            <td class="time-col">9:30 AM - 1:00 PM<br><br>3 Hours 30 Minutes</td>
+            <td class="team-col"><span class="team-badge">Mario</span><br><span class="team-badge">Alan</span></td>
+            <td class="comments-col">We created a user accent color picker system allowing personalization. Mario designed a selection of eight accessible color options including teal, coral, violet, amber, rose, indigo, emerald, and slate. Alan implemented JavaScript to apply the selected accent color via CSS custom properties. The accent color affects buttons, links, highlights, and interactive elements throughout the site. The preference persists independently of the theme selection.</td>
+          </tr>
+          <tr>
+            <td class="date-col">10/20/24</td>
+            <td class="task-col">Multilingual support planning</td>
+            <td class="time-col">10:30 AM - 2:30 PM<br><br>4 Hours</td>
+            <td class="team-col"><span class="team-badge">Mandip</span><br><span class="team-badge">Alan</span></td>
+            <td class="comments-col">Mandip led planning for multilingual support. We decided to support six languages: English, Spanish, French, Hindi, Korean, and Chinese. Alan designed the translation system using data-translate attributes in HTML and JSON files for each language. We created the file structure for translation files in an i18n directory. Mandip began documenting all translatable strings across the website. We planned for right to left text support for potential future languages.</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="page-number">Page 4 of 25</div>
+    </div>
+    
+    
+    <div class="page">
+      <div class="header">
+        <h1>Technology Student Association Work Log</h1>
+        <div class="subtitle">MindBalance - Mental Health Resource Platform</div>
+      </div>
+      
+      <table class="log-table">
+        <thead>
+          <tr>
+            <th class="date-col">Date</th>
+            <th class="task-col">Task</th>
+            <th class="time-col">Time Involved</th>
+            <th class="team-col">Team Members</th>
+            <th class="comments-col">Comments</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="date-col">10/22/24</td>
+            <td class="task-col">Translation system implementation</td>
+            <td class="time-col">11:00 AM - 5:30 PM<br><br>6 Hours 30 Minutes</td>
+            <td class="team-col"><span class="team-badge">Alan</span><br><span class="team-badge">Mandip</span></td>
+            <td class="comments-col">Alan built the translation system in JavaScript. We created a translations.js file that loads JSON translation files based on user language selection. The system finds all elements with data-translate attributes and replaces their text content. We implemented a language selector dropdown in the settings and footer. Mandip created the initial English translation file with over 1400 key value pairs covering all static text. The system persists language preference in localStorage.</td>
+          </tr>
+          <tr>
+            <td class="date-col">10/24/24</td>
+            <td class="task-col">Spanish translations</td>
+            <td class="time-col">10:00 AM - 4:00 PM<br><br>6 Hours</td>
+            <td class="team-col"><span class="team-badge">Mandip</span><br><span class="team-badge">Mario</span></td>
+            <td class="comments-col">Mandip created the complete Spanish translation file. We carefully translated all navigation items, button labels, form fields, and content text. Mario reviewed translations for accuracy and natural phrasing. We paid special attention to mental health terminology to ensure sensitivity and accuracy. The team tested the Spanish version thoroughly to confirm all strings displayed correctly. We identified and fixed several missing translation keys during testing.</td>
+          </tr>
+          <tr>
+            <td class="date-col">10/26/24</td>
+            <td class="task-col">French and Hindi translations</td>
+            <td class="time-col">9:00 AM - 3:30 PM<br><br>6 Hours 30 Minutes</td>
+            <td class="team-col"><span class="team-badge">Mandip</span></td>
+            <td class="comments-col">Mandip completed both French and Hindi translation files. For Hindi, we added the Noto Sans Devanagari font to properly display the script. We verified character encoding was correct for special characters in both languages. Mandip consulted native speakers to verify accuracy of mental health related terminology. We tested both languages across all pages and fixed layout issues caused by longer text strings in some translations.</td>
+          </tr>
+          <tr>
+            <td class="date-col">10/28/24</td>
+            <td class="task-col">Korean and Chinese translations</td>
+            <td class="time-col">10:30 AM - 5:00 PM<br><br>6 Hours 30 Minutes</td>
+            <td class="team-col"><span class="team-badge">Mandip</span><br><span class="team-badge">Alan</span></td>
+            <td class="comments-col">We completed Korean and Chinese Simplified translation files. Alan added Noto Sans KR font support for Korean text. Mandip ensured proper translation of idioms and culturally specific phrases. We tested character rendering across different browsers to confirm proper display. The team fixed several instances where text overflow occurred due to character width differences. All six languages now fully functional with seamless switching.</td>
+          </tr>
+          <tr>
+            <td class="date-col">10/30/24</td>
+            <td class="task-col">Resource library page structure</td>
+            <td class="time-col">11:30 AM - 4:30 PM<br><br>5 Hours</td>
+            <td class="team-col"><span class="team-badge">Marlon</span><br><span class="team-badge">Mario</span></td>
+            <td class="comments-col">We began building the resource library page. Marlon created the HTML structure including a hero section, search functionality, category filters, and a grid layout for resource cards. Mario designed solid card components with subtle shadows and borders following our design guidelines. We added featured resources section at the top highlighting important organizations. The page includes sections for nonprofit organizations, community resources, and educational materials.</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="page-number">Page 5 of 25</div>
+    </div>
+    
+    
+    <div class="page">
+      <div class="header">
+        <h1>Technology Student Association Work Log</h1>
+        <div class="subtitle">MindBalance - Mental Health Resource Platform</div>
+      </div>
+      
+      <table class="log-table">
+        <thead>
+          <tr>
+            <th class="date-col">Date</th>
+            <th class="task-col">Task</th>
+            <th class="time-col">Time Involved</th>
+            <th class="team-col">Team Members</th>
+            <th class="comments-col">Comments</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="date-col">11/01/24</td>
+            <td class="task-col">Resource data organization</td>
+            <td class="time-col">9:00 AM - 2:00 PM<br><br>5 Hours</td>
+            <td class="team-col"><span class="team-badge">Mandip</span><br><span class="team-badge">Alan</span></td>
+            <td class="comments-col">Mandip organized mental health resources into structured JSON data files. We created categories including anxiety, depression, stress management, mindfulness, sleep, and youth resources. Alan designed the data schema with fields for title, description, category, external link, and credibility indicators. We sourced information exclusively from authoritative providers like NIMH and Mayo Clinic. Each resource includes proper attribution and verification dates.</td>
+          </tr>
+          <tr>
+            <td class="date-col">11/03/24</td>
+            <td class="task-col">Resource search and filtering</td>
+            <td class="time-col">10:30 AM - 4:00 PM<br><br>5 Hours 30 Minutes</td>
+            <td class="team-col"><span class="team-badge">Alan</span><br><span class="team-badge">Marlon</span></td>
+            <td class="comments-col">Alan implemented search and filter functionality for the resource library. Users can type keywords to search across resource titles and descriptions. We added filter buttons for each category that highlight when active. The system supports multiple active filters allowing users to view combinations. Marlon added smooth animations when resources filter in and out of view. We optimized the search to update results in real time as users type.</td>
+          </tr>
+          <tr>
+            <td class="date-col">11/05/24</td>
+            <td class="task-col">Resource sharing feature</td>
+            <td class="time-vol">11:00 AM - 2:30 PM<br><br>3 Hours 30 Minutes</td>
+            <td class="team-col"><span class="team-badge">Alan</span><br><span class="team-badge">Mario</span></td>
+            <td class="comments-col">We added sharing functionality to resource cards. Each card now has a share button that opens a modal with options to copy the link, share via email, or share to social media platforms. Alan implemented the Web Share API for mobile devices which opens native share sheets. Mario designed the share modal with clear icons for each platform. We also added a print friendly version of resource cards for users who prefer physical copies.</td>
+          </tr>
+          <tr>
+            <td class="date-col">11/07/24</td>
+            <td class="task-col">Find Help page development</td>
+            <td class="time-col">12:00 PM - 5:30 PM<br><br>5 Hours 30 Minutes</td>
+            <td class="team-col"><span class="team-badge">Marlon</span><br><span class="team-badge">Mandip</span></td>
+            <td class="comments-col">We created the Find Help page dedicated to connecting users with local and national mental health services. Marlon built sections for crisis resources, national nonprofits, and local service directories. Mandip researched and compiled accurate contact information for major mental health organizations including NAMI, Mental Health America, and the Trevor Project. We included descriptions of services each organization provides and who they serve.</td>
+          </tr>
+          <tr>
+            <td class="date-col">11/09/24</td>
+            <td class="task-col">Support page creation</td>
+            <td class="time-col">9:30 AM - 3:00 PM<br><br>5 Hours 30 Minutes</td>
+            <td class="team-col"><span class="team-badge">Mario</span><br><span class="team-badge">Mandip</span></td>
+            <td class="comments-col">Mario and Mandip built the support page featuring multiple resources for users in need. We created sections for crisis support with prominent emergency numbers, self help tools including breathing exercises and grounding techniques, and a modern FAQ section with expandable answers. Mandip wrote clear and compassionate content for each section. Mario ensured the crisis information stands out visually with appropriate styling.</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="page-number">Page 6 of 25</div>
+    </div>
+    
+    
+    <div class="page">
+      <div class="header">
+        <h1>Technology Student Association Work Log</h1>
+        <div class="subtitle">MindBalance - Mental Health Resource Platform</div>
+      </div>
+      
+      <table class="log-table">
+        <thead>
+          <tr>
+            <th class="date-col">Date</th>
+            <th class="task-col">Task</th>
+            <th class="time-col">Time Involved</th>
+            <th class="team-col">Team Members</th>
+            <th class="comments-col">Comments</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="date-col">11/11/24</td>
+            <td class="task-col">Supabase authentication setup</td>
+            <td class="time-col">10:00 AM - 4:30 PM<br><br>6 Hours 30 Minutes</td>
+            <td class="team-col"><span class="team-badge">Alan</span><br><span class="team-badge">Marlon</span></td>
+            <td class="comments-col">Alan set up Supabase authentication for user accounts. We created the Supabase project and configured email and password authentication. Marlon built the sign in and sign up modal forms with proper validation. We implemented secure session management using Supabase client tokens. The system supports email verification and password reset functionality. We ensured authentication state persists across page reloads and browser sessions.</td>
+          </tr>
+          <tr>
+            <td class="date-col">11/13/24</td>
+            <td class="task-col">User menu and authentication UI</td>
+            <td class="time-col">11:30 AM - 4:00 PM<br><br>4 Hours 30 Minutes</td>
+            <td class="team-col"><span class="team-badge">Marlon</span><br><span class="team-badge">Mario</span></td>
+            <td class="comments-col">We built a consolidated user menu dropdown in the navigation. For signed in users, the menu shows profile access, notifications, settings, and logout options. For guests, we display sign in and settings access. Mario designed the dropdown with clean card styling and hover effects. We ensured settings and accessibility features remain available to all users regardless of authentication status. This was a critical accessibility principle for the project.</td>
+          </tr>
+          <tr>
+            <td class="date-col">11/15/24</td>
+            <td class="task-col">User profile page structure</td>
+            <td class="time-col">9:00 AM - 3:30 PM<br><br>6 Hours 30 Minutes</td>
+            <td class="team-col"><span class="team-badge">Marlon</span><br><span class="team-badge">Mario</span></td>
+            <td class="comments-col">We began building the user profile page with an Instagram inspired design. Marlon created the HTML structure with cover photo area, avatar upload section, and profile information display. Mario styled the profile header with editable display name and bio fields. We added social links section for users to share their profiles across platforms. The design uses solid cards with subtle shadows matching our style guidelines.</td>
+          </tr>
+          <tr>
+            <td class="date-col">11/17/24</td>
+            <td class="task-col">Profile tabs implementation</td>
+            <td class="time-col">10:00 AM - 5:00 PM<br><br>7 Hours</td>
+            <td class="team-col"><span class="team-badge">Marlon</span><br><span class="team-badge">Alan</span></td>
+            <td class="comments-col">We implemented multiple tabs for the profile page including Activity, Liked Posts, Saved Articles, Achievements, Wellness, and Settings. Marlon built the tab navigation with smooth transitions between sections. Alan wrote JavaScript to handle tab switching and content loading. Each tab loads its content dynamically to improve initial page load performance. We added URL hash support so users can link directly to specific tabs.</td>
+          </tr>
+          <tr>
+            <td class="date-col">11/19/24</td>
+            <td class="task-col">Avatar and cover photo uploads</td>
+            <td class="time-col">11:00 AM - 4:30 PM<br><br>5 Hours 30 Minutes</td>
+            <td class="team-col"><span class="team-badge">Alan</span><br><span class="team-badge">Mario</span></td>
+            <td class="comments-col">Alan implemented image upload functionality using Supabase Storage. Users can click their avatar or cover photo to select a new image. We added client side image compression to reduce file sizes before upload. Mario designed the upload interface with preview, crop, and cancel options. The system validates file types and sizes before upload. Uploaded images are stored securely and URLs are saved to user profiles in the database.</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="page-number">Page 7 of 25</div>
+    </div>
+    
+    
+    <div class="page">
+      <div class="header">
+        <h1>Technology Student Association Work Log</h1>
+        <div class="subtitle">MindBalance - Mental Health Resource Platform</div>
+      </div>
+      
+      <table class="log-table">
+        <thead>
+          <tr>
+            <th class="date-col">Date</th>
+            <th class="task-col">Task</th>
+            <th class="time-col">Time Involved</th>
+            <th class="team-col">Team Members</th>
+            <th class="comments-col">Comments</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="date-col">11/21/24</td>
+            <td class="task-col">Achievement badge system design</td>
+            <td class="time-col">10:30 AM - 3:00 PM<br><br>4 Hours 30 Minutes</td>
+            <td class="team-col"><span class="team-badge">Mario</span><br><span class="team-badge">Mandip</span></td>
+            <td class="comments-col">We designed a gamification system with 28 achievement badges. Mandip created categories including engagement badges for community participation, wellness badges for consistent check ins, reading badges for article completion, and milestone badges for account anniversaries. Mario designed badge icons with consistent styling using circles and relevant symbols. Each badge has a name, description, and unlock criteria defined in a JavaScript constants file.</td>
+          </tr>
+          <tr>
+            <td class="date-col">11/23/24</td>
+            <td class="task-col">Achievement tracking implementation</td>
+            <td class="time-col">9:00 AM - 2:30 PM<br><br>5 Hours 30 Minutes</td>
+            <td class="team-col"><span class="team-badge">Alan</span><br><span class="team-badge">Marlon</span></td>
+            <td class="comments-col">Alan built the achievement tracking system. We created database tables to store user achievement progress and unlock dates. The system checks achievement criteria when relevant actions occur such as posting comments or completing readings. Marlon built the achievements tab UI showing locked badges as grayed out and unlocked badges with color and unlock dates. We added toast notifications when users unlock new badges to celebrate their progress.</td>
+          </tr>
+          <tr>
+            <td class="date-col">11/25/24</td>
+            <td class="task-col">Wellness tab mood tracker</td>
+            <td class="time-col">11:00 AM - 5:30 PM<br><br>6 Hours 30 Minutes</td>
+            <td class="team-col"><span class="team-badge">Mario</span><br><span class="team-badge">Alan</span></td>
+            <td class="comments-col">We built the mood tracker feature for the profile wellness tab. Mario designed a visual history display showing mood entries over time with emoji indicators. Alan implemented data visualization using simple CSS charts to show mood patterns. Users can view their mood history by week or month. We added insights that identify patterns such as better moods on weekends or consistent morning check ins. The feature encourages self awareness and reflection.</td>
+          </tr>
+          <tr>
+            <td class="date-col">11/27/24</td>
+            <td class="task-col">Wellness goals feature</td>
+            <td class="time-col">10:00 AM - 3:30 PM<br><br>5 Hours 30 Minutes</td>
+            <td class="team-col"><span class="team-badge">Alan</span><br><span class="team-badge">Mandip</span></td>
+            <td class="comments-col">We added wellness goals functionality to the profile. Users can set personal goals related to sleep, exercise, mindfulness, or custom categories. Alan built the goal creation interface with progress tracking. Mandip wrote suggested goals covering common wellness objectives. The system calculates completion percentages and displays progress bars. Users receive encouragement notifications when they make progress toward their goals.</td>
+          </tr>
+          <tr>
+            <td class="date-col">11/29/24</td>
+            <td class="task-col">Reading streak tracking</td>
+            <td class="time-col">12:00 PM - 4:00 PM<br><br>4 Hours</td>
+            <td class="team-col"><span class="team-badge">Alan</span><br><span class="team-badge">Mario</span></td>
+            <td class="comments-col">We implemented reading streak tracking for blog article engagement. Alan created the logic to track consecutive days of reading activity. The system stores daily read timestamps and calculates current and longest streaks. Mario designed streak display widgets showing flame icons and streak counts. We added the streak counter to the profile page and article pages. Users receive special badges for reaching streak milestones like 7 days and 30 days.</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="page-number">Page 8 of 25</div>
+    </div>
+    
+    
+    <div class="page">
+      <div class="header">
+        <h1>Technology Student Association Work Log</h1>
+        <div class="subtitle">MindBalance - Mental Health Resource Platform</div>
+      </div>
+      
+      <table class="log-table">
+        <thead>
+          <tr>
+            <th class="date-col">Date</th>
+            <th class="task-col">Task</th>
+            <th class="time-col">Time Involved</th>
+            <th class="team-col">Team Members</th>
+            <th class="comments-col">Comments</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="date-col">12/01/24</td>
+            <td class="task-col">Profile onboarding modal</td>
+            <td class="time-col">9:30 AM - 1:30 PM<br><br>4 Hours</td>
+            <td class="team-col"><span class="team-badge">Mario</span><br><span class="team-badge">Marlon</span></td>
+            <td class="comments-col">We created a first time user onboarding modal for new profile visitors. Mario designed a multi step introduction explaining profile features and privacy options. Marlon implemented the modal with step navigation and progress indicators. The onboarding covers avatar setup, bio creation, privacy settings, and feature highlights. Users can skip or complete onboarding which is tracked to prevent repeat displays. The modal uses friendly and welcoming language.</td>
+          </tr>
+          <tr>
+            <td class="date-col">12/03/24</td>
+            <td class="task-col">Immersive profile experience</td>
+            <td class="time-col">10:00 AM - 5:00 PM<br><br>7 Hours</td>
+            <td class="team-col"><span class="team-badge">Mario</span><br><span class="team-badge">Alan</span></td>
+            <td class="comments-col">We enhanced the profile with an immersive full page experience. Mario created a cinematic design with day and night cycles based on user local time. We added personalized greetings that change throughout the day such as good morning or good evening. Alan implemented parallax backgrounds that respond to scroll position. The design includes scroll triggered animations for content sections. We ensured animations respect reduced motion preferences.</td>
+          </tr>
+          <tr>
+            <td class="date-col">12/05/24</td>
+            <td class="task-col">People you may know feature</td>
+            <td class="time-col">11:30 AM - 4:00 PM<br><br>4 Hours 30 Minutes</td>
+            <td class="team-col"><span class="team-badge">Alan</span><br><span class="team-badge">Marlon</span></td>
+            <td class="comments-col">Alan built a suggestions feature showing other community members. We query users with similar interests based on liked posts and forum activity. Marlon designed suggestion cards showing avatar, name, and mutual interests. Users can view profiles or dismiss suggestions. The algorithm respects privacy settings and only shows users who have opted into discovery. We added this section to the profile page to encourage community connections.</td>
+          </tr>
+          <tr>
+            <td class="date-col">12/07/24</td>
+            <td class="task-col">AI wellness insights integration</td>
+            <td class="time-col">9:00 AM - 3:30 PM<br><br>6 Hours 30 Minutes</td>
+            <td class="team-col"><span class="team-badge">Alan</span><br><span class="team-badge">Mandip</span></td>
+            <td class="comments-col">We integrated OpenAI to provide personalized wellness insights on profiles. Alan set up the API connection using Replit AI Integrations for secure key management. The system analyzes user mood history and goal progress to generate supportive insights. Mandip wrote prompts that ensure responses are encouraging and appropriate for mental health context. Insights appear in a dedicated card on the wellness tab with refresh functionality.</td>
+          </tr>
+          <tr>
+            <td class="date-col">12/09/24</td>
+            <td class="task-col">Community Hub database design</td>
+            <td class="time-col">10:30 AM - 2:30 PM<br><br>4 Hours</td>
+            <td class="team-col"><span class="team-badge">Alan</span></td>
+            <td class="comments-col">Alan designed the database schema for the community forum. We created tables for posts, comments, likes, and user mentions. The posts table includes fields for title, content, author, category, creation date, and moderation status. Comments link to posts with parent comment support for threaded replies. We added indexes for efficient querying and set up foreign key relationships. Row level security policies ensure users can only modify their own content.</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="page-number">Page 9 of 25</div>
+    </div>
+    
+    
+    <div class="page">
+      <div class="header">
+        <h1>Technology Student Association Work Log</h1>
+        <div class="subtitle">MindBalance - Mental Health Resource Platform</div>
+      </div>
+      
+      <table class="log-table">
+        <thead>
+          <tr>
+            <th class="date-col">Date</th>
+            <th class="task-col">Task</th>
+            <th class="time-col">Time Involved</th>
+            <th class="team-col">Team Members</th>
+            <th class="comments-col">Comments</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="date-col">12/11/24</td>
+            <td class="task-col">Community Hub page structure</td>
+            <td class="time-col">11:00 AM - 5:00 PM<br><br>6 Hours</td>
+            <td class="team-col"><span class="team-badge">Marlon</span><br><span class="team-badge">Mario</span></td>
+            <td class="comments-col">We built the Community Hub page layout. Marlon created sections for a new post form, post feed, and popular discussions sidebar. Mario designed post cards with author information, content preview, like counts, and comment counts. The layout is responsive with the sidebar collapsing on mobile devices. We added category filters and sort options for browsing posts by newest, popular, or specific topics.</td>
+          </tr>
+          <tr>
+            <td class="date-col">12/13/24</td>
+            <td class="task-col">Post creation and display</td>
+            <td class="time-col">9:30 AM - 4:00 PM<br><br>6 Hours 30 Minutes</td>
+            <td class="team-col"><span class="team-badge">Alan</span><br><span class="team-badge">Marlon</span></td>
+            <td class="comments-col">Alan implemented post creation functionality. The new post form includes title, content textarea with character limit, and category selection. Posts save to Supabase with author information automatically attached. Marlon built the post display with proper formatting, timestamps showing relative time, and author avatars. We added validation to ensure posts have minimum content length. Posts appear immediately in the feed after submission.</td>
+          </tr>
+          <tr>
+            <td class="date-col">12/15/24</td>
+            <td class="task-col">Comment system development</td>
+            <td class="time-col">10:00 AM - 4:30 PM<br><br>6 Hours 30 Minutes</td>
+            <td class="team-col"><span class="team-badge">Alan</span><br><span class="team-badge">Mario</span></td>
+            <td class="comments-col">We built the commenting system for forum posts. Users can add comments which appear below posts with author info and timestamps. Alan implemented nested replies with visual indentation for conversation threads. Mario styled comment cards with subtle borders to distinguish from parent posts. We added character limits and basic moderation filtering. Comments can be edited or deleted by their authors within a time window.</td>
+          </tr>
+          <tr>
+            <td class="date-col">12/17/24</td>
+            <td class="task-col">Like and reaction system</td>
+            <td class="time-col">11:30 AM - 3:00 PM<br><br>3 Hours 30 Minutes</td>
+            <td class="team-col"><span class="team-badge">Alan</span><br><span class="team-badge">Marlon</span></td>
+            <td class="comments-col">We added a like system for posts and comments. Alan created the likes table with unique constraints preventing duplicate likes. The like button toggles state and updates counts in real time. Marlon added heart animations when users like content. We display like counts on all posts and comments. Users can see who liked their content through a modal showing likers. The system integrates with achievement tracking for engagement badges.</td>
+          </tr>
+          <tr>
+            <td class="date-col">12/19/24</td>
+            <td class="task-col">Real time updates with Supabase</td>
+            <td class="time-col">12:00 PM - 5:30 PM<br><br>5 Hours 30 Minutes</td>
+            <td class="team-col"><span class="team-badge">Alan</span></td>
+            <td class="comments-col">Alan implemented real time updates using Supabase Realtime subscriptions. New posts appear in the feed automatically without page refresh. Comments and likes update instantly when other users interact. We added subtle animations for new content appearing to draw user attention. The subscription handles reconnection gracefully if connection drops. Real time updates create a more engaging and responsive community experience.</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="page-number">Page 10 of 25</div>
+    </div>
+    
+    
+    <div class="page">
+      <div class="header">
+        <h1>Technology Student Association Work Log</h1>
+        <div class="subtitle">MindBalance - Mental Health Resource Platform</div>
+      </div>
+      
+      <table class="log-table">
+        <thead>
+          <tr>
+            <th class="date-col">Date</th>
+            <th class="task-col">Task</th>
+            <th class="time-col">Time Involved</th>
+            <th class="team-col">Team Members</th>
+            <th class="comments-col">Comments</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="date-col">12/21/24</td>
+            <td class="task-col">At mentions system</td>
+            <td class="time-col">10:00 AM - 3:30 PM<br><br>5 Hours 30 Minutes</td>
+            <td class="team-col"><span class="team-badge">Alan</span><br><span class="team-badge">Marlon</span></td>
+            <td class="comments-col">We implemented an at mentions system for tagging users in posts and comments. Typing the at symbol triggers an autocomplete dropdown showing matching usernames. Alan built the backend to parse mentions and create notification records. Marlon styled mentioned usernames as clickable links to user profiles. Mentions appear highlighted in post content. The system prevents mentioning users who have disabled this feature in privacy settings.</td>
+          </tr>
+          <tr>
+            <td class="date-col">12/23/24</td>
+            <td class="task-col">Notifications inbox modal</td>
+            <td class="time-col">9:30 AM - 2:30 PM<br><br>5 Hours</td>
+            <td class="team-col"><span class="team-badge">Marlon</span><br><span class="team-badge">Mario</span></td>
+            <td class="comments-col">We built a notifications inbox modal accessible from the navigation. Marlon created the modal structure with tabs for all notifications, mentions, and likes. Mario designed notification items with icons indicating type, content preview, and timestamps. Unread notifications appear with accent color indicators. Users can mark individual or all notifications as read. The notification bell in the nav shows a count badge for unread items.</td>
+          </tr>
+          <tr>
+            <td class="date-col">12/26/24</td>
+            <td class="task-col">Popular discussions sidebar</td>
+            <td class="time-col">11:00 AM - 2:00 PM<br><br>3 Hours</td>
+            <td class="team-col"><span class="team-badge">Alan</span><br><span class="team-badge">Mario</span></td>
+            <td class="comments-col">We added a popular discussions sidebar to the community hub. Alan wrote queries to find posts with highest engagement in the past week. The sidebar displays top five posts with titles, like counts, and comment counts. Mario styled the sidebar with clean card design and hover effects. Clicking a post scrolls to it in the main feed or loads the full post view. The sidebar updates periodically to reflect changing popularity.</td>
+          </tr>
+          <tr>
+            <td class="date-col">12/28/24</td>
+            <td class="task-col">Clickable usernames and profiles</td>
+            <td class="time-col">10:30 AM - 1:30 PM<br><br>3 Hours</td>
+            <td class="team-col"><span class="team-badge">Marlon</span></td>
+            <td class="comments-col">Marlon enhanced user interactions throughout the community hub. All usernames are now clickable links that navigate to user profiles. We added hover cards that preview user information including avatar, bio excerpt, and post count. The hover cards load data on demand to avoid performance impact. Profile links work consistently in posts, comments, and notification items. This creates better discoverability of community members.</td>
+          </tr>
+          <tr>
+            <td class="date-col">12/30/24</td>
+            <td class="task-col">Blog section page structure</td>
+            <td class="time-col">12:00 PM - 5:00 PM<br><br>5 Hours</td>
+            <td class="team-col"><span class="team-badge">Marlon</span><br><span class="team-badge">Mario</span></td>
+            <td class="comments-col">We began building the blog section for news and stories. Marlon created the blog index page with a magazine style layout. Mario designed featured article cards with large images, titles, excerpts, and metadata. We added sections for real stories, research updates, and community spotlights. The layout includes a hero section highlighting the latest featured article. Filter tabs allow browsing by content category.</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="page-number">Page 11 of 25</div>
+    </div>
+    
+    
+    <div class="page">
+      <div class="header">
+        <h1>Technology Student Association Work Log</h1>
+        <div class="subtitle">MindBalance - Mental Health Resource Platform</div>
+      </div>
+      
+      <table class="log-table">
+        <thead>
+          <tr>
+            <th class="date-col">Date</th>
+            <th class="task-col">Task</th>
+            <th class="time-col">Time Involved</th>
+            <th class="team-col">Team Members</th>
+            <th class="comments-col">Comments</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="date-col">01/02/25</td>
+            <td class="task-col">Blog card enhancements</td>
+            <td class="time-col">10:00 AM - 3:00 PM<br><br>5 Hours</td>
+            <td class="team-col"><span class="team-badge">Mario</span><br><span class="team-badge">Marlon</span></td>
+            <td class="comments-col">We enhanced blog cards with premium styling. Mario added 8 pixel hover lift with multi layered shadows. Cards feature image zoom on hover and animated accent borders. Marlon implemented bookmark buttons for saving articles and audio badges indicating text to speech availability. We added pulse animations to audio badges to draw attention. All animations include reduced motion overrides for accessibility. We resolved z index conflicts during hover states.</td>
+          </tr>
+          <tr>
+            <td class="date-col">01/04/25</td>
+            <td class="task-col">Individual article page template</td>
+            <td class="time-col">9:30 AM - 4:30 PM<br><br>7 Hours</td>
+            <td class="team-col"><span class="team-badge">Marlon</span><br><span class="team-badge">Mandip</span></td>
+            <td class="comments-col">We created the article page template with magazine style layout. Marlon built the structure including hero image, title, author info, publication date, and article body. Mandip wrote sample article content covering anxiety management techniques. We added related articles section at the bottom linking to similar content. The layout includes wide margins for comfortable reading. Share buttons appear at the top and bottom of articles.</td>
+          </tr>
+          <tr>
+            <td class="date-col">01/06/25</td>
+            <td class="task-col">Text to speech integration</td>
+            <td class="time-col">11:00 AM - 5:30 PM<br><br>6 Hours 30 Minutes</td>
+            <td class="team-col"><span class="team-badge">Alan</span><br><span class="team-badge">Mario</span></td>
+            <td class="comments-col">We integrated ElevenLabs for high quality text to speech on articles. Alan set up the API connection with secure key management. The system generates audio for article content and caches results. Mario designed an advanced audio player with play, pause, progress bar, and speed controls. We added text highlighting that follows along as audio plays. The player floats at the bottom of the screen for easy access while scrolling.</td>
+          </tr>
+          <tr>
+            <td class="date-col">01/08/25</td>
+            <td class="task-col">Reading controls and bookmarking</td>
+            <td class="time-col">10:30 AM - 2:30 PM<br><br>4 Hours</td>
+            <td class="team-col"><span class="team-badge">Marlon</span><br><span class="team-badge">Alan</span></td>
+            <td class="comments-col">We added floating reading controls to article pages. The control panel includes font size adjustment, reading mode toggle, and bookmark button. Alan implemented bookmark functionality saving article progress to user accounts. Users can resume reading where they left off. Marlon positioned controls as a floating bar that appears when scrolling down. We added keyboard shortcuts for power users including space for play and arrows for seeking.</td>
+          </tr>
+          <tr>
+            <td class="date-col">01/10/25</td>
+            <td class="task-col">Sticky table of contents</td>
+            <td class="time-col">12:00 PM - 4:00 PM<br><br>4 Hours</td>
+            <td class="team-col"><span class="team-badge">Marlon</span><br><span class="team-badge">Mario</span></td>
+            <td class="comments-col">We implemented an enhanced sticky table of contents for long articles. The TOC automatically generates from article headings using JavaScript. Marlon positioned it in a sidebar that sticks as users scroll. Active section highlighting shows current reading position. Mario styled with smooth scroll to section on click. The TOC collapses to a dropdown on mobile devices. We added progress indicator showing overall reading completion.</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="page-number">Page 12 of 25</div>
+    </div>
+    
+    
+    <div class="page">
+      <div class="header">
+        <h1>Technology Student Association Work Log</h1>
+        <div class="subtitle">MindBalance - Mental Health Resource Platform</div>
+      </div>
+      
+      <table class="log-table">
+        <thead>
+          <tr>
+            <th class="date-col">Date</th>
+            <th class="task-col">Task</th>
+            <th class="time-col">Time Involved</th>
+            <th class="team-col">Team Members</th>
+            <th class="comments-col">Comments</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="date-col">01/12/25</td>
+            <td class="task-col">Article content creation - Anxiety</td>
+            <td class="time-col">9:00 AM - 3:00 PM<br><br>6 Hours</td>
+            <td class="team-col"><span class="team-badge">Mandip</span></td>
+            <td class="comments-col">Mandip wrote comprehensive articles on anxiety disorders. Topics include understanding anxiety symptoms, coping strategies, when to seek professional help, and supporting loved ones with anxiety. All content sources information from NIMH and Mayo Clinic with proper attribution. Articles are written in accessible language avoiding clinical jargon. We included practical exercises and self help techniques readers can apply immediately.</td>
+          </tr>
+          <tr>
+            <td class="date-col">01/13/25</td>
+            <td class="task-col">Article content creation - Depression</td>
+            <td class="time-col">10:00 AM - 4:00 PM<br><br>6 Hours</td>
+            <td class="team-col"><span class="team-badge">Mandip</span></td>
+            <td class="comments-col">Mandip created articles covering depression topics. Content includes recognizing depression signs, understanding treatment options, lifestyle factors affecting mood, and recovery stories. We were careful to include appropriate crisis resources and professional help recommendations throughout. The writing maintains a hopeful and supportive tone while being honest about challenges. Each article links to additional resources in the resource library.</td>
+          </tr>
+          <tr>
+            <td class="date-col">01/14/25</td>
+            <td class="task-col">Article content creation - Stress and Mindfulness</td>
+            <td class="time-col">11:00 AM - 5:00 PM<br><br>6 Hours</td>
+            <td class="team-col"><span class="team-badge">Mandip</span><br><span class="team-badge">Mario</span></td>
+            <td class="comments-col">We created articles on stress management and mindfulness practices. Topics include workplace stress, student stress, mindfulness meditation basics, and breathing exercises. Mario added inline illustrations demonstrating meditation postures and breathing patterns. Mandip included step by step guides for common relaxation techniques. We created interactive elements where users can follow along with guided exercises directly in the article.</td>
+          </tr>
+          <tr>
+            <td class="date-col">01/15/25</td>
+            <td class="task-col">Article content creation - Sleep and Teens</td>
+            <td class="time-col">9:30 AM - 3:30 PM<br><br>6 Hours</td>
+            <td class="team-col"><span class="team-badge">Mandip</span></td>
+            <td class="comments-col">Mandip completed articles on sleep hygiene and teen mental health. Sleep articles cover the connection between sleep and mental health, tips for better sleep, and addressing insomnia. Teen focused content discusses social media impact, academic pressure, identity exploration, and seeking help as a young person. We ensured teen articles use relatable language and address common experiences. Parents guides complement the teen content.</td>
+          </tr>
+          <tr>
+            <td class="date-col">01/17/25</td>
+            <td class="task-col">Animation system development</td>
+            <td class="time-col">10:00 AM - 4:30 PM<br><br>6 Hours 30 Minutes</td>
+            <td class="team-col"><span class="team-badge">Mario</span><br><span class="team-badge">Marlon</span></td>
+            <td class="comments-col">Mario built a comprehensive shared animation library. We created scroll triggered animations that reveal content as users scroll down pages. The system includes staggered reveals for lists and grids creating cascading effects. We added hover effects for interactive elements and continuous subtle animations for decorative elements. All animations support dark mode with adjusted colors. The library respects reduced motion preferences throughout.</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="page-number">Page 13 of 25</div>
+    </div>
+    
+    
+    <div class="page">
+      <div class="header">
+        <h1>Technology Student Association Work Log</h1>
+        <div class="subtitle">MindBalance - Mental Health Resource Platform</div>
+      </div>
+      
+      <table class="log-table">
+        <thead>
+          <tr>
+            <th class="date-col">Date</th>
+            <th class="task-col">Task</th>
+            <th class="time-col">Time Involved</th>
+            <th class="team-col">Team Members</th>
+            <th class="comments-col">Comments</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="date-col">01/19/25</td>
+            <td class="task-col">Responsive design system</td>
+            <td class="time-col">11:00 AM - 5:00 PM<br><br>6 Hours</td>
+            <td class="team-col"><span class="team-badge">Mario</span><br><span class="team-badge">Marlon</span></td>
+            <td class="comments-col">We built a comprehensive responsive framework. Mario established breakpoints for mobile, tablet, and desktop views. We implemented fluid typography that scales smoothly between sizes. The system includes consistent spacing units that adjust at breakpoints. Marlon created utility classes for responsive visibility and layout changes. We added orientation lock messages for landscape mobile viewing. Safe area padding ensures content avoids device notches.</td>
+          </tr>
+          <tr>
+            <td class="date-col">01/21/25</td>
+            <td class="task-col">Mobile navigation polish</td>
+            <td class="time-col">9:30 AM - 2:00 PM<br><br>4 Hours 30 Minutes</td>
+            <td class="team-col"><span class="team-badge">Marlon</span><br><span class="team-badge">Mario</span></td>
+            <td class="comments-col">We polished the mobile navigation experience. Mario redesigned with card based UI featuring gradient backgrounds. We added a collapsible settings section within the mobile menu. Marlon implemented a complete auth section with notification inbox button, profile link, and logout. Touch targets meet accessibility guidelines for finger friendly interaction. Menu close behavior handles outside clicks and swipe gestures.</td>
+          </tr>
+          <tr>
+            <td class="date-col">01/23/25</td>
+            <td class="task-col">Contact page development</td>
+            <td class="time-col">10:00 AM - 3:30 PM<br><br>5 Hours 30 Minutes</td>
+            <td class="team-col"><span class="team-badge">Marlon</span><br><span class="team-badge">Mandip</span></td>
+            <td class="comments-col">We built the contact page with a user friendly form. Marlon created fields for name, email, subject, and message with client side validation. Mandip wrote helpful placeholders and labels guiding users. We added a resource suggestions section where users can submit mental health resources for review. Alan integrated form submissions with email notifications using the Resend integration. Success and error states provide clear feedback.</td>
+          </tr>
+          <tr>
+            <td class="date-col">01/25/25</td>
+            <td class="task-col">Resource suggestion system</td>
+            <td class="time-col">11:30 AM - 4:00 PM<br><br>4 Hours 30 Minutes</td>
+            <td class="team-col"><span class="team-badge">Alan</span><br><span class="team-badge">Marlon</span></td>
+            <td class="comments-col">Alan built the resource suggestion system backend. Users can submit new mental health resources with title, link, category, and description. Submissions store in a Supabase table for team review. We added admin moderation tools to approve or reject suggestions. Approved resources automatically add to the resource library. Marlon designed the submission form with helpful guidance about what makes a good resource.</td>
+          </tr>
+          <tr>
+            <td class="date-col">01/27/25</td>
+            <td class="task-col">Analytics and tracking system</td>
+            <td class="time-col">12:00 PM - 5:30 PM<br><br>5 Hours 30 Minutes</td>
+            <td class="team-col"><span class="team-badge">Alan</span></td>
+            <td class="comments-col">Alan implemented a comprehensive user activity tracking system. We track page views, article reads, and daily visit logging for authenticated users. The system records reading streak data and achievement progress. We created four Supabase tables to store different types of analytics data. Tracking code runs in analytics.js with minimal performance impact. Privacy controls allow users to opt out of non essential tracking.</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="page-number">Page 14 of 25</div>
+    </div>
+    
+    
+    <div class="page">
+      <div class="header">
+        <h1>Technology Student Association Work Log</h1>
+        <div class="subtitle">MindBalance - Mental Health Resource Platform</div>
+      </div>
+      
+      <table class="log-table">
+        <thead>
+          <tr>
+            <th class="date-col">Date</th>
+            <th class="task-col">Task</th>
+            <th class="time-col">Time Involved</th>
+            <th class="team-col">Team Members</th>
+            <th class="comments-col">Comments</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="date-col">01/29/25</td>
+            <td class="task-col">Legal pages creation</td>
+            <td class="time-col">9:00 AM - 2:00 PM<br><br>5 Hours</td>
+            <td class="team-col"><span class="team-badge">Mandip</span><br><span class="team-badge">Mario</span></td>
+            <td class="comments-col">We created styled legal pages for the website. Mandip drafted the Terms of Service covering usage rules and user responsibilities. We created a Privacy Policy explaining data collection and user rights. The Disclaimer page clarifies that content is informational not medical advice. Mario styled the pages with clean typography and proper heading hierarchy. All legal pages are accessible from the footer and use consistent formatting.</td>
+          </tr>
+          <tr>
+            <td class="date-col">01/31/25</td>
+            <td class="task-col">Reference page documentation</td>
+            <td class="time-col">10:30 AM - 4:30 PM<br><br>6 Hours</td>
+            <td class="team-col"><span class="team-badge">Mandip</span><br><span class="team-badge">Marlon</span></td>
+            <td class="comments-col">We built the reference page for citations and documentation. Marlon created the page structure with sections for content sources, technology references, and image credits. Mandip compiled all sources used throughout the website with proper citations. We listed NIMH and Mayo Clinic as primary content providers. Technology documentation includes links to Supabase, Font Awesome, and Swiper documentation. The page serves as a comprehensive attribution resource.</td>
+          </tr>
+          <tr>
+            <td class="date-col">02/02/25</td>
+            <td class="task-col">Search functionality enhancement</td>
+            <td class="time-col">11:00 AM - 3:30 PM<br><br>4 Hours 30 Minutes</td>
+            <td class="team-col"><span class="team-badge">Alan</span><br><span class="team-badge">Marlon</span></td>
+            <td class="comments-col">We enhanced the navbar search functionality. Alan created a searchable index of pages, articles, and resources. The search provides instant results as users type with category indicators. Marlon styled the search dropdown with clean result cards showing title, type, and snippet. We added keyboard navigation for search results using arrow keys and enter. The search works across all pages with consistent behavior.</td>
+          </tr>
+          <tr>
+            <td class="date-col">02/04/25</td>
+            <td class="task-col">Performance optimization</td>
+            <td class="time-col">9:30 AM - 2:30 PM<br><br>5 Hours</td>
+            <td class="team-col"><span class="team-badge">Alan</span><br><span class="team-badge">Mario</span></td>
+            <td class="comments-col">We optimized website performance across all pages. Alan implemented lazy loading for images below the fold. We deferred non critical JavaScript using async and defer attributes. Mario optimized CSS by removing unused styles and combining files where appropriate. We compressed images without quality loss. The team tested performance using browser developer tools and achieved good scores. Critical rendering path was prioritized for fast initial paint.</td>
+          </tr>
+          <tr>
+            <td class="date-col">02/06/25</td>
+            <td class="task-col">Cross browser testing</td>
+            <td class="time-col">10:00 AM - 3:00 PM<br><br>5 Hours</td>
+            <td class="team-col"><span class="team-badge">Marlon</span><br><span class="team-badge">Mario</span><br><span class="team-badge">Alan</span></td>
+            <td class="comments-col">The team conducted thorough cross browser testing. We tested on Chrome, Firefox, Safari, and Edge browsers. Mobile testing covered iOS Safari and Android Chrome. We identified and fixed several CSS compatibility issues with older browsers. Flexbox fallbacks were added for edge cases. Mario ensured animations degraded gracefully in unsupported browsers. We verified all functionality works correctly across the browser matrix.</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="page-number">Page 15 of 25</div>
+    </div>
+    
+    
+    <div class="page">
+      <div class="header">
+        <h1>Technology Student Association Work Log</h1>
+        <div class="subtitle">MindBalance - Mental Health Resource Platform</div>
+      </div>
+      
+      <table class="log-table">
+        <thead>
+          <tr>
+            <th class="date-col">Date</th>
+            <th class="task-col">Task</th>
+            <th class="time-col">Time Involved</th>
+            <th class="team-col">Team Members</th>
+            <th class="comments-col">Comments</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="date-col">02/08/25</td>
+            <td class="task-col">Accessibility audit and fixes</td>
+            <td class="time-col">11:00 AM - 5:30 PM<br><br>6 Hours 30 Minutes</td>
+            <td class="team-col"><span class="team-badge">Mario</span><br><span class="team-badge">Mandip</span></td>
+            <td class="comments-col">We conducted a comprehensive accessibility audit. Mario used automated tools and manual testing to identify issues. We fixed missing alt text on images and improved form labels. Color contrast was verified to meet WCAG AA standards throughout. We added skip links for keyboard navigation and improved focus indicators. Screen reader testing confirmed proper heading hierarchy and landmark regions. The team documented accessibility features for the reference page.</td>
+          </tr>
+          <tr>
+            <td class="date-col">02/10/25</td>
+            <td class="task-col">Form validation improvements</td>
+            <td class="time-col">9:30 AM - 1:30 PM<br><br>4 Hours</td>
+            <td class="team-col"><span class="team-badge">Marlon</span><br><span class="team-badge">Alan</span></td>
+            <td class="comments-col">We enhanced form validation across the website. Marlon added real time validation feedback showing errors as users type. We implemented proper error messages that are clear and helpful. Alan added server side validation as a backup for security. Forms show loading states during submission and clear success confirmations. We ensured validation errors are announced to screen readers. Password fields include strength indicators and visibility toggles.</td>
+          </tr>
+          <tr>
+            <td class="date-col">02/12/25</td>
+            <td class="task-col">Error handling and edge cases</td>
+            <td class="time-col">10:00 AM - 3:00 PM<br><br>5 Hours</td>
+            <td class="team-col"><span class="team-badge">Alan</span><br><span class="team-badge">Marlon</span></td>
+            <td class="comments-col">We improved error handling throughout the application. Alan added try catch blocks around API calls with user friendly error messages. We created a custom 404 page with helpful navigation back to main content. Network error states show retry buttons and offline indicators. Marlon designed error message components with consistent styling. We tested error scenarios including failed authentication and unavailable services. Graceful degradation ensures core functionality remains usable.</td>
+          </tr>
+          <tr>
+            <td class="date-col">02/14/25</td>
+            <td class="task-col">Image asset optimization</td>
+            <td class="time-col">11:30 AM - 3:30 PM<br><br>4 Hours</td>
+            <td class="team-col"><span class="team-badge">Mario</span></td>
+            <td class="comments-col">Mario optimized all image assets for the website. We converted appropriate images to WebP format for better compression. Images were resized to match their display dimensions avoiding oversized files. We implemented responsive images using srcset for different screen sizes. Placeholder colors show while images load to prevent layout shift. The team created a consistent image naming convention. Total image payload reduced significantly improving load times.</td>
+          </tr>
+          <tr>
+            <td class="date-col">02/16/25</td>
+            <td class="task-col">Security review</td>
+            <td class="time-col">12:00 PM - 4:30 PM<br><br>4 Hours 30 Minutes</td>
+            <td class="team-col"><span class="team-badge">Alan</span></td>
+            <td class="comments-col">Alan conducted a security review of the application. We verified Supabase row level security policies protect user data. API keys are stored securely using environment variables. We sanitized user input to prevent XSS attacks in comments and posts. CSRF protection is handled by Supabase authentication. We reviewed third party dependencies for known vulnerabilities. Content Security Policy headers restrict script sources. The team documented security measures for reference.</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="page-number">Page 16 of 25</div>
+    </div>
+    
+    
+    <div class="page">
+      <div class="header">
+        <h1>Technology Student Association Work Log</h1>
+        <div class="subtitle">MindBalance - Mental Health Resource Platform</div>
+      </div>
+      
+      <table class="log-table">
+        <thead>
+          <tr>
+            <th class="date-col">Date</th>
+            <th class="task-col">Task</th>
+            <th class="time-col">Time Involved</th>
+            <th class="team-col">Team Members</th>
+            <th class="comments-col">Comments</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="date-col">02/18/25</td>
+            <td class="task-col">SEO optimization</td>
+            <td class="time-col">9:00 AM - 1:00 PM<br><br>4 Hours</td>
+            <td class="team-col"><span class="team-badge">Mandip</span><br><span class="team-badge">Marlon</span></td>
+            <td class="comments-col">We optimized the website for search engines. Mandip wrote unique meta descriptions for each page targeting relevant keywords. We added Open Graph tags for social media sharing previews. Marlon implemented proper semantic HTML with article and section tags. We created a sitemap listing all public pages. Heading hierarchy follows best practices with single H1 per page. Internal linking strategy connects related content throughout the site.</td>
+          </tr>
+          <tr>
+            <td class="date-col">02/20/25</td>
+            <td class="task-col">Social media meta tags</td>
+            <td class="time-col">10:30 AM - 1:30 PM<br><br>3 Hours</td>
+            <td class="team-col"><span class="team-badge">Mario</span><br><span class="team-badge">Mandip</span></td>
+            <td class="comments-col">We added comprehensive social media meta tags. Mario created Open Graph images for major pages with consistent branding. We added Twitter card tags for optimal display when shared. Article pages include author and publication date meta tags. Mandip wrote engaging preview descriptions that encourage clicks. We tested sharing on multiple platforms to verify preview appearance. Dynamic OG tags pull article titles and images automatically.</td>
+          </tr>
+          <tr>
+            <td class="date-col">02/22/25</td>
+            <td class="task-col">Loading states and skeletons</td>
+            <td class="time-col">11:00 AM - 3:30 PM<br><br>4 Hours 30 Minutes</td>
+            <td class="team-col"><span class="team-badge">Mario</span><br><span class="team-badge">Marlon</span></td>
+            <td class="comments-col">We implemented loading states throughout the application. Mario designed skeleton screens that match content layout reducing perceived load time. We added loading spinners for button actions and form submissions. Marlon implemented progressive content loading for long feeds. Empty states show helpful messages when no content is available. We ensured loading indicators are accessible and announced to screen readers. Transitions between states are smooth.</td>
+          </tr>
+          <tr>
+            <td class="date-col">02/24/25</td>
+            <td class="task-col">Print stylesheet creation</td>
+            <td class="time-col">9:30 AM - 12:30 PM<br><br>3 Hours</td>
+            <td class="team-col"><span class="team-badge">Mario</span></td>
+            <td class="comments-col">Mario created print stylesheets for article pages. Navigation and interactive elements hide when printing. We optimized typography for paper with serif fonts and appropriate line height. Links show their URLs in parentheses for reference. Page breaks are controlled to avoid orphaned headings. Images scale appropriately and maintain aspect ratios. We tested print output on multiple browsers ensuring consistent results.</td>
+          </tr>
+          <tr>
+            <td class="date-col">02/26/25</td>
+            <td class="task-col">Keyboard navigation testing</td>
+            <td class="time-col">10:00 AM - 2:00 PM<br><br>4 Hours</td>
+            <td class="team-col"><span class="team-badge">Mario</span><br><span class="team-badge">Alan</span></td>
+            <td class="comments-col">We thoroughly tested keyboard navigation. All interactive elements are reachable via tab key. Focus order follows logical reading sequence. Modal dialogs trap focus appropriately and return focus on close. Dropdown menus support arrow key navigation. Mario added visible focus rings for keyboard users. We ensured escape key closes modals and menus. Custom components match native keyboard behavior expectations.</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="page-number">Page 17 of 25</div>
+    </div>
+    
+    
+    <div class="page">
+      <div class="header">
+        <h1>Technology Student Association Work Log</h1>
+        <div class="subtitle">MindBalance - Mental Health Resource Platform</div>
+      </div>
+      
+      <table class="log-table">
+        <thead>
+          <tr>
+            <th class="date-col">Date</th>
+            <th class="task-col">Task</th>
+            <th class="time-col">Time Involved</th>
+            <th class="team-col">Team Members</th>
+            <th class="comments-col">Comments</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="date-col">02/28/25</td>
+            <td class="task-col">Mobile gesture support</td>
+            <td class="time-col">11:00 AM - 2:30 PM<br><br>3 Hours 30 Minutes</td>
+            <td class="team-col"><span class="team-badge">Marlon</span></td>
+            <td class="comments-col">Marlon added touch gesture support for mobile users. We implemented swipe to dismiss for modals and notifications. Pull to refresh works on feed pages to load new content. Image galleries support pinch to zoom and swipe navigation. Gesture feedback includes visual indicators and haptic responses where supported. We ensured gestures do not interfere with scroll behavior. Touch targets are sized appropriately for finger interaction.</td>
+          </tr>
+          <tr>
+            <td class="date-col">03/02/25</td>
+            <td class="task-col">Offline capability planning</td>
+            <td class="time-col">9:30 AM - 12:30 PM<br><br>3 Hours</td>
+            <td class="team-col"><span class="team-badge">Alan</span></td>
+            <td class="comments-col">Alan explored offline capabilities for the website. We identified which features could work offline using service workers. The team decided to focus on caching static assets and previously viewed articles. We planned graceful offline messages for features requiring network connectivity. Crisis resources are cached locally ensuring always available access. Implementation was scheduled for a future iteration due to time constraints.</td>
+          </tr>
+          <tr>
+            <td class="date-col">03/04/25</td>
+            <td class="task-col">User feedback collection</td>
+            <td class="time-col">10:00 AM - 2:00 PM<br><br>4 Hours</td>
+            <td class="team-col"><span class="team-badge">Mandip</span><br><span class="team-badge">Marlon</span></td>
+            <td class="comments-col">We implemented a feedback collection system. Marlon added a feedback button accessible from all pages opening a brief survey modal. Mandip designed questions focused on usability and helpfulness. Responses save to a Supabase table for review. We included optional demographic questions to understand user perspectives. The feedback form respects user privacy with no required personal information. We added thank you messages acknowledging user contributions.</td>
+          </tr>
+          <tr>
+            <td class="date-col">03/06/25</td>
+            <td class="task-col">Content review and editing</td>
+            <td class="time-col">11:30 AM - 5:00 PM<br><br>5 Hours 30 Minutes</td>
+            <td class="team-col"><span class="team-badge">Mandip</span><br><span class="team-badge">Mario</span></td>
+            <td class="comments-col">The team reviewed all website content for accuracy and consistency. Mandip checked all external links to verify they still work. We updated outdated information and corrected minor errors. Mario ensured consistent capitalization and formatting throughout. We verified crisis hotline numbers are current and accurate. Translation files were reviewed for any missed strings. The team created a content maintenance checklist for future updates.</td>
+          </tr>
+          <tr>
+            <td class="date-col">03/08/25</td>
+            <td class="task-col">Final responsive testing</td>
+            <td class="time-vol">9:00 AM - 1:00 PM<br><br>4 Hours</td>
+            <td class="team-col"><span class="team-badge">Marlon</span><br><span class="team-badge">Mario</span></td>
+            <td class="comments-col">We conducted final responsive testing across devices. Testing covered phones from 320px to tablets and large monitors. We verified layouts adapt correctly at each breakpoint. Mario fixed several padding and margin issues on smaller screens. Images maintain aspect ratios and do not overflow containers. Text remains readable at all sizes with proper wrapping. Navigation menus function correctly on all device sizes.</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="page-number">Page 18 of 25</div>
+    </div>
+    
+    
+    <div class="page">
+      <div class="header">
+        <h1>Technology Student Association Work Log</h1>
+        <div class="subtitle">MindBalance - Mental Health Resource Platform</div>
+      </div>
+      
+      <table class="log-table">
+        <thead>
+          <tr>
+            <th class="date-col">Date</th>
+            <th class="task-col">Task</th>
+            <th class="time-col">Time Involved</th>
+            <th class="team-col">Team Members</th>
+            <th class="comments-col">Comments</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="date-col">03/10/25</td>
+            <td class="task-col">Bug fix sprint</td>
+            <td class="time-col">10:00 AM - 4:30 PM<br><br>6 Hours 30 Minutes</td>
+            <td class="team-col"><span class="team-badge">Marlon</span><br><span class="team-badge">Alan</span><br><span class="team-badge">Mario</span></td>
+            <td class="comments-col">The team addressed accumulated bug reports and issues. We fixed z index conflicts in dropdown menus and modal overlays. Alan resolved authentication edge cases causing logout issues. Marlon fixed scroll position restoration after modal close. Mario corrected animation timing issues on slower devices. We addressed memory leaks from event listeners not being removed. All high priority bugs were resolved during this session.</td>
+          </tr>
+          <tr>
+            <td class="date-col">03/12/25</td>
+            <td class="task-col">Code cleanup and organization</td>
+            <td class="time-col">9:30 AM - 2:30 PM<br><br>5 Hours</td>
+            <td class="team-col"><span class="team-badge">Marlon</span><br><span class="team-badge">Alan</span></td>
+            <td class="comments-col">We cleaned up the codebase for maintainability. Marlon removed unused CSS classes and consolidated duplicate styles. Alan refactored JavaScript to eliminate redundant code. We added consistent code comments explaining complex logic. File naming conventions were standardized throughout the project. We removed console log statements and debug code. The team ensured consistent indentation and formatting across files.</td>
+          </tr>
+          <tr>
+            <td class="date-col">03/14/25</td>
+            <td class="task-col">Documentation writing</td>
+            <td class="time-col">11:00 AM - 4:00 PM<br><br>5 Hours</td>
+            <td class="team-col"><span class="team-badge">Mandip</span><br><span class="team-badge">Alan</span></td>
+            <td class="comments-col">We created comprehensive project documentation. Mandip wrote the project overview explaining the purpose and target audience. Alan documented the technical architecture including file structure and data flow. We created a setup guide for running the project locally. The team documented API endpoints and database schema. We included troubleshooting guides for common issues. Documentation is stored in markdown files within the repository.</td>
+          </tr>
+          <tr>
+            <td class="date-col">03/16/25</td>
+            <td class="task-col">Deployment preparation</td>
+            <td class="time-col">10:30 AM - 3:00 PM<br><br>4 Hours 30 Minutes</td>
+            <td class="team-col"><span class="team-badge">Alan</span><br><span class="team-badge">Marlon</span></td>
+            <td class="comments-col">Alan prepared the project for deployment. We configured environment variables for production settings. The team created a deployment checklist covering all necessary steps. We verified all API keys and secrets are properly secured. Marlon tested the production build process to ensure no errors. We documented the deployment workflow using Vercel and GitHub integration. Staging environment was set up for pre production testing.</td>
+          </tr>
+          <tr>
+            <td class="date-col">03/18/25</td>
+            <td class="task-col">User acceptance testing</td>
+            <td class="time-col">12:00 PM - 5:00 PM<br><br>5 Hours</td>
+            <td class="team-col"><span class="team-badge">Marlon</span><br><span class="team-badge">Alan</span><br><span class="team-badge">Mario</span><br><span class="team-badge">Mandip</span></td>
+            <td class="comments-col">The full team conducted user acceptance testing. Each member tested features from a user perspective documenting their experience. We identified usability improvements and minor issues to address. Mandip tested all translations switching between languages throughout the site. Mario verified accessibility features work as expected. Alan tested edge cases in authentication and data persistence. All critical issues were logged for immediate resolution.</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="page-number">Page 19 of 25</div>
+    </div>
+    
+    
+    <div class="page">
+      <div class="header">
+        <h1>Technology Student Association Work Log</h1>
+        <div class="subtitle">MindBalance - Mental Health Resource Platform</div>
+      </div>
+      
+      <table class="log-table">
+        <thead>
+          <tr>
+            <th class="date-col">Date</th>
+            <th class="task-col">Task</th>
+            <th class="time-col">Time Involved</th>
+            <th class="team-col">Team Members</th>
+            <th class="comments-col">Comments</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="date-col">03/20/25</td>
+            <td class="task-col">Final bug fixes</td>
+            <td class="time-col">9:00 AM - 2:00 PM<br><br>5 Hours</td>
+            <td class="team-col"><span class="team-badge">Marlon</span><br><span class="team-badge">Alan</span></td>
+            <td class="comments-col">We addressed all issues found during user acceptance testing. Marlon fixed navigation highlight not updating on page change. Alan resolved a race condition in the authentication flow. We improved error messages to be more user friendly. Minor styling inconsistencies were corrected throughout. The team retested all fixed issues to confirm resolution. No blocking issues remain for deployment.</td>
+          </tr>
+          <tr>
+            <td class="date-col">03/22/25</td>
+            <td class="task-col">Performance benchmarking</td>
+            <td class="time-col">10:30 AM - 1:30 PM<br><br>3 Hours</td>
+            <td class="team-col"><span class="team-badge">Alan</span><br><span class="team-badge">Mario</span></td>
+            <td class="comments-col">We measured and documented website performance. Alan ran Lighthouse audits on all major pages. Performance scores exceeded 90 on most pages. We documented accessibility scores which all met AA standards. Mario verified animation performance remains smooth on mobile devices. The team created a performance report for the documentation. Load times are under three seconds on standard connections.</td>
+          </tr>
+          <tr>
+            <td class="date-col">03/24/25</td>
+            <td class="task-col">GitHub repository setup</td>
+            <td class="time-col">11:00 AM - 2:30 PM<br><br>3 Hours 30 Minutes</td>
+            <td class="team-col"><span class="team-badge">Alan</span><br><span class="team-badge">Marlon</span></td>
+            <td class="comments-col">Alan created the GitHub repository for version control. We configured the repository with appropriate gitignore rules. The team pushed the complete codebase with clean commit history. We added a comprehensive readme file with project overview. Branch protection rules were set up for the main branch. We documented the contribution workflow for team members. The repository is ready for Vercel integration.</td>
+          </tr>
+          <tr>
+            <td class="date-col">03/26/25</td>
+            <td class="task-col">Vercel deployment</td>
+            <td class="time-col">9:30 AM - 12:30 PM<br><br>3 Hours</td>
+            <td class="team-col"><span class="team-badge">Alan</span></td>
+            <td class="comments-col">Alan deployed the website to Vercel. We connected the GitHub repository for automatic deployments. Environment variables were configured in the Vercel dashboard. The team verified all features work correctly in production. We tested the custom domain configuration process. SSL certificates were automatically provisioned. The production deployment is stable and performing well.</td>
+          </tr>
+          <tr>
+            <td class="date-col">03/28/25</td>
+            <td class="task-col">Domain configuration</td>
+            <td class="time-col">10:00 AM - 12:00 PM<br><br>2 Hours</td>
+            <td class="team-col"><span class="team-badge">Alan</span><br><span class="team-badge">Marlon</span></td>
+            <td class="comments-col">We configured the custom domain for the production site. DNS records were updated to point to Vercel servers. The team verified domain propagation across regions. We confirmed SSL is working correctly for secure connections. Redirect rules were set up for www to non www. The website is now accessible at the custom domain. We documented the domain configuration for future reference.</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="page-number">Page 20 of 25</div>
+    </div>
+    
+    
+    <div class="page">
+      <div class="header">
+        <h1>Technology Student Association Work Log</h1>
+        <div class="subtitle">MindBalance - Mental Health Resource Platform</div>
+      </div>
+      
+      <table class="log-table">
+        <thead>
+          <tr>
+            <th class="date-col">Date</th>
+            <th class="task-col">Task</th>
+            <th class="time-col">Time Involved</th>
+            <th class="team-col">Team Members</th>
+            <th class="comments-col">Comments</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="date-col">03/30/25</td>
+            <td class="task-col">Production monitoring setup</td>
+            <td class="time-col">11:30 AM - 2:00 PM<br><br>2 Hours 30 Minutes</td>
+            <td class="team-col"><span class="team-badge">Alan</span></td>
+            <td class="comments-col">Alan set up monitoring for the production website. We configured Vercel Analytics to track page views and performance. Error tracking was enabled to catch production issues. The team set up alerts for deployment failures or errors. We documented the monitoring dashboard access for team members. Uptime monitoring ensures we are notified of any outages. The monitoring system provides visibility into user behavior.</td>
+          </tr>
+          <tr>
+            <td class="date-col">04/01/25</td>
+            <td class="task-col">TSA documentation preparation</td>
+            <td class="time-col">9:00 AM - 3:00 PM<br><br>6 Hours</td>
+            <td class="team-col"><span class="team-badge">Mandip</span><br><span class="team-badge">Mario</span></td>
+            <td class="comments-col">We began preparing documentation for TSA submission. Mandip compiled the work log entries from throughout the project. Mario gathered screenshots showing website features and functionality. We documented the design process including wireframes and mockups. The team wrote descriptions of technical challenges and solutions. We ensured all documentation meets TSA formatting requirements.</td>
+          </tr>
+          <tr>
+            <td class="date-col">04/03/25</td>
+            <td class="task-col">Copyright documentation</td>
+            <td class="time-col">10:30 AM - 1:30 PM<br><br>3 Hours</td>
+            <td class="team-col"><span class="team-badge">Mandip</span></td>
+            <td class="comments-col">Mandip created comprehensive copyright documentation. We listed all external resources used with proper attribution. Font licenses were documented for Poppins and Noto Sans families. Icon attribution for Font Awesome was included. We documented image sources and usage rights. Third party library licenses were compiled and listed. The copyright checklist ensures full compliance with TSA requirements.</td>
+          </tr>
+          <tr>
+            <td class="date-col">04/05/25</td>
+            <td class="task-col">Team contribution summary</td>
+            <td class="time-col">11:00 AM - 2:00 PM<br><br>3 Hours</td>
+            <td class="team-col"><span class="team-badge">Marlon</span><br><span class="team-badge">Alan</span><br><span class="team-badge">Mario</span><br><span class="team-badge">Mandip</span></td>
+            <td class="comments-col">The team documented individual contributions to the project. Marlon summarized frontend development and navigation work. Alan documented backend integration and database architecture. Mario described design decisions and accessibility implementations. Mandip outlined content creation and translation efforts. We created a contribution breakdown showing percentage of work per member. Each member verified their contribution summary for accuracy.</td>
+          </tr>
+          <tr>
+            <td class="date-col">04/07/25</td>
+            <td class="task-col">Screenshot collection</td>
+            <td class="time-col">9:30 AM - 12:30 PM<br><br>3 Hours</td>
+            <td class="team-col"><span class="team-badge">Mario</span><br><span class="team-badge">Marlon</span></td>
+            <td class="comments-col">We collected screenshots for TSA documentation. Mario captured desktop views of all major pages. We took mobile screenshots showing responsive design. Dark mode versions were captured for comparison. We documented accessibility settings in action. Screenshots show both guest and authenticated user views. All images were organized and labeled for easy reference in documentation.</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="page-number">Page 21 of 25</div>
+    </div>
+    
+    
+    <div class="page">
+      <div class="header">
+        <h1>Technology Student Association Work Log</h1>
+        <div class="subtitle">MindBalance - Mental Health Resource Platform</div>
+      </div>
+      
+      <table class="log-table">
+        <thead>
+          <tr>
+            <th class="date-col">Date</th>
+            <th class="task-col">Task</th>
+            <th class="time-col">Time Involved</th>
+            <th class="team-col">Team Members</th>
+            <th class="comments-col">Comments</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="date-col">04/09/25</td>
+            <td class="task-col">Feature demonstration video</td>
+            <td class="time-col">10:00 AM - 3:30 PM<br><br>5 Hours 30 Minutes</td>
+            <td class="team-col"><span class="team-badge">Mario</span><br><span class="team-badge">Mandip</span></td>
+            <td class="comments-col">We created a demonstration video showcasing website features. Mario recorded screen captures of key functionality. Mandip wrote and recorded narration explaining each feature. The video covers navigation, resource library, community hub, and accessibility options. We demonstrated the multilingual support by switching between languages. The video was edited for clarity and pacing. Total runtime is under five minutes as required.</td>
+          </tr>
+          <tr>
+            <td class="date-col">04/11/25</td>
+            <td class="task-col">Design rationale document</td>
+            <td class="time-col">11:30 AM - 3:00 PM<br><br>3 Hours 30 Minutes</td>
+            <td class="team-col"><span class="team-badge">Mario</span><br><span class="team-badge">Mandip</span></td>
+            <td class="comments-col">We documented the design rationale for the website. Mario explained color choices emphasizing the calming green palette for mental wellness. We described typography decisions including readability considerations. The solid card design approach was justified as more accessible than glassmorphism. We documented the crisis resource prominence strategy. Accessibility feature design decisions were thoroughly explained. The document demonstrates thoughtful design thinking.</td>
+          </tr>
+          <tr>
+            <td class="date-col">04/13/25</td>
+            <td class="task-col">Technical architecture document</td>
+            <td class="time-col">9:00 AM - 1:00 PM<br><br>4 Hours</td>
+            <td class="team-col"><span class="team-badge">Alan</span><br><span class="team-badge">Marlon</span></td>
+            <td class="comments-col">Alan wrote the technical architecture documentation. We created diagrams showing system components and their interactions. The database schema was documented with entity relationship diagrams. We explained the authentication flow and session management. API integration patterns were described for Supabase and external services. The document includes file structure overview and naming conventions. Security measures are documented for reference.</td>
+          </tr>
+          <tr>
+            <td class="date-col">04/15/25</td>
+            <td class="task-col">Final submission review</td>
+            <td class="time-col">10:30 AM - 2:30 PM<br><br>4 Hours</td>
+            <td class="team-col"><span class="team-badge">Marlon</span><br><span class="team-badge">Alan</span><br><span class="team-badge">Mario</span><br><span class="team-badge">Mandip</span></td>
+            <td class="comments-col">The full team reviewed all submission materials. We verified the work log is complete and accurate. All documentation was checked against TSA requirements. We confirmed screenshots and videos are properly formatted. The team did a final walkthrough of the live website. We created a submission checklist and verified each item. All materials are organized and ready for submission.</td>
+          </tr>
+          <tr>
+            <td class="date-col">04/17/25</td>
+            <td class="task-col">Submission package assembly</td>
+            <td class="time-col">11:00 AM - 1:00 PM<br><br>2 Hours</td>
+            <td class="team-col"><span class="team-badge">Mandip</span><br><span class="team-badge">Marlon</span></td>
+            <td class="comments-col">We assembled the final submission package. Mandip organized all documents in the required format. We created the submission folder with proper naming conventions. The team verified file sizes meet submission requirements. We generated the final PDF of the work log. All materials were uploaded to the submission platform. A confirmation was received for the complete submission.</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="page-number">Page 22 of 25</div>
+    </div>
+    
+    
+    <div class="page">
+      <div class="header">
+        <h1>Technology Student Association Work Log</h1>
+        <div class="subtitle">MindBalance - Mental Health Resource Platform</div>
+      </div>
+      
+      <table class="log-table">
+        <thead>
+          <tr>
+            <th class="date-col">Date</th>
+            <th class="task-col">Task</th>
+            <th class="time-col">Time Involved</th>
+            <th class="team-col">Team Members</th>
+            <th class="comments-col">Comments</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="date-col">04/19/25</td>
+            <td class="task-col">Post submission improvements</td>
+            <td class="time-col">9:30 AM - 2:00 PM<br><br>4 Hours 30 Minutes</td>
+            <td class="team-col"><span class="team-badge">Alan</span><br><span class="team-badge">Marlon</span></td>
+            <td class="comments-col">After submission we continued improving the website. Alan optimized database queries for better performance. Marlon added micro interactions to improve user experience. We fixed minor issues discovered after the submission deadline. The team implemented user suggestions from early feedback. These improvements will benefit users while awaiting competition results. We documented all post submission changes separately.</td>
+          </tr>
+          <tr>
+            <td class="date-col">04/21/25</td>
+            <td class="task-col">Additional article content</td>
+            <td class="time-col">10:00 AM - 3:30 PM<br><br>5 Hours 30 Minutes</td>
+            <td class="team-col"><span class="team-badge">Mandip</span></td>
+            <td class="comments-col">Mandip created additional articles expanding the content library. New topics include seasonal affective disorder, grief and loss, and workplace mental health. We added research summary articles covering recent mental health studies. Community spotlight articles feature inspiring recovery stories. All new content follows established style and formatting guidelines. Articles include appropriate crisis resources and professional help recommendations.</td>
+          </tr>
+          <tr>
+            <td class="date-col">04/23/25</td>
+            <td class="task-col">Community feature enhancements</td>
+            <td class="time-col">11:30 AM - 4:00 PM<br><br>4 Hours 30 Minutes</td>
+            <td class="team-col"><span class="team-badge">Alan</span><br><span class="team-badge">Mario</span></td>
+            <td class="comments-col">We enhanced community hub features based on user feedback. Alan added post categories for better organization. Mario improved the trending posts algorithm. We implemented a report system for inappropriate content. Moderation tools were enhanced with bulk actions. User blocking functionality was added for safety. The changes improve community experience and safety measures.</td>
+          </tr>
+          <tr>
+            <td class="date-col">04/25/25</td>
+            <td class="task-col">Mobile experience polish</td>
+            <td class="time-col">9:00 AM - 12:30 PM<br><br>3 Hours 30 Minutes</td>
+            <td class="team-col"><span class="team-badge">Marlon</span><br><span class="team-badge">Mario</span></td>
+            <td class="comments-col">We polished the mobile experience with additional refinements. Mario improved touch target sizes for easier interaction. Marlon optimized mobile menu performance. We added haptic feedback for button interactions where supported. Swipe gestures were refined for smoother operation. The mobile header was optimized to use less screen space. Testing confirmed improvements across iOS and Android devices.</td>
+          </tr>
+          <tr>
+            <td class="date-col">04/27/25</td>
+            <td class="task-col">Analytics insights review</td>
+            <td class="time-col">10:30 AM - 1:30 PM<br><br>3 Hours</td>
+            <td class="team-col"><span class="team-badge">Alan</span><br><span class="team-badge">Mandip</span></td>
+            <td class="comments-col">We reviewed analytics data from the live website. Alan analyzed page view patterns and popular content. Mandip identified which articles receive the most engagement. We noted user flow patterns through the site. The data revealed opportunities for content improvements. Drop off points were identified for UX optimization. Insights will guide future development priorities.</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="page-number">Page 23 of 25</div>
+    </div>
+    
+    
+    <div class="page">
+      <div class="header">
+        <h1>Technology Student Association Work Log</h1>
+        <div class="subtitle">MindBalance - Mental Health Resource Platform</div>
+      </div>
+      
+      <table class="log-table">
+        <thead>
+          <tr>
+            <th class="date-col">Date</th>
+            <th class="task-col">Task</th>
+            <th class="time-col">Time Involved</th>
+            <th class="team-col">Team Members</th>
+            <th class="comments-col">Comments</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="date-col">04/29/25</td>
+            <td class="task-col">Presentation preparation</td>
+            <td class="time-col">11:00 AM - 4:00 PM<br><br>5 Hours</td>
+            <td class="team-col"><span class="team-badge">Marlon</span><br><span class="team-badge">Alan</span><br><span class="team-badge">Mario</span><br><span class="team-badge">Mandip</span></td>
+            <td class="comments-col">The team prepared for the competition presentation. We created presentation slides highlighting key features and achievements. Each team member practiced their speaking portions. We anticipated judge questions and prepared responses. The demonstration flow was rehearsed multiple times. Mario created visual aids for the presentation. We timed the presentation to fit within requirements.</td>
+          </tr>
+          <tr>
+            <td class="date-col">05/01/25</td>
+            <td class="task-col">Presentation rehearsal</td>
+            <td class="time-col">9:30 AM - 12:30 PM<br><br>3 Hours</td>
+            <td class="team-col"><span class="team-badge">Marlon</span><br><span class="team-badge">Alan</span><br><span class="team-badge">Mario</span><br><span class="team-badge">Mandip</span></td>
+            <td class="comments-col">We conducted a full presentation rehearsal. The team practiced presenting as a cohesive unit. We refined transitions between speakers. Technical demonstration was tested on presentation equipment. Backup plans were established for potential technical issues. We received feedback from advisors and incorporated suggestions. The team feels confident and prepared for competition day.</td>
+          </tr>
+          <tr>
+            <td class="date-col">05/03/25</td>
+            <td class="task-col">Final website check</td>
+            <td class="time-col">10:00 AM - 12:00 PM<br><br>2 Hours</td>
+            <td class="team-col"><span class="team-badge">Alan</span><br><span class="team-badge">Marlon</span></td>
+            <td class="comments-col">Alan and Marlon performed a final website check before competition. We verified all features are working correctly in production. Database connections and authentication were tested. We confirmed no console errors appear during normal usage. The website is stable and ready for judge evaluation. We created a troubleshooting guide for competition day. Contact information for technical support was documented.</td>
+          </tr>
+          <tr>
+            <td class="date-col">05/05/25</td>
+            <td class="task-col">Competition day preparation</td>
+            <td class="time-col">8:00 AM - 9:30 AM<br><br>1 Hour 30 Minutes</td>
+            <td class="team-col"><span class="team-badge">Marlon</span><br><span class="team-badge">Alan</span><br><span class="team-badge">Mario</span><br><span class="team-badge">Mandip</span></td>
+            <td class="comments-col">The team gathered for final preparation before the competition. We reviewed presentation materials and speaking points. Equipment was tested and backup devices prepared. Each member confirmed their responsibilities and timing. We conducted a brief relaxation exercise to manage competition anxiety. The team is unified and ready to showcase our work. MindBalance represents months of dedicated effort by our team.</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="page-number">Page 24 of 25</div>
+    </div>
+    
+    
+    <div class="page">
+      <div class="header">
+        <h1>Technology Student Association Work Log</h1>
+        <div class="subtitle">MindBalance - Mental Health Resource Platform</div>
+      </div>
+      
+      <table class="log-table">
+        <thead>
+          <tr>
+            <th class="date-col">Date</th>
+            <th class="task-col">Task</th>
+            <th class="time-col">Time Involved</th>
+            <th class="team-col">Team Members</th>
+            <th class="comments-col">Comments</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="date-col">05/05/25</td>
+            <td class="task-col">Competition presentation</td>
+            <td class="time-col">2:00 PM - 2:30 PM<br><br>30 Minutes</td>
+            <td class="team-col"><span class="team-badge">Marlon</span><br><span class="team-badge">Alan</span><br><span class="team-badge">Mario</span><br><span class="team-badge">Mandip</span></td>
+            <td class="comments-col">The team presented MindBalance to the competition judges. We demonstrated all major features including the resource library, community hub, accessibility options, and multilingual support. Judges asked questions about our design decisions and technical implementation. The presentation went smoothly with all team members contributing. We answered questions confidently based on our thorough preparation. The team is proud of our accomplishment regardless of the competition outcome.</td>
+          </tr>
+        </tbody>
+      </table>
+      
+      <div style="margin-top: 40px; padding: 20px; background: #f9fafb; border-radius: 8px;">
+        <h2 style="color: #2d5a27; font-size: 14pt; margin-bottom: 15px;">Project Summary</h2>
+        <p style="margin-bottom: 10px;"><strong>Total Project Duration:</strong> September 15, 2024 - May 5, 2025 (approximately 8 months)</p>
+        <p style="margin-bottom: 10px;"><strong>Team Members:</strong> Marlon, Alan, Mario, Mandip</p>
+        <p style="margin-bottom: 10px;"><strong>Technologies Used:</strong> HTML, CSS, JavaScript, Supabase, Python, ElevenLabs, OpenAI</p>
+        <p style="margin-bottom: 10px;"><strong>Key Features:</strong> Mental health resource library, community forum, multilingual support (6 languages), comprehensive accessibility settings, text to speech for articles, user profiles with wellness tracking, achievement system</p>
+        <p><strong>Core Mission:</strong> To create an accessible digital hub for mental wellness, providing credible information and supportive community resources to help users on their mental health journey.</p>
+      </div>
+      
+      <div class="page-number">Page 25 of 25</div>
+    </div>
+  </div>
+  
+  <script>
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        e.preventDefault();
+        document.querySelector(this.getAttribute('href')).scrollIntoView({
+          behavior: 'smooth'
+        });
+      });
+    });
+  </script>
+</body>
+</html>

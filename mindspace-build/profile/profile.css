@@ -490,6 +490,29 @@
 }
 
 /* === ACTIVITY FEED === */
+.mb-profile__activity {
+  max-height: 500px;
+  overflow-y: auto;
+  padding-right: 5px;
+}
+
+.mb-profile__activity::-webkit-scrollbar {
+  width: 5px;
+}
+
+.mb-profile__activity::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.mb-profile__activity::-webkit-scrollbar-thumb {
+  background: #d0c8bc;
+  border-radius: 10px;
+}
+
+[data-theme="dark"] .mb-profile__activity::-webkit-scrollbar-thumb {
+  background: #3d3a50;
+}
+
 .mb-activity-item {
   display: flex;
   gap: 15px;

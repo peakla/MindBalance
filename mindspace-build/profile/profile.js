@@ -658,7 +658,7 @@ async function loadActivityData(userId) {
       .select('id, activity_type, page_url, activity_data, created_at')
       .eq('user_id', userId)
       .order('created_at', { ascending: false })
-      .limit(10)
+      .limit(30)
   ]);
 
   const posts = postsRes.data;
@@ -690,34 +690,42 @@ async function loadActivityData(userId) {
   }
 
   if (activityLogs) {
+    const hiddenTypes = ['page_view', 'page_exit'];
     const activityConfig = {
       'article_read': { icon: 'book-outline', label: 'Read article' },
       'article_complete': { icon: 'checkmark-done-outline', label: 'Finished reading' },
-      'page_view': { icon: 'eye-outline', label: 'Visited' },
       'mood_checkin': { icon: 'happy-outline', label: 'Mood check-in' },
+      'mood_entry': { icon: 'happy-outline', label: 'Mood check-in' },
       'achievement_unlocked': { icon: 'trophy-outline', label: 'Achievement unlocked' },
       'profile_update': { icon: 'person-outline', label: 'Updated profile' },
       'bookmark': { icon: 'bookmark-outline', label: 'Bookmarked' },
-      'like': { icon: 'heart-outline', label: 'Liked a post' }
+      'like': { icon: 'heart-outline', label: 'Liked a post' },
+      'resource_view': { icon: 'folder-open-outline', label: 'Viewed resource' },
+      'search': { icon: 'search-outline', label: 'Searched' },
+      'share': { icon: 'share-social-outline', label: 'Shared' },
+      'community_post': { icon: 'chatbubble-outline', label: 'Posted in community' },
+      'community_comment': { icon: 'chatbox-outline', label: 'Commented' },
+      'community_like': { icon: 'heart-outline', label: 'Liked a post' },
+      'follow': { icon: 'person-add-outline', label: 'Followed someone' }
     };
     activityLogs.forEach(log => {
-      const config = activityConfig[log.activity_type] || { icon: 'ellipse-outline', label: log.activity_type };
+      const logType = log.activity_type || log.action_type || '';
+      if (hiddenTypes.includes(logType)) return;
+      const config = activityConfig[logType] || { icon: 'ellipse-outline', label: logType.replace(/_/g, ' ') };
       let desc = config.label;
       try {
-        if (log.activity_data) {
-          const data = typeof log.activity_data === 'string' ? JSON.parse(log.activity_data) : log.activity_data;
+        const rawData = log.activity_data || log.metadata;
+        if (rawData) {
+          const data = typeof rawData === 'string' ? JSON.parse(rawData) : rawData;
           if (data.article_title) desc += ': ' + data.article_title;
           else if (data.mood) desc += ': ' + data.mood;
           else if (data.badge_name) desc += ': ' + data.badge_name;
-          else if (log.page_url && log.activity_type === 'page_view') desc += ' ' + log.page_url;
-        } else if (log.page_url && log.activity_type === 'page_view') {
-          desc += ' ' + log.page_url;
+          else if (data.resource_title) desc += ': ' + data.resource_title;
+          else if (data.query) desc += ': "' + data.query + '"';
         }
-      } catch (e) {
-        if (log.page_url) desc += ' ' + log.page_url;
-      }
+      } catch (e) {}
       activities.push({
-        type: log.activity_type,
+        type: logType,
         content: desc,
         time: new Date(log.created_at),
         icon: config.icon

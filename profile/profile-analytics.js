@@ -36,37 +36,48 @@ const ProfileAnalytics = (function() {
       'search': 'search-outline',
       'share': 'share-social-outline',
       'mood_entry': 'happy-outline',
+      'mood_checkin': 'happy-outline',
       'goal_progress': 'flag-outline',
       'goal_complete': 'trophy-outline',
       'community_post': 'chatbubble-outline',
       'community_comment': 'chatbox-outline',
       'community_like': 'heart-outline',
+      'achievement_unlocked': 'trophy-outline',
+      'profile_update': 'person-outline',
+      'bookmark': 'bookmark-outline',
+      'like': 'heart-outline',
       'follow': 'person-add-outline'
     };
     return icons[actionType] || 'ellipse-outline';
   }
 
+  const HIDDEN_ACTIVITY_TYPES = ['page_view', 'page_exit'];
+
   function getActionDescription(activity) {
-    const meta = activity.metadata || {};
-    const type = activity.action_type;
+    const meta = activity.activity_data || activity.metadata || {};
+    const type = activity.activity_type || activity.action_type;
     
     const descriptions = {
-      'page_view': `Visited <strong>${meta.page_title || activity.page_url}</strong>`,
       'article_read': `Started reading <strong>${meta.article_title || 'an article'}</strong>`,
       'article_complete': `Completed <strong>${meta.article_title || 'an article'}</strong>`,
       'resource_view': `Viewed resource <strong>${meta.resource_title || 'a resource'}</strong>`,
       'search': `Searched for "<strong>${meta.query || ''}</strong>"`,
       'share': `Shared ${meta.content_type || 'content'} on ${meta.platform || 'social media'}`,
       'mood_entry': `Logged mood: <strong>${meta.mood || 'recorded'}</strong>`,
+      'mood_checkin': `Mood check-in: <strong>${meta.mood || 'recorded'}</strong>`,
       'goal_progress': `Made progress on a goal (${meta.progress || 0}%)`,
       'goal_complete': `Completed a wellness goal`,
       'community_post': `Created a new post in the community`,
       'community_comment': `Left a comment on a discussion`,
       'community_like': `Liked a post`,
+      'achievement_unlocked': `Achievement unlocked: <strong>${meta.badge_name || meta.achievement || 'New badge'}</strong>`,
+      'profile_update': `Updated profile`,
+      'bookmark': `Bookmarked an article`,
+      'like': `Liked a post`,
       'follow': `Started following someone`
     };
     
-    return descriptions[type] || `Performed ${type.replace(/_/g, ' ')}`;
+    return descriptions[type] || `${(type || 'activity').replace(/_/g, ' ')}`;
   }
 
   // ==================== CALENDAR HEATMAP ====================
@@ -172,25 +183,39 @@ const ProfileAnalytics = (function() {
     }
 
     try {
-      const activities = await MBAnalytics.getRecentActivity(userId, 10);
+      const rawActivities = await MBAnalytics.getRecentActivity(userId, 30);
       
-      if (!activities || activities.length === 0) {
+      if (!rawActivities || rawActivities.length === 0) {
+        showEmptyState();
+        return;
+      }
+
+      const activities = rawActivities.filter(a => {
+        const type = a.activity_type || a.action_type || '';
+        return !HIDDEN_ACTIVITY_TYPES.includes(type);
+      }).slice(0, 10);
+
+      if (activities.length === 0) {
         showEmptyState();
         return;
       }
       
-      listEl.innerHTML = activities.map(activity => `
-        <div class="mb-timeline__item">
-          <div class="mb-timeline__icon">
-            <ion-icon name="${getActionIcon(activity.action_type)}"></ion-icon>
+      listEl.innerHTML = activities.map(activity => {
+        const type = activity.activity_type || activity.action_type || '';
+        return `
+          <div class="mb-timeline__item">
+            <div class="mb-timeline__icon">
+              <ion-icon name="${getActionIcon(type)}"></ion-icon>
+            </div>
+            <div class="mb-timeline__content">
+              <div class="mb-timeline__action">${getActionDescription(activity)}</div>
+              <div class="mb-timeline__time">${formatTimeAgo(activity.created_at)}</div>
+            </div>
           </div>
-          <div class="mb-timeline__content">
-            <div class="mb-timeline__action">${getActionDescription(activity)}</div>
-            <div class="mb-timeline__time">${formatTimeAgo(activity.created_at)}</div>
-          </div>
-        </div>
-      `).join('');
+        `;
+      }).join('');
     } catch (err) {
+      console.warn('Activity timeline error:', err);
       showEmptyState();
     }
   }

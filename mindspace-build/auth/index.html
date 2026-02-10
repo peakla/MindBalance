@@ -678,6 +678,11 @@
       to { opacity: 1; }
     }
     
+    @keyframes spin {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+    
     
     @media (max-width: 992px) {
       .auth-panel {
@@ -1123,7 +1128,7 @@
         <div class="user-info" id="userInfo">
           <div class="avatar" id="userAvatar">MB</div>
           <div class="email" id="userEmail">user@example.com</div>
-          <div class="status"><i class="fas fa-check-circle"></i> Signed in</div>
+          <div class="status"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg> Signed in</div>
         </div>
         
         <div class="form-section" id="formSection">
@@ -1182,23 +1187,23 @@
         
         <div class="btn-row" id="actionBtns" style="display: none;">
           <button id="signout" class="btn btn-secondary">
-            <i class="fas fa-sign-out-alt"></i>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
             Sign Out
           </button>
           <button id="goBack" class="btn btn-primary">
-            <i class="fas fa-arrow-right"></i>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
             Continue
           </button>
         </div>
         
-        <div class="help-text">
-          <i class="fas fa-info-circle"></i>
+        <div class="help-text" id="helpText">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
           <span>Creating an account? You may need to confirm your email before signing in.</span>
         </div>
       </div>
       
       <a href="../" class="back-link">
-        <i class="fas fa-arrow-left"></i>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
         Back to MindSpace
       </a>
     </div>
@@ -1251,6 +1256,7 @@
   const userEmail = document.getElementById("userEmail");
   const formSection = document.getElementById("formSection");
   const actionBtns = document.getElementById("actionBtns");
+  const helpText = document.getElementById("helpText");
 
   const eyeOpenPath = '<path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/>';
   const eyeClosedPath = '<path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"/><line x1="1" y1="1" x2="23" y2="23"/>';
@@ -1290,10 +1296,10 @@
   function setMsg(text, type = 'info') {
     let icon = '';
     switch(type) {
-      case 'success': icon = '<i class="fas fa-check-circle"></i>'; break;
-      case 'error': icon = '<i class="fas fa-exclamation-circle"></i>'; break;
-      case 'loading': icon = '<i class="fas fa-spinner fa-spin"></i>'; break;
-      default: icon = '<i class="fas fa-info-circle"></i>';
+      case 'success': icon = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>'; break;
+      case 'error': icon = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>'; break;
+      case 'loading': icon = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="animation:spin 1s linear infinite"><path d="M21 12a9 9 0 1 1-6.219-8.56"/></svg>'; break;
+      default: icon = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>';
     }
     msgEl.innerHTML = icon + '<span>' + text + '</span>';
     msgEl.className = 'message show ' + type;
@@ -1325,11 +1331,13 @@
       userInfo.classList.add('show');
       formSection.classList.add('hidden');
       actionBtns.style.display = 'flex';
+      if (helpText) helpText.style.display = 'none';
       hideMsg();
     } else {
       userInfo.classList.remove('show');
       formSection.classList.remove('hidden');
       actionBtns.style.display = 'none';
+      if (helpText) helpText.style.display = '';
     }
   }
 

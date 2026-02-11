@@ -227,17 +227,36 @@ function updateCommunityUI(user) {
     if (sidebarUserCard) {
       sidebarUserCard.style.display = 'flex';
       if (sidebarUserName) sidebarUserName.textContent = userName || 'User';
-      if (sidebarUserAvatar) {
-        const initials = (userName || 'U').split(' ').map(w => w[0]).join('').substring(0,2).toUpperCase();
-        sidebarUserAvatar.textContent = initials;
-      }
     }
 
-    if (avatarCircle) {
-      const initials = user.email ? user.email.substring(0, 2).toUpperCase() : 'ME';
-      avatarCircle.textContent = initials;
-      avatarCircle.style.background = '#3b82f6';
-    }
+    const initials = user.email ? user.email.substring(0, 2).toUpperCase() : 'ME';
+
+    fetchUserProfile(user.id).then(function(profile) {
+      if (profile && profile.avatar_url) {
+        if (avatarCircle) {
+          avatarCircle.innerHTML = '<img src="' + profile.avatar_url + '" alt="Avatar" style="width:100%;height:100%;object-fit:cover;border-radius:50%;" onerror="this.parentElement.textContent=\'' + initials + '\'">';
+          avatarCircle.style.background = 'transparent';
+          avatarCircle.style.padding = '0';
+          avatarCircle.style.overflow = 'hidden';
+        }
+        if (sidebarUserAvatar) {
+          sidebarUserAvatar.innerHTML = '<img src="' + profile.avatar_url + '" alt="Avatar" style="width:100%;height:100%;object-fit:cover;border-radius:50%;" onerror="this.parentElement.textContent=\'' + initials + '\'">';
+          sidebarUserAvatar.style.background = 'transparent';
+          sidebarUserAvatar.style.padding = '0';
+          sidebarUserAvatar.style.overflow = 'hidden';
+        }
+      } else {
+        if (avatarCircle) {
+          avatarCircle.textContent = initials;
+          avatarCircle.style.background = '#3b82f6';
+        }
+        if (sidebarUserAvatar) {
+          const sideInitials = (userName || 'U').split(' ').map(w => w[0]).join('').substring(0,2).toUpperCase();
+          sidebarUserAvatar.textContent = sideInitials;
+        }
+      }
+    });
+
 
     if (postText) {
       postText.disabled = false;
@@ -1151,6 +1170,10 @@ async function handlePost() {
 
   if (!renderedPostIds.has(data.id)) {
     renderedPostIds.add(data.id);
+    const userProfile = await fetchUserProfile(currentUser.id);
+    if (userProfile && userProfile.avatar_url) {
+      data.avatar_url = userProfile.avatar_url;
+    }
     const newPost = createPostElement(data, 'Just now');
     feedList.insertBefore(newPost, feedList.firstChild);
     enableInteractions();
@@ -1693,10 +1716,22 @@ function setupRealtimeSubscription() {
         const existingPost = feedList.querySelector(`[data-id="${payload.new.id}"]`);
         if (!existingPost) {
           renderedPostIds.add(payload.new.id);
-          const article = createPostElement(payload.new, 'Just now');
-          feedList.insertBefore(article, feedList.firstChild);
-          enableInteractions();
-          updateDeleteButtons();
+          if (payload.new.author_id) {
+            fetchUserProfile(payload.new.author_id).then(function(profile) {
+              if (profile && profile.avatar_url) {
+                payload.new.avatar_url = profile.avatar_url;
+              }
+              const article = createPostElement(payload.new, 'Just now');
+              feedList.insertBefore(article, feedList.firstChild);
+              enableInteractions();
+              updateDeleteButtons();
+            });
+          } else {
+            const article = createPostElement(payload.new, 'Just now');
+            feedList.insertBefore(article, feedList.firstChild);
+            enableInteractions();
+            updateDeleteButtons();
+          }
         }
       }
     )

@@ -51,7 +51,7 @@ def generate_wellness_insight(mood_data, goals_data, streak_data):
     
     streak_summary = f"Current visit streak: {streak_data.get('current_streak', 0)} days"
     
-    prompt = f"""You are a supportive, empathetic wellness companion for a mental health platform called MindBalance.
+    prompt = f"""You are a supportive, empathetic wellness companion for a mental health platform called MindSpace.
     
 Based on this user's wellness data, provide a brief, encouraging insight (2-3 sentences max).
 Focus on positive reinforcement and gentle suggestions. Keep the tone warm, supportive, and non-clinical.

@@ -38,8 +38,8 @@ serve(async (req) => {
       return new Response(JSON.stringify({ message: "Not confirmed, skipping" }), { status: 200 });
     }
 
-    const source = payload.record.source || "mindbalance";
-    const brand = brandConfig[source] || brandConfig.mindbalance;
+    const source = payload.record.source || "mindspace";
+    const brand = brandConfig[source] || brandConfig.mindspace;
     const email = payload.record.email;
 
     const emailHtml = `

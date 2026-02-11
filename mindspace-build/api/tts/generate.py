@@ -2,7 +2,7 @@ from http.server import BaseHTTPRequestHandler
 import os
 import json
 
-ELEVENLABS_API_KEY = os.environ.get('ELEVENLABS_API_KEY')
+ELEVENLABS_API_KEY = (os.environ.get('ELEVENLABS_API_KEY') or '').strip()
 
 VOICE_MAP = {
     'rachel': 'EXAVITQu4vr4xnSDxMaL',

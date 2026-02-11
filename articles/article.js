@@ -519,11 +519,7 @@
         audioCache[index] = audioUrl;
       } catch (e) {
 
-        console.warn('Falling back to browser TTS:', e.message);
-        ttsEngine = 'browser';
-        localStorage.setItem('tts-engine', 'browser');
-        elevenLabsAvailable = false;
-        updateVoiceSelector();
+        console.warn('ElevenLabs TTS failed for this paragraph, using browser voice:', e.message);
         speakParagraphBrowser(index);
         return;
       }

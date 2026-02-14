@@ -81,12 +81,17 @@
   async function checkElevenLabsAvailability() {
     try {
       console.log('Checking ElevenLabs availability...');
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 5000);
+
       const response = await fetch('/api/tts/health', {
         method: 'GET',
         headers: {
           'Accept': 'application/json'
-        }
+        },
+        signal: controller.signal
       });
+      clearTimeout(timeoutId);
 
       if (response.ok) {
         const data = await response.json();
@@ -102,20 +107,26 @@
           }
         } else {
           console.log('ElevenLabs API key not configured on server');
-          ttsEngine = 'browser';
-          localStorage.setItem('tts-engine', 'browser');
+          if (ttsEngine === 'elevenlabs') {
+            ttsEngine = 'browser';
+            localStorage.setItem('tts-engine', 'browser');
+          }
         }
       } else {
         console.warn('ElevenLabs health check failed with status:', response.status);
         elevenLabsAvailable = false;
-        ttsEngine = 'browser';
-        localStorage.setItem('tts-engine', 'browser');
+        if (ttsEngine === 'elevenlabs') {
+          ttsEngine = 'browser';
+          localStorage.setItem('tts-engine', 'browser');
+        }
       }
     } catch (e) {
       console.warn('ElevenLabs not available, using browser TTS. Error:', e.message);
       elevenLabsAvailable = false;
-      ttsEngine = 'browser';
-      localStorage.setItem('tts-engine', 'browser');
+      if (ttsEngine === 'elevenlabs') {
+        ttsEngine = 'browser';
+        localStorage.setItem('tts-engine', 'browser');
+      }
     }
     updateVoiceSelector();
   }
@@ -622,10 +633,15 @@
 
 // --- Play/Pause/Stop ---
   function playSpeech() {
-
     if (ttsEngine === 'elevenlabs' && elevenLabsAvailable) {
       if (isPaused && currentAudio) {
-        currentAudio.play();
+        currentAudio.play().catch(e => {
+          console.warn('ElevenLabs resume failed, switching to browser:', e);
+          ttsEngine = 'browser';
+          localStorage.setItem('tts-engine', 'browser');
+          updateVoiceSelector();
+          playSpeech();
+        });
         isPaused = false;
         isPlaying = true;
         updatePlayerUI();
@@ -634,7 +650,6 @@
 
       paragraphs = getArticleContent();
       if (paragraphs.length === 0) return;
-
 
       audioCache = {};
       isPlaying = true;
@@ -645,7 +660,6 @@
       updatePlayerUI();
       return;
     }
-
 
     if (!speechSynthesis) {
       alert(getTranslation('tts_not_supported', 'Text-to-speech is not supported in your browser.'));
@@ -816,7 +830,13 @@
     if (paragraphs.length === 0) return;
     const newIndex = Math.min(currentParagraphIndex + 1, paragraphs.length - 1);
     if (isPlaying) {
-      speechSynthesis.cancel();
+      if (ttsEngine === 'elevenlabs' && currentAudio) {
+        currentAudio.pause();
+        currentAudio = null;
+      }
+      if (speechSynthesis) {
+        speechSynthesis.cancel();
+      }
       speakParagraph(newIndex);
     } else {
       currentParagraphIndex = newIndex;
@@ -829,7 +849,13 @@
     if (paragraphs.length === 0) return;
     const newIndex = Math.max(currentParagraphIndex - 1, 0);
     if (isPlaying) {
-      speechSynthesis.cancel();
+      if (ttsEngine === 'elevenlabs' && currentAudio) {
+        currentAudio.pause();
+        currentAudio = null;
+      }
+      if (speechSynthesis) {
+        speechSynthesis.cancel();
+      }
       speakParagraph(newIndex);
     } else {
       currentParagraphIndex = newIndex;

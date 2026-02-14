@@ -3559,20 +3559,10 @@ body.dark-theme .rl-local-search__error {
 @media (prefers-reduced-motion: reduce) {
   .mb-testimonials__track {
     animation: none !important;
-    transform: none !important;
-  }
-
-  .mb-testimonials__viewport {
-    height: auto !important;
-    overflow: visible !important;
   }
 
   .mb-testimonials__mask {
     display: none !important;
-  }
-
-  .mb-testimonials__grid {
-    grid-template-columns: repeat(3, 1fr);
   }
 
   .navbar.active .navbar-item {
@@ -3593,12 +3583,6 @@ body.dark-theme .rl-local-search__error {
 
 [data-reduce-motion="true"] .mb-testimonials__track {
   animation: none !important;
-  transform: none !important;
-}
-
-[data-reduce-motion="true"] .mb-testimonials__viewport {
-  height: auto !important;
-  overflow: visible !important;
 }
 
 [data-reduce-motion="true"] .mb-testimonials__mask {
@@ -6713,12 +6697,6 @@ body.nav-active .nav-open-btn {
 
 [data-adhd-mode="true"] .mb-testimonials__track {
   animation: none !important;
-  transform: none !important;
-}
-
-[data-adhd-mode="true"] .mb-testimonials__viewport {
-  height: auto !important;
-  overflow: visible !important;
 }
 
 [data-adhd-mode="true"] .mb-testimonials__mask {

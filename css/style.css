@@ -3,6 +3,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700&display=swap");
 
+
 /* === VARIABLES === */
 :root {
   --header-height: 100px;
@@ -91,9 +92,19 @@ span,
 input,
 button,
 select,
-textarea,
-ion-icon {
+textarea {
   display: block;
+}
+
+/* === ION-ICON SAFARI/iOS FALLBACK === */
+ion-icon {
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  contain: strict;
+  fill: currentcolor;
+  box-sizing: content-box !important;
+  visibility: inherit;
 }
 
 a {
@@ -10212,7 +10223,7 @@ body.reading-mode[data-theme="dark"] {
   background: #3a3a5a;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 1024px) {
   .navbar-dropdown {
     display: none !important;
   }

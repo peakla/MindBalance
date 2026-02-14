@@ -58,7 +58,7 @@
     </div>
   </div>
 
-  <div class="topbar">
+    <div class="topbar">
     <div class="container">
 
       <address class="topbar-item">
@@ -96,6 +96,7 @@
     </div>
   </div>
 
+  
   <header class="header" data-header>
     <div class="container">
 
@@ -103,7 +104,6 @@
         <img src="/assets/images/MindSpaceLogo.png" width="160" height="50" alt="MindSpace - logo" decoding="async">
       </a>
 
-<!-- ===== NAVBAR ===== -->
       <nav class="navbar" data-navbar>
 
         <div class="mobile-nav-header">
@@ -444,6 +444,125 @@
                 <ion-icon name="log-in-outline"></ion-icon>
                 <span data-translate="nav_signin">Sign In</span>
               </a>
+            </div>
+          </div>
+        </div>
+        
+        
+        <div style="display: none;">
+          <a href="/profile/" class="navbar-action-btn" id="userBtn" aria-label="User account" data-user-btn>
+            <ion-icon name="person-outline" class="action-icon"></ion-icon>
+          </a>
+          <button class="navbar-action-btn navbar-inbox-btn" id="inboxBtn" aria-label="Notifications" onclick="openGlobalInbox()" data-auth-show>
+            <ion-icon name="notifications-outline" class="action-icon"></ion-icon>
+            <span class="notif-badge" id="notifBadge" hidden>0</span>
+          </button>
+        </div>
+        
+        <div class="settings-wrapper" style="display: none;">
+          <button class="navbar-action-btn" id="settingsBtn" aria-label="Settings" data-settings-toggle>
+            <ion-icon name="settings-outline" class="action-icon"></ion-icon>
+          </button>
+          
+          
+          <div class="settings-dropdown" data-settings-dropdown>
+            <div class="settings-header">
+              <span class="settings-title" data-translate="settings_preferences">Preferences</span>
+            </div>
+            <div class="settings-content">
+              <div class="setting-item">
+                <div class="setting-info">
+                  <ion-icon name="moon-outline"></ion-icon>
+                  <span data-translate="settings_dark_mode">Dark Mode</span>
+                </div>
+                <label class="theme-toggle-switch">
+                  <input type="checkbox" data-theme-toggle>
+                  <span class="theme-toggle-slider"></span>
+                </label>
+              </div>
+              <div class="setting-item">
+                <div class="setting-info">
+                  <ion-icon name="text-outline"></ion-icon>
+                  <span data-translate="settings_font_size">Font Size</span>
+                </div>
+                <select class="setting-select" data-font-size-select>
+                  <option value="normal">Normal</option>
+                  <option value="large">Large</option>
+                  <option value="x-large">Extra Large</option>
+                </select>
+              </div>
+              <div class="setting-item">
+                <div class="setting-info">
+                  <ion-icon name="eye-outline"></ion-icon>
+                  <span data-translate="settings_colorblind">Colorblind Mode</span>
+                </div>
+                <select class="setting-select" data-colorblind-select>
+                  <option value="none">None</option>
+                  <option value="protanopia">Protanopia</option>
+                  <option value="deuteranopia">Deuteranopia</option>
+                  <option value="tritanopia">Tritanopia</option>
+                </select>
+              </div>
+              <div class="setting-item">
+                <div class="setting-info">
+                  <ion-icon name="flash-outline"></ion-icon>
+                  <span data-translate="settings_focus_mode">Focus Mode (ADHD)</span>
+                </div>
+                <label class="theme-toggle-switch">
+                  <input type="checkbox" data-adhd-toggle>
+                  <span class="theme-toggle-slider"></span>
+                </label>
+              </div>
+              <div class="setting-item">
+                <div class="setting-info">
+                  <ion-icon name="reader-outline"></ion-icon>
+                  <span data-translate="settings_dyslexia">Dyslexia Font</span>
+                </div>
+                <label class="theme-toggle-switch">
+                  <input type="checkbox" data-dyslexia-toggle>
+                  <span class="theme-toggle-slider"></span>
+                </label>
+              </div>
+              <div class="setting-item">
+                <div class="setting-info">
+                  <ion-icon name="accessibility-outline"></ion-icon>
+                  <span data-translate="settings_reduce_motion">Reduce Motion</span>
+                </div>
+                <label class="theme-toggle-switch">
+                  <input type="checkbox" data-reduce-motion-toggle>
+                  <span class="theme-toggle-slider"></span>
+                </label>
+              </div>
+              <div class="setting-item setting-item--accent">
+                <div class="setting-info">
+                  <ion-icon name="color-palette-outline"></ion-icon>
+                  <span data-translate="settings_accent_color">Accent Color</span>
+                </div>
+                <div class="accent-color-picker">
+                  <button class="accent-color-btn" data-accent-color="purple" title="Purple" style="--btn-color: #9b7ed9"></button>
+                  <button class="accent-color-btn" data-accent-color="blue" title="Blue" style="--btn-color: #4a90d9"></button>
+                  <button class="accent-color-btn" data-accent-color="green" title="Green" style="--btn-color: #4db896"></button>
+                  <button class="accent-color-btn" data-accent-color="teal" title="Teal" style="--btn-color: #38b2ac"></button>
+                  <button class="accent-color-btn" data-accent-color="pink" title="Pink" style="--btn-color: #d97eab"></button>
+                  <button class="accent-color-btn" data-accent-color="orange" title="Orange" style="--btn-color: #e09c5c"></button>
+                  <button class="accent-color-btn" data-accent-color="red" title="Red" style="--btn-color: #e07070"></button>
+                  <button class="accent-color-btn active" data-accent-color="blue" title="Blue" style="--btn-color: #2068A8"></button>
+                </div>
+              </div>
+              <div class="setting-item">
+                <div class="setting-info">
+                  <ion-icon name="language-outline"></ion-icon>
+                  <span data-translate="settings_language">Language</span>
+                </div>
+                <select class="setting-select" data-language-select>
+                  <option value="en">English</option>
+                  <option value="es">Español</option>
+                  <option value="fr">Français</option>
+                  <option value="zh">中文</option>
+                  <option value="hi">हिन्दी</option>
+                <option value="ko">한국어</option>
+                </select>
+              </div>
             </div>
           </div>
         </div>

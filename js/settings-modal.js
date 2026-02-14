@@ -758,6 +758,7 @@
         localStorage.removeItem(key);
       }
     });
+    localStorage.removeItem('mindbalance-language');
 
     window.MindBalanceSettings?.applyTheme?.('light');
     window.MindBalanceSettings?.applyAccentColor?.('gold');
@@ -767,6 +768,15 @@
     window.MindBalanceSettings?.applyAdhdMode?.(false);
     window.MindBalanceSettings?.applyDyslexiaFont?.(false);
     window.MindBalanceSettings?.applyReduceMotion?.(false);
+
+    if (typeof setLanguage === 'function') {
+      setLanguage('en');
+    } else if (window.MindBalanceTranslations?.setLanguage) {
+      window.MindBalanceTranslations.setLanguage('en');
+    }
+    document.querySelectorAll('.language-selector, #languageSelect').forEach(sel => {
+      sel.value = 'en';
+    });
 
     loadCurrentSettings();
     updateAccessibilityScore();

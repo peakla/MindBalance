@@ -114,7 +114,7 @@
 
   
   
-  <div class="topbar">
+    <div class="topbar">
     <div class="container">
 
       <address class="topbar-item">
@@ -171,24 +171,35 @@
           </button>
         </div>
 
+        <div class="mobile-nav-crisis" data-nav-toggler>
+          <a href="/support/#crisis" class="mobile-crisis-btn">
+            <ion-icon name="heart-outline"></ion-icon>
+            <span data-translate="nav_crisis">Get Help Now</span>
+            <ion-icon name="arrow-forward-outline" class="mobile-crisis-arrow"></ion-icon>
+          </a>
+        </div>
+
         <div class="navbar-scroll-content">
 
           <ul class="navbar-list">
           <li class="navbar-item">
-            <a href="/" class="navbar-link hover-underline active">
-              <div class="separator"></div><span class="span" data-translate="nav_home">Home</span>
+            <a href="/" class="navbar-link hover-underline">
+              <ion-icon name="home-outline" class="nav-link-icon" aria-hidden="true"></ion-icon>
+              <span class="span" data-translate="nav_home">Home</span>
             </a>
           </li>
 
           <li class="navbar-item">
             <a href="/support/" class="navbar-link hover-underline">
-              <div class="separator"></div><span class="span" data-translate="nav_contact">Contact</span>
+              <ion-icon name="chatbubbles-outline" class="nav-link-icon" aria-hidden="true"></ion-icon>
+              <span class="span" data-translate="nav_contact">Contact</span>
             </a>
           </li>
 
           <li class="navbar-item has-submenu" data-submenu="resources">
-            <a href="/resourcelib/" class="navbar-link hover-underline">
-              <div class="separator"></div><span class="span" data-translate="nav_resources">Resource Library</span>
+            <a href="/resourcelib/" class="navbar-link hover-underline active">
+              <ion-icon name="library-outline" class="nav-link-icon" aria-hidden="true"></ion-icon>
+              <span class="span" data-translate="nav_resources">Resource Library</span>
               <ion-icon name="chevron-forward-outline" class="submenu-chevron" aria-hidden="true"></ion-icon>
             </a>
             <div class="navbar-dropdown">
@@ -213,12 +224,14 @@
 
           <li class="navbar-item">
             <a href="/community/" class="navbar-link hover-underline">
-              <div class="separator"></div><span class="span" data-translate="nav_community">Community Hub</span>
+              <ion-icon name="people-outline" class="nav-link-icon" aria-hidden="true"></ion-icon>
+              <span class="span" data-translate="nav_community">Community Hub</span>
             </a>
           </li>
           <li class="navbar-item has-submenu" data-submenu="blog">
             <a href="/blog/" class="navbar-link hover-underline">
-              <div class="separator"></div><span class="span" data-translate="nav_blog">Blog</span>
+              <ion-icon name="newspaper-outline" class="nav-link-icon" aria-hidden="true"></ion-icon>
+              <span class="span" data-translate="nav_blog">Blog</span>
               <ion-icon name="chevron-forward-outline" class="submenu-chevron" aria-hidden="true"></ion-icon>
             </a>
             <div class="navbar-dropdown">
@@ -242,10 +255,9 @@
           </li>
           <li class="navbar-item">
         </ul>
-        </div>
 
-        
-        
+        <div class="mobile-nav-divider"></div>
+
         <div class="mobile-settings-section collapsed">
           <button class="mobile-settings-toggle" aria-expanded="false" aria-controls="mobileSettingsList">
             <span class="mobile-settings-title" data-translate="settings_title">Settings</span>
@@ -297,7 +309,7 @@
                 <span class="theme-toggle-slider"></span>
               </label>
             </div>
-                        <div class="mobile-setting-item mobile-setting-item--accent">
+            <div class="mobile-setting-item mobile-setting-item--accent">
               <span class="mobile-setting-label"><ion-icon name="color-palette-outline"></ion-icon> <span data-translate="settings_accent_color">Accent Color</span></span>
               <div class="mobile-accent-picker">
                 <button class="accent-color-btn" data-accent-color="purple" title="Purple" style="--btn-color: #9b7ed9"></button>
@@ -310,7 +322,7 @@
                 <button class="accent-color-btn active" data-accent-color="blue" title="Blue" style="--btn-color: #2068A8"></button>
               </div>
             </div>
-<div class="mobile-setting-item">
+            <div class="mobile-setting-item">
               <span class="mobile-setting-label"><ion-icon name="language-outline"></ion-icon> <span data-translate="settings_language">Language</span></span>
               <select class="setting-select" data-language-select>
                 <option value="en">English</option>
@@ -324,25 +336,40 @@
           </div>
         </div>
 
-        
+        </div>
+
         <div class="mobile-auth-section">
-          <button class="mobile-auth-btn mobile-inbox-btn" onclick="openGlobalInbox(); closeNavbar();" data-auth-show>
-            <ion-icon name="notifications-outline"></ion-icon>
-            <span data-translate="nav_notifications">Notifications</span>
-            <span class="notif-badge mobile-notif-badge" id="mobileNotifBadge" hidden>0</span>
-          </button>
-          <a href="/profile/" class="mobile-auth-btn mobile-profile-btn" data-auth-show>
-            <ion-icon name="person-outline"></ion-icon>
-            <span data-translate="nav_profile">My Profile</span>
-          </a>
-          <button class="mobile-auth-btn mobile-logout-btn" onclick="handleMobileLogout()" data-auth-show>
-            <ion-icon name="log-out-outline"></ion-icon>
-            <span data-translate="nav_logout">Log Out</span>
-          </button>
-          <a href="/auth/" class="mobile-auth-btn mobile-signin-btn" data-auth-hide>
-            <ion-icon name="log-in-outline"></ion-icon>
-            <span data-translate="nav_signin">Sign In</span>
-          </a>
+          <div class="mobile-auth-signed-in" data-auth-show>
+            <a href="/profile/" class="mobile-auth-btn mobile-profile-btn">
+              <div class="mobile-auth-btn__icon">
+                <ion-icon name="person-outline"></ion-icon>
+              </div>
+              <span data-translate="nav_profile">My Profile</span>
+              <ion-icon name="chevron-forward-outline" class="mobile-auth-btn__arrow"></ion-icon>
+            </a>
+            <div class="mobile-auth-row">
+              <button class="mobile-auth-btn mobile-inbox-btn" onclick="openGlobalInbox(); closeNavbar();">
+                <div class="mobile-auth-btn__icon">
+                  <ion-icon name="notifications-outline"></ion-icon>
+                </div>
+                <span data-translate="nav_notifications">Notifications</span>
+                <span class="notif-badge mobile-notif-badge" id="mobileNotifBadge" hidden>0</span>
+              </button>
+              <button class="mobile-auth-btn mobile-logout-btn" onclick="handleMobileLogout()">
+                <div class="mobile-auth-btn__icon mobile-auth-btn__icon--danger">
+                  <ion-icon name="log-out-outline"></ion-icon>
+                </div>
+                <span data-translate="nav_logout">Log Out</span>
+              </button>
+            </div>
+          </div>
+          <div class="mobile-auth-signed-out" data-auth-hide>
+            <a href="/auth/" class="mobile-auth-btn mobile-signin-btn">
+              <ion-icon name="log-in-outline"></ion-icon>
+              <span data-translate="nav_signin">Sign In</span>
+              <ion-icon name="arrow-forward-outline" class="mobile-auth-btn__arrow"></ion-icon>
+            </a>
+          </div>
         </div>
 
         
@@ -473,6 +500,125 @@
                 <ion-icon name="log-in-outline"></ion-icon>
                 <span data-translate="nav_signin">Sign In</span>
               </a>
+            </div>
+          </div>
+        </div>
+        
+        
+        <div style="display: none;">
+          <a href="/profile/" class="navbar-action-btn" id="userBtn" aria-label="User account" data-user-btn>
+            <ion-icon name="person-outline" class="action-icon"></ion-icon>
+          </a>
+          <button class="navbar-action-btn navbar-inbox-btn" id="inboxBtn" aria-label="Notifications" onclick="openGlobalInbox()" data-auth-show>
+            <ion-icon name="notifications-outline" class="action-icon"></ion-icon>
+            <span class="notif-badge" id="notifBadge" hidden>0</span>
+          </button>
+        </div>
+        
+        <div class="settings-wrapper" style="display: none;">
+          <button class="navbar-action-btn" id="settingsBtn" aria-label="Settings" data-settings-toggle>
+            <ion-icon name="settings-outline" class="action-icon"></ion-icon>
+          </button>
+          
+          
+          <div class="settings-dropdown" data-settings-dropdown>
+            <div class="settings-header">
+              <span class="settings-title" data-translate="settings_preferences">Preferences</span>
+            </div>
+            <div class="settings-content">
+              <div class="setting-item">
+                <div class="setting-info">
+                  <ion-icon name="moon-outline"></ion-icon>
+                  <span data-translate="settings_dark_mode">Dark Mode</span>
+                </div>
+                <label class="theme-toggle-switch">
+                  <input type="checkbox" data-theme-toggle>
+                  <span class="theme-toggle-slider"></span>
+                </label>
+              </div>
+              <div class="setting-item">
+                <div class="setting-info">
+                  <ion-icon name="text-outline"></ion-icon>
+                  <span data-translate="settings_font_size">Font Size</span>
+                </div>
+                <select class="setting-select" data-font-size-select>
+                  <option value="normal">Normal</option>
+                  <option value="large">Large</option>
+                  <option value="x-large">Extra Large</option>
+                </select>
+              </div>
+              <div class="setting-item">
+                <div class="setting-info">
+                  <ion-icon name="eye-outline"></ion-icon>
+                  <span data-translate="settings_colorblind">Colorblind Mode</span>
+                </div>
+                <select class="setting-select" data-colorblind-select>
+                  <option value="none">None</option>
+                  <option value="protanopia">Protanopia</option>
+                  <option value="deuteranopia">Deuteranopia</option>
+                  <option value="tritanopia">Tritanopia</option>
+                </select>
+              </div>
+              <div class="setting-item">
+                <div class="setting-info">
+                  <ion-icon name="flash-outline"></ion-icon>
+                  <span data-translate="settings_focus_mode">Focus Mode (ADHD)</span>
+                </div>
+                <label class="theme-toggle-switch">
+                  <input type="checkbox" data-adhd-toggle>
+                  <span class="theme-toggle-slider"></span>
+                </label>
+              </div>
+              <div class="setting-item">
+                <div class="setting-info">
+                  <ion-icon name="reader-outline"></ion-icon>
+                  <span data-translate="settings_dyslexia">Dyslexia Font</span>
+                </div>
+                <label class="theme-toggle-switch">
+                  <input type="checkbox" data-dyslexia-toggle>
+                  <span class="theme-toggle-slider"></span>
+                </label>
+              </div>
+              <div class="setting-item">
+                <div class="setting-info">
+                  <ion-icon name="accessibility-outline"></ion-icon>
+                  <span data-translate="settings_reduce_motion">Reduce Motion</span>
+                </div>
+                <label class="theme-toggle-switch">
+                  <input type="checkbox" data-reduce-motion-toggle>
+                  <span class="theme-toggle-slider"></span>
+                </label>
+              </div>
+              <div class="setting-item setting-item--accent">
+                <div class="setting-info">
+                  <ion-icon name="color-palette-outline"></ion-icon>
+                  <span data-translate="settings_accent_color">Accent Color</span>
+                </div>
+                <div class="accent-color-picker">
+                  <button class="accent-color-btn" data-accent-color="purple" title="Purple" style="--btn-color: #9b7ed9"></button>
+                  <button class="accent-color-btn" data-accent-color="blue" title="Blue" style="--btn-color: #4a90d9"></button>
+                  <button class="accent-color-btn" data-accent-color="green" title="Green" style="--btn-color: #4db896"></button>
+                  <button class="accent-color-btn" data-accent-color="teal" title="Teal" style="--btn-color: #38b2ac"></button>
+                  <button class="accent-color-btn" data-accent-color="pink" title="Pink" style="--btn-color: #d97eab"></button>
+                  <button class="accent-color-btn" data-accent-color="orange" title="Orange" style="--btn-color: #e09c5c"></button>
+                  <button class="accent-color-btn" data-accent-color="red" title="Red" style="--btn-color: #e07070"></button>
+                  <button class="accent-color-btn active" data-accent-color="blue" title="Blue" style="--btn-color: #2068A8"></button>
+                </div>
+              </div>
+              <div class="setting-item">
+                <div class="setting-info">
+                  <ion-icon name="language-outline"></ion-icon>
+                  <span data-translate="settings_language">Language</span>
+                </div>
+                <select class="setting-select" data-language-select>
+                  <option value="en">English</option>
+                  <option value="es">Español</option>
+                  <option value="fr">Français</option>
+                  <option value="zh">中文</option>
+                  <option value="hi">हिन्दी</option>
+                <option value="ko">한국어</option>
+                </select>
+              </div>
             </div>
           </div>
         </div>

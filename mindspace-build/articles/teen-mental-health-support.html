@@ -121,7 +121,7 @@
     <div class="article-reading-progress__fill"></div>
   </div>
 
-  <div class="topbar">
+    <div class="topbar">
     <div class="container">
 
       <address class="topbar-item">
@@ -159,90 +159,111 @@
     </div>
   </div>
 
+  
   <header class="header" data-header>
     <div class="container">
+
       <a href="/" class="logo">
-        <img src="/assets/images/MindSpaceLogo.png" width="160" height="50" alt="MindSpace - logo"
-          decoding="async">
+        <img src="/assets/images/MindSpaceLogo.png" width="160" height="50" alt="MindSpace - logo" decoding="async">
       </a>
 
-<!-- ===== NAVBAR ===== -->
       <nav class="navbar" data-navbar>
-        <button class="close-btn" aria-label="close menu" data-nav-toggler>
-          <ion-icon name="close-outline" aria-hidden="true"></ion-icon>
-        </button>
+
+        <div class="mobile-nav-header">
+          <a href="/" class="mobile-nav-header__logo">
+            <img src="/assets/images/MindSpaceLogo.png" width="130" height="40" alt="MindSpace - logo" decoding="async">
+          </a>
+          <button class="mobile-nav-close" aria-label="close menu" data-nav-toggler>
+            <ion-icon name="close-outline" aria-hidden="true"></ion-icon>
+          </button>
+        </div>
+
+        <div class="mobile-nav-crisis" data-nav-toggler>
+          <a href="/support/#crisis" class="mobile-crisis-btn">
+            <ion-icon name="heart-outline"></ion-icon>
+            <span data-translate="nav_crisis">Get Help Now</span>
+            <ion-icon name="arrow-forward-outline" class="mobile-crisis-arrow"></ion-icon>
+          </a>
+        </div>
 
         <div class="navbar-scroll-content">
-          <a href="/" class="logo">
-            <img src="/assets/images/MindSpaceLogo.png" width="160" height="50" alt="MindSpace - logo"
-              decoding="async">
-          </a>
 
           <ul class="navbar-list">
-            <li class="navbar-item">
-              <a href="/" class="navbar-link hover-underline">
-                <div class="separator"></div><span class="span" data-translate="nav_home">Home</span>
+          <li class="navbar-item">
+            <a href="/" class="navbar-link hover-underline">
+              <ion-icon name="home-outline" class="nav-link-icon" aria-hidden="true"></ion-icon>
+              <span class="span" data-translate="nav_home">Home</span>
+            </a>
+          </li>
+
+          <li class="navbar-item">
+            <a href="/support/" class="navbar-link hover-underline">
+              <ion-icon name="chatbubbles-outline" class="nav-link-icon" aria-hidden="true"></ion-icon>
+              <span class="span" data-translate="nav_contact">Contact</span>
+            </a>
+          </li>
+
+          <li class="navbar-item has-submenu" data-submenu="resources">
+            <a href="/resourcelib/" class="navbar-link hover-underline">
+              <ion-icon name="library-outline" class="nav-link-icon" aria-hidden="true"></ion-icon>
+              <span class="span" data-translate="nav_resources">Resource Library</span>
+              <ion-icon name="chevron-forward-outline" class="submenu-chevron" aria-hidden="true"></ion-icon>
+            </a>
+            <div class="navbar-dropdown">
+              <a href="/resourcelib/?category=anxiety" class="navbar-dropdown__item">
+                <ion-icon name="pulse-outline"></ion-icon> Anxiety Resources
               </a>
-            </li>
-            <li class="navbar-item">
-              <a href="/support/" class="navbar-link hover-underline">
-                <div class="separator"></div><span class="span" data-translate="nav_contact">Contact</span>
+              <a href="/resourcelib/?category=depression" class="navbar-dropdown__item">
+                <ion-icon name="cloudy-outline"></ion-icon> Depression Support
               </a>
-            </li>
-            <li class="navbar-item">
-              <a href="/resourcelib/" class="navbar-link hover-underline">
-                <div class="separator"></div><span class="span" data-translate="nav_resources">Resource Library</span>
+              <a href="/resourcelib/?category=stress" class="navbar-dropdown__item">
+                <ion-icon name="flash-outline"></ion-icon> Stress Management
               </a>
-              <div class="navbar-dropdown">
-                <a href="/resourcelib/?category=anxiety" class="navbar-dropdown__item">
-                  <ion-icon name="pulse-outline"></ion-icon> Anxiety Resources
-                </a>
-                <a href="/resourcelib/?category=depression" class="navbar-dropdown__item">
-                  <ion-icon name="cloudy-outline"></ion-icon> Depression Support
-                </a>
-                <a href="/resourcelib/?category=stress" class="navbar-dropdown__item">
-                  <ion-icon name="flash-outline"></ion-icon> Stress Management
-                </a>
-                <a href="/resourcelib/?category=mindfulness" class="navbar-dropdown__item">
-                  <ion-icon name="leaf-outline"></ion-icon> Mindfulness
-                </a>
-                <div class="navbar-dropdown__divider"></div>
-                <a href="/resourcelib/" class="navbar-dropdown__item">
-                  <ion-icon name="grid-outline"></ion-icon> View All Resources
-                </a>
-              </div>
-            </li>
-            <li class="navbar-item">
-              <a href="/community/" class="navbar-link hover-underline">
-                <div class="separator"></div><span class="span" data-translate="nav_community">Community Hub</span>
+              <a href="/resourcelib/?category=mindfulness" class="navbar-dropdown__item">
+                <ion-icon name="leaf-outline"></ion-icon> Mindfulness
               </a>
-            </li>
-            <li class="navbar-item">
-              <a href="/blog/" class="navbar-link hover-underline active">
-                <div class="separator"></div><span class="span" data-translate="nav_blog">Blog</span>
+              <div class="navbar-dropdown__divider"></div>
+              <a href="/resourcelib/" class="navbar-dropdown__item">
+                <ion-icon name="grid-outline"></ion-icon> View All Resources
               </a>
-              <div class="navbar-dropdown">
-                <a href="/articles/anxiety.html" class="navbar-dropdown__item">
-                  <ion-icon name="document-text-outline"></ion-icon> Understanding Anxiety
-                </a>
-                <a href="/articles/depression.html" class="navbar-dropdown__item">
-                  <ion-icon name="document-text-outline"></ion-icon> Depression Guide
-                </a>
-                <a href="/articles/stress.html" class="navbar-dropdown__item">
-                  <ion-icon name="document-text-outline"></ion-icon> Stress Management
-                </a>
-                <a href="/articles/mindfulness.html" class="navbar-dropdown__item">
-                  <ion-icon name="document-text-outline"></ion-icon> Mindfulness Basics
-                </a>
-                <div class="navbar-dropdown__divider"></div>
-                <a href="/blog/" class="navbar-dropdown__item">
-                  <ion-icon name="albums-outline"></ion-icon> All Articles
-                </a>
-              </div>
-            </li>
-            <li class="navbar-item">
-          </ul>
-        </div>
+            </div>
+          </li>
+
+          <li class="navbar-item">
+            <a href="/community/" class="navbar-link hover-underline">
+              <ion-icon name="people-outline" class="nav-link-icon" aria-hidden="true"></ion-icon>
+              <span class="span" data-translate="nav_community">Community Hub</span>
+            </a>
+          </li>
+          <li class="navbar-item has-submenu" data-submenu="blog">
+            <a href="/blog/" class="navbar-link hover-underline active">
+              <ion-icon name="newspaper-outline" class="nav-link-icon" aria-hidden="true"></ion-icon>
+              <span class="span" data-translate="nav_blog">Blog</span>
+              <ion-icon name="chevron-forward-outline" class="submenu-chevron" aria-hidden="true"></ion-icon>
+            </a>
+            <div class="navbar-dropdown">
+              <a href="/articles/anxiety.html" class="navbar-dropdown__item">
+                <ion-icon name="document-text-outline"></ion-icon> Understanding Anxiety
+              </a>
+              <a href="/articles/depression.html" class="navbar-dropdown__item">
+                <ion-icon name="document-text-outline"></ion-icon> Depression Guide
+              </a>
+              <a href="/articles/stress.html" class="navbar-dropdown__item">
+                <ion-icon name="document-text-outline"></ion-icon> Stress Management
+              </a>
+              <a href="/articles/mindfulness.html" class="navbar-dropdown__item">
+                <ion-icon name="document-text-outline"></ion-icon> Mindfulness Basics
+              </a>
+              <div class="navbar-dropdown__divider"></div>
+              <a href="/blog/" class="navbar-dropdown__item">
+                <ion-icon name="albums-outline"></ion-icon> All Articles
+              </a>
+            </div>
+          </li>
+          <li class="navbar-item">
+        </ul>
+
+        <div class="mobile-nav-divider"></div>
 
         <div class="mobile-settings-section collapsed">
           <button class="mobile-settings-toggle" aria-expanded="false" aria-controls="mobileSettingsList">
@@ -251,16 +272,14 @@
           </button>
           <div class="mobile-settings-list" id="mobileSettingsList">
             <div class="mobile-setting-item">
-              <span class="mobile-setting-label"><ion-icon name="moon-outline"></ion-icon> <span
-                  data-translate="settings_dark_mode">Dark Mode</span></span>
+              <span class="mobile-setting-label"><ion-icon name="moon-outline"></ion-icon> <span data-translate="settings_dark_mode">Dark Mode</span></span>
               <label class="theme-toggle-switch">
                 <input type="checkbox" data-theme-toggle>
                 <span class="theme-toggle-slider"></span>
               </label>
             </div>
             <div class="mobile-setting-item">
-              <span class="mobile-setting-label"><ion-icon name="text-outline"></ion-icon> <span
-                  data-translate="settings_font_size">Font Size</span></span>
+              <span class="mobile-setting-label"><ion-icon name="text-outline"></ion-icon> <span data-translate="settings_font_size">Font Size</span></span>
               <select class="setting-select" data-font-size-select>
                 <option value="normal">Normal</option>
                 <option value="large">Large</option>
@@ -268,8 +287,7 @@
               </select>
             </div>
             <div class="mobile-setting-item">
-              <span class="mobile-setting-label"><ion-icon name="eye-outline"></ion-icon> <span
-                  data-translate="settings_colorblind">Colorblind Mode</span></span>
+              <span class="mobile-setting-label"><ion-icon name="eye-outline"></ion-icon> <span data-translate="settings_colorblind">Colorblind Mode</span></span>
               <select class="setting-select" data-colorblind-select>
                 <option value="none">None</option>
                 <option value="protanopia">Protanopia</option>
@@ -278,30 +296,27 @@
               </select>
             </div>
             <div class="mobile-setting-item">
-              <span class="mobile-setting-label"><ion-icon name="flash-outline"></ion-icon> <span
-                  data-translate="settings_focus_mode">Focus Mode (ADHD)</span></span>
+              <span class="mobile-setting-label"><ion-icon name="flash-outline"></ion-icon> <span data-translate="settings_focus_mode">Focus Mode (ADHD)</span></span>
               <label class="theme-toggle-switch">
                 <input type="checkbox" data-adhd-toggle>
                 <span class="theme-toggle-slider"></span>
               </label>
             </div>
             <div class="mobile-setting-item">
-              <span class="mobile-setting-label"><ion-icon name="reader-outline"></ion-icon> <span
-                  data-translate="settings_dyslexia">Dyslexia Font</span></span>
+              <span class="mobile-setting-label"><ion-icon name="reader-outline"></ion-icon> <span data-translate="settings_dyslexia">Dyslexia Font</span></span>
               <label class="theme-toggle-switch">
                 <input type="checkbox" data-dyslexia-toggle>
                 <span class="theme-toggle-slider"></span>
               </label>
             </div>
             <div class="mobile-setting-item">
-              <span class="mobile-setting-label"><ion-icon name="accessibility-outline"></ion-icon> <span
-                  data-translate="settings_reduce_motion">Reduce Motion</span></span>
+              <span class="mobile-setting-label"><ion-icon name="accessibility-outline"></ion-icon> <span data-translate="settings_reduce_motion">Reduce Motion</span></span>
               <label class="theme-toggle-switch">
                 <input type="checkbox" data-reduce-motion-toggle>
                 <span class="theme-toggle-slider"></span>
               </label>
             </div>
-                        <div class="mobile-setting-item mobile-setting-item--accent">
+            <div class="mobile-setting-item mobile-setting-item--accent">
               <span class="mobile-setting-label"><ion-icon name="color-palette-outline"></ion-icon> <span data-translate="settings_accent_color">Accent Color</span></span>
               <div class="mobile-accent-picker">
                 <button class="accent-color-btn" data-accent-color="purple" title="Purple" style="--btn-color: #9b7ed9"></button>
@@ -314,9 +329,8 @@
                 <button class="accent-color-btn active" data-accent-color="blue" title="Blue" style="--btn-color: #2068A8"></button>
               </div>
             </div>
-<div class="mobile-setting-item">
-              <span class="mobile-setting-label"><ion-icon name="language-outline"></ion-icon> <span
-                  data-translate="settings_language">Language</span></span>
+            <div class="mobile-setting-item">
+              <span class="mobile-setting-label"><ion-icon name="language-outline"></ion-icon> <span data-translate="settings_language">Language</span></span>
               <select class="setting-select" data-language-select>
                 <option value="en">English</option>
                 <option value="es">Español</option>
@@ -326,73 +340,113 @@
                 <option value="ko">한국어</option>
               </select>
             </div>
+          </div>
+        </div>
 
-            <div class="navbar-submenu-panel" data-submenu-panel="resources">
-              <div class="submenu-header">
-                <button class="submenu-back-btn" aria-label="Back to main menu">
-                  <ion-icon name="arrow-back-outline"></ion-icon>
-                </button>
-                <h3 class="submenu-title" data-translate="nav_resources">Resource Library</h3>
-              </div>
-              <div class="submenu-items">
-                <a href="/resourcelib/?category=anxiety" class="submenu-item">
-                  <ion-icon name="pulse-outline"></ion-icon>
-                  <span>Anxiety Resources</span>
-                </a>
-                <a href="/resourcelib/?category=depression" class="submenu-item">
-                  <ion-icon name="cloudy-outline"></ion-icon>
-                  <span>Depression Support</span>
-                </a>
-                <a href="/resourcelib/?category=stress" class="submenu-item">
-                  <ion-icon name="flash-outline"></ion-icon>
-                  <span>Stress Management</span>
-                </a>
-                <a href="/resourcelib/?category=mindfulness" class="submenu-item">
-                  <ion-icon name="leaf-outline"></ion-icon>
-                  <span>Mindfulness</span>
-                </a>
-                <div class="submenu-divider"></div>
-                <a href="/resourcelib/" class="submenu-item">
-                  <ion-icon name="grid-outline"></ion-icon>
-                  <span>View All Resources</span>
-                </a>
-              </div>
-            </div>
+        </div>
 
-            <div class="navbar-submenu-panel" data-submenu-panel="blog">
-              <div class="submenu-header">
-                <button class="submenu-back-btn" aria-label="Back to main menu">
-                  <ion-icon name="arrow-back-outline"></ion-icon>
-                </button>
-                <h3 class="submenu-title" data-translate="nav_blog">Blog</h3>
+        <div class="mobile-auth-section">
+          <div class="mobile-auth-signed-in" data-auth-show>
+            <a href="/profile/" class="mobile-auth-btn mobile-profile-btn">
+              <div class="mobile-auth-btn__icon">
+                <ion-icon name="person-outline"></ion-icon>
               </div>
-              <div class="submenu-items">
-                <a href="/articles/anxiety.html" class="submenu-item">
-                  <ion-icon name="document-text-outline"></ion-icon>
-                  <span>Understanding Anxiety</span>
-                </a>
-                <a href="/articles/depression.html" class="submenu-item">
-                  <ion-icon name="document-text-outline"></ion-icon>
-                  <span>Depression Guide</span>
-                </a>
-                <a href="/articles/stress.html" class="submenu-item">
-                  <ion-icon name="document-text-outline"></ion-icon>
-                  <span>Stress Management</span>
-                </a>
-                <a href="/articles/mindfulness.html" class="submenu-item">
-                  <ion-icon name="document-text-outline"></ion-icon>
-                  <span>Mindfulness Basics</span>
-                </a>
-                <div class="submenu-divider"></div>
-                <a href="/blog/" class="submenu-item">
-                  <ion-icon name="albums-outline"></ion-icon>
-                  <span>All Articles</span>
-                </a>
-              </div>
+              <span data-translate="nav_profile">My Profile</span>
+              <ion-icon name="chevron-forward-outline" class="mobile-auth-btn__arrow"></ion-icon>
+            </a>
+            <div class="mobile-auth-row">
+              <button class="mobile-auth-btn mobile-inbox-btn" onclick="openGlobalInbox(); closeNavbar();">
+                <div class="mobile-auth-btn__icon">
+                  <ion-icon name="notifications-outline"></ion-icon>
+                </div>
+                <span data-translate="nav_notifications">Notifications</span>
+                <span class="notif-badge mobile-notif-badge" id="mobileNotifBadge" hidden>0</span>
+              </button>
+              <button class="mobile-auth-btn mobile-logout-btn" onclick="handleMobileLogout()">
+                <div class="mobile-auth-btn__icon mobile-auth-btn__icon--danger">
+                  <ion-icon name="log-out-outline"></ion-icon>
+                </div>
+                <span data-translate="nav_logout">Log Out</span>
+              </button>
             </div>
+          </div>
+          <div class="mobile-auth-signed-out" data-auth-hide>
+            <a href="/auth/" class="mobile-auth-btn mobile-signin-btn">
+              <ion-icon name="log-in-outline"></ion-icon>
+              <span data-translate="nav_signin">Sign In</span>
+              <ion-icon name="arrow-forward-outline" class="mobile-auth-btn__arrow"></ion-icon>
+            </a>
+          </div>
+        </div>
+
+        
+        <div class="navbar-submenu-panel" data-submenu-panel="resources">
+          <div class="submenu-header">
+            <button class="submenu-back-btn" aria-label="Back to main menu">
+              <ion-icon name="arrow-back-outline"></ion-icon>
+            </button>
+            <h3 class="submenu-title" data-translate="nav_resources">Resource Library</h3>
+          </div>
+          <div class="submenu-items">
+            <a href="/resourcelib/?category=anxiety" class="submenu-item">
+              <ion-icon name="pulse-outline"></ion-icon>
+              <span>Anxiety Resources</span>
+            </a>
+            <a href="/resourcelib/?category=depression" class="submenu-item">
+              <ion-icon name="cloudy-outline"></ion-icon>
+              <span>Depression Support</span>
+            </a>
+            <a href="/resourcelib/?category=stress" class="submenu-item">
+              <ion-icon name="flash-outline"></ion-icon>
+              <span>Stress Management</span>
+            </a>
+            <a href="/resourcelib/?category=mindfulness" class="submenu-item">
+              <ion-icon name="leaf-outline"></ion-icon>
+              <span>Mindfulness</span>
+            </a>
+            <div class="submenu-divider"></div>
+            <a href="/resourcelib/" class="submenu-item">
+              <ion-icon name="grid-outline"></ion-icon>
+              <span>View All Resources</span>
+            </a>
+          </div>
+        </div>
+
+        <div class="navbar-submenu-panel" data-submenu-panel="blog">
+          <div class="submenu-header">
+            <button class="submenu-back-btn" aria-label="Back to main menu">
+              <ion-icon name="arrow-back-outline"></ion-icon>
+            </button>
+            <h3 class="submenu-title" data-translate="nav_blog">Blog</h3>
+          </div>
+          <div class="submenu-items">
+            <a href="/articles/anxiety.html" class="submenu-item">
+              <ion-icon name="document-text-outline"></ion-icon>
+              <span>Understanding Anxiety</span>
+            </a>
+            <a href="/articles/depression.html" class="submenu-item">
+              <ion-icon name="document-text-outline"></ion-icon>
+              <span>Depression Guide</span>
+            </a>
+            <a href="/articles/stress.html" class="submenu-item">
+              <ion-icon name="document-text-outline"></ion-icon>
+              <span>Stress Management</span>
+            </a>
+            <a href="/articles/mindfulness.html" class="submenu-item">
+              <ion-icon name="document-text-outline"></ion-icon>
+              <span>Mindfulness Basics</span>
+            </a>
+            <div class="submenu-divider"></div>
+            <a href="/blog/" class="submenu-item">
+              <ion-icon name="albums-outline"></ion-icon>
+              <span>All Articles</span>
+            </a>
+          </div>
+        </div>
 
       </nav>
 
+      
       <div class="navbar-actions">
         
         <div class="navbar-search" id="navbarSearch">
@@ -589,6 +643,7 @@
       </button>
 
       <div class="overlay" data-nav-toggler data-overlay></div>
+
     </div>
   </header>
 

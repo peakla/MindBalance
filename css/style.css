@@ -4571,7 +4571,7 @@ body.dark-theme .rl-local-search__error {
   .navbar-link {
     font-weight: var(--weight-bold);
     letter-spacing: var(--letterSpacing-1);
-    font-size: 13px;
+    font-size: clamp(11px, 1.1vw, 13px);
     white-space: nowrap;
     overflow: visible;
   }

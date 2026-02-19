@@ -3812,6 +3812,11 @@ body.reading-mode .mb-blogGrid {
   border-color: rgba(255,255,255,0.1);
 }
 
+[data-theme="dark"] .mb-footer__newsletter-btn {
+  background: var(--purple-gradient, linear-gradient(135deg, #8b6de1 0%, #7c5cd4 100%)) !important;
+  color: #fff !important;
+}
+
 [data-theme="dark"] .mb-blogGrid {
   color: #e0e0e0;
 }

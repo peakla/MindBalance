@@ -553,6 +553,203 @@
     });
   }
 
+  // ==================== SCROLL REVEAL ====================
+  function initScrollReveal() {
+    var revealEls = document.querySelectorAll('[data-reveal]');
+    if (!revealEls.length) return;
+
+    var observer = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-revealed');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+    revealEls.forEach(function (el) { observer.observe(el); });
+  }
+
+  // ==================== STICKY FILTER CHIPS ====================
+  function initStickyFilters() {
+    var stickyEl = document.getElementById('stickyFilters');
+    var catSection = document.querySelector('.mb-categoryCards');
+    if (!stickyEl || !catSection) return;
+
+    var chips = stickyEl.querySelectorAll('.mb-stickyChip[data-filter]');
+    var categoryCards = document.querySelectorAll('.mb-categoryCard[data-filter]');
+
+    function updateStickyVisibility() {
+      var rect = catSection.getBoundingClientRect();
+      var shouldShow = rect.bottom < 0;
+      stickyEl.classList.toggle('is-visible', shouldShow);
+    }
+
+    window.addEventListener('scroll', updateStickyVisibility, { passive: true });
+    updateStickyVisibility();
+
+    chips.forEach(function (chip) {
+      chip.addEventListener('click', function () {
+        chips.forEach(function (c) { c.classList.remove('is-active'); });
+        chip.classList.add('is-active');
+        var filter = chip.dataset.filter;
+        categoryCards.forEach(function (c) {
+          c.classList.toggle('is-active', c.dataset.filter === filter);
+        });
+        var matchingCard = document.querySelector('.mb-categoryCard[data-filter="' + filter + '"]');
+        if (matchingCard) matchingCard.click();
+      });
+    });
+  }
+
+  // ==================== ROTATING QUOTES ====================
+  function initQuoteRotation() {
+    var quoteEl = document.getElementById('rotatingQuote');
+    var authorEl = document.getElementById('rotatingAuthor');
+    if (!quoteEl || !authorEl) return;
+
+    var quotes = [
+      { text: "You don\u2019t have to control your thoughts. You just have to stop letting them control you.", author: "Dan Millman" },
+      { text: "Mental health is not a destination, but a process. It\u2019s about how you drive, not where you\u2019re going.", author: "Noam Shpancer" },
+      { text: "There is hope, even when your brain tells you there isn\u2019t.", author: "John Green" },
+      { text: "You are not your illness. You have an individual story to tell. You have a name, a history, a personality.", author: "Julian Seifter" },
+      { text: "Recovery is not one and done. It is a lifelong journey that takes place one day, one step at a time.", author: "Unknown" },
+      { text: "Self-care is how you take your power back.", author: "Lalah Delia" },
+      { text: "It\u2019s okay to not be okay \u2013 as long as you are not giving up.", author: "Karen Salmansohn" },
+      { text: "The strongest people are not those who show strength in front of us, but those who win battles we know nothing about.", author: "Jonathan Harnisch" }
+    ];
+
+    var index = 0;
+    setInterval(function () {
+      index = (index + 1) % quotes.length;
+      quoteEl.style.opacity = '0';
+      authorEl.style.opacity = '0';
+      setTimeout(function () {
+        quoteEl.textContent = quotes[index].text;
+        authorEl.textContent = '\u2014 ' + quotes[index].author;
+        quoteEl.style.opacity = '1';
+        authorEl.style.opacity = '1';
+      }, 400);
+    }, 8000);
+  }
+
+  // ==================== ANIMATED STAT COUNTERS ====================
+  function initStatCounters() {
+    var statNumbers = document.querySelectorAll('.mb-stats__number[data-count]');
+    if (!statNumbers.length) return;
+
+    var observer = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          var el = entry.target;
+          var target = parseInt(el.getAttribute('data-count'), 10);
+          var duration = 1500;
+          var start = 0;
+          var startTime = null;
+
+          function animate(timestamp) {
+            if (!startTime) startTime = timestamp;
+            var progress = Math.min((timestamp - startTime) / duration, 1);
+            var eased = 1 - Math.pow(1 - progress, 3);
+            el.textContent = Math.round(eased * target);
+            if (progress < 1) requestAnimationFrame(animate);
+            else el.textContent = target + '+';
+          }
+
+          requestAnimationFrame(animate);
+          observer.unobserve(el);
+        }
+      });
+    }, { threshold: 0.5 });
+
+    statNumbers.forEach(function (el) { observer.observe(el); });
+  }
+
+  // ==================== MOOD-BASED RECOMMENDATIONS ====================
+  function initMoodRecommendations() {
+    var moodBtns = document.querySelectorAll('.mb-moodBtn[data-mood]');
+    var resultsEl = document.getElementById('moodResults');
+    var resultsTitleEl = document.getElementById('moodResultsTitle');
+    var resultsCardsEl = document.getElementById('moodResultsCards');
+    if (!moodBtns.length || !resultsEl) return;
+
+    var moodMap = {
+      anxious: {
+        title: 'When you\u2019re feeling anxious, try these:',
+        articles: [
+          { title: 'Anxiety Disorders: symptoms, types & treatment', url: '../articles/anxiety.html', category: 'Anxiety', time: '15 min' },
+          { title: 'Meditation & mindfulness: a beginner\u2019s guide', url: '../articles/mindfulness.html', category: 'Mindfulness', time: '12 min' },
+          { title: 'Anxiety and sleep: the cycle that keeps people stuck', url: 'https://www.sleepfoundation.org/mental-health/anxiety-and-sleep', category: 'Sleep', time: '6 min' }
+        ]
+      },
+      sad: {
+        title: 'When you\u2019re feeling down, these can help:',
+        articles: [
+          { title: 'Understanding Depression: Symptoms & Treatment', url: '../articles/depression.html', category: 'Depression', time: '12 min' },
+          { title: 'Stories of Hope: Real Recovery Journeys', url: '../articles/recovery-stories.html', category: 'Story', time: '10 min' },
+          { title: 'Mental Health Wins: Celebrating Progress', url: '../articles/mental-health-wins.html', category: 'Story', time: '10 min' }
+        ]
+      },
+      stressed: {
+        title: 'Stressed? These articles offer real coping tools:',
+        articles: [
+          { title: 'Stress: what it is and how to manage it', url: '../articles/stress.html', category: 'Stress', time: '12 min' },
+          { title: 'Mental health basics: daily life & support', url: 'https://www.cdc.gov/mental-health/about/', category: 'Stress', time: '6 min' },
+          { title: 'Workplace Mental Health: A Growing Priority', url: '../articles/workplace-wellness.html', category: 'News', time: '10 min' }
+        ]
+      },
+      tired: {
+        title: 'Rest is important. Start here:',
+        articles: [
+          { title: 'Better Sleep: Your Complete Guide', url: '../articles/sleep.html', category: 'Sleep', time: '10 min' },
+          { title: 'How much sleep do you really need?', url: '../articles/sleep.html', category: 'Sleep', time: '4 min' },
+          { title: 'Meditation & mindfulness: a beginner\u2019s guide', url: '../articles/mindfulness.html', category: 'Mindfulness', time: '12 min' }
+        ]
+      },
+      hopeful: {
+        title: 'Keep that energy! These will inspire you:',
+        articles: [
+          { title: 'Stories of Hope: Real Recovery Journeys', url: '../articles/recovery-stories.html', category: 'Story', time: '10 min' },
+          { title: 'Community Care: The Power of Coming Together', url: '../articles/community-support.html', category: 'Community', time: '10 min' },
+          { title: 'Mental Health Wins: Celebrating Progress', url: '../articles/mental-health-wins.html', category: 'Story', time: '10 min' }
+        ]
+      },
+      curious: {
+        title: 'Great mindset! Explore these in-depth guides:',
+        articles: [
+          { title: 'Anxiety Disorders: symptoms, types & treatment', url: '../articles/anxiety.html', category: 'Anxiety', time: '15 min' },
+          { title: 'Teen Mental Health: A Complete Guide', url: '../articles/teen-mental-health.html', category: 'Teens', time: '10 min' },
+          { title: 'Breaking: New Research in Mental Health', url: '../articles/mental-health-news.html', category: 'News', time: '10 min' }
+        ]
+      }
+    };
+
+    moodBtns.forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var mood = btn.dataset.mood;
+        var data = moodMap[mood];
+        if (!data) return;
+
+        moodBtns.forEach(function (b) { b.classList.remove('is-active'); });
+        btn.classList.add('is-active');
+
+        if (resultsTitleEl) resultsTitleEl.textContent = data.title;
+        if (resultsCardsEl) {
+          resultsCardsEl.innerHTML = data.articles.map(function (a) {
+            return '<a class="mb-moodRec__card" href="' + a.url + '">' +
+              '<span class="mb-pill">' + a.category + '</span>' +
+              '<span class="mb-moodRec__cardTitle">' + a.title + '</span>' +
+              '<span class="mb-moodRec__cardMeta">' + a.time + ' read</span>' +
+              '</a>';
+          }).join('');
+        }
+
+        resultsEl.hidden = false;
+        resultsEl.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      });
+    });
+  }
+
   // ==================== INITIALIZATION ====================
   function init() {
     addTTSButtons();
@@ -568,6 +765,11 @@
     initCardProgress();
     initBackToTop();
     initSmoothScroll();
+    initScrollReveal();
+    initStickyFilters();
+    initQuoteRotation();
+    initStatCounters();
+    initMoodRecommendations();
 
     window.addEventListener('beforeunload', stopSpeech);
   }

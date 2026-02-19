@@ -648,10 +648,17 @@
 
   
   <section class="mb-blogHero animate-fade-in">
+    <div class="mb-blogHero__shapes" aria-hidden="true">
+      <span class="mb-shape mb-shape--1"></span>
+      <span class="mb-shape mb-shape--2"></span>
+      <span class="mb-shape mb-shape--3"></span>
+      <span class="mb-shape mb-shape--4"></span>
+      <span class="mb-shape mb-shape--5"></span>
+    </div>
     <div class="mb-blogHero__inner container">
       <div class="mb-blogHero__left">
         <div class="mb-blogHero__badge" data-translate="blog_hero_badge">MindSpace Blog</div>
-        <h2 class="mb-blogHero__title" data-translate="blog_hero_title">Mental health, explained clearly.</h2>
+        <h2 class="mb-blogHero__title" data-translate="blog_hero_title">Mental health, <span class="mb-blogHero__accent">explained clearly.</span></h2>
         <p class="mb-blogHero__lead" data-translate="blog_hero_lead">
           Credible sources, plain-language summaries, and practical takeaways—organized like a modern magazine page.
           Explore expert-backed articles on anxiety, depression, stress management, and mindfulness. Whether you're
@@ -751,6 +758,72 @@
     </div>
   </section>
 
+  <div class="mb-stickyFilters" id="stickyFilters" aria-label="Quick filters">
+    <div class="mb-stickyFilters__inner container">
+      <button class="mb-stickyChip is-active" data-filter="all" type="button">All</button>
+      <button class="mb-stickyChip" data-filter="Anxiety" type="button">Anxiety</button>
+      <button class="mb-stickyChip" data-filter="Depression" type="button">Depression</button>
+      <button class="mb-stickyChip" data-filter="Stress" type="button">Stress</button>
+      <button class="mb-stickyChip" data-filter="Sleep" type="button">Sleep</button>
+      <button class="mb-stickyChip" data-filter="Mindfulness" type="button">Mindfulness</button>
+      <button class="mb-stickyChip" data-filter="Teens" type="button">Teens</button>
+      <button class="mb-stickyChip" data-filter="News" type="button">News</button>
+      <button class="mb-stickyChip" data-filter="Story" type="button">Stories</button>
+    </div>
+  </div>
+
+  <section class="mb-stats container" aria-label="Blog statistics">
+    <div class="mb-stats__grid">
+      <div class="mb-stats__item" data-reveal>
+        <span class="mb-stats__number" data-count="13">0</span>
+        <span class="mb-stats__label">Expert Articles</span>
+      </div>
+      <div class="mb-stats__item" data-reveal>
+        <span class="mb-stats__number" data-count="120">0</span>
+        <span class="mb-stats__label">Minutes of Audio</span>
+      </div>
+      <div class="mb-stats__item" data-reveal>
+        <span class="mb-stats__number" data-count="6">0</span>
+        <span class="mb-stats__label">Languages</span>
+      </div>
+      <div class="mb-stats__item" data-reveal>
+        <span class="mb-stats__number" data-count="10">0</span>
+        <span class="mb-stats__label">Topic Categories</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="mb-articleOfDay container" id="articleOfDay" data-reveal>
+    <div class="mb-articleOfDay__badge">
+      <ion-icon name="star"></ion-icon>
+      <span>Article of the Day</span>
+    </div>
+    <div class="mb-articleOfDay__card">
+      <div class="mb-articleOfDay__imgWrap">
+        <img class="mb-articleOfDay__img" src="https://images.unsplash.com/photo-1506126613408-eca07ce68773?auto=format&fit=crop&w=800&q=70" alt="Mindfulness meditation" loading="lazy" />
+        <div class="mb-articleOfDay__overlay"></div>
+      </div>
+      <div class="mb-articleOfDay__content">
+        <div class="mb-metaRow">
+          <span class="mb-pill">Mindfulness</span>
+          <span class="mb-mood mb-mood--uplifting">Practical</span>
+          <span class="mb-metaDot">&bull;</span>
+          <span class="mb-metaText">6 min read</span>
+        </div>
+        <h3 class="mb-articleOfDay__title">
+          <a href="../articles/mindfulness.html">Meditation &amp; mindfulness: a beginner&rsquo;s guide</a>
+        </h3>
+        <p class="mb-articleOfDay__desc">A research-based overview of mindfulness, including benefits, practical exercises, and how to get started with just 5 minutes a day.</p>
+        <div class="mb-articleOfDay__actions">
+          <a class="mb-btn" href="../articles/mindfulness.html">Read Now</a>
+          <button class="mb-btn mb-btn--ghost mb-ttsBtn" type="button" aria-label="Listen">
+            <ion-icon name="headset-outline"></ion-icon> Listen
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
   
 <!-- ===== MAIN CONTENT ===== -->
   <main class="mb-blog container" id="sections">
@@ -779,7 +852,7 @@
         </div>
 
         
-        <div class="mb-sectionHead" id="news-stories">
+        <div class="mb-sectionHead" id="news-stories" data-reveal>
           <h3 class="mb-sectionHead__title" data-translate="blog_news_stories">News & Stories</h3>
           <span class="mb-sectionHead__subtitle" style="font-size: 14px; color: #666;" data-translate="blog_news_stories_sub">Real stories, research updates & community spotlights</span>
         </div>
@@ -914,8 +987,31 @@
           </article>
         </div>
 
-        
-        <div class="mb-sectionHead" style="margin-top: 2rem;">
+        <section class="mb-newsletterCta" data-reveal aria-label="Newsletter signup">
+          <div class="mb-newsletterCta__content">
+            <ion-icon name="mail-outline" class="mb-newsletterCta__icon"></ion-icon>
+            <div class="mb-newsletterCta__text">
+              <h3 data-translate="blog_newsletter_title">Stay in the loop</h3>
+              <p data-translate="blog_newsletter_desc">Monthly mental health tips + new resources. No spam &mdash; unsubscribe anytime.</p>
+            </div>
+          </div>
+          <form class="mb-newsletterCta__form" id="blogNewsletterForm">
+            <input type="email" placeholder="Enter your email" required aria-label="Email address" id="blogNewsEmail" data-translate-placeholder="footer_email_placeholder" />
+            <button type="submit"><span data-translate="footer_subscribe">Subscribe</span></button>
+          </form>
+        </section>
+
+        <section class="mb-quoteBanner" data-reveal>
+          <div class="mb-quoteBanner__inner container">
+            <div class="mb-quoteBanner__icon">&ldquo;</div>
+            <blockquote class="mb-quoteBanner__text" id="rotatingQuote">
+              You don&rsquo;t have to control your thoughts. You just have to stop letting them control you.
+            </blockquote>
+            <cite class="mb-quoteBanner__author" id="rotatingAuthor">&mdash; Dan Millman</cite>
+          </div>
+        </section>
+
+        <div class="mb-sectionHead" data-reveal style="margin-top: 2rem;">
           <h3 class="mb-sectionHead__title" data-translate="blog_featured_articles">Featured Articles</h3>
           <a class="mb-sectionHead__more" href="#latest" data-translate="blog_view_more">View More →</a>
         </div>
@@ -1052,8 +1148,105 @@
           </article>
         </div>
 
-        
-        <div class="mb-sectionHead" id="latest">
+        <section class="mb-communityCta" data-reveal aria-label="Join the community">
+          <div class="mb-communityCta__content">
+            <ion-icon name="people-circle-outline" class="mb-communityCta__icon"></ion-icon>
+            <div class="mb-communityCta__text">
+              <h3 data-translate="blog_community_title">Join our Community Hub</h3>
+              <p data-translate="blog_community_desc">Share experiences, connect with others, and find support in our community forum.</p>
+            </div>
+          </div>
+          <a href="/community/" class="mb-communityCta__btn" data-translate="blog_visit_community">Visit Community Hub</a>
+        </section>
+
+        <section class="mb-moodRec container" data-reveal>
+          <div class="mb-moodRec__header">
+            <h3 class="mb-moodRec__title">How are you feeling?</h3>
+            <p class="mb-moodRec__subtitle">We'll suggest articles based on your mood</p>
+          </div>
+          <div class="mb-moodRec__moods">
+            <button class="mb-moodBtn" data-mood="anxious" type="button">
+              <span class="mb-moodBtn__emoji">😰</span>
+              <span class="mb-moodBtn__label">Anxious</span>
+            </button>
+            <button class="mb-moodBtn" data-mood="sad" type="button">
+              <span class="mb-moodBtn__emoji">😔</span>
+              <span class="mb-moodBtn__label">Down</span>
+            </button>
+            <button class="mb-moodBtn" data-mood="stressed" type="button">
+              <span class="mb-moodBtn__emoji">😤</span>
+              <span class="mb-moodBtn__label">Stressed</span>
+            </button>
+            <button class="mb-moodBtn" data-mood="tired" type="button">
+              <span class="mb-moodBtn__emoji">😴</span>
+              <span class="mb-moodBtn__label">Tired</span>
+            </button>
+            <button class="mb-moodBtn" data-mood="hopeful" type="button">
+              <span class="mb-moodBtn__emoji">🌱</span>
+              <span class="mb-moodBtn__label">Hopeful</span>
+            </button>
+            <button class="mb-moodBtn" data-mood="curious" type="button">
+              <span class="mb-moodBtn__emoji">🧠</span>
+              <span class="mb-moodBtn__label">Curious</span>
+            </button>
+          </div>
+          <div class="mb-moodRec__results" id="moodResults" hidden>
+            <h4 class="mb-moodRec__resultsTitle" id="moodResultsTitle">Recommended for you</h4>
+            <div class="mb-moodRec__cards" id="moodResultsCards"></div>
+          </div>
+        </section>
+
+        <section class="mb-popular container" data-reveal>
+          <div class="mb-sectionHead">
+            <h3 class="mb-sectionHead__title">
+              <ion-icon name="trending-up-outline"></ion-icon> Popular This Week
+            </h3>
+          </div>
+          <div class="mb-popular__grid">
+            <a class="mb-popular__item" href="../articles/anxiety.html">
+              <span class="mb-popular__rank">1</span>
+              <div class="mb-popular__info">
+                <span class="mb-popular__name">Anxiety Disorders: symptoms, types &amp; treatment</span>
+                <span class="mb-popular__meta">NIMH &bull; 15 min read</span>
+              </div>
+              <span class="mb-popular__views"><ion-icon name="eye-outline"></ion-icon> 2.4k</span>
+            </a>
+            <a class="mb-popular__item" href="../articles/stress.html">
+              <span class="mb-popular__rank">2</span>
+              <div class="mb-popular__info">
+                <span class="mb-popular__name">Stress: what it is and how to manage it</span>
+                <span class="mb-popular__meta">APA &bull; 12 min read</span>
+              </div>
+              <span class="mb-popular__views"><ion-icon name="eye-outline"></ion-icon> 1.8k</span>
+            </a>
+            <a class="mb-popular__item" href="../articles/depression.html">
+              <span class="mb-popular__rank">3</span>
+              <div class="mb-popular__info">
+                <span class="mb-popular__name">Understanding Depression: Complete Guide</span>
+                <span class="mb-popular__meta">NIMH &bull; 12 min read</span>
+              </div>
+              <span class="mb-popular__views"><ion-icon name="eye-outline"></ion-icon> 1.5k</span>
+            </a>
+            <a class="mb-popular__item" href="../articles/sleep.html">
+              <span class="mb-popular__rank">4</span>
+              <div class="mb-popular__info">
+                <span class="mb-popular__name">Better Sleep: Your Complete Guide</span>
+                <span class="mb-popular__meta">Mayo Clinic &bull; 10 min read</span>
+              </div>
+              <span class="mb-popular__views"><ion-icon name="eye-outline"></ion-icon> 1.2k</span>
+            </a>
+            <a class="mb-popular__item" href="../articles/mindfulness.html">
+              <span class="mb-popular__rank">5</span>
+              <div class="mb-popular__info">
+                <span class="mb-popular__name">Meditation &amp; Mindfulness Guide</span>
+                <span class="mb-popular__meta">NIH &bull; 12 min read</span>
+              </div>
+              <span class="mb-popular__views"><ion-icon name="eye-outline"></ion-icon> 980</span>
+            </a>
+          </div>
+        </section>
+
+        <div class="mb-sectionHead" id="latest" data-reveal>
           <h3 class="mb-sectionHead__title" data-translate="blog_indepth_guides">In-Depth Guides</h3>
           <a class="mb-sectionHead__more" href="#more" data-translate="blog_view_more">View More →</a>
         </div>
@@ -1223,7 +1416,7 @@
         </div>
 
         
-        <div class="mb-sectionHead" id="more">
+        <div class="mb-sectionHead" id="more" data-reveal>
           <h3 class="mb-sectionHead__title" data-translate="blog_more_topics">More Topics</h3>
           <a class="mb-sectionHead__more" href="#allPosts" data-translate="blog_view_more">View More →</a>
         </div>

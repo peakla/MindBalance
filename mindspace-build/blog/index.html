@@ -30,8 +30,8 @@
   <link rel="stylesheet" href="../css/responsive-system.css" />
   <link rel="stylesheet" href="../css/settings-modal.css" />
   <link rel="stylesheet" href="../css/analytics.css" />
-  <link rel="stylesheet" href="../css/animations.css" />
   <link rel="stylesheet" href="../css/blog-redesign.css" />
+  <link rel="stylesheet" href="../css/animations.css" />
 
   
   <link rel="preload" href="../css/style.css" as="style" />
@@ -121,9 +121,8 @@
   </nav>
 
   
-    <div class="topbar">
+  <div class="topbar">
     <div class="container">
-
       <address class="topbar-item">
         <div class="icon">
           <ion-icon name="location-outline" aria-hidden="true"></ion-icon>
@@ -155,10 +154,10 @@
         </div>
         <span class="span">mindspacehelp@gmail.com</span>
       </a>
-
     </div>
   </div>
 
+  
   
   <header class="header" data-header>
     <div class="container">
@@ -260,7 +259,6 @@
               </a>
             </div>
           </li>
-          <li class="navbar-item">
         </ul>
 
         <div class="mobile-nav-divider"></div>
@@ -320,13 +318,13 @@
               <span class="mobile-setting-label"><ion-icon name="color-palette-outline"></ion-icon> <span data-translate="settings_accent_color">Accent Color</span></span>
               <div class="mobile-accent-picker">
                 <button class="accent-color-btn" data-accent-color="purple" title="Purple" style="--btn-color: #9b7ed9"></button>
-                <button class="accent-color-btn" data-accent-color="blue" title="Blue" style="--btn-color: #4a90d9"></button>
+                <button class="accent-color-btn active" data-accent-color="blue" title="Blue" style="--btn-color: #4a90d9"></button>
                 <button class="accent-color-btn" data-accent-color="green" title="Green" style="--btn-color: #4db896"></button>
                 <button class="accent-color-btn" data-accent-color="teal" title="Teal" style="--btn-color: #38b2ac"></button>
                 <button class="accent-color-btn" data-accent-color="pink" title="Pink" style="--btn-color: #d97eab"></button>
                 <button class="accent-color-btn" data-accent-color="orange" title="Orange" style="--btn-color: #e09c5c"></button>
                 <button class="accent-color-btn" data-accent-color="red" title="Red" style="--btn-color: #e07070"></button>
-                <button class="accent-color-btn active" data-accent-color="blue" title="Blue" style="--btn-color: #2068A8"></button>
+                <button class="accent-color-btn" data-accent-color="gold" title="Gold" style="--btn-color: #af916d"></button>
               </div>
             </div>
             <div class="mobile-setting-item">
@@ -603,13 +601,13 @@
                 </div>
                 <div class="accent-color-picker">
                   <button class="accent-color-btn" data-accent-color="purple" title="Purple" style="--btn-color: #9b7ed9"></button>
-                  <button class="accent-color-btn" data-accent-color="blue" title="Blue" style="--btn-color: #4a90d9"></button>
+                  <button class="accent-color-btn active" data-accent-color="blue" title="Blue" style="--btn-color: #4a90d9"></button>
                   <button class="accent-color-btn" data-accent-color="green" title="Green" style="--btn-color: #4db896"></button>
                   <button class="accent-color-btn" data-accent-color="teal" title="Teal" style="--btn-color: #38b2ac"></button>
                   <button class="accent-color-btn" data-accent-color="pink" title="Pink" style="--btn-color: #d97eab"></button>
                   <button class="accent-color-btn" data-accent-color="orange" title="Orange" style="--btn-color: #e09c5c"></button>
                   <button class="accent-color-btn" data-accent-color="red" title="Red" style="--btn-color: #e07070"></button>
-                  <button class="accent-color-btn active" data-accent-color="blue" title="Blue" style="--btn-color: #2068A8"></button>
+                  <button class="accent-color-btn" data-accent-color="gold" title="Gold" style="--btn-color: #af916d"></button>
                 </div>
               </div>
               <div class="setting-item">
@@ -647,7 +645,6 @@
     </div>
   </header>
 
-  
   <section class="mb-blogHero">
     <div class="mb-blogHero__shapes" aria-hidden="true">
       <span class="mb-shape mb-shape--1"></span>
@@ -818,7 +815,6 @@
     </div>
   </section>
 
-  
 <!-- ===== MAIN CONTENT ===== -->
   <main class="mb-blog container" id="sections">
     <div class="mb-blogContent">
@@ -835,7 +831,6 @@
           </div>
         </div>
 
-        
         <div class="mb-emptyState" id="noResults">
           <strong data-translate="blog_no_results">No results found.</strong>
           <div style="margin-top:6px;" data-translate="blog_no_results_hint">
@@ -843,803 +838,471 @@
           </div>
         </div>
 
-        
-        <div class="mb-sectionHead" id="news-stories" data-reveal>
-          <h3 class="mb-sectionHead__title" data-translate="blog_news_stories">News & Stories</h3>
-          <span class="mb-sectionHead__subtitle" style="font-size: 14px; color: #666;" data-translate="blog_news_stories_sub">Real stories, research updates & community spotlights</span>
+        <div class="mb-sectionHead" id="allArticles" data-reveal>
+          <h3 class="mb-sectionHead__title" data-translate="blog_all_articles">All Articles</h3>
         </div>
 
-        <div class="mb-3up animate-stagger">
-          <article class="mb-postCard card-animated hover-lift" data-category="News">
-            <a class="mb-postCard__imgWrap" href="../articles/mental-health-news.html">
-              <img class="mb-postCard__img"
-                src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?auto=format&fit=crop&w=1200&q=70"
-                alt="Medical research laboratory" loading="lazy" />
-              <span class="mb-pill mb-pill--news mb-postCard__pill" data-translate="blog_pill_research">Research</span>
-              <span class="mb-new-badge" data-translate="blog_new_badge">New</span>
-              <span class="mb-tts-badge-overlay">🎧</span>
-            </a>
-            <div class="mb-postCard__body">
-              <h4 class="mb-postCard__title">
-                <a href="../articles/mental-health-news.html"><span data-translate="blog_card_news_title">Breaking: New Research in Mental Health Treatment</span></a>
-              </h4>
-              <div class="mb-postCard__meta">Research • 10 <span data-translate="blog_min_read">min read</span> • 🎧 <span data-translate="blog_audio_available">Audio available</span></div>
-              <p class="mb-postCard__excerpt" data-translate="blog_card_news_desc">
-                Exciting advances in therapy approaches, new medications in development, and digital mental health innovations.
-              </p>
-              <a class="mb-linkArrow" href="../articles/mental-health-news.html" data-translate="blog_read_article">Read article →</a>
-            </div>
-          </article>
-
-          <article class="mb-postCard card-animated hover-lift" data-category="Story">
-            <a class="mb-postCard__imgWrap" href="../articles/recovery-stories.html">
-              <img class="mb-postCard__img"
-                src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=1200&q=70"
-                alt="Friends supporting each other" loading="lazy" />
-              <span class="mb-pill mb-pill--story mb-postCard__pill" data-translate="blog_pill_stories">Stories</span>
-              <span class="mb-new-badge" data-translate="blog_new_badge">New</span>
-              <span class="mb-tts-badge-overlay">🎧</span>
-            </a>
-            <div class="mb-postCard__body">
+        <div class="mb-articleGrid">
               <h4 class="mb-postCard__title">
                 <a href="../articles/recovery-stories.html"><span data-translate="blog_card_recovery_title">Stories of Hope: Real Recovery Journeys</span></a>
+
+          <article class="mb-articleCard" data-category="Anxiety">
+            <a class="mb-articleCard__imgWrap" href="../articles/anxiety.html">
+              <img class="mb-articleCard__img" src="/assets/images/BlogCover.png" alt="Anxiety disorders guide" loading="lazy" />
+              <span class="mb-tts-badge-overlay" data-has-tts><ion-icon name="headset-outline"></ion-icon></span>
+            </a>
+            <div class="mb-articleCard__body">
+              <div class="mb-articleCard__meta">
+                <span class="mb-pill">Anxiety</span>
+                <span class="mb-articleCard__source">NIMH</span>
+                <span class="mb-articleCard__readtime">15 min read</span>
+                <span class="mb-articleCard__audio"><ion-icon name="headset-outline"></ion-icon> Audio</span>
+              </div>
+              <h4 class="mb-articleCard__title">
+                <a href="../articles/anxiety.html"><span data-translate="blog_card_anxiety_title">Anxiety Disorders: Symptoms, Types &amp; Treatment</span></a>
               </h4>
-              <div class="mb-postCard__meta">Inspiration • 10 <span data-translate="blog_min_read">min read</span> • 🎧 <span data-translate="blog_audio_available">Audio available</span></div>
-              <p class="mb-postCard__excerpt" data-translate="blog_card_recovery_desc">
-                Inspiring stories of people who found their path to healing and thriving after mental health challenges.
-              </p>
-              <a class="mb-linkArrow" href="../articles/recovery-stories.html" data-translate="blog_read_article">Read article →</a>
+              <p class="mb-articleCard__desc" data-translate="blog_card_anxiety_desc">A comprehensive guide explaining what anxiety disorders are, how they show up, and evidence-based treatment options.</p>
+              <a class="mb-linkArrow" href="../articles/anxiety.html" data-translate="blog_read_article">Read article &rarr;</a>
             </div>
           </article>
 
-          <article class="mb-postCard card-animated hover-lift" data-category="News">
-            <a class="mb-postCard__imgWrap" href="../articles/workplace-wellness.html">
-              <img class="mb-postCard__img"
-                src="https://images.unsplash.com/photo-1497215842964-222b430dc094?auto=format&fit=crop&w=1200&q=70"
-                alt="Modern office space" loading="lazy" />
-              <span class="mb-pill mb-pill--news mb-postCard__pill" data-translate="blog_pill_workplace">Workplace</span>
-              <span class="mb-new-badge" data-translate="blog_new_badge">New</span>
-              <span class="mb-tts-badge-overlay">🎧</span>
+          <article class="mb-articleCard" data-category="Depression">
+            <a class="mb-articleCard__imgWrap" href="../articles/depression.html">
+              <img class="mb-articleCard__img" src="/assets/images/depressioncover.png" alt="Understanding depression" loading="lazy" />
+              <span class="mb-tts-badge-overlay" data-has-tts><ion-icon name="headset-outline"></ion-icon></span>
             </a>
-            <div class="mb-postCard__body">
-              <h4 class="mb-postCard__title">
+            <div class="mb-articleCard__body">
+              <div class="mb-articleCard__meta">
+                <span class="mb-pill">Depression</span>
+                <span class="mb-articleCard__source">NIMH</span>
+                <span class="mb-articleCard__readtime">12 min read</span>
+                <span class="mb-articleCard__audio"><ion-icon name="headset-outline"></ion-icon> Audio</span>
+              </div>
+              <h4 class="mb-articleCard__title">
+                <a href="../articles/depression.html"><span data-translate="blog_compact_depression_title">Understanding Depression: Symptoms &amp; Treatment</span></a>
+              </h4>
+              <p class="mb-articleCard__desc" data-translate="blog_compact_depression_desc">Key symptoms, causes, types, and treatment options for depression explained clearly.</p>
+              <a class="mb-linkArrow" href="../articles/depression.html" data-translate="blog_read_article">Read article &rarr;</a>
+            </div>
+          </article>
+
+          <article class="mb-articleCard" data-category="Stress">
+            <a class="mb-articleCard__imgWrap" href="../articles/stress.html">
+              <img class="mb-articleCard__img" src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=1200&q=70" alt="People working at a desk" loading="lazy" />
+              <span class="mb-tts-badge-overlay" data-has-tts><ion-icon name="headset-outline"></ion-icon></span>
+            </a>
+            <div class="mb-articleCard__body">
+              <div class="mb-articleCard__meta">
+                <span class="mb-pill">Stress</span>
+                <span class="mb-articleCard__source">APA</span>
+                <span class="mb-articleCard__readtime">12 min read</span>
+                <span class="mb-articleCard__audio"><ion-icon name="headset-outline"></ion-icon> Audio</span>
+              </div>
+              <h4 class="mb-articleCard__title">
+                <a href="../articles/stress.html"><span data-translate="blog_card_stress_title">Stress: What It Is and How to Manage It</span></a>
+              </h4>
+              <p class="mb-articleCard__desc" data-translate="blog_card_stress_desc">A practical guide explaining what stress is, how it impacts the mind/body, and what helps reduce it over time.</p>
+              <a class="mb-linkArrow" href="../articles/stress.html" data-translate="blog_read_article">Read article &rarr;</a>
+            </div>
+          </article>
+
+          <article class="mb-articleCard" data-category="Mindfulness">
+            <a class="mb-articleCard__imgWrap" href="../articles/mindfulness.html">
+              <img class="mb-articleCard__img" src="https://images.unsplash.com/photo-1506126613408-eca07ce68773?auto=format&fit=crop&w=1200&q=70" alt="Person meditating outdoors" loading="lazy" />
+              <span class="mb-tts-badge-overlay" data-has-tts><ion-icon name="headset-outline"></ion-icon></span>
+            </a>
+            <div class="mb-articleCard__body">
+              <div class="mb-articleCard__meta">
+                <span class="mb-pill">Mindfulness</span>
+                <span class="mb-articleCard__source">NIH</span>
+                <span class="mb-articleCard__readtime">12 min read</span>
+                <span class="mb-articleCard__audio"><ion-icon name="headset-outline"></ion-icon> Audio</span>
+              </div>
+              <h4 class="mb-articleCard__title">
+                <a href="../articles/mindfulness.html"><span data-translate="blog_card_mindfulness_title">Meditation &amp; Mindfulness: A Beginner&rsquo;s Guide</span></a>
+              </h4>
+              <p class="mb-articleCard__desc" data-translate="blog_card_mindfulness_desc">A research-based overview of mindfulness, including benefits, practical exercises, and how to get started.</p>
+              <a class="mb-linkArrow" href="../articles/mindfulness.html" data-translate="blog_read_article">Read article &rarr;</a>
+            </div>
+          </article>
+
+          <article class="mb-articleCard" data-category="Sleep">
+            <a class="mb-articleCard__imgWrap" href="../articles/sleep.html">
+              <img class="mb-articleCard__img" src="/assets/images/SleepBlog.png" alt="Cozy bed and pillow" loading="lazy" />
+              <span class="mb-tts-badge-overlay" data-has-tts><ion-icon name="headset-outline"></ion-icon></span>
+            </a>
+            <div class="mb-articleCard__body">
+              <div class="mb-articleCard__meta">
+                <span class="mb-pill">Sleep</span>
+                <span class="mb-articleCard__source">Mayo Clinic</span>
+                <span class="mb-articleCard__readtime">10 min read</span>
+                <span class="mb-articleCard__audio"><ion-icon name="headset-outline"></ion-icon> Audio</span>
+              </div>
+              <h4 class="mb-articleCard__title">
+                <a href="../articles/sleep.html"><span data-translate="blog_guide_sleep_title">Better Sleep: Your Complete Guide to Restful Nights</span></a>
+              </h4>
+              <p class="mb-articleCard__desc" data-translate="blog_guide_sleep_desc">A clear &ldquo;sleep hygiene&rdquo; checklist: habits that improve sleep, habits that ruin it, and what to try first.</p>
+              <a class="mb-linkArrow" href="../articles/sleep.html" data-translate="blog_read_article">Read article &rarr;</a>
+            </div>
+          </article>
+
+          <article class="mb-articleCard" data-category="Teens">
+            <a class="mb-articleCard__imgWrap" href="../articles/teen-mental-health.html">
+              <img class="mb-articleCard__img" src="/assets/images/FullTeenCover.png" alt="Teen mental health guide" loading="lazy" />
+              <span class="mb-tts-badge-overlay" data-has-tts><ion-icon name="headset-outline"></ion-icon></span>
+            </a>
+            <div class="mb-articleCard__body">
+              <div class="mb-articleCard__meta">
+                <span class="mb-pill">Teens</span>
+                <span class="mb-articleCard__source">CDC</span>
+                <span class="mb-articleCard__readtime">10 min read</span>
+                <span class="mb-articleCard__audio"><ion-icon name="headset-outline"></ion-icon> Audio</span>
+              </div>
+              <h4 class="mb-articleCard__title">
+                <a href="../articles/teen-mental-health.html"><span data-translate="blog_mini_teen_title">Teen Mental Health: A Complete Guide</span></a>
+              </h4>
+              <p class="mb-articleCard__desc" data-translate="blog_guide_teen_desc">Understanding the unique mental health challenges teens face and how to provide effective support.</p>
+              <a class="mb-linkArrow" href="../articles/teen-mental-health.html" data-translate="blog_read_article">Read article &rarr;</a>
+            </div>
+          </article>
+
+          <article class="mb-articleCard" data-category="News">
+            <a class="mb-articleCard__imgWrap" href="../articles/mental-health-news.html">
+              <img class="mb-articleCard__img" src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?auto=format&fit=crop&w=1200&q=70" alt="Medical research laboratory" loading="lazy" />
+              <span class="mb-tts-badge-overlay" data-has-tts><ion-icon name="headset-outline"></ion-icon></span>
+            </a>
+            <div class="mb-articleCard__body">
+              <div class="mb-articleCard__meta">
+                <span class="mb-pill">News</span>
+                <span class="mb-articleCard__source">Research</span>
+                <span class="mb-articleCard__readtime">10 min read</span>
+                <span class="mb-articleCard__audio"><ion-icon name="headset-outline"></ion-icon> Audio</span>
+              </div>
+              <h4 class="mb-articleCard__title">
+                <a href="../articles/mental-health-news.html"><span data-translate="blog_card_news_title">Breaking: New Research in Mental Health Treatment</span></a>
+              </h4>
+              <p class="mb-articleCard__desc" data-translate="blog_card_news_desc">Exciting advances in therapy approaches, new medications in development, and digital mental health innovations.</p>
+              <a class="mb-linkArrow" href="../articles/mental-health-news.html" data-translate="blog_read_article">Read article &rarr;</a>
+            </div>
+          </article>
+
+          <article class="mb-articleCard" data-category="Story">
+            <a class="mb-articleCard__imgWrap" href="../articles/recovery-stories.html">
+              <img class="mb-articleCard__img" src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=1200&q=70" alt="Friends supporting each other" loading="lazy" />
+              <span class="mb-tts-badge-overlay" data-has-tts><ion-icon name="headset-outline"></ion-icon></span>
+            </a>
+            <div class="mb-articleCard__body">
+              <div class="mb-articleCard__meta">
+                <span class="mb-pill">Story</span>
+                <span class="mb-articleCard__source">Inspiration</span>
+                <span class="mb-articleCard__readtime">10 min read</span>
+                <span class="mb-articleCard__audio"><ion-icon name="headset-outline"></ion-icon> Audio</span>
+              </div>
+              <h4 class="mb-articleCard__title">
+                <a href="../articles/recovery-stories.html"><span data-translate="blog_card_recovery_title">Stories of Hope: Real Recovery Journeys</span></a>
+              </h4>
+              <p class="mb-articleCard__desc" data-translate="blog_card_recovery_desc">Inspiring stories of people who found their path to healing and thriving after mental health challenges.</p>
+              <a class="mb-linkArrow" href="../articles/recovery-stories.html" data-translate="blog_read_article">Read article &rarr;</a>
+            </div>
+          </article>
+
+          <article class="mb-articleCard" data-category="News">
+            <a class="mb-articleCard__imgWrap" href="../articles/workplace-wellness.html">
+              <img class="mb-articleCard__img" src="https://images.unsplash.com/photo-1497215842964-222b430dc094?auto=format&fit=crop&w=1200&q=70" alt="Modern office space" loading="lazy" />
+              <span class="mb-tts-badge-overlay" data-has-tts><ion-icon name="headset-outline"></ion-icon></span>
+            </a>
+            <div class="mb-articleCard__body">
+              <div class="mb-articleCard__meta">
+                <span class="mb-pill">News</span>
+                <span class="mb-articleCard__source">Work-Life</span>
+                <span class="mb-articleCard__readtime">10 min read</span>
+                <span class="mb-articleCard__audio"><ion-icon name="headset-outline"></ion-icon> Audio</span>
+              </div>
+              <h4 class="mb-articleCard__title">
                 <a href="../articles/workplace-wellness.html"><span data-translate="blog_card_workplace_title">Workplace Mental Health: A Growing Priority</span></a>
               </h4>
-              <div class="mb-postCard__meta">Work-Life • 10 <span data-translate="blog_min_read">min read</span> • 🎧 <span data-translate="blog_audio_available">Audio available</span></div>
-              <p class="mb-postCard__excerpt" data-translate="blog_card_workplace_desc">
-                How companies are implementing mental health programs and supporting employee wellness.
-              </p>
-              <a class="mb-linkArrow" href="../articles/workplace-wellness.html" data-translate="blog_read_article">Read article →</a>
+              <p class="mb-articleCard__desc" data-translate="blog_card_workplace_desc">How companies are implementing mental health programs and supporting employee wellness.</p>
+              <a class="mb-linkArrow" href="../articles/workplace-wellness.html" data-translate="blog_read_article">Read article &rarr;</a>
             </div>
           </article>
-        </div>
 
-        <div class="mb-3up animate-stagger" style="margin-top: 1.5rem;">
-          <article class="mb-postCard card-animated hover-lift" data-category="Teens">
-            <a class="mb-postCard__imgWrap" href="../articles/teen-mental-health-support.html">
-              <img class="mb-postCard__img"
-                src="/assets/images/SupportCard.png"
-                alt="Teens supporting each other" loading="lazy" />
-              <span class="mb-pill mb-postCard__pill">Teens</span>
-              <span class="mb-new-badge" data-translate="blog_new_badge">New</span>
-              <span class="mb-tts-badge-overlay">🎧</span>
+          <article class="mb-articleCard" data-category="Teens">
+            <a class="mb-articleCard__imgWrap" href="../articles/teen-mental-health-support.html">
+              <img class="mb-articleCard__img" src="/assets/images/SupportCard.png" alt="Teens supporting each other" loading="lazy" />
+              <span class="mb-tts-badge-overlay" data-has-tts><ion-icon name="headset-outline"></ion-icon></span>
             </a>
-            <div class="mb-postCard__body">
-              <h4 class="mb-postCard__title">
+            <div class="mb-articleCard__body">
+              <div class="mb-articleCard__meta">
+                <span class="mb-pill">Teens</span>
+                <span class="mb-articleCard__source">Youth</span>
+                <span class="mb-articleCard__readtime">10 min read</span>
+                <span class="mb-articleCard__audio"><ion-icon name="headset-outline"></ion-icon> Audio</span>
+              </div>
+              <h4 class="mb-articleCard__title">
                 <a href="../articles/teen-mental-health-support.html"><span data-translate="blog_card_teen_support_title">Supporting Teens: Stories of Growth</span></a>
               </h4>
-              <div class="mb-postCard__meta">Youth • 10 <span data-translate="blog_min_read">min read</span> • 🎧 <span data-translate="blog_audio_available">Audio available</span></div>
-              <p class="mb-postCard__excerpt" data-translate="blog_card_teen_support_desc">
-                Real challenges teens face today and inspiring stories of young people who found help and thrived.
-              </p>
-              <a class="mb-linkArrow" href="../articles/teen-mental-health-support.html" data-translate="blog_read_article">Read article →</a>
+              <p class="mb-articleCard__desc" data-translate="blog_card_teen_support_desc">Real challenges teens face today and inspiring stories of young people who found help and thrived.</p>
+              <a class="mb-linkArrow" href="../articles/teen-mental-health-support.html" data-translate="blog_read_article">Read article &rarr;</a>
             </div>
           </article>
 
-          <article class="mb-postCard card-animated hover-lift" data-category="Community">
-            <a class="mb-postCard__imgWrap" href="../articles/community-support.html">
-              <img class="mb-postCard__img"
-                src="https://images.unsplash.com/photo-1582213782179-e0d53f98f2ca?auto=format&fit=crop&w=1200&q=70"
-                alt="Community gathering" loading="lazy" />
-              <span class="mb-pill mb-pill--story mb-postCard__pill" data-translate="blog_pill_community">Community</span>
-              <span class="mb-new-badge" data-translate="blog_new_badge">New</span>
-              <span class="mb-tts-badge-overlay">🎧</span>
+          <article class="mb-articleCard" data-category="Community">
+            <a class="mb-articleCard__imgWrap" href="../articles/community-support.html">
+              <img class="mb-articleCard__img" src="https://images.unsplash.com/photo-1582213782179-e0d53f98f2ca?auto=format&fit=crop&w=1200&q=70" alt="Community gathering" loading="lazy" />
+              <span class="mb-tts-badge-overlay" data-has-tts><ion-icon name="headset-outline"></ion-icon></span>
             </a>
-            <div class="mb-postCard__body">
-              <h4 class="mb-postCard__title">
+            <div class="mb-articleCard__body">
+              <div class="mb-articleCard__meta">
+                <span class="mb-pill">Community</span>
+                <span class="mb-articleCard__source">Support</span>
+                <span class="mb-articleCard__readtime">10 min read</span>
+                <span class="mb-articleCard__audio"><ion-icon name="headset-outline"></ion-icon> Audio</span>
+              </div>
+              <h4 class="mb-articleCard__title">
                 <a href="../articles/community-support.html"><span data-translate="blog_card_community_title">Community Care: The Power of Coming Together</span></a>
               </h4>
-              <div class="mb-postCard__meta">Support • 10 <span data-translate="blog_min_read">min read</span> • 🎧 <span data-translate="blog_audio_available">Audio available</span></div>
-              <p class="mb-postCard__excerpt" data-translate="blog_card_community_desc">
-                How support groups and community initiatives are transforming mental health care.
-              </p>
-              <a class="mb-linkArrow" href="../articles/community-support.html" data-translate="blog_read_article">Read article →</a>
+              <p class="mb-articleCard__desc" data-translate="blog_card_community_desc">How support groups and community initiatives are transforming mental health care.</p>
+              <a class="mb-linkArrow" href="../articles/community-support.html" data-translate="blog_read_article">Read article &rarr;</a>
             </div>
           </article>
 
-          <article class="mb-postCard card-animated hover-lift" data-category="Story">
-            <a class="mb-postCard__imgWrap" href="../articles/mental-health-wins.html">
-              <img class="mb-postCard__img"
-                src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=1200&q=70"
-                alt="Celebration and joy" loading="lazy" />
-              <span class="mb-pill mb-pill--story mb-postCard__pill" data-translate="blog_pill_wins">Wins</span>
-              <span class="mb-new-badge" data-translate="blog_new_badge">New</span>
-              <span class="mb-tts-badge-overlay">🎧</span>
+          <article class="mb-articleCard" data-category="Story">
+            <a class="mb-articleCard__imgWrap" href="../articles/mental-health-wins.html">
+              <img class="mb-articleCard__img" src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=1200&q=70" alt="Celebration and joy" loading="lazy" />
+              <span class="mb-tts-badge-overlay" data-has-tts><ion-icon name="headset-outline"></ion-icon></span>
             </a>
-            <div class="mb-postCard__body">
-              <h4 class="mb-postCard__title">
+            <div class="mb-articleCard__body">
+              <div class="mb-articleCard__meta">
+                <span class="mb-pill">Story</span>
+                <span class="mb-articleCard__source">Inspiration</span>
+                <span class="mb-articleCard__readtime">10 min read</span>
+                <span class="mb-articleCard__audio"><ion-icon name="headset-outline"></ion-icon> Audio</span>
+              </div>
+              <h4 class="mb-articleCard__title">
                 <a href="../articles/mental-health-wins.html"><span data-translate="blog_card_wins_title">Mental Health Wins: Celebrating Progress</span></a>
               </h4>
-              <div class="mb-postCard__meta">Inspiration • 10 <span data-translate="blog_min_read">min read</span> • 🎧 <span data-translate="blog_audio_available">Audio available</span></div>
-              <p class="mb-postCard__excerpt" data-translate="blog_card_wins_desc">
-                Wholesome victories, celebrity journeys, and positive trends in mental health awareness.
-              </p>
-              <a class="mb-linkArrow" href="../articles/mental-health-wins.html" data-translate="blog_read_article">Read article →</a>
+              <p class="mb-articleCard__desc" data-translate="blog_card_wins_desc">Wholesome victories, celebrity journeys, and positive trends in mental health awareness.</p>
+              <a class="mb-linkArrow" href="../articles/mental-health-wins.html" data-translate="blog_read_article">Read article &rarr;</a>
             </div>
           </article>
+
+          <article class="mb-articleCard" data-category="Stress">
+            <a class="mb-articleCard__imgWrap" href="https://www.cdc.gov/mental-health/about/" target="_blank" rel="noopener">
+              <img class="mb-articleCard__img" src="/assets/images/MentalHealth.png" alt="Person walking outside" loading="lazy" />
+            </a>
+            <div class="mb-articleCard__body">
+              <div class="mb-articleCard__meta">
+                <span class="mb-pill">Stress</span>
+                <span class="mb-articleCard__source">CDC</span>
+                <span class="mb-articleCard__readtime">6 min read</span>
+              </div>
+              <h4 class="mb-articleCard__title">
+                <a href="https://www.cdc.gov/mental-health/about/" target="_blank" rel="noopener"><span data-translate="blog_guide_mentalhealth_title">Mental Health Basics: How It Affects Daily Life</span></a>
+              </h4>
+              <p class="mb-articleCard__desc" data-translate="blog_guide_mentalhealth_desc">A grounded overview of what mental health is, why it matters, and how to connect with support resources.</p>
+              <a class="mb-linkArrow" href="https://www.cdc.gov/mental-health/about/" target="_blank" rel="noopener" data-translate="blog_read_article">Read article &rarr;</a>
+            </div>
+          </article>
+
+          <article class="mb-articleCard" data-category="Anxiety">
+            <a class="mb-articleCard__imgWrap" href="https://www.sleepfoundation.org/mental-health/anxiety-and-sleep" target="_blank" rel="noopener">
+              <img class="mb-articleCard__img" src="/assets/images/SleepCoverAn.png" alt="Anxiety and sleep" loading="lazy" />
+            </a>
+            <div class="mb-articleCard__body">
+              <div class="mb-articleCard__meta">
+                <span class="mb-pill">Anxiety</span>
+                <span class="mb-articleCard__source">Sleep Foundation</span>
+                <span class="mb-articleCard__readtime">6 min read</span>
+              </div>
+              <h4 class="mb-articleCard__title">
+                <a href="https://www.sleepfoundation.org/mental-health/anxiety-and-sleep" target="_blank" rel="noopener"><span data-translate="blog_guide_anxietysleep_title">Anxiety and Sleep: The Cycle That Keeps People Stuck</span></a>
+              </h4>
+              <p class="mb-articleCard__desc" data-translate="blog_guide_anxietysleep_desc">How anxiety disrupts sleep and how poor sleep fuels anxiety, plus practical tips to break the cycle.</p>
+              <a class="mb-linkArrow" href="https://www.sleepfoundation.org/mental-health/anxiety-and-sleep" target="_blank" rel="noopener" data-translate="blog_read_article">Read article &rarr;</a>
+            </div>
+          </article>
+
+          <article class="mb-articleCard" data-category="Mindfulness">
+            <a class="mb-articleCard__imgWrap" href="https://www.apa.org/topics/mindfulness" target="_blank" rel="noopener">
+              <img class="mb-articleCard__img" src="/assets/images/MindCover.png" alt="Mindfulness practice" loading="lazy" />
+            </a>
+            <div class="mb-articleCard__body">
+              <div class="mb-articleCard__meta">
+                <span class="mb-pill">Mindfulness</span>
+                <span class="mb-articleCard__source">APA</span>
+                <span class="mb-articleCard__readtime">5 min read</span>
+              </div>
+              <h4 class="mb-articleCard__title">
+                <a href="https://www.apa.org/topics/mindfulness" target="_blank" rel="noopener"><span data-translate="blog_guide_mindfulness_title">Mindfulness: What It Is and How to Start Small</span></a>
+              </h4>
+              <p class="mb-articleCard__desc" data-translate="blog_guide_mindfulness_desc">A practical explanation of mindfulness and how it supports attention, emotion regulation, and stress reduction in everyday life.</p>
+              <a class="mb-linkArrow" href="https://www.apa.org/topics/mindfulness" target="_blank" rel="noopener" data-translate="blog_read_article">Read article &rarr;</a>
+            </div>
+          </article>
+
         </div>
 
-        <section class="mb-newsletterCta" data-reveal aria-label="Newsletter signup">
-          <div class="mb-newsletterCta__content">
-            <ion-icon name="mail-outline" class="mb-newsletterCta__icon"></ion-icon>
-            <div class="mb-newsletterCta__text">
-              <h3 data-translate="blog_newsletter_title">Stay in the loop</h3>
-              <p data-translate="blog_newsletter_desc">Monthly mental health tips + new resources. No spam &mdash; unsubscribe anytime.</p>
-            </div>
-          </div>
-          <form class="mb-newsletterCta__form" id="blogNewsletterForm">
-            <input type="email" placeholder="Enter your email" required aria-label="Email address" id="blogNewsEmail" data-translate-placeholder="footer_email_placeholder" />
-            <button type="submit"><span data-translate="footer_subscribe">Subscribe</span></button>
-          </form>
-        </section>
-
-        <section class="mb-quoteBanner" data-reveal>
-          <div class="mb-quoteBanner__inner container">
-            <div class="mb-quoteBanner__icon">&ldquo;</div>
-            <blockquote class="mb-quoteBanner__text" id="rotatingQuote">
-              You don&rsquo;t have to control your thoughts. You just have to stop letting them control you.
-            </blockquote>
-            <cite class="mb-quoteBanner__author" id="rotatingAuthor">&mdash; Dan Millman</cite>
-          </div>
-        </section>
-
-        <div class="mb-sectionHead" data-reveal style="margin-top: 2rem;">
-          <h3 class="mb-sectionHead__title" data-translate="blog_featured_articles">Featured Articles</h3>
-          <a class="mb-sectionHead__more" href="#latest" data-translate="blog_view_more">View More →</a>
-        </div>
-
-        
-        <div class="mb-2up animate-stagger">
-          <article class="mb-postCard card-animated hover-lift" data-category="Stress">
-            <a class="mb-postCard__imgWrap" href="../articles/stress.html">
-              <img class="mb-postCard__img"
-                src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=1200&q=70"
-                alt="People working at a desk" loading="lazy" />
-              <span class="mb-pill mb-postCard__pill">Stress</span>
-              <span class="mb-tts-badge-overlay">🎧</span>
-            </a>
-            <div class="mb-postCard__body">
-              <h4 class="mb-postCard__title">
-                <a href="../articles/stress.html"><span data-translate="blog_card_stress_title">Stress: what it is and how to manage it</span></a>
-              </h4>
-              <div class="mb-postCard__meta">APA • 12 <span data-translate="blog_min_read">min read</span> • 🎧 <span data-translate="blog_audio_available">Audio available</span></div>
-              <p class="mb-postCard__excerpt" data-translate="blog_card_stress_desc">
-                A practical guide explaining what stress is, how it impacts the mind/body, and what helps reduce it over
-                time. Listen to the full article.
-              </p>
-              <p class="mb-postCard__subtext" data-translate="blog_card_stress_subtext">
-                Common signs (sleep, focus, mood, body tension). Why stress builds up and when it becomes harmful.
-                Healthy coping tools you can try immediately.
-              </p>
-              <p class="mb-postHint" data-translate="blog_card_stress_hint"><strong data-translate="blog_best_for">Best for:</strong> "stress basics" blog posts and real-life coping tips.
-              </p>
-              <a class="mb-linkArrow" href="../articles/stress.html" data-translate="blog_read_article">Read article →</a>
-            </div>
-          </article>
-
-          <article class="mb-postCard card-animated hover-lift" data-category="Mindfulness">
-            <a class="mb-postCard__imgWrap" href="../articles/mindfulness.html">
-              <img class="mb-postCard__img"
-                src="https://images.unsplash.com/photo-1506126613408-eca07ce68773?auto=format&fit=crop&w=1200&q=70"
-                alt="Person meditating outdoors" loading="lazy" />
-              <span class="mb-pill mb-postCard__pill">Mindfulness</span>
-              <span class="mb-tts-badge-overlay">🎧</span>
-            </a>
-            <div class="mb-postCard__body">
-              <h4 class="mb-postCard__title">
-                <a href="../articles/mindfulness.html">
-                  <span data-translate="blog_card_mindfulness_title">Meditation & mindfulness: a beginner's guide</span>
-                </a>
-              </h4>
-              <div class="mb-postCard__meta">NIH • 12 <span data-translate="blog_min_read">min read</span> • 🎧 <span data-translate="blog_audio_available">Audio available</span></div>
-              <p class="mb-postCard__excerpt" data-translate="blog_card_mindfulness_desc">
-                A research-based overview of mindfulness, including benefits, practical exercises, and how to get
-                started.
-              </p>
-              <p class="mb-postCard__subtext" data-translate="blog_card_mindfulness_subtext">
-                What mindfulness is (and what it's not). Conditions it may help (stress, anxiety, sleep for some
-                people). How to start safely with realistic expectations.
-              </p>
-              <p class="mb-postHint" data-translate="blog_card_mindfulness_hint"><strong data-translate="blog_best_for">Best for:</strong> evidence-based "mindfulness for beginners" articles.</p>
-              <a class="mb-linkArrow" href="../articles/mindfulness.html" data-translate="blog_read_article">Read article →</a>
-            </div>
-          </article>
-        </div>
-
-        
-        <div class="mb-2up mb-2up--mini animate-stagger">
-          <article class="mb-miniCard card-animated hover-lift" data-category="Depression">
-            <img src="/assets/images/depressioncover.png"
-              alt="Person looking thoughtful" class="mb-miniCard__img" loading="lazy">
-            <div class="mb-miniCard__content">
-              <h4 class="mb-miniCard__title">
-                <a href="../articles/depression.html">
-                  <span data-translate="blog_mini_depression_title">Understanding Depression: Symptoms & Treatment 🎧</span>
-                </a>
-              </h4>
-              <div class="mb-miniCard__meta">NIMH • 12 <span data-translate="blog_min_read">min read</span> • 🎧 <span data-translate="blog_audio">Audio</span></div>
-              <p class="mb-postHint" data-translate="blog_mini_depression_hint"><strong data-translate="blog_what_youll_learn">What you'll learn:</strong> key symptoms, causes, types, and treatment
-                options.</p>
-              <a class="mb-linkArrow" href="../articles/depression.html" data-translate="blog_read_short">Read →</a>
-              <span class="mb-pill mb-miniCard__pill">Depression</span>
-            </div>
-          </article>
-
-          <article class="mb-miniCard card-animated hover-lift" data-category="Teens">
-            <img src="/assets/images/FullTeenCover.png"
-              alt="Teenager contemplating" class="mb-miniCard__img" loading="lazy">
-            <div class="mb-miniCard__content">
-              <h4 class="mb-miniCard__title">
-                <a href="../articles/teen-mental-health.html">
-                  <span data-translate="blog_mini_teen_title">Teen Mental Health: A Complete Guide 🎧</span>
-                </a>
-              </h4>
-              <div class="mb-miniCard__meta">CDC • 10 <span data-translate="blog_min_read">min read</span> • 🎧 <span data-translate="blog_audio">Audio</span></div>
-              <p class="mb-postHint" data-translate="blog_mini_teen_hint"><strong data-translate="blog_what_youll_learn">What you'll learn:</strong> warning signs, how to help, and building
-                resilience.</p>
-              <a class="mb-linkArrow" href="../articles/teen-mental-health.html" data-translate="blog_read_short">Read →</a>
-              <span class="mb-pill mb-miniCard__pill">Teens</span>
-            </div>
-          </article>
-        </div>
-
-        
-        <div class="mb-2up mb-2up--mini animate-stagger">
-          <article class="mb-miniCard card-animated hover-lift" data-category="Sleep">
-            <img src="/assets/images/SleepCover.png" alt="Peaceful bedroom for restful sleep" class="mb-miniCard__img"
-              loading="lazy">
-            <div class="mb-miniCard__content">
-              <h4 class="mb-miniCard__title">
-                <a href="https://www.cdc.gov/sleep/about/" target="_blank" rel="noopener">
-                  <span data-translate="blog_mini_sleep_title">How much sleep do you really need?</span>
-                </a>
-              </h4>
-              <div class="mb-miniCard__meta">CDC • Sleep basics • 4 <span data-translate="blog_min_read">min read</span></div>
-              <p class="mb-postHint" data-translate="blog_mini_sleep_hint"><strong data-translate="blog_what_youll_learn">What you'll learn:</strong> recommended sleep hours by age + why it
-                matters.</p>
-              <a class="mb-linkArrow" href="../articles/sleep.html" data-translate="blog_read_short">Read →</a>
-              <span class="mb-pill mb-miniCard__pill">Sleep</span>
-            </div>
-          </article>
-
-          <article class="mb-miniCard card-animated hover-lift" data-category="Anxiety">
-            <img src="/assets/images/BlogCover.png" alt="Calm sky representing peace" class="mb-miniCard__img"
-              loading="lazy">
-            <div class="mb-miniCard__content">
-              <h4 class="mb-miniCard__title">
-                <a href="https://www.nimh.nih.gov/health/publications/so-stressed-out-fact-sheet" target="_blank"
-                  rel="noopener">
-                  <span data-translate="blog_mini_anxiety_title">Stress: when it's too much (NIMH)</span>
-                </a>
-              </h4>
-              <div class="mb-miniCard__meta">NIMH • Quick guide • 5 <span data-translate="blog_min_read">min read</span></div>
-              <p class="mb-postHint" data-translate="blog_mini_anxiety_hint"><strong data-translate="blog_what_youll_learn">What you'll learn:</strong> warning signs + when to ask for help.</p>
-              <a class="mb-linkArrow" href="../articles/anxiety.html" data-translate="blog_read_short">Read →</a>
-              <span class="mb-pill mb-miniCard__pill">Anxiety</span>
-            </div>
-          </article>
-        </div>
-
-        <section class="mb-communityCta" data-reveal aria-label="Join the community">
-          <div class="mb-communityCta__content">
-            <ion-icon name="people-circle-outline" class="mb-communityCta__icon"></ion-icon>
-            <div class="mb-communityCta__text">
-              <h3 data-translate="blog_community_title">Join our Community Hub</h3>
-              <p data-translate="blog_community_desc">Share experiences, connect with others, and find support in our community forum.</p>
-            </div>
-          </div>
-          <a href="/community/" class="mb-communityCta__btn" data-translate="blog_visit_community">Visit Community Hub</a>
-        </section>
-
-        <section class="mb-moodRec container" data-reveal>
-          <div class="mb-moodRec__header">
-            <h3 class="mb-moodRec__title">How are you feeling?</h3>
-            <p class="mb-moodRec__subtitle">We'll suggest articles based on your mood</p>
-          </div>
-          <div class="mb-moodRec__moods">
-            <button class="mb-moodBtn" data-mood="anxious" type="button">
-              <span class="mb-moodBtn__emoji">😰</span>
-              <span class="mb-moodBtn__label">Anxious</span>
-            </button>
-            <button class="mb-moodBtn" data-mood="sad" type="button">
-              <span class="mb-moodBtn__emoji">😔</span>
-              <span class="mb-moodBtn__label">Down</span>
-            </button>
-            <button class="mb-moodBtn" data-mood="stressed" type="button">
-              <span class="mb-moodBtn__emoji">😤</span>
-              <span class="mb-moodBtn__label">Stressed</span>
-            </button>
-            <button class="mb-moodBtn" data-mood="tired" type="button">
-              <span class="mb-moodBtn__emoji">😴</span>
-              <span class="mb-moodBtn__label">Tired</span>
-            </button>
-            <button class="mb-moodBtn" data-mood="hopeful" type="button">
-              <span class="mb-moodBtn__emoji">🌱</span>
-              <span class="mb-moodBtn__label">Hopeful</span>
-            </button>
-            <button class="mb-moodBtn" data-mood="curious" type="button">
-              <span class="mb-moodBtn__emoji">🧠</span>
-              <span class="mb-moodBtn__label">Curious</span>
-            </button>
-          </div>
-          <div class="mb-moodRec__results" id="moodResults" hidden>
-            <h4 class="mb-moodRec__resultsTitle" id="moodResultsTitle">Recommended for you</h4>
-            <div class="mb-moodRec__cards" id="moodResultsCards"></div>
-          </div>
-        </section>
-
-        <section class="mb-popular container" data-reveal>
-          <div class="mb-sectionHead">
-            <h3 class="mb-sectionHead__title">
-              <ion-icon name="trending-up-outline"></ion-icon> Popular This Week
-            </h3>
-          </div>
-          <div class="mb-popular__grid">
-            <a class="mb-popular__item" href="../articles/anxiety.html">
-              <span class="mb-popular__rank">1</span>
-              <div class="mb-popular__info">
-                <span class="mb-popular__name">Anxiety Disorders: symptoms, types &amp; treatment</span>
-                <span class="mb-popular__meta">NIMH &bull; 15 min read</span>
-              </div>
-              <span class="mb-popular__views"><ion-icon name="eye-outline"></ion-icon> 2.4k</span>
-            </a>
-            <a class="mb-popular__item" href="../articles/stress.html">
-              <span class="mb-popular__rank">2</span>
-              <div class="mb-popular__info">
-                <span class="mb-popular__name">Stress: what it is and how to manage it</span>
-                <span class="mb-popular__meta">APA &bull; 12 min read</span>
-              </div>
-              <span class="mb-popular__views"><ion-icon name="eye-outline"></ion-icon> 1.8k</span>
-            </a>
-            <a class="mb-popular__item" href="../articles/depression.html">
-              <span class="mb-popular__rank">3</span>
-              <div class="mb-popular__info">
-                <span class="mb-popular__name">Understanding Depression: Complete Guide</span>
-                <span class="mb-popular__meta">NIMH &bull; 12 min read</span>
-              </div>
-              <span class="mb-popular__views"><ion-icon name="eye-outline"></ion-icon> 1.5k</span>
-            </a>
-            <a class="mb-popular__item" href="../articles/sleep.html">
-              <span class="mb-popular__rank">4</span>
-              <div class="mb-popular__info">
-                <span class="mb-popular__name">Better Sleep: Your Complete Guide</span>
-                <span class="mb-popular__meta">Mayo Clinic &bull; 10 min read</span>
-              </div>
-              <span class="mb-popular__views"><ion-icon name="eye-outline"></ion-icon> 1.2k</span>
-            </a>
-            <a class="mb-popular__item" href="../articles/mindfulness.html">
-              <span class="mb-popular__rank">5</span>
-              <div class="mb-popular__info">
-                <span class="mb-popular__name">Meditation &amp; Mindfulness Guide</span>
-                <span class="mb-popular__meta">NIH &bull; 12 min read</span>
-              </div>
-              <span class="mb-popular__views"><ion-icon name="eye-outline"></ion-icon> 980</span>
-            </a>
-          </div>
-        </section>
-
-        <div class="mb-sectionHead" id="latest" data-reveal>
-          <h3 class="mb-sectionHead__title" data-translate="blog_indepth_guides">In-Depth Guides</h3>
-          <a class="mb-sectionHead__more" href="#more" data-translate="blog_view_more">View More →</a>
-        </div>
-
-        
-        <div class="mb-listStack animate-stagger">
-          <article class="mb-listPost card-animated hover-lift" data-category="Sleep">
-            <a class="mb-listPost__imgWrap" href="../articles/sleep.html">
-              <img class="mb-listPost__img"
-                src="/assets/images/SleepBlog.png"
-                alt="Cozy bed and pillow" loading="lazy" />
-              <span class="mb-tts-badge-overlay">🎧</span>
-            </a>
-            <div class="mb-listPost__body">
-              <div class="mb-metaRow">
-                <span class="mb-pill">Sleep</span><span class="mb-metaDot">•</span><span class="mb-metaText">Mayo
-                  Clinic</span><span class="mb-metaDot">•</span><span class="mb-metaText">10
-                  <span data-translate="blog_min_read">min read</span></span><span class="mb-metaDot">•</span><span class="mb-metaText">🎧 <span data-translate="blog_audio">Audio</span></span>
-              </div>
-              <h4 class="mb-listPost__title">
-                <a href="../articles/sleep.html">
-                  <span data-translate="blog_guide_sleep_title">Better Sleep: Your Complete Guide to Restful Nights</span>
-                </a>
-              </h4>
-              <p class="mb-listPost__excerpt" data-translate="blog_guide_sleep_desc">
-                A clear “sleep hygiene” checklist: habits that improve sleep, habits that ruin it, and what to try
-                first. Listen to the full article.
-              </p>
-              <p class="mb-listPost__subtext" data-translate="blog_guide_sleep_subtext">
-                Daily routines that make sleep easier (timing, light, exercise). Common sleep blockers (screens,
-                caffeine, stress patterns). Practical changes you can start tonight.
-              </p>
-              <p class="mb-postHint" data-translate="blog_guide_sleep_hint"><strong data-translate="blog_best_for">Best for:</strong> building a sleep routine that actually sticks.</p>
-              <a class="mb-linkArrow" href="../articles/sleep.html" data-translate="blog_read_full_article">Read full article →</a>
-            </div>
-          </article>
-
-          <article class="mb-listPost card-animated hover-lift" data-category="Stress">
-            <a class="mb-listPost__imgWrap" href="https://www.cdc.gov/mental-health/about/" target="_blank"
-              rel="noopener">
-              <img class="mb-listPost__img"
-                src="/assets/images/MentalHealth.png"
-                alt="Person walking outside" loading="lazy" />
-            </a>
-            <div class="mb-listPost__body">
-              <div class="mb-metaRow">
-                <span class="mb-pill">Stress</span><span class="mb-metaDot">•</span><span
-                  class="mb-metaText">CDC</span><span class="mb-metaDot">•</span><span class="mb-metaText">6 <span data-translate="blog_min_read">min read</span></span>
-              </div>
-              <h4 class="mb-listPost__title">
-                <a href="https://www.cdc.gov/mental-health/about/" target="_blank" rel="noopener">
-                  <span data-translate="blog_guide_mentalhealth_title">Mental health basics: how it affects daily life and where to find support</span>
-                </a>
-              </h4>
-              <p class="mb-listPost__excerpt" data-translate="blog_guide_mentalhealth_desc">
-                A grounded overview of what mental health is, why it matters, and how to connect with support resources.
-              </p>
-              <p class="mb-listPost__subtext" data-translate="blog_guide_mentalhealth_subtext">
-                What “mental health” includes (thoughts, emotions, behavior). How stress and life events can impact
-                well-being. Where to start if you or a friend needs help.
-              </p>
-              <p class="mb-postHint" data-translate="blog_guide_mentalhealth_hint"><strong data-translate="blog_best_for">Best for:</strong> your “Get Support” page and school-friendly citations.
-              </p>
-              <a class="mb-linkArrow" href="https://www.cdc.gov/mental-health/about/" target="_blank"
-                rel="noopener" data-translate="blog_read_more">Read more →</a>
-            </div>
-          </article>
-
-          <article class="mb-listPost card-animated hover-lift" data-category="Anxiety">
-            <a class="mb-listPost__imgWrap" href="https://www.sleepfoundation.org/mental-health/anxiety-and-sleep"
-              target="_blank" rel="noopener">
-              <img class="mb-listPost__img"
-                src="/assets/images/SleepCoverAn.png"
-                alt="Anxiety and sleep cover" loading="lazy" />
-            </a>
-            <div class="mb-listPost__body">
-              <div class="mb-metaRow">
-                <span class="mb-pill">Anxiety</span><span class="mb-metaDot">•</span><span class="mb-metaText">Sleep
-                  Foundation</span><span class="mb-metaDot">•</span><span class="mb-metaText">6 <span data-translate="blog_min_read">min read</span></span>
-              </div>
-              <h4 class="mb-listPost__title">
-                <a href="https://www.sleepfoundation.org/mental-health/anxiety-and-sleep" target="_blank"
-                  rel="noopener">
-                  <span data-translate="blog_guide_anxietysleep_title">Anxiety and sleep: the cycle that keeps people stuck</span>
-                </a>
-              </h4>
-              <p class="mb-listPost__excerpt" data-translate="blog_guide_anxietysleep_desc">
-                Explains how anxiety can disrupt sleep (racing thoughts, tension) and how poor sleep can worsen anxiety
-                the
-                next day.
-              </p>
-              <p class="mb-listPost__subtext" data-translate="blog_guide_anxietysleep_subtext">
-                Why “hyperarousal” makes it hard to fall asleep. How sleep loss affects mood, attention, and worry.
-                Action steps: calming routines and sleep-supporting habits.
-              </p>
-              <p class="mb-postHint" data-translate="blog_guide_anxietysleep_hint"><strong data-translate="blog_best_for">Best for:</strong> “why this happens” posts + practical bedtime routines.
-              </p>
-              <a class="mb-linkArrow" href="https://www.sleepfoundation.org/mental-health/anxiety-and-sleep"
-                target="_blank" rel="noopener" data-translate="blog_read_more">Read more →</a>
-            </div>
-          </article>
-
-          <article class="mb-listPost" data-category="Mindfulness">
-            <a class="mb-listPost__imgWrap" href="https://www.apa.org/topics/mindfulness" target="_blank"
-              rel="noopener">
-              <img class="mb-listPost__img"
-                src="/assets/images/MindCover.png"
-                alt="Mindfulness cover" loading="lazy" />
-            </a>
-            <div class="mb-listPost__body">
-              <div class="mb-metaRow">
-                <span class="mb-pill">Mindfulness</span><span class="mb-metaDot">•</span><span
-                  class="mb-metaText">APA</span><span class="mb-metaDot">•</span><span class="mb-metaText">5 min
-                  read</span>
-              </div>
-              <h4 class="mb-listPost__title">
-                <a href="https://www.apa.org/topics/mindfulness" target="_blank" rel="noopener">
-                  <span data-translate="blog_guide_mindfulness_title">Mindfulness: what it is, how it helps, and how to start small</span>
-                </a>
-              </h4>
-              <p class="mb-listPost__excerpt" data-translate="blog_guide_mindfulness_desc">
-                A practical explanation of mindfulness and how it supports attention, emotion regulation, and stress
-                reduction in everyday life.
-              </p>
-              <p class="mb-listPost__subtext" data-translate="blog_guide_mindfulness_subtext">
-                What mindfulness looks like in real life (not “perfect calm”). Simple starter practices (1–5 minutes).
-                How to make it a habit without pressure.
-              </p>
-              <p class="mb-postHint" data-translate="blog_guide_mindfulness_hint"><strong data-translate="blog_best_for">Best for:</strong> beginners who want clear steps and realistic
-                expectations.</p>
-              <a class="mb-linkArrow" href="https://www.apa.org/topics/mindfulness" target="_blank" rel="noopener" data-translate="blog_read_more">Read
-                more →</a>
-            </div>
-          </article>
-
-          <article class="mb-listPost" data-category="Teens">
-            <a class="mb-listPost__imgWrap" href="../articles/teen-mental-health.html">
-              <img class="mb-listPost__img"
-                src="/assets/images/FullTeenCover.png"
-                alt="Teen sitting and thinking" loading="lazy" />
-              <span class="mb-tts-badge-overlay">🎧</span>
-            </a>
-            <div class="mb-listPost__body">
-              <div class="mb-metaRow">
-                <span class="mb-pill">Teens</span><span class="mb-metaDot">•</span><span
-                  class="mb-metaText">CDC</span><span class="mb-metaDot">•</span><span class="mb-metaText">10 min
-                  read</span><span class="mb-metaDot">•</span><span class="mb-metaText">🎧 Audio</span>
-              </div>
-              <h4 class="mb-listPost__title">
-                <a href="../articles/teen-mental-health.html">
-                  <span data-translate="blog_guide_teen_title">Teen Mental Health: A Complete Guide for Young People and Parents</span>
-                </a>
-              </h4>
-              <p class="mb-listPost__excerpt" data-translate="blog_guide_teen_desc">
-                Understanding the unique mental health challenges teens face and how to provide effective support.
-                Listen to the full article.
-              </p>
-              <p class="mb-listPost__subtext" data-translate="blog_guide_teen_subtext">
-                Common challenges (anxiety, depression, self-harm). Warning signs to watch for. How to help as a teen or
-                parent. Building mental resilience.
-              </p>
-              <p class="mb-postHint" data-translate="blog_guide_teen_hint"><strong data-translate="blog_best_for">Best for:</strong> teens, parents, teachers, and anyone supporting young
-                people.</p>
-              <a class="mb-linkArrow" href="../articles/teen-mental-health.html" data-translate="blog_read_full_article">Read full article →</a>
-            </div>
-          </article>
-        </div>
-
-        
-        <div class="mb-sectionHead" id="more" data-reveal>
-          <h3 class="mb-sectionHead__title" data-translate="blog_more_topics">More Topics</h3>
-          <a class="mb-sectionHead__more" href="#allPosts" data-translate="blog_view_more">View More →</a>
-        </div>
-
-        
-        <div class="mb-3grid" id="allPosts">
-          <article class="mb-compactCard" data-category="Depression">
-            <a class="mb-compactCard__imgWrap" href="../articles/depression.html">
-              <img class="mb-compactCard__img"
-                src="/assets/images/depressioncover.png"
-                alt="Depression awareness cover" loading="lazy" />
-              <span class="mb-pill mb-compactCard__pill">Depression</span>
-              <span class="mb-tts-badge-overlay">🎧</span>
-            </a>
-            <h4 class="mb-compactCard__title">
-              <a href="../articles/depression.html"><span data-translate="blog_compact_depression_title">Understanding Depression: Symptoms, Causes & Treatment 🎧</span></a>
-            </h4>
-            <div class="mb-compactCard__meta">NIMH • 12 <span data-translate="blog_min_read">min read</span> • 🎧 <span data-translate="blog_audio">Audio</span></div>
-            <p class="mb-postHint" data-translate="blog_compact_depression_hint"><strong data-translate="blog_quick_take">Quick take:</strong> comprehensive guide to depression with audio support.
-            </p>
-          </article>
-
-          <article class="mb-compactCard" data-category="Teens">
-            <a class="mb-compactCard__imgWrap" href="../articles/teen-mental-health.html">
-              <img class="mb-compactCard__img"
-                src="/assets/images/FullTeenCover.png"
-                alt="Teen sitting and thinking" loading="lazy" />
-              <span class="mb-pill mb-compactCard__pill">Teens</span>
-              <span class="mb-tts-badge-overlay">🎧</span>
-            </a>
-            <h4 class="mb-compactCard__title">
-              <a href="../articles/teen-mental-health.html"><span data-translate="blog_compact_teen_title">Teen Mental Health: Complete Guide 🎧</span></a>
-            </h4>
-            <div class="mb-compactCard__meta">NIMH • 8 <span data-translate="blog_min_read">min read</span></div>
-            <p class="mb-postHint" data-translate="blog_compact_teen_hint"><strong data-translate="blog_quick_take">Quick take:</strong> warning signs + how to support a teen safely.</p>
-          </article>
-
-          <article class="mb-compactCard" data-category="Stress">
-            <a class="mb-compactCard__imgWrap" href="https://www.who.int/news-room/questions-and-answers/item/stress"
-              target="_blank" rel="noopener">
-              <img class="mb-compactCard__img"
-                src="/assets/images/SressCover.png"
-                alt="Stress awareness cover" loading="lazy" />
-              <span class="mb-pill mb-compactCard__pill">Stress</span>
-            </a>
-            <h4 class="mb-compactCard__title">
-              <a href="https://www.who.int/news-room/questions-and-answers/item/stress" target="_blank"
-                rel="noopener"><span data-translate="blog_compact_stress_title">Stress:
-                Q&A and self-care basics</span></a>
-            </h4>
-            <div class="mb-compactCard__meta">WHO • 6 <span data-translate="blog_min_read">min read</span></div>
-            <p class="mb-postHint" data-translate="blog_compact_stress_hint"><strong data-translate="blog_quick_take">Quick take:</strong> simple explanations + practical self-care suggestions.
-            </p>
-          </article>
-
-          <article class="mb-compactCard" data-category="Sleep" hidden>
-            <a class="mb-compactCard__imgWrap" href="https://www.sleepfoundation.org/sleep-hygiene" target="_blank"
-              rel="noopener">
-              <img class="mb-compactCard__img"
-                src="https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=1200&q=70"
-                alt="Bed and lamp" loading="lazy" />
-              <span class="mb-pill mb-compactCard__pill">Sleep</span>
-            </a>
-            <h4 class="mb-compactCard__title">
-              <a href="https://www.sleepfoundation.org/sleep-hygiene" target="_blank" rel="noopener"><span data-translate="blog_compact_sleep_title">Sleep hygiene: a
-                guide to better sleep</span></a>
-            </h4>
-            <div class="mb-compactCard__meta">Sleep Foundation • 7 <span data-translate="blog_min_read">min read</span></div>
-            <p class="mb-postHint" data-translate="blog_compact_sleep_hint"><strong data-translate="blog_quick_take">Quick take:</strong> routines + environment fixes that improve sleep quality.
-            </p>
-          </article>
-
-          <article class="mb-compactCard" data-category="Mindfulness" hidden>
-            <a class="mb-compactCard__imgWrap" href="https://www.mindful.org/how-to-meditate/" target="_blank"
-              rel="noopener">
-              <img class="mb-compactCard__img"
-                src="https://images.unsplash.com/photo-1506126613408-eca07ce68773?auto=format&fit=crop&w=1200&q=70"
-                alt="Meditation outdoors" loading="lazy" />
-              <span class="mb-pill mb-compactCard__pill">Mindfulness</span>
-            </a>
-            <h4 class="mb-compactCard__title">
-              <a href="https://www.mindful.org/how-to-meditate/" target="_blank" rel="noopener"><span data-translate="blog_compact_mindfulness_title">How to meditate: a
-                simple beginner walkthrough</span></a>
-            </h4>
-            <div class="mb-compactCard__meta">Mindful • 6 <span data-translate="blog_min_read">min read</span></div>
-            <p class="mb-postHint" data-translate="blog_compact_mindfulness_hint"><strong data-translate="blog_quick_take">Quick take:</strong> step-by-step meditation instructions with common
-              mistakes.</p>
-          </article>
-
-          <article class="mb-compactCard" data-category="Anxiety" hidden>
-            <a class="mb-compactCard__imgWrap" href="https://www.nimh.nih.gov/health/topics/anxiety-disorders"
-              target="_blank" rel="noopener">
-              <img class="mb-compactCard__img"
-                src="https://images.unsplash.com/photo-1527137342181-19aab11a8ee8?auto=format&fit=crop&w=1200&q=70"
-                alt="Clouds in sky" loading="lazy" />
-              <span class="mb-pill mb-compactCard__pill">Anxiety</span>
-            </a>
-            <h4 class="mb-compactCard__title">
-              <a href="https://www.nimh.nih.gov/health/topics/anxiety-disorders" target="_blank"
-                rel="noopener"><span data-translate="blog_compact_anxiety_title">Anxiety disorders (publication): deeper details</span></a>
-            </h4>
-            <div class="mb-compactCard__meta">NIMH • 9 <span data-translate="blog_min_read">min read</span></div>
-            <p class="mb-postHint" data-translate="blog_compact_anxiety_hint"><strong data-translate="blog_quick_take">Quick take:</strong> types, symptoms, treatment options explained in more
-              depth.</p>
-          </article>
-        </div>
-
-        
         <div class="mb-loadMore">
-          <button class="mb-loadMore__btn" type="button" id="loadMoreBtn" data-translate="blog_load_more">Load more…</button>
+          <button class="mb-loadMore__btn" type="button" id="loadMoreBtn" data-translate="blog_load_more">Load more&hellip;</button>
         </div>
       </section>
 
-      
-      <aside class="mb-sidebar" aria-label="Sidebar">
-        <div class="mb-widget">
-          <div class="mb-widget__title" data-translate="blog_sidebar_search">Search</div>
-          <div class="mb-sideSearch">
-            <input class="mb-sideSearch__input" id="sideSearch" type="search" placeholder="Type and hit enter" data-translate-placeholder="blog_search_placeholder" />
+      <section class="mb-newsletterCta" data-reveal aria-label="Newsletter signup">
+        <div class="mb-newsletterCta__content">
+          <ion-icon name="mail-outline" class="mb-newsletterCta__icon"></ion-icon>
+          <div class="mb-newsletterCta__text">
+            <h3 data-translate="blog_newsletter_title">Stay in the loop</h3>
+            <p data-translate="blog_newsletter_desc">Monthly mental health tips + new resources. No spam &mdash; unsubscribe anytime.</p>
           </div>
         </div>
+        <form class="mb-newsletterCta__form" id="blogNewsletterForm">
+          <input type="email" placeholder="Enter your email" required aria-label="Email address" id="blogNewsEmail" data-translate-placeholder="footer_email_placeholder" />
+          <button type="submit"><span data-translate="footer_subscribe">Subscribe</span></button>
+        </form>
+      </section>
 
-        <div class="mb-widget" id="trending">
-          <div class="mb-widget__title" data-translate="blog_trending_news">Trending News</div>
-          <div class="mb-trending">
-            <a class="mb-trending__item" href="https://www.nimh.nih.gov/health/topics/anxiety-disorders" target="_blank"
-              rel="noopener">
-              <img class="mb-trending__thumb"
-                src="/assets/images/AnxietyMini.png"
-                alt="Anxiety disorders" loading="lazy" />
-              <div class="mb-trending__text">
-                <div class="mb-trending__kicker">NIMH</div>
-                <div class="mb-trending__title" data-translate="blog_trending_1_title">Anxiety disorders</div>
-                <div class="mb-postHint" data-translate="blog_trending_1_hint"><strong>Why it's trending:</strong> clear symptoms + treatment overview.</div>
-              </div>
-            </a>
+      <section class="mb-quoteBanner" data-reveal>
+        <div class="mb-quoteBanner__inner container">
+          <div class="mb-quoteBanner__icon">&ldquo;</div>
+          <blockquote class="mb-quoteBanner__text" id="rotatingQuote">
+            You don&rsquo;t have to control your thoughts. You just have to stop letting them control you.
+          </blockquote>
+          <cite class="mb-quoteBanner__author" id="rotatingAuthor">&mdash; Dan Millman</cite>
+        </div>
+      </section>
 
-            <a class="mb-trending__item" href="https://www.who.int/news-room/fact-sheets/detail/depression"
-              target="_blank" rel="noopener">
-              <img class="mb-trending__thumb"
-                src="https://images.unsplash.com/photo-1507537297725-24a1c029d3ca?auto=format&fit=crop&w=400&q=70"
-                alt="Thumbnail" loading="lazy" />
-              <div class="mb-trending__text">
-                <div class="mb-trending__kicker">WHO</div>
-                <div class="mb-trending__title" data-translate="blog_trending_2_title">Depression fact sheet</div>
-                <div class="mb-postHint" data-translate="blog_trending_2_hint"><strong>Why it's trending:</strong> fast, credible definitions for projects.
-                </div>
-              </div>
-            </a>
-
-            <a class="mb-trending__item" href="https://www.apa.org/topics/stress" target="_blank" rel="noopener">
-              <img class="mb-trending__thumb"
-                src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=400&q=70"
-                alt="Thumbnail" loading="lazy" />
-              <div class="mb-trending__text">
-                <div class="mb-trending__kicker">APA</div>
-                <div class="mb-trending__title" data-translate="blog_trending_3_title">Stress management</div>
-                <div class="mb-postHint" data-translate="blog_trending_3_hint"><strong>Why it's trending:</strong> practical coping ideas people can try.
-                </div>
-              </div>
-            </a>
+      <section class="mb-communityCta" data-reveal aria-label="Join the community">
+        <div class="mb-communityCta__content">
+          <ion-icon name="people-circle-outline" class="mb-communityCta__icon"></ion-icon>
+          <div class="mb-communityCta__text">
+            <h3 data-translate="blog_community_title">Join our Community Hub</h3>
+            <p data-translate="blog_community_desc">Share experiences, connect with others, and find support in our community forum.</p>
           </div>
         </div>
+        <a href="/community/" class="mb-communityCta__btn" data-translate="blog_visit_community">Visit Community Hub</a>
+      </section>
 
-        <div class="mb-widget">
-          <div class="mb-widget__title" data-translate="blog_sidebar_categories">Categories</div>
-          <div class="mb-cats animate-slide-up">
-            <button class="mb-catBtn" type="button" data-filter="Anxiety"><span data-translate="blog_filter_anxiety">Anxiety</span> <span>›</span></button>
-            <button class="mb-catBtn" type="button" data-filter="Depression"><span data-translate="blog_filter_depression">Depression</span> <span>›</span></button>
-            <button class="mb-catBtn" type="button" data-filter="Stress"><span data-translate="blog_filter_stress">Stress</span> <span>›</span></button>
-            <button class="mb-catBtn" type="button" data-filter="Sleep"><span data-translate="blog_filter_sleep">Sleep</span> <span>›</span></button>
-            <button class="mb-catBtn" type="button" data-filter="Mindfulness"><span data-translate="blog_filter_mindfulness">Mindfulness</span> <span>›</span></button>
-            <button class="mb-catBtn" type="button" data-filter="Teens"><span data-translate="blog_filter_teens">Teens</span> <span>›</span></button>
-            <button class="mb-catBtn" type="button" data-filter="News"><span data-translate="blog_filter_news">News</span> <span>›</span></button>
-            <button class="mb-catBtn" type="button" data-filter="Story"><span data-translate="blog_filter_stories">Stories</span> <span>›</span></button>
-            <button class="mb-catBtn" type="button" data-filter="Community"><span data-translate="blog_filter_community">Community</span> <span>›</span></button>
-          </div>
+      <section class="mb-moodRec container" data-reveal>
+        <div class="mb-moodRec__header">
+          <h3 class="mb-moodRec__title">How are you feeling?</h3>
+          <p class="mb-moodRec__subtitle">We'll suggest articles based on your mood</p>
         </div>
-
-        <div class="mb-widget">
-          <div class="mb-widget__title" data-translate="blog_sidebar_tagcloud">Tag Cloud</div>
-          <div class="mb-tags">
-            <button class="mb-tag" type="button" data-filter="Anxiety" data-translate="blog_filter_anxiety">Anxiety</button>
-            <button class="mb-tag" type="button" data-filter="Depression" data-translate="blog_filter_depression">Depression</button>
-            <button class="mb-tag" type="button" data-filter="Stress" data-translate="blog_filter_stress">Stress</button>
-            <button class="mb-tag" type="button" data-filter="Sleep" data-translate="blog_filter_sleep">Sleep</button>
-            <button class="mb-tag" type="button" data-filter="Mindfulness" data-translate="blog_filter_mindfulness">Mindfulness</button>
-            <button class="mb-tag" type="button" data-filter="Teens" data-translate="blog_filter_teens">Teens</button>
-            <button class="mb-tag" type="button" data-filter="News" data-translate="blog_filter_news">News</button>
-            <button class="mb-tag" type="button" data-filter="Story" data-translate="blog_filter_stories">Stories</button>
-            <button class="mb-tag" type="button" data-filter="Community" data-translate="blog_filter_community">Community</button>
-          </div>
+        <div class="mb-moodRec__moods">
+          <button class="mb-moodBtn" data-mood="anxious" type="button">
+            <span class="mb-moodBtn__emoji">😰</span>
+            <span class="mb-moodBtn__label">Anxious</span>
+          </button>
+          <button class="mb-moodBtn" data-mood="sad" type="button">
+            <span class="mb-moodBtn__emoji">😔</span>
+            <span class="mb-moodBtn__label">Down</span>
+          </button>
+          <button class="mb-moodBtn" data-mood="stressed" type="button">
+            <span class="mb-moodBtn__emoji">😤</span>
+            <span class="mb-moodBtn__label">Stressed</span>
+          </button>
+          <button class="mb-moodBtn" data-mood="tired" type="button">
+            <span class="mb-moodBtn__emoji">😴</span>
+            <span class="mb-moodBtn__label">Tired</span>
+          </button>
+          <button class="mb-moodBtn" data-mood="hopeful" type="button">
+            <span class="mb-moodBtn__emoji">🌱</span>
+            <span class="mb-moodBtn__label">Hopeful</span>
+          </button>
+          <button class="mb-moodBtn" data-mood="curious" type="button">
+            <span class="mb-moodBtn__emoji">🧠</span>
+            <span class="mb-moodBtn__label">Curious</span>
+          </button>
         </div>
-
-        <div class="mb-widget" id="mbSavedWidget">
-          <div class="mb-widget__title" data-translate="blog_saved_articles">Saved Articles</div>
-          <div id="mbSavedEmpty" class="mb-savedEmpty">Loading…</div>
-          <div id="mbSavedList" class="mb-savedList"></div>
-
-          <div class="mb-authLinks">
-            <a class="mb-authBtn" href="../auth/" id="mbLoginLink" data-translate="blog_sign_in_register">Sign in / Register</a>
-            <button class="mb-authBtn mb-authBtn--ghost" type="button" id="mbLogoutBtn" style="display:none;" data-translate="blog_log_out">Log out</button>
-          </div>
+        <div class="mb-moodRec__results" id="moodResults" hidden>
+          <h4 class="mb-moodRec__resultsTitle" id="moodResultsTitle">Recommended for you</h4>
+          <div class="mb-moodRec__cards" id="moodResultsCards"></div>
         </div>
+      </section>
 
-        <div class="mb-widget animate-fade-in">
-          <div class="mb-widget__title" data-translate="blog_sidebar_updates">Get Updates</div>
-          <p class="mb-widget__text" data-translate="blog_sidebar_updates_desc">
-            Monthly mental health tips + new resources we add to the library. No spam—unsubscribe anytime.
-          </p>
-          <form class="mb-footer__newsletter-form" id="newsletterForm">
-            <input type="email" class="mb-footer__newsletter-input" placeholder="Enter your email" data-translate-placeholder="footer_email_placeholder" required aria-label="Email address">
-            <button type="submit" class="mb-footer__newsletter-btn">
-              <span data-translate="footer_subscribe">Subscribe</span>
-              <ion-icon name="arrow-forward-outline"></ion-icon>
-            </button>
-          </form>
+      <section class="mb-popular container" data-reveal>
+        <div class="mb-sectionHead">
+          <h3 class="mb-sectionHead__title">
+            <ion-icon name="trending-up-outline"></ion-icon> Popular This Week
+          </h3>
         </div>
+        <div class="mb-popular__grid">
+          <a class="mb-popular__item" href="../articles/anxiety.html">
+            <span class="mb-popular__rank">1</span>
+            <div class="mb-popular__info">
+              <span class="mb-popular__name">Anxiety Disorders: symptoms, types &amp; treatment</span>
+              <span class="mb-popular__meta">NIMH &bull; 15 min read</span>
+            </div>
+            <span class="mb-popular__views"><ion-icon name="eye-outline"></ion-icon> 2.4k</span>
+          </a>
+          <a class="mb-popular__item" href="../articles/stress.html">
+            <span class="mb-popular__rank">2</span>
+            <div class="mb-popular__info">
+              <span class="mb-popular__name">Stress: what it is and how to manage it</span>
+              <span class="mb-popular__meta">APA &bull; 12 min read</span>
+            </div>
+            <span class="mb-popular__views"><ion-icon name="eye-outline"></ion-icon> 1.8k</span>
+          </a>
+          <a class="mb-popular__item" href="../articles/depression.html">
+            <span class="mb-popular__rank">3</span>
+            <div class="mb-popular__info">
+              <span class="mb-popular__name">Understanding Depression: Complete Guide</span>
+              <span class="mb-popular__meta">NIMH &bull; 12 min read</span>
+            </div>
+            <span class="mb-popular__views"><ion-icon name="eye-outline"></ion-icon> 1.5k</span>
+          </a>
+          <a class="mb-popular__item" href="../articles/sleep.html">
+            <span class="mb-popular__rank">4</span>
+            <div class="mb-popular__info">
+              <span class="mb-popular__name">Better Sleep: Your Complete Guide</span>
+              <span class="mb-popular__meta">Mayo Clinic &bull; 10 min read</span>
+            </div>
+            <span class="mb-popular__views"><ion-icon name="eye-outline"></ion-icon> 1.2k</span>
+          </a>
+          <a class="mb-popular__item" href="../articles/mindfulness.html">
+            <span class="mb-popular__rank">5</span>
+            <div class="mb-popular__info">
+              <span class="mb-popular__name">Meditation &amp; Mindfulness Guide</span>
+              <span class="mb-popular__meta">NIH &bull; 12 min read</span>
+            </div>
+            <span class="mb-popular__views"><ion-icon name="eye-outline"></ion-icon> 980</span>
+          </a>
+        </div>
+      </section>
 
-        <div class="mb-widget">
-          <div class="mb-widget__title" data-translate="blog_sidebar_quick_actions">Quick Actions</div>
-          <div class="mb-actions">
-            <a class="mb-actionBtn" href="../support/">Get Support</a>
-            <a class="mb-actionBtn mb-actionBtn--ghost" href="../resourcelib/">Open Library</a>
-          </div>
-        </div>
-      </aside>
     </div>
   </main>
 
-  
+  <div class="mb-previewOverlay" id="previewOverlay"></div>
+  <aside class="mb-previewPanel" id="previewPanel" aria-label="Article preview">
+    <div class="mb-previewPanel__header">
+      <span class="mb-previewPanel__category" id="previewCategory"></span>
+      <button class="mb-previewPanel__close" id="previewClose" aria-label="Close preview">
+        <ion-icon name="close-outline"></ion-icon>
+      </button>
+    </div>
+    <div class="mb-previewPanel__body" id="previewBody">
+      <img class="mb-previewPanel__img" id="previewImg" src="" alt="" />
+      <h3 class="mb-previewPanel__title" id="previewTitle"></h3>
+      <div class="mb-previewPanel__meta" id="previewMeta"></div>
+      <div class="mb-previewPanel__mood" id="previewMood"></div>
+      <div class="mb-previewPanel__excerpt" id="previewExcerpt"></div>
+      <div class="mb-previewPanel__takeaways" id="previewTakeaways">
+        <h4 data-translate="blog_key_takeaways">Key Takeaways</h4>
+        <ul id="previewTakeawaysList"></ul>
+      </div>
+    </div>
+    <div class="mb-previewPanel__footer">
+      <button class="mb-previewPanel__tts" id="previewTts" type="button">
+        <ion-icon name="headset-outline"></ion-icon>
+        <span data-translate="blog_listen">Listen</span>
+      </button>
+      <a class="mb-previewPanel__readBtn" id="previewReadBtn" href="#">
+        <span data-translate="blog_read_full">Read Full Article</span>
+        <ion-icon name="arrow-forward-outline"></ion-icon>
+      </a>
+    </div>
+  </aside>
+
   <div class="mb-toast" id="toast" role="status" aria-live="polite" aria-atomic="true"></div>
 
   
@@ -2043,7 +1706,7 @@
 
           <h5 class="mb-footer__subheading" data-translate="footer_follow">Follow Us</h5>
           <div class="mb-footer__social">
-            <a class="mb-footer__icon mb-footer__icon--instagram" href="https://www.instagram.com/mindspace2026?igsh=MTdid3ZpdDZzdHFtcA==" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+            <a class="mb-footer__icon mb-footer__icon--instagram" href="https://www.instagram.com/mindbalance2026?igsh=MTdid3ZpdDZzdHFtcA==" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
               <ion-icon name="logo-instagram"></ion-icon>
             </a>
             <a class="mb-footer__icon mb-footer__icon--youtube" href="https://www.youtube.com/@MindBaIance" target="_blank" rel="noopener noreferrer" aria-label="YouTube">

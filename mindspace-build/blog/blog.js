@@ -78,8 +78,8 @@
   }
 
   function getArticleText(article) {
-    var title = article.querySelector('.mb-featureCard__title, .mb-postCard__title, .mb-listPost__title, .mb-miniCard__title');
-    var excerpt = article.querySelector('.mb-featureCard__desc, .mb-postCard__excerpt, .mb-listPost__excerpt');
+    var title = article.querySelector('.mb-articleCard__title, .mb-featureCard__title, .mb-postCard__title, .mb-listPost__title, .mb-miniCard__title');
+    var excerpt = article.querySelector('.mb-articleCard__desc, .mb-featureCard__desc, .mb-postCard__excerpt, .mb-listPost__excerpt');
     var subtext = article.querySelector('.mb-featureCard__subtext, .mb-postCard__subtext, .mb-listPost__subtext');
 
     var text = '';
@@ -91,12 +91,12 @@
   }
 
   function addTTSButtons() {
-    var articles = document.querySelectorAll('.mb-featureCard, .mb-postCard, .mb-listPost');
+    var articles = document.querySelectorAll('.mb-articleCard, .mb-featureCard, .mb-postCard, .mb-listPost');
 
     articles.forEach(function (article) {
       if (article.querySelector('.mb-ttsBtn')) return;
 
-      var actionsContainer = article.querySelector('.mb-featureCard__actions, .mb-postCard__body, .mb-listPost__body');
+      var actionsContainer = article.querySelector('.mb-articleCard__body, .mb-featureCard__actions, .mb-postCard__body, .mb-listPost__body');
       if (!actionsContainer) return;
 
       var ttsBtn = document.createElement('button');
@@ -204,7 +204,7 @@
 
   // ==================== KEYBOARD NAVIGATION ====================
   function enhanceKeyboardNav() {
-    var articles = document.querySelectorAll('.mb-featureCard, .mb-postCard, .mb-listPost, .mb-miniCard, .mb-compactCard');
+    var articles = document.querySelectorAll('.mb-articleCard, .mb-featureCard, .mb-postCard, .mb-listPost, .mb-miniCard, .mb-compactCard');
 
     articles.forEach(function (article) {
       article.setAttribute('tabindex', '0');
@@ -223,7 +223,7 @@
 
   // ==================== HOVER EFFECTS ====================
   function addHoverEffects() {
-    var cards = document.querySelectorAll('.mb-postCard, .mb-listPost, .mb-miniCard, .mb-compactCard');
+    var cards = document.querySelectorAll('.mb-articleCard, .mb-postCard, .mb-listPost, .mb-miniCard, .mb-compactCard');
 
     cards.forEach(function (card) {
       card.addEventListener('mouseenter', function () {
@@ -419,7 +419,7 @@
     document.addEventListener('click', function (e) {
       if (e.target.closest('a[href]') || e.target.closest('button') || e.target.closest('.mb-cardBookmark')) return;
 
-      var card = e.target.closest('.mb-postCard, .mb-miniCard, .mb-compactCard, .mb-listPost');
+      var card = e.target.closest('.mb-articleCard, .mb-postCard, .mb-miniCard, .mb-compactCard, .mb-listPost');
       if (!card) return;
 
       e.preventDefault();
@@ -427,13 +427,13 @@
     });
 
     function openPreview(card) {
-      var titleEl = card.querySelector('.mb-postCard__title a, .mb-miniCard__title a, .mb-compactCard__title a, .mb-listPost__title a');
+      var titleEl = card.querySelector('.mb-articleCard__title a, .mb-postCard__title a, .mb-miniCard__title a, .mb-compactCard__title a, .mb-listPost__title a');
       var imgEl = card.querySelector('img');
-      var excerptEl = card.querySelector('.mb-postCard__excerpt, .mb-listPost__excerpt');
+      var excerptEl = card.querySelector('.mb-articleCard__desc, .mb-postCard__excerpt, .mb-listPost__excerpt');
       var subtextEl = card.querySelector('.mb-postCard__subtext, .mb-listPost__subtext');
       var hintEl = card.querySelector('.mb-postHint');
-      var pillEl = card.querySelector('.mb-postCard__pill, .mb-pill');
-      var metaEl = card.querySelector('.mb-postCard__meta, .mb-miniCard__meta, .mb-compactCard__meta');
+      var pillEl = card.querySelector('.mb-articleCard__source, .mb-postCard__pill, .mb-pill');
+      var metaEl = card.querySelector('.mb-articleCard__meta, .mb-postCard__meta, .mb-miniCard__meta, .mb-compactCard__meta');
       var moodEl = card.querySelector('.mb-mood');
       var linkEl = card.querySelector('a[href]');
 
@@ -458,6 +458,7 @@
         previewCategory.className = 'mb-previewPanel__category';
         if (pillEl) {
           var pillClasses = pillEl.className
+            .replace('mb-articleCard__source', '')
             .replace('mb-postCard__pill', '')
             .replace('mb-miniCard__pill', '')
             .replace('mb-compactCard__pill', '')

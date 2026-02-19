@@ -15,7 +15,7 @@
   transform: translateX(-50%);
   font-size: 8rem;
   font-family: Georgia, serif;
-  color: rgba(175, 145, 109, 0.15);
+  color: rgba(var(--user-accent-rgb), 0.15);
   line-height: 1;
   pointer-events: none;
 }
@@ -173,7 +173,7 @@
 .wellness-tip__icon {
   width: 48px;
   height: 48px;
-  background: linear-gradient(135deg, var(--user-accent, #af916d) 0%, #d4b896 100%);
+  background: linear-gradient(135deg, var(--user-accent, #af916d) 0%, var(--user-accent-light) 100%);
   border-radius: 12px;
   display: flex;
   align-items: center;
@@ -194,7 +194,7 @@
   background: linear-gradient(135deg, #f8f5f0 0%, #ebe6df 100%);
   border-radius: 16px;
   padding: 32px;
-  border: 1px solid rgba(175, 145, 109, 0.2);
+  border: 1px solid rgba(var(--user-accent-rgb), 0.2);
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
 }
 
@@ -231,7 +231,7 @@
 
 .wellness-tip__action:hover {
   transform: translateY(-2px);
-  box-shadow: 0 4px 15px rgba(175, 145, 109, 0.3);
+  box-shadow: 0 4px 15px rgba(var(--user-accent-rgb), 0.3);
 }
 
 .wellness-tip__action:focus-visible {
@@ -252,7 +252,7 @@
 }
 
 [data-theme="dark"] .wellness-tip__icon {
-  background: linear-gradient(135deg, var(--user-accent, #9b7ed9) 0%, #7a5dc7 100%);
+  background: linear-gradient(135deg, var(--user-accent, #9b7ed9) 0%, var(--user-accent-dark) 100%);
 }
 
 [data-theme="dark"] .wellness-tip__label {

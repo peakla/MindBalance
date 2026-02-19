@@ -15,7 +15,7 @@
   transform: translateX(-50%);
   font-size: 8rem;
   font-family: Georgia, serif;
-  color: rgba(32, 104, 168, 0.15);
+  color: rgba(var(--user-accent-rgb), 0.15);
   line-height: 1;
   pointer-events: none;
 }
@@ -55,7 +55,7 @@
   font-family: 'Poppins', sans-serif;
   font-size: 1rem;
   font-weight: 600;
-  color: var(--user-accent, #2068A8);
+  color: var(--user-accent, #af916d);
   text-transform: uppercase;
   letter-spacing: 1px;
   opacity: 1;
@@ -90,12 +90,12 @@
 }
 
 .quote-banner__dot.active {
-  background: var(--user-accent, #2068A8);
+  background: var(--user-accent, #af916d);
   transform: scale(1.2);
 }
 
 .quote-banner__dot:focus-visible {
-  outline: 2px solid var(--user-accent, #2068A8);
+  outline: 2px solid var(--user-accent, #af916d);
   outline-offset: 2px;
 }
 
@@ -173,7 +173,7 @@
 .wellness-tip__icon {
   width: 48px;
   height: 48px;
-  background: linear-gradient(135deg, var(--user-accent, #2068A8) 0%, #38b6ff 100%);
+  background: linear-gradient(135deg, var(--user-accent, #af916d) 0%, var(--user-accent-light) 100%);
   border-radius: 12px;
   display: flex;
   align-items: center;
@@ -187,14 +187,14 @@
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 2px;
-  color: var(--user-accent, #2068A8);
+  color: var(--user-accent, #af916d);
 }
 
 .wellness-tip__card {
   background: linear-gradient(135deg, #f8f5f0 0%, #ebe6df 100%);
   border-radius: 16px;
   padding: 32px;
-  border: 1px solid rgba(32, 104, 168, 0.2);
+  border: 1px solid rgba(var(--user-accent-rgb), 0.2);
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
 }
 
@@ -219,7 +219,7 @@
   align-items: center;
   gap: 8px;
   padding: 12px 24px;
-  background: var(--user-accent, #2068A8);
+  background: var(--user-accent, #af916d);
   color: #fff;
   font-family: 'Poppins', sans-serif;
   font-size: 0.9rem;
@@ -231,11 +231,11 @@
 
 .wellness-tip__action:hover {
   transform: translateY(-2px);
-  box-shadow: 0 4px 15px rgba(32, 104, 168, 0.3);
+  box-shadow: 0 4px 15px rgba(var(--user-accent-rgb), 0.3);
 }
 
 .wellness-tip__action:focus-visible {
-  outline: 2px solid var(--user-accent, #2068A8);
+  outline: 2px solid var(--user-accent, #af916d);
   outline-offset: 3px;
 }
 
@@ -252,7 +252,7 @@
 }
 
 [data-theme="dark"] .wellness-tip__icon {
-  background: linear-gradient(135deg, var(--user-accent, #9b7ed9) 0%, #7a5dc7 100%);
+  background: linear-gradient(135deg, var(--user-accent, #9b7ed9) 0%, var(--user-accent-dark) 100%);
 }
 
 [data-theme="dark"] .wellness-tip__label {

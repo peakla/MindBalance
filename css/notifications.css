@@ -305,11 +305,11 @@
 }
 
 [data-theme="dark"] .inbox-item.unread {
-  background: rgba(175, 145, 109, 0.15);
+  background: rgba(var(--user-accent-rgb), 0.15);
 }
 
 [data-theme="dark"] .inbox-item.unread:hover {
-  background: rgba(175, 145, 109, 0.25);
+  background: rgba(var(--user-accent-rgb), 0.25);
 }
 
 .inbox-item__icon {
@@ -317,7 +317,7 @@
   width: 40px;
   height: 40px;
   border-radius: 50%;
-  background: linear-gradient(135deg, var(--user-accent, #af916d), #d4a574);
+  background: linear-gradient(135deg, var(--user-accent, #af916d), var(--user-accent-grad-end));
   display: flex;
   align-items: center;
   justify-content: center;

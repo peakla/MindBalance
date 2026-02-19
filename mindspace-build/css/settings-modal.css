@@ -129,7 +129,7 @@
 .settings-category-btn.active {
   background: var(--user-accent);
   color: #fff;
-  box-shadow: 0 4px 15px rgba(175, 145, 109, 0.3);
+  box-shadow: 0 4px 15px rgba(var(--user-accent-rgb), 0.3);
 }
 
 [data-theme="dark"] .settings-category-btn {
@@ -479,7 +479,7 @@
   color: #fff;
 }
 .theme-preset-night::before {
-  background: linear-gradient(90deg, #9b7ed9 0%, #6366f1 100%);
+  background: linear-gradient(90deg, var(--user-accent) 0%, var(--user-accent-dark) 100%);
 }
 
 .theme-preset-contrast {
@@ -653,7 +653,7 @@
 .settings-select:focus {
   outline: none;
   border-color: var(--user-accent);
-  box-shadow: 0 0 0 3px rgba(175, 145, 109, 0.15);
+  box-shadow: 0 0 0 3px rgba(var(--user-accent-rgb), 0.15);
 }
 
 [data-theme="dark"] .settings-select {
@@ -890,7 +890,7 @@
 
 .onboarding-btn:hover {
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(175, 145, 109, 0.3);
+  box-shadow: 0 6px 20px rgba(var(--user-accent-rgb), 0.3);
 }
 
 .onboarding-skip {

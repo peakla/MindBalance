@@ -31,10 +31,10 @@
 
   <style>
     :root {
-      --primary: #d4a574;
-      --primary-hover: #c49464;
+      --primary: var(--user-accent-grad-end);
+      --primary-hover: var(--user-accent-dark);
       --primary-light: #e4b584;
-      --accent: #d4a574;
+      --accent: var(--user-accent-grad-end);
       --success: #10b981;
       --success-bg: #dcfce7;
       --error: #ef4444;
@@ -46,7 +46,7 @@
       --border: #e5e7eb;
       --bg: #f9fafb;
       --card: #ffffff;
-      --panel-bg: #d4a574;
+      --panel-bg: var(--user-accent-grad-end);
       --panel-text: #1f2937;
     }
     
@@ -832,7 +832,7 @@
     [data-theme="dark"] .form-group input:focus,
     body.dark-mode .form-group input:focus {
       background: #2f2f50;
-      border-color: #9b7ed9;
+      border-color: var(--user-accent);
     }
     
     [data-theme="dark"] .form-group input::placeholder,
@@ -883,7 +883,7 @@
     
     [data-theme="dark"] .toggle-link a,
     body.dark-mode .toggle-link a {
-      color: #9b7ed9;
+      color: var(--user-accent);
     }
     
     [data-theme="dark"] .help-text,
@@ -900,7 +900,7 @@
     
     [data-theme="dark"] .btn-primary,
     body.dark-mode .btn-primary {
-      background: linear-gradient(135deg, #9b7ed9 0%, #7c5cbf 100%);
+      background: linear-gradient(135deg, var(--user-accent) 0%, var(--user-accent-dark) 100%);
       box-shadow: 0 4px 15px rgba(155, 126, 217, 0.3);
     }
     
@@ -965,7 +965,7 @@
     
     [data-theme="dark"] .back-link:hover,
     body.dark-mode .back-link:hover {
-      color: #9b7ed9;
+      color: var(--user-accent);
     }
     
     [data-theme="dark"] .input-icon,
@@ -980,7 +980,7 @@
     
     [data-theme="dark"] .password-toggle:hover,
     body.dark-mode .password-toggle:hover {
-      color: #9b7ed9;
+      color: var(--user-accent);
     }
     
     [data-theme="dark"] .btn i,

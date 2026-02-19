@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Community Hub | MindSpace</title>
+  <title>Community Hub | MindBalance</title>
 
   <link rel="icon" type="image/png" href="/assets/images/favicon.png" />
 
@@ -38,7 +38,7 @@
       max-width: 100%;
       margin: 0 auto;
       padding: 20px 24px;
-      background: #f0f7ff;
+      background: #f8f6f3;
       min-height: 100vh;
     }
 
@@ -83,7 +83,7 @@
       border-bottom: 1px solid rgba(0, 0, 0, .07);
       font-weight: 700;
       font-size: 20px;
-      color: #2068A8;
+      color: #AF916D;
     }
 
     .mb-panelBody {
@@ -112,15 +112,15 @@
     }
 
     .mb-navLink:hover {
-      background: rgba(32, 104, 168, 0.05);
+      background: rgba(175, 145, 109, 0.05);
       border-color: rgba(0, 0, 0, .06);
-      border-left-color: rgba(32, 104, 168, 0.3);
+      border-left-color: rgba(175, 145, 109, 0.3);
     }
 
     .mb-navLink.is-active {
-      background: rgba(32, 104, 168, 0.08);
+      background: rgba(175, 145, 109, 0.08);
       border-color: rgba(0, 0, 0, .08);
-      border-left: 3px solid #2068A8;
+      border-left: 3px solid #AF916D;
       font-weight: 700;
     }
 
@@ -128,8 +128,8 @@
       font-size: 12px;
       padding: 4px 8px;
       border-radius: 999px;
-      background: rgba(32, 104, 168, 0.12);
-      color: #1a5a8f;
+      background: rgba(175, 145, 109, 0.12);
+      color: var(--user-accent-dark);
       font-weight: 600;
       display: inline-block;
     }
@@ -150,7 +150,7 @@
     .mb-statNum {
       font-size: 18px;
       font-weight: 800;
-      color: #2068A8;
+      color: #AF916D;
     }
     .mb-statLabel {
       font-size: 11px;
@@ -178,7 +178,7 @@
       display: inline-block;
       width: 10px;
       height: 10px;
-      background: #2068A8;
+      background: #AF916D;
       border-radius: 50%;
       margin-right: 8px;
       vertical-align: middle;
@@ -197,8 +197,8 @@
     }
 
     .mb-search:focus {
-      border-color: #2068A8;
-      box-shadow: 0 0 0 3px rgba(32, 104, 168, 0.1);
+      border-color: #AF916D;
+      box-shadow: 0 0 0 3px rgba(175, 145, 109, 0.1);
       background: #fff;
     }
 
@@ -215,7 +215,7 @@
       gap: 12px;
       align-items: center;
       padding: 14px 16px;
-      background: rgba(32, 104, 168, .03);
+      background: rgba(175, 145, 109, .03);
       border-bottom: 1px solid rgba(0, 0, 0, .07);
     }
 
@@ -272,7 +272,7 @@
       width: 0;
       height: 0;
       border-radius: 50%;
-      background: rgba(32, 104, 168, 0.2);
+      background: rgba(175, 145, 109, 0.2);
       transform: translate(-50%, -50%);
       transition: width 0.4s ease, height 0.4s ease, opacity 0.4s ease;
       opacity: 0;
@@ -285,9 +285,9 @@
     }
 
     .mb-btnPrimary {
-      background: #2068A8;
+      background: #AF916D;
       color: #fff;
-      border-color: #2068A8;
+      border-color: #AF916D;
     }
 
     .mb-btn:disabled {
@@ -374,12 +374,12 @@
       height: 42px;
       border-radius: 50%;
       object-fit: cover;
-      border: 2px solid rgba(32, 104, 168, 0.3);
+      border: 2px solid rgba(175, 145, 109, 0.3);
       flex-shrink: 0;
     }
     .mb-postAvatar--team {
-      border-color: #2068A8;
-      background: linear-gradient(135deg, #2068A8, #1a5a8f);
+      border-color: #AF916D;
+      background: linear-gradient(135deg, var(--user-accent), var(--user-accent-dark));
       display: grid;
       place-items: center;
       color: #fff;
@@ -435,7 +435,7 @@
     }
 
     [data-theme="dark"] .mb-postAuthorLink:hover {
-      color: #5ba4e6;
+      color: var(--user-accent-light);
     }
 
     .mb-postTime {
@@ -466,8 +466,8 @@
       color: #666;
     }
     .mb-postFooter .mb-btn:hover {
-      background: rgba(32, 104, 168, 0.08);
-      color: #2068A8;
+      background: rgba(175, 145, 109, 0.08);
+      color: #AF916D;
     }
     .mb-postFooter .mb-likeBtn {
       font-weight: 600;
@@ -488,7 +488,7 @@
     .mb-progressFill {
       width: 70%;
       height: 100%;
-      background: #2068A8;
+      background: #AF916D;
     }
 
     .mb-miniList {
@@ -508,7 +508,7 @@
     }
 
     .mb-miniItem:hover {
-      border-left: 3px solid #2068A8;
+      border-left: 3px solid #AF916D;
     }
 
     .mb-miniTitle {
@@ -546,7 +546,7 @@
       font-size: 16px;
       font-weight: 700;
       margin-bottom: 8px;
-      color: #2068A8;
+      color: #AF916D;
     }
     .mb-welcomeCard p {
       font-size: 13px;
@@ -557,9 +557,9 @@
     .mb-welcomeCard .mb-btn {
       width: 100%;
       text-align: center;
-      background: #2068A8;
+      background: #AF916D;
       color: #fff;
-      border-color: #2068A8;
+      border-color: #AF916D;
     }
 
     .mb-likeBtn:hover {
@@ -624,7 +624,7 @@
     }
 
     [data-theme="dark"] .mb-commentAuthorLink:hover {
-      color: #5ba4e6;
+      color: var(--user-accent-light);
     }
 
     .mb-commentBody {
@@ -678,12 +678,12 @@
     }
 
     .mb-post-pinned {
-      border-left: 3px solid #5ba4e6;
+      border-left: 3px solid var(--user-accent-light);
     }
 
     .mb-pinned-badge {
-      background: rgba(32, 104, 168, .2);
-      color: #1a5a8f;
+      background: rgba(214, 189, 159, .2);
+      color: var(--user-accent-dark);
       font-size: 11px;
       padding: 2px 8px;
       border-radius: 10px;
@@ -692,7 +692,7 @@
     }
 
     .mb-pinBtn {
-      color: #1a5a8f !important;
+      color: var(--user-accent-dark) !important;
     }
 
     .mb-likeBtn {
@@ -899,11 +899,11 @@
 
     .mb-feedTabs { display: flex; gap: 4px; }
     .mb-feedTab { padding: 10px 18px; border: none; background: transparent; font-size: 14px; font-weight: 600; color: #666; cursor: pointer; border-bottom: 2px solid transparent; transition: all 0.2s ease; white-space: nowrap; }
-    .mb-feedTab:hover { color: #2068A8; background: rgba(32, 104, 168, 0.05); }
-    .mb-feedTab.is-active { color: #2068A8; border-bottom-color: #2068A8; }
+    .mb-feedTab:hover { color: #AF916D; background: rgba(175, 145, 109, 0.05); }
+    .mb-feedTab.is-active { color: #AF916D; border-bottom-color: #AF916D; }
 
     .mb-userCard { padding: 16px; display: flex; align-items: center; gap: 12px; border-bottom: 1px solid rgba(0,0,0,.07); }
-    .mb-userCard__avatar { width: 48px; height: 48px; border-radius: 50%; background: #2068A8; color: #fff; display: grid; place-items: center; font-weight: 800; font-size: 18px; flex-shrink: 0; }
+    .mb-userCard__avatar { width: 48px; height: 48px; border-radius: 50%; background: #AF916D; color: #fff; display: grid; place-items: center; font-weight: 800; font-size: 18px; flex-shrink: 0; }
     .mb-userCard__name { font-weight: 700; font-size: 15px; }
     .mb-levelBadge { font-size: 11px; padding: 2px 8px; border-radius: 10px; font-weight: 600; display: inline-block; margin-top: 2px; }
     .mb-levelBadge--newcomer { background: rgba(76, 175, 80, 0.12); color: #2e7d32; }
@@ -912,8 +912,8 @@
     .mb-levelBadge--champion { background: rgba(255, 152, 0, 0.12); color: #e65100; }
 
     .mb-quickActions { padding: 10px; display: grid; grid-template-columns: 1fr 1fr; gap: 8px; border-top: 1px solid rgba(0,0,0,.07); }
-    .mb-quickAction { padding: 10px 12px; border-radius: 10px; border: 1px solid rgba(32, 104, 168, 0.2); background: rgba(32, 104, 168, 0.05); font-size: 13px; font-weight: 600; color: #3a4a5a; cursor: pointer; display: flex; align-items: center; gap: 6px; text-decoration: none; transition: all 0.2s ease; }
-    .mb-quickAction:hover { background: rgba(32, 104, 168, 0.12); border-color: #2068A8; transform: translateY(-1px); }
+    .mb-quickAction { padding: 10px 12px; border-radius: 10px; border: 1px solid rgba(175, 145, 109, 0.2); background: rgba(175, 145, 109, 0.05); font-size: 13px; font-weight: 600; color: #5a4a3a; cursor: pointer; display: flex; align-items: center; gap: 6px; text-decoration: none; transition: all 0.2s ease; }
+    .mb-quickAction:hover { background: rgba(175, 145, 109, 0.12); border-color: #AF916D; transform: translateY(-1px); }
 
     .mb-categoryTag { font-size: 11px; padding: 3px 10px; border-radius: 12px; font-weight: 600; display: inline-flex; align-items: center; gap: 4px; }
     .mb-categoryTag--motivation { background: rgba(76, 175, 80, 0.12); color: #2e7d32; }
@@ -926,20 +926,20 @@
     .mb-postBody--truncated { max-height: 80px; overflow: hidden; position: relative; }
     .mb-postBody--truncated::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 30px; background: linear-gradient(transparent, #fff); pointer-events: none; }
     [data-theme="dark"] .mb-postBody--truncated::after { background: linear-gradient(transparent, #2a2a4a); }
-    .mb-readMore { padding: 4px 12px; font-size: 13px; color: #2068A8; cursor: pointer; border: none; background: none; font-weight: 600; display: block; }
+    .mb-readMore { padding: 4px 12px; font-size: 13px; color: #AF916D; cursor: pointer; border: none; background: none; font-weight: 600; display: block; }
     .mb-readMore:hover { text-decoration: underline; }
 
     .mb-bookmarkBtn { flex-shrink: 0; }
-    .mb-bookmarkBtn.is-bookmarked { color: #2068A8 !important; background: rgba(32, 104, 168, 0.1) !important; }
+    .mb-bookmarkBtn.is-bookmarked { color: #AF916D !important; background: rgba(175, 145, 109, 0.1) !important; }
 
     .mb-charCount { width: 38px; height: 38px; position: relative; display: grid; place-items: center; }
     .mb-charCount__svg { width: 100%; height: 100%; transform: rotate(-90deg); }
     .mb-charCount__num { position: absolute; font-size: 10px; font-weight: 700; color: #666; }
     .mb-charCount__progress { transition: stroke-dashoffset 0.3s ease; }
 
-    .mb-fab { position: fixed; bottom: 90px; right: 28px; width: 56px; height: 56px; border-radius: 50%; background: #2068A8; color: #fff; border: none; font-size: 24px; cursor: pointer; box-shadow: 0 4px 16px rgba(32, 104, 168, 0.4); z-index: 1000; transition: all 0.3s ease; display: grid; place-items: center; }
-    .mb-fab:hover { transform: scale(1.1) translateY(-2px); box-shadow: 0 8px 24px rgba(32, 104, 168, 0.5); }
-    [data-theme="dark"] .mb-fab { background: #5ba4e6; color: #1a1a2e; }
+    .mb-fab { position: fixed; bottom: 90px; right: 28px; width: 56px; height: 56px; border-radius: 50%; background: #AF916D; color: #fff; border: none; font-size: 24px; cursor: pointer; box-shadow: 0 4px 16px rgba(175, 145, 109, 0.4); z-index: 1000; transition: all 0.3s ease; display: grid; place-items: center; }
+    .mb-fab:hover { transform: scale(1.1) translateY(-2px); box-shadow: 0 8px 24px rgba(175, 145, 109, 0.5); }
+    [data-theme="dark"] .mb-fab { background: var(--user-accent-light); color: #1a1a2e; }
 
     .mb-reactions { position: relative; display: inline-flex; }
     .mb-reactionPicker { position: absolute; bottom: 100%; left: 0; display: flex; gap: 4px; padding: 6px 10px; background: #fff; border: 1px solid rgba(0,0,0,.1); border-radius: 24px; box-shadow: 0 4px 16px rgba(0,0,0,.12); margin-bottom: 6px; animation: reactionPop 0.2s ease; }
@@ -962,11 +962,11 @@
     .mb-contributor__name { font-weight: 600; font-size: 13px; }
     .mb-contributor__posts { font-size: 11px; opacity: 0.6; }
     .mb-trendingPills { display: flex; flex-wrap: wrap; gap: 8px; }
-    .mb-trendingPill { padding: 6px 14px; border-radius: 20px; background: rgba(32, 104, 168, 0.08); color: #3a4a5a; font-size: 13px; font-weight: 500; text-decoration: none; transition: all 0.2s; border: 1px solid rgba(32, 104, 168, 0.15); }
-    .mb-trendingPill:hover { background: rgba(32, 104, 168, 0.18); border-color: #2068A8; transform: translateY(-1px); }
-    .mb-wellnessTip { margin: 14px; padding: 16px; background: linear-gradient(135deg, rgba(32, 104, 168, 0.08), rgba(32, 104, 168, 0.03)); border-radius: 14px; border: 1px solid rgba(32, 104, 168, 0.12); }
+    .mb-trendingPill { padding: 6px 14px; border-radius: 20px; background: rgba(175, 145, 109, 0.08); color: #5a4a3a; font-size: 13px; font-weight: 500; text-decoration: none; transition: all 0.2s; border: 1px solid rgba(175, 145, 109, 0.15); }
+    .mb-trendingPill:hover { background: rgba(175, 145, 109, 0.18); border-color: #AF916D; transform: translateY(-1px); }
+    .mb-wellnessTip { margin: 14px; padding: 16px; background: linear-gradient(135deg, rgba(175, 145, 109, 0.08), rgba(175, 145, 109, 0.03)); border-radius: 14px; border: 1px solid rgba(175, 145, 109, 0.12); }
     .mb-wellnessTip__icon { font-size: 24px; margin-bottom: 6px; }
-    .mb-wellnessTip__title { font-weight: 700; font-size: 14px; margin-bottom: 6px; color: #2068A8; }
+    .mb-wellnessTip__title { font-weight: 700; font-size: 14px; margin-bottom: 6px; color: #AF916D; }
     .mb-wellnessTip__text { font-size: 13px; line-height: 1.5; color: #555; }
     .mb-moodBar { display: flex; border-radius: 8px; overflow: hidden; height: 12px; margin-bottom: 8px; }
     .mb-moodSegment { height: 100%; transition: width 0.5s ease; }
@@ -994,7 +994,7 @@
     @keyframes confettiFall { 0% { transform: translateY(0) rotate(0deg); opacity: 1; } 100% { transform: translateY(100vh) rotate(720deg); opacity: 0; } }
 
     @keyframes sparkle { 0% { opacity: 1; transform: scale(0) rotate(0deg); } 50% { opacity: 1; transform: scale(1.2) rotate(180deg); } 100% { opacity: 0; transform: scale(0.5) rotate(360deg); } }
-    .mb-sparkle { position: absolute; width: 8px; height: 8px; background: #2068A8; border-radius: 50%; pointer-events: none; animation: sparkle 0.6s ease forwards; }
+    .mb-sparkle { position: absolute; width: 8px; height: 8px; background: #AF916D; border-radius: 50%; pointer-events: none; animation: sparkle 0.6s ease forwards; }
 
     @media (max-width: 1100px) {
       .mb-grid { grid-template-columns: 260px 1fr; }
@@ -1034,7 +1034,7 @@
 
     [data-theme="dark"] .mb-panelHeader {
       border-bottom-color: rgba(255, 255, 255, .1);
-      color: #5ba4e6;
+      color: var(--user-accent-light);
     }
 
     [data-theme="dark"] .mb-navLink {
@@ -1042,34 +1042,34 @@
     }
 
     [data-theme="dark"] .mb-navLink:hover {
-      background: rgba(32, 104, 168, 0.06);
+      background: rgba(214, 189, 159, 0.06);
       border-color: rgba(255, 255, 255, .1);
-      border-left-color: rgba(32, 104, 168, 0.3);
+      border-left-color: rgba(214, 189, 159, 0.3);
     }
 
     [data-theme="dark"] .mb-navLink.is-active {
-      background: rgba(32, 104, 168, 0.1);
+      background: rgba(214, 189, 159, 0.1);
       border-color: rgba(255, 255, 255, .15);
-      border-left-color: #5ba4e6;
+      border-left-color: var(--user-accent-light);
     }
 
     [data-theme="dark"] .mb-pill {
-      background: rgba(32, 104, 168, 0.15);
-      color: #5ba4e6;
+      background: rgba(214, 189, 159, 0.15);
+      color: var(--user-accent-light);
     }
 
     [data-theme="dark"] .mb-communityStats {
       border-top-color: rgba(255, 255, 255, .08);
     }
     [data-theme="dark"] .mb-statNum {
-      color: #5ba4e6;
+      color: var(--user-accent-light);
     }
     [data-theme="dark"] .mb-statLabel {
       color: #aaa;
     }
 
     [data-theme="dark"] .mb-feedHeader {
-      border-image: linear-gradient(to right, #5ba4e6, transparent) 1;
+      border-image: linear-gradient(to right, var(--user-accent-light), transparent) 1;
     }
 
     [data-theme="dark"] .mb-feedTitle {
@@ -1077,7 +1077,7 @@
     }
 
     [data-theme="dark"] .mb-feedTitle::before {
-      background: #5ba4e6;
+      background: var(--user-accent-light);
     }
 
     [data-theme="dark"] .mb-search {
@@ -1087,8 +1087,8 @@
     }
 
     [data-theme="dark"] .mb-search:focus {
-      border-color: #5ba4e6;
-      box-shadow: 0 0 0 3px rgba(32, 104, 168, 0.15);
+      border-color: var(--user-accent-light);
+      box-shadow: 0 0 0 3px rgba(214, 189, 159, 0.15);
     }
 
     [data-theme="dark"] .mb-search::placeholder {
@@ -1100,13 +1100,13 @@
     }
 
     [data-theme="dark"] .mb-composerTop {
-      background: rgba(32, 104, 168, .04);
+      background: rgba(214, 189, 159, .04);
       border-bottom-color: rgba(255, 255, 255, .08);
     }
 
     [data-theme="dark"] .mb-avatar {
       background: rgba(255, 255, 255, .15);
-      color: #5ba4e6;
+      color: var(--user-accent-light);
     }
 
     [data-theme="dark"] .mb-input {
@@ -1126,9 +1126,9 @@
     }
 
     [data-theme="dark"] .mb-btnPrimary {
-      background: #5ba4e6;
+      background: var(--user-accent-light);
       color: #1a1a2e;
-      border-color: #5ba4e6;
+      border-color: var(--user-accent-light);
     }
 
     [data-theme="dark"] .mb-post {
@@ -1146,10 +1146,10 @@
     }
 
     [data-theme="dark"] .mb-postAvatar {
-      border-color: rgba(32, 104, 168, 0.3);
+      border-color: rgba(214, 189, 159, 0.3);
     }
     [data-theme="dark"] .mb-postAvatar--team {
-      border-color: #5ba4e6;
+      border-color: var(--user-accent-light);
     }
 
     [data-theme="dark"] .mb-postName {
@@ -1171,8 +1171,8 @@
       color: #aaa;
     }
     [data-theme="dark"] .mb-postFooter .mb-btn:hover {
-      background: rgba(32, 104, 168, 0.1);
-      color: #5ba4e6;
+      background: rgba(214, 189, 159, 0.1);
+      color: var(--user-accent-light);
     }
     [data-theme="dark"] .mb-feedHeader {
       border-bottom-color: rgba(255,255,255,.08);
@@ -1183,7 +1183,7 @@
     }
 
     [data-theme="dark"] .mb-progressFill {
-      background: #5ba4e6;
+      background: var(--user-accent-light);
     }
 
     [data-theme="dark"] .mb-miniItem {
@@ -1192,7 +1192,7 @@
     }
 
     [data-theme="dark"] .mb-miniItem:hover {
-      border-left-color: #5ba4e6;
+      border-left-color: var(--user-accent-light);
     }
 
     [data-theme="dark"] .mb-miniTitle {
@@ -1211,12 +1211,12 @@
       border-bottom-color: rgba(255,255,255,.07);
     }
     [data-theme="dark"] .mb-welcomeCard h4 {
-      color: #5ba4e6;
+      color: var(--user-accent-light);
     }
     [data-theme="dark"] .mb-welcomeCard .mb-btn {
-      background: #5ba4e6;
+      background: var(--user-accent-light);
       color: #1a1a2e;
-      border-color: #5ba4e6;
+      border-color: var(--user-accent-light);
     }
 
     [data-theme="dark"] .mb-likeBtn:hover {
@@ -1293,7 +1293,7 @@
     }
 
     [data-theme="dark"] .mb-commentUser {
-      color: #5ba4e6;
+      color: var(--user-accent-light);
     }
 
     [data-theme="dark"] .mb-mediaPreview {
@@ -1306,12 +1306,12 @@
     }
 
     [data-theme="dark"] .mb-pinned-badge {
-      background: rgba(32, 104, 168, .15);
-      color: #5ba4e6;
+      background: rgba(214, 189, 159, .15);
+      color: var(--user-accent-light);
     }
 
     [data-theme="dark"] .mb-pinBtn {
-      color: #5ba4e6 !important;
+      color: var(--user-accent-light) !important;
     }
 
     [data-theme="dark"] .mb-skeleton { background: #2a2a4a; border-color: rgba(255,255,255,.06); }
@@ -1320,21 +1320,21 @@
     [data-theme="dark"] .mb-onlineCount { color: #aaa; }
     [data-theme="dark"] .mb-contributor:hover { background: rgba(255,255,255,.05); }
     [data-theme="dark"] .mb-contributor__name { color: #e0e0e0; }
-    [data-theme="dark"] .mb-trendingPill { background: rgba(32, 104, 168, 0.1); color: #5ba4e6; border-color: rgba(32, 104, 168, 0.15); }
-    [data-theme="dark"] .mb-trendingPill:hover { background: rgba(32, 104, 168, 0.2); border-color: #5ba4e6; }
-    [data-theme="dark"] .mb-wellnessTip { background: linear-gradient(135deg, rgba(32, 104, 168, 0.08), rgba(32, 104, 168, 0.03)); border-color: rgba(32, 104, 168, 0.12); }
-    [data-theme="dark"] .mb-wellnessTip__title { color: #5ba4e6; }
+    [data-theme="dark"] .mb-trendingPill { background: rgba(214, 189, 159, 0.1); color: var(--user-accent-light); border-color: rgba(214, 189, 159, 0.15); }
+    [data-theme="dark"] .mb-trendingPill:hover { background: rgba(214, 189, 159, 0.2); border-color: var(--user-accent-light); }
+    [data-theme="dark"] .mb-wellnessTip { background: linear-gradient(135deg, rgba(214, 189, 159, 0.08), rgba(214, 189, 159, 0.03)); border-color: rgba(214, 189, 159, 0.12); }
+    [data-theme="dark"] .mb-wellnessTip__title { color: var(--user-accent-light); }
     [data-theme="dark"] .mb-wellnessTip__text { color: #bbb; }
     [data-theme="dark"] .mb-moodLabels { color: #888; }
-    [data-theme="dark"] .mb-quickAction { color: #5ba4e6; background: rgba(32, 104, 168, 0.05); border-color: rgba(32, 104, 168, 0.15); }
-    [data-theme="dark"] .mb-quickAction:hover { background: rgba(32, 104, 168, 0.12); border-color: #5ba4e6; }
+    [data-theme="dark"] .mb-quickAction { color: var(--user-accent-light); background: rgba(214, 189, 159, 0.05); border-color: rgba(214, 189, 159, 0.15); }
+    [data-theme="dark"] .mb-quickAction:hover { background: rgba(214, 189, 159, 0.12); border-color: var(--user-accent-light); }
     [data-theme="dark"] .mb-userCard { border-bottom-color: rgba(255,255,255,.07); }
     [data-theme="dark"] .mb-userCard__name { color: #e0e0e0; }
     [data-theme="dark"] .mb-feedTab { color: #aaa; }
-    [data-theme="dark"] .mb-feedTab:hover { color: #5ba4e6; }
-    [data-theme="dark"] .mb-feedTab.is-active { color: #5ba4e6; border-bottom-color: #5ba4e6; }
+    [data-theme="dark"] .mb-feedTab:hover { color: var(--user-accent-light); }
+    [data-theme="dark"] .mb-feedTab.is-active { color: var(--user-accent-light); border-bottom-color: var(--user-accent-light); }
     [data-theme="dark"] .mb-categorySelect { background: #1a1a2e; border-color: rgba(255,255,255,.12); color: #e0e0e0; }
-    [data-theme="dark"] .mb-readMore { color: #5ba4e6; }
+    [data-theme="dark"] .mb-readMore { color: var(--user-accent-light); }
     [data-theme="dark"] .mb-charCount__num { color: #aaa; }
   </style>
 </head>
@@ -1374,7 +1374,7 @@
   <div class="orientation-lock"></div>
   <div class="preload" data-preaload>
     <img src="/assets/images/preload.gif" alt="Loading..." class="loader-gif" decoding="async">
-    <img src="/assets/images/MindSpaceLogo.png" alt="MindSpace" class="preload-logo" decoding="async">
+    <img src="/assets/images/MindBalanceLogo.svg" alt="MindBalance" class="preload-logo" decoding="async">
     <span class="preload-text">Loading your wellness space</span>
     <div class="progress-bar">
       <div class="progress-bar-fill"></div>
@@ -1398,7 +1398,7 @@
   
   
   
-    <div class="topbar">
+  <div class="topbar">
     <div class="container">
 
       <address class="topbar-item">
@@ -1426,11 +1426,11 @@
 
       <div class="separator"></div>
 
-      <a href="https://mail.google.com/mail/?view=cm&fs=1&to=mindspacehelp@gmail.com" class="topbar-item link">
+      <a href="https://mail.google.com/mail/?view=cm&fs=1&to=mindbalancehelp@gmail.com" class="topbar-item link">
         <div class="icon">
           <ion-icon name="mail-outline" aria-hidden="true"></ion-icon>
         </div>
-        <span class="span">mindspacehelp@gmail.com</span>
+        <span class="span">mindbalancehelp@gmail.com</span>
       </a>
 
     </div>
@@ -1441,14 +1441,14 @@
     <div class="container">
 
       <a href="/" class="logo">
-        <img src="/assets/images/MindSpaceLogo.png" width="160" height="50" alt="MindSpace - logo" decoding="async">
+        <img src="/assets/images/MindBalanceLogo.svg" width="160" height="50" alt="MindBalance - logo" decoding="async">
       </a>
 
       <nav class="navbar" data-navbar>
 
         <div class="mobile-nav-header">
           <a href="/" class="mobile-nav-header__logo">
-            <img src="/assets/images/MindSpaceLogo.png" width="130" height="40" alt="MindSpace - logo" decoding="async">
+            <img src="/assets/images/MindBalanceLogo.svg" width="130" height="40" alt="MindBalance - logo" decoding="async">
           </a>
           <button class="mobile-nav-close" aria-label="close menu" data-nav-toggler>
             <ion-icon name="close-outline" aria-hidden="true"></ion-icon>
@@ -1538,6 +1538,11 @@
             </div>
           </li>
           <li class="navbar-item">
+            <a href="/docs/" class="navbar-link hover-underline">
+              <ion-icon name="document-outline" class="nav-link-icon" aria-hidden="true"></ion-icon>
+              <span class="span" data-translate="nav_docs">References</span>
+            </a>
+          </li>
         </ul>
 
         <div class="mobile-nav-divider"></div>
@@ -1603,7 +1608,7 @@
                 <button class="accent-color-btn" data-accent-color="pink" title="Pink" style="--btn-color: #d97eab"></button>
                 <button class="accent-color-btn" data-accent-color="orange" title="Orange" style="--btn-color: #e09c5c"></button>
                 <button class="accent-color-btn" data-accent-color="red" title="Red" style="--btn-color: #e07070"></button>
-                <button class="accent-color-btn active" data-accent-color="blue" title="Blue" style="--btn-color: #2068A8"></button>
+                <button class="accent-color-btn active" data-accent-color="gold" title="Gold" style="--btn-color: #af916d"></button>
               </div>
             </div>
             <div class="mobile-setting-item">
@@ -1886,7 +1891,7 @@
                   <button class="accent-color-btn" data-accent-color="pink" title="Pink" style="--btn-color: #d97eab"></button>
                   <button class="accent-color-btn" data-accent-color="orange" title="Orange" style="--btn-color: #e09c5c"></button>
                   <button class="accent-color-btn" data-accent-color="red" title="Red" style="--btn-color: #e07070"></button>
-                  <button class="accent-color-btn active" data-accent-color="blue" title="Blue" style="--btn-color: #2068A8"></button>
+                  <button class="accent-color-btn active" data-accent-color="gold" title="Gold" style="--btn-color: #af916d"></button>
                 </div>
               </div>
               <div class="setting-item">
@@ -1928,7 +1933,7 @@
 <!-- ===== HERO ===== -->
   <div id="main-hero" class="hero community-hero">
     <video autoplay loop muted playsinline webkit-playsinline="true" x-webkit-airplay="deny" disablePictureInPicture preload="auto" poster="/assets/images/hero-poster.jpg" class="back-video">
-      <source src="/assets/images/MindSpaceHub.mp4" type="video/mp4" />
+      <source src="/assets/images/MindBalanceHub.mp4" type="video/mp4" />
     </video>
     <div class="hero-content">
       <h1 class="animate-fade-in" data-translate="community_hub_title">Community Hub</h1>
@@ -2018,7 +2023,7 @@
             <div class="mb-charCount" id="charCountRing">
               <svg viewBox="0 0 36 36" class="mb-charCount__svg">
                 <circle cx="18" cy="18" r="16" fill="none" stroke="rgba(0,0,0,.08)" stroke-width="3"/>
-                <circle cx="18" cy="18" r="16" fill="none" stroke="#2068A8" stroke-width="3" stroke-dasharray="100" stroke-dashoffset="100" class="mb-charCount__progress" id="charProgress"/>
+                <circle cx="18" cy="18" r="16" fill="none" stroke="#AF916D" stroke-width="3" stroke-dasharray="100" stroke-dashoffset="100" class="mb-charCount__progress" id="charProgress"/>
               </svg>
               <span class="mb-charCount__num" id="charCountNum">0</span>
             </div>
@@ -2090,7 +2095,7 @@
             <div class="mb-contributor">
               <div class="mb-contributor__avatar" style="background: #3b82f6;">MB</div>
               <div class="mb-contributor__info">
-                <span class="mb-contributor__name">MindSpace Team</span>
+                <span class="mb-contributor__name">MindBalance Team</span>
                 <span class="mb-contributor__posts">Team Account</span>
               </div>
             </div>
@@ -2242,7 +2247,7 @@
         if (charProgress) {
           const pct = Math.min(len / MAX_CHARS * 100, 100);
           charProgress.setAttribute('stroke-dashoffset', 100 - pct);
-          charProgress.setAttribute('stroke', pct > 90 ? '#e74c3c' : pct > 70 ? '#f39c12' : '#2068A8');
+          charProgress.setAttribute('stroke', pct > 90 ? '#e74c3c' : pct > 70 ? '#f39c12' : '#AF916D');
         }
       });
     }
@@ -2312,10 +2317,10 @@
       <div class="mb-footer__main-grid">
 
         
-        <section class="mb-footer__col" aria-label="About MindSpace">
-          <h3 class="mb-footer__brand" data-translate="footer_brand">MindSpace</h3>
+        <section class="mb-footer__col" aria-label="About MindBalance">
+          <h3 class="mb-footer__brand" data-translate="footer_brand">MindBalance</h3>
           <p class="mb-footer__text" data-translate="footer_about">
-            MindSpace is a student-built mental health education and support hub.
+            MindBalance is a student-built mental health education and support hub.
             Our goal is to provide clear, reliable information and guide visitors toward safe resources.
           </p>
           <a class="mb-footer__link" href="/support/" data-translate="footer_read_more">Read more →</a>
@@ -2381,7 +2386,7 @@
 
           <h5 class="mb-footer__subheading" data-translate="footer_follow">Follow Us</h5>
           <div class="mb-footer__social">
-            <a class="mb-footer__icon mb-footer__icon--instagram" href="https://www.instagram.com/mindspace2026?igsh=MTdid3ZpdDZzdHFtcA==" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+            <a class="mb-footer__icon mb-footer__icon--instagram" href="https://www.instagram.com/mindbalance2026?igsh=MTdid3ZpdDZzdHFtcA==" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
               <ion-icon name="logo-instagram"></ion-icon>
             </a>
             <a class="mb-footer__icon mb-footer__icon--youtube" href="https://www.youtube.com/@MindBaIance" target="_blank" rel="noopener noreferrer" aria-label="YouTube">
@@ -2477,7 +2482,7 @@
   <div class="mb-footer__bottom">
     <div class="mb-footer__wrap mb-footer__bottomwrap">
       <p class="mb-footer__copy">
-        © <span id="mb-footer-year"></span> MindSpace. <span data-translate="footer_copy">For educational purposes only.</span>
+        © <span id="mb-footer-year"></span> MindBalance. <span data-translate="footer_copy">For educational purposes only.</span>
       </p>
 
       <div class="mb-footer__legal">

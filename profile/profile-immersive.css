@@ -272,7 +272,7 @@
 .profile-greeting__name {
   display: inline;
   white-space: nowrap;
-  background: linear-gradient(135deg, var(--user-accent, #b89b5e) 0%, var(--time-primary) 100%);
+  background: linear-gradient(135deg, var(--user-accent) 0%, var(--time-primary) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -433,7 +433,7 @@ body:not([data-theme="dark"]) .time-night .glass-card {
   font-family: 'Poppins', sans-serif;
   font-weight: 700;
   font-size: 2rem;
-  background: linear-gradient(135deg, var(--user-accent, #b89b5e) 0%, var(--time-primary) 100%);
+  background: linear-gradient(135deg, var(--user-accent) 0%, var(--time-primary) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -468,7 +468,7 @@ body:not([data-theme="dark"]) .time-night .glass-card {
 
 .progress-ring__circle-progress {
   fill: none;
-  stroke: var(--user-accent, #b89b5e);
+  stroke: var(--user-accent);
   stroke-width: 6;
   stroke-linecap: round;
   stroke-dasharray: 226;
@@ -530,7 +530,7 @@ body:not([data-theme="dark"]) .time-night .glass-card {
   font-size: 0.75rem;
   padding: 3px 8px;
   border-radius: 12px;
-  background: linear-gradient(135deg, var(--user-accent, #b89b5e) 0%, #d6bd9f 100%);
+  background: linear-gradient(135deg, var(--user-accent) 0%, var(--user-accent-light) 100%);
   color: #fff;
   font-weight: 600;
 }
@@ -561,7 +561,7 @@ body:not([data-theme="dark"]) .time-night .glass-card {
 }
 
 .quick-action-btn--primary {
-  background: linear-gradient(135deg, var(--user-accent, #b89b5e) 0%, #d6bd9f 100%);
+  background: linear-gradient(135deg, var(--user-accent) 0%, var(--user-accent-light) 100%);
   color: #fff;
 }
 
@@ -805,7 +805,7 @@ body:not([data-theme="dark"]) .time-night .glass-card {
   padding: 6px 14px;
   border-radius: 20px;
   border: none;
-  background: var(--user-accent, #b89b5e);
+  background: var(--user-accent);
   color: #fff;
   font-size: 0.8rem;
   font-weight: 600;
@@ -980,7 +980,7 @@ body:not([data-theme="dark"]) .time-night .mb-profile__actions-btn {
 }
 
 body:not([data-theme="dark"]) .time-night .mb-profile__actions-btn.primary {
-  background: linear-gradient(135deg, #b89b5e 0%, #d6bd9f 100%);
+  background: linear-gradient(135deg, var(--user-accent) 0%, var(--user-accent-light) 100%);
   color: #fff;
 }
 

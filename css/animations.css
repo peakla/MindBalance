@@ -395,17 +395,17 @@
   transform: translateX(-50%);
   width: 80px;
   height: 4px;
-  background: linear-gradient(135deg, #d6bd9f 0%, #c4a67a 100%);
+  background: linear-gradient(135deg, var(--user-accent-light), var(--user-accent-grad-end));
   border-radius: 2px;
 }
 
 [data-theme="dark"] .section-decorated::before {
-  background: linear-gradient(135deg, #d6bd9f 0%, #8b7355 100%);
+  background: linear-gradient(135deg, var(--user-accent-light) 0%, var(--user-accent-dark) 100%);
 }
 
 /* === GRADIENT TEXT === */
 .gradient-text {
-  background: linear-gradient(135deg, #8b7355 0%, #d6bd9f 50%, #8b7355 100%);
+  background: linear-gradient(135deg, var(--user-accent-dark) 0%, var(--user-accent-light) 50%, var(--user-accent-dark) 100%);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -413,7 +413,7 @@
 }
 
 .gradient-text-animated {
-  background: linear-gradient(135deg, #8b7355 0%, #d6bd9f 50%, #8b7355 100%);
+  background: linear-gradient(135deg, var(--user-accent-dark) 0%, var(--user-accent-light) 50%, var(--user-accent-dark) 100%);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -423,7 +423,7 @@
 
 [data-theme="dark"] .gradient-text,
 [data-theme="dark"] .gradient-text-animated {
-  background: linear-gradient(135deg, #fff 0%, #d6bd9f 50%, #fff 100%);
+  background: linear-gradient(135deg, #fff 0%, var(--user-accent-light) 50%, #fff 100%);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -475,7 +475,7 @@
   width: 70px;
   height: 70px;
   margin-bottom: 25px;
-  background: linear-gradient(135deg, #d6bd9f 0%, #c4a67a 100%);
+  background: linear-gradient(135deg, var(--user-accent-light) 0%, var(--user-accent-grad-end) 100%);
   border-radius: 50%;
   box-shadow: 0 10px 30px rgba(214, 189, 159, 0.35);
   animation: pulse 3s ease-in-out infinite;
@@ -503,7 +503,7 @@
   gap: 12px;
   font-size: 1.1rem;
   font-weight: 600;
-  color: #8b7355;
+  color: var(--user-accent-dark);
   position: relative;
   z-index: 1;
 }
@@ -512,7 +512,7 @@
   content: '';
   width: 40px;
   height: 2px;
-  background: linear-gradient(90deg, transparent, #d6bd9f);
+  background: linear-gradient(90deg, transparent, var(--user-accent-light));
   border-radius: 1px;
 }
 
@@ -520,7 +520,7 @@
   content: '';
   width: 40px;
   height: 2px;
-  background: linear-gradient(90deg, #d6bd9f, transparent);
+  background: linear-gradient(90deg, var(--user-accent-light), transparent);
   border-radius: 1px;
 }
 
@@ -567,7 +567,7 @@
 }
 
 [data-theme="dark"] .quote-block__author {
-  color: #d6bd9f;
+  color: var(--user-accent-light);
 }
 
 [data-theme="dark"] .quote-block__decoration {

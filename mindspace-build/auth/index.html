@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Sign In | MindSpace</title>
+  <title>Sign In | MindBalance</title>
   <link rel="icon" type="image/png" href="/assets/images/favicon.png" />
   
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -19,7 +19,7 @@
   
   <script>
     (function() {
-      var theme = localStorage.getItem('mindspace_theme') || 'light';
+      var theme = localStorage.getItem('mindbalance_theme') || 'light';
       if (theme === 'system') {
         theme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
       }
@@ -31,10 +31,10 @@
 
   <style>
     :root {
-      --primary: #2068A8;
-      --primary-hover: #1a5a8f;
-      --primary-light: #38b6ff;
-      --accent: #2068A8;
+      --primary: var(--user-accent-grad-end);
+      --primary-hover: var(--user-accent-dark);
+      --primary-light: #e4b584;
+      --accent: var(--user-accent-grad-end);
       --success: #10b981;
       --success-bg: #dcfce7;
       --error: #ef4444;
@@ -46,7 +46,7 @@
       --border: #e5e7eb;
       --bg: #f9fafb;
       --card: #ffffff;
-      --panel-bg: #2068A8;
+      --panel-bg: var(--user-accent-grad-end);
       --panel-text: #1f2937;
     }
     
@@ -332,7 +332,7 @@
     .form-group input:focus {
       border-color: var(--primary);
       background: var(--card);
-      box-shadow: 0 0 0 4px rgba(32, 104, 168, 0.15);
+      box-shadow: 0 0 0 4px rgba(212, 165, 116, 0.15);
     }
     
     .form-group input:focus + .input-icon,
@@ -423,9 +423,9 @@
     }
     
     .btn-primary:hover {
-      background: linear-gradient(135deg, var(--primary-hover) 0%, #165a85 100%);
+      background: linear-gradient(135deg, var(--primary-hover) 0%, #b5844f 100%);
       transform: translateY(-3px);
-      box-shadow: 0 12px 28px rgba(32, 104, 168, 0.45);
+      box-shadow: 0 12px 28px rgba(212, 165, 116, 0.45);
     }
     
     .btn-primary:active {
@@ -630,7 +630,7 @@
       font-size: 1.5rem;
       font-weight: 600;
       margin: 0 auto 14px;
-      box-shadow: 0 4px 12px rgba(32, 104, 168, 0.4);
+      box-shadow: 0 4px 12px rgba(212, 165, 116, 0.4);
     }
     
     .user-info .email {
@@ -832,7 +832,7 @@
     [data-theme="dark"] .form-group input:focus,
     body.dark-mode .form-group input:focus {
       background: #2f2f50;
-      border-color: #9b7ed9;
+      border-color: var(--user-accent);
     }
     
     [data-theme="dark"] .form-group input::placeholder,
@@ -883,7 +883,7 @@
     
     [data-theme="dark"] .toggle-link a,
     body.dark-mode .toggle-link a {
-      color: #9b7ed9;
+      color: var(--user-accent);
     }
     
     [data-theme="dark"] .help-text,
@@ -900,7 +900,7 @@
     
     [data-theme="dark"] .btn-primary,
     body.dark-mode .btn-primary {
-      background: linear-gradient(135deg, #9b7ed9 0%, #7c5cbf 100%);
+      background: linear-gradient(135deg, var(--user-accent) 0%, var(--user-accent-dark) 100%);
       box-shadow: 0 4px 15px rgba(155, 126, 217, 0.3);
     }
     
@@ -965,7 +965,7 @@
     
     [data-theme="dark"] .back-link:hover,
     body.dark-mode .back-link:hover {
-      color: #9b7ed9;
+      color: var(--user-accent);
     }
     
     [data-theme="dark"] .input-icon,
@@ -980,7 +980,7 @@
     
     [data-theme="dark"] .password-toggle:hover,
     body.dark-mode .password-toggle:hover {
-      color: #9b7ed9;
+      color: var(--user-accent);
     }
     
     [data-theme="dark"] .btn i,
@@ -1007,7 +1007,7 @@
       left: 0;
       right: 0;
       bottom: 0;
-      background: #38b6ff;
+      background: #f8a29e;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -1044,7 +1044,7 @@
 
 <div class="preload" data-preaload>
   <img src="/assets/images/preload.gif" alt="Loading..." class="loader-gif" decoding="async">
-  <img src="/assets/images/MindSpaceLogo.png" alt="MindSpace" class="preload-logo" decoding="async">
+  <img src="/assets/images/MindBalanceLogo.svg" alt="MindBalance" class="preload-logo" decoding="async">
   <span class="preload-text">Loading your wellness space</span>
   <div class="progress-bar">
     <div class="progress-bar-fill"></div>
@@ -1081,7 +1081,7 @@
   
   <div class="auth-panel">
     <div class="panel-content">
-      <img src="/assets/images/MindSpaceLogo.png" alt="MindSpace" class="panel-logo">
+      <img src="/assets/images/MindBalanceLogo.svg" alt="MindBalance" class="panel-logo">
       <h1 class="panel-title">Your Mental Wellness Journey Starts Here</h1>
       <p class="panel-tagline">Join our community of support, discover resources, and take the first step toward better mental health.</p>
       
@@ -1120,7 +1120,7 @@
       </div>
       
       <div class="panel-testimonial">
-        <p class="panel-testimonial-text">"MindSpace helped me find the resources I needed when I felt lost. The community here truly understands."</p>
+        <p class="panel-testimonial-text">"MindBalance helped me find the resources I needed when I felt lost. The community here truly understands."</p>
         <span class="panel-testimonial-author">— Sarah M., Community Member</span>
       </div>
     </div>
@@ -1131,7 +1131,7 @@
     <div class="auth-container">
       <div class="mobile-logo">
         <a href="../">
-          <img src="/assets/images/MindSpaceLogo.png" alt="MindSpace">
+          <img src="/assets/images/MindBalanceLogo.svg" alt="MindBalance">
         </a>
       </div>
       
@@ -1215,7 +1215,7 @@
       
       <a href="../" class="back-link">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
-        Back to MindSpace
+        Back to MindBalance
       </a>
     </div>
   </div>
@@ -1226,6 +1226,7 @@
     var hash = window.location.hash || '';
     var search = window.location.search || '';
     var isOAuthCallback = hash.includes('access_token') || hash.includes('refresh_token') || search.includes('code=');
+    
     if (isOAuthCallback) {
     }
   })();
@@ -1461,7 +1462,7 @@
     const { data, error } = await sb.auth.signInWithOAuth({
       provider: 'google',
       options: {
-        redirectTo: 'https://www.mindspace.site/auth/'
+        redirectTo: 'https://www.mindbalance.cloud/auth/'
       }
     });
     
@@ -1513,10 +1514,10 @@
       <div class="mb-footer__main-grid">
 
         
-        <section class="mb-footer__col" aria-label="About MindSpace">
-          <h3 class="mb-footer__brand" data-translate="footer_brand">MindSpace</h3>
+        <section class="mb-footer__col" aria-label="About MindBalance">
+          <h3 class="mb-footer__brand" data-translate="footer_brand">MindBalance</h3>
           <p class="mb-footer__text" data-translate="footer_about">
-            MindSpace is a student-built mental health education and support hub.
+            MindBalance is a student-built mental health education and support hub.
             Our goal is to provide clear, reliable information and guide visitors toward safe resources.
           </p>
           <a class="mb-footer__link" href="/support/" data-translate="footer_read_more">Read more →</a>
@@ -1583,7 +1584,7 @@
 
           <h5 class="mb-footer__subheading" data-translate="footer_follow">Follow Us</h5>
           <div class="mb-footer__social">
-            <a class="mb-footer__icon mb-footer__icon--instagram" href="https://www.instagram.com/mindspace2026?igsh=MTdid3ZpdDZzdHFtcA==" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+            <a class="mb-footer__icon mb-footer__icon--instagram" href="https://www.instagram.com/mindbalance2026?igsh=MTdid3ZpdDZzdHFtcA==" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
               <ion-icon name="logo-instagram"></ion-icon>
             </a>
             <a class="mb-footer__icon mb-footer__icon--youtube" href="https://www.youtube.com/@MindBaIance" target="_blank" rel="noopener noreferrer" aria-label="YouTube">
@@ -1679,7 +1680,7 @@
   <div class="mb-footer__bottom">
     <div class="mb-footer__wrap mb-footer__bottomwrap">
       <p class="mb-footer__copy">
-        © <span id="mb-footer-year"></span> MindSpace. <span data-translate="footer_copy">For educational purposes only.</span>
+        © <span id="mb-footer-year"></span> MindBalance. <span data-translate="footer_copy">For educational purposes only.</span>
       </p>
 
       <div class="mb-footer__legal">

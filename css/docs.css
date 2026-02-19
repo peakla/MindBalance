@@ -32,7 +32,7 @@
   transform: translateX(-50%);
   width: 120px;
   height: 3px;
-  background: linear-gradient(90deg, var(--gold-crayola, #d4a574), var(--quick-silver, #a3a3a3));
+  background: linear-gradient(90deg, var(--user-accent-grad-end), var(--quick-silver, #a3a3a3));
   border-radius: 3px;
 }
 
@@ -46,7 +46,7 @@
 
 .docs-header__brand ion-icon {
   font-size: 2.75rem;
-  color: var(--gold-crayola, #d4a574);
+  color: var(--user-accent-grad-end);
 }
 
 .docs-header__brand h1 {
@@ -151,7 +151,7 @@
 }
 
 [data-theme="dark"] .docs-section__title ion-icon {
-  color: var(--gold-crayola, #d4a574);
+  color: var(--user-accent-grad-end);
 }
 
 .docs-section__desc {
@@ -289,7 +289,7 @@
 
 [data-theme="dark"] .docs-feature:hover {
   background: var(--eerie-black-4, #2a2a2a);
-  border-color: var(--gold-crayola, #d4a574);
+  border-color: var(--user-accent-grad-end);
 }
 
 .docs-feature__icon {
@@ -354,16 +354,16 @@
 }
 
 [data-theme="dark"] .docs-tech-item:hover {
-  border-color: var(--gold-crayola, #d4a574);
+  border-color: var(--user-accent-grad-end);
 }
 
 .docs-tech-item h4 {
   font-size: 1.05rem;
   font-weight: 600;
-  color: var(--gold-crayola, #d4a574);
+  color: var(--user-accent-grad-end);
   margin-bottom: 1rem;
   padding-bottom: 0.75rem;
-  border-bottom: 2px solid var(--gold-crayola, #d4a574);
+  border-bottom: 2px solid var(--user-accent-grad-end);
 }
 
 .docs-tech-item ul {

@@ -9,7 +9,7 @@
   display: flex;
   align-items: center;
   gap: 16px;
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(212, 165, 116, 0.3);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(var(--user-accent-rgb), 0.3);
   z-index: 10000;
   transform: translateX(120%);
   opacity: 0;
@@ -25,7 +25,7 @@
 .mb-achievement-notification__icon {
   width: 56px;
   height: 56px;
-  background: linear-gradient(135deg, #2068A8 0%, #e4c094 100%);
+  background: linear-gradient(135deg, var(--user-accent-grad-end) 0%, var(--user-accent-light) 100%);
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -50,7 +50,7 @@
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 1px;
-  color: #2068A8;
+  color: var(--user-accent-grad-end);
 }
 
 .mb-achievement-notification__name {
@@ -66,8 +66,8 @@
 
 /* === ACHIEVEMENT ANIMATION === */
 @keyframes achievementPulse {
-  0%, 100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(212, 165, 116, 0.4); }
-  50% { transform: scale(1.05); box-shadow: 0 0 20px 5px rgba(212, 165, 116, 0.2); }
+  0%, 100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(var(--user-accent-rgb), 0.4); }
+  50% { transform: scale(1.05); box-shadow: 0 0 20px 5px rgba(var(--user-accent-rgb), 0.2); }
 }
 
 /* === CALENDAR HEATMAP === */
@@ -95,7 +95,7 @@
 }
 
 .mb-heatmap__title ion-icon {
-  color: #2068A8;
+  color: var(--user-accent-grad-end);
 }
 
 .mb-heatmap__stats {
@@ -129,10 +129,10 @@
   z-index: 10;
 }
 
-.mb-heatmap__day[data-level="1"] { background: #e8dfd4; }
+.mb-heatmap__day[data-level="1"] { background: var(--user-accent-soft); }
 .mb-heatmap__day[data-level="2"] { background: #d4c4b0; }
 .mb-heatmap__day[data-level="3"] { background: #c9ad8c; }
-.mb-heatmap__day[data-level="4"] { background: #2068A8; }
+.mb-heatmap__day[data-level="4"] { background: var(--user-accent-grad-end); }
 
 .mb-heatmap__legend {
   display: flex;
@@ -175,7 +175,7 @@
 }
 
 .mb-timeline__title ion-icon {
-  color: #2068A8;
+  color: var(--user-accent-grad-end);
 }
 
 .mb-timeline__list {
@@ -192,7 +192,7 @@
   top: 0;
   bottom: 0;
   width: 2px;
-  background: linear-gradient(to bottom, #2068A8, #f0f0f5);
+  background: linear-gradient(to bottom, var(--user-accent-grad-end), #f0f0f5);
 }
 
 .mb-timeline__item {
@@ -220,7 +220,7 @@
   width: 40px;
   height: 40px;
   background: #fff;
-  border: 2px solid #2068A8;
+  border: 2px solid var(--user-accent-grad-end);
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -231,7 +231,7 @@
 
 .mb-timeline__icon ion-icon {
   font-size: 18px;
-  color: #2068A8;
+  color: var(--user-accent-grad-end);
 }
 
 .mb-timeline__content {
@@ -294,7 +294,7 @@
 
 .mb-stats-chart__period button.active,
 .mb-stats-chart__period button:hover {
-  background: #2068A8;
+  background: var(--user-accent-grad-end);
   color: #fff;
 }
 
@@ -308,7 +308,7 @@
 
 .mb-stats-chart__bar {
   flex: 1;
-  background: linear-gradient(to top, #2068A8, #e8dfd4);
+  background: linear-gradient(to top, var(--user-accent-grad-end), var(--user-accent-soft));
   border-radius: 4px 4px 0 0;
   min-height: 4px;
   transition: all 0.3s ease;
@@ -316,7 +316,7 @@
 }
 
 .mb-stats-chart__bar:hover {
-  background: linear-gradient(to top, #1a5a8f, #2068A8);
+  background: linear-gradient(to top, var(--user-accent-dark), var(--user-accent-grad-end));
 }
 
 .mb-stats-chart__bar::after {
@@ -368,7 +368,7 @@
 
 .mb-progress-ring__progress {
   fill: none;
-  stroke: #2068A8;
+  stroke: var(--user-accent-grad-end);
   stroke-linecap: round;
   transition: stroke-dashoffset 1s ease-out;
 }
@@ -420,7 +420,7 @@
 .mb-badge__icon {
   width: 56px;
   height: 56px;
-  background: linear-gradient(135deg, #2068A8 0%, #e4c094 100%);
+  background: linear-gradient(135deg, var(--user-accent-grad-end) 0%, var(--user-accent-light) 100%);
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -456,7 +456,7 @@
 
 .mb-badge__date {
   font-size: 10px;
-  color: #2068A8;
+  color: var(--user-accent-grad-end);
   margin-top: 8px;
 }
 
@@ -486,7 +486,7 @@
 
 .mb-empty-state__icon {
   font-size: 64px;
-  color: #2068A8;
+  color: var(--user-accent-grad-end);
   margin-bottom: 16px;
   opacity: 0.6;
 }
@@ -507,7 +507,7 @@
 .mb-empty-state__action {
   display: inline-block;
   padding: 12px 24px;
-  background: #2068A8;
+  background: var(--user-accent-grad-end);
   color: #fff;
   font-weight: 600;
   border-radius: 25px;
@@ -516,7 +516,7 @@
 }
 
 .mb-empty-state__action:hover {
-  background: #1a5a8f;
+  background: var(--user-accent-dark);
   transform: translateY(-2px);
 }
 
@@ -544,7 +544,7 @@
 .mb-reading-stat__icon {
   width: 48px;
   height: 48px;
-  background: linear-gradient(135deg, #f0f5fa 0%, #f0ebe4 100%);
+  background: linear-gradient(135deg, #f8f6f2 0%, #f0ebe4 100%);
   border-radius: 12px;
   display: flex;
   align-items: center;
@@ -554,7 +554,7 @@
 
 .mb-reading-stat__icon ion-icon {
   font-size: 24px;
-  color: #2068A8;
+  color: var(--user-accent-grad-end);
 }
 
 .mb-reading-stat__value {
@@ -630,7 +630,7 @@
 }
 
 [data-theme="dark"] .mb-timeline__list::before {
-  background: linear-gradient(to bottom, #2068A8, #3a3a50);
+  background: linear-gradient(to bottom, var(--user-accent-grad-end), #3a3a50);
 }
 
 [data-theme="dark"] .mb-timeline__icon {

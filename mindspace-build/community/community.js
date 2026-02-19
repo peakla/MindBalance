@@ -41,7 +41,7 @@ async function fetchUserProfile(userId) {
 }
 
 function showConfetti() {
-  const colors = ['#2068A8', '#5ba4e6', '#1a5a8f', '#4caf50', '#2196f3', '#ff9800'];
+  const colors = ['#AF916D', '#d6bd9f', '#8b7355', '#4caf50', '#2196f3', '#ff9800'];
   for (let i = 0; i < 30; i++) {
     const confetti = document.createElement('div');
     confetti.style.cssText = 'position:fixed;width:' + (Math.random()*10+5) + 'px;height:' + (Math.random()*10+5) + 'px;background:' + colors[Math.floor(Math.random()*colors.length)] + ';left:' + (Math.random()*100) + 'vw;top:-20px;border-radius:' + (Math.random()>0.5?'50%':'2px') + ';z-index:10000;pointer-events:none;animation:confettiFall ' + (Math.random()*2+1.5) + 's ease forwards;';
@@ -52,8 +52,8 @@ function showConfetti() {
 
 // --- Helpers ---
 function getTranslation(key, fallback) {
-  if (window.translations && window.MindSpaceSettings) {
-    const lang = localStorage.getItem('mindspace-language') || 'en';
+  if (window.translations && window.MindBalanceSettings) {
+    const lang = localStorage.getItem('mindbalance-language') || 'en';
     const langMap = { en: 'en', es: 'es', fr: 'fr', zh: 'zh', hi: 'hi', ko: 'ko' };
     const langKey = langMap[lang] || 'en';
     if (window.translations[langKey] && window.translations[langKey][key]) {
@@ -178,8 +178,8 @@ function containsProfanity(text) {
 
 // --- Supabase Client ---
 function initSupabase() {
-  if (window.MindSpaceAuth && window.MindSpaceAuth.getSupabase) {
-    sb = window.MindSpaceAuth.getSupabase();
+  if (window.MindBalanceAuth && window.MindBalanceAuth.getSupabase) {
+    sb = window.MindBalanceAuth.getSupabase();
   }
 
   if (!sb && typeof supabase !== 'undefined') {
@@ -461,7 +461,7 @@ async function handleShare(e) {
   const shareUrl = `${window.location.origin}${window.location.pathname}#post-${postId}`;
 
   const shareData = {
-    title: 'MindSpace Community Post',
+    title: 'MindBalance Community Post',
     text: postContent.substring(0, 100) + (postContent.length > 100 ? '...' : ''),
     url: shareUrl
   };
@@ -990,7 +990,7 @@ function createCommentElement(commentData) {
   comment.setAttribute('data-comment-id', commentData.id);
 
   const isTeamComment = !commentData.author_id;
-  const displayName = commentData.author_name || (isTeamComment ? 'MindSpace Team' : 'Anonymous');
+  const displayName = commentData.author_name || (isTeamComment ? 'MindBalance Team' : 'Anonymous');
 
   const avatarColors = ['#3b82f6', '#ef4444', '#10b981', '#f59e0b', '#8b5cf6', '#ec4899', '#06b6d4', '#84cc16'];
   const colorIndex = (commentData.author_id || '').split('').reduce((acc, c) => acc + c.charCodeAt(0), 0) % avatarColors.length;
@@ -1236,12 +1236,12 @@ function createPostElement(postData, timeStr) {
     article.dataset.edited = 'true';
   }
 
-  const displayName = postData.author_name || 'MindSpace Team';
+  const displayName = postData.author_name || 'MindBalance Team';
   const authorLink = postData.author_id
     ? `<a href="/profile/?user=${postData.author_id}" class="mb-postAuthorLink">${escapeHtml(displayName)}</a>`
     : escapeHtml(displayName);
 
-  const isTeamPost = !postData.author_id || displayName === 'MindSpace Team';
+  const isTeamPost = !postData.author_id || displayName === 'MindBalance Team';
   const initials = displayName.split(' ').map(w => w[0]).join('').substring(0, 2).toUpperCase();
   const avatarColors = ['#3b82f6', '#ef4444', '#10b981', '#f59e0b', '#8b5cf6', '#ec4899', '#06b6d4', '#84cc16'];
   const colorIndex = (postData.author_id || '').split('').reduce((acc, c) => acc + c.charCodeAt(0), 0) % avatarColors.length;
@@ -1617,7 +1617,7 @@ function scrollToHashPost() {
     setTimeout(() => {
       targetPost.scrollIntoView({ behavior: 'smooth', block: 'center' });
       targetPost.style.transition = 'box-shadow 0.4s ease';
-      targetPost.style.boxShadow = '0 0 0 3px var(--accent-color, #2068A8), 0 4px 20px rgba(0,0,0,0.15)';
+      targetPost.style.boxShadow = '0 0 0 3px var(--accent-color, #af916d), 0 4px 20px rgba(0,0,0,0.15)';
       setTimeout(() => {
         targetPost.style.boxShadow = '';
       }, 3000);
@@ -1655,7 +1655,7 @@ async function loadTopContributors() {
     if (!posts) return;
     const counts = {};
     posts.forEach(p => {
-      const key = p.author_name || 'MindSpace Team';
+      const key = p.author_name || 'MindBalance Team';
       if (!counts[key]) counts[key] = { name: key, count: 0 };
       counts[key].count++;
     });
@@ -1892,11 +1892,11 @@ async function init() {
 
   setupRealtimeSubscription();
 
-  if (window.MindSpaceAuth && window.MindSpaceAuth.onAuthReady) {
+  if (window.MindBalanceAuth && window.MindBalanceAuth.onAuthReady) {
 
 
 
-    window.MindSpaceAuth.onAuthChange(handleAuthChange);
+    window.MindBalanceAuth.onAuthChange(handleAuthChange);
   } else {
 
     const user = await checkAuth();
@@ -2084,7 +2084,7 @@ function scrollToPost(postId) {
   if (postEl) {
     postEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
     postEl.style.transition = 'box-shadow 0.3s ease';
-    postEl.style.boxShadow = '0 0 0 3px rgba(32, 104, 168, 0.5)';
+    postEl.style.boxShadow = '0 0 0 3px rgba(184, 155, 94, 0.5)';
     setTimeout(() => {
       postEl.style.boxShadow = '';
     }, 2000);

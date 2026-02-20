@@ -479,6 +479,11 @@ async function loadProfileData(userId) {
 
     if (profile.cover_url) {
       document.getElementById('coverPhoto').style.backgroundImage = `url(${profile.cover_url})`;
+    } else {
+      const localCover = localStorage.getItem('profile_cover_url');
+      if (localCover && isOwnProfile) {
+        document.getElementById('coverPhoto').style.backgroundImage = `url(${localCover})`;
+      }
     }
 
 
@@ -984,6 +989,16 @@ async function uploadPhoto(file, type) {
 
     if (updateError.code === '42501' || updateError.message?.includes('policy')) {
       ToastManager.error('Permission denied. Please check database permissions.');
+      return;
+    }
+
+    if (updateError.code === '42703' && type === 'cover') {
+      console.warn('cover_url column missing from profiles table');
+      if (type === 'cover') {
+        document.getElementById('coverPhoto').style.backgroundImage = `url(${publicUrl})`;
+        localStorage.setItem('profile_cover_url', publicUrl);
+        ToastManager.info('Cover photo updated locally. Database column pending setup.');
+      }
       return;
     }
 

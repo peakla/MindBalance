@@ -461,7 +461,7 @@ async function handleShare(e) {
   const shareUrl = `${window.location.origin}${window.location.pathname}#post-${postId}`;
 
   const shareData = {
-    title: 'MindBalance Community Post',
+    title: 'MindSpace Community Post',
     text: postContent.substring(0, 100) + (postContent.length > 100 ? '...' : ''),
     url: shareUrl
   };
@@ -990,7 +990,7 @@ function createCommentElement(commentData) {
   comment.setAttribute('data-comment-id', commentData.id);
 
   const isTeamComment = !commentData.author_id;
-  const displayName = commentData.author_name || (isTeamComment ? 'MindBalance Team' : 'Anonymous');
+  const displayName = commentData.author_name || (isTeamComment ? 'MindSpace Team' : 'Anonymous');
 
   const avatarColors = ['#3b82f6', '#ef4444', '#10b981', '#f59e0b', '#8b5cf6', '#ec4899', '#06b6d4', '#84cc16'];
   const colorIndex = (commentData.author_id || '').split('').reduce((acc, c) => acc + c.charCodeAt(0), 0) % avatarColors.length;
@@ -1236,12 +1236,12 @@ function createPostElement(postData, timeStr) {
     article.dataset.edited = 'true';
   }
 
-  const displayName = postData.author_name || 'MindBalance Team';
+  const displayName = postData.author_name || 'MindSpace Team';
   const authorLink = postData.author_id
     ? `<a href="/profile/?user=${postData.author_id}" class="mb-postAuthorLink">${escapeHtml(displayName)}</a>`
     : escapeHtml(displayName);
 
-  const isTeamPost = !postData.author_id || displayName === 'MindBalance Team';
+  const isTeamPost = !postData.author_id || displayName === 'MindSpace Team';
   const initials = displayName.split(' ').map(w => w[0]).join('').substring(0, 2).toUpperCase();
   const avatarColors = ['#3b82f6', '#ef4444', '#10b981', '#f59e0b', '#8b5cf6', '#ec4899', '#06b6d4', '#84cc16'];
   const colorIndex = (postData.author_id || '').split('').reduce((acc, c) => acc + c.charCodeAt(0), 0) % avatarColors.length;
@@ -1655,7 +1655,7 @@ async function loadTopContributors() {
     if (!posts) return;
     const counts = {};
     posts.forEach(p => {
-      const key = p.author_name || 'MindBalance Team';
+      const key = p.author_name || 'MindSpace Team';
       if (!counts[key]) counts[key] = { name: key, count: 0 };
       counts[key].count++;
     });

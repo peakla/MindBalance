@@ -3,7 +3,7 @@ modules = ["web", "python-3.11", "nodejs-20", "postgresql-16"]
 
 [nix]
 channel = "stable-24_11"
-packages = ["static-web-server"]
+packages = ["freetype", "lcms2", "libimagequant", "libjpeg", "libtiff", "libwebp", "libxcrypt", "openjpeg", "static-web-server", "tcl", "tk", "zlib"]
 
 [deployment]
 publicDir = "/"

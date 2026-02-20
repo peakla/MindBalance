@@ -1,2 +1,8 @@
 elevenlabs>=1.0.0
 openai>=1.0.0
+flask
+flask-cors
+Pillow
+psycopg2-binary
+requests
+resend

@@ -757,7 +757,7 @@ html {
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: #f8a29e;
+  background-color: #f79f9b !important;
   z-index: 99999;
   display: flex;
   flex-direction: column;
@@ -846,11 +846,6 @@ html {
 }
 
 /* Dark mode preloader */
-[data-theme="dark"] .preload,
-.dark-mode .preload {
-  background-color: #f8a29e;
-}
-
 [data-theme="dark"] .preload-text,
 .dark-mode .preload-text {
   color: #ffffff;
@@ -859,12 +854,6 @@ html {
 [data-theme="dark"] .progress-bar,
 .dark-mode .progress-bar {
   background: rgba(var(--user-accent-rgb), 0.1);
-}
-
-.preload,
-[data-theme="dark"] .preload,
-.dark-mode .preload {
-  background-color: var(--user-accent-soft, #f5f0e8) !important;
 }
 
 @media (max-width: 768px) {

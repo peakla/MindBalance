@@ -937,8 +937,8 @@
     .mb-charCount__num { position: absolute; font-size: 10px; font-weight: 700; color: #666; }
     .mb-charCount__progress { transition: stroke-dashoffset 0.3s ease; }
 
-    .mb-fab { position: fixed; bottom: 90px; right: 28px; width: 56px; height: 56px; border-radius: 50%; background: #AF916D; color: #fff; border: none; font-size: 24px; cursor: pointer; box-shadow: 0 4px 16px rgba(175, 145, 109, 0.4); z-index: 1000; transition: all 0.3s ease; display: grid; place-items: center; }
-    .mb-fab:hover { transform: scale(1.1) translateY(-2px); box-shadow: 0 8px 24px rgba(175, 145, 109, 0.5); }
+    .mb-fab { position: fixed; bottom: 150px; right: 28px; width: 56px; height: 56px; border-radius: 50%; background: var(--user-accent); color: #fff; border: none; font-size: 24px; cursor: pointer; box-shadow: 0 4px 16px rgba(var(--user-accent-rgb), 0.4); z-index: 1000; transition: all 0.3s ease; display: grid; place-items: center; }
+    .mb-fab:hover { transform: scale(1.1) translateY(-2px); box-shadow: 0 8px 24px rgba(var(--user-accent-rgb), 0.5); }
     [data-theme="dark"] .mb-fab { background: var(--user-accent-light); color: #1a1a2e; }
 
     .mb-reactions { position: relative; display: inline-flex; }
@@ -1010,7 +1010,7 @@
       .mb-search { width: 100%; max-width: none; }
       .mb-feedTabs { overflow-x: auto; }
       .mb-feedList { max-height: none; }
-      .mb-fab { bottom: 80px; right: 16px; width: 48px; height: 48px; font-size: 20px; }
+      .mb-fab { bottom: 140px; right: 16px; width: 48px; height: 48px; font-size: 20px; }
       .mb-userCard { display: none; }
       .mb-composerActions { flex-wrap: wrap; gap: 8px; }
       .mb-postFooter { gap: 4px; }

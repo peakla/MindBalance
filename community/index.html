@@ -2230,8 +2230,12 @@
       fab.addEventListener('click', () => {
         const composer = document.querySelector('.mb-composer');
         const input = document.getElementById('postText');
-        if (composer) window.scrollTo({ top: composer.offsetTop - 120, behavior: 'smooth' });
-        setTimeout(() => { if (input) input.focus(); }, 500);
+        if (input && !input.disabled) {
+          if (composer) window.scrollTo({ top: composer.offsetTop - 120, behavior: 'smooth' });
+          setTimeout(() => { if (input) input.focus(); }, 500);
+        } else {
+          window.location.href = '../auth/';
+        }
       });
     }
 

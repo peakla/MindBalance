@@ -1,0 +1,259 @@
+-- WARNING: This schema is for context only and is not meant to be run.
+-- Table order and constraints may not be valid for execution.
+
+CREATE TABLE public.achievements (
+  id text NOT NULL,
+  name text NOT NULL,
+  description text NOT NULL,
+  icon text NOT NULL,
+  category text NOT NULL,
+  points integer DEFAULT 10,
+  criteria jsonb,
+  CONSTRAINT achievements_pkey PRIMARY KEY (id)
+);
+CREATE TABLE public.community_comments (
+  id uuid NOT NULL DEFAULT gen_random_uuid(),
+  post_id uuid NOT NULL,
+  author_id uuid NOT NULL,
+  author_name text NOT NULL,
+  content text NOT NULL,
+  created_at timestamp with time zone NOT NULL DEFAULT now(),
+  CONSTRAINT community_comments_pkey PRIMARY KEY (id),
+  CONSTRAINT community_comments_post_id_fkey FOREIGN KEY (post_id) REFERENCES public.community_posts(id),
+  CONSTRAINT community_comments_author_id_fkey FOREIGN KEY (author_id) REFERENCES auth.users(id)
+);
+CREATE TABLE public.community_likes (
+  post_id uuid NOT NULL,
+  user_id uuid NOT NULL,
+  created_at timestamp with time zone NOT NULL DEFAULT now(),
+  CONSTRAINT community_likes_pkey PRIMARY KEY (post_id, user_id),
+  CONSTRAINT community_likes_post_id_fkey FOREIGN KEY (post_id) REFERENCES public.community_posts(id),
+  CONSTRAINT community_likes_user_id_fkey FOREIGN KEY (user_id) REFERENCES auth.users(id)
+);
+CREATE TABLE public.community_posts (
+  id uuid NOT NULL DEFAULT gen_random_uuid(),
+  author_id uuid NOT NULL,
+  author_name text NOT NULL,
+  category text NOT NULL DEFAULT 'General'::text,
+  content text NOT NULL,
+  link_url text,
+  created_at timestamp with time zone NOT NULL DEFAULT now(),
+  updated_at timestamp with time zone NOT NULL DEFAULT now(),
+  CONSTRAINT community_posts_pkey PRIMARY KEY (id),
+  CONSTRAINT community_posts_author_id_fkey FOREIGN KEY (author_id) REFERENCES auth.users(id)
+);
+CREATE TABLE public.followers (
+  id uuid NOT NULL DEFAULT gen_random_uuid(),
+  follower_id uuid,
+  following_id uuid,
+  created_at timestamp with time zone DEFAULT now(),
+  CONSTRAINT followers_pkey PRIMARY KEY (id),
+  CONSTRAINT followers_follower_id_fkey FOREIGN KEY (follower_id) REFERENCES auth.users(id),
+  CONSTRAINT followers_following_id_fkey FOREIGN KEY (following_id) REFERENCES auth.users(id)
+);
+CREATE TABLE public.likes (
+  id uuid NOT NULL DEFAULT gen_random_uuid(),
+  user_id uuid,
+  content_type text NOT NULL,
+  content_id uuid NOT NULL,
+  created_at timestamp with time zone DEFAULT now(),
+  CONSTRAINT likes_pkey PRIMARY KEY (id),
+  CONSTRAINT likes_user_id_fkey FOREIGN KEY (user_id) REFERENCES auth.users(id)
+);
+CREATE TABLE public.mood_logs (
+  id uuid NOT NULL DEFAULT gen_random_uuid(),
+  user_id uuid,
+  mood text NOT NULL,
+  mood_score integer NOT NULL CHECK (mood_score >= 1 AND mood_score <= 5),
+  note text,
+  created_at timestamp with time zone DEFAULT now(),
+  CONSTRAINT mood_logs_pkey PRIMARY KEY (id),
+  CONSTRAINT mood_logs_user_id_fkey FOREIGN KEY (user_id) REFERENCES auth.users(id)
+);
+CREATE TABLE public.newsletter_subscribers (
+  id uuid NOT NULL DEFAULT gen_random_uuid(),
+  email text NOT NULL UNIQUE,
+  subscribed_at timestamp with time zone DEFAULT now(),
+  is_active boolean DEFAULT true,
+  CONSTRAINT newsletter_subscribers_pkey PRIMARY KEY (id)
+);
+CREATE TABLE public.notifications (
+  id uuid NOT NULL DEFAULT gen_random_uuid(),
+  user_id uuid,
+  type text NOT NULL,
+  title text NOT NULL,
+  message text,
+  link text,
+  sender_id uuid,
+  is_read boolean DEFAULT false,
+  created_at timestamp with time zone DEFAULT now(),
+  read boolean DEFAULT false,
+  CONSTRAINT notifications_pkey PRIMARY KEY (id),
+  CONSTRAINT notifications_user_id_fkey FOREIGN KEY (user_id) REFERENCES auth.users(id),
+  CONSTRAINT notifications_sender_id_fkey FOREIGN KEY (sender_id) REFERENCES auth.users(id)
+);
+CREATE TABLE public.post_comments (
+  id uuid NOT NULL DEFAULT gen_random_uuid(),
+  post_id uuid,
+  author_id uuid,
+  content text NOT NULL,
+  parent_id uuid,
+  created_at timestamp with time zone DEFAULT now(),
+  updated_at timestamp with time zone DEFAULT now(),
+  author_email text,
+  author_name text,
+  CONSTRAINT post_comments_pkey PRIMARY KEY (id),
+  CONSTRAINT post_comments_post_id_fkey FOREIGN KEY (post_id) REFERENCES public.posts(id),
+  CONSTRAINT post_comments_author_id_fkey FOREIGN KEY (author_id) REFERENCES auth.users(id),
+  CONSTRAINT post_comments_parent_id_fkey FOREIGN KEY (parent_id) REFERENCES public.post_comments(id)
+);
+CREATE TABLE public.post_likes (
+  id uuid NOT NULL DEFAULT gen_random_uuid(),
+  post_id uuid,
+  user_id uuid,
+  created_at timestamp with time zone DEFAULT now(),
+  CONSTRAINT post_likes_pkey PRIMARY KEY (id),
+  CONSTRAINT post_likes_post_id_fkey FOREIGN KEY (post_id) REFERENCES public.posts(id),
+  CONSTRAINT post_likes_user_id_fkey FOREIGN KEY (user_id) REFERENCES auth.users(id)
+);
+CREATE TABLE public.post_media (
+  id uuid NOT NULL DEFAULT gen_random_uuid(),
+  post_id uuid,
+  file_url text NOT NULL,
+  file_type text NOT NULL,
+  file_name text NOT NULL,
+  file_size integer,
+  created_at timestamp with time zone DEFAULT now(),
+  CONSTRAINT post_media_pkey PRIMARY KEY (id)
+);
+CREATE TABLE public.post_reports (
+  id uuid NOT NULL DEFAULT gen_random_uuid(),
+  post_id uuid,
+  reporter_id uuid,
+  reason text NOT NULL,
+  details text,
+  status text DEFAULT 'pending'::text,
+  created_at timestamp with time zone DEFAULT now(),
+  CONSTRAINT post_reports_pkey PRIMARY KEY (id),
+  CONSTRAINT post_reports_post_id_fkey FOREIGN KEY (post_id) REFERENCES public.posts(id),
+  CONSTRAINT post_reports_reporter_id_fkey FOREIGN KEY (reporter_id) REFERENCES auth.users(id)
+);
+CREATE TABLE public.posts (
+  id uuid NOT NULL DEFAULT gen_random_uuid(),
+  author_id uuid,
+  content text NOT NULL,
+  category text DEFAULT 'general'::text,
+  image_url text,
+  like_count integer DEFAULT 0,
+  comment_count integer DEFAULT 0,
+  is_pinned boolean DEFAULT false,
+  pinned_at timestamp with time zone,
+  is_hidden boolean DEFAULT false,
+  created_at timestamp with time zone DEFAULT now(),
+  updated_at timestamp with time zone DEFAULT now(),
+  author_email text,
+  media_url text,
+  author_name text,
+  CONSTRAINT posts_pkey PRIMARY KEY (id),
+  CONSTRAINT posts_author_id_fkey FOREIGN KEY (author_id) REFERENCES auth.users(id)
+);
+CREATE TABLE public.profiles (
+  id uuid NOT NULL,
+  email text,
+  display_name text,
+  avatar_url text,
+  bio text,
+  theme_color text DEFAULT '#d4a574'::text,
+  social_links jsonb DEFAULT '{}'::jsonb,
+  is_public boolean DEFAULT true,
+  show_activity boolean DEFAULT true,
+  show_saved boolean DEFAULT false,
+  reputation_points integer DEFAULT 0,
+  current_streak integer DEFAULT 0,
+  longest_streak integer DEFAULT 0,
+  last_visit_date date,
+  created_at timestamp with time zone DEFAULT now(),
+  updated_at timestamp with time zone DEFAULT now(),
+  CONSTRAINT profiles_pkey PRIMARY KEY (id),
+  CONSTRAINT profiles_id_fkey FOREIGN KEY (id) REFERENCES auth.users(id)
+);
+CREATE TABLE public.reading_progress (
+  id uuid NOT NULL DEFAULT gen_random_uuid(),
+  user_id uuid,
+  article_slug text NOT NULL,
+  scroll_depth integer DEFAULT 0,
+  time_spent_seconds integer DEFAULT 0,
+  completed boolean DEFAULT false,
+  last_read_at timestamp with time zone DEFAULT now(),
+  created_at timestamp with time zone DEFAULT now(),
+  CONSTRAINT reading_progress_pkey PRIMARY KEY (id),
+  CONSTRAINT reading_progress_user_id_fkey FOREIGN KEY (user_id) REFERENCES auth.users(id)
+);
+CREATE TABLE public.resource_suggestions (
+  id uuid NOT NULL DEFAULT gen_random_uuid(),
+  user_id uuid,
+  title text NOT NULL,
+  url text,
+  category text,
+  description text,
+  status text DEFAULT 'pending'::text,
+  created_at timestamp with time zone DEFAULT now(),
+  CONSTRAINT resource_suggestions_pkey PRIMARY KEY (id),
+  CONSTRAINT resource_suggestions_user_id_fkey FOREIGN KEY (user_id) REFERENCES auth.users(id)
+);
+CREATE TABLE public.saved_articles (
+  id uuid NOT NULL DEFAULT gen_random_uuid(),
+  user_id uuid,
+  article_slug text NOT NULL,
+  article_title text NOT NULL,
+  article_category text,
+  article_image text,
+  saved_at timestamp with time zone DEFAULT now(),
+  CONSTRAINT saved_articles_pkey PRIMARY KEY (id),
+  CONSTRAINT saved_articles_user_id_fkey FOREIGN KEY (user_id) REFERENCES auth.users(id)
+);
+CREATE TABLE public.user_achievements (
+  id uuid NOT NULL DEFAULT gen_random_uuid(),
+  user_id uuid,
+  achievement_id text,
+  unlocked_at timestamp with time zone DEFAULT now(),
+  CONSTRAINT user_achievements_pkey PRIMARY KEY (id),
+  CONSTRAINT user_achievements_user_id_fkey FOREIGN KEY (user_id) REFERENCES auth.users(id),
+  CONSTRAINT user_achievements_achievement_id_fkey FOREIGN KEY (achievement_id) REFERENCES public.achievements(id)
+);
+CREATE TABLE public.user_activity_logs (
+  id uuid NOT NULL DEFAULT gen_random_uuid(),
+  user_id uuid,
+  activity_type text NOT NULL,
+  activity_data jsonb DEFAULT '{}'::jsonb,
+  page_url text,
+  created_at timestamp with time zone DEFAULT now(),
+  CONSTRAINT user_activity_logs_pkey PRIMARY KEY (id),
+  CONSTRAINT user_activity_logs_user_id_fkey FOREIGN KEY (user_id) REFERENCES auth.users(id)
+);
+CREATE TABLE public.user_engagement (
+  id uuid NOT NULL DEFAULT gen_random_uuid(),
+  user_id uuid,
+  visit_date date NOT NULL,
+  articles_read integer DEFAULT 0,
+  time_spent_minutes integer DEFAULT 0,
+  created_at timestamp with time zone DEFAULT now(),
+  CONSTRAINT user_engagement_pkey PRIMARY KEY (id),
+  CONSTRAINT user_engagement_user_id_fkey FOREIGN KEY (user_id) REFERENCES auth.users(id)
+);
+CREATE TABLE public.wellness_goals (
+  id uuid NOT NULL DEFAULT gen_random_uuid(),
+  user_id uuid,
+  title text NOT NULL,
+  description text,
+  category text NOT NULL,
+  target_value integer DEFAULT 1,
+  current_value integer DEFAULT 0,
+  start_date date DEFAULT CURRENT_DATE,
+  end_date date,
+  completed boolean DEFAULT false,
+  completed_at timestamp with time zone,
+  created_at timestamp with time zone DEFAULT now(),
+  CONSTRAINT wellness_goals_pkey PRIMARY KEY (id),
+  CONSTRAINT wellness_goals_user_id_fkey FOREIGN KEY (user_id) REFERENCES auth.users(id)
+);

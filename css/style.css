@@ -4053,21 +4053,23 @@ body.dark-theme .rl-local-search__error {
   flex: 1;
   padding: 12px 18px;
   border-radius: 25px;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  background: rgba(255, 255, 255, 0.1);
-  color: #fff;
+  border: none;
+  background: rgba(255, 255, 255, 0.85);
+  color: #333;
   font-size: 14px;
+  font-family: 'Poppins', sans-serif;
   transition: all 200ms ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
 }
 
 .mb-footer__newsletter-input::placeholder {
-  color: rgba(255, 255, 255, 0.5);
+  color: #999;
 }
 
 .mb-footer__newsletter-input:focus {
   outline: none;
-  border-color: var(--user-accent);
-  background: rgba(255, 255, 255, 0.15);
+  background: rgba(255, 255, 255, 0.95);
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
 }
 
 .mb-footer__newsletter-btn {
@@ -4407,7 +4409,8 @@ body.dark-theme .rl-local-search__error {
 }
 
 [data-theme="dark"] .mb-footer__newsletter-input:focus {
-  border-color: var(--purple-accent);
+  background: rgba(255, 255, 255, 0.12);
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.2);
 }
 
 [data-theme="dark"] .mb-footer__newsletter-btn {

@@ -3194,7 +3194,6 @@ body.dark-theme .rl-local-search__error {
   position: absolute;
   inset: 0;
   background: rgba(0, 0, 0, 0.6);
-  backdrop-filter: blur(4px);
 }
 
 .suggest-modal__content {
@@ -4046,8 +4045,7 @@ body.dark-theme .rl-local-search__error {
   padding: 8px 14px;
   border-radius: 20px;
   border: 1px solid rgba(255, 255, 255, 0.35);
-  background: rgba(255, 255, 255, 0.15);
-  -webkit-backdrop-filter: blur(4px);
+  background: rgba(255, 255, 255, 0.2);
   color: rgba(255, 255, 255, 0.85);
   font-size: 12px;
   font-weight: 600;

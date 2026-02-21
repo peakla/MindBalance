@@ -251,11 +251,9 @@
   text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
   display: inline-block;
   padding: 6px 16px;
-  background: rgba(255, 255, 255, 0.15);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
+  background: rgba(255, 255, 255, 0.2);
   border-radius: 20px;
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.25);
 }
 
 .profile-greeting__message {
@@ -373,15 +371,13 @@
 }
 
 .mb-profile.immersive .mb-profile__header {
-  background: rgba(255, 255, 255, 0.85);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 255, 255, 0.3);
+  background: #fff;
+  border: 1px solid rgba(0, 0, 0, 0.1);
   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
 }
 
 [data-theme="dark"] .mb-profile.immersive .mb-profile__header {
-  background: rgba(45, 43, 61, 0.85);
+  background: #2d2b3d;
   border: 1px solid rgba(155, 126, 217, 0.2);
 }
 
@@ -396,12 +392,10 @@ body:not([data-theme="dark"]) .time-night .mb-profile.immersive .mb-profile__hea
   border: 1px solid rgba(200, 180, 220, 0.3);
 }
 
-/* === GLASSMORPHISM CARDS === */
+/* === SOLID CARDS === */
 .glass-card {
-  background: rgba(255, 255, 255, 0.7);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 255, 255, 0.4);
+  background: #fff;
+  border: 1px solid rgba(0, 0, 0, 0.1);
   border-radius: 20px;
   box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
   transition: transform 0.3s ease, box-shadow 0.3s ease;

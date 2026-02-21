@@ -971,7 +971,7 @@ document.addEventListener("DOMContentLoaded", function () {
       small.className = "rl-cardSmall";
       const audienceKey = `rl_aud_${(item.audience || "General").replace(/\s+/g, "")}`;
       const audienceText = getLabel(audienceKey, item.audience || "General");
-      small.innerHTML = `<span data-translate="${audienceKey}">${audienceText}</span> • ${item.provider || "MindBalance"}`;
+      small.innerHTML = `<span data-translate="${audienceKey}">${audienceText}</span> • ${item.provider || "MindSpace"}`;
 
       const title = document.createElement("h3");
       title.className = "rl-cardTitle";
@@ -1127,7 +1127,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
       const provider = document.createElement('p');
       provider.className = 'rl-spotlight-card__provider';
-      provider.textContent = item.provider || 'MindBalance';
+      provider.textContent = item.provider || 'MindSpace';
 
       const title = document.createElement('h4');
       title.className = 'rl-spotlight-card__title';

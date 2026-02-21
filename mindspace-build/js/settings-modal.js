@@ -220,7 +220,7 @@
                   <div class="theme-presets-grid">
                     <div class="theme-preset-card theme-preset-default" data-preset="default">
                       <div class="theme-preset-name" data-translate="settings_preset_default">Default</div>
-                      <div class="theme-preset-desc" data-translate="settings_preset_default_desc">Classic MindBalance</div>
+                      <div class="theme-preset-desc" data-translate="settings_preset_default_desc">Classic MindSpace</div>
                     </div>
                     <div class="theme-preset-card theme-preset-ocean" data-preset="ocean">
                       <div class="theme-preset-name" data-translate="settings_preset_ocean">Calm Ocean</div>
@@ -275,7 +275,7 @@
                 <div class="settings-preview">
                   <div class="settings-preview-title" data-translate="settings_live_preview">Live Preview</div>
                   <div class="settings-preview-frame">
-                    <p class="preview-sample-text" style="font-size: 18px; font-weight: 600; margin-bottom: 8px;" data-translate="settings_preview_welcome">Welcome to MindBalance</p>
+                    <p class="preview-sample-text" style="font-size: 18px; font-weight: 600; margin-bottom: 8px;" data-translate="settings_preview_welcome">Welcome to MindSpace</p>
                     <p class="preview-sample-text" style="font-size: 14px; opacity: 0.8; margin-bottom: 16px;" data-translate="settings_preview_journey">Your journey to mental wellness starts here.</p>
                     <span class="preview-sample-btn" data-translate="settings_preview_btn">Get Started</span>
                   </div>
@@ -457,7 +457,7 @@
               </div>
               <h3 class="onboarding-title" data-translate="settings_onboarding_title">Welcome to Settings!</h3>
               <p class="onboarding-text" data-translate="settings_onboarding_text">
-                Customize your MindBalance experience with theme presets, accessibility options, and more. Your preferences sync across all pages.
+                Customize your MindSpace experience with theme presets, accessibility options, and more. Your preferences sync across all pages.
               </p>
               <button class="onboarding-btn" id="onboardingStartBtn" data-translate="settings_onboarding_start">Let's Get Started</button>
               <button class="onboarding-skip" id="onboardingSkipBtn" data-translate="settings_onboarding_skip">Skip for now</button>

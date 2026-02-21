@@ -1445,6 +1445,15 @@ body.nav-active .topbar {
   letter-spacing: 0.2px;
 }
 
+.topbar__slide[data-slide="3"] span,
+.topbar__slide[data-slide="4"] span {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  min-width: 0;
+  flex: 1;
+}
+
 .topbar__slide a {
   color: #fff;
   text-decoration: underline;

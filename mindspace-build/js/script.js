@@ -1694,8 +1694,10 @@ document.addEventListener('DOMContentLoaded', function() {
 
   function showTopbar() {
     topbar.classList.remove('dismissed');
+    topbar.classList.remove('topbar--hidden');
     var hdr = document.querySelector('.header');
     if (hdr) hdr.classList.remove('topbar--gone');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
     syncTopbarHeight();
     startTimer();
   }

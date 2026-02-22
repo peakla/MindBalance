@@ -1,359 +1,1825 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
+  <!-- ===== HEAD ===== -->
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Reference | MindBalance</title>
 
-<!-- ===== HEAD ===== -->
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Reference | MindBalance</title>
+    <link rel="icon" type="image/png" href="/assets/images/favicon.png" />
+    <meta
+      name="title"
+      content="MindBalance - Mental Health Blog, Support & Resource Hub"
+    />
+    <meta
+      name="description"
+      content="MindBalance is a student-built mental health education and support hub with credible resources, clear explanations, and practical tools for anxiety, stress, depression, sleep, mindfulness, and teen mental health."
+    />
 
+    <link rel="preconnect" href="https://unpkg.com" />
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" />
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" />
+    <link rel="preconnect" href="https://code.jquery.com" />
+    <link rel="preconnect" href="https://acsbapp.com" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 
-  <link rel="icon" type="image/png" href="/assets/images/favicon.png">
-  <meta name="title" content="MindBalance - Mental Health Blog, Support & Resource Hub">
-  <meta name="description" content="MindBalance is a student-built mental health education and support hub with credible resources, clear explanations, and practical tools for anxiety, stress, depression, sleep, mindfulness, and teen mental health.">
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
 
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/docs.css" />
+    <link rel="stylesheet" href="/css/responsive-system.css" />
+    <link rel="stylesheet" href="/css/settings-modal.css" />
+    <link rel="stylesheet" href="/css/animations.css" />
+    <link rel="stylesheet" href="/css/quote-banner.css" />
+    <link rel="stylesheet" href="/css/wellness-checkin.css" />
+    <link rel="stylesheet" href="/css/notifications.css" />
 
-  <link rel="preconnect" href="https://unpkg.com">
-  <link rel="preconnect" href="https://cdn.jsdelivr.net">
-  <link rel="preconnect" href="https://cdnjs.cloudflare.com">
-  <link rel="preconnect" href="https://code.jquery.com">
-  <link rel="preconnect" href="https://acsbapp.com">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preload" href="/css/style.css" as="style" />
+    <link rel="preload" href="/js/script.js" as="script" />
 
+    <script>
+      !(function (o, c) {
+        var n = c.documentElement,
+          t = " w-mod-";
+        n.className += t + "js";
+        ("ontouchstart" in o ||
+          (o.DocumentTouch && c instanceof DocumentTouch)) &&
+          (n.className += t + "touch");
+      })(window, document);
+    </script>
 
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://code.jquery.com/jquery-3.4.1.js" defer></script>
 
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="/js/auth.js" defer></script>
+    <script src="/js/settings.js" defer></script>
+    <script src="/js/settings-modal.js" defer></script>
+    <script src="/js/translations.js" defer></script>
+    <script src="/js/quote-banner.js" defer></script>
+    <script src="/js/wellness-checkin.js" defer></script>
+    <script src="/js/notifications.js" defer></script>
+  </head>
 
-  <link rel="stylesheet" href="/css/style.css">
-  <link rel="stylesheet" href="/css/docs.css">
-  <link rel="stylesheet" href="/css/responsive-system.css">
-  <link rel="stylesheet" href="/css/settings-modal.css">
-  <link rel="stylesheet" href="/css/animations.css">
-  <link rel="stylesheet" href="/css/quote-banner.css">
-  <link rel="stylesheet" href="/css/wellness-checkin.css">
-  <link rel="stylesheet" href="/css/notifications.css">
+  <body>
+    <a
+      href="#main-content"
+      class="skip-to-content"
+      data-translate="skip_to_content"
+      >Skip to main content</a
+    >
 
-
-  <link rel="preload" href="/css/style.css" as="style">
-  <link rel="preload" href="/js/script.js" as="script">
-
-
-
-
-  <script>
-    !function (o, c) {
-      var n = c.documentElement, t = " w-mod-";
-      n.className += t + "js";
-      ("ontouchstart" in o || (o.DocumentTouch && c instanceof DocumentTouch)) &&
-        (n.className += t + "touch");
-    }(window, document);
-  </script>
-
-
-  <script src="https://code.jquery.com/jquery-3.4.1.js" defer></script>
-
-
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  <script src="/js/auth.js" defer></script>
-  <script src="/js/settings.js" defer></script>
-  <script src="/js/settings-modal.js" defer></script>
-  <script src="/js/translations.js" defer></script>
-  <script src="/js/quote-banner.js" defer></script>
-  <script src="/js/wellness-checkin.js" defer></script>
-  <script src="/js/notifications.js" defer></script>
-</head>
-
-<body>
-
-<a href="#main-content" class="skip-to-content" data-translate="skip_to_content">Skip to main content</a>
-
-<svg style="position: absolute; width: 0; height: 0; overflow: hidden;" aria-hidden="true">
-  <defs>
-
-    <filter id="protanopia-filter">
-      <feColorMatrix type="matrix" values="
+    <svg
+      style="position: absolute; width: 0; height: 0; overflow: hidden"
+      aria-hidden="true"
+    >
+      <defs>
+        <filter id="protanopia-filter">
+          <feColorMatrix
+            type="matrix"
+            values="
         0.567, 0.433, 0,     0, 0
         0.558, 0.442, 0,     0, 0
         0,     0.242, 0.758, 0, 0
-        0,     0,     0,     1, 0"/>
-    </filter>
+        0,     0,     0,     1, 0"
+          />
+        </filter>
 
-    <filter id="deuteranopia-filter">
-      <feColorMatrix type="matrix" values="
+        <filter id="deuteranopia-filter">
+          <feColorMatrix
+            type="matrix"
+            values="
         0.625, 0.375, 0,   0, 0
         0.7,   0.3,   0,   0, 0
         0,     0.3,   0.7, 0, 0
-        0,     0,     0,   1, 0"/>
-    </filter>
+        0,     0,     0,   1, 0"
+          />
+        </filter>
 
-    <filter id="tritanopia-filter">
-      <feColorMatrix type="matrix" values="
+        <filter id="tritanopia-filter">
+          <feColorMatrix
+            type="matrix"
+            values="
         0.95, 0.05,  0,     0, 0
         0,    0.433, 0.567, 0, 0
         0,    0.475, 0.525, 0, 0
-        0,    0,     0,     1, 0"/>
-    </filter>
-  </defs>
-</svg>
+        0,    0,     0,     1, 0"
+          />
+        </filter>
+      </defs>
+    </svg>
 
-
-  <div class="preload" data-preaload>
-    <img src="/assets/images/preload.gif" alt="Loading..." class="loader-gif" decoding="async">
-    <img src="/assets/images/MindBalanceLogo.svg" alt="MindBalance" class="preload-logo" decoding="async">
-    <span class="preload-text">Loading your wellness space</span>
-    <div class="progress-bar">
-      <div class="progress-bar-fill"></div>
-    </div>
-  </div>
-
-
-  <div class="orientation-lock"></div>
-
-
-<!-- ===== NAVBAR ===== -->
-  <nav class="scroll-progress" aria-label="Page sections">
-    <div class="scroll-progress__bar" aria-hidden="true"></div>
-    <div class="scroll-progress__sections">
-      <button class="scroll-progress__dot" data-section="main-hero" aria-label="Jump to Hero section">
-        <span class="scroll-progress__label" aria-hidden="true">Hero</span>
-      </button>
-      <button class="scroll-progress__dot" data-section="about" aria-label="Jump to About section">
-        <span class="scroll-progress__label" aria-hidden="true">About</span>
-      </button>
-      <button class="scroll-progress__dot" data-section="services" aria-label="Jump to Services section">
-        <span class="scroll-progress__label" aria-hidden="true">Services</span>
-      </button>
-      <button class="scroll-progress__dot" data-section="testimonials" aria-label="Jump to Reviews section">
-        <span class="scroll-progress__label" aria-hidden="true">Reviews</span>
-      </button>
-      <button class="scroll-progress__dot" data-section="footer" aria-label="Jump to Footer section">
-        <span class="scroll-progress__label" aria-hidden="true">Footer</span>
-      </button>
-    </div>
-  </nav>
-
-
-  <div class="topbar" id="smartTopbar">
-    <div class="topbar__inner">
-      <div class="topbar__slides" id="topbarSlides">
-        <div class="topbar__slide active" data-slide="0">
-          <ion-icon name="heart-outline" aria-hidden="true"></ion-icon>
-          <span data-translate="topbar_welcome">Welcome to MindBalance — Your wellness journey starts here</span>
-        </div>
-        <div class="topbar__slide" data-slide="1">
-          <ion-icon name="sunny-outline" aria-hidden="true"></ion-icon>
-          <span data-translate="topbar_tip">Daily tip: Take 5 deep breaths right now. Your mind will thank you.</span>
-        </div>
-        <div class="topbar__slide" data-slide="2">
-          <ion-icon name="shield-checkmark-outline" aria-hidden="true"></ion-icon>
-          <span data-translate="topbar_crisis">Need support now? Call or text <strong>988</strong> — Suicide &amp; Crisis Lifeline (24/7)</span>
-        </div>
-        <div class="topbar__slide" data-slide="3">
-          <ion-icon name="call-outline" aria-hidden="true"></ion-icon>
-          <span data-translate="topbar_contact">Reach us: <a href="tel:+12142459442">+1 (214) 245 9442</a> &nbsp;|&nbsp; <a href="https://mail.google.com/mail/?view=cm&fs=1&to=mindbalancehelp@gmail.com">mindbalancehelp@gmail.com</a></span>
-        </div>
-        <div class="topbar__slide" data-slide="4">
-          <ion-icon name="location-outline" aria-hidden="true"></ion-icon>
-          <span data-translate="topbar_location">4601 N MacArthur Blvd, Irving, TX 75038 &nbsp;|&nbsp; Open daily 8 AM – 10 PM</span>
-        </div>
-      </div>
-      <div class="topbar__dots" id="topbarDots">
-        <button class="topbar__dot active" data-dot="0" aria-label="Slide 1"></button>
-        <button class="topbar__dot" data-dot="1" aria-label="Slide 2"></button>
-        <button class="topbar__dot" data-dot="2" aria-label="Slide 3"></button>
-        <button class="topbar__dot" data-dot="3" aria-label="Slide 4"></button>
-        <button class="topbar__dot" data-dot="4" aria-label="Slide 5"></button>
+    <div class="preload" data-preaload>
+      <img
+        src="/assets/images/preload.gif"
+        alt="Loading..."
+        class="loader-gif"
+        decoding="async"
+      />
+      <img
+        src="/assets/images/MindBalanceLogo.svg"
+        alt="MindBalance"
+        class="preload-logo"
+        decoding="async"
+      />
+      <span class="preload-text">Loading your wellness space</span>
+      <div class="progress-bar">
+        <div class="progress-bar-fill"></div>
       </div>
     </div>
-  </div>
 
+    <div class="orientation-lock"></div>
 
-  <header class="header" data-header>
-    <div class="container">
+    <!-- ===== NAVBAR ===== -->
+    <nav class="scroll-progress" aria-label="Page sections">
+      <div class="scroll-progress__bar" aria-hidden="true"></div>
+      <div class="scroll-progress__sections">
+        <button
+          class="scroll-progress__dot"
+          data-section="main-hero"
+          aria-label="Jump to Hero section"
+        >
+          <span class="scroll-progress__label" aria-hidden="true">Hero</span>
+        </button>
+        <button
+          class="scroll-progress__dot"
+          data-section="about"
+          aria-label="Jump to About section"
+        >
+          <span class="scroll-progress__label" aria-hidden="true">About</span>
+        </button>
+        <button
+          class="scroll-progress__dot"
+          data-section="services"
+          aria-label="Jump to Services section"
+        >
+          <span class="scroll-progress__label" aria-hidden="true"
+            >Services</span
+          >
+        </button>
+        <button
+          class="scroll-progress__dot"
+          data-section="testimonials"
+          aria-label="Jump to Reviews section"
+        >
+          <span class="scroll-progress__label" aria-hidden="true">Reviews</span>
+        </button>
+        <button
+          class="scroll-progress__dot"
+          data-section="footer"
+          aria-label="Jump to Footer section"
+        >
+          <span class="scroll-progress__label" aria-hidden="true">Footer</span>
+        </button>
+      </div>
+    </nav>
 
-      <a href="/" class="logo">
-        <img src="/assets/images/MindBalanceLogo.svg" width="160" height="50" alt="MindBalance - logo" decoding="async">
-      </a>
-
-      <nav class="navbar" data-navbar>
-
-        <div class="mobile-nav-header">
-          <a href="/" class="mobile-nav-header__logo">
-            <img src="/assets/images/MindBalanceLogo.svg" width="130" height="40" alt="MindBalance - logo" decoding="async">
-          </a>
-          <button class="mobile-nav-close" aria-label="close menu" data-nav-toggler>
-            <ion-icon name="close-outline" aria-hidden="true"></ion-icon>
-          </button>
+    <div class="topbar" id="smartTopbar">
+      <div class="topbar__inner">
+        <div class="topbar__slides" id="topbarSlides">
+          <div class="topbar__slide active" data-slide="0">
+            <ion-icon name="heart-outline" aria-hidden="true"></ion-icon>
+            <span data-translate="topbar_welcome"
+              >Welcome to MindBalance — Your wellness journey starts here</span
+            >
+          </div>
+          <div class="topbar__slide" data-slide="1">
+            <ion-icon name="sunny-outline" aria-hidden="true"></ion-icon>
+            <span data-translate="topbar_tip"
+              >Daily tip: Take 5 deep breaths right now. Your mind will thank
+              you.</span
+            >
+          </div>
+          <div class="topbar__slide" data-slide="2">
+            <ion-icon
+              name="shield-checkmark-outline"
+              aria-hidden="true"
+            ></ion-icon>
+            <span data-translate="topbar_crisis"
+              >Need support now? Call or text <strong>988</strong> — Suicide
+              &amp; Crisis Lifeline (24/7)</span
+            >
+          </div>
+          <div class="topbar__slide" data-slide="3">
+            <ion-icon name="call-outline" aria-hidden="true"></ion-icon>
+            <span data-translate="topbar_contact"
+              >Reach us:
+              <a href="tel:+12142459442">+1 (214) 245 9442</a> &nbsp;|&nbsp;
+              <a
+                href="https://mail.google.com/mail/?view=cm&fs=1&to=mindbalancehelp@gmail.com"
+                >mindbalancehelp@gmail.com</a
+              ></span
+            >
+          </div>
+          <div class="topbar__slide" data-slide="4">
+            <ion-icon name="location-outline" aria-hidden="true"></ion-icon>
+            <span data-translate="topbar_location"
+              >4601 N MacArthur Blvd, Irving, TX 75038 &nbsp;|&nbsp; Open daily
+              8 AM – 10 PM</span
+            >
+          </div>
         </div>
-
-        <div class="mobile-nav-crisis" data-nav-toggler>
-          <a href="/support/#crisis" class="mobile-crisis-btn">
-            <ion-icon name="heart-outline"></ion-icon>
-            <span data-translate="nav_crisis">Get Help Now</span>
-            <ion-icon name="arrow-forward-outline" class="mobile-crisis-arrow"></ion-icon>
-          </a>
+        <div class="topbar__dots" id="topbarDots">
+          <button
+            class="topbar__dot active"
+            data-dot="0"
+            aria-label="Slide 1"
+          ></button>
+          <button
+            class="topbar__dot"
+            data-dot="1"
+            aria-label="Slide 2"
+          ></button>
+          <button
+            class="topbar__dot"
+            data-dot="2"
+            aria-label="Slide 3"
+          ></button>
+          <button
+            class="topbar__dot"
+            data-dot="3"
+            aria-label="Slide 4"
+          ></button>
+          <button
+            class="topbar__dot"
+            data-dot="4"
+            aria-label="Slide 5"
+          ></button>
         </div>
+      </div>
+    </div>
 
-        <div class="navbar-scroll-content">
+    <header class="header" data-header>
+      <div class="container">
+        <a href="/" class="logo">
+          <img
+            src="/assets/images/MindBalanceLogo.svg"
+            width="160"
+            height="50"
+            alt="MindBalance - logo"
+            decoding="async"
+          />
+        </a>
 
-          <ul class="navbar-list">
-          <li class="navbar-item">
-            <a href="/" class="navbar-link hover-underline">
-              <ion-icon name="home-outline" class="nav-link-icon" aria-hidden="true"></ion-icon>
-              <span class="span" data-translate="nav_home">Home</span>
+        <nav class="navbar" data-navbar>
+          <div class="mobile-nav-header">
+            <a href="/" class="mobile-nav-header__logo">
+              <img
+                src="/assets/images/MindBalanceLogo.svg"
+                width="130"
+                height="40"
+                alt="MindBalance - logo"
+                decoding="async"
+              />
             </a>
-          </li>
+            <button
+              class="mobile-nav-close"
+              aria-label="close menu"
+              data-nav-toggler
+            >
+              <ion-icon name="close-outline" aria-hidden="true"></ion-icon>
+            </button>
+          </div>
 
-          <li class="navbar-item">
-            <a href="/support/" class="navbar-link hover-underline">
-              <ion-icon name="chatbubbles-outline" class="nav-link-icon" aria-hidden="true"></ion-icon>
-              <span class="span" data-translate="nav_contact">Contact</span>
+          <div class="mobile-nav-crisis" data-nav-toggler>
+            <a href="/support/#crisis" class="mobile-crisis-btn">
+              <ion-icon name="heart-outline"></ion-icon>
+              <span data-translate="nav_crisis">Get Help Now</span>
+              <ion-icon
+                name="arrow-forward-outline"
+                class="mobile-crisis-arrow"
+              ></ion-icon>
             </a>
-          </li>
+          </div>
 
-          <li class="navbar-item has-submenu" data-submenu="resources">
-            <a href="/resourcelib/" class="navbar-link hover-underline">
-              <ion-icon name="library-outline" class="nav-link-icon" aria-hidden="true"></ion-icon>
-              <span class="span" data-translate="nav_resources">Resource Library</span>
-              <ion-icon name="chevron-forward-outline" class="submenu-chevron" aria-hidden="true"></ion-icon>
-            </a>
-            <div class="navbar-dropdown">
-              <a href="/resourcelib/?category=anxiety" class="navbar-dropdown__item">
-                <ion-icon name="pulse-outline"></ion-icon> Anxiety Resources
-              </a>
-              <a href="/resourcelib/?category=depression" class="navbar-dropdown__item">
-                <ion-icon name="cloudy-outline"></ion-icon> Depression Support
-              </a>
-              <a href="/resourcelib/?category=stress" class="navbar-dropdown__item">
-                <ion-icon name="flash-outline"></ion-icon> Stress Management
-              </a>
-              <a href="/resourcelib/?category=mindfulness" class="navbar-dropdown__item">
-                <ion-icon name="leaf-outline"></ion-icon> Mindfulness
-              </a>
-              <div class="navbar-dropdown__divider"></div>
-              <a href="/resourcelib/" class="navbar-dropdown__item">
-                <ion-icon name="grid-outline"></ion-icon> View All Resources
-              </a>
-            </div>
-          </li>
+          <div class="navbar-scroll-content">
+            <ul class="navbar-list">
+              <li class="navbar-item">
+                <a href="/" class="navbar-link hover-underline">
+                  <ion-icon
+                    name="home-outline"
+                    class="nav-link-icon"
+                    aria-hidden="true"
+                  ></ion-icon>
+                  <span class="span" data-translate="nav_home">Home</span>
+                </a>
+              </li>
 
-          <li class="navbar-item">
-            <a href="/community/" class="navbar-link hover-underline">
-              <ion-icon name="people-outline" class="nav-link-icon" aria-hidden="true"></ion-icon>
-              <span class="span" data-translate="nav_community">Community Hub</span>
-            </a>
-          </li>
-          <li class="navbar-item has-submenu" data-submenu="blog">
-            <a href="/blog/" class="navbar-link hover-underline">
-              <ion-icon name="newspaper-outline" class="nav-link-icon" aria-hidden="true"></ion-icon>
-              <span class="span" data-translate="nav_blog">Blog</span>
-              <ion-icon name="chevron-forward-outline" class="submenu-chevron" aria-hidden="true"></ion-icon>
-            </a>
-            <div class="navbar-dropdown">
-              <a href="/articles/anxiety.html" class="navbar-dropdown__item">
-                <ion-icon name="document-text-outline"></ion-icon> Understanding Anxiety
-              </a>
-              <a href="/articles/depression.html" class="navbar-dropdown__item">
-                <ion-icon name="document-text-outline"></ion-icon> Depression Guide
-              </a>
-              <a href="/articles/stress.html" class="navbar-dropdown__item">
-                <ion-icon name="document-text-outline"></ion-icon> Stress Management
-              </a>
-              <a href="/articles/mindfulness.html" class="navbar-dropdown__item">
-                <ion-icon name="document-text-outline"></ion-icon> Mindfulness Basics
-              </a>
-              <div class="navbar-dropdown__divider"></div>
-              <a href="/blog/" class="navbar-dropdown__item">
-                <ion-icon name="albums-outline"></ion-icon> All Articles
-              </a>
-            </div>
-          </li>
-          <li class="navbar-item">
-            <a href="/docs/" class="navbar-link hover-underline active">
-              <ion-icon name="document-outline" class="nav-link-icon" aria-hidden="true"></ion-icon>
-              <span class="span" data-translate="nav_docs">References</span>
-            </a>
-          </li>
-        </ul>
+              <li class="navbar-item">
+                <a href="/support/" class="navbar-link hover-underline">
+                  <ion-icon
+                    name="chatbubbles-outline"
+                    class="nav-link-icon"
+                    aria-hidden="true"
+                  ></ion-icon>
+                  <span class="span" data-translate="nav_contact">Contact</span>
+                </a>
+              </li>
 
-        <div class="mobile-nav-divider"></div>
+              <li class="navbar-item has-submenu" data-submenu="resources">
+                <a href="/resourcelib/" class="navbar-link hover-underline">
+                  <ion-icon
+                    name="library-outline"
+                    class="nav-link-icon"
+                    aria-hidden="true"
+                  ></ion-icon>
+                  <span class="span" data-translate="nav_resources"
+                    >Resource Library</span
+                  >
+                  <ion-icon
+                    name="chevron-forward-outline"
+                    class="submenu-chevron"
+                    aria-hidden="true"
+                  ></ion-icon>
+                </a>
+                <div class="navbar-dropdown">
+                  <a
+                    href="/resourcelib/?category=anxiety"
+                    class="navbar-dropdown__item"
+                  >
+                    <ion-icon name="pulse-outline"></ion-icon> Anxiety Resources
+                  </a>
+                  <a
+                    href="/resourcelib/?category=depression"
+                    class="navbar-dropdown__item"
+                  >
+                    <ion-icon name="cloudy-outline"></ion-icon> Depression
+                    Support
+                  </a>
+                  <a
+                    href="/resourcelib/?category=stress"
+                    class="navbar-dropdown__item"
+                  >
+                    <ion-icon name="flash-outline"></ion-icon> Stress Management
+                  </a>
+                  <a
+                    href="/resourcelib/?category=mindfulness"
+                    class="navbar-dropdown__item"
+                  >
+                    <ion-icon name="leaf-outline"></ion-icon> Mindfulness
+                  </a>
+                  <div class="navbar-dropdown__divider"></div>
+                  <a href="/resourcelib/" class="navbar-dropdown__item">
+                    <ion-icon name="grid-outline"></ion-icon> View All Resources
+                  </a>
+                </div>
+              </li>
 
-        <div class="mobile-settings-section collapsed">
-          <button class="mobile-settings-toggle" aria-expanded="false" aria-controls="mobileSettingsList">
-            <span class="mobile-settings-title" data-translate="settings_title">Settings</span>
-            <ion-icon name="chevron-down-outline"></ion-icon>
-          </button>
-          <div class="mobile-settings-list" id="mobileSettingsList">
-            <div class="mobile-setting-item">
-              <span class="mobile-setting-label"><ion-icon name="moon-outline"></ion-icon> <span data-translate="settings_dark_mode">Dark Mode</span></span>
-              <label class="theme-toggle-switch">
-                <input type="checkbox" data-theme-toggle>
-                <span class="theme-toggle-slider"></span>
-              </label>
-            </div>
-            <div class="mobile-setting-item">
-              <span class="mobile-setting-label"><ion-icon name="text-outline"></ion-icon> <span data-translate="settings_font_size">Font Size</span></span>
-              <select class="setting-select" data-font-size-select>
-                <option value="normal">Normal</option>
-                <option value="large">Large</option>
-                <option value="x-large">Extra Large</option>
-              </select>
-            </div>
-            <div class="mobile-setting-item">
-              <span class="mobile-setting-label"><ion-icon name="eye-outline"></ion-icon> <span data-translate="settings_colorblind">Colorblind Mode</span></span>
-              <select class="setting-select" data-colorblind-select>
-                <option value="none">None</option>
-                <option value="protanopia">Protanopia</option>
-                <option value="deuteranopia">Deuteranopia</option>
-                <option value="tritanopia">Tritanopia</option>
-              </select>
-            </div>
-            <div class="mobile-setting-item">
-              <span class="mobile-setting-label"><ion-icon name="flash-outline"></ion-icon> <span data-translate="settings_focus_mode">Focus Mode (ADHD)</span></span>
-              <label class="theme-toggle-switch">
-                <input type="checkbox" data-adhd-toggle>
-                <span class="theme-toggle-slider"></span>
-              </label>
-            </div>
-            <div class="mobile-setting-item">
-              <span class="mobile-setting-label"><ion-icon name="reader-outline"></ion-icon> <span data-translate="settings_dyslexia">Dyslexia Font</span></span>
-              <label class="theme-toggle-switch">
-                <input type="checkbox" data-dyslexia-toggle>
-                <span class="theme-toggle-slider"></span>
-              </label>
-            </div>
-            <div class="mobile-setting-item">
-              <span class="mobile-setting-label"><ion-icon name="accessibility-outline"></ion-icon> <span data-translate="settings_reduce_motion">Reduce Motion</span></span>
-              <label class="theme-toggle-switch">
-                <input type="checkbox" data-reduce-motion-toggle>
-                <span class="theme-toggle-slider"></span>
-              </label>
-            </div>
-            <div class="mobile-setting-item">
-              <span class="mobile-setting-label"><ion-icon name="megaphone-outline"></ion-icon> <span>Welcome Bar</span></span>
-              <label class="theme-toggle-switch">
-                <input type="checkbox" data-topbar-toggle checked>
-                <span class="theme-toggle-slider"></span>
-              </label>
-            </div>
-            <div class="mobile-setting-item mobile-setting-item--accent">
-              <span class="mobile-setting-label"><ion-icon name="color-palette-outline"></ion-icon> <span data-translate="settings_accent_color">Accent Color</span></span>
-              <div class="mobile-accent-picker">
-                <button class="accent-color-btn" data-accent-color="purple" title="Purple" style="--btn-color: #9b7ed9"></button>
-                <button class="accent-color-btn" data-accent-color="blue" title="Blue" style="--btn-color: #4a90d9"></button>
-                <button class="accent-color-btn" data-accent-color="green" title="Green" style="--btn-color: #4db896"></button>
-                <button class="accent-color-btn" data-accent-color="teal" title="Teal" style="--btn-color: #38b2ac"></button>
-                <button class="accent-color-btn" data-accent-color="pink" title="Pink" style="--btn-color: #d97eab"></button>
-                <button class="accent-color-btn" data-accent-color="orange" title="Orange" style="--btn-color: #e09c5c"></button>
-                <button class="accent-color-btn" data-accent-color="red" title="Red" style="--btn-color: #e07070"></button>
-                <button class="accent-color-btn active" data-accent-color="gold" title="Gold" style="--btn-color: #af916d"></button>
+              <li class="navbar-item">
+                <a href="/community/" class="navbar-link hover-underline">
+                  <ion-icon
+                    name="people-outline"
+                    class="nav-link-icon"
+                    aria-hidden="true"
+                  ></ion-icon>
+                  <span class="span" data-translate="nav_community"
+                    >Community Hub</span
+                  >
+                </a>
+              </li>
+              <li class="navbar-item has-submenu" data-submenu="blog">
+                <a href="/blog/" class="navbar-link hover-underline">
+                  <ion-icon
+                    name="newspaper-outline"
+                    class="nav-link-icon"
+                    aria-hidden="true"
+                  ></ion-icon>
+                  <span class="span" data-translate="nav_blog">Blog</span>
+                  <ion-icon
+                    name="chevron-forward-outline"
+                    class="submenu-chevron"
+                    aria-hidden="true"
+                  ></ion-icon>
+                </a>
+                <div class="navbar-dropdown">
+                  <a
+                    href="/articles/anxiety.html"
+                    class="navbar-dropdown__item"
+                  >
+                    <ion-icon name="document-text-outline"></ion-icon>
+                    Understanding Anxiety
+                  </a>
+                  <a
+                    href="/articles/depression.html"
+                    class="navbar-dropdown__item"
+                  >
+                    <ion-icon name="document-text-outline"></ion-icon>
+                    Depression Guide
+                  </a>
+                  <a href="/articles/stress.html" class="navbar-dropdown__item">
+                    <ion-icon name="document-text-outline"></ion-icon> Stress
+                    Management
+                  </a>
+                  <a
+                    href="/articles/mindfulness.html"
+                    class="navbar-dropdown__item"
+                  >
+                    <ion-icon name="document-text-outline"></ion-icon>
+                    Mindfulness Basics
+                  </a>
+                  <div class="navbar-dropdown__divider"></div>
+                  <a href="/blog/" class="navbar-dropdown__item">
+                    <ion-icon name="albums-outline"></ion-icon> All Articles
+                  </a>
+                </div>
+              </li>
+              <li class="navbar-item">
+                <a href="/docs/" class="navbar-link hover-underline active">
+                  <ion-icon
+                    name="document-outline"
+                    class="nav-link-icon"
+                    aria-hidden="true"
+                  ></ion-icon>
+                  <span class="span" data-translate="nav_docs">References</span>
+                </a>
+              </li>
+            </ul>
+
+            <div class="mobile-nav-divider"></div>
+
+            <div class="mobile-settings-section collapsed">
+              <button
+                class="mobile-settings-toggle"
+                aria-expanded="false"
+                aria-controls="mobileSettingsList"
+              >
+                <span
+                  class="mobile-settings-title"
+                  data-translate="settings_title"
+                  >Settings</span
+                >
+                <ion-icon name="chevron-down-outline"></ion-icon>
+              </button>
+              <div class="mobile-settings-list" id="mobileSettingsList">
+                <div class="mobile-setting-item">
+                  <span class="mobile-setting-label"
+                    ><ion-icon name="moon-outline"></ion-icon>
+                    <span data-translate="settings_dark_mode"
+                      >Dark Mode</span
+                    ></span
+                  >
+                  <label class="theme-toggle-switch">
+                    <input type="checkbox" data-theme-toggle />
+                    <span class="theme-toggle-slider"></span>
+                  </label>
+                </div>
+                <div class="mobile-setting-item">
+                  <span class="mobile-setting-label"
+                    ><ion-icon name="text-outline"></ion-icon>
+                    <span data-translate="settings_font_size"
+                      >Font Size</span
+                    ></span
+                  >
+                  <select class="setting-select" data-font-size-select>
+                    <option value="normal">Normal</option>
+                    <option value="large">Large</option>
+                    <option value="x-large">Extra Large</option>
+                  </select>
+                </div>
+                <div class="mobile-setting-item">
+                  <span class="mobile-setting-label"
+                    ><ion-icon name="eye-outline"></ion-icon>
+                    <span data-translate="settings_colorblind"
+                      >Colorblind Mode</span
+                    ></span
+                  >
+                  <select class="setting-select" data-colorblind-select>
+                    <option value="none">None</option>
+                    <option value="protanopia">Protanopia</option>
+                    <option value="deuteranopia">Deuteranopia</option>
+                    <option value="tritanopia">Tritanopia</option>
+                  </select>
+                </div>
+                <div class="mobile-setting-item">
+                  <span class="mobile-setting-label"
+                    ><ion-icon name="flash-outline"></ion-icon>
+                    <span data-translate="settings_focus_mode"
+                      >Focus Mode (ADHD)</span
+                    ></span
+                  >
+                  <label class="theme-toggle-switch">
+                    <input type="checkbox" data-adhd-toggle />
+                    <span class="theme-toggle-slider"></span>
+                  </label>
+                </div>
+                <div class="mobile-setting-item">
+                  <span class="mobile-setting-label"
+                    ><ion-icon name="reader-outline"></ion-icon>
+                    <span data-translate="settings_dyslexia"
+                      >Dyslexia Font</span
+                    ></span
+                  >
+                  <label class="theme-toggle-switch">
+                    <input type="checkbox" data-dyslexia-toggle />
+                    <span class="theme-toggle-slider"></span>
+                  </label>
+                </div>
+                <div class="mobile-setting-item">
+                  <span class="mobile-setting-label"
+                    ><ion-icon name="accessibility-outline"></ion-icon>
+                    <span data-translate="settings_reduce_motion"
+                      >Reduce Motion</span
+                    ></span
+                  >
+                  <label class="theme-toggle-switch">
+                    <input type="checkbox" data-reduce-motion-toggle />
+                    <span class="theme-toggle-slider"></span>
+                  </label>
+                </div>
+                <div class="mobile-setting-item">
+                  <span class="mobile-setting-label"
+                    ><ion-icon name="megaphone-outline"></ion-icon>
+                    <span>Welcome Bar</span></span
+                  >
+                  <label class="theme-toggle-switch">
+                    <input type="checkbox" data-topbar-toggle checked />
+                    <span class="theme-toggle-slider"></span>
+                  </label>
+                </div>
+                <div class="mobile-setting-item mobile-setting-item--accent">
+                  <span class="mobile-setting-label"
+                    ><ion-icon name="color-palette-outline"></ion-icon>
+                    <span data-translate="settings_accent_color"
+                      >Accent Color</span
+                    ></span
+                  >
+                  <div class="mobile-accent-picker">
+                    <button
+                      class="accent-color-btn"
+                      data-accent-color="purple"
+                      title="Purple"
+                      style="--btn-color: #9b7ed9"
+                    ></button>
+                    <button
+                      class="accent-color-btn"
+                      data-accent-color="blue"
+                      title="Blue"
+                      style="--btn-color: #4a90d9"
+                    ></button>
+                    <button
+                      class="accent-color-btn"
+                      data-accent-color="green"
+                      title="Green"
+                      style="--btn-color: #4db896"
+                    ></button>
+                    <button
+                      class="accent-color-btn"
+                      data-accent-color="teal"
+                      title="Teal"
+                      style="--btn-color: #38b2ac"
+                    ></button>
+                    <button
+                      class="accent-color-btn"
+                      data-accent-color="pink"
+                      title="Pink"
+                      style="--btn-color: #d97eab"
+                    ></button>
+                    <button
+                      class="accent-color-btn"
+                      data-accent-color="orange"
+                      title="Orange"
+                      style="--btn-color: #e09c5c"
+                    ></button>
+                    <button
+                      class="accent-color-btn"
+                      data-accent-color="red"
+                      title="Red"
+                      style="--btn-color: #e07070"
+                    ></button>
+                    <button
+                      class="accent-color-btn active"
+                      data-accent-color="gold"
+                      title="Gold"
+                      style="--btn-color: #af916d"
+                    ></button>
+                  </div>
+                </div>
+                <div class="mobile-setting-item">
+                  <span class="mobile-setting-label"
+                    ><ion-icon name="language-outline"></ion-icon>
+                    <span data-translate="settings_language"
+                      >Language</span
+                    ></span
+                  >
+                  <select class="setting-select" data-language-select>
+                    <option value="en">English</option>
+                    <option value="es">Español</option>
+                    <option value="fr">Français</option>
+                    <option value="zh">中文</option>
+                    <option value="hi">हिन्दी</option>
+                    <option value="ko">한국어</option>
+                    <option value="de">Deutsch</option>
+                    <option value="gr">Ελληνικά</option>
+                  </select>
+                </div>
               </div>
             </div>
-            <div class="mobile-setting-item">
-              <span class="mobile-setting-label"><ion-icon name="language-outline"></ion-icon> <span data-translate="settings_language">Language</span></span>
-              <select class="setting-select" data-language-select>
+          </div>
+
+          <div class="mobile-auth-section">
+            <div class="mobile-auth-signed-in" data-auth-show>
+              <a href="/profile/" class="mobile-auth-btn mobile-profile-btn">
+                <div class="mobile-auth-btn__icon">
+                  <ion-icon name="person-outline"></ion-icon>
+                </div>
+                <span data-translate="nav_profile">My Profile</span>
+                <ion-icon
+                  name="chevron-forward-outline"
+                  class="mobile-auth-btn__arrow"
+                ></ion-icon>
+              </a>
+              <div class="mobile-auth-row">
+                <button
+                  class="mobile-auth-btn mobile-inbox-btn"
+                  onclick="openGlobalInbox(); closeNavbar();"
+                >
+                  <div class="mobile-auth-btn__icon">
+                    <ion-icon name="notifications-outline"></ion-icon>
+                  </div>
+                  <span data-translate="nav_notifications">Notifications</span>
+                  <span
+                    class="notif-badge mobile-notif-badge"
+                    id="mobileNotifBadge"
+                    hidden
+                    >0</span
+                  >
+                </button>
+                <button
+                  class="mobile-auth-btn mobile-logout-btn"
+                  onclick="handleMobileLogout()"
+                >
+                  <div
+                    class="mobile-auth-btn__icon mobile-auth-btn__icon--danger"
+                  >
+                    <ion-icon name="log-out-outline"></ion-icon>
+                  </div>
+                  <span data-translate="nav_logout">Log Out</span>
+                </button>
+              </div>
+            </div>
+            <div class="mobile-auth-signed-out" data-auth-hide>
+              <a href="/auth/" class="mobile-auth-btn mobile-signin-btn">
+                <ion-icon name="log-in-outline"></ion-icon>
+                <span data-translate="nav_signin">Sign In</span>
+                <ion-icon
+                  name="arrow-forward-outline"
+                  class="mobile-auth-btn__arrow"
+                ></ion-icon>
+              </a>
+            </div>
+          </div>
+
+          <div class="navbar-submenu-panel" data-submenu-panel="resources">
+            <div class="submenu-header">
+              <button class="submenu-back-btn" aria-label="Back to main menu">
+                <ion-icon name="arrow-back-outline"></ion-icon>
+              </button>
+              <h3 class="submenu-title" data-translate="nav_resources">
+                Resource Library
+              </h3>
+            </div>
+            <div class="submenu-items">
+              <a href="/resourcelib/?category=anxiety" class="submenu-item">
+                <ion-icon name="pulse-outline"></ion-icon>
+                <span>Anxiety Resources</span>
+              </a>
+              <a href="/resourcelib/?category=depression" class="submenu-item">
+                <ion-icon name="cloudy-outline"></ion-icon>
+                <span>Depression Support</span>
+              </a>
+              <a href="/resourcelib/?category=stress" class="submenu-item">
+                <ion-icon name="flash-outline"></ion-icon>
+                <span>Stress Management</span>
+              </a>
+              <a href="/resourcelib/?category=mindfulness" class="submenu-item">
+                <ion-icon name="leaf-outline"></ion-icon>
+                <span>Mindfulness</span>
+              </a>
+              <div class="submenu-divider"></div>
+              <a href="/resourcelib/" class="submenu-item">
+                <ion-icon name="grid-outline"></ion-icon>
+                <span>View All Resources</span>
+              </a>
+            </div>
+          </div>
+
+          <div class="navbar-submenu-panel" data-submenu-panel="blog">
+            <div class="submenu-header">
+              <button class="submenu-back-btn" aria-label="Back to main menu">
+                <ion-icon name="arrow-back-outline"></ion-icon>
+              </button>
+              <h3 class="submenu-title" data-translate="nav_blog">Blog</h3>
+            </div>
+            <div class="submenu-items">
+              <a href="/articles/anxiety.html" class="submenu-item">
+                <ion-icon name="document-text-outline"></ion-icon>
+                <span>Understanding Anxiety</span>
+              </a>
+              <a href="/articles/depression.html" class="submenu-item">
+                <ion-icon name="document-text-outline"></ion-icon>
+                <span>Depression Guide</span>
+              </a>
+              <a href="/articles/stress.html" class="submenu-item">
+                <ion-icon name="document-text-outline"></ion-icon>
+                <span>Stress Management</span>
+              </a>
+              <a href="/articles/mindfulness.html" class="submenu-item">
+                <ion-icon name="document-text-outline"></ion-icon>
+                <span>Mindfulness Basics</span>
+              </a>
+              <div class="submenu-divider"></div>
+              <a href="/blog/" class="submenu-item">
+                <ion-icon name="albums-outline"></ion-icon>
+                <span>All Articles</span>
+              </a>
+            </div>
+          </div>
+        </nav>
+
+        <div class="navbar-actions">
+          <div class="navbar-search" id="navbarSearch">
+            <input
+              type="text"
+              class="navbar-search__input"
+              placeholder="Search..."
+              aria-label="Search site"
+              id="searchInput"
+            />
+            <button
+              class="navbar-search__btn"
+              aria-label="Toggle search"
+              id="searchToggle"
+            >
+              <ion-icon name="search-outline"></ion-icon>
+            </button>
+            <div class="navbar-search__results" id="searchResults"></div>
+          </div>
+
+          <button
+            class="navbar-settings-btn"
+            onclick="openSettingsModal()"
+            aria-label="Accessibility settings"
+            title="Settings"
+          >
+            <ion-icon name="settings-outline"></ion-icon>
+          </button>
+
+          <div class="user-menu-wrapper" id="userMenuWrapper">
+            <button
+              class="user-menu-trigger"
+              id="userMenuTrigger"
+              aria-label="User menu"
+              aria-expanded="false"
+            >
+              <span class="user-icon" data-user-icon>
+                <ion-icon name="person-outline"></ion-icon>
+              </span>
+              <ion-icon
+                name="chevron-down-outline"
+                class="menu-chevron"
+              ></ion-icon>
+              <span
+                class="notif-badge user-menu-badge"
+                id="userMenuBadge"
+                hidden
+                >0</span
+              >
+            </button>
+
+            <div class="user-menu-dropdown" id="userMenuDropdown">
+              <div
+                class="user-menu-signed-in"
+                data-auth-show
+                style="display: none"
+              >
+                <div class="user-menu-header">
+                  <img
+                    src="/assets/images/default-avatar.png"
+                    alt="User avatar"
+                    class="user-avatar-large"
+                    id="userMenuAvatar"
+                  />
+                  <div class="user-info">
+                    <p class="user-name" id="userMenuName">User</p>
+                    <p class="user-email" id="userMenuEmail">
+                      user@example.com
+                    </p>
+                  </div>
+                </div>
+                <div class="user-menu-items">
+                  <a href="/profile/" class="user-menu-item">
+                    <ion-icon name="person-outline"></ion-icon>
+                    <span data-translate="nav_profile">My Profile</span>
+                  </a>
+                  <button
+                    class="user-menu-item"
+                    onclick="openGlobalInbox(); toggleUserMenu();"
+                  >
+                    <ion-icon name="notifications-outline"></ion-icon>
+                    <span data-translate="nav_notifications"
+                      >Notifications</span
+                    >
+                    <span class="menu-item-badge" id="userMenuNotifBadge" hidden
+                      >0</span
+                    >
+                  </button>
+                  <div class="user-menu-divider"></div>
+                  <button
+                    class="user-menu-item logout-item"
+                    onclick="handleUserMenuLogout()"
+                  >
+                    <ion-icon name="log-out-outline"></ion-icon>
+                    <span data-translate="nav_logout">Log Out</span>
+                  </button>
+                </div>
+              </div>
+
+              <div class="user-menu-guest" data-auth-hide>
+                <p data-translate="user_menu_guest_text">
+                  Sign in to access your profile and notifications
+                </p>
+                <a href="/auth/" class="user-menu-signin-btn">
+                  <ion-icon name="log-in-outline"></ion-icon>
+                  <span data-translate="nav_signin">Sign In</span>
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <div style="display: none">
+            <a
+              href="/profile/"
+              class="navbar-action-btn"
+              id="userBtn"
+              aria-label="User account"
+              data-user-btn
+            >
+              <ion-icon name="person-outline" class="action-icon"></ion-icon>
+            </a>
+            <button
+              class="navbar-action-btn navbar-inbox-btn"
+              id="inboxBtn"
+              aria-label="Notifications"
+              onclick="openGlobalInbox()"
+              data-auth-show
+            >
+              <ion-icon
+                name="notifications-outline"
+                class="action-icon"
+              ></ion-icon>
+              <span class="notif-badge" id="notifBadge" hidden>0</span>
+            </button>
+          </div>
+
+          <div class="settings-wrapper" style="display: none">
+            <button
+              class="navbar-action-btn"
+              id="settingsBtn"
+              aria-label="Settings"
+              data-settings-toggle
+            >
+              <ion-icon name="settings-outline" class="action-icon"></ion-icon>
+            </button>
+
+            <div class="settings-dropdown" data-settings-dropdown>
+              <div class="settings-header">
+                <span
+                  class="settings-title"
+                  data-translate="settings_preferences"
+                  >Preferences</span
+                >
+              </div>
+              <div class="settings-content">
+                <div class="setting-item">
+                  <div class="setting-info">
+                    <ion-icon name="moon-outline"></ion-icon>
+                    <span data-translate="settings_dark_mode">Dark Mode</span>
+                  </div>
+                  <label class="theme-toggle-switch">
+                    <input type="checkbox" data-theme-toggle />
+                    <span class="theme-toggle-slider"></span>
+                  </label>
+                </div>
+                <div class="setting-item">
+                  <div class="setting-info">
+                    <ion-icon name="text-outline"></ion-icon>
+                    <span data-translate="settings_font_size">Font Size</span>
+                  </div>
+                  <select class="setting-select" data-font-size-select>
+                    <option value="normal">Normal</option>
+                    <option value="large">Large</option>
+                    <option value="x-large">Extra Large</option>
+                  </select>
+                </div>
+                <div class="setting-item">
+                  <div class="setting-info">
+                    <ion-icon name="eye-outline"></ion-icon>
+                    <span data-translate="settings_colorblind"
+                      >Colorblind Mode</span
+                    >
+                  </div>
+                  <select class="setting-select" data-colorblind-select>
+                    <option value="none">None</option>
+                    <option value="protanopia">Protanopia</option>
+                    <option value="deuteranopia">Deuteranopia</option>
+                    <option value="tritanopia">Tritanopia</option>
+                  </select>
+                </div>
+                <div class="setting-item">
+                  <div class="setting-info">
+                    <ion-icon name="flash-outline"></ion-icon>
+                    <span data-translate="settings_focus_mode"
+                      >Focus Mode (ADHD)</span
+                    >
+                  </div>
+                  <label class="theme-toggle-switch">
+                    <input type="checkbox" data-adhd-toggle />
+                    <span class="theme-toggle-slider"></span>
+                  </label>
+                </div>
+                <div class="setting-item">
+                  <div class="setting-info">
+                    <ion-icon name="reader-outline"></ion-icon>
+                    <span data-translate="settings_dyslexia"
+                      >Dyslexia Font</span
+                    >
+                  </div>
+                  <label class="theme-toggle-switch">
+                    <input type="checkbox" data-dyslexia-toggle />
+                    <span class="theme-toggle-slider"></span>
+                  </label>
+                </div>
+                <div class="setting-item">
+                  <div class="setting-info">
+                    <ion-icon name="accessibility-outline"></ion-icon>
+                    <span data-translate="settings_reduce_motion"
+                      >Reduce Motion</span
+                    >
+                  </div>
+                  <label class="theme-toggle-switch">
+                    <input type="checkbox" data-reduce-motion-toggle />
+                    <span class="theme-toggle-slider"></span>
+                  </label>
+                </div>
+                <div class="setting-item setting-item--accent">
+                  <div class="setting-info">
+                    <ion-icon name="color-palette-outline"></ion-icon>
+                    <span data-translate="settings_accent_color"
+                      >Accent Color</span
+                    >
+                  </div>
+                  <div class="accent-color-picker">
+                    <button
+                      class="accent-color-btn"
+                      data-accent-color="purple"
+                      title="Purple"
+                      style="--btn-color: #9b7ed9"
+                    ></button>
+                    <button
+                      class="accent-color-btn"
+                      data-accent-color="blue"
+                      title="Blue"
+                      style="--btn-color: #4a90d9"
+                    ></button>
+                    <button
+                      class="accent-color-btn"
+                      data-accent-color="green"
+                      title="Green"
+                      style="--btn-color: #4db896"
+                    ></button>
+                    <button
+                      class="accent-color-btn"
+                      data-accent-color="teal"
+                      title="Teal"
+                      style="--btn-color: #38b2ac"
+                    ></button>
+                    <button
+                      class="accent-color-btn"
+                      data-accent-color="pink"
+                      title="Pink"
+                      style="--btn-color: #d97eab"
+                    ></button>
+                    <button
+                      class="accent-color-btn"
+                      data-accent-color="orange"
+                      title="Orange"
+                      style="--btn-color: #e09c5c"
+                    ></button>
+                    <button
+                      class="accent-color-btn"
+                      data-accent-color="red"
+                      title="Red"
+                      style="--btn-color: #e07070"
+                    ></button>
+                    <button
+                      class="accent-color-btn active"
+                      data-accent-color="gold"
+                      title="Gold"
+                      style="--btn-color: #af916d"
+                    ></button>
+                  </div>
+                </div>
+                <div class="setting-item">
+                  <div class="setting-info">
+                    <ion-icon name="megaphone-outline"></ion-icon>
+                    <span>Welcome Bar</span>
+                  </div>
+                  <label class="theme-toggle-switch">
+                    <input type="checkbox" data-topbar-toggle checked />
+                    <span class="theme-toggle-slider"></span>
+                  </label>
+                </div>
+                <div class="setting-item">
+                  <div class="setting-info">
+                    <ion-icon name="language-outline"></ion-icon>
+                    <span data-translate="settings_language">Language</span>
+                  </div>
+                  <select class="setting-select" data-language-select>
+                    <option value="en">English</option>
+                    <option value="es">Español</option>
+                    <option value="fr">Français</option>
+                    <option value="zh">中文</option>
+                    <option value="hi">हिन्दी</option>
+                    <option value="ko">한국어</option>
+                    <option value="de">Deutsch</option>
+                    <option value="gr">Ελληνικά</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <a
+            href="/support/#crisis"
+            class="crisis-btn"
+            aria-label="Get help now"
+          >
+            <ion-icon name="alert-circle" aria-hidden="true"></ion-icon>
+            <span data-translate="nav_get_help">Get Help Now</span>
+          </a>
+        </div>
+
+        <button class="nav-open-btn" aria-label="open menu" data-nav-toggler>
+          <span class="line line-1"></span>
+          <span class="line line-2"></span>
+          <span class="line line-3"></span>
+        </button>
+
+        <div class="overlay" data-nav-toggler data-overlay></div>
+      </div>
+    </header>
+
+    <!-- ===== MAIN CONTENT ===== -->
+    <main id="main-content">
+      <div class="docs-container">
+        <header class="docs-header animate-fade-in">
+          <div class="docs-header__brand">
+            <ion-icon name="heart-outline"></ion-icon>
+            <h1 data-translate="docs_title">MindBalance</h1>
+          </div>
+          <p class="docs-header__subtitle" data-translate="docs_subtitle">
+            References
+          </p>
+        </header>
+
+        <div class="docs-main">
+          <div class="docs-top-row">
+            <section class="docs-section docs-section--pdfs">
+              <h2 class="docs-section__title animate-slide-up">
+                <ion-icon name="document-text-outline"></ion-icon>
+                <span data-translate="docs_competition_docs"
+                  >Competition Documents</span
+                >
+              </h2>
+              <p class="docs-section__desc" data-translate="docs_review_desc">
+                Please review the following documentation for our project
+                submission.
+              </p>
+
+              <div class="docs-pdf-list animate-stagger">
+                <a
+                  href="https://drive.google.com/file/d/1ax0bfA41EkKlIChvjMbONUDOxOgqrXm5/view?usp=sharing"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="docs-pdf-card card-animated hover-lift"
+                >
+                  <div class="docs-pdf-card__icon">
+                    <ion-icon name="document-outline"></ion-icon>
+                  </div>
+                  <div class="docs-pdf-card__content">
+                    <h3 data-translate="docs_worklog">Work Log</h3>
+                    <p data-translate="docs_click_pdf">Click to view PDF</p>
+                  </div>
+                  <ion-icon
+                    name="open-outline"
+                    class="docs-pdf-card__arrow"
+                  ></ion-icon>
+                </a>
+
+                <a
+                  href="https://drive.google.com/file/d/1YTEYcFZ6JiCj510DV41hTMK6EPbUTvod/view?usp=sharing"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="docs-pdf-card card-animated hover-lift"
+                >
+                  <div class="docs-pdf-card__icon">
+                    <ion-icon name="document-outline"></ion-icon>
+                  </div>
+                  <div class="docs-pdf-card__content">
+                    <h3 data-translate="docs_copyright">Copyright Checklist</h3>
+                    <p data-translate="docs_click_pdf">Click to view PDF</p>
+                  </div>
+                  <ion-icon
+                    name="open-outline"
+                    class="docs-pdf-card__arrow"
+                  ></ion-icon>
+                </a>
+
+                <a
+                  href="https://drive.google.com/file/d/1noEzMCtA-QNKoTy_NB1ZCRXUEBFrQqPD/view?usp=sharing"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="docs-pdf-card card-animated hover-lift"
+                >
+                  <div class="docs-pdf-card__icon">
+                    <ion-icon name="document-outline"></ion-icon>
+                  </div>
+                  <div class="docs-pdf-card__content">
+                    <h3 data-translate="docs_references">
+                      Media & Text Citations
+                    </h3>
+                    <p data-translate="docs_click_pdf">Click to view PDF</p>
+                  </div>
+                  <ion-icon
+                    name="open-outline"
+                    class="docs-pdf-card__arrow"
+                  ></ion-icon>
+                </a>
+
+                <a
+                  href="https://drive.google.com/file/d/1wkGBz-NMstJ7BfQe4XnDsRR4Ywvw0HYm/view?usp=sharing"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="docs-pdf-card card-animated hover-lift"
+                >
+                  <div class="docs-pdf-card__icon">
+                    <ion-icon name="document-outline"></ion-icon>
+                  </div>
+                  <div class="docs-pdf-card__content">
+                    <h3 data-translate="docs_credits">Credits & Attribution</h3>
+                    <p data-translate="docs_click_pdf">Click to view PDF</p>
+                  </div>
+                  <ion-icon
+                    name="open-outline"
+                    class="docs-pdf-card__arrow"
+                  ></ion-icon>
+                </a>
+              </div>
+            </section>
+
+            <section class="docs-section docs-section--overview">
+              <h2 class="docs-section__title animate-slide-up">
+                <ion-icon name="information-circle-outline"></ion-icon>
+                <span data-translate="docs_overview">Project Overview</span>
+              </h2>
+              <div class="docs-content animate-fade-in">
+                <p>
+                  <strong>MindBalance</strong>
+                  <span data-translate="docs_overview_p1"
+                    >is a comprehensive mental health education and support hub
+                    built for students and young adults. Our mission is to
+                    provide accessible, credible information about mental health
+                    topics while connecting users with professional resources
+                    and community support.</span
+                  >
+                </p>
+
+                <p data-translate="docs_overview_p2">
+                  The platform addresses the growing need for reliable mental
+                  health information by curating content from authoritative
+                  sources like the National Institute of Mental Health (NIMH),
+                  Mayo Clinic, and other trusted providers. Users can explore
+                  educational articles, find local mental health services,
+                  connect with community members, and access crisis support
+                  resources.
+                </p>
+
+                <p data-translate="docs_overview_p3">
+                  MindBalance was designed with accessibility as a core
+                  principle, offering features like dark mode, adjustable font
+                  sizes, colorblind modes, dyslexia-friendly fonts, and focus
+                  mode for users with ADHD.
+                </p>
+              </div>
+            </section>
+          </div>
+
+          <section class="docs-section">
+            <h2 class="docs-section__title animate-slide-up">
+              <ion-icon name="list-outline"></ion-icon>
+              <span data-translate="docs_features">Features</span>
+            </h2>
+            <div class="docs-features animate-stagger">
+              <div class="docs-feature card-animated">
+                <div class="docs-feature__icon">
+                  <ion-icon name="library-outline"></ion-icon>
+                </div>
+                <div class="docs-feature__content">
+                  <h3 data-translate="docs_feature_resource_title">
+                    Resource Library
+                  </h3>
+                  <p data-translate="docs_feature_resource_desc">
+                    Interactive directory featuring credible mental health
+                    resources from organizations like NAMI, Mental Health
+                    America, Crisis Text Line, and The Trevor Project. Includes
+                    search, filtering by category, and a spotlight section for
+                    featured resources.
+                  </p>
+                </div>
+              </div>
+
+              <div class="docs-feature card-animated">
+                <div class="docs-feature__icon">
+                  <ion-icon name="people-outline"></ion-icon>
+                </div>
+                <div class="docs-feature__content">
+                  <h3 data-translate="docs_feature_community_title">
+                    Community Hub
+                  </h3>
+                  <p data-translate="docs_feature_community_desc">
+                    Moderated forum for peer support with posts, comments,
+                    likes, and real-time updates. Features profanity filtering,
+                    media uploads, @mentions system, and admin moderation tools.
+                  </p>
+                </div>
+              </div>
+
+              <div class="docs-feature card-animated">
+                <div class="docs-feature__icon">
+                  <ion-icon name="newspaper-outline"></ion-icon>
+                </div>
+                <div class="docs-feature__content">
+                  <h3 data-translate="docs_feature_articles_title">
+                    Educational Articles
+                  </h3>
+                  <p data-translate="docs_feature_articles_desc">
+                    In-depth articles on anxiety, depression, stress,
+                    mindfulness, sleep, and teen mental health. Features
+                    text-to-speech audio, reading progress tracking,
+                    bookmarking, and related articles recommendations.
+                  </p>
+                </div>
+              </div>
+
+              <div class="docs-feature card-animated">
+                <div class="docs-feature__icon">
+                  <ion-icon name="hand-left-outline"></ion-icon>
+                </div>
+                <div class="docs-feature__content">
+                  <h3 data-translate="docs_feature_crisis_title">
+                    Crisis Support
+                  </h3>
+                  <p data-translate="docs_feature_crisis_desc">
+                    Always-visible crisis resources including 988 Suicide &
+                    Crisis Lifeline, Crisis Text Line, and The Trevor Project.
+                    Quick access from every page ensures help is never more than
+                    a click away.
+                  </p>
+                </div>
+              </div>
+
+              <div class="docs-feature card-animated">
+                <div class="docs-feature__icon">
+                  <ion-icon name="accessibility-outline"></ion-icon>
+                </div>
+                <div class="docs-feature__content">
+                  <h3 data-translate="docs_feature_accessibility_title">
+                    Accessibility Settings
+                  </h3>
+                  <p data-translate="docs_feature_accessibility_desc">
+                    7 accessibility options: Dark Mode, Font Size adjustment,
+                    High Contrast, three Colorblind modes (Protanopia,
+                    Deuteranopia, Tritanopia), Focus Mode for ADHD,
+                    Dyslexia-friendly font, and Reduced Motion.
+                  </p>
+                </div>
+              </div>
+
+              <div class="docs-feature card-animated">
+                <div class="docs-feature__icon">
+                  <ion-icon name="person-outline"></ion-icon>
+                </div>
+                <div class="docs-feature__content">
+                  <h3 data-translate="docs_feature_profiles_title">
+                    User Profiles
+                  </h3>
+                  <p data-translate="docs_feature_profiles_desc">
+                    Profiles with customizable avatars, bio, social links, mood
+                    tracking, wellness goals, reading streak calendar,
+                    achievements, and privacy controls.
+                  </p>
+                </div>
+              </div>
+
+              <div class="docs-feature card-animated">
+                <div class="docs-feature__icon">
+                  <ion-icon name="globe-outline"></ion-icon>
+                </div>
+                <div class="docs-feature__content">
+                  <h3 data-translate="docs_feature_multilingual_title">
+                    Multilingual Support
+                  </h3>
+                  <p data-translate="docs_feature_multilingual_desc">
+                    Full translation support for 8 languages: English, Spanish,
+                    French, Chinese (Simplified), Hindi, Korean, German, and
+                    Greek. Language preference persists across sessions.
+                  </p>
+                </div>
+              </div>
+
+              <div class="docs-feature card-animated">
+                <div class="docs-feature__icon">
+                  <ion-icon name="location-outline"></ion-icon>
+                </div>
+                <div class="docs-feature__content">
+                  <h3 data-translate="docs_feature_findhelp_title">
+                    Find Help Locator
+                  </h3>
+                  <p data-translate="docs_feature_findhelp_desc">
+                    ZIP code-based search to find local mental health services
+                    using the SAMHSA Treatment Locator API. Filter by service
+                    type and radius, with direct call and directions buttons.
+                  </p>
+                </div>
+              </div>
+
+              <div class="docs-feature card-animated">
+                <div class="docs-feature__icon">
+                  <ion-icon name="document-text-outline"></ion-icon>
+                </div>
+                <div class="docs-feature__content">
+                  <h3 data-translate="docs_feature_news_title">
+                    News & Stories
+                  </h3>
+                  <p data-translate="docs_feature_news_desc">
+                    Curated mental health news, recovery stories, workplace
+                    wellness articles, and community spotlights. Features
+                    real-time content with text-to-speech and full reading
+                    controls.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section class="docs-section">
+            <h2 class="docs-section__title animate-slide-up">
+              <ion-icon name="code-slash-outline"></ion-icon>
+              <span data-translate="docs_tech_stack">Tech Stack</span>
+            </h2>
+            <div class="docs-tech-grid animate-stagger">
+              <div class="docs-tech-item card-animated">
+                <h4 data-translate="docs_tech_frontend">Frontend</h4>
+                <ul>
+                  <li data-translate="docs_tech_frontend_1">
+                    HTML5, CSS3, JavaScript (ES6+)
+                  </li>
+                  <li data-translate="docs_tech_frontend_2">
+                    Custom CSS with CSS Variables for theming
+                  </li>
+                  <li data-translate="docs_tech_frontend_3">
+                    Responsive design with mobile-first approach
+                  </li>
+                  <li data-translate="docs_tech_frontend_4">
+                    Swiper.js for carousels
+                  </li>
+                  <li data-translate="docs_tech_frontend_5">
+                    Ionicons for iconography
+                  </li>
+                </ul>
+              </div>
+
+              <div class="docs-tech-item card-animated">
+                <h4 data-translate="docs_tech_backend">Backend & Data</h4>
+                <ul>
+                  <li data-translate="docs_tech_backend_1">
+                    Python Flask server
+                  </li>
+                  <li data-translate="docs_tech_backend_2">
+                    Supabase (PostgreSQL) for database
+                  </li>
+                  <li data-translate="docs_tech_backend_3">
+                    Supabase Auth for authentication
+                  </li>
+                  <li data-translate="docs_tech_backend_4">
+                    Supabase Realtime for live updates
+                  </li>
+                  <li data-translate="docs_tech_backend_5">
+                    Supabase Storage for media uploads
+                  </li>
+                </ul>
+              </div>
+
+              <div class="docs-tech-item card-animated">
+                <h4 data-translate="docs_tech_apis">APIs & Integrations</h4>
+                <ul>
+                  <li data-translate="docs_tech_apis_1">
+                    SAMHSA Treatment Locator API
+                  </li>
+                  <li data-translate="docs_tech_apis_2">
+                    ElevenLabs API for text-to-speech
+                  </li>
+                  <li data-translate="docs_tech_apis_3">
+                    OpenAI API for AI wellness insights
+                  </li>
+                  <li data-translate="docs_tech_apis_4">
+                    Resend API for newsletter emails
+                  </li>
+                  <li data-translate="docs_tech_apis_5">
+                    Formspree for form submissions
+                  </li>
+                  <li data-translate="docs_tech_apis_6">
+                    Supabase API for backend services
+                  </li>
+                </ul>
+              </div>
+
+              <div class="docs-tech-item card-animated">
+                <h4 data-translate="docs_tech_sources">Content Sources</h4>
+                <ul>
+                  <li data-translate="docs_tech_sources_1">
+                    National Institute of Mental Health (NIMH)
+                  </li>
+                  <li data-translate="docs_tech_sources_2">Mayo Clinic</li>
+                  <li data-translate="docs_tech_sources_3">
+                    American Psychological Association
+                  </li>
+                  <li data-translate="docs_tech_sources_4">
+                    NAMI, Mental Health America
+                  </li>
+                  <li data-translate="docs_tech_sources_5">SAMHSA</li>
+                </ul>
+              </div>
+
+              <div class="docs-tech-item card-animated">
+                <h4 data-translate="docs_tech_media">Image & Design Sources</h4>
+                <ul>
+                  <li data-translate="docs_tech_media_1">
+                    Unsplash for photography
+                  </li>
+                  <li data-translate="docs_tech_media_2">
+                    Canva for graphics & design
+                  </li>
+                  <li data-translate="docs_tech_media_3">
+                    Ionicons for icon library
+                  </li>
+                  <li data-translate="docs_tech_media_4">
+                    Google Fonts (Poppins)
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </section>
+
+          <section class="docs-section docs-section--cta">
+            <a href="/" class="docs-cta-button hover-glow">
+              <ion-icon name="arrow-forward-outline"></ion-icon>
+              <span data-translate="docs_explore">Explore MindBalance</span>
+            </a>
+          </section>
+        </div>
+      </div>
+    </main>
+
+    <button class="back-to-top" id="backToTop" aria-label="Back to top">
+      <ion-icon name="chevron-up-outline"></ion-icon>
+    </button>
+
+    <!-- ===== FOOTER ===== -->
+    <footer id="footer" class="mb-footer" aria-label="Site footer">
+      <div class="mb-footer__wave">
+        <svg viewBox="0 0 1200 120" preserveAspectRatio="none">
+          <path
+            class="wave-path wave-1"
+            d="M0,60 Q150,20 300,60 T600,60 T900,60 T1200,60 L1200,120 L0,120 Z"
+          ></path>
+          <path
+            class="wave-path wave-2"
+            d="M0,80 Q200,40 400,80 T800,80 T1200,80 L1200,120 L0,120 Z"
+          ></path>
+          <path
+            class="wave-path wave-3"
+            d="M0,100 Q300,70 600,100 T1200,100 L1200,120 L0,120 Z"
+          ></path>
+        </svg>
+      </div>
+
+      <div class="mb-footer__top">
+        <div class="mb-footer__pattern"></div>
+
+        <div class="mb-footer__wrap">
+          <div class="mb-footer__main-grid">
+            <section class="mb-footer__col" aria-label="About MindBalance">
+              <h3 class="mb-footer__brand" data-translate="footer_brand">
+                MindBalance
+              </h3>
+              <p class="mb-footer__text" data-translate="footer_about">
+                MindBalance is a student-built mental health education and
+                support hub. Our goal is to provide clear, reliable information
+                and guide visitors toward safe resources.
+              </p>
+              <a
+                class="mb-footer__link"
+                href="/support/"
+                data-translate="footer_read_more"
+                >Read more →</a
+              >
+
+              <div class="mb-footer__trust">
+                <div class="mb-footer__badge">
+                  <ion-icon name="shield-checkmark-outline"></ion-icon>
+                  <span>Privacy First</span>
+                </div>
+                <div class="mb-footer__badge">
+                  <ion-icon name="accessibility-outline"></ion-icon>
+                  <span>Accessible</span>
+                </div>
+                <div class="mb-footer__badge">
+                  <ion-icon name="people-outline"></ion-icon>
+                  <span>Community</span>
+                </div>
+              </div>
+            </section>
+
+            <nav
+              class="mb-footer__col mb-footer__accordion"
+              aria-label="Footer navigation"
+            >
+              <button class="mb-footer__accordion-btn" aria-expanded="false">
+                <h4 class="mb-footer__heading" data-translate="footer_pages">
+                  Pages
+                </h4>
+                <ion-icon
+                  name="chevron-down-outline"
+                  class="accordion-icon"
+                ></ion-icon>
+              </button>
+              <ul class="mb-footer__list mb-footer__accordion-content">
+                <li>
+                  <a class="mb-footer__link" href="/" data-translate="nav_home"
+                    >Home</a
+                  >
+                </li>
+                <li><a class="mb-footer__link" href="/support/">About</a></li>
+                <li>
+                  <a class="mb-footer__link" href="/resourcelib/"
+                    >Resource Library</a
+                  >
+                </li>
+                <li>
+                  <a class="mb-footer__link" href="/community/"
+                    >Community Hub</a
+                  >
+                </li>
+                <li><a class="mb-footer__link" href="/blog/">Blog</a></li>
+                <li>
+                  <a class="mb-footer__link" href="/auth/" data-auth-btn
+                    >Sign In</a
+                  >
+                </li>
+              </ul>
+            </nav>
+
+            <section class="mb-footer__col" aria-label="Popular topics">
+              <h4 class="mb-footer__heading" data-translate="footer_topics">
+                Popular Topics
+              </h4>
+              <div class="mb-footer__tags">
+                <a
+                  class="mb-footer__tag"
+                  href="/resourcelib/?topic=anxiety"
+                  data-translate="blog_filter_anxiety"
+                  >Anxiety</a
+                >
+                <a
+                  class="mb-footer__tag"
+                  href="/resourcelib/?topic=depression"
+                  data-translate="blog_filter_depression"
+                  >Depression</a
+                >
+                <a
+                  class="mb-footer__tag"
+                  href="/resourcelib/?topic=stress"
+                  data-translate="blog_filter_stress"
+                  >Stress</a
+                >
+                <a
+                  class="mb-footer__tag"
+                  href="/resourcelib/?topic=sleep"
+                  data-translate="blog_filter_sleep"
+                  >Sleep</a
+                >
+                <a
+                  class="mb-footer__tag"
+                  href="/resourcelib/?topic=mindfulness"
+                  data-translate="blog_filter_mindfulness"
+                  >Mindfulness</a
+                >
+                <a
+                  class="mb-footer__tag"
+                  href="/resourcelib/?topic=teens"
+                  data-translate="blog_filter_teens"
+                  >Teens</a
+                >
+              </div>
+            </section>
+
+            <section class="mb-footer__col" aria-label="Take action">
+              <h4 class="mb-footer__heading" data-translate="footer_action">
+                Take Action
+              </h4>
+
+              <p class="mb-footer__text" data-translate="footer_action_desc">
+                Support mental health education and community access to
+                resources.
+              </p>
+
+              <div class="mb-footer__cta animate-scale-in">
+                <a
+                  class="mb-footer__btn"
+                  href="/support/"
+                  data-translate="footer_get_support"
+                  >Get Support</a
+                >
+                <a
+                  class="mb-footer__btn mb-footer__btn--ghost"
+                  href="/auth/"
+                  data-auth-btn
+                  >Sign In</a
+                >
+              </div>
+
+              <h5 class="mb-footer__subheading" data-translate="footer_follow">
+                Follow Us
+              </h5>
+              <div class="mb-footer__social">
+                <a
+                  class="mb-footer__icon mb-footer__icon--instagram"
+                  href="https://www.instagram.com/mindbalance2026?igsh=MTdid3ZpdDZzdHFtcA=="
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Instagram"
+                >
+                  <ion-icon name="logo-instagram"></ion-icon>
+                </a>
+                <a
+                  class="mb-footer__icon mb-footer__icon--youtube"
+                  href="https://www.youtube.com/@MindBaIance"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="YouTube"
+                >
+                  <ion-icon name="logo-youtube"></ion-icon>
+                </a>
+              </div>
+            </section>
+          </div>
+
+          <div class="mb-footer__extras">
+            <section
+              class="mb-footer__newsletter"
+              aria-label="Newsletter signup"
+            >
+              <div class="mb-footer__newsletter-content">
+                <ion-icon
+                  name="mail-outline"
+                  class="newsletter-icon"
+                ></ion-icon>
+                <div class="newsletter-text">
+                  <h4
+                    class="mb-footer__heading"
+                    data-translate="footer_stay_updated"
+                  >
+                    Stay Updated
+                  </h4>
+                  <p
+                    class="mb-footer__text"
+                    data-translate="footer_newsletter_desc"
+                  >
+                    Get mental wellness tips and resources delivered to your
+                    inbox.
+                  </p>
+                </div>
+              </div>
+              <form class="mb-footer__newsletter-form" id="newsletterForm">
+                <input
+                  type="email"
+                  class="mb-footer__newsletter-input"
+                  placeholder="Enter your email"
+                  data-translate-placeholder="footer_email_placeholder"
+                  required
+                  aria-label="Email address"
+                />
+                <button type="submit" class="mb-footer__newsletter-btn">
+                  <span data-translate="footer_subscribe">Subscribe</span>
+                  <ion-icon name="arrow-forward-outline"></ion-icon>
+                </button>
+              </form>
+              <p
+                class="mb-footer__newsletter-note"
+                data-translate="footer_privacy_note"
+              >
+                We respect your privacy. Unsubscribe anytime.
+              </p>
+            </section>
+
+            <section class="mb-footer__recent" aria-label="Recent articles">
+              <h4
+                class="mb-footer__heading"
+                data-translate="footer_latest_articles"
+              >
+                Latest Articles
+              </h4>
+              <div class="mb-footer__posts">
+                <a
+                  href="/articles/mental-health-news.html"
+                  class="mb-footer__post"
+                >
+                  <div class="mb-footer__post-icon">
+                    <ion-icon name="flask-outline"></ion-icon>
+                  </div>
+                  <div class="mb-footer__post-info">
+                    <span
+                      class="mb-footer__post-title"
+                      data-translate="footer_post_research_news"
+                      >Mental Health Research News</span
+                    >
+                    <span
+                      class="mb-footer__post-meta"
+                      data-translate="footer_post_research_meta"
+                      >Latest findings</span
+                    >
+                  </div>
+                </a>
+                <a
+                  href="/articles/recovery-stories.html"
+                  class="mb-footer__post"
+                >
+                  <div class="mb-footer__post-icon">
+                    <ion-icon name="heart-outline"></ion-icon>
+                  </div>
+                  <div class="mb-footer__post-info">
+                    <span
+                      class="mb-footer__post-title"
+                      data-translate="footer_post_recovery"
+                      >Recovery Stories</span
+                    >
+                    <span
+                      class="mb-footer__post-meta"
+                      data-translate="footer_post_recovery_meta"
+                      >Real journeys</span
+                    >
+                  </div>
+                </a>
+                <a
+                  href="/articles/workplace-wellness.html"
+                  class="mb-footer__post"
+                >
+                  <div class="mb-footer__post-icon">
+                    <ion-icon name="briefcase-outline"></ion-icon>
+                  </div>
+                  <div class="mb-footer__post-info">
+                    <span
+                      class="mb-footer__post-title"
+                      data-translate="footer_post_workplace"
+                      >Workplace Wellness</span
+                    >
+                    <span
+                      class="mb-footer__post-meta"
+                      data-translate="footer_post_workplace_meta"
+                      >Professional tips</span
+                    >
+                  </div>
+                </a>
+              </div>
+            </section>
+          </div>
+
+          <div class="mb-footer__controls">
+            <div class="mb-footer__control-group">
+              <ion-icon name="language-outline"></ion-icon>
+              <select
+                class="mb-footer__select"
+                id="footerLangSelect"
+                aria-label="Select language"
+              >
                 <option value="en">English</option>
                 <option value="es">Español</option>
                 <option value="fr">Français</option>
@@ -364,833 +1830,77 @@
                 <option value="gr">Ελληνικά</option>
               </select>
             </div>
-          </div>
-        </div>
-
-        </div>
-
-        <div class="mobile-auth-section">
-          <div class="mobile-auth-signed-in" data-auth-show>
-            <a href="/profile/" class="mobile-auth-btn mobile-profile-btn">
-              <div class="mobile-auth-btn__icon">
-                <ion-icon name="person-outline"></ion-icon>
-              </div>
-              <span data-translate="nav_profile">My Profile</span>
-              <ion-icon name="chevron-forward-outline" class="mobile-auth-btn__arrow"></ion-icon>
-            </a>
-            <div class="mobile-auth-row">
-              <button class="mobile-auth-btn mobile-inbox-btn" onclick="openGlobalInbox(); closeNavbar();">
-                <div class="mobile-auth-btn__icon">
-                  <ion-icon name="notifications-outline"></ion-icon>
-                </div>
-                <span data-translate="nav_notifications">Notifications</span>
-                <span class="notif-badge mobile-notif-badge" id="mobileNotifBadge" hidden>0</span>
-              </button>
-              <button class="mobile-auth-btn mobile-logout-btn" onclick="handleMobileLogout()">
-                <div class="mobile-auth-btn__icon mobile-auth-btn__icon--danger">
-                  <ion-icon name="log-out-outline"></ion-icon>
-                </div>
-                <span data-translate="nav_logout">Log Out</span>
-              </button>
-            </div>
-          </div>
-          <div class="mobile-auth-signed-out" data-auth-hide>
-            <a href="/auth/" class="mobile-auth-btn mobile-signin-btn">
-              <ion-icon name="log-in-outline"></ion-icon>
-              <span data-translate="nav_signin">Sign In</span>
-              <ion-icon name="arrow-forward-outline" class="mobile-auth-btn__arrow"></ion-icon>
-            </a>
-          </div>
-        </div>
-
-        
-        <div class="navbar-submenu-panel" data-submenu-panel="resources">
-          <div class="submenu-header">
-            <button class="submenu-back-btn" aria-label="Back to main menu">
-              <ion-icon name="arrow-back-outline"></ion-icon>
-            </button>
-            <h3 class="submenu-title" data-translate="nav_resources">Resource Library</h3>
-          </div>
-          <div class="submenu-items">
-            <a href="/resourcelib/?category=anxiety" class="submenu-item">
-              <ion-icon name="pulse-outline"></ion-icon>
-              <span>Anxiety Resources</span>
-            </a>
-            <a href="/resourcelib/?category=depression" class="submenu-item">
-              <ion-icon name="cloudy-outline"></ion-icon>
-              <span>Depression Support</span>
-            </a>
-            <a href="/resourcelib/?category=stress" class="submenu-item">
-              <ion-icon name="flash-outline"></ion-icon>
-              <span>Stress Management</span>
-            </a>
-            <a href="/resourcelib/?category=mindfulness" class="submenu-item">
-              <ion-icon name="leaf-outline"></ion-icon>
-              <span>Mindfulness</span>
-            </a>
-            <div class="submenu-divider"></div>
-            <a href="/resourcelib/" class="submenu-item">
-              <ion-icon name="grid-outline"></ion-icon>
-              <span>View All Resources</span>
-            </a>
-          </div>
-        </div>
-
-        <div class="navbar-submenu-panel" data-submenu-panel="blog">
-          <div class="submenu-header">
-            <button class="submenu-back-btn" aria-label="Back to main menu">
-              <ion-icon name="arrow-back-outline"></ion-icon>
-            </button>
-            <h3 class="submenu-title" data-translate="nav_blog">Blog</h3>
-          </div>
-          <div class="submenu-items">
-            <a href="/articles/anxiety.html" class="submenu-item">
-              <ion-icon name="document-text-outline"></ion-icon>
-              <span>Understanding Anxiety</span>
-            </a>
-            <a href="/articles/depression.html" class="submenu-item">
-              <ion-icon name="document-text-outline"></ion-icon>
-              <span>Depression Guide</span>
-            </a>
-            <a href="/articles/stress.html" class="submenu-item">
-              <ion-icon name="document-text-outline"></ion-icon>
-              <span>Stress Management</span>
-            </a>
-            <a href="/articles/mindfulness.html" class="submenu-item">
-              <ion-icon name="document-text-outline"></ion-icon>
-              <span>Mindfulness Basics</span>
-            </a>
-            <div class="submenu-divider"></div>
-            <a href="/blog/" class="submenu-item">
-              <ion-icon name="albums-outline"></ion-icon>
-              <span>All Articles</span>
-            </a>
-          </div>
-        </div>
-
-      </nav>
-
-      
-      <div class="navbar-actions">
-        
-        <div class="navbar-search" id="navbarSearch">
-          <input type="text" class="navbar-search__input" placeholder="Search..." aria-label="Search site" id="searchInput">
-          <button class="navbar-search__btn" aria-label="Toggle search" id="searchToggle">
-            <ion-icon name="search-outline"></ion-icon>
-          </button>
-          <div class="navbar-search__results" id="searchResults"></div>
-        </div>
-        
-        
-        <button class="navbar-settings-btn" onclick="openSettingsModal()" aria-label="Accessibility settings" title="Settings">
-          <ion-icon name="settings-outline"></ion-icon>
-        </button>
-        
-        
-        <div class="user-menu-wrapper" id="userMenuWrapper">
-          <button class="user-menu-trigger" id="userMenuTrigger" aria-label="User menu" aria-expanded="false">
-            <span class="user-icon" data-user-icon>
-              <ion-icon name="person-outline"></ion-icon>
-            </span>
-            <ion-icon name="chevron-down-outline" class="menu-chevron"></ion-icon>
-            <span class="notif-badge user-menu-badge" id="userMenuBadge" hidden>0</span>
-          </button>
-          
-          <div class="user-menu-dropdown" id="userMenuDropdown">
-            
-            <div class="user-menu-signed-in" data-auth-show style="display: none;">
-              <div class="user-menu-header">
-                <img src="/assets/images/default-avatar.png" alt="User avatar" class="user-avatar-large" id="userMenuAvatar">
-                <div class="user-info">
-                  <p class="user-name" id="userMenuName">User</p>
-                  <p class="user-email" id="userMenuEmail">user@example.com</p>
-                </div>
-              </div>
-              <div class="user-menu-items">
-                <a href="/profile/" class="user-menu-item">
-                  <ion-icon name="person-outline"></ion-icon>
-                  <span data-translate="nav_profile">My Profile</span>
-                </a>
-                <button class="user-menu-item" onclick="openGlobalInbox(); toggleUserMenu();">
-                  <ion-icon name="notifications-outline"></ion-icon>
-                  <span data-translate="nav_notifications">Notifications</span>
-                  <span class="menu-item-badge" id="userMenuNotifBadge" hidden>0</span>
-                </button>
-                <div class="user-menu-divider"></div>
-                <button class="user-menu-item logout-item" onclick="handleUserMenuLogout()">
-                  <ion-icon name="log-out-outline"></ion-icon>
-                  <span data-translate="nav_logout">Log Out</span>
-                </button>
-              </div>
-            </div>
-            
-            
-            <div class="user-menu-guest" data-auth-hide>
-              <p data-translate="user_menu_guest_text">Sign in to access your profile and notifications</p>
-              <a href="/auth/" class="user-menu-signin-btn">
-                <ion-icon name="log-in-outline"></ion-icon>
-                <span data-translate="nav_signin">Sign In</span>
-              </a>
+            <div class="mb-footer__control-group">
+              <ion-icon name="moon-outline" class="theme-icon-dark"></ion-icon>
+              <ion-icon
+                name="sunny-outline"
+                class="theme-icon-light"
+              ></ion-icon>
+              <label class="mb-footer__theme-toggle">
+                <input
+                  type="checkbox"
+                  id="footerThemeToggle"
+                  data-theme-toggle
+                />
+                <span class="mb-footer__theme-slider"></span>
+              </label>
             </div>
           </div>
         </div>
-        
-        
-        <div style="display: none;">
-          <a href="/profile/" class="navbar-action-btn" id="userBtn" aria-label="User account" data-user-btn>
-            <ion-icon name="person-outline" class="action-icon"></ion-icon>
-          </a>
-          <button class="navbar-action-btn navbar-inbox-btn" id="inboxBtn" aria-label="Notifications" onclick="openGlobalInbox()" data-auth-show>
-            <ion-icon name="notifications-outline" class="action-icon"></ion-icon>
-            <span class="notif-badge" id="notifBadge" hidden>0</span>
-          </button>
-        </div>
-        
-        <div class="settings-wrapper" style="display: none;">
-          <button class="navbar-action-btn" id="settingsBtn" aria-label="Settings" data-settings-toggle>
-            <ion-icon name="settings-outline" class="action-icon"></ion-icon>
-          </button>
-          
-          
-          <div class="settings-dropdown" data-settings-dropdown>
-            <div class="settings-header">
-              <span class="settings-title" data-translate="settings_preferences">Preferences</span>
-            </div>
-            <div class="settings-content">
-              <div class="setting-item">
-                <div class="setting-info">
-                  <ion-icon name="moon-outline"></ion-icon>
-                  <span data-translate="settings_dark_mode">Dark Mode</span>
-                </div>
-                <label class="theme-toggle-switch">
-                  <input type="checkbox" data-theme-toggle>
-                  <span class="theme-toggle-slider"></span>
-                </label>
-              </div>
-              <div class="setting-item">
-                <div class="setting-info">
-                  <ion-icon name="text-outline"></ion-icon>
-                  <span data-translate="settings_font_size">Font Size</span>
-                </div>
-                <select class="setting-select" data-font-size-select>
-                  <option value="normal">Normal</option>
-                  <option value="large">Large</option>
-                  <option value="x-large">Extra Large</option>
-                </select>
-              </div>
-              <div class="setting-item">
-                <div class="setting-info">
-                  <ion-icon name="eye-outline"></ion-icon>
-                  <span data-translate="settings_colorblind">Colorblind Mode</span>
-                </div>
-                <select class="setting-select" data-colorblind-select>
-                  <option value="none">None</option>
-                  <option value="protanopia">Protanopia</option>
-                  <option value="deuteranopia">Deuteranopia</option>
-                  <option value="tritanopia">Tritanopia</option>
-                </select>
-              </div>
-              <div class="setting-item">
-                <div class="setting-info">
-                  <ion-icon name="flash-outline"></ion-icon>
-                  <span data-translate="settings_focus_mode">Focus Mode (ADHD)</span>
-                </div>
-                <label class="theme-toggle-switch">
-                  <input type="checkbox" data-adhd-toggle>
-                  <span class="theme-toggle-slider"></span>
-                </label>
-              </div>
-              <div class="setting-item">
-                <div class="setting-info">
-                  <ion-icon name="reader-outline"></ion-icon>
-                  <span data-translate="settings_dyslexia">Dyslexia Font</span>
-                </div>
-                <label class="theme-toggle-switch">
-                  <input type="checkbox" data-dyslexia-toggle>
-                  <span class="theme-toggle-slider"></span>
-                </label>
-              </div>
-              <div class="setting-item">
-                <div class="setting-info">
-                  <ion-icon name="accessibility-outline"></ion-icon>
-                  <span data-translate="settings_reduce_motion">Reduce Motion</span>
-                </div>
-                <label class="theme-toggle-switch">
-                  <input type="checkbox" data-reduce-motion-toggle>
-                  <span class="theme-toggle-slider"></span>
-                </label>
-              </div>
-              <div class="setting-item setting-item--accent">
-                <div class="setting-info">
-                  <ion-icon name="color-palette-outline"></ion-icon>
-                  <span data-translate="settings_accent_color">Accent Color</span>
-                </div>
-                <div class="accent-color-picker">
-                  <button class="accent-color-btn" data-accent-color="purple" title="Purple" style="--btn-color: #9b7ed9"></button>
-                  <button class="accent-color-btn" data-accent-color="blue" title="Blue" style="--btn-color: #4a90d9"></button>
-                  <button class="accent-color-btn" data-accent-color="green" title="Green" style="--btn-color: #4db896"></button>
-                  <button class="accent-color-btn" data-accent-color="teal" title="Teal" style="--btn-color: #38b2ac"></button>
-                  <button class="accent-color-btn" data-accent-color="pink" title="Pink" style="--btn-color: #d97eab"></button>
-                  <button class="accent-color-btn" data-accent-color="orange" title="Orange" style="--btn-color: #e09c5c"></button>
-                  <button class="accent-color-btn" data-accent-color="red" title="Red" style="--btn-color: #e07070"></button>
-                  <button class="accent-color-btn active" data-accent-color="gold" title="Gold" style="--btn-color: #af916d"></button>
-                </div>
-              </div>
-              <div class="setting-item">
-                <div class="setting-info">
-                  <ion-icon name="megaphone-outline"></ion-icon>
-                  <span>Welcome Bar</span>
-                </div>
-                <label class="theme-toggle-switch">
-                  <input type="checkbox" data-topbar-toggle checked>
-                  <span class="theme-toggle-slider"></span>
-                </label>
-              </div>
-              <div class="setting-item">
-                <div class="setting-info">
-                  <ion-icon name="language-outline"></ion-icon>
-                  <span data-translate="settings_language">Language</span>
-                </div>
-                <select class="setting-select" data-language-select>
-                  <option value="en">English</option>
-                  <option value="es">Español</option>
-                  <option value="fr">Français</option>
-                  <option value="zh">中文</option>
-                  <option value="hi">हिन्दी</option>
-                <option value="ko">한국어</option>
-                <option value="de">Deutsch</option>
-                <option value="gr">Ελληνικά</option>
-                </select>
-              </div>
-            </div>
-          </div>
-        </div>
-        
-        <a href="/support/#crisis" class="crisis-btn" aria-label="Get help now">
-          <ion-icon name="alert-circle" aria-hidden="true"></ion-icon>
-          <span data-translate="nav_get_help">Get Help Now</span>
-        </a>
       </div>
 
-      <button class="nav-open-btn" aria-label="open menu" data-nav-toggler>
-        <span class="line line-1"></span>
-        <span class="line line-2"></span>
-        <span class="line line-3"></span>
-      </button>
+      <div class="mb-footer__bottom">
+        <div class="mb-footer__wrap mb-footer__bottomwrap">
+          <p class="mb-footer__copy">
+            © <span id="mb-footer-year"></span> MindBalance.
+            <span data-translate="footer_copy"
+              >For educational purposes only.</span
+            >
+          </p>
 
-      <div class="overlay" data-nav-toggler data-overlay></div>
-
-    </div>
-  </header>
-
-
-  
-<!-- ===== MAIN CONTENT ===== -->
-  <main id="main-content">
-    <div class="docs-container">
-      <header class="docs-header animate-fade-in">
-        <div class="docs-header__brand">
-          <ion-icon name="heart-outline"></ion-icon>
-          <h1 data-translate="docs_title">MindBalance</h1>
-        </div>
-        <p class="docs-header__subtitle" data-translate="docs_subtitle">References</p>
-      </header>
-
-      <div class="docs-main">
-        <div class="docs-top-row">
-          <section class="docs-section docs-section--pdfs">
-            <h2 class="docs-section__title animate-slide-up">
-              <ion-icon name="document-text-outline"></ion-icon>
-              <span data-translate="docs_competition_docs">Competition Documents</span>
-            </h2>
-            <p class="docs-section__desc" data-translate="docs_review_desc">Please review the following documentation for
-              our project submission.</p>
-
-            <div class="docs-pdf-list animate-stagger">
-              <a href="https://drive.google.com/file/d/1ax0bfA41EkKlIChvjMbONUDOxOgqrXm5/view?usp=sharing" target="_blank" rel="noopener noreferrer" class="docs-pdf-card card-animated hover-lift">
-                <div class="docs-pdf-card__icon">
-                  <ion-icon name="document-outline"></ion-icon>
-                </div>
-                <div class="docs-pdf-card__content">
-                  <h3 data-translate="docs_worklog">Work Log</h3>
-                  <p data-translate="docs_click_pdf">Click to view PDF</p>
-                </div>
-                <ion-icon name="open-outline" class="docs-pdf-card__arrow"></ion-icon>
-              </a>
-
-              <a href="https://drive.google.com/file/d/1YTEYcFZ6JiCj510DV41hTMK6EPbUTvod/view?usp=sharing"
-                target="_blank" rel="noopener noreferrer" class="docs-pdf-card card-animated hover-lift">
-                <div class="docs-pdf-card__icon">
-                  <ion-icon name="document-outline"></ion-icon>
-                </div>
-                <div class="docs-pdf-card__content">
-                  <h3 data-translate="docs_copyright">Copyright Checklist</h3>
-                  <p data-translate="docs_click_pdf">Click to view PDF</p>
-                </div>
-                <ion-icon name="open-outline" class="docs-pdf-card__arrow"></ion-icon>
-              </a>
-
-              <a href="https://drive.google.com/file/d/1noEzMCtA-QNKoTy_NB1ZCRXUEBFrQqPD/view?usp=sharing" target="_blank" rel="noopener noreferrer" class="docs-pdf-card card-animated hover-lift">
-                <div class="docs-pdf-card__icon">
-                  <ion-icon name="document-outline"></ion-icon>
-                </div>
-                <div class="docs-pdf-card__content">
-                  <h3 data-translate="docs_references">Media & Text Citations</h3>
-                  <p data-translate="docs_click_pdf">Click to view PDF</p>
-                </div>
-                <ion-icon name="open-outline" class="docs-pdf-card__arrow"></ion-icon>
-              </a>
-
-              <a href="https://drive.google.com/file/d/1wkGBz-NMstJ7BfQe4XnDsRR4Ywvw0HYm/view?usp=sharing" target="_blank" rel="noopener noreferrer" class="docs-pdf-card card-animated hover-lift">
-                <div class="docs-pdf-card__icon">
-                  <ion-icon name="document-outline"></ion-icon>
-                </div>
-                <div class="docs-pdf-card__content">
-                  <h3 data-translate="docs_credits">Credits & Attribution</h3>
-                  <p data-translate="docs_click_pdf">Click to view PDF</p>
-                </div>
-                <ion-icon name="open-outline" class="docs-pdf-card__arrow"></ion-icon>
-              </a>
-            </div>
-          </section>
-
-          <section class="docs-section docs-section--overview">
-            <h2 class="docs-section__title animate-slide-up">
-              <ion-icon name="information-circle-outline"></ion-icon>
-              <span data-translate="docs_overview">Project Overview</span>
-            </h2>
-            <div class="docs-content animate-fade-in">
-              <p><strong>MindBalance</strong> <span data-translate="docs_overview_p1">is a comprehensive mental health
-                  education and support hub built for students and young adults. Our mission is to provide accessible,
-                  credible information about mental health topics while connecting users with professional resources and
-                  community support.</span></p>
-
-              <p data-translate="docs_overview_p2">The platform addresses the growing need for reliable mental health
-                information by curating content from authoritative sources like the National Institute of Mental Health
-                (NIMH), Mayo Clinic, and other trusted providers. Users can explore educational articles, find local
-                mental health services, connect with community members, and access crisis support resources.</p>
-
-              <p data-translate="docs_overview_p3">MindBalance was designed with accessibility as a core principle,
-                offering features like dark mode, adjustable font sizes, colorblind modes, dyslexia-friendly fonts, and
-                focus mode for users with ADHD.</p>
-            </div>
-          </section>
-        </div>
-
-        <section class="docs-section">
-          <h2 class="docs-section__title animate-slide-up">
-            <ion-icon name="list-outline"></ion-icon>
-            <span data-translate="docs_features">Features</span>
-          </h2>
-          <div class="docs-features animate-stagger">
-            <div class="docs-feature card-animated">
-              <div class="docs-feature__icon">
-                <ion-icon name="library-outline"></ion-icon>
-              </div>
-              <div class="docs-feature__content">
-                <h3 data-translate="docs_feature_resource_title">Resource Library</h3>
-                <p data-translate="docs_feature_resource_desc">Interactive directory featuring credible mental health
-                  resources from organizations like NAMI, Mental Health America, Crisis Text Line, and The Trevor
-                  Project. Includes search, filtering by category, and a spotlight section for featured resources.</p>
-              </div>
-            </div>
-
-            <div class="docs-feature card-animated">
-              <div class="docs-feature__icon">
-                <ion-icon name="people-outline"></ion-icon>
-              </div>
-              <div class="docs-feature__content">
-                <h3 data-translate="docs_feature_community_title">Community Hub</h3>
-                <p data-translate="docs_feature_community_desc">Moderated forum for peer support with posts, comments,
-                  likes, and real-time updates. Features profanity filtering, media uploads, @mentions system, and admin
-                  moderation tools.</p>
-              </div>
-            </div>
-
-            <div class="docs-feature card-animated">
-              <div class="docs-feature__icon">
-                <ion-icon name="newspaper-outline"></ion-icon>
-              </div>
-              <div class="docs-feature__content">
-                <h3 data-translate="docs_feature_articles_title">Educational Articles</h3>
-                <p data-translate="docs_feature_articles_desc">In-depth articles on anxiety, depression, stress,
-                  mindfulness, sleep, and teen mental health. Features text-to-speech audio, reading progress tracking,
-                  bookmarking, and related articles recommendations.</p>
-              </div>
-            </div>
-
-            <div class="docs-feature card-animated">
-              <div class="docs-feature__icon">
-                <ion-icon name="hand-left-outline"></ion-icon>
-              </div>
-              <div class="docs-feature__content">
-                <h3 data-translate="docs_feature_crisis_title">Crisis Support</h3>
-                <p data-translate="docs_feature_crisis_desc">Always-visible crisis resources including 988 Suicide &
-                  Crisis Lifeline, Crisis Text Line, and The Trevor Project. Quick access from every page ensures help
-                  is never more than a click away.</p>
-              </div>
-            </div>
-
-            <div class="docs-feature card-animated">
-              <div class="docs-feature__icon">
-                <ion-icon name="accessibility-outline"></ion-icon>
-              </div>
-              <div class="docs-feature__content">
-                <h3 data-translate="docs_feature_accessibility_title">Accessibility Settings</h3>
-                <p data-translate="docs_feature_accessibility_desc">7 accessibility options: Dark Mode, Font Size
-                  adjustment, High Contrast, three Colorblind modes (Protanopia, Deuteranopia, Tritanopia), Focus Mode
-                  for ADHD, Dyslexia-friendly font, and Reduced Motion.</p>
-              </div>
-            </div>
-
-            <div class="docs-feature card-animated">
-              <div class="docs-feature__icon">
-                <ion-icon name="person-outline"></ion-icon>
-              </div>
-              <div class="docs-feature__content">
-                <h3 data-translate="docs_feature_profiles_title">User Profiles</h3>
-                <p data-translate="docs_feature_profiles_desc">Instagram-style profiles with customizable avatars, bio,
-                  social links, mood tracking, wellness goals, reading streak calendar, achievements, and privacy
-                  controls.</p>
-              </div>
-            </div>
-
-            <div class="docs-feature card-animated">
-              <div class="docs-feature__icon">
-                <ion-icon name="globe-outline"></ion-icon>
-              </div>
-              <div class="docs-feature__content">
-                <h3 data-translate="docs_feature_multilingual_title">Multilingual Support</h3>
-                <p data-translate="docs_feature_multilingual_desc">Full translation support for 8 languages: English,
-                  Spanish, French, Chinese (Simplified), Hindi, Korean, German, and Greek. Language preference persists across
-                  sessions.</p>
-              </div>
-            </div>
-
-            <div class="docs-feature card-animated">
-              <div class="docs-feature__icon">
-                <ion-icon name="location-outline"></ion-icon>
-              </div>
-              <div class="docs-feature__content">
-                <h3 data-translate="docs_feature_findhelp_title">Find Help Locator</h3>
-                <p data-translate="docs_feature_findhelp_desc">ZIP code-based search to find local mental health
-                  services using the SAMHSA Treatment Locator API. Filter by service type and radius, with direct call
-                  and directions buttons.</p>
-              </div>
-            </div>
-
-            <div class="docs-feature card-animated">
-              <div class="docs-feature__icon">
-                <ion-icon name="document-text-outline"></ion-icon>
-              </div>
-              <div class="docs-feature__content">
-                <h3 data-translate="docs_feature_news_title">News & Stories</h3>
-                <p data-translate="docs_feature_news_desc">Curated mental health news, recovery stories, workplace
-                  wellness articles, and community spotlights. Features real-time content with text-to-speech and full
-                  reading controls.</p>
-              </div>
-            </div>
+          <div class="mb-footer__legal">
+            <a
+              class="mb-footer__legal-link"
+              href="/terms/"
+              data-translate="footer_terms"
+              >Terms</a
+            >
+            <a
+              class="mb-footer__legal-link"
+              href="/privacy/"
+              data-translate="footer_privacy"
+              >Privacy</a
+            >
+            <a
+              class="mb-footer__legal-link"
+              href="/disclaimer/"
+              data-translate="footer_disclaimer"
+              >Disclaimer</a
+            >
           </div>
-        </section>
-
-        <section class="docs-section">
-          <h2 class="docs-section__title animate-slide-up">
-            <ion-icon name="code-slash-outline"></ion-icon>
-            <span data-translate="docs_tech_stack">Tech Stack</span>
-          </h2>
-          <div class="docs-tech-grid animate-stagger">
-            <div class="docs-tech-item card-animated">
-              <h4 data-translate="docs_tech_frontend">Frontend</h4>
-              <ul>
-                <li data-translate="docs_tech_frontend_1">HTML5, CSS3, JavaScript (ES6+)</li>
-                <li data-translate="docs_tech_frontend_2">Custom CSS with CSS Variables for theming</li>
-                <li data-translate="docs_tech_frontend_3">Responsive design with mobile-first approach</li>
-                <li data-translate="docs_tech_frontend_4">Swiper.js for carousels</li>
-                <li data-translate="docs_tech_frontend_5">Ionicons for iconography</li>
-              </ul>
-            </div>
-
-            <div class="docs-tech-item card-animated">
-              <h4 data-translate="docs_tech_backend">Backend & Data</h4>
-              <ul>
-                <li data-translate="docs_tech_backend_1">Python Flask server</li>
-                <li data-translate="docs_tech_backend_2">Supabase (PostgreSQL) for database</li>
-                <li data-translate="docs_tech_backend_3">Supabase Auth for authentication</li>
-                <li data-translate="docs_tech_backend_4">Supabase Realtime for live updates</li>
-                <li data-translate="docs_tech_backend_5">Supabase Storage for media uploads</li>
-              </ul>
-            </div>
-
-            <div class="docs-tech-item card-animated">
-              <h4 data-translate="docs_tech_apis">APIs & Integrations</h4>
-              <ul>
-                <li data-translate="docs_tech_apis_1">SAMHSA Treatment Locator API</li>
-                <li data-translate="docs_tech_apis_2">ElevenLabs API for text-to-speech</li>
-                <li data-translate="docs_tech_apis_3">OpenAI API for AI wellness insights</li>
-                <li data-translate="docs_tech_apis_4">Resend API for newsletter emails</li>
-                <li data-translate="docs_tech_apis_5">Formspree for form submissions</li>
-                <li data-translate="docs_tech_apis_6">Supabase API for backend services</li>
-              </ul>
-            </div>
-
-            <div class="docs-tech-item card-animated">
-              <h4 data-translate="docs_tech_sources">Content Sources</h4>
-              <ul>
-                <li data-translate="docs_tech_sources_1">National Institute of Mental Health (NIMH)</li>
-                <li data-translate="docs_tech_sources_2">Mayo Clinic</li>
-                <li data-translate="docs_tech_sources_3">American Psychological Association</li>
-                <li data-translate="docs_tech_sources_4">NAMI, Mental Health America</li>
-                <li data-translate="docs_tech_sources_5">SAMHSA</li>
-              </ul>
-            </div>
-
-            <div class="docs-tech-item card-animated">
-              <h4 data-translate="docs_tech_media">Image & Design Sources</h4>
-              <ul>
-                <li data-translate="docs_tech_media_1">Unsplash for photography</li>
-                <li data-translate="docs_tech_media_2">Canva for graphics & design</li>
-                <li data-translate="docs_tech_media_3">Ionicons for icon library</li>
-                <li data-translate="docs_tech_media_4">Google Fonts (Poppins)</li>
-              </ul>
-            </div>
-          </div>
-        </section>
-
-        <section class="docs-section docs-section--cta">
-          <a href="/" class="docs-cta-button hover-glow">
-            <ion-icon name="arrow-forward-outline"></ion-icon>
-            <span data-translate="docs_explore">Explore MindBalance</span>
-          </a>
-        </section>
-      </div>
-    </div>
-  </main>
-
-  <button class="back-to-top" id="backToTop" aria-label="Back to top">
-    <ion-icon name="chevron-up-outline"></ion-icon>
-  </button>
-
-  
-<!-- ===== FOOTER ===== -->
-  <footer id="footer" class="mb-footer" aria-label="Site footer">
-    
-    <div class="mb-footer__wave">
-      <svg viewBox="0 0 1200 120" preserveAspectRatio="none">
-        <path class="wave-path wave-1" d="M0,60 Q150,20 300,60 T600,60 T900,60 T1200,60 L1200,120 L0,120 Z"></path>
-        <path class="wave-path wave-2" d="M0,80 Q200,40 400,80 T800,80 T1200,80 L1200,120 L0,120 Z"></path>
-        <path class="wave-path wave-3" d="M0,100 Q300,70 600,100 T1200,100 L1200,120 L0,120 Z"></path>
-      </svg>
-    </div>
-
-    <div class="mb-footer__top">
-      
-      <div class="mb-footer__pattern"></div>
-
-      <div class="mb-footer__wrap">
-        
-        <div class="mb-footer__main-grid">
-
-          
-          <section class="mb-footer__col" aria-label="About MindBalance">
-            <h3 class="mb-footer__brand" data-translate="footer_brand">MindBalance</h3>
-            <p class="mb-footer__text" data-translate="footer_about">
-              MindBalance is a student-built mental health education and support hub.
-              Our goal is to provide clear, reliable information and guide visitors toward safe resources.
-            </p>
-            <a class="mb-footer__link" href="/support/" data-translate="footer_read_more">Read more →</a>
-
-            
-            <div class="mb-footer__trust">
-              <div class="mb-footer__badge">
-                <ion-icon name="shield-checkmark-outline"></ion-icon>
-                <span>Privacy First</span>
-              </div>
-              <div class="mb-footer__badge">
-                <ion-icon name="accessibility-outline"></ion-icon>
-                <span>Accessible</span>
-              </div>
-              <div class="mb-footer__badge">
-                <ion-icon name="people-outline"></ion-icon>
-                <span>Community</span>
-              </div>
-            </div>
-          </section>
-
-          
-          <nav class="mb-footer__col mb-footer__accordion" aria-label="Footer navigation">
-            <button class="mb-footer__accordion-btn" aria-expanded="false">
-              <h4 class="mb-footer__heading" data-translate="footer_pages">Pages</h4>
-              <ion-icon name="chevron-down-outline" class="accordion-icon"></ion-icon>
-            </button>
-            <ul class="mb-footer__list mb-footer__accordion-content">
-              <li><a class="mb-footer__link" href="/" data-translate="nav_home">Home</a></li>
-              <li><a class="mb-footer__link" href="/support/">About</a></li>
-              <li><a class="mb-footer__link" href="/resourcelib/">Resource Library</a></li>
-              <li><a class="mb-footer__link" href="/community/">Community Hub</a></li>
-              <li><a class="mb-footer__link" href="/blog/">Blog</a></li>
-              <li><a class="mb-footer__link" href="/auth/" data-auth-btn>Sign In</a></li>
-            </ul>
-          </nav>
-
-          
-          <section class="mb-footer__col" aria-label="Popular topics">
-            <h4 class="mb-footer__heading" data-translate="footer_topics">Popular Topics</h4>
-            <div class="mb-footer__tags">
-              <a class="mb-footer__tag" href="/resourcelib/?topic=anxiety"
-                data-translate="blog_filter_anxiety">Anxiety</a>
-              <a class="mb-footer__tag" href="/resourcelib/?topic=depression"
-                data-translate="blog_filter_depression">Depression</a>
-              <a class="mb-footer__tag" href="/resourcelib/?topic=stress" data-translate="blog_filter_stress">Stress</a>
-              <a class="mb-footer__tag" href="/resourcelib/?topic=sleep" data-translate="blog_filter_sleep">Sleep</a>
-              <a class="mb-footer__tag" href="/resourcelib/?topic=mindfulness"
-                data-translate="blog_filter_mindfulness">Mindfulness</a>
-              <a class="mb-footer__tag" href="/resourcelib/?topic=teens" data-translate="blog_filter_teens">Teens</a>
-            </div>
-          </section>
-
-          
-          <section class="mb-footer__col" aria-label="Take action">
-            <h4 class="mb-footer__heading" data-translate="footer_action">Take Action</h4>
-
-            <p class="mb-footer__text" data-translate="footer_action_desc">
-              Support mental health education and community access to resources.
-            </p>
-
-            <div class="mb-footer__cta animate-scale-in">
-              <a class="mb-footer__btn" href="/support/" data-translate="footer_get_support">Get Support</a>
-              <a class="mb-footer__btn mb-footer__btn--ghost" href="/auth/" data-auth-btn>Sign In</a>
-            </div>
-
-            <h5 class="mb-footer__subheading" data-translate="footer_follow">Follow Us</h5>
-            <div class="mb-footer__social">
-              <a class="mb-footer__icon mb-footer__icon--instagram"
-                href="https://www.instagram.com/mindbalance2026?igsh=MTdid3ZpdDZzdHFtcA==" target="_blank"
-                rel="noopener noreferrer" aria-label="Instagram">
-                <ion-icon name="logo-instagram"></ion-icon>
-              </a>
-              <a class="mb-footer__icon mb-footer__icon--youtube" href="https://www.youtube.com/@MindBaIance"
-                target="_blank" rel="noopener noreferrer" aria-label="YouTube">
-                <ion-icon name="logo-youtube"></ion-icon>
-              </a>
-            </div>
-          </section>
-        </div>
-
-        
-        <div class="mb-footer__extras">
-          
-          <section class="mb-footer__newsletter" aria-label="Newsletter signup">
-            <div class="mb-footer__newsletter-content">
-              <ion-icon name="mail-outline" class="newsletter-icon"></ion-icon>
-              <div class="newsletter-text">
-                <h4 class="mb-footer__heading" data-translate="footer_stay_updated">Stay Updated</h4>
-                <p class="mb-footer__text" data-translate="footer_newsletter_desc">Get mental wellness tips and resources delivered to your inbox.</p>
-              </div>
-            </div>
-            <form class="mb-footer__newsletter-form" id="newsletterForm">
-              <input type="email" class="mb-footer__newsletter-input" placeholder="Enter your email" data-translate-placeholder="footer_email_placeholder" required
-                aria-label="Email address">
-              <button type="submit" class="mb-footer__newsletter-btn">
-                <span data-translate="footer_subscribe">Subscribe</span>
-                <ion-icon name="arrow-forward-outline"></ion-icon>
-              </button>
-            </form>
-            <p class="mb-footer__newsletter-note" data-translate="footer_privacy_note">We respect your privacy. Unsubscribe anytime.</p>
-          </section>
-
-          
-          <section class="mb-footer__recent" aria-label="Recent articles">
-            <h4 class="mb-footer__heading" data-translate="footer_latest_articles">Latest Articles</h4>
-            <div class="mb-footer__posts">
-              <a href="/articles/mental-health-news.html" class="mb-footer__post">
-                <div class="mb-footer__post-icon">
-                  <ion-icon name="flask-outline"></ion-icon>
-                </div>
-                <div class="mb-footer__post-info">
-                  <span class="mb-footer__post-title" data-translate="footer_post_research_news">Mental Health Research News</span>
-                  <span class="mb-footer__post-meta" data-translate="footer_post_research_meta">Latest findings</span>
-                </div>
-              </a>
-              <a href="/articles/recovery-stories.html" class="mb-footer__post">
-                <div class="mb-footer__post-icon">
-                  <ion-icon name="heart-outline"></ion-icon>
-                </div>
-                <div class="mb-footer__post-info">
-                  <span class="mb-footer__post-title" data-translate="footer_post_recovery">Recovery Stories</span>
-                  <span class="mb-footer__post-meta" data-translate="footer_post_recovery_meta">Real journeys</span>
-                </div>
-              </a>
-              <a href="/articles/workplace-wellness.html" class="mb-footer__post">
-                <div class="mb-footer__post-icon">
-                  <ion-icon name="briefcase-outline"></ion-icon>
-                </div>
-                <div class="mb-footer__post-info">
-                  <span class="mb-footer__post-title" data-translate="footer_post_workplace">Workplace Wellness</span>
-                  <span class="mb-footer__post-meta" data-translate="footer_post_workplace_meta">Professional tips</span>
-                </div>
-              </a>
-            </div>
-          </section>
-        </div>
-
-        
-        <div class="mb-footer__controls">
-          <div class="mb-footer__control-group">
-            <ion-icon name="language-outline"></ion-icon>
-            <select class="mb-footer__select" id="footerLangSelect" aria-label="Select language">
-              <option value="en">English</option>
-              <option value="es">Español</option>
-              <option value="fr">Français</option>
-              <option value="zh">中文</option>
-              <option value="hi">हिन्दी</option>
-              <option value="ko">한국어</option>
-                <option value="de">Deutsch</option>
-                <option value="gr">Ελληνικά</option>
-            </select>
-          </div>
-          <div class="mb-footer__control-group">
-            <ion-icon name="moon-outline" class="theme-icon-dark"></ion-icon>
-            <ion-icon name="sunny-outline" class="theme-icon-light"></ion-icon>
-            <label class="mb-footer__theme-toggle">
-              <input type="checkbox" id="footerThemeToggle" data-theme-toggle>
-              <span class="mb-footer__theme-slider"></span>
-            </label>
-          </div>
-        </div>
-
-      </div>
-    </div>
-
-    
-    <div class="mb-footer__bottom">
-      <div class="mb-footer__wrap mb-footer__bottomwrap">
-        <p class="mb-footer__copy">
-          © <span id="mb-footer-year"></span> MindBalance. <span data-translate="footer_copy">For educational purposes
-            only.</span>
-        </p>
-
-        <div class="mb-footer__legal">
-          <a class="mb-footer__legal-link" href="/terms/" data-translate="footer_terms">Terms</a>
-          <a class="mb-footer__legal-link" href="/privacy/" data-translate="footer_privacy">Privacy</a>
-          <a class="mb-footer__legal-link" href="/disclaimer/" data-translate="footer_disclaimer">Disclaimer</a>
         </div>
       </div>
-    </div>
-  </footer>
+    </footer>
 
-  
-<!-- ===== SCRIPTS ===== -->
-  <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
-  <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
-  <script src="https://unpkg.com/swiper@8/swiper-bundle.min.js" defer></script>
+    <!-- ===== SCRIPTS ===== -->
+    <script
+      type="module"
+      src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"
+    ></script>
+    <script
+      nomodule
+      src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"
+    ></script>
+    <script
+      src="https://unpkg.com/swiper@8/swiper-bundle.min.js"
+      defer
+    ></script>
 
-  
-  <script src="/js/script.js" defer></script>
-  <script src="/js/scroll-progress.js" defer></script>
-  <script src="/js/animations.js" defer></script>
+    <script src="/js/script.js" defer></script>
+    <script src="/js/scroll-progress.js" defer></script>
+    <script src="/js/animations.js" defer></script>
 
-  <script src="../js/footer.js" defer></script>
-<script src="../js/haptics.js" defer></script>
-</body>
-
+    <script src="../js/footer.js" defer></script>
+    <script src="../js/haptics.js" defer></script>
+  </body>
 </html>

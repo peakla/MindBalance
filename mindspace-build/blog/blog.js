@@ -7,7 +7,7 @@
   function getTranslation(key, fallback) {
     if (window.translations) {
       var lang = localStorage.getItem('mindspace-language') || localStorage.getItem('mindbalance-language') || 'en';
-      var langMap = { en: 'en', es: 'es', fr: 'fr', zh: 'zh', hi: 'hi', ko: 'ko' };
+      var langMap = { en: 'en', es: 'es', fr: 'fr', zh: 'zh', hi: 'hi', ko: 'ko', de: 'de', gr: 'gr' };
       var langKey = langMap[lang] || 'en';
       if (window.translations[langKey] && window.translations[langKey][key]) {
         return window.translations[langKey][key];
@@ -676,14 +676,13 @@
     if (!quoteEl || !authorEl) return;
 
     var quotes = [
-      { text: "You don\u2019t have to control your thoughts. You just have to stop letting them control you.", author: "Dan Millman" },
-      { text: "Mental health is not a destination, but a process. It\u2019s about how you drive, not where you\u2019re going.", author: "Noam Shpancer" },
-      { text: "There is hope, even when your brain tells you there isn\u2019t.", author: "John Green" },
-      { text: "You are not your illness. You have an individual story to tell. You have a name, a history, a personality.", author: "Julian Seifter" },
-      { text: "Recovery is not one and done. It is a lifelong journey that takes place one day, one step at a time.", author: "Unknown" },
-      { text: "Self-care is how you take your power back.", author: "Lalah Delia" },
-      { text: "It\u2019s okay to not be okay \u2013 as long as you are not giving up.", author: "Karen Salmansohn" },
-      { text: "The strongest people are not those who show strength in front of us, but those who win battles we know nothing about.", author: "Jonathan Harnisch" }
+      { text: getTranslation('quote_1_text', "You don\u2019t have to control your thoughts. You just have to stop letting them control you."), author: getTranslation('quote_1_author', "Dan Millman") },
+      { text: getTranslation('quote_2_text', "Mental health is not a destination, but a process. It\u2019s about how you drive, not where you\u2019re going."), author: getTranslation('quote_2_author', "Noam Shpancer") },
+      { text: getTranslation('quote_3_text', "There is hope, even when your brain tells you there isn\u2019t."), author: getTranslation('quote_3_author', "John Green") },
+      { text: getTranslation('quote_5_text', "You are not your illness. You have an individual story to tell. You have a name, a history, a personality."), author: getTranslation('quote_5_author', "Julian Seifter") },
+      { text: getTranslation('quote_6_text', "Healing takes time, and asking for help is a courageous step."), author: getTranslation('quote_6_author', "Mariska Hargitay") },
+      { text: getTranslation('quote_4_text', "Self-care is how you take your power back."), author: getTranslation('quote_4_author', "Lalah Delia") },
+      { text: getTranslation('quote_7_text', "Be patient with yourself. Self-growth is tender; it\u2019s holy ground."), author: getTranslation('quote_7_author', "Stephen Covey") }
     ];
 
     var index = 0;

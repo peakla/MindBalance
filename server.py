@@ -360,13 +360,18 @@ def newsletter_subscribe():
             )
             conn.commit()
         
-        api_key, from_email = get_resend_credentials()
-        from_email = "MindBalance <noreply@mindbalance.cloud>"
+        api_key, connector_from_email = get_resend_credentials()
+        if connector_from_email and 'resend.dev' in connector_from_email:
+            from_email = connector_from_email
+        else:
+            from_email = "MindBalance <onboarding@resend.dev>"
+        print(f"[Newsletter] API key found: {bool(api_key)}, from_email: {from_email}")
         if api_key:
             try:
                 import resend as resend_module
                 resend_module.api_key = api_key
-                Emails.send({
+                print(f"[Newsletter] Sending welcome email to {email} from {from_email}")
+                result = Emails.send({
                     "from": from_email,
                     "to": [email],
                     "subject": "Welcome to MindBalance Newsletter!",
@@ -397,7 +402,7 @@ def newsletter_subscribe():
                             </p>
                             
                             <div style="text-align: center; margin-top: 30px;">
-                                <a href="https://mindbalance.replit.app" 
+                                <a href="https://mindbalance.cloud" 
                                    style="display: inline-block; background: #af916d; color: #fff; padding: 14px 32px; 
                                           border-radius: 30px; text-decoration: none; font-weight: 600; font-size: 15px;">
                                     Visit MindBalance
@@ -410,14 +415,15 @@ def newsletter_subscribe():
                                 You received this email because you subscribed to MindBalance newsletter.
                             </p>
                             <p style="color: #8a8899; font-size: 13px; margin-top: 10px;">
-                                <a href="https://mindbalance.replit.app" style="color: #af916d; text-decoration: none;">
-                                    mindbalance.replit.app
+                                <a href="https://mindbalance.cloud" style="color: #af916d; text-decoration: none;">
+                                    mindbalance.cloud
                                 </a>
                             </p>
                         </div>
                     </div>
                     """
                 })
+                print(f"Welcome email sent successfully: {result}")
             except Exception as e:
                 print(f"Error sending welcome email: {e}")
         

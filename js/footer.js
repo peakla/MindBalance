@@ -31,6 +31,16 @@ function initBackToTop() {
   });
 }
 
+// --- Newsletter API Base ---
+function getNewsletterApiBase() {
+  const host = window.location.hostname;
+  if (host === 'mindbalance.cloud' || host === 'www.mindbalance.cloud' ||
+      host === 'mindspace.site' || host === 'www.mindspace.site') {
+    return 'https://d519c840-a074-41fa-b89a-8627dded835a-00-f7kivyi5gpot.worf.replit.dev';
+  }
+  return '';
+}
+
 // --- Newsletter Form ---
 function initNewsletterForm() {
   const form = document.getElementById('newsletterForm');
@@ -83,6 +93,17 @@ function initNewsletterForm() {
           }, { onConflict: 'email' });
 
         if (error) throw error;
+
+        const apiBase = getNewsletterApiBase();
+        try {
+          await fetch(apiBase + '/api/newsletter', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email: email })
+          });
+        } catch (emailErr) {
+          console.warn('Welcome email request failed:', emailErr);
+        }
 
         btn.innerHTML = '<ion-icon name="checkmark-outline"></ion-icon> Subscribed!';
         btn.style.background = 'linear-gradient(135deg, #10b981 0%, #059669 100%)';

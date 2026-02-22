@@ -1771,5 +1771,10 @@
   "docs_tech_media_3": "Ionicons para biblioteca de iconos",
   "docs_tech_media_4": "Google Fonts (Poppins)",
   "docs_originality_statement": "Este sitio web fue diseñado y construido completamente desde cero por nuestro equipo utilizando HTML, CSS y JavaScript personalizados. No se utilizaron plantillas, temas ni sistemas o frameworks preconstruidos en la creación de este sitio.",
-  "docs_originality_title": "Declaración de originalidad"
+  "docs_originality_title": "Declaración de originalidad",
+  "blog_newsletter_title": "Mantente al día",
+  "blog_newsletter_desc": "Consejos mensuales de salud mental + nuevos recursos. Sin spam — cancela cuando quieras.",
+  "blog_community_title": "Únete a nuestra comunidad",
+  "blog_community_desc": "Comparte experiencias, conecta con otros y encuentra apoyo en nuestro foro comunitario.",
+  "blog_visit_community": "Visitar la comunidad"
 }

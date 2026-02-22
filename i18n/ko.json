@@ -1771,5 +1771,10 @@
   "docs_tech_media_3": "아이콘 라이브러리용 Ionicons",
   "docs_tech_media_4": "Google Fonts (Poppins)",
   "docs_originality_statement": "이 웹사이트는 저희 팀이 맞춤형 HTML, CSS, 그리고 JavaScript를 사용해 처음부터 완전히 새로 설계하고 제작했습니다. 이 사이트를 제작하는 데에는 기성 템플릿, 테마 또는 프레임워크 시스템을 사용하지 않았습니다.",
-  "docs_originality_title": "독창성 선언문"
+  "docs_originality_title": "독창성 선언문",
+  "blog_newsletter_title": "최신 소식 받기",
+  "blog_newsletter_desc": "월간 정신 건강 팁 + 새로운 자료. 스팸 없음 — 언제든 구독 취소 가능.",
+  "blog_community_title": "커뮤니티에 참여하세요",
+  "blog_community_desc": "경험을 공유하고, 다른 사람들과 연결하며, 커뮤니티 포럼에서 지원을 찾으세요.",
+  "blog_visit_community": "커뮤니티 허브 방문"
 }

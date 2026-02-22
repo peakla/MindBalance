@@ -1770,5 +1770,10 @@
   "docs_tech_media_3": "Ionicons 图标库",
   "docs_tech_media_4": "Google Fonts (Poppins)",
   "docs_originality_statement": "本网站由我们的团队完全从零设计和构建，使用自定义的 HTML、CSS 和 JavaScript。在创建本网站时未使用任何预制模板、主题或框架系统。",
-  "docs_originality_title": "原创性声明"
+  "docs_originality_title": "原创性声明",
+  "blog_newsletter_title": "保持更新",
+  "blog_newsletter_desc": "每月心理健康建议 + 新资源。没有垃圾邮件 — 随时取消订阅。",
+  "blog_community_title": "加入我们的社区",
+  "blog_community_desc": "分享经验，与他人联系，在我们的社区论坛中寻找支持。",
+  "blog_visit_community": "访问社区中心"
 }

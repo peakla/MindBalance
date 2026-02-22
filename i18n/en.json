@@ -1787,5 +1787,10 @@
   "docs_tech_media_3": "Ionicons for icon library",
   "docs_tech_media_4": "Google Fonts (Poppins)",
   "docs_originality_statement": "This website was designed and built entirely from scratch by our team using custom HTML, CSS, and JavaScript. No pre-built templates, themes, or framework systems were used in the creation of this site.",
-  "docs_originality_title": "Originality Statement"
+  "docs_originality_title": "Originality Statement",
+  "blog_newsletter_title": "Stay in the loop",
+  "blog_newsletter_desc": "Monthly mental health tips + new resources. No spam — unsubscribe anytime.",
+  "blog_community_title": "Join our Community Hub",
+  "blog_community_desc": "Share experiences, connect with others, and find support in our community forum.",
+  "blog_visit_community": "Visit Community Hub"
 }

@@ -2187,7 +2187,9 @@ function updateStreakMilestones(currentStreak) {
 
   const calendarEl = document.getElementById('streakCalendar');
   if (!calendarEl) return;
-  let badgeContainer = calendarEl.querySelector('.streak-milestone-badges');
+  const calendarParent = calendarEl.closest('.mb-profile__streak-calendar');
+  if (!calendarParent) return;
+  let badgeContainer = calendarParent.querySelector('.streak-milestone-badges');
   if (badgeContainer) badgeContainer.remove();
 
   badgeContainer = createSafeElement('div', 'streak-milestone-badges');
@@ -2207,7 +2209,7 @@ function updateStreakMilestones(currentStreak) {
     badgeContainer.appendChild(badge);
   });
 
-  calendarEl.appendChild(badgeContainer);
+  calendarParent.appendChild(badgeContainer);
 }
 
 

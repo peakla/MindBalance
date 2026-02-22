@@ -1731,7 +1731,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
   const slides = topbar.querySelectorAll('.topbar__slide');
   const dots = topbar.querySelectorAll('.topbar__dot');
-  const closeBtn = document.getElementById('topbarClose');
   let current = 0;
   let timer = null;
   const INTERVAL = 5000;
@@ -1766,14 +1765,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   });
 
-  if (closeBtn) {
-    closeBtn.addEventListener('click', () => {
-      topbar.classList.add('dismissed');
-      sessionStorage.setItem('topbarDismissed', '1');
-      hideTopbar();
-      if (topbarToggle) topbarToggle.checked = false;
-    });
-  }
+
 
   if (!topbar.classList.contains('dismissed')) {
     startTimer();

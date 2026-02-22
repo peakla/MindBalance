@@ -5,8 +5,8 @@
 }
 
 [data-theme="dark"] {
-  --profile-accent: #9b7ed9;
-  --profile-gradient: linear-gradient(135deg, #9b7ed9 0%, #7c5fc4 100%);
+  --profile-accent: var(--user-accent-light, var(--user-accent));
+  --profile-gradient: linear-gradient(135deg, var(--user-accent) 0%, var(--user-accent-dark) 100%);
 }
 
 /* === PROFILE BASE === */
@@ -3277,7 +3277,7 @@
 }
 
 [data-theme="dark"] .mb-profile__section-title ion-icon {
-  color: var(--purple-accent, #9b7ed9);
+  color: var(--user-accent-light, var(--user-accent));
 }
 
 [data-theme="dark"] .mb-profile__community-section {
@@ -3499,7 +3499,7 @@
 }
 
 [data-theme="dark"] .onboarding-modal__header {
-  background: linear-gradient(135deg, #9b7ed9 0%, #7a5dc7 100%);
+  background: linear-gradient(135deg, var(--user-accent) 0%, var(--user-accent-dark) 100%);
 }
 
 [data-theme="dark"] .onboarding-modal__body label {
@@ -3515,8 +3515,8 @@
 
 [data-theme="dark"] .onboarding-modal__body input:focus,
 [data-theme="dark"] .onboarding-modal__body textarea:focus {
-  border-color: #9b7ed9;
-  box-shadow: 0 0 0 4px rgba(155, 126, 217, 0.2);
+  border-color: var(--user-accent-light, var(--user-accent));
+  box-shadow: 0 0 0 4px rgba(var(--user-accent-rgb, 175, 145, 109), 0.2);
   background: #2d2b3d;
 }
 
@@ -3526,5 +3526,5 @@
 }
 
 [data-theme="dark"] .onboarding-modal__footer .btn-primary {
-  background: linear-gradient(135deg, #9b7ed9 0%, #7a5dc7 100%);
+  background: linear-gradient(135deg, var(--user-accent) 0%, var(--user-accent-dark) 100%);
 }

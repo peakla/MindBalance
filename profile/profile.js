@@ -462,7 +462,8 @@ async function loadProfileData(userId) {
     } else {
       const name = profile.display_name || profile.username || profile.email || 'U';
       const initials = name.split(' ').map(w => w[0]).join('').toUpperCase().slice(0, 2) || name.substring(0, 2).toUpperCase();
-      const colors = ['#AF916D','#E57373','#64B5F6','#81C784','#FFD54F','#BA68C8','#4DB6AC','#FF8A65','#90A4AE','#A1887F'];
+      const accentColor = getComputedStyle(document.documentElement).getPropertyValue('--user-accent').trim() || '#AF916D';
+      const colors = [accentColor,'#E57373','#64B5F6','#81C784','#FFD54F','#BA68C8','#4DB6AC','#FF8A65','#90A4AE','#A1887F'];
       const colorIndex = name.charCodeAt(0) % colors.length;
       let initialsEl = document.getElementById('avatarInitials');
       if (!initialsEl) {
@@ -2783,7 +2784,8 @@ document.addEventListener('DOMContentLoaded', setupQuickActions);
 
 
 function createFollowAvatar(profile) {
-  const colors = ['#AF916D','#E57373','#64B5F6','#81C784','#FFD54F','#BA68C8','#4DB6AC','#FF8A65','#90A4AE','#A1887F'];
+  const accentColor = getComputedStyle(document.documentElement).getPropertyValue('--user-accent').trim() || '#AF916D';
+  const colors = [accentColor,'#E57373','#64B5F6','#81C784','#FFD54F','#BA68C8','#4DB6AC','#FF8A65','#90A4AE','#A1887F'];
   if (profile.avatar_url) {
     const avatar = document.createElement('img');
     avatar.className = 'mb-follow-item__avatar';

@@ -34,9 +34,9 @@
   --user-accent-grad-end: #d4a574;
   --user-accent-text: #6b5635;
 
-  --purple-accent: #8b6de1;
-  --purple-gradient: linear-gradient(135deg, #8b6de1 0%, #7c5cd4 100%);
-  --purple-glow: rgba(139, 109, 225, 0.3);
+  --purple-accent: var(--user-accent-light, #8b6de1);
+  --purple-gradient: linear-gradient(135deg, var(--user-accent) 0%, var(--user-accent-dark) 100%);
+  --purple-glow: var(--user-accent-glow, rgba(139, 109, 225, 0.3));
 
   
   --scrollbar-track: #f0ede8;

@@ -1492,6 +1492,45 @@ body.nav-active .topbar {
   min-width: 0;
 }
 
+@media (max-width: 600px) {
+  .topbar__inner {
+    padding: 6px 10px;
+    min-height: 32px;
+  }
+
+  .topbar__slide span {
+    font-size: 10.5px;
+    letter-spacing: 0;
+    line-height: 1.4;
+  }
+
+  .topbar__slide ion-icon {
+    font-size: 13px;
+  }
+
+  .topbar__slide[data-slide="3"],
+  .topbar__slide[data-slide="4"] {
+    white-space: normal;
+    overflow: visible;
+    flex-wrap: wrap;
+    text-align: center;
+  }
+
+  .topbar__slide[data-slide="3"] span,
+  .topbar__slide[data-slide="4"] span {
+    overflow: visible;
+    text-overflow: initial;
+    white-space: normal;
+    display: inline;
+    word-break: break-word;
+  }
+
+  .topbar__dots {
+    margin-left: 8px;
+    gap: 4px;
+  }
+}
+
 .topbar__slide a {
   display: inline;
   color: #fff;

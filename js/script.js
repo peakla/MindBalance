@@ -1702,18 +1702,22 @@ document.addEventListener('DOMContentLoaded', function() {
     startTimer();
   }
 
-  const topbarToggle = document.querySelector('[data-topbar-toggle]');
+  const topbarToggles = document.querySelectorAll('[data-topbar-toggle]');
+
+  function setAllToggles(checked) {
+    topbarToggles.forEach(function(t) { t.checked = checked; });
+  }
 
   if (sessionStorage.getItem('topbarDismissed') === '1') {
     topbar.classList.add('dismissed');
     hideTopbar();
-    if (topbarToggle) topbarToggle.checked = false;
+    setAllToggles(false);
   } else {
-    if (topbarToggle) topbarToggle.checked = true;
+    setAllToggles(true);
   }
 
-  if (topbarToggle) {
-    topbarToggle.addEventListener('change', function() {
+  topbarToggles.forEach(function(toggle) {
+    toggle.addEventListener('change', function() {
       if (this.checked) {
         sessionStorage.removeItem('topbarDismissed');
         showTopbar();
@@ -1722,8 +1726,9 @@ document.addEventListener('DOMContentLoaded', function() {
         sessionStorage.setItem('topbarDismissed', '1');
         hideTopbar();
       }
+      setAllToggles(this.checked);
     });
-  }
+  });
 
   if (!topbar.classList.contains('dismissed')) {
     syncTopbarHeight();

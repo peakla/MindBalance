@@ -18,7 +18,7 @@ const fallbackTranslations = {
   settings_language: "Language"
 };
 
-const supportedLanguages = ['en', 'es', 'fr', 'zh', 'hi', 'ko'];
+const supportedLanguages = ['en', 'es', 'fr', 'zh', 'hi', 'ko', 'de'];
 
 // --- Language Detection ---
 function getCurrentLanguage() {

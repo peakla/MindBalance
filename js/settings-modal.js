@@ -451,6 +451,7 @@
                       <option value="zh">中文</option>
                       <option value="hi">हिन्दी</option>
                       <option value="ko">한국어</option>
+                      <option value="de">Deutsch</option>
                     </select>
                   </div>
                 </div>

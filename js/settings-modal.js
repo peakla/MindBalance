@@ -453,6 +453,7 @@
                       <option value="ko">한국어</option>
                       <option value="de">Deutsch</option>
                       <option value="gr">Ελληνικά</option>
+                      <option value="ru">Русский</option>
                     </select>
                   </div>
                 </div>

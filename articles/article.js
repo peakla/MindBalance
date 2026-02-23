@@ -45,7 +45,7 @@
   function getTranslation(key, fallback) {
     if (window.translations) {
       const lang = getSavedLanguage();
-      const langMap = { en: 'en', es: 'es', fr: 'fr', zh: 'zh', hi: 'hi', ko: 'ko' };
+      const langMap = { en: 'en', es: 'es', fr: 'fr', zh: 'zh', hi: 'hi', ko: 'ko', de: 'de', gr: 'gr', ru: 'ru' };
       const langKey = langMap[lang] || 'en';
       if (window.translations[langKey] && window.translations[langKey][key]) {
         return window.translations[langKey][key];
@@ -439,7 +439,10 @@
       'fr': 'fr-FR',
       'zh': 'zh-CN',
       'hi': 'hi-IN',
-      'ko': 'ko-KR'
+      'ko': 'ko-KR',
+      'de': 'de-DE',
+      'gr': 'el-GR',
+      'ru': 'ru-RU'
     };
     return langMap[savedLang] || 'en-US';
   }

@@ -1625,6 +1625,7 @@
                 <option value="ko">한국어</option>
                 <option value="de">Deutsch</option>
                 <option value="gr">Ελληνικά</option>
+                <option value="ru">Русский</option>
               </select>
             </div>
           </div>
@@ -1923,6 +1924,7 @@
                 <option value="ko">한국어</option>
                 <option value="de">Deutsch</option>
                 <option value="gr">Ελληνικά</option>
+                <option value="ru">Русский</option>
                 </select>
               </div>
             </div>
@@ -1983,7 +1985,7 @@
                 Register</span></a></li>
         </ul>
         <div class="mb-quickActions">
-          <button class="mb-quickAction" onclick="(function(){ const c=document.querySelector('.mb-composer'); const t=document.getElementById('postText'); if(c && c.offsetParent !== null){ window.scrollTo({top:c.offsetTop-120,behavior:'smooth'}); setTimeout(function(){if(t)t.focus();},500); } else { window.location.href='../auth/'; } })()">
+          <button class="mb-quickAction" onclick="(function(){ const t=document.getElementById('postText'); if(t && !t.disabled){ const c=document.querySelector('.mb-composer'); if(c) window.scrollTo({top:c.offsetTop-120,behavior:'smooth'}); setTimeout(function(){if(t)t.focus();},500); } else { window.location.href='../auth/'; } })()">
             <span>✏️</span> Create Post
           </button>
           <button class="mb-quickAction" onclick="(function(){ const f=document.querySelector('.mb-feedList'); if(f){ window.scrollTo({top:f.offsetTop-120,behavior:'smooth'}); } })()">
@@ -2486,6 +2488,7 @@
             <option value="ko">한국어</option>
                 <option value="de">Deutsch</option>
                 <option value="gr">Ελληνικά</option>
+                <option value="ru">Русский</option>
           </select>
         </div>
         <div class="mb-footer__control-group">

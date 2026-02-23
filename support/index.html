@@ -319,6 +319,7 @@
                 <option value="ko">한국어</option>
                 <option value="de">Deutsch</option>
                 <option value="gr">Ελληνικά</option>
+                <option value="ru">Русский</option>
               </select>
             </div>
           </div>
@@ -617,6 +618,7 @@
                 <option value="ko">한국어</option>
                 <option value="de">Deutsch</option>
                 <option value="gr">Ελληνικά</option>
+                <option value="ru">Русский</option>
                 </select>
               </div>
             </div>
@@ -1445,113 +1447,140 @@
       </div>
 
       
-      <section class="appointment-section" id="appointment" aria-label="Schedule Appointment">
-        <div class="container">
-          <div class="appointment-content">
-            <div class="appointment-info">
-              <h2 class="appointment-info__title" data-translate="appt_title">Schedule a Support Session</h2>
-              <p class="appointment-info__text" data-translate="appt_text">Book a confidential counseling session with one of our trained support specialists. Sessions are available for various needs including therapy check-ins, consultations, and ongoing support.</p>
-              
-              <div class="appointment-features">
-                <div class="appointment-feature">
-                  <ion-icon name="shield-checkmark-outline"></ion-icon>
-                  <span data-translate="appt_confidential">Confidential</span>
-                </div>
-                <div class="appointment-feature">
-                  <ion-icon name="videocam-outline"></ion-icon>
-                  <span data-translate="appt_virtual">Virtual Options</span>
-                </div>
-                <div class="appointment-feature">
-                  <ion-icon name="heart-outline"></ion-icon>
-                  <span data-translate="appt_supportive">Supportive</span>
-                </div>
-              </div>
-            </div>
-
-            <form class="appointment-form" id="appointmentForm" action="https://formspree.io/f/mnjjnorq" method="POST">
-              <div class="form-group">
-                <label for="appointmentName" class="form-label" data-translate="appt_name_label">Full Name</label>
-                <input type="text" id="appointmentName" name="name" class="form-input" data-translate-placeholder="appt_name_placeholder" placeholder="Your name" required>
-              </div>
-
-              <div class="form-group">
-                <label for="appointmentEmail" class="form-label" data-translate="appt_email_label">Email Address</label>
-                <input type="email" id="appointmentEmail" name="email" class="form-input" data-translate-placeholder="appt_email_placeholder" placeholder="you@example.com" required>
-              </div>
-
-              <div class="form-row">
-                <div class="form-group">
-                  <label for="appointmentDate" class="form-label" data-translate="appt_date_label">Preferred Date</label>
-                  <input type="date" id="appointmentDate" name="preferred_date" class="form-input" required>
-                </div>
-
-                <div class="form-group">
-                  <label for="appointmentTime" class="form-label" data-translate="appt_time_label">Preferred Time</label>
-                  <select id="appointmentTime" name="preferred_time" class="form-select" required>
-                    <option value="" data-translate="appt_time_select">Select a time</option>
-                    <option value="09:00">9:00 AM</option>
-                    <option value="10:00">10:00 AM</option>
-                    <option value="11:00">11:00 AM</option>
-                    <option value="13:00">1:00 PM</option>
-                    <option value="14:00">2:00 PM</option>
-                    <option value="15:00">3:00 PM</option>
-                    <option value="16:00">4:00 PM</option>
-                    <option value="17:00">5:00 PM</option>
-                  </select>
-                </div>
-              </div>
-
-              <div class="form-group">
-                <label for="appointmentType" class="form-label" data-translate="appt_type_label">Type of Support</label>
-                <select id="appointmentType" name="support_type" class="form-select" required>
-                  <option value="" data-translate="appt_type_select">Select support type</option>
-                  <option value="therapy" data-translate="appt_type_therapy">Therapy Session</option>
-                  <option value="checkin" data-translate="appt_type_checkin">Check-in Call</option>
-                  <option value="consultation" data-translate="appt_type_consultation">Initial Consultation</option>
-                  <option value="crisis" data-translate="appt_type_crisis">Crisis Support</option>
-                  <option value="other" data-translate="appt_type_other">Other</option>
-                </select>
-              </div>
-
-              <div class="form-group">
-                <label for="appointmentNotes" class="form-label" data-translate="appt_notes_label">Additional Notes (Optional)</label>
-                <textarea id="appointmentNotes" name="notes" class="form-textarea" data-translate-placeholder="appt_notes_placeholder" placeholder="Anything you'd like us to know before your session..." rows="3"></textarea>
-              </div>
-
-              <button type="submit" class="form-submit">
-                <ion-icon name="calendar-outline"></ion-icon>
-                <span data-translate="appt_submit">Request Appointment</span>
-              </button>
-
-              <p class="form-disclaimer" data-translate="appt_disclaimer">We'll contact you within 24 hours to confirm your appointment. All sessions are confidential.</p>
-            </form>
-          </div>
+      <section class="support-hub" id="appointment" aria-label="Support Hub">
+        <div class="support-hub__bg-decor">
+          <div class="support-hub__circle support-hub__circle--1"></div>
+          <div class="support-hub__circle support-hub__circle--2"></div>
+          <div class="support-hub__dots"></div>
         </div>
-      </section>
-
-      
-      <section class="faq-split" id="faq" aria-label="Frequently Asked Questions">
         <div class="container">
-          
-          <div class="faq-split__header animate-on-scroll">
-            <div class="faq-split__header-icon">
-              <ion-icon name="help-circle-outline"></ion-icon>
+          <div class="support-hub__header animate-on-scroll">
+            <div class="support-hub__header-badge">
+              <ion-icon name="people-outline"></ion-icon>
+              <span data-translate="hub_badge">Support Center</span>
             </div>
-            <h2 class="faq-split__title" data-translate="faq_intro_title">How can we help you?</h2>
-            <p class="faq-split__subtitle" data-translate="faq_intro_text">At MindBalance, we believe in being open and supportive. Find answers to your questions about mental health, therapy, and getting help.</p>
+            <h2 class="support-hub__title" data-translate="hub_title">We're Here For You</h2>
+            <p class="support-hub__subtitle" data-translate="hub_subtitle">Book a session with our support team or find answers to common questions about mental health, therapy, and getting help.</p>
           </div>
 
-          
-          <div class="faq-split__search animate-on-scroll">
-            <ion-icon name="search-outline" class="faq-split__search-icon"></ion-icon>
-            <input type="text" class="faq-split__search-input" id="faqSearchInput" aria-label="Search frequently asked questions" data-translate-placeholder="faq_search_placeholder" placeholder="Search for a question...">
-            <button class="faq-split__search-clear" id="faqSearchClear" aria-label="Clear search" style="display: none;">
-              <ion-icon name="close-circle"></ion-icon>
-            </button>
-          </div>
+          <div class="support-hub__grid" id="faq">
+            <div class="support-hub__left animate-on-scroll">
+              <div class="support-hub__form-card">
+                <div class="support-hub__form-header">
+                  <div class="support-hub__form-icon">
+                    <ion-icon name="calendar-outline"></ion-icon>
+                  </div>
+                  <div>
+                    <h3 class="support-hub__form-title" data-translate="appt_title">Schedule a Support Session</h3>
+                    <p class="support-hub__form-desc" data-translate="appt_text">Book a confidential counseling session with one of our trained support specialists.</p>
+                  </div>
+                </div>
 
-          
-          <div class="faq-split__container animate-on-scroll">
+                <form class="appointment-form" id="appointmentForm" action="https://formspree.io/f/mnjjnorq" method="POST">
+                  <div class="form-group">
+                    <label for="appointmentName" class="form-label" data-translate="appt_name_label">Full Name</label>
+                    <input type="text" id="appointmentName" name="name" class="form-input" data-translate-placeholder="appt_name_placeholder" placeholder="Your name" required>
+                  </div>
+
+                  <div class="form-group">
+                    <label for="appointmentEmail" class="form-label" data-translate="appt_email_label">Email Address</label>
+                    <input type="email" id="appointmentEmail" name="email" class="form-input" data-translate-placeholder="appt_email_placeholder" placeholder="you@example.com" required>
+                  </div>
+
+                  <div class="form-row">
+                    <div class="form-group">
+                      <label for="appointmentDate" class="form-label" data-translate="appt_date_label">Preferred Date</label>
+                      <input type="date" id="appointmentDate" name="preferred_date" class="form-input" required>
+                    </div>
+                    <div class="form-group">
+                      <label for="appointmentTime" class="form-label" data-translate="appt_time_label">Preferred Time</label>
+                      <select id="appointmentTime" name="preferred_time" class="form-select" required>
+                        <option value="" data-translate="appt_time_select">Select a time</option>
+                        <option value="09:00">9:00 AM</option>
+                        <option value="10:00">10:00 AM</option>
+                        <option value="11:00">11:00 AM</option>
+                        <option value="13:00">1:00 PM</option>
+                        <option value="14:00">2:00 PM</option>
+                        <option value="15:00">3:00 PM</option>
+                        <option value="16:00">4:00 PM</option>
+                        <option value="17:00">5:00 PM</option>
+                      </select>
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <label for="appointmentType" class="form-label" data-translate="appt_type_label">Type of Support</label>
+                    <select id="appointmentType" name="support_type" class="form-select" required>
+                      <option value="" data-translate="appt_type_select">Select support type</option>
+                      <option value="therapy" data-translate="appt_type_therapy">Therapy Session</option>
+                      <option value="checkin" data-translate="appt_type_checkin">Check-in Call</option>
+                      <option value="consultation" data-translate="appt_type_consultation">Initial Consultation</option>
+                      <option value="crisis" data-translate="appt_type_crisis">Crisis Support</option>
+                      <option value="other" data-translate="appt_type_other">Other</option>
+                    </select>
+                  </div>
+
+                  <div class="form-group">
+                    <label for="appointmentNotes" class="form-label" data-translate="appt_notes_label">Additional Notes (Optional)</label>
+                    <textarea id="appointmentNotes" name="notes" class="form-textarea" data-translate-placeholder="appt_notes_placeholder" placeholder="Anything you'd like us to know before your session..." rows="3"></textarea>
+                  </div>
+
+                  <button type="submit" class="form-submit">
+                    <ion-icon name="calendar-outline"></ion-icon>
+                    <span data-translate="appt_submit">Request Appointment</span>
+                  </button>
+
+                  <p class="form-disclaimer" data-translate="appt_disclaimer">We'll contact you within 24 hours to confirm your appointment. All sessions are confidential.</p>
+                </form>
+              </div>
+
+              <div class="support-hub__trust-row">
+                <div class="support-hub__trust-item">
+                  <ion-icon name="shield-checkmark-outline"></ion-icon>
+                  <div>
+                    <span class="support-hub__trust-value" data-translate="appt_confidential">Confidential</span>
+                    <span class="support-hub__trust-label" data-translate="hub_trust_private">100% Private</span>
+                  </div>
+                </div>
+                <div class="support-hub__trust-item">
+                  <ion-icon name="videocam-outline"></ion-icon>
+                  <div>
+                    <span class="support-hub__trust-value" data-translate="appt_virtual">Virtual Options</span>
+                    <span class="support-hub__trust-label" data-translate="hub_trust_online">Video & Chat</span>
+                  </div>
+                </div>
+                <div class="support-hub__trust-item">
+                  <ion-icon name="time-outline"></ion-icon>
+                  <div>
+                    <span class="support-hub__trust-value" data-translate="hub_trust_response">Fast Response</span>
+                    <span class="support-hub__trust-label" data-translate="hub_trust_hours">Within 24 Hours</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="support-hub__right animate-on-scroll">
+              <div class="support-hub__faq-card">
+                <div class="support-hub__faq-header">
+                  <div class="support-hub__faq-header-top">
+                    <div class="support-hub__faq-icon">
+                      <ion-icon name="help-circle-outline"></ion-icon>
+                    </div>
+                    <div>
+                      <h3 class="support-hub__faq-title" data-translate="faq_intro_title">Common Questions</h3>
+                      <p class="support-hub__faq-desc" data-translate="faq_intro_text_short">Quick answers about mental health, therapy, and getting help.</p>
+                    </div>
+                  </div>
+                  <div class="faq-split__search">
+                    <ion-icon name="search-outline" class="faq-split__search-icon"></ion-icon>
+                    <input type="text" class="faq-split__search-input" id="faqSearchInput" aria-label="Search frequently asked questions" data-translate-placeholder="faq_search_placeholder" placeholder="Search for a question...">
+                    <button class="faq-split__search-clear" id="faqSearchClear" aria-label="Clear search" style="display: none;">
+                      <ion-icon name="close-circle"></ion-icon>
+                    </button>
+                  </div>
+                </div>
+
+                <div class="faq-split__container">
             
             <div class="faq-split__left">
               
@@ -1794,8 +1823,10 @@
               </div>
             </div>
           </div>
+              </div>
+            </div>
+          </div>
 
-          
           <div class="faq-split__cta animate-on-scroll">
             <div class="faq-split__cta-content">
               <ion-icon name="chatbubbles-outline" class="faq-split__cta-icon"></ion-icon>
@@ -1985,6 +2016,7 @@
             <option value="ko">한국어</option>
                 <option value="de">Deutsch</option>
                 <option value="gr">Ελληνικά</option>
+                <option value="ru">Русский</option>
           </select>
         </div>
         <div class="mb-footer__control-group">

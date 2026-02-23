@@ -1985,68 +1985,303 @@ body.dark-mode .view-toggle-btn.active {
   margin-bottom: 6px;
 }
 
-.appointment-section {
-  background: linear-gradient(135deg, rgba(var(--user-accent-rgb), 0.04) 0%, rgba(var(--user-accent-rgb), 0.08) 100%);
-  padding: 80px 20px;
+.support-hub {
+  position: relative;
+  padding: 80px 20px 100px;
+  background: linear-gradient(180deg, #fff 0%, rgba(var(--user-accent-rgb), 0.06) 40%, rgba(var(--user-accent-rgb), 0.1) 70%, #fff 100%);
+  overflow: hidden;
 }
 
-.appointment-content {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 60px;
-  max-width: 1100px;
-  margin: 0 auto;
-  align-items: start;
+.support-hub__bg-decor {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
 }
 
-.appointment-info__title {
-  font-size: 2rem;
-  font-weight: 700;
-  color: #2d2d2d;
-  margin-bottom: 16px;
+.support-hub__circle {
+  position: absolute;
+  border-radius: 50%;
+  border: 2px solid rgba(var(--user-accent-rgb), 0.08);
 }
 
-.appointment-info__text {
-  font-size: 1rem;
-  color: #555;
-  line-height: 1.7;
-  margin-bottom: 32px;
+.support-hub__circle--1 {
+  width: 500px;
+  height: 500px;
+  top: -100px;
+  right: -150px;
 }
 
-.appointment-features {
-  display: flex;
-  gap: 24px;
-  flex-wrap: wrap;
+.support-hub__circle--2 {
+  width: 300px;
+  height: 300px;
+  bottom: 50px;
+  left: -80px;
 }
 
-.appointment-feature {
-  display: flex;
+.support-hub__dots {
+  position: absolute;
+  top: 60px;
+  left: 50%;
+  width: 200px;
+  height: 200px;
+  background-image: radial-gradient(circle, rgba(var(--user-accent-rgb), 0.12) 1.5px, transparent 1.5px);
+  background-size: 20px 20px;
+  transform: translateX(-50%);
+  opacity: 0.6;
+}
+
+.support-hub__header {
+  text-align: center;
+  margin-bottom: 56px;
+  position: relative;
+  z-index: 1;
+}
+
+.support-hub__header-badge {
+  display: inline-flex;
   align-items: center;
   gap: 8px;
-  color: #555;
-  font-size: 0.95rem;
+  padding: 8px 20px;
+  background: linear-gradient(135deg, rgba(var(--user-accent-rgb), 0.12) 0%, rgba(var(--user-accent-rgb), 0.06) 100%);
+  border: 1px solid rgba(var(--user-accent-rgb), 0.2);
+  border-radius: 50px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--user-accent);
+  margin-bottom: 20px;
 }
 
-.appointment-feature ion-icon {
-  font-size: 1.3rem;
-  color: var(--user-accent-light);
+.support-hub__header-badge ion-icon {
+  font-size: 1.1rem;
+}
+
+.support-hub__title {
+  font-size: 2.8rem;
+  font-weight: 800;
+  color: #2d2d2d;
+  margin-bottom: 16px;
+  letter-spacing: -0.5px;
+}
+
+.support-hub__subtitle {
+  font-size: 1.15rem;
+  color: #666;
+  max-width: 640px;
+  margin: 0 auto;
+  line-height: 1.7;
+}
+
+.support-hub__grid {
+  display: flex;
+  flex-direction: column;
+  gap: 48px;
+  max-width: 1400px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+  padding: 0 40px;
+}
+
+.support-hub__left {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  width: 100%;
+}
+
+.support-hub__form-card {
+  background: #fff;
+  border-radius: 20px;
+  padding: 0;
+  box-shadow: 0 8px 40px rgba(0, 0, 0, 0.06);
+  border: 1px solid rgba(var(--user-accent-rgb), 0.12);
+  overflow: hidden;
+}
+
+.support-hub__form-header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 28px 36px;
+  background: linear-gradient(135deg, rgba(var(--user-accent-rgb), 0.08) 0%, rgba(var(--user-accent-rgb), 0.03) 100%);
+  border-bottom: 1px solid rgba(var(--user-accent-rgb), 0.1);
+}
+
+.support-hub__form-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 14px;
+  background: linear-gradient(135deg, var(--user-accent-light) 0%, var(--user-accent) 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  box-shadow: 0 4px 15px rgba(var(--user-accent-rgb), 0.3);
+}
+
+.support-hub__form-icon ion-icon {
+  font-size: 24px;
+  color: #fff;
+}
+
+.support-hub__form-title {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #2d2d2d;
+  margin: 0 0 4px;
+}
+
+.support-hub__form-desc {
+  font-size: 0.9rem;
+  color: #777;
+  margin: 0;
+  line-height: 1.5;
+}
+
+.support-hub__form-card .appointment-form {
+  padding: 32px 36px 36px;
+}
+
+.support-hub__trust-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+
+.support-hub__trust-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 18px 16px;
+  background: #fff;
+  border-radius: 14px;
+  border: 1px solid rgba(var(--user-accent-rgb), 0.12);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.04);
+}
+
+.support-hub__trust-item ion-icon {
+  font-size: 1.5rem;
+  color: var(--user-accent);
+  flex-shrink: 0;
+}
+
+.support-hub__trust-value {
+  display: block;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #2d2d2d;
+}
+
+.support-hub__trust-label {
+  display: block;
+  font-size: 0.75rem;
+  color: #888;
+  margin-top: 2px;
+}
+
+.support-hub__right {
+  position: static;
+  width: 100%;
+}
+
+.support-hub__faq-card {
+  background: #fff;
+  border-radius: 20px;
+  box-shadow: 0 8px 40px rgba(0, 0, 0, 0.06);
+  border: 1px solid rgba(var(--user-accent-rgb), 0.12);
+  overflow: hidden;
+}
+
+.support-hub__faq-header {
+  padding: 28px 32px 0;
+}
+
+.support-hub__faq-header-top {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.support-hub__faq-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 14px;
+  background: linear-gradient(135deg, var(--user-accent-light) 0%, var(--user-accent) 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  box-shadow: 0 4px 15px rgba(var(--user-accent-rgb), 0.3);
+}
+
+.support-hub__faq-icon ion-icon {
+  font-size: 24px;
+  color: #fff;
+}
+
+.support-hub__faq-title {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #2d2d2d;
+  margin: 0 0 4px;
+}
+
+.support-hub__faq-desc {
+  font-size: 0.9rem;
+  color: #777;
+  margin: 0;
+  line-height: 1.5;
+}
+
+.support-hub__faq-header .faq-split__search {
+  margin: 0 0 24px;
+  max-width: 100%;
+}
+
+.support-hub__faq-header .faq-split__search-input {
+  padding: 14px 44px 14px 48px;
+  border-radius: 12px;
+  font-size: 0.9rem;
+}
+
+.support-hub__faq-card .faq-split__container {
+  border-top: 1px solid rgba(var(--user-accent-rgb), 0.1);
+}
+
+.support-hub__faq-card .faq-split__left {
+  border-radius: 0;
+  border: none;
+  box-shadow: none;
+  border-right: 1px solid rgba(var(--user-accent-rgb), 0.1);
+}
+
+.support-hub__faq-card .faq-split__right {
+  position: static;
+}
+
+.support-hub__faq-card .faq-split__answer-panel {
+  border: none;
+  box-shadow: none;
+  border-radius: 0;
+  padding: 32px;
 }
 
 .appointment-form {
   background: #fff;
-  border-radius: 20px;
+  border-radius: 0;
   padding: 36px;
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.06);
 }
 
 .form-group {
-  margin-bottom: 20px;
+  margin-bottom: 24px;
 }
 
 .form-row {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 16px;
+  gap: 20px;
 }
 
 .form-label {
@@ -2888,25 +3123,16 @@ body.dark-mode .view-toggle-btn.active {
 }
 
 .faq-split {
-  background: linear-gradient(180deg, rgba(var(--user-accent-rgb), 0.04) 0%, #fff 50%, rgba(var(--user-accent-rgb), 0.04) 100%);
-  padding: 80px 20px 100px;
+  padding: 0;
   position: relative;
-  overflow: hidden;
 }
 
 .faq-split::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 6px;
-  background: linear-gradient(90deg, var(--user-accent-light), var(--user-accent), var(--user-accent-light));
+  display: none;
 }
 
 .faq-split__header {
-  text-align: center;
-  margin-bottom: 40px;
+  display: none;
 }
 
 .faq-split__header-icon {
@@ -3002,19 +3228,17 @@ body.dark-mode .view-toggle-btn.active {
 
 .faq-split__container {
   display: grid;
-  grid-template-columns: 400px 1fr;
-  gap: 32px;
-  max-width: 1200px;
-  margin: 0 auto;
-  min-height: 600px;
+  grid-template-columns: 380px 1fr;
+  gap: 0;
+  min-height: 500px;
 }
 
 .faq-split__left {
   background: #fff;
-  border-radius: 20px;
-  border: 2px solid rgba(var(--user-accent-rgb), 0.15);
+  border-radius: 0;
+  border: none;
   overflow: hidden;
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.06);
+  box-shadow: none;
   display: flex;
   flex-direction: column;
 }
@@ -3187,17 +3411,16 @@ body.dark-mode .view-toggle-btn.active {
 }
 
 .faq-split__right {
-  position: sticky;
-  top: 120px;
+  position: static;
   height: fit-content;
 }
 
 .faq-split__answer-panel {
   background: #fff;
-  border-radius: 20px;
-  border: 2px solid rgba(var(--user-accent-rgb), 0.15);
+  border-radius: 0;
+  border: none;
   padding: 32px;
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.06);
+  box-shadow: none;
   animation: faq-answer-slide-in 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
@@ -3421,12 +3644,14 @@ body.dark-mode .view-toggle-btn.active {
   align-items: center;
   justify-content: space-between;
   gap: 24px;
-  max-width: 1200px;
-  margin: 60px auto 0;
+  max-width: 1300px;
+  margin: 48px auto 0;
   padding: 32px 40px;
   background: linear-gradient(135deg, var(--user-accent-light) 0%, var(--user-accent) 100%);
   border-radius: 20px;
   box-shadow: 0 15px 40px rgba(var(--user-accent-rgb), 0.35);
+  position: relative;
+  z-index: 1;
 }
 
 .faq-split__cta-content {
@@ -4266,8 +4491,81 @@ body.dark-mode .view-toggle-btn.active {
   background: #252542;
 }
 
-[data-theme="dark"] .appointment-section {
-  background: linear-gradient(135deg, #252542 0%, #1a1a2e 100%);
+[data-theme="dark"] .support-hub {
+  background: linear-gradient(180deg, #1a1a2e 0%, #16213e 40%, #1e2a47 70%, #1a1a2e 100%);
+}
+
+[data-theme="dark"] .support-hub__circle {
+  border-color: rgba(var(--user-accent-rgb), 0.06);
+}
+
+[data-theme="dark"] .support-hub__dots {
+  background-image: radial-gradient(circle, rgba(var(--user-accent-rgb), 0.08) 1.5px, transparent 1.5px);
+}
+
+[data-theme="dark"] .support-hub__header-badge {
+  background: linear-gradient(135deg, rgba(var(--user-accent-rgb), 0.15) 0%, rgba(var(--user-accent-rgb), 0.08) 100%);
+  border-color: rgba(var(--user-accent-rgb), 0.25);
+}
+
+[data-theme="dark"] .support-hub__title {
+  color: #fff;
+}
+
+[data-theme="dark"] .support-hub__subtitle {
+  color: #aaa;
+}
+
+[data-theme="dark"] .support-hub__form-card {
+  background: #1e2a47;
+  border-color: #2d3a5a;
+}
+
+[data-theme="dark"] .support-hub__form-header {
+  background: linear-gradient(135deg, rgba(var(--user-accent-rgb), 0.1) 0%, rgba(var(--user-accent-rgb), 0.04) 100%);
+  border-color: #2d3a5a;
+}
+
+[data-theme="dark"] .support-hub__form-title {
+  color: #fff;
+}
+
+[data-theme="dark"] .support-hub__form-desc {
+  color: #aaa;
+}
+
+[data-theme="dark"] .support-hub__trust-item {
+  background: #1e2a47;
+  border-color: #2d3a5a;
+}
+
+[data-theme="dark"] .support-hub__trust-value {
+  color: #e0e0e0;
+}
+
+[data-theme="dark"] .support-hub__trust-label {
+  color: #888;
+}
+
+[data-theme="dark"] .support-hub__faq-card {
+  background: #1e2a47;
+  border-color: #2d3a5a;
+}
+
+[data-theme="dark"] .support-hub__faq-title {
+  color: #fff;
+}
+
+[data-theme="dark"] .support-hub__faq-desc {
+  color: #aaa;
+}
+
+[data-theme="dark"] .support-hub__faq-card .faq-split__container {
+  border-color: #2d3a5a;
+}
+
+[data-theme="dark"] .support-hub__faq-card .faq-split__left {
+  border-color: #2d3a5a;
 }
 
 [data-theme="dark"] .crisis-banner {
@@ -4314,7 +4612,7 @@ body.dark-mode .view-toggle-btn.active {
 [data-theme="dark"] .resource-card__title,
 [data-theme="dark"] .selfhelp-card__title,
 [data-theme="dark"] .section-title,
-[data-theme="dark"] .appointment-info__title {
+[data-theme="dark"] .support-hub__form-title {
   color: #fff;
 }
 
@@ -4323,9 +4621,7 @@ body.dark-mode .view-toggle-btn.active {
 [data-theme="dark"] .helpline-card__text,
 [data-theme="dark"] .resource-card__text,
 [data-theme="dark"] .selfhelp-card__text,
-[data-theme="dark"] .section-subtitle,
-[data-theme="dark"] .appointment-info__text,
-[data-theme="dark"] .appointment-feature {
+[data-theme="dark"] .section-subtitle {
   color: rgba(255, 255, 255, 0.7);
 }
 
@@ -4335,7 +4631,7 @@ body.dark-mode .view-toggle-btn.active {
 }
 
 [data-theme="dark"] .appointment-form {
-  background: #252542;
+  background: transparent;
 }
 
 [data-theme="dark"] .form-label {
@@ -4579,9 +4875,46 @@ body.dark-mode .view-toggle-btn.active {
     gap: 4px;
   }
 
-  .appointment-content {
+  .support-hub {
+    padding: 60px 16px 80px;
+  }
+
+  .support-hub__title {
+    font-size: 2rem;
+  }
+
+  .support-hub__subtitle {
+    font-size: 1rem;
+  }
+
+  .support-hub__grid {
+    gap: 32px;
+    padding: 0 16px;
+  }
+
+  .support-hub__trust-row {
     grid-template-columns: 1fr;
-    gap: 40px;
+  }
+
+  .support-hub__form-header {
+    padding: 20px 20px;
+  }
+
+  .support-hub__form-card .appointment-form {
+    padding: 20px;
+  }
+
+  .support-hub__faq-header {
+    padding: 20px 20px 0;
+  }
+
+  .support-hub__faq-card .faq-split__container {
+    grid-template-columns: 1fr;
+  }
+
+  .support-hub__faq-card .faq-split__left {
+    border-right: none;
+    border-bottom: 1px solid rgba(var(--user-accent-rgb), 0.1);
   }
 
   .form-row {

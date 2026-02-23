@@ -26,7 +26,7 @@
 .mb-achievement-notification__icon {
   width: 56px;
   height: 56px;
-  background: linear-gradient(135deg, #d4a574 0%, #e8c9a0 100%);
+  background: linear-gradient(135deg, var(--user-accent-grad-end) 0%, var(--user-accent-light) 100%);
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -51,7 +51,7 @@
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 1px;
-  color: #d4a574;
+  color: var(--user-accent-grad-end);
 }
 
 .mb-achievement-notification__name {
@@ -131,8 +131,8 @@
 }
 
 .mb-heatmap__day[data-level="1"] { background: var(--user-accent-soft); }
-.mb-heatmap__day[data-level="2"] { background: #d4c4b0; }
-.mb-heatmap__day[data-level="3"] { background: #c9ad8c; }
+.mb-heatmap__day[data-level="2"] { background: var(--user-accent-light); }
+.mb-heatmap__day[data-level="3"] { background: var(--user-accent-grad-end); }
 .mb-heatmap__day[data-level="4"] { background: var(--user-accent-grad-end); }
 
 .mb-heatmap__legend {
@@ -545,7 +545,7 @@
 .mb-reading-stat__icon {
   width: 48px;
   height: 48px;
-  background: linear-gradient(135deg, #f8f6f2 0%, #f0ebe4 100%);
+  background: linear-gradient(135deg, var(--user-accent-soft) 0%, var(--user-accent-soft) 100%);
   border-radius: 12px;
   display: flex;
   align-items: center;

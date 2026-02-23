@@ -4,6 +4,7 @@
 document.addEventListener('DOMContentLoaded', () => {
   initBackToTop();
   initNewsletterForm();
+  initBlogNewsletterForm();
   initFooterAccordion();
   initFooterControls();
 });
@@ -69,6 +70,8 @@ function initNewsletterForm() {
       const sb = typeof getSupabase === 'function' ? getSupabase() : null;
       if (!sb) {
         showToast('Service temporarily unavailable. Please try again later.');
+        btn.innerHTML = originalContent;
+        btn.disabled = false;
         return;
       }
 
@@ -120,6 +123,96 @@ function initNewsletterForm() {
     setTimeout(() => {
       btn.innerHTML = originalContent;
       btn.style.background = '';
+      btn.disabled = false;
+    }, 3000);
+  });
+}
+
+// --- Blog Newsletter Form ---
+function initBlogNewsletterForm() {
+  const form = document.getElementById('blogNewsletterForm');
+  if (!form) return;
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    const emailInput = document.getElementById('blogNewsEmail');
+    const btn = form.querySelector('button[type="submit"]');
+    const email = emailInput.value.trim().toLowerCase();
+
+    if (!email) return;
+
+    const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    if (!emailPattern.test(email)) {
+      showToast('Please enter a valid email address.');
+      return;
+    }
+
+    const originalContent = btn.innerHTML;
+    btn.innerHTML = 'Subscribing...';
+    btn.disabled = true;
+
+    try {
+      const sb = typeof getSupabase === 'function' ? getSupabase() : null;
+      if (!sb) {
+        showToast('Service temporarily unavailable. Please try again later.');
+        btn.innerHTML = originalContent;
+        btn.disabled = false;
+        return;
+      }
+
+      const { data: existing } = await sb
+        .from('newsletter_subscribers')
+        .select('email, is_active')
+        .eq('email', email)
+        .maybeSingle();
+
+      if (existing && existing.is_active) {
+        btn.innerHTML = 'Subscribed!';
+        btn.style.background = 'linear-gradient(135deg, #10b981 0%, #059669 100%)';
+        btn.style.color = '#fff';
+        emailInput.value = '';
+        showToast('You are already subscribed to our newsletter!');
+      } else {
+        const { error } = await sb
+          .from('newsletter_subscribers')
+          .upsert({
+            email: email,
+            is_active: true,
+            subscribed_at: new Date().toISOString()
+          }, { onConflict: 'email' });
+
+        if (error) throw error;
+
+        const apiBase = getNewsletterApiBase();
+        try {
+          await fetch(apiBase + '/api/newsletter', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email: email })
+          });
+        } catch (emailErr) {
+          console.warn('Welcome email request failed:', emailErr);
+        }
+
+        btn.innerHTML = 'Subscribed!';
+        btn.style.background = 'linear-gradient(135deg, #10b981 0%, #059669 100%)';
+        btn.style.color = '#fff';
+        emailInput.value = '';
+        showToast('Thanks for subscribing! Welcome to our community.');
+      }
+    } catch (error) {
+      console.error('Newsletter subscription error:', error);
+      btn.innerHTML = 'Error';
+      btn.style.background = 'linear-gradient(135deg, #ef4444 0%, #dc2626 100%)';
+      btn.style.color = '#fff';
+      showToast('Something went wrong. Please try again later.');
+    }
+
+    setTimeout(() => {
+      btn.innerHTML = originalContent;
+      btn.style.background = '';
+      btn.style.color = '';
       btn.disabled = false;
     }, 3000);
   });

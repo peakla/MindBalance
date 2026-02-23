@@ -51,8 +51,7 @@ TEXT_EXTENSIONS = {
 
 NAVBAR_DOCS_PATTERN = re.compile(
     r'<li\s+class="navbar-item">\s*'
-    r'<a\s+href="/docs/"[^>]*>\s*'
-    r'<div\s+class="separator"></div>\s*'
+    r'<a\s+href="/docs/"[^>]*>.*?'
     r'<span[^>]*data-translate="nav_docs"[^>]*>[^<]*</span>\s*'
     r'</a>\s*'
     r'</li>',
@@ -113,6 +112,26 @@ COLOR_REPLACEMENTS = [
     ("#e5a800", "#4893D4"),
     ("#d49600", "#3B8DD4"),
 
+    ("#d4c4a8", "#a3c8ed"),
+    ("#7a6548", "#2d6ab0"),
+    ("#6b5635", "#245a8c"),
+    ("#f0ede8", "#e0f0ff"),
+
+    ("#e8c9a0", "#a3d1f7"),
+    ("#d4c4b0", "#a3c8ed"),
+    ("#c9ad8c", "#7BBDF7"),
+    ("#d0c8bc", "#b8d8f8"),
+    ("#a09080", "#6b9cc4"),
+    ("#b5844f", "#2d6ab0"),
+    ("#e4b584", "#7BBDF7"),
+    ("#c99640", "#2d6ab0"),
+    ("#d6a756", "#4A93D4"),
+    ("#e8c074", "#7BBDF7"),
+    ("#e8b060", "#5BA4E6"),
+    ("#e8c77b", "#7BBDF7"),
+    ("#d9940a", "#2d6ab0"),
+    ("#f0a500", "#3B8DD4"),
+
     ("#f5f0e8", "#bde0fe"),
     ("#f8f6f2", "#d4ecff"),
     ("#fbf4e8", "#bde0fe"),
@@ -139,6 +158,8 @@ COLOR_REPLACEMENTS = [
     ("#EBF3FC", "#bde0fe"),
     ("#EFF5FC", "#d4ecff"),
     ("#D6E8F8", "#a3d1f7"),
+
+    ("#f79f9b", "#38b6ff"),
 ]
 
 
@@ -158,36 +179,61 @@ def transform_content(content, filepath):
     content = content.replace("MINDBALANCE", "MINDSPACE")
     content = content.replace("Mindbalance", "Mindspace")
 
-    if ext.lower() in {".css", ".html", ".js"}:
+    content = content.replace("gold-crayola", "blue-crayola")
+    content = content.replace("gold_crayola", "blue_crayola")
+
+    SETTINGS_FILES = {"settings.js", "settings-modal.js"}
+    is_settings_file = basename in SETTINGS_FILES
+
+    if ext.lower() in {".css", ".html", ".js"} and not is_settings_file:
         for old_color, new_color in COLOR_REPLACEMENTS:
-            content = content.replace(old_color, new_color)
+            content = re.sub(re.escape(old_color), new_color, content, flags=re.IGNORECASE)
 
     if ext.lower() == ".js":
-        content = re.sub(
-            r"blue: \{ hex: '#4a90d9', hover: '#3d7fc8', rgb: '74, 144, 217' \}",
-            "sky: { hex: '#4a90d9', hover: '#3d7fc8', rgb: '74, 144, 217' }",
-            content
-        )
-        content = re.sub(
-            r"blue: \{ hex: '#4a90d9', hover: '#3d7fc8', rgb: '74, 144, 217', name: 'Blue' \}",
-            "sky: { hex: '#4a90d9', hover: '#3d7fc8', rgb: '74, 144, 217', name: 'Sky' }",
-            content
-        )
+        if is_settings_file:
+            MINDSPACE_ACCENT_COLORS_SETTINGS = """  const ACCENT_COLORS = {
+    blue:   { hex: '#5BA4E6', hover: '#4893D4', rgb: '91, 164, 230', light: '#a3c8ed', soft: '#bde0fe', dark: '#2d6ab0', gradEnd: '#7BBDF7', text: '#245a8c' },
+    purple: { hex: '#9b7ed9', hover: '#8a6dc8', rgb: '155, 126, 217', light: '#c9b8ec', soft: '#f3eefb', dark: '#6b4fb5', gradEnd: '#b99ae6', text: '#5a3d9e' },
+    sky:    { hex: '#4a90d9', hover: '#3d7fc8', rgb: '74, 144, 217',  light: '#a3c8ed', soft: '#eaf2fb', dark: '#2d6ab0', gradEnd: '#6daeed', text: '#245a8c' },
+    green:  { hex: '#4db896', hover: '#3fa884', rgb: '77, 184, 150',  light: '#a3dbc7', soft: '#e8f7f1', dark: '#2e8a6a', gradEnd: '#6fd4aa', text: '#267558' },
+    teal:   { hex: '#38b2ac', hover: '#2d9d98', rgb: '56, 178, 172',  light: '#96d8d4', soft: '#e6f5f4', dark: '#238079', gradEnd: '#5fccc6', text: '#1d6b65' },
+    pink:   { hex: '#d97eab', hover: '#c86d9a', rgb: '217, 126, 171', light: '#ecbdd5', soft: '#fbeef4', dark: '#b4547f', gradEnd: '#e9a3c3', text: '#993f6a' },
+    orange: { hex: '#e09c5c', hover: '#d08b4b', rgb: '224, 156, 92',  light: '#f0cca3', soft: '#fdf3e8', dark: '#b87430', gradEnd: '#edb87a', text: '#9a6228' },
+    red:    { hex: '#e07070', hover: '#d05f5f', rgb: '224, 112, 112', light: '#f0b3b3', soft: '#fdeaea', dark: '#b84444', gradEnd: '#ed9494', text: '#9a3535' }
+  };"""
+
+            MINDSPACE_ACCENT_COLORS_MODAL = """  const ACCENT_COLORS = {
+    blue:   { hex: '#5BA4E6', hover: '#4893D4', rgb: '91, 164, 230', light: '#a3c8ed', soft: '#bde0fe', dark: '#2d6ab0', gradEnd: '#7BBDF7', text: '#245a8c', name: 'Blue' },
+    purple: { hex: '#9b7ed9', hover: '#8a6dc8', rgb: '155, 126, 217', light: '#c9b8ec', soft: '#f3eefb', dark: '#6b4fb5', gradEnd: '#b99ae6', text: '#5a3d9e', name: 'Purple' },
+    sky:    { hex: '#4a90d9', hover: '#3d7fc8', rgb: '74, 144, 217',  light: '#a3c8ed', soft: '#eaf2fb', dark: '#2d6ab0', gradEnd: '#6daeed', text: '#245a8c', name: 'Sky' },
+    green:  { hex: '#4db896', hover: '#3fa884', rgb: '77, 184, 150',  light: '#a3dbc7', soft: '#e8f7f1', dark: '#2e8a6a', gradEnd: '#6fd4aa', text: '#267558', name: 'Green' },
+    teal:   { hex: '#38b2ac', hover: '#2d9d98', rgb: '56, 178, 172',  light: '#96d8d4', soft: '#e6f5f4', dark: '#238079', gradEnd: '#5fccc6', text: '#1d6b65', name: 'Teal' },
+    pink:   { hex: '#d97eab', hover: '#c86d9a', rgb: '217, 126, 171', light: '#ecbdd5', soft: '#fbeef4', dark: '#b4547f', gradEnd: '#e9a3c3', text: '#993f6a', name: 'Pink' },
+    orange: { hex: '#e09c5c', hover: '#d08b4b', rgb: '224, 156, 92',  light: '#f0cca3', soft: '#fdf3e8', dark: '#b87430', gradEnd: '#edb87a', text: '#9a6228', name: 'Orange' },
+    red:    { hex: '#e07070', hover: '#d05f5f', rgb: '224, 112, 112', light: '#f0b3b3', soft: '#fdeaea', dark: '#b84444', gradEnd: '#ed9494', text: '#9a3535', name: 'Red' }
+  };"""
+
+            content = re.sub(
+                r'const ACCENT_COLORS\s*=\s*\{.*?\};',
+                lambda m: MINDSPACE_ACCENT_COLORS_MODAL.strip() if "name:" in m.group() else MINDSPACE_ACCENT_COLORS_SETTINGS.strip(),
+                content,
+                count=1,
+                flags=re.DOTALL
+            )
+
         content = content.replace("data-accent-color=\"blue\"", "data-accent-color=\"sky\"")
 
-        content = content.replace(
-            "gold: { hex: '#5BA4E6', hover: '#4893D4', rgb: '91, 164, 230' }",
-            "blue: { hex: '#5BA4E6', hover: '#4893D4', rgb: '91, 164, 230' }"
-        )
-        content = content.replace(
-            "gold: { hex: '#5BA4E6', hover: '#4893D4', rgb: '91, 164, 230', name: 'Gold' }",
-            "blue: { hex: '#5BA4E6', hover: '#4893D4', rgb: '91, 164, 230', name: 'Blue' }"
-        )
         content = content.replace("DEFAULT_ACCENT = 'gold'", "DEFAULT_ACCENT = 'blue'")
         content = content.replace("ACCENT_COLORS.gold", "ACCENT_COLORS.blue")
         content = content.replace("accentColor, 'gold'", "accentColor, 'blue'")
         content = content.replace("applyAccentColor?.('gold')", "applyAccentColor?.('blue')")
         content = content.replace("accent: 'gold'", "accent: 'blue'")
+        content = content.replace("colorName : 'gold'", "colorName : 'blue'")
+        content = content.replace("? colorName : 'gold'", "? colorName : 'blue'")
+        content = content.replace("accentColor, 'gold')", "accentColor, 'blue')")
+        content = re.sub(r"getPreference\(STORAGE_KEYS\.accentColor,\s*'gold'\)", "getPreference(STORAGE_KEYS.accentColor, 'blue')", content)
+        content = content.replace("|| '#af916d'", "|| '#5BA4E6'")
+        content = content.replace("|| '#AF916D'", "|| '#5BA4E6'")
 
     if ext.lower() == ".html":
         content = re.sub(
@@ -198,6 +244,10 @@ def transform_content(content, filepath):
         content = content.replace('data-accent-color="gold"', 'data-accent-color="blue"')
         content = content.replace("title=\"Gold\"", "title=\"Blue\"")
         content = content.replace("--gold-crayola", "--blue-crayola")
+        content = content.replace(
+            'data-accent-color="purple" title="Purple" style="--btn-color: #6DB3F2"',
+            'data-accent-color="purple" title="Purple" style="--btn-color: #9b7ed9"'
+        )
         content = content.replace("#f8a29e", "#38b6ff")
         content = content.replace("MindSpaceLogo.svg", "MindSpaceLogo.png")
         content = content.replace("MindBalanceLogo.svg", "MindSpaceLogo.png")
@@ -222,35 +272,6 @@ def transform_content(content, filepath):
         content = content.replace("#AF916D", "#2068A8")
         content = content.replace("#af916d", "#2068a8")
 
-        if basename == "style.css":
-            mindspace_overrides = """
-/* MindSpace: white-on-blue footer buttons */
-.mb-footer__btn {
-  background: linear-gradient(135deg, #2068A8 0%, #1B5A94 100%) !important;
-  color: #fff !important;
-  box-shadow: 0 4px 15px rgba(32, 104, 168, 0.3) !important;
-}
-.mb-footer__btn:hover {
-  box-shadow: 0 6px 20px rgba(32, 104, 168, 0.4) !important;
-}
-/* MindSpace: light blue navbar & header */
-.header { background-color: #bde0fe !important; }
-.header.active { background-color: #bde0fe !important; }
-.navbar { background: #bde0fe !important; }
-.navbar-link,
-.navbar-link .span { color: #1a3a5c !important; }
-.navbar-link:is(:hover, :focus-visible),
-.navbar-link:is(:hover, :focus-visible) .span,
-.navbar-link.active,
-.navbar-link.active .span { color: #0d2847 !important; }
-.header .btn-outline { color: #1a3a5c !important; border-color: #1a3a5c !important; }
-.header .btn-outline:hover { background: #1a3a5c !important; color: #fff !important; }
-.header-search-btn ion-icon { color: #1a3a5c !important; }
-.header-action-btn ion-icon { color: #1a3a5c !important; }
-.settings-trigger-btn { color: #1a3a5c !important; }
-.mb-footer__top { background: linear-gradient(135deg, #2068A8 0%, #1B5A94 100%) !important; }
-"""
-            content += mindspace_overrides
 
     return content
 

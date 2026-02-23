@@ -107,3 +107,7 @@ The architecture uses a split deployment: static assets are served by Vercel, wh
 - **Resend**: Used for sending newsletter welcome emails.
 - **Vercel**: Static site hosting for frontend deployment.
 - **PostgreSQL**: Used for newsletter subscriber management (separate from Supabase for this specific function).
+
+## Vercel Deployment Project IDs
+- **MindBalance** (mindbalance.cloud): `prj_hbARldfI796V96wykjvsO1yYOiuo`
+- **MindSpace** (mindspace.site): `prj_LqQQ9Euz6u3ThZxBjrN5N6cAw4TR`

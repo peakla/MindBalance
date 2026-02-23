@@ -396,12 +396,12 @@
 }
 
 .inbox-item--achievement .inbox-item__icon {
-  background: linear-gradient(135deg, #d4a574 0%, #e8c9a0 100%);
+  background: linear-gradient(135deg, var(--user-accent-grad-end) 0%, var(--user-accent-light) 100%);
   color: #1a1a2e;
 }
 
 .inbox-item--achievement .inbox-item__from {
-  color: #d4a574;
+  color: var(--user-accent-grad-end);
 }
 
 .inbox-item--achievement .inbox-item__text {

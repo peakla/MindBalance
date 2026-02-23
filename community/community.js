@@ -41,7 +41,8 @@ async function fetchUserProfile(userId) {
 }
 
 function showConfetti() {
-  const colors = ['#AF916D', '#d6bd9f', '#8b7355', '#4caf50', '#2196f3', '#ff9800'];
+  const accentColor = getComputedStyle(document.documentElement).getPropertyValue('--user-accent').trim() || '#af916d';
+  const colors = [accentColor, '#d6bd9f', '#8b7355', '#4caf50', '#2196f3', '#ff9800'];
   for (let i = 0; i < 30; i++) {
     const confetti = document.createElement('div');
     confetti.style.cssText = 'position:fixed;width:' + (Math.random()*10+5) + 'px;height:' + (Math.random()*10+5) + 'px;background:' + colors[Math.floor(Math.random()*colors.length)] + ';left:' + (Math.random()*100) + 'vw;top:-20px;border-radius:' + (Math.random()>0.5?'50%':'2px') + ';z-index:10000;pointer-events:none;animation:confettiFall ' + (Math.random()*2+1.5) + 's ease forwards;';
@@ -54,7 +55,7 @@ function showConfetti() {
 function getTranslation(key, fallback) {
   if (window.translations && window.MindBalanceSettings) {
     const lang = localStorage.getItem('mindbalance-language') || 'en';
-    const langMap = { en: 'en', es: 'es', fr: 'fr', zh: 'zh', hi: 'hi', ko: 'ko' };
+    const langMap = { en: 'en', es: 'es', fr: 'fr', zh: 'zh', hi: 'hi', ko: 'ko', de: 'de', gr: 'gr', ru: 'ru' };
     const langKey = langMap[lang] || 'en';
     if (window.translations[langKey] && window.translations[langKey][key]) {
       return window.translations[langKey][key];

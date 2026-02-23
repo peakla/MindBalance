@@ -454,6 +454,7 @@
                       <option value="de">Deutsch</option>
                       <option value="gr">Ελληνικά</option>
                       <option value="ru">Русский</option>
+                      <option value="ar">العربية</option>
                     </select>
                   </div>
                 </div>

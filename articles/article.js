@@ -45,7 +45,7 @@
   function getTranslation(key, fallback) {
     if (window.translations) {
       const lang = getSavedLanguage();
-      const langMap = { en: 'en', es: 'es', fr: 'fr', zh: 'zh', hi: 'hi', ko: 'ko', de: 'de', gr: 'gr', ru: 'ru' };
+      const langMap = { en: 'en', es: 'es', fr: 'fr', zh: 'zh', hi: 'hi', ko: 'ko', de: 'de', gr: 'gr', ru: 'ru', ar: 'ar' };
       const langKey = langMap[lang] || 'en';
       if (window.translations[langKey] && window.translations[langKey][key]) {
         return window.translations[langKey][key];
@@ -442,7 +442,8 @@
       'ko': 'ko-KR',
       'de': 'de-DE',
       'gr': 'el-GR',
-      'ru': 'ru-RU'
+      'ru': 'ru-RU',
+      'ar': 'ar-SA'
     };
     return langMap[savedLang] || 'en-US';
   }
@@ -501,6 +502,16 @@
 
       if (!response.ok) {
         const error = await response.json().catch(() => ({ error: 'Unknown error' }));
+        if (error.fallback) {
+          console.warn('ElevenLabs unavailable, switching to browser voice');
+          useElevenLabs = false;
+          const toggle = document.getElementById('ttsEngineToggle');
+          if (toggle) {
+            toggle.textContent = '🔊 Browser';
+            toggle.classList.remove('elevenlabs-active');
+          }
+          throw new Error('FALLBACK_TO_BROWSER');
+        }
         throw new Error(error.error || 'TTS generation failed');
       }
 

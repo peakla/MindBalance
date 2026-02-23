@@ -303,8 +303,10 @@ def generate_tts():
     except Exception as e:
         error_msg = str(e)
         if 'quota' in error_msg.lower() or 'limit' in error_msg.lower():
-            return jsonify({'error': 'API quota exceeded. Please try again later or use browser voice.'}), 429
-        return jsonify({'error': f'TTS generation failed: {error_msg}'}), 500
+            return jsonify({'error': 'API quota exceeded. Please try again later or use browser voice.', 'fallback': True}), 429
+        if 'payment' in error_msg.lower() or '401' in error_msg or 'unauthorized' in error_msg.lower():
+            return jsonify({'error': 'Premium voice service is temporarily unavailable. Please use browser voice instead.', 'fallback': True}), 503
+        return jsonify({'error': f'TTS generation failed. Please try browser voice instead.', 'fallback': True}), 500
 
 @app.route('/api/tts/health', methods=['GET'])
 @check_referer

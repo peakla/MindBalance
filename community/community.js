@@ -55,7 +55,7 @@ function showConfetti() {
 function getTranslation(key, fallback) {
   if (window.translations && window.MindBalanceSettings) {
     const lang = localStorage.getItem('mindbalance-language') || 'en';
-    const langMap = { en: 'en', es: 'es', fr: 'fr', zh: 'zh', hi: 'hi', ko: 'ko', de: 'de', gr: 'gr', ru: 'ru' };
+    const langMap = { en: 'en', es: 'es', fr: 'fr', zh: 'zh', hi: 'hi', ko: 'ko', de: 'de', gr: 'gr', ru: 'ru', ar: 'ar' };
     const langKey = langMap[lang] || 'en';
     if (window.translations[langKey] && window.translations[langKey][key]) {
       return window.translations[langKey][key];

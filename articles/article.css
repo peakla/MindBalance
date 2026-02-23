@@ -1919,16 +1919,123 @@
   }
   
   .article-tts-player {
-    padding: 16px;
-    border-radius: 12px;
+    padding: 12px;
+    border-radius: 10px;
+    margin-bottom: 20px;
   }
-  
+
+  .tts-player__header {
+    margin-bottom: 10px;
+    gap: 6px;
+  }
+
+  .tts-player__icon {
+    font-size: 1.1rem;
+  }
+
+  .tts-player__title {
+    font-size: 0.9rem;
+  }
+
+  .tts-player__controls {
+    gap: 8px;
+    margin-bottom: 10px;
+  }
+
+  .tts-btn {
+    width: 36px;
+    height: 36px;
+    font-size: 0.9rem;
+  }
+
   .tts-btn--play,
   .tts-btn--pause {
-    width: 56px;
-    height: 56px;
+    width: 44px;
+    height: 44px;
+    font-size: 1.1rem;
   }
-  
+
+  .tts-btn--skip {
+    width: 32px;
+    height: 32px;
+    font-size: 0.8rem;
+  }
+
+  .tts-player__progress {
+    margin-bottom: 8px;
+  }
+
+  .tts-progress-bar {
+    height: 4px;
+    margin-bottom: 4px;
+  }
+
+  .tts-status {
+    font-size: 0.75rem;
+  }
+
+  .tts-player__row {
+    gap: 8px;
+    margin-bottom: 8px;
+  }
+
+  .tts-player__speed {
+    gap: 6px;
+    font-size: 0.8rem;
+  }
+
+  .tts-speed-select {
+    padding: 4px 8px;
+    font-size: 0.8rem;
+  }
+
+  .tts-player__voice {
+    gap: 6px;
+  }
+
+  .tts-player__voice label {
+    font-size: 0.8rem;
+  }
+
+  .tts-voice-select {
+    padding: 4px 8px;
+    font-size: 0.8rem;
+    min-width: 100px;
+  }
+
+  .tts-volume-btn {
+    width: 28px;
+    height: 28px;
+  }
+
+  .tts-volume-btn svg {
+    width: 16px;
+    height: 16px;
+  }
+
+  .tts-player__volume {
+    gap: 6px;
+    min-width: 140px;
+  }
+
+  .tts-volume-value {
+    font-size: 0.75rem;
+  }
+
+  .tts-engine-toggle {
+    padding: 4px 8px;
+    font-size: 0.7rem;
+  }
+
+  .tts-option-btn {
+    padding: 4px 8px;
+    font-size: 0.75rem;
+  }
+
+  .tts-time-remaining {
+    font-size: 0.75rem;
+  }
+
   .tts-hint {
     display: none;
   }

@@ -7,7 +7,7 @@
   function getTranslation(key, fallback) {
     if (window.translations) {
       var lang = localStorage.getItem('mindbalance-language') || 'en';
-      var langMap = { en: 'en', es: 'es', fr: 'fr', zh: 'zh', hi: 'hi', ko: 'ko', de: 'de', gr: 'gr', ru: 'ru' };
+      var langMap = { en: 'en', es: 'es', fr: 'fr', zh: 'zh', hi: 'hi', ko: 'ko', de: 'de', gr: 'gr', ru: 'ru', ar: 'ar' };
       var langKey = langMap[lang] || 'en';
       if (window.translations[langKey] && window.translations[langKey][key]) {
         return window.translations[langKey][key];

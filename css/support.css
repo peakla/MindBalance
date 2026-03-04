@@ -4322,12 +4322,14 @@ body.dark-mode .view-toggle-btn.active {
 }
 
 [data-theme="dark"] .helpline-contact {
-  background: linear-gradient(135deg, #2a2a4a 0%, #353558 100%);
-  color: #fff;
+  background: #2a2a4a !important;
+  color: #e0e0e0;
+  border: 1px solid #3a3a5a;
 }
 
 [data-theme="dark"] .helpline-contact--call {
-  background: linear-gradient(135deg, #2a4a30 0%, #355540 100%);
+  background: #1e3a25 !important;
+  color: #8bc48f;
 }
 
 [data-theme="dark"] .helpline-contact--call ion-icon {
@@ -4335,7 +4337,8 @@ body.dark-mode .view-toggle-btn.active {
 }
 
 [data-theme="dark"] .helpline-contact--text {
-  background: linear-gradient(135deg, #1a3050 0%, #253a5a 100%);
+  background: #1a2e45 !important;
+  color: #64b5f6;
 }
 
 [data-theme="dark"] .helpline-contact--text ion-icon {
@@ -4343,7 +4346,8 @@ body.dark-mode .view-toggle-btn.active {
 }
 
 [data-theme="dark"] .helpline-contact--chat {
-  background: linear-gradient(135deg, #3a2845 0%, #4a3055 100%);
+  background: #2e1e3a !important;
+  color: #ce93d8;
 }
 
 [data-theme="dark"] .helpline-contact--chat ion-icon {
@@ -4351,15 +4355,18 @@ body.dark-mode .view-toggle-btn.active {
 }
 
 [data-theme="dark"] .helpline-contact--call:hover {
-  background: linear-gradient(135deg, #43a047 0%, #2e7d32 100%);
+  background: #2e7d32 !important;
+  color: #fff;
 }
 
 [data-theme="dark"] .helpline-contact--text:hover {
-  background: linear-gradient(135deg, #1976d2 0%, #1565c0 100%);
+  background: #1565c0 !important;
+  color: #fff;
 }
 
 [data-theme="dark"] .helpline-contact--chat:hover {
-  background: linear-gradient(135deg, #8e24aa 0%, #7b1fa2 100%);
+  background: #7b1fa2 !important;
+  color: #fff;
 }
 
 [data-theme="dark"] .helpline-contact:hover {
@@ -4599,11 +4606,14 @@ body.dark-mode .view-toggle-btn.active {
 }
 
 [data-theme="dark"] .crisis-card__icon ion-icon,
-[data-theme="dark"] .quicklink-card__icon ion-icon,
 [data-theme="dark"] .helpline-card ion-icon,
 [data-theme="dark"] .resource-card ion-icon,
 [data-theme="dark"] .selfhelp-card__header ion-icon {
   color: var(--user-accent-light);
+}
+
+[data-theme="dark"] .quicklink-card__icon ion-icon {
+  color: #fff;
 }
 
 [data-theme="dark"] .crisis-card__title,

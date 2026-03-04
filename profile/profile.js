@@ -306,7 +306,7 @@ document.addEventListener('DOMContentLoaded', () => {
       loadReputationPointsData(viewedUserId);
 
 
-      if (typeof ProfileAnalytics !== 'undefined') {
+      if (isOwnProfile && typeof ProfileAnalytics !== 'undefined') {
         ProfileAnalytics.init(viewedUserId);
       }
 
@@ -399,6 +399,11 @@ function applyViewMode() {
     if (wellnessTab) wellnessTab.style.display = 'none';
     if (savedTab) savedTab.style.display = 'none';
 
+    const analyticsIds = ['profileReadingStats', 'profileActivityChart', 'profileHeatmap', 'profileTimeline'];
+    analyticsIds.forEach(id => {
+      const el = document.getElementById(id);
+      if (el) el.style.display = 'none';
+    });
 
     checkFollowStatus();
   }

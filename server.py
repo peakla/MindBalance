@@ -489,7 +489,8 @@ def newsletter_subscribe():
   <!-- Inspirational quote -->
   <tr>
     <td style="padding: 28px 40px 0;">
-      <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
+      <table role="presentation" cellspacing="0" cellpadd
+      ing="0" border="0" width="100%">
         <tr>
           <td class="quote-section" style="background-color: #f8f5f0; border-left: 3px solid #af916d; border-radius: 0 10px 10px 0; padding: 18px 24px;">
             <p class="quote-text" style="font-family: Georgia, 'Times New Roman', serif; color: #6a6680; font-size: 14px; line-height: 1.6; margin: 0; font-style: italic;">

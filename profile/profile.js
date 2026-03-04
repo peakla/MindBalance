@@ -383,11 +383,9 @@ function applyViewMode() {
 
     const settingsTab = document.querySelector('[data-tab="settings"]');
     const wellnessTab = document.querySelector('[data-tab="wellness"]');
-    const likedPostsTab = document.querySelector('[data-tab="liked-posts"]');
     const savedTab = document.querySelector('[data-tab="saved"]');
     if (settingsTab) settingsTab.style.display = 'none';
     if (wellnessTab) wellnessTab.style.display = 'none';
-    if (likedPostsTab) likedPostsTab.style.display = 'none';
     if (savedTab) savedTab.style.display = 'none';
 
 
@@ -611,7 +609,7 @@ async function loadStatsData(userId) {
 
 
   const { count: likeCount } = await supabaseClient
-    .from('likes')
+    .from('post_likes')
     .select('*', { count: 'exact', head: true })
     .eq('user_id', userId);
 
@@ -1201,39 +1199,49 @@ async function loadFollowerCountsData(userId) {
 }
 
 // --- Liked Posts ---
-async function loadLikedPosts() {
-  if (!currentUser) return;
+async function loadLikedPosts(userId) {
+  const targetUserId = userId || viewedUserId || (currentUser ? currentUser.id : null);
+  if (!targetUserId) return;
 
   const supabaseClient = getSupabaseClient();
   if (!supabaseClient) return;
 
   const likedContainer = document.getElementById('likedPosts');
 
+  function getLikedEmptyState() {
+    if (isOwnProfile) {
+      return createEmptyState('heart-outline', 'No liked posts yet', '../community/', 'Explore the community');
+    } else {
+      const viewedName = document.getElementById('profileName')?.textContent || 'This user';
+      return createEmptyState('heart-outline', viewedName + ' has no liked posts yet', null, null);
+    }
+  }
+
   const { data: likes, error } = await supabaseClient
     .from('post_likes')
     .select('post_id, created_at, posts(id, content, author_id, created_at, like_count)')
-    .eq('user_id', currentUser.id)
+    .eq('user_id', targetUserId)
     .order('created_at', { ascending: false })
     .limit(20);
 
   if (error) {
     const { data: altLikes } = await supabaseClient
-      .from('likes')
+      .from('post_likes')
       .select('post_id, created_at')
-      .eq('user_id', currentUser.id)
+      .eq('user_id', targetUserId)
       .order('created_at', { ascending: false })
       .limit(20);
 
     if (!altLikes || altLikes.length === 0) {
       likedContainer.innerHTML = '';
-      likedContainer.appendChild(createEmptyState('heart-outline', 'No liked posts yet', '../community/', 'Explore the community'));
+      likedContainer.appendChild(getLikedEmptyState());
       return;
     }
 
     const postIds = altLikes.map(l => l.post_id).filter(Boolean);
     if (postIds.length === 0) {
       likedContainer.innerHTML = '';
-      likedContainer.appendChild(createEmptyState('heart-outline', 'No liked posts yet', '../community/', 'Explore the community'));
+      likedContainer.appendChild(getLikedEmptyState());
       return;
     }
 
@@ -1244,7 +1252,7 @@ async function loadLikedPosts() {
 
     if (!posts || posts.length === 0) {
       likedContainer.innerHTML = '';
-      likedContainer.appendChild(createEmptyState('heart-outline', 'No liked posts yet', '../community/', 'Explore the community'));
+      likedContainer.appendChild(getLikedEmptyState());
       return;
     }
 
@@ -1266,7 +1274,7 @@ async function loadLikedPosts() {
 
   if (!likes || likes.length === 0) {
     likedContainer.innerHTML = '';
-    likedContainer.appendChild(createEmptyState('heart-outline', 'No liked posts yet', '../community/', 'Explore the community'));
+    likedContainer.appendChild(getLikedEmptyState());
     return;
   }
 
@@ -1286,8 +1294,9 @@ async function loadLikedPosts() {
 }
 
 // --- Achievements ---
-async function loadAchievements() {
-  if (!currentUser) return;
+async function loadAchievements(userId) {
+  const targetUserId = userId || viewedUserId || (currentUser ? currentUser.id : null);
+  if (!targetUserId) return;
 
   const supabaseClient = getSupabaseClient();
   if (!supabaseClient) return;
@@ -1302,7 +1311,7 @@ async function loadAchievements() {
   const { data: userAchievements } = await supabaseClient
     .from('user_achievements')
     .select('achievement_id, unlocked_at')
-    .eq('user_id', currentUser.id);
+    .eq('user_id', targetUserId);
 
   if (!allAchievements || allAchievements.length === 0) {
     grid.innerHTML = '';
@@ -1490,7 +1499,12 @@ async function loadSavedArticles() {
 
     if (error || !articles || articles.length === 0) {
       savedContainer.innerHTML = '';
-      savedContainer.appendChild(createEmptyState('bookmark-outline', 'No saved articles yet', '../blog/', 'Browse articles'));
+      if (isOwnProfile) {
+        savedContainer.appendChild(createEmptyState('bookmark-outline', 'No saved articles yet', '../blog/', 'Browse articles'));
+      } else {
+        const viewedName = document.getElementById('profileName')?.textContent || 'This user';
+        savedContainer.appendChild(createEmptyState('bookmark-outline', viewedName + ' has no saved articles yet', null, null));
+      }
       return;
     }
 
@@ -1605,7 +1619,12 @@ async function loadMoodHistory(loadMore = false) {
   if (error || !moods || moods.length === 0) {
     if (!loadMore) {
       chart.innerHTML = '';
-      chart.appendChild(createSafeElement('p', 'mb-profile__mood-empty', 'No mood entries yet. Start tracking today!'));
+      if (isOwnProfile) {
+        chart.appendChild(createSafeElement('p', 'mb-profile__mood-empty', 'No mood entries yet. Start tracking today!'));
+      } else {
+        const viewedName = document.getElementById('profileName')?.textContent || 'This user';
+        chart.appendChild(createSafeElement('p', 'mb-profile__mood-empty', viewedName + ' has no mood entries yet.'));
+      }
       hideInsights();
     }
     return;
@@ -3080,7 +3099,7 @@ async function deleteAccount() {
     await Promise.all([
       supabaseClient.from('posts').delete().eq('author_id', currentUser.id),
       supabaseClient.from('post_comments').delete().eq('author_id', currentUser.id),
-      supabaseClient.from('likes').delete().eq('user_id', currentUser.id),
+      supabaseClient.from('post_likes').delete().eq('user_id', currentUser.id),
       supabaseClient.from('followers').delete().or(`follower_id.eq.${currentUser.id},following_id.eq.${currentUser.id}`),
       supabaseClient.from('saved_articles').delete().eq('user_id', currentUser.id),
       supabaseClient.from('mood_logs').delete().eq('user_id', currentUser.id),

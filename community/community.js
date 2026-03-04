@@ -537,13 +537,18 @@ async function handleLike(e) {
 
     if (!error) {
       btn.dataset.liked = 'false';
-      const newCount = currentCount - 1;
       if (heartIcon) heartIcon.textContent = '♡';
-      if (likeCountSpan) likeCountSpan.textContent = newCount > 0 ? newCount : '';
       btn.classList.remove('like-animating');
 
+      const { count: actualCount } = await client
+        .from('post_likes')
+        .select('*', { count: 'exact', head: true })
+        .eq('post_id', postId);
+      const newCount = actualCount || 0;
+      if (likeCountSpan) likeCountSpan.textContent = newCount > 0 ? newCount : '';
+
       try {
-        await client.from('posts').update({ like_count: Math.max(0, newCount) }).eq('id', postId);
+        await client.from('posts').update({ like_count: newCount }).eq('id', postId);
       } catch (updateErr) {
         console.warn('Failed to update like_count:', updateErr);
       }
@@ -556,9 +561,7 @@ async function handleLike(e) {
 
     if (!error) {
       btn.dataset.liked = 'true';
-      const newCount = currentCount + 1;
       if (heartIcon) heartIcon.textContent = chosenEmoji === '♡' ? '♥' : chosenEmoji;
-      if (likeCountSpan) likeCountSpan.textContent = newCount > 0 ? newCount : '';
 
       btn.classList.add('like-animating');
       setTimeout(() => btn.classList.remove('like-animating'), 400);
@@ -568,6 +571,13 @@ async function handleLike(e) {
       pop.textContent = '+1';
       btn.appendChild(pop);
       setTimeout(() => pop.remove(), 600);
+
+      const { count: actualCount } = await client
+        .from('post_likes')
+        .select('*', { count: 'exact', head: true })
+        .eq('post_id', postId);
+      const newCount = actualCount || 0;
+      if (likeCountSpan) likeCountSpan.textContent = newCount > 0 ? newCount : '';
 
       try {
         await client.from('posts').update({ like_count: newCount }).eq('id', postId);

@@ -1588,6 +1588,26 @@ async function loadPosts(forceReload = false) {
       }
     }
 
+    const postIds = data.map(p => p.id);
+    const { data: likeCounts } = await client
+      .from('post_likes')
+      .select('post_id')
+      .in('post_id', postIds);
+
+    if (likeCounts) {
+      const countMap = {};
+      likeCounts.forEach(l => {
+        countMap[l.post_id] = (countMap[l.post_id] || 0) + 1;
+      });
+      data.forEach(post => {
+        const realCount = countMap[post.id] || 0;
+        if (realCount !== (post.like_count || 0)) {
+          post.like_count = realCount;
+          client.from('posts').update({ like_count: realCount }).eq('id', post.id).then(() => {});
+        }
+      });
+    }
+
     if (currentUser) {
       const { data: userLikes } = await client
         .from('post_likes')

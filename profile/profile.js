@@ -36,9 +36,20 @@ function createActivityItem(activity) {
 
   const contentWrap = createSafeElement('div', 'mb-activity-item__content');
   const text = createSafeElement('p', 'mb-activity-item__text');
-  const typeLabels = {
+  const typeLabels = isOwnProfile ? {
     'post': 'You posted',
     'comment': 'You commented',
+    'article_read': 'Read article',
+    'article_complete': 'Finished reading',
+    'page_view': 'Visited',
+    'mood_checkin': 'Mood check-in',
+    'achievement_unlocked': 'Achievement unlocked',
+    'profile_update': 'Updated profile',
+    'bookmark': 'Bookmarked',
+    'like': 'Liked a post'
+  } : {
+    'post': 'Posted',
+    'comment': 'Commented',
     'article_read': 'Read article',
     'article_complete': 'Finished reading',
     'page_view': 'Visited',

@@ -168,11 +168,17 @@ const ProfileAnalytics = (function() {
     const listEl = document.getElementById('timelineList');
     
     const showEmptyState = () => {
+      const ownProfile = window.isOwnProfile !== false;
+      const viewedName = document.getElementById('profileName')?.textContent || 'This user';
+      const title = ownProfile ? 'No Activity Yet' : 'No Activity Yet';
+      const desc = ownProfile
+        ? 'Start exploring articles, resources, and the community to see your activity here.'
+        : viewedName + ' has no activity to show yet.';
       listEl.innerHTML = `
         <div class="mb-empty-state">
           <ion-icon name="footsteps-outline" class="mb-empty-state__icon"></ion-icon>
-          <h4 class="mb-empty-state__title">No Activity Yet</h4>
-          <p class="mb-empty-state__desc">Start exploring articles, resources, and the community to see your activity here.</p>
+          <h4 class="mb-empty-state__title">${title}</h4>
+          <p class="mb-empty-state__desc">${desc}</p>
         </div>
       `;
     };

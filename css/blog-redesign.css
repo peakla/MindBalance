@@ -4312,3 +4312,75 @@ body.reading-mode .mb-blogGrid {
     display: none !important;
   }
 }
+
+.mb-externalBadge {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 5px 10px;
+  background: rgba(30, 30, 50, 0.85);
+  color: #fff;
+  font-size: 0.7rem;
+  font-weight: 600;
+  border-radius: 6px;
+  z-index: 2;
+  letter-spacing: 0.3px;
+  text-transform: uppercase;
+}
+
+.mb-externalBadge ion-icon {
+  font-size: 0.8rem;
+}
+
+.mb-externalDisclaimer {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  margin-top: 12px;
+  padding: 10px 12px;
+  background: #f0f0f0;
+  border: 1px solid #d0d0d0;
+  border-radius: 8px;
+}
+
+.mb-externalDisclaimer ion-icon {
+  flex-shrink: 0;
+  font-size: 1rem;
+  color: #888;
+  margin-top: 1px;
+}
+
+.mb-externalDisclaimer p {
+  margin: 0;
+  font-size: 0.65rem;
+  line-height: 1.4;
+  color: #777;
+}
+
+.mb-articleCard--external {
+  border: 1px dashed #c0c0c0;
+}
+
+[data-theme="dark"] .mb-externalDisclaimer {
+  background: #1a1a2e;
+  border-color: #3a3a5a;
+}
+
+[data-theme="dark"] .mb-externalDisclaimer p {
+  color: #999;
+}
+
+[data-theme="dark"] .mb-externalDisclaimer ion-icon {
+  color: #666;
+}
+
+[data-theme="dark"] .mb-articleCard--external {
+  border-color: #3a3a5a;
+}
+
+[data-theme="dark"] .mb-externalBadge {
+  background: rgba(20, 20, 40, 0.9);
+}

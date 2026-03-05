@@ -852,4 +852,27 @@
     toggleReadingMode: toggleReadingMode,
     speakText: speakText
   };
+
+  // --- Scroll fade indicators for filter bars ---
+  function initScrollIndicators() {
+    var pairs = [
+      { parent: '.mb-categoryCards', scroller: '.mb-categoryCards__scroll' },
+      { parent: '.mb-stickyFilters', scroller: '.mb-stickyFilters__inner' }
+    ];
+    pairs.forEach(function(cfg) {
+      var parent = document.querySelector(cfg.parent);
+      var scroller = document.querySelector(cfg.scroller);
+      if (!parent || !scroller) return;
+      function update() {
+        var scrollLeft = scroller.scrollLeft;
+        var maxScroll = scroller.scrollWidth - scroller.clientWidth;
+        parent.classList.toggle('scroll-start', scrollLeft > 8);
+        parent.classList.toggle('scroll-end', scrollLeft >= maxScroll - 8);
+      }
+      scroller.addEventListener('scroll', update, { passive: true });
+      window.addEventListener('resize', update, { passive: true });
+      update();
+    });
+  }
+  initScrollIndicators();
 })();

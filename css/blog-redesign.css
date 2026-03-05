@@ -490,6 +490,42 @@
    ========================================================== */
 .mb-categoryCards {
   padding: 24px 0;
+  position: relative;
+}
+
+.mb-categoryCards::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 48px;
+  background: linear-gradient(to right, transparent, var(--blog-bg, #f5f0eb));
+  pointer-events: none;
+  z-index: 2;
+  transition: opacity 0.3s ease;
+}
+
+.mb-categoryCards.scroll-end::after {
+  opacity: 0;
+}
+
+.mb-categoryCards::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 48px;
+  background: linear-gradient(to left, transparent, var(--blog-bg, #f5f0eb));
+  pointer-events: none;
+  z-index: 2;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.mb-categoryCards.scroll-start::before {
+  opacity: 1;
 }
 
 .mb-categoryCards__scroll {
@@ -613,6 +649,41 @@
   transform: translateY(-100%);
   transition: opacity 0.35s cubic-bezier(0.4, 0, 0.2, 1), transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+}
+
+.mb-stickyFilters::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 48px;
+  background: linear-gradient(to right, transparent, #fff);
+  pointer-events: none;
+  z-index: 2;
+  transition: opacity 0.3s ease;
+}
+
+.mb-stickyFilters.scroll-end::after {
+  opacity: 0;
+}
+
+.mb-stickyFilters::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 48px;
+  background: linear-gradient(to left, transparent, #fff);
+  pointer-events: none;
+  z-index: 2;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.mb-stickyFilters.scroll-start::before {
+  opacity: 1;
 }
 
 .mb-stickyFilters.is-visible {
@@ -3230,10 +3301,26 @@ body.reading-mode .mb-blogGrid {
   color: #fff;
 }
 
+[data-theme="dark"] .mb-categoryCards::after {
+  background: linear-gradient(to right, transparent, #1a1a2e);
+}
+
+[data-theme="dark"] .mb-categoryCards::before {
+  background: linear-gradient(to left, transparent, #1a1a2e);
+}
+
 [data-theme="dark"] .mb-stickyFilters {
   background: #1a1a2e;
   border-bottom-color: rgba(255,255,255,0.1);
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+}
+
+[data-theme="dark"] .mb-stickyFilters::after {
+  background: linear-gradient(to right, transparent, #1a1a2e);
+}
+
+[data-theme="dark"] .mb-stickyFilters::before {
+  background: linear-gradient(to left, transparent, #1a1a2e);
 }
 
 [data-theme="dark"] .mb-stickyChip {

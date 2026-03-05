@@ -637,6 +637,56 @@ def goal_suggestion_endpoint():
         })
 
 
+@app.route('/api/report', methods=['POST', 'OPTIONS'])
+def report_post_endpoint():
+    if request.method == 'OPTIONS':
+        return '', 204
+
+    try:
+        data = request.get_json() or {}
+        post_id = data.get('post_id')
+        reason = data.get('reason')
+        reporter_id = data.get('reporter_id')
+
+        if not post_id or not reason:
+            return jsonify({'success': False, 'error': 'Missing post_id or reason'}), 400
+
+        SUPABASE_URL = "https://cxjqessxarjayqxvhnhs.supabase.co"
+        SERVICE_KEY = os.environ.get('SUPABASE_SERVICE_ROLE_KEY', '')
+
+        headers = {
+            'apikey': SERVICE_KEY,
+            'Authorization': f'Bearer {SERVICE_KEY}',
+            'Content-Type': 'application/json',
+            'Prefer': 'return=representation'
+        }
+
+        payload = {
+            'post_id': post_id,
+            'reporter_id': reporter_id,
+            'reason': reason
+        }
+
+        resp = requests.post(
+            f'{SUPABASE_URL}/rest/v1/post_reports',
+            headers=headers,
+            json=payload,
+            timeout=15
+        )
+
+        if resp.status_code == 201:
+            return jsonify({'success': True})
+        elif resp.status_code == 409:
+            return jsonify({'success': False, 'error': 'duplicate'}), 409
+        else:
+            error_data = resp.json() if resp.text else {}
+            return jsonify({'success': False, 'error': error_data.get('message', 'Unknown error')}), resp.status_code
+
+    except Exception as e:
+        print(f"Report error: {e}")
+        return jsonify({'success': False, 'error': 'Server error'}), 500
+
+
 # ==================== SERVER STARTUP ====================
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000, debug=False)

@@ -758,33 +758,44 @@ function showReportModal(postId) {
 
   submitBtn.addEventListener('click', async () => {
     const selectedReason = modal.querySelector('input[name="reportReason"]:checked');
-    if (!selectedReason || !currentUser) return;
+    if (!selectedReason) return;
 
     submitBtn.disabled = true;
     submitBtn.textContent = 'Submitting...';
 
-    const client = initSupabase();
+    const host = window.location.hostname;
+    const isProduction = (host === 'mindbalance.cloud' || host === 'www.mindbalance.cloud' ||
+                          host === 'mindspace.site' || host === 'www.mindspace.site');
+    const apiBase = isProduction
+      ? 'https://d519c840-a074-41fa-b89a-8627dded835a-00-f7kivyi5gpot.worf.replit.dev'
+      : '';
 
-    const { error } = await client
-      .from('post_reports')
-      .insert({
-        post_id: postId,
-        reporter_id: currentUser.id,
-        reporter_email: currentUser.email,
-        reason: selectedReason.value
+    try {
+      const resp = await fetch(apiBase + '/api/report', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          post_id: postId,
+          reporter_id: currentUser ? currentUser.id : null,
+          reason: selectedReason.value
+        })
       });
 
-    if (error) {
-      console.error('Report error:', error);
-      if (error.message?.includes('does not exist') || error.code === '42P01') {
-        alert('Report system needs setup. Please run supabase-setup.sql in your Supabase SQL Editor.');
-      } else if (error.message?.includes('duplicate') || error.code === '23505') {
-        alert('You have already reported this post.');
-      } else if (error.message?.includes('violates row-level security') || error.code === '42501') {
-        alert('Permission denied. Please make sure you are signed in and the database is properly configured.');
-      } else {
-        alert('Failed to submit report: ' + (error.message || 'Unknown error'));
+      const result = await resp.json();
+
+      if (!resp.ok || !result.success) {
+        if (resp.status === 409 || result.error === 'duplicate') {
+          alert('You have already reported this post.');
+        } else {
+          alert('Failed to submit report. Please try again later.');
+        }
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Submit Report';
+        return;
       }
+    } catch (err) {
+      console.error('Report error:', err);
+      alert('Failed to submit report. Please try again later.');
       submitBtn.disabled = false;
       submitBtn.textContent = 'Submit Report';
       return;
@@ -792,7 +803,6 @@ function showReportModal(postId) {
 
     modal.classList.remove('is-active');
     setTimeout(() => modal.remove(), 200);
-
 
     const toast = document.createElement('div');
     toast.textContent = 'Report submitted. Thank you for helping keep the community safe.';
@@ -814,11 +824,6 @@ function showReportModal(postId) {
 }
 
 async function handleReport(e) {
-  if (!currentUser) {
-    alert('Please sign in to report posts');
-    return;
-  }
-
   const post = e.target.closest('.mb-post');
   const postId = post.getAttribute('data-id');
 

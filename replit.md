@@ -1,7 +1,7 @@
 # MindBalance & MindSpace — Compressed Technical Guide
 
 ## Overview
-MindBalance (www.mindbalance.cloud) and MindSpace (www.mindspace.site) are twin static websites providing curated mental health resources. They share a single codebase and Supabase backend, differing primarily in color scheme and specific content: MindBalance uses a gold/brown palette and includes a Reference Page, while MindSpace uses a light blue palette and omits the Reference Page. Both platforms offer 13 wellness articles with text-to-speech functionality, a wellness check-in, AI personalization, a Community Hub, crisis support, multi-language support (8 languages: English, Spanish, French, Chinese, Hindi, Korean, German, Greek), dark mode, and extensive accessibility features. The project aims to provide accessible and credible mental health support, leveraging technology for personalization and community engagement.
+MindBalance (www.mindbalance.cloud) and MindSpace (www.mindspace.site) are twin static websites providing curated mental health resources. They share a single codebase and Supabase backend, differing primarily in color scheme and specific content: MindBalance uses a gold/brown palette and includes a Reference Page, while MindSpace uses a light blue palette and omits the Reference Page. Both platforms offer 13 wellness articles with text-to-speech functionality, a wellness check-in, AI personalization, a Community Hub, crisis support, multi-language support (11 languages: English, Spanish, French, Chinese, Hindi, Korean, German, Greek, Russian, Arabic, Italian), dark mode, and extensive accessibility features. The project aims to provide accessible and credible mental health support, leveraging technology for personalization and community engagement.
 
 ## Competition: TSA Webmaster (High School)
 
@@ -62,7 +62,7 @@ MindBalance (www.mindbalance.cloud) and MindSpace (www.mindspace.site) are twin 
   1. Custom-built from scratch — no frameworks, templates, or site builders
   2. Hosted on Vercel (not Replit) — Replit was development environment only
   3. Accessibility-first design with 8+ accessibility features
-  4. 8-language multilingual support
+  4. 11-language multilingual support
   5. Real API integrations (Supabase, ElevenLabs, OpenAI, Resend)
   6. Community features with real-time updates
   7. Evidence-based mental health content from authoritative sources (NIMH, Mayo Clinic, SAMHSA)
@@ -89,7 +89,7 @@ The application uses a Flask backend (`server.py`) to serve static files and pro
 ### Feature Specifications
 - **Authentication**: Uses Supabase for user authentication, managing sessions and broadcasting auth state changes.
 - **Settings & Accessibility**: Comprehensive accessibility features including dark mode, high contrast, colorblind modes, ADHD mode, dyslexia font, reduced motion, and adjustable font sizes. These settings are persisted in local storage and applied as `data-*` attributes on the `<html>` element.
-- **Translation System**: Supports eight languages (English, Spanish, French, Chinese, Hindi, Korean, German, Greek) using `data-translate` attributes for dynamic content translation. Translation files are in `i18n/` directory (en.json, es.json, fr.json, zh.json, hi.json, ko.json, de.json, gr.json).
+- **Translation System**: Supports eleven languages (English, Spanish, French, Chinese, Hindi, Korean, German, Greek, Russian, Arabic, Italian) using `data-translate` attributes for dynamic content translation. Translation files are in `i18n/` directory (en.json, es.json, fr.json, zh.json, hi.json, ko.json, de.json, gr.json, ru.json, ar.json, it.json).
 - **Resource Library**: Features a filterable library of resources with search, category, provider, and tag filtering, supporting URL-based pre-selection.
 - **TTS Article Player**: Provides text-to-speech functionality for articles, with an option to use ElevenLabs API or a browser-based fallback. Includes features like highlighting, auto-scroll, sleep timer, notes, bookmarks, and a sticky table of contents. Critical production routing ensures TTS API calls are directed to an always-on Replit server.
 - **Analytics & Achievements**: Tracks user activity (page views, article reads, mood entries, community interactions) and awards 28 unique achievements based on engagement. Also tracks reading progress and daily streaks.

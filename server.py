@@ -638,9 +638,13 @@ def goal_suggestion_endpoint():
 
 
 @app.route('/api/report', methods=['POST', 'OPTIONS'])
+@rate_limit
+@check_referer
 def report_post_endpoint():
     if request.method == 'OPTIONS':
         return '', 204
+
+    VALID_REASONS = {'spam', 'harassment', 'inappropriate', 'self-harm', 'other'}
 
     try:
         data = request.get_json() or {}
@@ -650,6 +654,20 @@ def report_post_endpoint():
 
         if not post_id or not reason:
             return jsonify({'success': False, 'error': 'Missing post_id or reason'}), 400
+
+        if reason not in VALID_REASONS:
+            return jsonify({'success': False, 'error': 'Invalid reason'}), 400
+
+        try:
+            uuid.UUID(str(post_id))
+        except ValueError:
+            return jsonify({'success': False, 'error': 'Invalid post_id'}), 400
+
+        if reporter_id:
+            try:
+                uuid.UUID(str(reporter_id))
+            except ValueError:
+                reporter_id = None
 
         SUPABASE_URL = "https://cxjqessxarjayqxvhnhs.supabase.co"
         SERVICE_KEY = os.environ.get('SUPABASE_SERVICE_ROLE_KEY', '')
